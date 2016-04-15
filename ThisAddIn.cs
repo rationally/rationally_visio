@@ -38,6 +38,7 @@ namespace rationally_visio
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
+            //Comment to test pulling
         }
 
         #region VSTO generated code

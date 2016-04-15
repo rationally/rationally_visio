@@ -194,7 +194,7 @@
     <ManifestKeyFile>rationally_visio_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>14286C0CE398574BBCAF77AF8FC270D78D77E479</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>561F5F347454B139C12F50E8ADF65B7CBBDD3805</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,7 +13,7 @@ namespace rationally_visio
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            MessageBox.Show("rationally_visio");
+            MessageBox.Show("rationally_visio"); 
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)

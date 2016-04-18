@@ -64,6 +64,17 @@ VisMeasurementSystem.visMSUS), 0x40);
             descriptionContainer.ContainerProperties.AddMember(containerElement1, VisMemberAddOptions.visMemberAddExpandContainer);
 
             //descriptionContainer.SetBegin(100, 100);
+            foreach (object shape in activePage.Shapes)
+            {
+                if (shape == visioRectShape)
+                {
+                    var x = 0;
+                }
+            }
+            visioRectShape.Text = @"Rectangle text.";
+
+            this.Application.ActiveWindow.Select(visioRectShape, (short)VisSelectArgs.visSelect);
+            activePage.DropContainer(containerDocument.Masters.ItemU["Alternating"], visioRectShape);
             /*Visio.Master visioStarMaster = visioStencil.Masters.get_ItemU(@"Cube");
             Visio.Shape visioStarShape = visioPage.Drop(visioStarMaster, 2.0, 5.5);
             visioStarShape.Text = @"Star text.";

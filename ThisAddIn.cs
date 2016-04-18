@@ -26,16 +26,17 @@ namespace rationally_visio
             Document visioStencil = visioDocs.OpenEx("Analog and Digital Logic.vss",
                 (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked);
 
-            Page visioPage = this.Application.ActivePage;
+            Page activePage = this.Application.ActivePage;
+
+            Document containerDocument = Application.Documents.OpenEx(Application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers,
+VisMeasurementSystem.visMSUS), 0x40);
 
             Master visioRectMaster = visioStencil.Masters.get_ItemU(@"Inverter");
-            Shape visioRectShape = visioPage.Drop(visioRectMaster, 4.25, 5.5);
+            Shape visioRectShape = activePage.Drop(visioRectMaster, 4.25, 5.5);
             visioRectShape.Text = @"Rectangle text.";
 
-            Master secondMaster = visioStencil.Masters.get_ItemU(@"Inverter");
-            //ContainerProperties p = new ContainerProperties();
-
-            //visioPage.DropContainer(visioRectShape,secondMaster);
+            this.Application.ActiveWindow.Select(visioRectShape, (short)VisSelectArgs.visSelect);
+            activePage.DropContainer(containerDocument.Masters.get_ItemU("Alternating"), visioRectShape);
             /*Visio.Master visioStarMaster = visioStencil.Masters.get_ItemU(@"Cube");
             Visio.Shape visioStarShape = visioPage.Drop(visioStarMaster, 2.0, 5.5);
             visioStarShape.Text = @"Star text.";

@@ -11,9 +11,14 @@ namespace rationally_visio
 {
     public partial class ThisAddIn
     {
+        private string author;
+        private string decision;
+        private string header;
+
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            MessageBox.Show("rationally_visio");
+            ShowMyDialogBox();
+            MessageBox.Show(decision + " by " + author +" with header " + header);
 
             this.Application.Documents.Add("");
 
@@ -30,7 +35,7 @@ namespace rationally_visio
             Master secondMaster = visioStencil.Masters.get_ItemU(@"Inverter");
             //ContainerProperties p = new ContainerProperties();
 
-            visioPage.DropContainer(visioRectShape,secondMaster);
+            //visioPage.DropContainer(visioRectShape,secondMaster);
             /*Visio.Master visioStarMaster = visioStencil.Masters.get_ItemU(@"Cube");
             Visio.Shape visioStarShape = visioPage.Drop(visioStarMaster, 2.0, 5.5);
             visioStarShape.Text = @"Star text.";
@@ -43,6 +48,21 @@ namespace rationally_visio
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
             //Comment to test pulling
+        }
+
+        public void ShowMyDialogBox()
+        {
+            SheetSetUp testDialog = new SheetSetUp();
+
+            // Show testDialog as a modal dialog and determine if DialogResult = OK.
+            if (testDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Read the contents of testDialog's TextBox.
+                this.author = testDialog.textBoxAuthor.Text;
+                this.decision = testDialog.textBoxName.Text;
+                this.header = testDialog.textBoxHeader.Text;
+            }
+            testDialog.Dispose();
         }
 
         #region VSTO generated code

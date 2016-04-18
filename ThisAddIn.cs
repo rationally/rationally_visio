@@ -17,9 +17,8 @@ namespace rationally_visio
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            ShowMyDialogBox();
-            MessageBox.Show(decision + " by " + author +" with header " + header);
-
+            //ShowMyDialogBox();
+            //MessageBox.Show(decision + " by " + author +" with header " + header);
             this.Application.Documents.Add("");
 
             Documents visioDocs = this.Application.Documents;
@@ -33,6 +32,13 @@ VisMeasurementSystem.visMSUS), 0x40);
 
             Master visioRectMaster = visioStencil.Masters.ItemU[@"Inverter"];
             Shape visioRectShape = activePage.Drop(visioRectMaster, 4.25, 5.5);
+            foreach (object shape in activePage.Shapes)
+            {
+                if (shape == visioRectShape)
+                {
+                    var x = 0;
+                }
+            }
             visioRectShape.Text = @"Rectangle text.";
 
             this.Application.ActiveWindow.Select(visioRectShape, (short)VisSelectArgs.visSelect);

@@ -17,12 +17,17 @@ namespace rationally_visio
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            //ShowMyDialogBox();
-            //MessageBox.Show(decision + " by " + author +" with header " + header);
+            ShowMyDialogBox();
+            MessageBox.Show(decision + " by " + author +" with header " + header);
+
             this.Application.Documents.Add("");
 
             Documents visioDocs = this.Application.Documents;
-            Document visioStencil = visioDocs.OpenEx("Analog and Digital Logic.vss",
+
+            Document analogDocument = visioDocs.OpenEx("Analog and Digital Logic.vss",
+                (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked);
+
+            Document basicDocument = visioDocs.OpenEx("Basic Shapes.vss",
                 (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked);
 
             Page activePage = this.Application.ActivePage;
@@ -30,8 +35,33 @@ namespace rationally_visio
             Document containerDocument = Application.Documents.OpenEx(Application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers,
 VisMeasurementSystem.visMSUS), 0x40);
 
-            Master visioRectMaster = visioStencil.Masters.ItemU[@"Inverter"];
+            activePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visMillimeters] = 297; 
+            activePage.PageSheet.CellsU["PageHeight"].Result[VisUnitCodes.visMillimeters] = 210;
+
+            Master visioRectMaster = analogDocument.Masters.get_ItemU(@"Inverter");
             Shape visioRectShape = activePage.Drop(visioRectMaster, 4.25, 5.5);
+
+            Master visioCircleMaster = basicDocument.Masters.get_ItemU(@"Circle");
+            Shape visioCircleShape = activePage.Drop(visioRectMaster, 0, 0);
+            visioCircleShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = 22;
+            //add a header to the page
+            //Shape headerShape = activePage.DrawRectangle(10,10,400,10);
+            //headerShape.TextStyle = "Basic";
+            //headerShape.LineStyle = "TextOnly";
+            //headerShape.FillStyle = "TextOnly";
+            //headerShape.Characters.Text = "Deployment of Step 2 and Step 3";
+            //headerShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = 22;
+
+            //this.Application.ActiveWindow.Select(visioRectShape, (short)VisSelectArgs.visSelect);
+
+            Shape descriptionContainer = activePage.DropContainer(containerDocument.Masters.get_ItemU("Alternating"), visioRectShape);
+            //descriptionContainer.Name = "mand";
+            descriptionContainer.Text = "Description";
+            Master containerElement1master = basicDocument.Masters.get_ItemU(@"Rectangle");
+            Shape containerElement1 = activePage.Drop(containerElement1master, 4.25, 5.5);
+            descriptionContainer.ContainerProperties.AddMember(containerElement1, VisMemberAddOptions.visMemberAddExpandContainer);
+            
+            //descriptionContainer.SetBegin(100, 100);
             foreach (object shape in activePage.Shapes)
             {
                 if (shape == visioRectShape)

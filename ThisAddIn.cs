@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using Visio = Microsoft.Office.Interop.Visio;
+using Microsoft.Office.Interop.Visio;
 using Office = Microsoft.Office.Core;
 
 namespace rationally_visio
@@ -17,16 +17,20 @@ namespace rationally_visio
 
             this.Application.Documents.Add("");
 
-            Visio.Documents visioDocs = this.Application.Documents;
-            Visio.Document visioStencil = visioDocs.OpenEx("Analog and Digital Logic.vss",
+            Documents visioDocs = this.Application.Documents;
+            Document visioStencil = visioDocs.OpenEx("Analog and Digital Logic.vss",
                 (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked);
 
-            Visio.Page visioPage = this.Application.ActivePage;
+            Page visioPage = this.Application.ActivePage;
 
-            Visio.Master visioRectMaster = visioStencil.Masters.get_ItemU(@"Inverter");
-            Visio.Shape visioRectShape = visioPage.Drop(visioRectMaster, 4.25, 5.5);
+            Master visioRectMaster = visioStencil.Masters.get_ItemU(@"Inverter");
+            Shape visioRectShape = visioPage.Drop(visioRectMaster, 4.25, 5.5);
             visioRectShape.Text = @"Rectangle text.";
 
+            Master secondMaster = visioStencil.Masters.get_ItemU(@"Inverter");
+            //ContainerProperties p = new ContainerProperties();
+
+            visioPage.DropContainer(visioRectShape,secondMaster);
             /*Visio.Master visioStarMaster = visioStencil.Masters.get_ItemU(@"Cube");
             Visio.Shape visioStarShape = visioPage.Drop(visioStarMaster, 2.0, 5.5);
             visioStarShape.Text = @"Star text.";

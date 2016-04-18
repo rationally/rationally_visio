@@ -31,12 +31,12 @@ namespace rationally_visio
             Document containerDocument = Application.Documents.OpenEx(Application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers,
 VisMeasurementSystem.visMSUS), 0x40);
 
-            Master visioRectMaster = visioStencil.Masters.get_ItemU(@"Inverter");
+            Master visioRectMaster = visioStencil.Masters.ItemU[@"Inverter"];
             Shape visioRectShape = activePage.Drop(visioRectMaster, 4.25, 5.5);
             visioRectShape.Text = @"Rectangle text.";
 
             this.Application.ActiveWindow.Select(visioRectShape, (short)VisSelectArgs.visSelect);
-            activePage.DropContainer(containerDocument.Masters.get_ItemU("Alternating"), visioRectShape);
+            activePage.DropContainer(containerDocument.Masters.ItemU["Alternating"], visioRectShape);
             /*Visio.Master visioStarMaster = visioStencil.Masters.get_ItemU(@"Cube");
             Visio.Shape visioStarShape = visioPage.Drop(visioStarMaster, 2.0, 5.5);
             visioStarShape.Text = @"Star text.";

@@ -45,13 +45,15 @@ namespace rationally_visio
             Shape visioCircleShape = activePage.Drop(visioRectMaster, 0, 0);
             visioCircleShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = 22;
             //add a header to the page
-            //Shape headerShape = activePage.DrawRectangle(10,10,400,10);
+            Shape headerShape = activePage.DrawRectangle(0.1, 8, 5, 8);
             //headerShape.TextStyle = "Basic";
-            //headerShape.LineStyle = "TextOnly";
-            //headerShape.FillStyle = "TextOnly";
-            //headerShape.Characters.Text = "Deployment of Step 2 and Step 3";
-            //headerShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = 22;
-
+            headerShape.LineStyle = "Text Only";
+            headerShape.FillStyle = "Text Only";
+            headerShape.Text = "Deployment of Step 2 and Step 34";
+            headerShape.Characters.Text = "Deployment of Step 2 and Step 3";
+            headerShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = 22;
+            //headerShape.CellsSRC[(short)VisSectionIndices.visSectionObject, (short)VisRowIndices.visRowLine, (short)VisCellIndices.visLineColor].FormulaU = "\"RGB(255,0,0)\"";
+            headerShape.CellsSRC[(short)VisSectionIndices.visSectionObject, (short)VisRowIndices.visRowLine, (short)VisCellIndices.visLinePattern].ResultIU = 0;
             //this.Application.ActiveWindow.Select(visioRectShape, (short)VisSelectArgs.visSelect);
 
             Shape descriptionContainer = activePage.DropContainer(containerDocument.Masters.get_ItemU("Alternating"), visioRectShape);
@@ -60,7 +62,7 @@ namespace rationally_visio
             Master containerElement1master = basicDocument.Masters.get_ItemU(@"Rectangle");
             Shape containerElement1 = activePage.Drop(containerElement1master, 4.25, 5.5);
             descriptionContainer.ContainerProperties.AddMember(containerElement1, VisMemberAddOptions.visMemberAddExpandContainer);
-            */
+
             //descriptionContainer.SetBegin(100, 100);
             foreach (Shape shape in activePage.Shapes)
             {
@@ -71,7 +73,7 @@ namespace rationally_visio
             visioRectShape.Text = @"Rectangle text.";
 
             this.Application.ActiveWindow.Select(visioRectShape, (short)VisSelectArgs.visSelect);
-           // activePage.DropContainer(containerDocument.Masters.ItemU["Alternating"], visioRectShape);
+            activePage.DropContainer(containerDocument.Masters.ItemU["Alternating"], visioRectShape);
             /*Visio.Master visioStarMaster = visioStencil.Masters.get_ItemU(@"Cube");
             Visio.Shape visioStarShape = visioPage.Drop(visioStarMaster, 2.0, 5.5);
             visioStarShape.Text = @"Star text.";

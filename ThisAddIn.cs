@@ -19,7 +19,9 @@ namespace rationally_visio
         {
             //ShowMyDialogBox();
             //MessageBox.Show(decision + " by " + author +" with header " + header);
-
+            Application.MarkerEvent += new EApplication_MarkerEventEventHandler(Application_MarkerEvent);
+            Application.TemplatePaths = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
+            Application.DocumentCreated += new EApplication_DocumentCreatedEventHandler(Application_DocumentCreatedEvent);
             this.Application.Documents.Add("");
 
             Documents visioDocs = this.Application.Documents; 
@@ -29,9 +31,10 @@ namespace rationally_visio
 
             Document basicDocument = visioDocs.OpenEx("Basic Shapes.vss",
                 (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked);
+            
 
-            string docPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vss";
-            this.Application.Documents.OpenEx(docPath,
+            string docPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vssx";
+            Document rationallyDocument = this.Application.Documents.OpenEx(docPath,
                 ((short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked +
                  (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenRO));
 
@@ -49,11 +52,8 @@ namespace rationally_visio
             Master visioRectMaster = analogDocument.Masters.get_ItemU(@"Inverter");
             Shape visioRectShape = activePage.Drop(visioRectMaster, 4.25, 5.5);
 
-            Master visioCircleMaster = basicDocument.Masters.get_ItemU(@"Circle");
-            Shape visioCircleShape = activePage.Drop(visioRectMaster, 0, 0);
-            visioCircleShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = 22;
             //add a header to the page
-            Shape headerShape = activePage.DrawRectangle(0.1, 8, 5, 8);
+            Shape headerShape = activePage.DrawRectangle(0.1, 8, 5, 8); 
             //headerShape.TextStyle = "Basic";
             headerShape.LineStyle = "Text Only";
             headerShape.FillStyle = "Text Only";
@@ -64,12 +64,12 @@ namespace rationally_visio
             headerShape.CellsSRC[(short)VisSectionIndices.visSectionObject, (short)VisRowIndices.visRowLine, (short)VisCellIndices.visLinePattern].ResultIU = 0;
             //this.Application.ActiveWindow.Select(visioRectShape, (short)VisSelectArgs.visSelect);
 
-            Shape descriptionContainer = activePage.DropContainer(containerDocument.Masters.get_ItemU("Alternating"), visioRectShape);
+            /*Shape descriptionContainer = activePage.DropContainer(containerDocument.Masters.get_ItemU("Alternating"), visioRectShape);
             //descriptionContainer.Name = "mand";
             descriptionContainer.Text = "Description";
             Master containerElement1master = basicDocument.Masters.get_ItemU(@"Rectangle");
             Shape containerElement1 = activePage.Drop(containerElement1master, 4.25, 5.5);
-            descriptionContainer.ContainerProperties.AddMember(containerElement1, VisMemberAddOptions.visMemberAddExpandContainer);
+            descriptionContainer.ContainerProperties.AddMember(containerElement1, VisMemberAddOptions.visMemberAddExpandContainer);*/
 
             //descriptionContainer.SetBegin(100, 100);
             foreach (Shape shape in activePage.Shapes)
@@ -80,8 +80,12 @@ namespace rationally_visio
             }
             visioRectShape.Text = @"Rectangle text.";
 
+            Master forcesMaster = rationallyDocument.Masters.get_ItemU(@"Forces");
+            Shape forceShape = activePage.Drop(forcesMaster, 4, 3);
+            var a = forceShape.CellsU["User.rationallyType"];
+            string forcesType = forceShape.CellsU["User.rationallyType"].ResultStr["value"];
             this.Application.ActiveWindow.Select(visioRectShape, (short)VisSelectArgs.visSelect);
-            activePage.DropContainer(containerDocument.Masters.ItemU["Alternating"], visioRectShape);
+            activePage.DropContainer(containerDocument.Masters.ItemU["Alternating"], forceShape);
             /*Visio.Master visioStarMaster = visioStencil.Masters.get_ItemU(@"Cube");
             Visio.Shape visioStarShape = visioPage.Drop(visioStarMaster, 2.0, 5.5);
             visioStarShape.Text = @"Star text.";
@@ -127,7 +131,16 @@ namespace rationally_visio
             this.Startup += new System.EventHandler(ThisAddIn_Startup);
             this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
         }
-        
+
+        private void Application_MarkerEvent(Microsoft.Office.Interop.Visio.Application application, int sequence, string context)
+        {
+            //ShowMyDialogBox();
+        }
+
+        private void Application_DocumentCreatedEvent(IVDocument d)
+        {
+            ShowMyDialogBox();
+        }
         #endregion
     }
 }

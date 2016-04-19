@@ -104,6 +104,11 @@ VisMeasurementSystem.visMSUS), 0x40);
             testDialog.Dispose();
         }
 
+        protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
+        {
+            return new RationallyRibbon();
+        }
+
         #region VSTO generated code
 
         /// <summary>

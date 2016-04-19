@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace rationally_visio.Properties {
+    using System;
     
     
     /// <summary>
@@ -18,7 +19,7 @@ namespace rationally_visio.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -56,6 +57,28 @@ namespace rationally_visio.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+        ///&lt;customUI xmlns=&quot;http://schemas.microsoft.com/office/2009/07/customui&quot; onLoad=&quot;Ribbon_Load&quot;&gt;
+        ///  &lt;ribbon&gt;
+        ///    &lt;tabs&gt;
+        ///      &lt;tab idMso=&quot;TabAddIns&quot;&gt;
+        ///        &lt;group id=&quot;MyGroup&quot;
+        ///               label=&quot;My Group&quot;&gt;
+        ///        &lt;/group&gt;
+        ///      &lt;/tab&gt;
+        ///    &lt;/tabs&gt;
+        ///  &lt;/ribbon&gt;
+        ///&lt;/customUI&gt;
+        ///
+        ///.
+        /// </summary>
+        internal static string RationallyRibbon {
+            get {
+                return ResourceManager.GetString("RationallyRibbon", resourceCulture);
             }
         }
     }

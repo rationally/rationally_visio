@@ -18,22 +18,30 @@ namespace rationally_visio
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             //ShowMyDialogBox();
-            MessageBox.Show(decision + " by " + author +" with header " + header);
+            //MessageBox.Show(decision + " by " + author +" with header " + header);
 
             this.Application.Documents.Add("");
 
-            Documents visioDocs = this.Application.Documents;
+            Documents visioDocs = this.Application.Documents; 
 
             Document analogDocument = visioDocs.OpenEx("Analog and Digital Logic.vss",
-                (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked);
+                (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked); 
 
             Document basicDocument = visioDocs.OpenEx("Basic Shapes.vss",
                 (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked);
 
+            string docPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vss";
+            this.Application.Documents.OpenEx(docPath,
+                ((short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked +
+                 (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenRO));
+
+            //Document testDocument = visioDocs.OpenEx("D:\\DecisionsStencil.vss",
+           //     (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenRO);
+
             Page activePage = this.Application.ActivePage;
 
             Document containerDocument = Application.Documents.OpenEx(Application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers,
-VisMeasurementSystem.visMSUS), 0x40);
+                        VisMeasurementSystem.visMSUS), 0x40); 
 
             activePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visMillimeters] = 297; 
             activePage.PageSheet.CellsU["PageHeight"].Result[VisUnitCodes.visMillimeters] = 210;
@@ -64,12 +72,11 @@ VisMeasurementSystem.visMSUS), 0x40);
             descriptionContainer.ContainerProperties.AddMember(containerElement1, VisMemberAddOptions.visMemberAddExpandContainer);
 
             //descriptionContainer.SetBegin(100, 100);
-            foreach (object shape in activePage.Shapes)
+            foreach (Shape shape in activePage.Shapes)
             {
-                if (shape == visioRectShape)
-                {
-                    var x = 0;
-                }
+                var x = shape.CellExistsU["type", 0];
+                var y = shape.CellExistsU["type", 1];
+                var z = "GODMILJAAR";
             }
             visioRectShape.Text = @"Rectangle text.";
 

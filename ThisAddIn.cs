@@ -30,6 +30,14 @@ namespace rationally_visio
             Document basicDocument = visioDocs.OpenEx("Basic Shapes.vss",
                 (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked);
 
+            string docPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vss";
+            this.Application.Documents.OpenEx(docPath,
+                ((short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked +
+                 (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenRO));
+
+            //Document testDocument = visioDocs.OpenEx("D:\\DecisionsStencil.vss",
+           //     (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenRO);
+
             Page activePage = this.Application.ActivePage;
 
             Document containerDocument = Application.Documents.OpenEx(Application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers,

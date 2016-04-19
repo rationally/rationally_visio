@@ -22,6 +22,7 @@ namespace rationally_visio
             Application.MarkerEvent += new EApplication_MarkerEventEventHandler(Application_MarkerEvent);
             Application.TemplatePaths = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
             Application.DocumentCreated += new EApplication_DocumentCreatedEventHandler(Application_DocumentCreatedEvent);
+            Application.DocumentOpened += new EApplication_DocumentOpenedEventHandler(Application_DocumentOpenedEvent);
             this.Application.Documents.Add("");
 
             Documents visioDocs = this.Application.Documents; 
@@ -139,7 +140,18 @@ namespace rationally_visio
 
         private void Application_DocumentCreatedEvent(IVDocument d)
         {
-            ShowMyDialogBox();
+            if (d.Template.ToLower().Contains("rationally"))
+            {
+                ShowMyDialogBox();
+            }
+        }
+
+        private void Application_DocumentOpenedEvent(IVDocument d)
+        {
+            if (d.Template.ToLower().Contains("rationally"))
+            {
+                ShowMyDialogBox();
+            }
         }
         #endregion
     }

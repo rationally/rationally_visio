@@ -17,15 +17,15 @@ namespace rationally_visio
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            ShowMyDialogBox();
-            MessageBox.Show(decision + " by " + author +" with header " + header);
+            //ShowMyDialogBox();
+            //MessageBox.Show(decision + " by " + author +" with header " + header);
 
             this.Application.Documents.Add("");
 
-            Documents visioDocs = this.Application.Documents;
+            Documents visioDocs = this.Application.Documents; 
 
             Document analogDocument = visioDocs.OpenEx("Analog and Digital Logic.vss",
-                (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked);
+                (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked); 
 
             Document basicDocument = visioDocs.OpenEx("Basic Shapes.vss",
                 (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked);
@@ -33,7 +33,7 @@ namespace rationally_visio
             Page activePage = this.Application.ActivePage;
 
             Document containerDocument = Application.Documents.OpenEx(Application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers,
-VisMeasurementSystem.visMSUS), 0x40);
+                        VisMeasurementSystem.visMSUS), 0x40); 
 
             activePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visMillimeters] = 297; 
             activePage.PageSheet.CellsU["PageHeight"].Result[VisUnitCodes.visMillimeters] = 210;
@@ -60,19 +60,18 @@ VisMeasurementSystem.visMSUS), 0x40);
             Master containerElement1master = basicDocument.Masters.get_ItemU(@"Rectangle");
             Shape containerElement1 = activePage.Drop(containerElement1master, 4.25, 5.5);
             descriptionContainer.ContainerProperties.AddMember(containerElement1, VisMemberAddOptions.visMemberAddExpandContainer);
-            
+            */
             //descriptionContainer.SetBegin(100, 100);
-            foreach (object shape in activePage.Shapes)
+            foreach (Shape shape in activePage.Shapes)
             {
-                if (shape == visioRectShape)
-                {
-                    var x = 0;
-                }
+                var x = shape.CellExistsU["type", 0];
+                var y = shape.CellExistsU["type", 1];
+                var z = "GODMILJAAR";
             }
             visioRectShape.Text = @"Rectangle text.";
 
             this.Application.ActiveWindow.Select(visioRectShape, (short)VisSelectArgs.visSelect);
-            activePage.DropContainer(containerDocument.Masters.ItemU["Alternating"], visioRectShape);
+           // activePage.DropContainer(containerDocument.Masters.ItemU["Alternating"], visioRectShape);
             /*Visio.Master visioStarMaster = visioStencil.Masters.get_ItemU(@"Cube");
             Visio.Shape visioStarShape = visioPage.Drop(visioStarMaster, 2.0, 5.5);
             visioStarShape.Text = @"Star text.";

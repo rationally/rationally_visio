@@ -39,9 +39,6 @@ namespace rationally_visio
                 ((short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked +
                  (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenRO));
 
-            //Document testDocument = visioDocs.OpenEx("D:\\DecisionsStencil.vss",
-           //     (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenRO);
-
             Page activePage = this.Application.ActivePage;
 
             Document containerDocument = Application.Documents.OpenEx(Application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers,
@@ -50,7 +47,7 @@ namespace rationally_visio
             activePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visMillimeters] = 297; 
             activePage.PageSheet.CellsU["PageHeight"].Result[VisUnitCodes.visMillimeters] = 210;
 
-            Master visioRectMaster = analogDocument.Masters.get_ItemU(@"Inverter");
+            Master visioRectMaster = analogDocument.Masters.ItemU[@"Inverter"];
             Shape visioRectShape = activePage.Drop(visioRectMaster, 4.25, 5.5);
 
             //add a header to the page
@@ -61,16 +58,7 @@ namespace rationally_visio
             headerShape.Text = "Deployment of Step 2 and Step 34";
             headerShape.Characters.Text = "Deployment of Step 2 and Step 3";
             headerShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = 22;
-            //headerShape.CellsSRC[(short)VisSectionIndices.visSectionObject, (short)VisRowIndices.visRowLine, (short)VisCellIndices.visLineColor].FormulaU = "\"RGB(255,0,0)\"";
             headerShape.CellsSRC[(short)VisSectionIndices.visSectionObject, (short)VisRowIndices.visRowLine, (short)VisCellIndices.visLinePattern].ResultIU = 0;
-            //this.Application.ActiveWindow.Select(visioRectShape, (short)VisSelectArgs.visSelect);
-
-            /*Shape descriptionContainer = activePage.DropContainer(containerDocument.Masters.get_ItemU("Alternating"), visioRectShape);
-            //descriptionContainer.Name = "mand";
-            descriptionContainer.Text = "Description";
-            Master containerElement1master = basicDocument.Masters.get_ItemU(@"Rectangle");
-            Shape containerElement1 = activePage.Drop(containerElement1master, 4.25, 5.5);
-            descriptionContainer.ContainerProperties.AddMember(containerElement1, VisMemberAddOptions.visMemberAddExpandContainer);*/
 
             //descriptionContainer.SetBegin(100, 100);
             foreach (Shape shape in activePage.Shapes)
@@ -81,19 +69,12 @@ namespace rationally_visio
             }
             visioRectShape.Text = @"Rectangle text.";
 
-            Master forcesMaster = rationallyDocument.Masters.get_ItemU(@"Forces");
+            Master forcesMaster = rationallyDocument.Masters.ItemU[@"Forces"];
             Shape forceShape = activePage.Drop(forcesMaster, 4, 3);
             var a = forceShape.CellsU["User.rationallyType"];
             string forcesType = forceShape.CellsU["User.rationallyType"].ResultStr["value"];
             this.Application.ActiveWindow.Select(visioRectShape, (short)VisSelectArgs.visSelect);
             activePage.DropContainer(containerDocument.Masters.ItemU["Alternating"], forceShape);
-            /*Visio.Master visioStarMaster = visioStencil.Masters.get_ItemU(@"Cube");
-            Visio.Shape visioStarShape = visioPage.Drop(visioStarMaster, 2.0, 5.5);
-            visioStarShape.Text = @"Star text.";
-
-            Visio.Master visioHexagonMaster = visioStencil.Masters.get_ItemU(@"Hexagon");
-            Visio.Shape visioHexagonShape = visioPage.Drop(visioHexagonMaster, 7.0, 5.5);
-            visioHexagonShape.Text = @"Hexagon text.";*/
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)

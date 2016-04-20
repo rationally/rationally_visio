@@ -14,6 +14,7 @@ namespace rationally_visio
         private string author;
         private string decision;
         private string header;
+        private Document rationallyDocument;
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -35,7 +36,7 @@ namespace rationally_visio
             
 
             string docPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vssx";
-            Document rationallyDocument = this.Application.Documents.OpenEx(docPath,
+            rationallyDocument = this.Application.Documents.OpenEx(docPath,
                 ((short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked +
                  (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenRO));
 
@@ -46,9 +47,6 @@ namespace rationally_visio
 
             activePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visMillimeters] = 297; 
             activePage.PageSheet.CellsU["PageHeight"].Result[VisUnitCodes.visMillimeters] = 210;
-
-            Master visioRectMaster = analogDocument.Masters.ItemU[@"Inverter"];
-            Shape visioRectShape = activePage.Drop(visioRectMaster, 4.25, 5.5);
 
             //add a header to the page
             Shape headerShape = activePage.DrawRectangle(0.1, 8, 5, 8); 
@@ -65,15 +63,13 @@ namespace rationally_visio
             {
                 var x = shape.CellExistsU["type", 0];
                 var y = shape.CellExistsU["type", 1];
-                var z = "GODMILJAAR";
             }
-            visioRectShape.Text = @"Rectangle text.";
 
             Master forcesMaster = rationallyDocument.Masters.ItemU[@"Forces"];
             Shape forceShape = activePage.Drop(forcesMaster, 4, 3);
             var a = forceShape.CellsU["User.rationallyType"];
             string forcesType = forceShape.CellsU["User.rationallyType"].ResultStr["value"];
-            this.Application.ActiveWindow.Select(visioRectShape, (short)VisSelectArgs.visSelect);
+
             activePage.DropContainer(containerDocument.Masters.ItemU["Alternating"], forceShape);
         }
 
@@ -116,7 +112,18 @@ namespace rationally_visio
 
         private void Application_MarkerEvent(Microsoft.Office.Interop.Visio.Application application, int sequence, string context)
         {
-            //ShowMyDialogBox();
+            Selection selection = this.Application.ActiveWindow.Selection;//event must originate from selected element
+            //for (int i = 0; i < selection.Count; i++) 
+            foreach (IVShape s in selection)
+            {
+                if (s.CellsU["User.rationallyType"].ResultStr["Value"] == "forces") //TODO check context
+                {
+                    //create a master
+                    Master forcesMaster = rationallyDocument.Masters.ItemU[@"Force"];
+
+                    s.Drop(forcesMaster, 1, 1);
+                }
+            }
         }
 
         private void Application_DocumentCreatedEvent(IVDocument d)

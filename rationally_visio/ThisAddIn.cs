@@ -18,7 +18,7 @@ namespace rationally_visio
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            //ShowMyDialogBox();
+            /*//ShowMyDialogBox();
             //MessageBox.Show(decision + " by " + author +" with header " + header);
             Application.MarkerEvent += new EApplication_MarkerEventEventHandler(Application_MarkerEvent);
             Application.TemplatePaths = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
@@ -70,7 +70,7 @@ namespace rationally_visio
             var a = forceShape.CellsU["User.rationallyType"];
             string forcesType = forceShape.CellsU["User.rationallyType"].ResultStr["value"];
 
-            activePage.DropContainer(containerDocument.Masters.ItemU["Alternating"], forceShape);
+            activePage.DropContainer(containerDocument.Masters.ItemU["Alternating"], forceShape);*/
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)

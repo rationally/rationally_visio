@@ -129,53 +129,44 @@ namespace ExtendedVisioAddin1
             Application.TemplatePaths = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
             Application.DocumentCreated += new EApplication_DocumentCreatedEventHandler(Application_DocumentCreatedEvent);
             Application.DocumentOpened += new EApplication_DocumentOpenedEventHandler(Application_DocumentOpenedEvent);
-            this.Application.Documents.Add("");
 
             Documents visioDocs = this.Application.Documents;
 
-            Document analogDocument = visioDocs.OpenEx("Analog and Digital Logic.vss",
-                (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked);
-
-            Document basicDocument = visioDocs.OpenEx("Basic Shapes.vss",
-                (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked);
+            
 
 
-            string docPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vssx";
-            rationallyDocument = this.Application.Documents.OpenEx(docPath,
-                ((short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked +
-                 (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenRO));
+
 
             Page activePage = this.Application.ActivePage;
 
-            Document containerDocument = Application.Documents.OpenEx(Application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers,
-                        VisMeasurementSystem.visMSUS), 0x40);
+            
 
-            activePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visMillimeters] = 297;
-            activePage.PageSheet.CellsU["PageHeight"].Result[VisUnitCodes.visMillimeters] = 210;
+            //activePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visMillimeters] = 297;
+            //activePage.PageSheet.CellsU["PageHeight"].Result[VisUnitCodes.visMillimeters] = 210;
 
             //add a header to the page
-            Shape headerShape = activePage.DrawRectangle(0.1, 8, 5, 8);
+            /*Shape headerShape = activePage.DrawRectangle(0.1, 8, 5, 8);
             //headerShape.TextStyle = "Basic";
             headerShape.LineStyle = "Text Only";
             headerShape.FillStyle = "Text Only";
             headerShape.Text = "Deployment of Step 2 and Step 34";
             headerShape.Characters.Text = "Deployment of Step 2 and Step 3";
             headerShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = 22;
-            headerShape.CellsSRC[(short)VisSectionIndices.visSectionObject, (short)VisRowIndices.visRowLine, (short)VisCellIndices.visLinePattern].ResultIU = 0;
+            headerShape.CellsSRC[(short)VisSectionIndices.visSectionObject, (short)VisRowIndices.visRowLine, (short)VisCellIndices.visLinePattern].ResultIU = 0;*/
 
             //descriptionContainer.SetBegin(100, 100);
-            foreach (Shape shape in activePage.Shapes)
+            /*foreach (Shape shape in activePage.Shapes)
             {
                 var x = shape.CellExistsU["type", 0];
                 var y = shape.CellExistsU["type", 1];
-            }
+            }*/
 
-            Master forcesMaster = rationallyDocument.Masters.ItemU[@"Forces"];
+            /*Master forcesMaster = rationallyDocument.Masters.ItemU[@"Forces"];
             Shape forceShape = activePage.Drop(forcesMaster, 4, 3);
             var a = forceShape.CellsU["User.rationallyType"];
-            string forcesType = forceShape.CellsU["User.rationallyType"].ResultStr["value"];
+            string forcesType = forceShape.CellsU["User.rationallyType"].ResultStr["value"];*/
 
-            activePage.DropContainer(containerDocument.Masters.ItemU["Alternating"], forceShape);
+            //activePage.DropContainer(containerDocument.Masters.ItemU["Alternating"], forceShape);
         }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e)
@@ -231,10 +222,18 @@ namespace ExtendedVisioAddin1
 
         private void Application_DocumentOpenedEvent(IVDocument d)
         {
-            if (d.Template.ToLower().Contains("rationally"))
-            {
-                ShowMyDialogBox();
-            }
+            //if (d.Template.ToLower().Contains("rationally"))
+            //{
+                string docPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vssx";
+                rationallyDocument = this.Application.Documents.OpenEx(docPath,
+    ((short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked +
+     (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenRO));
+
+                Document containerDocument = Application.Documents.OpenEx(Application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers,
+                        VisMeasurementSystem.visMSUS), 0x40);
+
+                //ShowMyDialogBox();
+            //}
         }
 
 

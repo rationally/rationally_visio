@@ -59,10 +59,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>ExtendedVisioAddin1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>rationally_visio2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>609A4F38942E51A99A6A25AF541D3A59F4D82AE2</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>44C76F1FB9A41961B0441C42308001B7D96AD2F0</ManifestCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ExtendedVisioAddin1_TemporaryKey.pfx" />
+    <None Include="rationally_visio2_TemporaryKey.pfx" />
     <None Include="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.cs</DependentUpon>
     </None>

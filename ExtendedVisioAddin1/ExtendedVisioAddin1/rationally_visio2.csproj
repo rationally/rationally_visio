@@ -102,6 +102,7 @@
     <Compile Include="AddinCommandBars.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\InformationContainer.cs" />
     <Compile Include="Components\TextLabel.cs" />
     <Compile Include="CustomUI.cs" />
     <Compile Include="EventHandlers\DocumentCreatedEventHandler.cs" />

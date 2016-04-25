@@ -65,7 +65,6 @@ namespace rationally_visio
             // Do something with the newly constructed ribbon, such as capture
             // a local reference to it for later use.
             this.ribbon = ribbonUI;
-            MessageBox.Show("Capturing local reference to new ribbon.");
         }
 
         /// <summary>This method is a callback specified in the custom UI XML 
@@ -74,7 +73,7 @@ namespace rationally_visio
         /// <param name="control">The Ribbon UI control that was activated</param>
         public void OnAction(Microsoft.Office.Core.IRibbonControl control)
         {
-            System.Windows.Forms.MessageBox.Show("OnAction");
+            //System.Windows.Forms.MessageBox.Show("OnAction");
         }
 
         /// <summary>This method is a callback specified in the custom UI XML 
@@ -87,7 +86,7 @@ namespace rationally_visio
             bool cancelDefault)
         {
             // Take a custom action when the user clicks Copy.
-            System.Windows.Forms.MessageBox.Show("CommandOnAction called: User clicked Copy.");
+           // System.Windows.Forms.MessageBox.Show("CommandOnAction called: User clicked Copy.");
 
             cancelDefault = false;
         }

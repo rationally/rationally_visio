@@ -6,25 +6,38 @@ using System.Text;
 
 namespace ExtendedVisioAddin1.Components
 {
-    class TextLabel : RationallyComponent
+    public class TextLabel : RationallyComponent
     {
-        private String text;
+        private string text;
+        private short size;
 
-        public TextLabel(String text)
+        public TextLabel(string text)
         {
             this.text = text;
-            
+            this.size = 12;
 
         }
 
-        public void Draw(double x, double y)
+        /// <summary>
+        /// Adds the text label to the sheet, on the given coordinates.
+        /// </summary>
+        /// <param name="x">Amount of inches from the left.</param>
+        /// <param name="y">Amount of inches from the bottom.</param>
+        public new Shape Draw(double x, double y)
         {
-            Shape textShape = Globals.ThisAddIn.Application.ActivePage.DrawRectangle(x, y, x+text.Length*0.3, y+30);
+            Shape textShape = Globals.ThisAddIn.Application.ActivePage.DrawRectangle(x, y, x+text.Length*0.3, y-0.5);
             //headerShape.TextStyle = "Basic";
             textShape.LineStyle = "Text Only";
             textShape.FillStyle = "Text Only";
             textShape.Characters.Text = text;
-            textShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = 22;
+            textShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = size;
+            textShape.CellsU["LinePattern"].ResultIU = 0;
+            return textShape;
+        }
+
+        public void SetFontSize(short size)
+        {
+            this.size = size;
         }
     }
 }

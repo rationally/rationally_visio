@@ -4,16 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ExtendedVisioAddin1
+namespace ExtendedVisioAddin1.Components
 {
 
 
-    class RationallyComponent
+    public class RationallyComponent
     {
         private Master componentMaster;
 
-        public void Place()
+        public Shape Draw(double x, double y)
         {
+            return null;
 
         }
     }

@@ -36,10 +36,7 @@ namespace ExtendedVisioAddin1
 
             Page activePage = this.Application.ActivePage;
 
-            
-
-            //activePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visMillimeters] = 297;
-            //activePage.PageSheet.CellsU["PageHeight"].Result[VisUnitCodes.visMillimeters] = 210;
+           
 
             //add a header to the page
             /*Shape headerShape = activePage.DrawRectangle(0.1, 8, 5, 8);
@@ -102,11 +99,10 @@ namespace ExtendedVisioAddin1
             //{
                 string docPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vssx";
                 rationallyDocument = this.Application.Documents.OpenEx(docPath,
-    ((short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenDocked +
-     (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenRO));
+    ((short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visAddDocked));
 
                 Document containerDocument = Application.Documents.OpenEx(Application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers,
-                        VisMeasurementSystem.visMSUS), 0x40);
+                        VisMeasurementSystem.visMSUS), (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenHidden);
 
                 //ShowMyDialogBox();
             //}

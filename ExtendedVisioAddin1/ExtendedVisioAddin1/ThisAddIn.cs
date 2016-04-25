@@ -77,9 +77,9 @@ namespace ExtendedVisioAddin1
             if (testDialog.ShowDialog() == DialogResult.OK)
             {
                 // Read the contents of testDialog's TextBox.
-                this.author = testDialog.textBoxAuthor.Text;
-                this.decision = testDialog.textBoxName.Text;
-                this.header = testDialog.textBoxHeader.Text;
+                this.author = testDialog.author.Text;
+                this.decision = testDialog.decisionName.Text;
+                this.header = testDialog.version.Text;
             }
             testDialog.Dispose();
         }

@@ -104,6 +104,7 @@
   <ItemGroup>
     <Compile Include="CustomUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RationallyComponent.cs" />
     <Compile Include="RationallyRibbon.cs" />
     <Compile Include="SheetSetUp.cs">
       <SubType>Form</SubType>

@@ -23,28 +23,28 @@ namespace rationally_visio
             if (string.IsNullOrWhiteSpace(decisionName.Text))
             {
                 MessageBox.Show("Enter a decision name.");
-                submitButton.DialogResult = DialogResult.None;
+                this.DialogResult = DialogResult.None;
                 return;
             }
             if (string.IsNullOrWhiteSpace(author.Text))
             {
                 MessageBox.Show("Enter an author name.");
-                submitButton.DialogResult = DialogResult.None;
+                this.DialogResult = DialogResult.None;
                 return;
             }
             if (string.IsNullOrWhiteSpace(version.Text))
             {
                 MessageBox.Show("Enter a version.");
-                submitButton.DialogResult = DialogResult.None;
+                this.DialogResult = DialogResult.None;
                 return;
             }
             DateTime temp;
             if (DateTime.TryParse(date.Text, out temp))
-                submitButton.DialogResult = DialogResult.OK;
+                this.DialogResult = DialogResult.OK;
             else
             {
                 MessageBox.Show("Enter a valid date.");
-                submitButton.DialogResult = DialogResult.None;
+                this.DialogResult = DialogResult.None;
             }
             return;
         }

@@ -26,27 +26,29 @@ namespace ExtendedVisioAddin1.Components
         public new Shape Draw(double x, double y)
         {
             //1) draws the three text elements
-            TextLabel authorLabel = new TextLabel("Author: " + this.author);
-            TextLabel dateLabel = new TextLabel("Date: " + this.date);
-            TextLabel versionLabel = new TextLabel("Version: " + this.version);
+            TextLabel authorLabel = new TextLabel("Author: " + author + "\t\t Date: " + date + "\t\t Version: " + version);
+            //TextLabel dateLabel = new TextLabel("Date: " + this.date);
+            //TextLabel versionLabel = new TextLabel("Version: " + this.version);
 
-            Globals.ThisAddIn.Application.ActiveWindow.DeselectAll();
+            //Globals.ThisAddIn.Application.ActiveWindow.DeselectAll();
 
             Shape authorShape = authorLabel.Draw(x+0.1,y-0.1);
-            Shape dateShape = dateLabel.Draw(x+3,y-0.1);
-            Shape versionShape = versionLabel.Draw(x+6,y-0.1);
-            Globals.ThisAddIn.Application.ActiveWindow.Select(authorShape, (short)VisSelectArgs.visSelect);
-            Globals.ThisAddIn.Application.ActiveWindow.Select(dateShape, (short)VisSelectArgs.visSelect);
-            Globals.ThisAddIn.Application.ActiveWindow.Select(versionShape, (short)VisSelectArgs.visSelect);
+            //Shape dateShape = dateLabel.Draw(x+3,y-0.1);
+            //Shape versionShape = versionLabel.Draw(x+6,y-0.1);
+            //Globals.ThisAddIn.Application.ActiveWindow.Select(authorShape, (short)VisSelectArgs.visSelect);
+            //Globals.ThisAddIn.Application.ActiveWindow.Select(dateShape, (short)VisSelectArgs.visSelect);
+            //Globals.ThisAddIn.Application.ActiveWindow.Select(versionShape, (short)VisSelectArgs.visSelect);
 
             //2) create a container
             Document containerDocument = Globals.ThisAddIn.Application.Documents.OpenEx(Globals.ThisAddIn.Application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers,
             VisMeasurementSystem.visMSUS), (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visAddHidden);
-            Master plainContainer = containerDocument.Masters.ItemU[@"Plain"];
+            Master plainContainer = containerDocument.Masters.ItemU[@"Alternating"];
 
             //3) wrap the text components in the container
-            Shape informationShape = Globals.ThisAddIn.Application.ActivePage.DropContainer(plainContainer, Globals.ThisAddIn.Application.ActiveWindow.Selection);
-            informationShape.Text = "";
+            Shape informationShape = Globals.ThisAddIn.Application.ActivePage.DropContainer(plainContainer, authorShape);
+            //informationShape.CellsU["Height"].ResultIU = authorShape.CellsU["Height"].ResultIU + authorShape.CellsU["TopMargin"].Result[VisUnitCodes.visInches] + authorShape.CellsU["BottomMargin"].Result[VisUnitCodes.visInches];
+            informationShape.Text = "Decision Information";//"Author:" + author + "\t\t Date:" + date + "\t\t Version:" + version;
+            
             return informationShape;
         }
     }

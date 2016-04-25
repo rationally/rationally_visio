@@ -59,10 +59,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>rationally_visio2_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>rationally_visio2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>14A37F95C6DA37D6AABBD94FBD1C8CD644719ED3</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>44C76F1FB9A41961B0441C42308001B7D96AD2F0</ManifestCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

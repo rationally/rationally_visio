@@ -28,7 +28,7 @@ namespace ExtendedVisioAddin1.EventHandlers
 
                 //draw the information container
                 InformationContainer informationContainer = new InformationContainer(model.Author, model.Date, model.Version);
-                informationContainer.Draw(Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches] - 7, offsetHeight);
+                informationContainer.Draw(Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches] - 8, offsetHeight);
             }
         }
 

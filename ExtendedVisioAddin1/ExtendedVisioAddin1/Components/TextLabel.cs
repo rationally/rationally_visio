@@ -25,7 +25,8 @@ namespace ExtendedVisioAddin1.Components
         /// <param name="y">Amount of inches from the bottom.</param>
         public new Shape Draw(double x, double y)
         {
-            Shape textShape = Globals.ThisAddIn.Application.ActivePage.DrawRectangle(x, y, x+text.Length*0.3, y-0.5);
+            double fac = (size/12.0);
+            Shape textShape = Globals.ThisAddIn.Application.ActivePage.DrawRectangle(x, y, x+text.Length*0.125*fac, y-0.5);
             //headerShape.TextStyle = "Basic";
             textShape.LineStyle = "Text Only";
             textShape.FillStyle = "Text Only";

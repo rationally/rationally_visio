@@ -12,15 +12,6 @@ namespace ExtendedVisioAddin1
     {
         private Master componentMaster;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="componentMaster">Component that is represented by this class.</param>
-        public RationallyComponent(Master componentMaster)
-        {
-            this.componentMaster = componentMaster;
-        }
-
         public void Place()
         {
 

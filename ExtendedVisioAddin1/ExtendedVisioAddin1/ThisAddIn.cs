@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 using rationally_visio;
 using Microsoft.Office.Interop.Visio;
+using ExtendedVisioAddin1.EventHandlers;
+using ExtendedVisioAddin1.Model;
 
 namespace ExtendedVisioAddin1
 {
@@ -11,18 +13,18 @@ namespace ExtendedVisioAddin1
         private string decision;
         private string header;
         private Document rationallyDocument;
-
+        private RModel model;
 
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
-
+            model = new RModel();
 
             //ShowMyDialogBox();
             //MessageBox.Show(decision + " by " + author +" with header " + header);
             Application.MarkerEvent += new EApplication_MarkerEventEventHandler(Application_MarkerEvent);
             Application.TemplatePaths = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
-            Application.DocumentCreated += new EApplication_DocumentCreatedEventHandler(Application_DocumentCreatedEvent);
+            Application.DocumentCreated += new EApplication_DocumentCreatedEventHandler(DelegateCreateDocumentEvent);
             Application.DocumentOpened += new EApplication_DocumentOpenedEventHandler(Application_DocumentOpenedEvent);
 
             Documents visioDocs = this.Application.Documents;
@@ -69,20 +71,7 @@ namespace ExtendedVisioAddin1
 
         }
 
-        public void ShowMyDialogBox()
-        {
-            SheetSetUp testDialog = new SheetSetUp();
 
-            // Show testDialog as a modal dialog and determine if DialogResult = OK.
-            if (testDialog.ShowDialog() == DialogResult.OK)
-            {
-                // Read the contents of testDialog's TextBox.
-                this.author = testDialog.textBoxAuthor.Text;
-                this.decision = testDialog.textBoxName.Text;
-                this.header = testDialog.textBoxHeader.Text;
-            }
-            testDialog.Dispose();
-        }
 
         protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
@@ -105,13 +94,7 @@ namespace ExtendedVisioAddin1
             }
         }
 
-        private void Application_DocumentCreatedEvent(IVDocument d)
-        {
-            if (d.Template.ToLower().Contains("rationally"))
-            {
-                ShowMyDialogBox();
-            }
-        }
+
 
         private void Application_DocumentOpenedEvent(IVDocument d)
         {
@@ -140,5 +123,10 @@ namespace ExtendedVisioAddin1
             Shutdown += ThisAddIn_Shutdown;
         }
 
+        //#region Event delegaters
+        private void DelegateCreateDocumentEvent(IVDocument d)
+        {
+            new DocumentCreatedEventHandler(d, model);
+        }
     }
 }

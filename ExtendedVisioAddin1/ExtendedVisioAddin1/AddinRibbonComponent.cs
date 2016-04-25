@@ -8,7 +8,7 @@ namespace ExtendedVisioAddin1
     {
         private void buttonCommand1_Click(object sender, RibbonControlEventArgs e)
         {
-            Globals.ThisAddIn.Command1();
+           // Globals.ThisAddIn.Command1();
         }
     }
 }

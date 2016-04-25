@@ -93,13 +93,13 @@ namespace ExtendedVisioAddin1
             var button = (CommandBarButton)cb.FindControl(Tag: id) ??
                 (CommandBarButton)cb.Controls.Add(MsoControlType.msoControlButton);
 
-            button.Enabled = Globals.ThisAddIn.IsCommandEnabled(id);
+            //button.Enabled = Globals.ThisAddIn.IsCommandEnabled(id);
 
-            var checkState = Globals.ThisAddIn.IsCommandChecked(id);
-            button.State = checkState ? MsoButtonState.msoButtonDown : MsoButtonState.msoButtonUp;
+           // var checkState = Globals.ThisAddIn.IsCommandChecked(id);
+            //button.State = checkState ? MsoButtonState.msoButtonDown : MsoButtonState.msoButtonUp;
 
             button.Tag = id;
-            button.Caption = Globals.ThisAddIn.GetCommandLabel(id);
+            //button.Caption = Globals.ThisAddIn.GetCommandLabel(id);
             SetCommandBarButtonImage(button, id);
 
             button.Click += CommandBarButtonClicked;
@@ -109,20 +109,20 @@ namespace ExtendedVisioAddin1
 
         private void CommandBarButtonClicked(CommandBarButton ctrl, ref bool cancelDefault)
         {
-            Globals.ThisAddIn.OnCommand(ctrl.Tag);
+            //Globals.ThisAddIn.OnCommand(ctrl.Tag);
         }
 
         private void SetCommandBarButtonImage(CommandBarButton button, string id)
         {
-            var image = Globals.ThisAddIn.GetCommandBitmap(id + "_sm");
-            if (image == null)
-                return;
+            /*//var image = Globals.ThisAddIn.GetCommandBitmap(id + "_sm");
+            //if (image == null)
+                //return;
 
             Bitmap picture, mask;
-            BitmapToPictureAndMask(image, out picture, out mask);
+            //BitmapToPictureAndMask(image, out picture, out mask);
 
             button.Picture = PictureConvert.ImageToPictureDisp(picture);
-            button.Mask = PictureConvert.ImageToPictureDisp(mask);
+            button.Mask = PictureConvert.ImageToPictureDisp(mask);*/
         }
 
         static public void BitmapToPictureAndMask(Bitmap bm, out Bitmap picture, out Bitmap mask)

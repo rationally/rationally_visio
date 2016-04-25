@@ -144,6 +144,6 @@
         public System.Windows.Forms.TextBox version;
         public System.Windows.Forms.Button submitButton;
         private System.Windows.Forms.Label dateHeader;
-        private System.Windows.Forms.TextBox date;
+        public System.Windows.Forms.TextBox date;
     }
 }

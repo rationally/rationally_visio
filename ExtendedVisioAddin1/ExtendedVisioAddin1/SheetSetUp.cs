@@ -26,13 +26,13 @@ namespace rationally_visio
                 submitButton.DialogResult = DialogResult.None;
                 return;
             }
-            if (String.IsNullOrWhiteSpace(author.Text))
+            if (string.IsNullOrWhiteSpace(author.Text))
             {
                 MessageBox.Show("Enter an author name.");
                 submitButton.DialogResult = DialogResult.None;
                 return;
             }
-            if (String.IsNullOrWhiteSpace(version.Text))
+            if (string.IsNullOrWhiteSpace(version.Text))
             {
                 MessageBox.Show("Enter a version.");
                 submitButton.DialogResult = DialogResult.None;

@@ -30,10 +30,10 @@ namespace ExtendedVisioAddin1.EventHandlers
             if (testDialog.ShowDialog() == DialogResult.OK)
             {
                 // Read the contents of testDialog's TextBox.
-                model.Author = testDialog.textBoxAuthor.Text ?? "";
-                model.DecisionName = testDialog.textBoxName.Text ?? "";
-                model.Date = testDialog.textBoxHeader.Text ?? "";
-                model.Version = testDialog.textBoxHeader.Text ?? "";//TODO other reading fields
+                model.Author = testDialog.author.Text ?? "";
+                model.DecisionName = testDialog.decisionName.Text ?? "";
+                model.Date = testDialog.date.Text ?? "";
+                model.Version = testDialog.version.Text ?? "";
             }
             testDialog.Dispose();
         }

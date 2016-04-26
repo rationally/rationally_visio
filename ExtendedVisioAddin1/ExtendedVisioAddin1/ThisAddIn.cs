@@ -101,8 +101,8 @@ namespace ExtendedVisioAddin1
                 rationallyDocument = this.Application.Documents.OpenEx(docPath,
     ((short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visAddDocked));
 
-                Document containerDocument = Application.Documents.OpenEx(Application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers,
-                        VisMeasurementSystem.visMSUS), (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenHidden);
+                //Document containerDocument = Application.Documents.OpenEx(Application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers,
+                 //       VisMeasurementSystem.visMSUS), (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenHidden);
 
                 //ShowMyDialogBox();
             //}

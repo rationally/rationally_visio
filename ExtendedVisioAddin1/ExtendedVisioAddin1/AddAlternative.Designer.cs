@@ -63,12 +63,6 @@
             // alternativeStatus
             // 
             this.alternativeStatus.FormattingEnabled = true;
-            this.alternativeStatus.Items.AddRange(new object[] {
-            "accepted",
-            "challenged",
-            "discarded",
-            "proposed",
-            "rejected"});
             this.alternativeStatus.Location = new System.Drawing.Point(16, 74);
             this.alternativeStatus.Name = "alternativeStatus";
             this.alternativeStatus.Size = new System.Drawing.Size(196, 21);

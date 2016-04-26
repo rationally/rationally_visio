@@ -16,8 +16,10 @@ namespace ExtendedVisioAddin1.EventHandlers
             foreach (IVShape s in selectedComponents)
             {
                 RationallyComponent c = new RationallyComponent(s);
-                if (c.Type == "alternatives")
+                if (c.Type == "alternatives")//TODO might be redundant
                 {
+                    model.Alternatives.Add(new Alternative("alt title","status","desc"));
+                    model.Alternatives.Last().AddTo(s,0);
                     //model.RationallyDocument.Masters[""];
                 }
                 //TODO remove lock msvSDContainerLocked

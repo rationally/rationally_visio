@@ -87,6 +87,9 @@ namespace ExtendedVisioAddin1
                     Master forcesMaster = rationallyDocument.Masters.ItemU[@"Force"];
 
                     s.Drop(forcesMaster, 1, 1);
+                } else if (s.CellsU["User.rationallyType"].ResultStr["Value"] == "alternatives")
+                {
+                    AddAlternativeEventHandler a = new AddAlternativeEventHandler(model);
                 }
             }
         }

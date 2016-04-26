@@ -6,9 +6,10 @@ namespace ExtendedVisioAddin1
 {
     internal partial class EditAlternative : Form
     {
-        public EditAlternative(RModel model, string currentStatus)
+        public EditAlternative(RModel model, string alternative, string currentStatus)
         {
             InitializeComponent();
+            name.Text = "Change state of " + alternative;
             editStatusBox.Items.AddRange(model.AlternativeStates.ToArray());
             editStatusBox.SelectedItem = currentStatus;
         }

@@ -33,10 +33,11 @@ namespace ExtendedVisioAddin1.Components
             get { return Shape1.CellsU["User.rationallyType"].ResultStr["Value"]; }
             set
             {
-                //if (Shape1.RowExists["User.rationallyType.Value",0] > 0)
-               // {
-                    Shape1.CellsU["User.rationallyType.Value"].Formula = value;
-                //}
+                var a = Shape1.Cells["User.rationallyType.Value"].Formula;
+                //if (Shape1.CellExistsU["User.rationallyType.KAPOT", 0] != 0)
+                {
+                    Shape1.Cells["User.rationallyType.Value"].Formula = "\""+ value + "\"";
+                }
             }
         }
 

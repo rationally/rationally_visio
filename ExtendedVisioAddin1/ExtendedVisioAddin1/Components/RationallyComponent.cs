@@ -35,7 +35,7 @@ namespace ExtendedVisioAddin1.Components
             {
                 //if (Shape1.RowExists["User.rationallyType.Value",0] > 0)
                // {
-                    Shape1.CellsU["User.rationallyType.Value"].Formula = value;
+                Shape1.Cells["User.rationallyType.Value"].Formula = "\"" + value + "\"";
                 //}
             }
         }

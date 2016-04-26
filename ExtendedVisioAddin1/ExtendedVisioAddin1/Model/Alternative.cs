@@ -24,7 +24,7 @@ namespace ExtendedVisioAddin1.Model
             this.Description = description;
         }
 
-        public void AddTo(IVShape alternatives, int alternativeIdentifier)
+        public void AddTo(IVShape alternatives, int alternativeIdentifier) 
         {
             
             Application application = Globals.ThisAddIn.Application;

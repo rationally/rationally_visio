@@ -13,7 +13,7 @@ namespace ExtendedVisioAddin1.EventHandlers
         public AddAlternativeEventHandler(RModel model)
         {
             Selection selectedComponents = Globals.ThisAddIn.Application.ActiveWindow.Selection;
-            foreach (Shape s in selectedComponents)
+            foreach (IVShape s in selectedComponents)
             {
                 RationallyComponent c = new RationallyComponent(s);
                 if (c.Type == "alternatives")

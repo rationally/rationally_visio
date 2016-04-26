@@ -23,7 +23,7 @@ namespace ExtendedVisioAddin1.Components
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public new Shape Draw(double x, double y)
+        public new IVShape Draw(double x, double y)
         {
             //1) draws the three text elements
             TextLabel authorLabel = new TextLabel("Author: " + author + "\t\t Date: " + date + "\t\t Version: " + version);
@@ -32,7 +32,7 @@ namespace ExtendedVisioAddin1.Components
 
             //Globals.ThisAddIn.Application.ActiveWindow.DeselectAll();
 
-            Shape authorShape = authorLabel.Draw(x+0.1,y-0.1);
+            IVShape authorShape = authorLabel.Draw(x+0.1,y-0.1);
             //Shape dateShape = dateLabel.Draw(x+3,y-0.1);
             //Shape versionShape = versionLabel.Draw(x+6,y-0.1);
             //Globals.ThisAddIn.Application.ActiveWindow.Select(authorShape, (short)VisSelectArgs.visSelect);

@@ -23,7 +23,7 @@ namespace ExtendedVisioAddin1.Components
         /// </summary>
         /// <param name="x">Amount of inches from the left.</param>
         /// <param name="y">Amount of inches from the bottom.</param>
-        public new Shape Draw(double x, double y)
+        public new IVShape Draw(double x, double y)
         {
             double fac = (size/12.0);
             Shape textShape = Globals.ThisAddIn.Application.ActivePage.DrawRectangle(x, y, x+text.Length*0.125*fac, y-0.5);

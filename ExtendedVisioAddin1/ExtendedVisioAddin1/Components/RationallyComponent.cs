@@ -84,6 +84,64 @@ namespace ExtendedVisioAddin1.Components
 
             set { Shape1.CellsU["LockWidth"].ResultIU = (value ? 1 : 0); }
         }
+        public bool LockHeight
+        {
+            get
+            {
+                return Shape1.CellsU["LockHeight"].ResultIU > 0;
+            }
+
+            set { Shape1.CellsU["LockHeight"].ResultIU = (value ? 1 : 0); }
+        }
+
+        public bool LockMoveX
+        {
+            get
+            {
+                return Shape1.CellsU["LockMoveX"].ResultIU > 0;
+            }
+
+            set { Shape1.CellsU["LockMoveX"].ResultIU = (value ? 1 : 0); }
+        }
+        public bool LockMoveY
+        {
+            get
+            {
+                return Shape1.CellsU["LockMoveY"].ResultIU > 0;
+            }
+
+            set { Shape1.CellsU["LockMoveY"].ResultIU = (value ? 1 : 0); }
+        }
+
+        public bool LockRotate
+        {
+            get
+            {
+                return Shape1.CellsU["LockRotate"].ResultIU > 0;
+            }
+
+            set { Shape1.CellsU["LockRotate"].ResultIU = (value ? 1 : 0); }
+        }
+
+        public bool LockDelete
+        {
+            get
+            {
+                return Shape1.CellsU["LockDelete"].ResultIU > 0;
+            }
+
+            set { Shape1.CellsU["LockDelete"].ResultIU = (value ? 1 : 0); }
+        }
+
+        public bool LockTextEdit
+        {
+            get
+            {
+                return Shape1.CellsU["LockTextEdit"].ResultIU > 0;
+            }
+
+            set { Shape1.CellsU["LockTextEdit"].ResultIU = (value ? 1 : 0); }
+        }
 
         public bool MsvSdContainerLocked
         {

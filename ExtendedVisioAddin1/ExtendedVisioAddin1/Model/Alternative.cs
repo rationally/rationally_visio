@@ -35,17 +35,20 @@ namespace ExtendedVisioAddin1.Model
             double ALTERNATIVE_WIDTH = altComponent.Width; //inches
 
             Application application = Globals.ThisAddIn.Application;
+            Page activePage = application.ActivePage;
+            Window activeWindow = application.ActiveWindow;
+            
             Document containerDocument = application.Documents.OpenEx(application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers, VisMeasurementSystem.visMSUS), (short) Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenHidden);
             Document basicDocument = application.Documents.OpenEx("Basic Shapes.vss", (short) Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenHidden);
 
             Master alternativeMaster = containerDocument.Masters["Plain"];//wrapper for one whole alternative
 
             //--- define sub parts of the alternative. Only a Selection can be used to fill a container, so empty the current selection of the window and fill it with sub parts
-            application.ActiveWindow.DeselectAll();
+            activeWindow.DeselectAll();
 
             //1) state box
             Master stateRectangleMaster = basicDocument.Masters["Rectangle"];
-            Shape stateRectangle = application.ActivePage.Drop(stateRectangleMaster, (STATUS_WIDTH / 2), 0);
+            Shape stateRectangle = activePage.Drop(stateRectangleMaster, (STATUS_WIDTH / 2), 0);
             RationallyComponent stateComponent = new RationallyComponent(stateRectangle);
             stateComponent.Width = STATUS_WIDTH;
             stateComponent.Height = TOP_ROW_HEIGHT;
@@ -54,12 +57,12 @@ namespace ExtendedVisioAddin1.Model
             stateComponent.RationallyType = "alternativeState";
             stateRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             stateComponent.AlternativeIndex = alternativeIdentifier;
-            application.ActiveWindow.Select(stateRectangle, (short)VisSelectArgs.visSelect);
+            activeWindow.Select(stateRectangle, (short)VisSelectArgs.visSelect);
 
             //2) identifier ("A:")
             string identifier = (char) (65 + alternativeIdentifier) + "";
             Master identifierRectangleMaster = basicDocument.Masters["Rectangle"];
-            Shape identifierRectangle = application.ActiveWindow.PageAsObj.Drop(identifierRectangleMaster, STATUS_WIDTH + MARGIN + (IDENTIFIER_WIDTH/2), 0);
+            Shape identifierRectangle = activePage.Drop(identifierRectangleMaster, STATUS_WIDTH + MARGIN + (IDENTIFIER_WIDTH/2), 0);
             RationallyComponent identifierComponent = new RationallyComponent(identifierRectangle);
             identifierComponent.ToggleBoldFont(true);
             identifierComponent.Text = identifier + ":";
@@ -70,7 +73,7 @@ namespace ExtendedVisioAddin1.Model
             identifierRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             identifierComponent.AlternativeIndex = alternativeIdentifier;
 
-            application.ActiveWindow.Select(identifierRectangle, (short)VisSelectArgs.visSelect);
+            activeWindow.Select(identifierRectangle, (short)VisSelectArgs.visSelect);
 
             //locks
             identifierComponent.LockWidth = true;//TODO other locks
@@ -81,7 +84,7 @@ namespace ExtendedVisioAddin1.Model
             //3) title
             double TITLE_WIDTH = ALTERNATIVE_WIDTH - (STATUS_WIDTH + MARGIN + IDENTIFIER_WIDTH + MARGIN);
             Master titleRectangleMaster = basicDocument.Masters["Rectangle"];
-            Shape titleRectangle = application.ActivePage.Drop(titleRectangleMaster, STATUS_WIDTH + MARGIN + IDENTIFIER_WIDTH + MARGIN + (TITLE_WIDTH/2), 0);
+            Shape titleRectangle = activePage.Drop(titleRectangleMaster, STATUS_WIDTH + MARGIN + IDENTIFIER_WIDTH + MARGIN + (TITLE_WIDTH/2), 0);
             RationallyComponent titleComponent = new RationallyComponent(titleRectangle);
             titleComponent.Width = TITLE_WIDTH;
             titleComponent.Height = TOP_ROW_HEIGHT;
@@ -90,13 +93,13 @@ namespace ExtendedVisioAddin1.Model
             titleComponent.RationallyType = "alternativeTitle";
             titleRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             titleComponent.AlternativeIndex = alternativeIdentifier;
-            application.ActiveWindow.Select(titleRectangle, (short)VisSelectArgs.visSelect);
+            activeWindow.Select(titleRectangle, (short)VisSelectArgs.visSelect);
 
             
 
             //4) description area
             Master descRectangleMaster = basicDocument.Masters["Rectangle"];
-            Shape descRectangle = application.ActivePage.Drop(descRectangleMaster, ALTERNATIVE_WIDTH/2, TOP_ROW_HEIGHT + MARGIN);
+            Shape descRectangle = activePage.Drop(descRectangleMaster, ALTERNATIVE_WIDTH/2, -((TOP_ROW_HEIGHT/2) + MARGIN + (DESCRIPTION_HEIGHT/2)));
             RationallyComponent descComponent = new RationallyComponent(descRectangle);
             descComponent.Width = ALTERNATIVE_WIDTH;
             descComponent.Height = DESCRIPTION_HEIGHT;
@@ -105,12 +108,12 @@ namespace ExtendedVisioAddin1.Model
             descComponent.RationallyType = "alternativeDescription";
             descRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             descComponent.AlternativeIndex = alternativeIdentifier;
-            application.ActiveWindow.Select(descRectangle, (short)VisSelectArgs.visSelect);
+            activeWindow.Select(descRectangle, (short)VisSelectArgs.visSelectAll);
 
-            
+            int c = activeWindow.Selection.Count;
             altComponent.MsvSdContainerLocked = false;
-            Shape droppedAlternative = application.ActivePage.DropContainer(alternativeMaster, null);//altComponent.CenterX, altComponent.CenterY
-            application.ActiveWindow.Select(droppedAlternative, (short)VisSelectArgs.visSelect);
+            Shape droppedAlternative = activePage.DropContainer(alternativeMaster, activeWindow.Selection);//altComponent.CenterX, altComponent.CenterY
+            activeWindow.Select(droppedAlternative, (short)VisSelectArgs.visSelect);
             //droppedAlternative.ContainerProperties.ResizeAsNeeded = VisContainerAutoResize.visContainerAutoResizeExpandContract;
             RationallyComponent alternative = new RationallyComponent(droppedAlternative);
 
@@ -119,20 +122,21 @@ namespace ExtendedVisioAddin1.Model
             droppedAlternative.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             alternative.AlternativeIndex = alternativeIdentifier;
 
-            
+
 
             /*droppedAlternative.ContainerProperties.AddMember(identifierRectangle, VisMemberAddOptions.visMemberAddExpandContainer);
             droppedAlternative.ContainerProperties.AddMember(titleRectangle, VisMemberAddOptions.visMemberAddExpandContainer);
             droppedAlternative.ContainerProperties.AddMember(stateRectangle, VisMemberAddOptions.visMemberAddExpandContainer);
             droppedAlternative.ContainerProperties.AddMember(descRectangle, VisMemberAddOptions.visMemberAddExpandContainer);*/
 
-            //application.ActiveWindow.Selection.Move(altComponent.CenterX);
+            //activeWindow.Selection.Move(altComponent.CenterX);
             //alternative.CenterY = altComponent.CenterY;
 
-            
+
             //alternatives.ContainerProperties.ResizeAsNeeded = VisContainerAutoResize.visContainerAutoResizeExpandContract;
             droppedAlternative.AddToContainers();//TODO position alternative above alternatives
 
+            basicDocument.Close();
             containerDocument.Close();
         }
     }

@@ -57,7 +57,17 @@ namespace ExtendedVisioAddin1.Model
             stateComponent.RationallyType = "alternativeState";
             stateRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             stateComponent.AlternativeIndex = alternativeIdentifier;
-            
+            activeWindow.Select(stateRectangle, (short)VisSelectArgs.visSelect);
+
+            //locks
+            stateComponent.LockDelete = true;
+            stateComponent.LockRotate = true;
+            stateComponent.LockMoveX = true;
+            stateComponent.LockMoveY = true;
+            stateComponent.LockHeight = true;
+            stateComponent.LockTextEdit = true;
+            stateComponent.LockWidth = true;
+
 
             //2) identifier ("A:")
             string identifier = (char) (65 + alternativeIdentifier) + "";
@@ -76,8 +86,13 @@ namespace ExtendedVisioAddin1.Model
             
 
             //locks
-            identifierComponent.LockWidth = true;//TODO other locks
-
+            identifierComponent.LockDelete = true;
+            identifierComponent.LockRotate = true;
+            identifierComponent.LockMoveX = true;
+            identifierComponent.LockMoveY = true;
+            identifierComponent.LockHeight = true;
+            identifierComponent.LockTextEdit = true;
+            identifierComponent.LockWidth = true;
 
 
 
@@ -95,7 +110,11 @@ namespace ExtendedVisioAddin1.Model
             titleComponent.AlternativeIndex = alternativeIdentifier;
             
 
-            
+            //locks
+            titleComponent.LockDelete = true;
+            titleComponent.LockRotate = true;
+            titleComponent.LockMoveX = true;
+            titleComponent.LockMoveY = true;
 
             //4) description area
             Master descRectangleMaster = basicDocument.Masters["Rectangle"];
@@ -109,6 +128,12 @@ namespace ExtendedVisioAddin1.Model
             descRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             descComponent.AlternativeIndex = alternativeIdentifier;
 
+            //locks
+            identifierComponent.LockDelete = true;
+            identifierComponent.LockRotate = true;
+            identifierComponent.LockMoveX = true;
+            identifierComponent.LockMoveY = true;
+
             altComponent.MsvSdContainerLocked = false;
             Shape droppedAlternative = activePage.DropContainer(alternativeMaster, null);//altComponent.CenterX, altComponent.CenterY
             //activeWindow.Select(droppedAlternative, (short)VisSelectArgs.visSelect);
@@ -119,6 +144,14 @@ namespace ExtendedVisioAddin1.Model
             alternative.RationallyType = "alternative";
             droppedAlternative.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             alternative.AlternativeIndex = alternativeIdentifier;
+
+            //locks
+            alternative.LockDelete = true;
+            alternative.LockRotate = true;
+            alternative.LockMoveX = true;
+            alternative.LockMoveY = true;
+            alternative.LockTextEdit = true;
+            //droppedAlternative.CellsU["User.msvSDHeadingStyle"].ResultIU = 0;//TODO encap in rat com
 
             droppedAlternative.CellsU["User.msvSDHeadingStyle"].ResultIU = 0;//TODO encap in rat com
             droppedAlternative.ContainerProperties.ResizeAsNeeded = VisContainerAutoResize.visContainerAutoResizeExpandContract;

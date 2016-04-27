@@ -14,6 +14,7 @@ namespace ExtendedVisioAddin1.Model
         private const double IDENTIFIER_WIDTH = 0.4;
         private const double DESCRIPTION_HEIGHT = 2;
         private const double TOP_ROW_HEIGHT = 0.5;
+        public static double ALTERNATIVE_HEIGHT => TOP_ROW_HEIGHT + MARGIN + DESCRIPTION_HEIGHT;
 
         public string Description { get; set; }
 
@@ -28,7 +29,7 @@ namespace ExtendedVisioAddin1.Model
             this.Description = description;
         }
 
-        public void AddTo(IVShape alternatives, int alternativeIdentifier)
+        public Shape Paint(IVShape alternatives, int alternativeIdentifier)
         {
             RationallyComponent altComponent = new RationallyComponent(alternatives);
 
@@ -174,6 +175,8 @@ namespace ExtendedVisioAddin1.Model
 
             basicDocument.Close();
             containerDocument.Close();
+
+            return droppedAlternative;
         }
     }
 }

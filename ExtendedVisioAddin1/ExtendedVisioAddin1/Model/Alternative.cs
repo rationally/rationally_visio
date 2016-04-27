@@ -60,6 +60,11 @@ namespace ExtendedVisioAddin1.Model
             stateComponent.AlternativeIndex = alternativeIdentifier;
             activeWindow.Select(stateRectangle, (short)VisSelectArgs.visSelect);
 
+            //Events
+            stateRectangle.AddNamedRow((short)VisSectionIndices.visSectionAction, "Action_1", (short)VisRowTags.visTagDefault);
+            stateRectangle.CellsU["Actions.Action_1.Action"].Formula = "QUEUEMARKEREVENT(\"editState\")";
+            stateRectangle.CellsU["Actions.Action_1.Menu"].Formula = "\"Edit state\"";
+
             //locks
             stateComponent.LockDelete = true;
             stateComponent.LockRotate = true;

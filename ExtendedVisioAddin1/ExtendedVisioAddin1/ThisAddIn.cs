@@ -53,6 +53,10 @@ namespace ExtendedVisioAddin1
                 {
                     EditAlternativeStateEventHandler b = new EditAlternativeStateEventHandler(model);
                 }
+                else if (s.CellsU["User.rationallyType"].ResultStr["Value"] == "alternative")
+                {
+                    RemoveAlternativeEventHandler c = new RemoveAlternativeEventHandler(model);
+                }
             }
         }
 

@@ -19,7 +19,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                     AddAlternative alternative = new AddAlternative(model);
                     if (alternative.ShowDialog() == DialogResult.OK)
                     {
-                        model.Alternatives.Add(new Alternative(alternative.alternativeName.Text, alternative.alternativeStatus.SelectedText, ""));
+                        model.Alternatives.Add(new Alternative(alternative.alternativeName.Text, alternative.alternativeStatus.SelectedItem.ToString(), ""));
                         model.Alternatives.Last().AddTo(s,0);
                     }
                     alternative.Dispose();

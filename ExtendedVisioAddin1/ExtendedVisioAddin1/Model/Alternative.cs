@@ -134,10 +134,10 @@ namespace ExtendedVisioAddin1.Model
             descComponent.AlternativeIndex = alternativeIdentifier;
 
             //locks
-            identifierComponent.LockDelete = true;
-            identifierComponent.LockRotate = true;
-            identifierComponent.LockMoveX = true;
-            identifierComponent.LockMoveY = true;
+            descComponent.LockDelete = true;
+            descComponent.LockRotate = true;
+            descComponent.LockMoveX = true;
+            descComponent.LockMoveY = true;
 
             altComponent.MsvSdContainerLocked = false;
             Shape droppedAlternative = activePage.DropContainer(alternativeMaster, null);//altComponent.CenterX, altComponent.CenterY
@@ -173,10 +173,15 @@ namespace ExtendedVisioAddin1.Model
             //activeWindow.Selection.Move(altComponent.CenterX);
             //alternative.CenterY = altComponent.CenterY;
 
+            //Events
+            droppedAlternative.AddNamedRow((short)VisSectionIndices.visSectionAction, "Action_1", (short)VisRowTags.visTagDefault);
+            droppedAlternative.CellsU["Actions.Action_1.Action"].Formula = "QUEUEMARKEREVENT(\"deleteAlternative\")";
+            droppedAlternative.CellsU["Actions.Action_1.Menu"].Formula = "\"Delete alternative\"";
+
 
             //alternatives.ContainerProperties.ResizeAsNeeded = VisContainerAutoResize.visContainerAutoResizeExpandContract;
             droppedAlternative.AddToContainers();//TODO position alternative above alternatives
-
+            altComponent.MsvSdContainerLocked = true;
             basicDocument.Close();
             containerDocument.Close();
         }

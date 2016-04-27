@@ -20,7 +20,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 if (c.Type == "alternative")
                 {
                     //todo get alternative by identifier
-                    DialogResult confirmResult = MessageBox.Show("Are you sure to delete the " + "ALTERNATIVE NAME", "Confirm Deletion", MessageBoxButtons.YesNo); //todo alternative name
+                    DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete the " + "ALTERNATIVE NAME", "Confirm Deletion", MessageBoxButtons.YesNo); //todo alternative name
                     if (confirmResult == DialogResult.Yes)
                     {
                         //todo: remove alternative from list

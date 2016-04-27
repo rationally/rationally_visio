@@ -49,6 +49,10 @@ namespace ExtendedVisioAddin1
                 {
                     AddAlternativeEventHandler a = new AddAlternativeEventHandler(model);
                 }
+                else if (s.CellsU["User.rationallyType"].ResultStr["Value"] == "alternativeState")
+                {
+                    EditAlternativeStateEventHandler b = new EditAlternativeStateEventHandler(model);
+                }
             }
         }
 

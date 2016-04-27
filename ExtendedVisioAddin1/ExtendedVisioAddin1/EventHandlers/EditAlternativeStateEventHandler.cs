@@ -17,7 +17,7 @@ namespace ExtendedVisioAddin1.EventHandlers
             foreach (IVShape s in selectedComponents)
             {
                 RationallyComponent c = new RationallyComponent(s);
-                if (c.Type == "alternative")
+                if (c.Type == "alternativeState")
                 {
                     //todo get alternative by identifier
                     EditAlternative alternative = new EditAlternative(model, "TODO",  "TODO"); //todo get name and state from identifier

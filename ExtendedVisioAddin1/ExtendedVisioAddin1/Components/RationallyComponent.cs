@@ -57,12 +57,23 @@ namespace ExtendedVisioAddin1.Components
             get { return Shape1.CellsU["Height"].ResultIU; }
             set { Shape1.CellsU["Height"].ResultIU = value; }
         }
-        public double CenterX => Shape1.CellsU["pinX"].Result[VisUnitCodes.visInches];
-        public double CenterY => Shape1.CellsU["pinY"].Result[VisUnitCodes.visInches];
+        public double CenterX
+        {
+            get { return Shape1.CellsU["pinX"].Result[VisUnitCodes.visInches]; }
+            set { Shape1.CellsU["pinX"].Result[VisUnitCodes.visInches] = value; }
+        }
+
+        public double CenterY
+        {
+            get { return Shape1.CellsU["pinY"].Result[VisUnitCodes.visInches]; }
+            set { Shape1.CellsU["pinY"].Result[VisUnitCodes.visInches] = value; }
+        }
 
 
         //content related
         public string Text { get { return Shape1.Text; } set { Shape1.Text = value; } }
+
+        //lock related msvSDContainerLocked
 
         public bool LockWidth
         {
@@ -74,8 +85,16 @@ namespace ExtendedVisioAddin1.Components
             set { Shape1.CellsU["LockWidth"].ResultIU = (value ? 1 : 0); }
         }
 
+        public bool MsvSdContainerLocked
+        {
+            get
+            {
+                return Shape1.CellsU["User.msvSDContainerLocked"].ResultStr["Value"] == "TRUE";
+            }
 
-        //lock related
+            set { Shape1.CellsU["User.msvSDContainerLocked"].Formula = (value ? "TRUE" : "FALSE"); }
+        }
+
 
         /// <summary>
         /// Updates shapesheet of the stored IVShape. Character.Style holds information about the font style (bold, italic...) in a bitwise manner.

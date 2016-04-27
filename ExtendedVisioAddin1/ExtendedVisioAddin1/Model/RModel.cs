@@ -26,7 +26,7 @@ namespace ExtendedVisioAddin1.Model
             AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"};
             string docPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vssx";
             this.RationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath,
-((short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visAddDocked));
+((short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visAddHidden));
         }
     }
 }

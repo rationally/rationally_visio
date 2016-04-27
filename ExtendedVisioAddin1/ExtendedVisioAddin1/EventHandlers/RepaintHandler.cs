@@ -15,6 +15,7 @@ namespace ExtendedVisioAddin1.EventHandlers
         public RepaintHandler(RModel model)
         {
             this.model = model;
+            PaintAlternatives();
         }
 
         public void PaintAlternatives()
@@ -25,9 +26,30 @@ namespace ExtendedVisioAddin1.EventHandlers
             RationallyComponent alternatives = null;
             foreach (Shape s in Globals.ThisAddIn.Application.ActivePage.Shapes)
             {
+                RationallyComponent c = new RationallyComponent(s);
+                if (c.RationallyType == "alternatives")
+                {
+                    alternatives = c;
+                }
             }
+
             //set height to alternative count * factor
-            //loop over alternatives, fetch a shape for each
+            if (alternatives != null)
+            {
+                alternatives.Height = Alternative.ALTERNATIVE_HEIGHT*model.Alternatives.Count;
+            }
+            else
+            {
+                return;//nothing to paint
+            }
+            
+
+            //loop over alternatives, paint and fetch a shape for each
+            for (int i = 0; i < model.Alternatives.Count; i++)
+            {
+                Shape droppedAlternative = model.Alternatives[i].Paint(alternatives.Shape1, i);
+                alternatives.Shape1.Drop(droppedAlternative, alternatives.CenterX, alternatives.CenterY - (alternatives.Height/2) + i*Alternative.ALTERNATIVE_HEIGHT);
+            }
             //add the shapes to the alternatives shape
         }
 

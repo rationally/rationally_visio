@@ -57,7 +57,7 @@ namespace ExtendedVisioAddin1.Model
             stateComponent.RationallyType = "alternativeState";
             stateRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             stateComponent.AlternativeIndex = alternativeIdentifier;
-            activeWindow.Select(stateRectangle, (short)VisSelectArgs.visSelect);
+            
 
             //2) identifier ("A:")
             string identifier = (char) (65 + alternativeIdentifier) + "";
@@ -73,7 +73,7 @@ namespace ExtendedVisioAddin1.Model
             identifierRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             identifierComponent.AlternativeIndex = alternativeIdentifier;
 
-            activeWindow.Select(identifierRectangle, (short)VisSelectArgs.visSelect);
+            
 
             //locks
             identifierComponent.LockWidth = true;//TODO other locks
@@ -93,7 +93,7 @@ namespace ExtendedVisioAddin1.Model
             titleComponent.RationallyType = "alternativeTitle";
             titleRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             titleComponent.AlternativeIndex = alternativeIdentifier;
-            activeWindow.Select(titleRectangle, (short)VisSelectArgs.visSelect);
+            
 
             
 
@@ -108,12 +108,10 @@ namespace ExtendedVisioAddin1.Model
             descComponent.RationallyType = "alternativeDescription";
             descRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             descComponent.AlternativeIndex = alternativeIdentifier;
-            activeWindow.Select(descRectangle, (short)VisSelectArgs.visSelectAll);
 
-            int c = activeWindow.Selection.Count;
             altComponent.MsvSdContainerLocked = false;
-            Shape droppedAlternative = activePage.DropContainer(alternativeMaster, activeWindow.Selection);//altComponent.CenterX, altComponent.CenterY
-            activeWindow.Select(droppedAlternative, (short)VisSelectArgs.visSelect);
+            Shape droppedAlternative = activePage.DropContainer(alternativeMaster, null);//altComponent.CenterX, altComponent.CenterY
+            //activeWindow.Select(droppedAlternative, (short)VisSelectArgs.visSelect);
             //droppedAlternative.ContainerProperties.ResizeAsNeeded = VisContainerAutoResize.visContainerAutoResizeExpandContract;
             RationallyComponent alternative = new RationallyComponent(droppedAlternative);
 
@@ -122,10 +120,15 @@ namespace ExtendedVisioAddin1.Model
             droppedAlternative.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             alternative.AlternativeIndex = alternativeIdentifier;
 
+            //droppedAlternative.CellsU["User.msvSDHeadingStyle"].ResultIU = 0;//TODO encap in rat com
 
+            activeWindow.Select(stateRectangle, (short)VisSelectArgs.visSelect);
+            activeWindow.Select(identifierRectangle, (short)VisSelectArgs.visSelect);
+            activeWindow.Select(titleRectangle, (short)VisSelectArgs.visSelect);
+            activeWindow.Select(descRectangle, (short)VisSelectArgs.visSelect);
 
-            /*droppedAlternative.ContainerProperties.AddMember(identifierRectangle, VisMemberAddOptions.visMemberAddExpandContainer);
-            droppedAlternative.ContainerProperties.AddMember(titleRectangle, VisMemberAddOptions.visMemberAddExpandContainer);
+            droppedAlternative.ContainerProperties.AddMember(activeWindow.Selection, VisMemberAddOptions.visMemberAddExpandContainer);
+            /*droppedAlternative.ContainerProperties.AddMember(titleRectangle, VisMemberAddOptions.visMemberAddExpandContainer);
             droppedAlternative.ContainerProperties.AddMember(stateRectangle, VisMemberAddOptions.visMemberAddExpandContainer);
             droppedAlternative.ContainerProperties.AddMember(descRectangle, VisMemberAddOptions.visMemberAddExpandContainer);*/
 

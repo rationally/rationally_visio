@@ -126,6 +126,7 @@
     <Compile Include="EventHandlers\EventHandler.cs" />
     <Compile Include="EventHandlers\EventHandlerFactory.cs" />
     <Compile Include="EventHandlers\RemoveAlternativeEventHandler.cs" />
+    <Compile Include="EventHandlers\RepaintHandler.cs" />
     <Compile Include="Model\Alternative.cs" />
     <Compile Include="Model\RModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

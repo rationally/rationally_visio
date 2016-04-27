@@ -40,9 +40,9 @@ namespace ExtendedVisioAddin1.Components
             }
         }
 
-        public double AlternativeIndex
+        public int AlternativeIndex
         {
-            get { return Shape1.CellsU["User.alternativeIndex"].ResultIU; }
+            get { return (int)Shape1.CellsU["User.alternativeIndex"].ResultIU; }
             set { Shape1.CellsU["User.alternativeIndex.Value"].ResultIU = value; }
         }
 

@@ -158,15 +158,17 @@ namespace ExtendedVisioAddin1.Model
             alternative.LockTextEdit = true;
             //droppedAlternative.CellsU["User.msvSDHeadingStyle"].ResultIU = 0;//TODO encap in rat com
 
+            droppedAlternative.CellsU["User.msvSDHeadingStyle"].ResultIU = 0;//TODO encap in rat com
+            droppedAlternative.ContainerProperties.ResizeAsNeeded = VisContainerAutoResize.visContainerAutoResizeExpandContract;
             activeWindow.Select(stateRectangle, (short)VisSelectArgs.visSelect);
             activeWindow.Select(identifierRectangle, (short)VisSelectArgs.visSelect);
             activeWindow.Select(titleRectangle, (short)VisSelectArgs.visSelect);
             activeWindow.Select(descRectangle, (short)VisSelectArgs.visSelect);
 
-            droppedAlternative.ContainerProperties.AddMember(activeWindow.Selection, VisMemberAddOptions.visMemberAddExpandContainer);
-            /*droppedAlternative.ContainerProperties.AddMember(titleRectangle, VisMemberAddOptions.visMemberAddExpandContainer);
             droppedAlternative.ContainerProperties.AddMember(stateRectangle, VisMemberAddOptions.visMemberAddExpandContainer);
-            droppedAlternative.ContainerProperties.AddMember(descRectangle, VisMemberAddOptions.visMemberAddExpandContainer);*/
+            droppedAlternative.ContainerProperties.AddMember(identifierRectangle, VisMemberAddOptions.visMemberAddExpandContainer);
+            droppedAlternative.ContainerProperties.AddMember(titleRectangle, VisMemberAddOptions.visMemberAddExpandContainer);
+            droppedAlternative.ContainerProperties.AddMember(descRectangle, VisMemberAddOptions.visMemberAddExpandContainer);
 
             //activeWindow.Selection.Move(altComponent.CenterX);
             //alternative.CenterY = altComponent.CenterY;

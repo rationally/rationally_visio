@@ -71,7 +71,7 @@ namespace ExtendedVisioAddin1.Model
             identifierComponent.AlternativeIndex = alternativeIdentifier;
 
             application.ActiveWindow.Select(identifierRectangle, (short)VisSelectArgs.visSelect);
-
+          
             //locks
             identifierComponent.LockWidth = true;//TODO other locks
 

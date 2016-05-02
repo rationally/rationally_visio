@@ -6,7 +6,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
-    internal class RComponent
+    public class RComponent
     {
         public double X { get; set; }
         public double Y { get; set; }

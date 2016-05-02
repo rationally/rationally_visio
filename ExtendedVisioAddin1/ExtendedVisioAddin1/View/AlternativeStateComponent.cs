@@ -8,8 +8,9 @@ namespace ExtendedVisioAddin1.View
 {
     class AlternativeStateComponent : RComponent
     {
-        public AlternativeStateComponent(Page page) : base(page)
+        public AlternativeStateComponent(Page page, string state ) : base(page)
         {
+
         }
     }
 }

@@ -22,7 +22,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 ShowMyDialogBox();
                 double offsetHeight =Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageHeight"].Result[VisUnitCodes.visInches] - 0.4;
                 //draw the header
-                TextLabel header = new TextLabel(model.DecisionName);
+                TextLabel header = new TextLabel(Globals.ThisAddIn.Application.ActivePage,model.DecisionName);
                 header.SetFontSize(22);
                 header.Draw(1, offsetHeight);
 

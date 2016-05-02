@@ -26,7 +26,7 @@ namespace ExtendedVisioAddin1.Components
         public new IVShape Draw(double x, double y)
         {
             //1) draws the three text elements
-            TextLabel authorLabel = new TextLabel("Author: " + author + "\t\t Date: " + date + "\t\t Version: " + version);
+            TextLabel authorLabel = new TextLabel(Globals.ThisAddIn.Application.ActivePage, "Author: " + author + "\t\t Date: " + date + "\t\t Version: " + version);
             //TextLabel dateLabel = new TextLabel("Date: " + this.date);
             //TextLabel versionLabel = new TextLabel("Version: " + this.version);
 

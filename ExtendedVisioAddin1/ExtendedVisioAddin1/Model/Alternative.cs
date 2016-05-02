@@ -29,7 +29,7 @@ namespace ExtendedVisioAddin1.Model
             this.Description = description;
         }
 
-        public Shape Paint(IVShape alternatives, int alternativeIndex)
+        public Shape Paint(IVShape alternatives, int alternativeIndex, RModel model)
         {
             RationallyComponent altComponent = new RationallyComponent(alternatives);
 
@@ -62,11 +62,18 @@ namespace ExtendedVisioAddin1.Model
 
             //Events
             stateRectangle.AddNamedRow((short)VisSectionIndices.visSectionAction, "Action_1", (short)VisRowTags.visTagDefault);
-            stateRectangle.CellsU["Actions.Action_1.Action"].Formula = "QUEUEMARKEREVENT(\"editState\")";
-            stateRectangle.CellsU["Actions.Action_1.Menu"].Formula = "\"Edit state\"";
+            stateRectangle.CellsU["Actions.Action_1.Action"].Formula = "";
+            stateRectangle.CellsU["Actions.Action_1.Menu"].Formula = "\"Change state\"";
+            stateRectangle.CellsU["Actions.Action_1.FlyoutChild"].Formula = "FALSE";
 
-            
-
+            for(int i = 0; i < model.AlternativeStates.Count; i++)
+            {
+                string stateName = "State_" + i;
+                stateRectangle.AddNamedRow((short)VisSectionIndices.visSectionAction, stateName, (short)VisRowTags.visTagDefault);
+                stateRectangle.CellsU["Actions."+ stateName + ".Action"].Formula = "QUEUEMARKEREVENT(\"stateChange."+ model.AlternativeStates[i] + "\")";
+                stateRectangle.CellsU["Actions." + stateName + ".Menu"].Formula = "\"" + model.AlternativeStates[i] +"\"";
+                stateRectangle.CellsU["Actions." + stateName + ".FlyoutChild"].Formula = "TRUE";
+            }
 
             //2) identifier ("A:")
             string identifier = (char) (65 + alternativeIndex) + "";
@@ -185,6 +192,8 @@ namespace ExtendedVisioAddin1.Model
             droppedAlternative.AddNamedRow((short)VisSectionIndices.visSectionAction, "Action_1", (short)VisRowTags.visTagDefault);
             droppedAlternative.CellsU["Actions.Action_1.Action"].Formula = "QUEUEMARKEREVENT(\"deleteAlternative\")";
             droppedAlternative.CellsU["Actions.Action_1.Menu"].Formula = "\"Delete alternative\"";
+
+
 
 
             //alternatives.ContainerProperties.ResizeAsNeeded = VisContainerAutoResize.visContainerAutoResizeExpandContract;

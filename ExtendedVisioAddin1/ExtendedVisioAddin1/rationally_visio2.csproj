@@ -114,12 +114,6 @@
     <Compile Include="Components\InformationContainer.cs" />
     <Compile Include="Components\TextLabel.cs" />
     <Compile Include="CustomUI.cs" />
-    <Compile Include="EditAlternative.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditAlternative.Designer.cs">
-      <DependentUpon>EditAlternative.cs</DependentUpon>
-    </Compile>
     <Compile Include="EventHandlers\AddAlternativeEventHandler.cs" />
     <Compile Include="EventHandlers\DocumentCreatedEventHandler.cs" />
     <Compile Include="EventHandlers\EditAlternativeStateEventHandler.cs" />
@@ -162,9 +156,6 @@
     </Compile>
     <EmbeddedResource Include="AddAlternative.resx">
       <DependentUpon>AddAlternative.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditAlternative.resx">
-      <DependentUpon>EditAlternative.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

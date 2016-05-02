@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using ExtendedVisioAddin1.Components;
 using ExtendedVisioAddin1.Model;
+using ExtendedVisioAddin1.View;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers
@@ -23,20 +24,22 @@ namespace ExtendedVisioAddin1.EventHandlers
             //sync the model with the view
             UpdateAlternativeTitles();
             //get alternatives shape
-            RationallyComponent alternatives = null;
-            foreach (Shape s in Globals.ThisAddIn.Application.ActivePage.Shapes)
+            RComponent alternatives = null;
+            foreach (IVShape s in Globals.ThisAddIn.Application.ActivePage.Shapes)
             {
-                RationallyComponent c = new RationallyComponent(s);
-                if (c.Shape1.CellExistsU["User.rationallyType",0] != 0 && c.RationallyType == "alternatives")
+                RComponent c = new RComponent(Globals.ThisAddIn.Application.ActivePage);
+                c.RShape = s;
+
+                if (c.RShape.CellExistsU["User.rationallyType",0] != 0 && c.RationallyType == "alternatives")
                 {
                     alternatives = c;
                     continue;
                 }
                 //remove old alternative shapes
-                if (c.Shape1.CellExistsU["User.rationallyType.Value", 0] != 0 && (c.RationallyType == "alternative" || c.RationallyType == "alternativeIdentifier" || c.RationallyType == "alternativeTitle" || c.RationallyType == "alternativeDescription" || c.RationallyType == "alternativeState"))
+                if (c.RShape.CellExistsU["User.rationallyType.Value", 0] != 0 && (c.RationallyType == "alternative" || c.RationallyType == "alternativeIdentifier" || c.RationallyType == "alternativeTitle" || c.RationallyType == "alternativeDescription" || c.RationallyType == "alternativeState"))
                 {
                     c.LockDelete = false;
-                    c.Shape1.Delete();
+                    c.RShape.Delete();
                 }
             }
 
@@ -53,12 +56,12 @@ namespace ExtendedVisioAddin1.EventHandlers
 
             
 
-            //alternatives.Shape1.ContainerProperties.ResizeAsNeeded = VisContainerAutoResize.visContainerAutoResizeExpandContract;
+            //alternatives.RShape.ContainerProperties.ResizeAsNeeded = VisContainerAutoResize.visContainerAutoResizeExpandContract;
             //loop over alternatives, paint and fetch a shape for each
             for (int i = 0; i < model.Alternatives.Count; i++)
             {
-                IVShape droppedAlternative = model.Alternatives[i].Paint(alternatives.Shape1, i, model);
-                //alternatives.Shape1.Drop(droppedAlternative, alternatives.CenterX, alternatives.CenterY - (alternatives.Height/2) + i*Alternative.ALTERNATIVE_HEIGHT);
+                IVShape droppedAlternative = model.Alternatives[i].Paint(alternatives.RShape, i, model);
+                //alternatives.RShape.Drop(droppedAlternative, alternatives.CenterX, alternatives.CenterY - (alternatives.Height/2) + i*Alternative.ALTERNATIVE_HEIGHT);
             }
             //add the shapes to the alternatives shape
         }
@@ -68,8 +71,9 @@ namespace ExtendedVisioAddin1.EventHandlers
             //get all title shapes
             foreach (Shape s in Globals.ThisAddIn.Application.ActivePage.Shapes)
             {
-                RationallyComponent c = new RationallyComponent(s);
-                if (c.Shape1.CellExistsU["User.rationallyType", 0] != 0 && c.RationallyType == "alternativeTitle")
+                RComponent c = new RComponent(Globals.ThisAddIn.Application.ActivePage);
+                c.RShape = s;
+                if (c.RShape.CellExistsU["User.rationallyType", 0] != 0 && c.RationallyType == "alternativeTitle")
                 {
                     model.Alternatives[c.AlternativeIndex].Title = c.Text;
                 }

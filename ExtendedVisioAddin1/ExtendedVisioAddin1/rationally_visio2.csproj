@@ -109,6 +109,9 @@
       <DependentUpon>AddAlternative.cs</DependentUpon>
     </Compile>
     <Compile Include="AddinCommandBars.cs" />
+    <Compile Include="View\AlternativeContainer.cs" />
+    <Compile Include="View\AlternativesContainer.cs" />
+    <Compile Include="View\AlternativeStateComponent.cs" />
     <Compile Include="View\HeaderlessContainer.cs" />
     <Compile Include="View\ILayoutManager.cs" />
     <Compile Include="View\InlineLayout.cs" />

@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using ExtendedVisioAddin1.Components;
 using ExtendedVisioAddin1.Model;
+using ExtendedVisioAddin1.View;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers
@@ -16,7 +17,8 @@ namespace ExtendedVisioAddin1.EventHandlers
             Selection selectedComponents = Globals.ThisAddIn.Application.ActiveWindow.Selection;
             foreach (IVShape s in selectedComponents)
             {
-                RationallyComponent c = new RationallyComponent(s);
+                RComponent c = new RComponent(Globals.ThisAddIn.Application.ActivePage);
+                c.RShape = s;
                 if (c.Type == "alternativeState")
                 {
                     var x = "DebugVar";

@@ -8,12 +8,12 @@ namespace ExtendedVisioAddin1.View
 {
     class HeaderlessContainer : RContainer
     {
-        public HeaderlessContainer(Page page)
+        public HeaderlessContainer(Page page) : base(page)
         {
             Application application = Globals.ThisAddIn.Application;
             Document containerDocument = application.Documents.OpenEx(application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers, VisMeasurementSystem.visMSUS), (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenHidden);
             Master containerMaster = containerDocument.Masters["Plain"];
-            this.Page = page;
+
             RShape = Page.DropContainer(containerMaster, null);
             RShape.CellsU["User.msvSDHeadingStyle"].ResultIU = 0; //Remove header
             containerDocument.Close();

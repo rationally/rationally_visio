@@ -149,7 +149,7 @@ namespace ExtendedVisioAddin1.Model
             //alternative.CenterY = altComponent.CenterY;
 
             //locks
-            stateComponent.LockDelete = true;
+            /*stateComponent.LockDelete = true;
             stateComponent.LockRotate = true;
             stateComponent.LockMoveX = true;
             stateComponent.LockMoveY = true;
@@ -179,7 +179,7 @@ namespace ExtendedVisioAddin1.Model
             descComponent.LockDelete = true;
             descComponent.LockRotate = true;
             descComponent.LockMoveX = true;
-            descComponent.LockMoveY = true;
+            descComponent.LockMoveY = true;*/
 
             //Events
             droppedAlternative.AddNamedRow((short)VisSectionIndices.visSectionAction, "Action_1", (short)VisRowTags.visTagDefault);

@@ -9,6 +9,7 @@ namespace ExtendedVisioAddin1
 {
     public partial class ThisAddIn
     {
+        //TODO: application static kan mss mooier
         private RModel model;
 
 

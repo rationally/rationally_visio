@@ -30,7 +30,7 @@ namespace ExtendedVisioAddin1.Model
             this.Description = description;
         }
 
-        public Shape Paint(IVShape alternatives, int alternativeIndex, RModel model)
+        public IVShape Paint(IVShape alternatives, int alternativeIndex, RModel model)
         {
             RationallyComponent altComponent = new RationallyComponent(alternatives);
 
@@ -116,11 +116,13 @@ namespace ExtendedVisioAddin1.Model
 
 
             altComponent.MsvSdContainerLocked = false;
-            //altComponent.CenterX, altComponent.CenterY
 
             HeaderlessContainer alternativeContainer = new HeaderlessContainer(activePage);
             //activeWindow.Select(droppedAlternative, (short)VisSelectArgs.visSelect);
             //droppedAlternative.ContainerProperties.ResizeAsNeeded = VisContainerAutoResize.visContainerAutoResizeExpandContract;
+
+            IVShape droppedAlternative = alternativeContainer.RShape;
+
             RationallyComponent alternative = new RationallyComponent(droppedAlternative);
 
             droppedAlternative.AddNamedRow((short)VisSectionIndices.visSectionUser, "rationallyType", (short)VisRowTags.visTagDefault);
@@ -128,10 +130,6 @@ namespace ExtendedVisioAddin1.Model
             droppedAlternative.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             alternative.AlternativeIndex = alternativeIndex;
 
-            
-            //droppedAlternative.CellsU["User.msvSDHeadingStyle"].ResultIU = 0;//TODO encap in rat com
-
-            droppedAlternative.CellsU["User.msvSDHeadingStyle"].ResultIU = 0;//TODO encap in rat com
             droppedAlternative.ContainerProperties.ResizeAsNeeded = VisContainerAutoResize.visContainerAutoResizeExpandContract;
             activeWindow.Select(stateRectangle, (short)VisSelectArgs.visSelect);
             activeWindow.Select(identifierRectangle, (short)VisSelectArgs.visSelect);

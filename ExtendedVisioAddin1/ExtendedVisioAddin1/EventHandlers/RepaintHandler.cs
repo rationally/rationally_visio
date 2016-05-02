@@ -57,7 +57,7 @@ namespace ExtendedVisioAddin1.EventHandlers
             //loop over alternatives, paint and fetch a shape for each
             for (int i = 0; i < model.Alternatives.Count; i++)
             {
-                Shape droppedAlternative = model.Alternatives[i].Paint(alternatives.Shape1, i, model);
+                IVShape droppedAlternative = model.Alternatives[i].Paint(alternatives.Shape1, i, model);
                 //alternatives.Shape1.Drop(droppedAlternative, alternatives.CenterX, alternatives.CenterY - (alternatives.Height/2) + i*Alternative.ALTERNATIVE_HEIGHT);
             }
             //add the shapes to the alternatives shape

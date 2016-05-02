@@ -17,15 +17,15 @@ namespace ExtendedVisioAddin1.View
         public void Repaint()
         {
             //start the drawing at the left top of the container
-            this.Draw(toManage.X-(toManage.Width/2.0), toManage.Y+(toManage.Height/2.0), 0, new Queue<RComponent>(toManage.Children));
+            this.Draw(toManage.X-(toManage.Width/2.0), toManage.Y+(toManage.Height/2.0), 0,0,0, new Queue<RComponent>(toManage.Children));
         }
-
-        private void Draw(double x, double y, double currentLineHeight, Queue<RComponent> components)
+        private void Draw(double x, double y, double currentLineHeight, double contentXEnd, double contentYEnd, Queue<RComponent> components)
         {
             //Base Case
             if (components.Count == 0)
             {
-                return;//TODO shrinking
+                ShrinkContainer(contentXEnd,contentYEnd);
+                return;
             }
 
             RComponent toDraw = components.Dequeue();
@@ -41,7 +41,17 @@ namespace ExtendedVisioAddin1.View
                 PrepareContainerExpansion(x,y,0,toDrawHeight);   
             }
 
-            toManage.Page.Drop(toDraw,x,y);//TODO +half size
+            double dropX = x + toDraw.MarginLeft + (toDraw.Width/2.0);
+            double dropY = y - toDraw.MarginTop - (toDrawHeight/2.0);
+            toManage.Page.Drop(toDraw,dropX,dropY);
+
+            x = x + toDrawWidth;
+            currentLineHeight = Math.Max(currentLineHeight, toDrawHeight);
+            contentXEnd = Math.Max(contentXEnd, dropX + toDrawWidth);
+            contentYEnd = Math.Min(contentYEnd, y - toDrawHeight);
+
+            //Recursive Case
+            Draw(x,y,currentLineHeight,contentXEnd,contentYEnd,components);
         }
 
         /// <summary>
@@ -62,8 +72,6 @@ namespace ExtendedVisioAddin1.View
 
             bool expandXIfNeeded = ((int) toManage.UsedSizingPolicy & (int) SizingPolicy.ExpandXIfNeeded) > 0;
             bool expandYIfNeeded = ((int)toManage.UsedSizingPolicy & (int)SizingPolicy.ExpandYIfNeeded) > 0;
-
-
 
             //NOTE: expansion is two directional: divided between to the left and to the right
             //update the center according to the new height and original top left (because that should stay the same)

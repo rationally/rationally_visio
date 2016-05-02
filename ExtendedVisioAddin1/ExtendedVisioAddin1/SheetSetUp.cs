@@ -15,6 +15,7 @@ namespace rationally_visio
         public SheetSetUp()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             date.Text = DateTime.Now.ToString("dd-MM-yyyy");
         }
 

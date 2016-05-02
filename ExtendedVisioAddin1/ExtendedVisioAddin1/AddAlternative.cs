@@ -9,7 +9,9 @@ namespace ExtendedVisioAddin1
         public AddAlternative(RModel model)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             alternativeStatus.Items.AddRange(model.AlternativeStates.ToArray());
+            alternativeStatus.SelectedIndex = 0;//TODO: what if empty
         }
 
         private void createAlternative_Click(object sender, EventArgs e)

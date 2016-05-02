@@ -11,7 +11,7 @@ namespace ExtendedVisioAddin1.EventHandlers
 {
     class EditAlternativeStateEventHandler : EventHandler
     {
-        public EditAlternativeStateEventHandler(RModel model)
+        public EditAlternativeStateEventHandler(RModel model, string newState)
         {
             Selection selectedComponents = Globals.ThisAddIn.Application.ActiveWindow.Selection;
             foreach (IVShape s in selectedComponents)
@@ -19,16 +19,13 @@ namespace ExtendedVisioAddin1.EventHandlers
                 RationallyComponent c = new RationallyComponent(s);
                 if (c.Type == "alternativeState")
                 {
+                    var x = "DebugVar";
                     //todo get alternative by identifier
-                    EditAlternative alternative = new EditAlternative(model, "TODO",  "TODO"); //todo get name and state from identifier
-                    if (alternative.ShowDialog() == DialogResult.OK)
-                    {
-                        //TODO update alternative to new state (alternative.editStatusBox.selectedText)
-                        //todo REPAINT
-                    }
-                    alternative.Dispose();
+                    //TODO update alternative to new state (alternative.editStatusBox.selectedText)
+                    //todo REPAINT
                 }
             }
+            
         }
     }
 }

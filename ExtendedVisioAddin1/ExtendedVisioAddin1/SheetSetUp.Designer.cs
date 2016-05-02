@@ -43,7 +43,7 @@
             // 
             this.decisionName.Location = new System.Drawing.Point(12, 32);
             this.decisionName.Name = "decisionName";
-            this.decisionName.Size = new System.Drawing.Size(188, 20);
+            this.decisionName.Size = new System.Drawing.Size(211, 20);
             this.decisionName.TabIndex = 0;
             // 
             // decisionNameHead
@@ -68,7 +68,7 @@
             // 
             this.author.Location = new System.Drawing.Point(12, 76);
             this.author.Name = "author";
-            this.author.Size = new System.Drawing.Size(188, 20);
+            this.author.Size = new System.Drawing.Size(211, 20);
             this.author.TabIndex = 3;
             // 
             // versionDecision
@@ -84,15 +84,15 @@
             // 
             this.version.Location = new System.Drawing.Point(12, 120);
             this.version.Name = "version";
-            this.version.Size = new System.Drawing.Size(188, 20);
+            this.version.Size = new System.Drawing.Size(211, 20);
             this.version.TabIndex = 5;
             this.version.Text = "0.0.0";
             // 
             // submitButton
             // 
-            this.submitButton.Location = new System.Drawing.Point(12, 193);
+            this.submitButton.Location = new System.Drawing.Point(12, 190);
             this.submitButton.Name = "submitButton";
-            this.submitButton.Size = new System.Drawing.Size(188, 23);
+            this.submitButton.Size = new System.Drawing.Size(211, 23);
             this.submitButton.TabIndex = 6;
             this.submitButton.Text = "Submit";
             this.submitButton.UseVisualStyleBackColor = true;
@@ -111,14 +111,14 @@
             // 
             this.date.Location = new System.Drawing.Point(12, 164);
             this.date.Name = "date";
-            this.date.Size = new System.Drawing.Size(188, 20);
+            this.date.Size = new System.Drawing.Size(211, 20);
             this.date.TabIndex = 8;
             // 
             // SheetSetUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(212, 228);
+            this.ClientSize = new System.Drawing.Size(235, 228);
             this.Controls.Add(this.date);
             this.Controls.Add(this.dateHeader);
             this.Controls.Add(this.submitButton);

@@ -21,7 +21,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 c.RShape = s;
                 if (c.Type == "alternativeState")
                 {
-                    var x = "DebugVar";
+                    //var x = "DebugVar";
                     //todo get alternative by identifier
                     //TODO update alternative to new state (alternative.editStatusBox.selectedText)
                     //todo REPAINT

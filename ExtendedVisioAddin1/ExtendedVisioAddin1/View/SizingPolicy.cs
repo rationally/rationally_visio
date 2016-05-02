@@ -5,6 +5,7 @@ using System.Text;
 
 namespace ExtendedVisioAddin1.View
 {
+    [Flags]
     internal enum SizingPolicy
     {
         FixedSize = 0,

@@ -10,12 +10,14 @@ namespace ExtendedVisioAddin1
     public partial class ThisAddIn
     {
         //TODO: application static kan mss mooier
-        private RModel model;
+        public RModel model { get; set; }
 
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             model = new RModel();
+            model.Alternatives.Add(new Alternative("titelo","Accepted","dessehcription"));
+            
             Application.MarkerEvent += new EApplication_MarkerEventEventHandler(Application_MarkerEvent);
             Application.TemplatePaths = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
             Application.DocumentCreated += new EApplication_DocumentCreatedEventHandler(DelegateCreateDocumentEvent);
@@ -86,6 +88,7 @@ namespace ExtendedVisioAddin1
         private void DelegateCreateDocumentEvent(IVDocument d)
         {
             new DocumentCreatedEventHandler(d, model);
+            new RepaintHandler(model);
         }
     }
 }

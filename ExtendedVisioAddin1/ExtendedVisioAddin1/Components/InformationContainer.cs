@@ -23,7 +23,7 @@ namespace ExtendedVisioAddin1.Components
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public new IVShape Draw(double x, double y)
+        public IVShape Draw(double x, double y)
         {
             //1) draws the three text elements
             TextLabel authorLabel = new TextLabel(Globals.ThisAddIn.Application.ActivePage, "Author: " + author + "\t\t Date: " + date + "\t\t Version: " + version);

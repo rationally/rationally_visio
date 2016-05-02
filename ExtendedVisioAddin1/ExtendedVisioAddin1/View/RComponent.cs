@@ -174,9 +174,9 @@ namespace ExtendedVisioAddin1.View
 
         }
 
-        public void Repaint()
+        public virtual void Repaint()
         {
-            
+
         }
     }
 }

@@ -36,7 +36,7 @@ namespace ExtendedVisioAddin1.View
 
             if (toManage.X + (toDrawWidth/2) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
             {
-                x = 0;//go to a new line
+                x = toManage.X;//go to a new line
                 y -= currentLineHeight; //the new line of components should not overlap with the one above
                 PrepareContainerExpansion(x,y,0,toDrawHeight);   
             }

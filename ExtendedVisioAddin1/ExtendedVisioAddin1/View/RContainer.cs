@@ -15,9 +15,10 @@ namespace ExtendedVisioAddin1.View
         public RContainer(Page page) : base(page)
         {
             this.Children = new List<RComponent>();
+            this.LayoutManager = new InlineLayout(this);
         }
 
-        public new void Repaint()
+        public override void Repaint()
         {
             Children.ForEach(c => c.Repaint());
             LayoutManager.Repaint();

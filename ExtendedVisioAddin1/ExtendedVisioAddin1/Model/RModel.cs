@@ -6,7 +6,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.Model
 {
-    internal class RModel
+    public class RModel
     {
         public Document RationallyDocument { get; }
         public List<Alternative> Alternatives { get; set; }

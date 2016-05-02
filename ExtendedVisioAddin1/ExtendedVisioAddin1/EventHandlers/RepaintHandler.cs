@@ -16,10 +16,16 @@ namespace ExtendedVisioAddin1.EventHandlers
         public RepaintHandler(RModel model)
         {
             this.model = model;
-            PaintAlternatives();
+
+            if (model.Alternatives.Count > 0)
+            {
+                AlternativesContainer alternativesContainer = new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage,model.Alternatives);
+                alternativesContainer.Repaint();
+            }
+
         }
 
-        public void PaintAlternatives()
+        /*public void PaintAlternatives()
         {
             //sync the model with the view
             UpdateAlternativeTitles();
@@ -43,16 +49,6 @@ namespace ExtendedVisioAddin1.EventHandlers
                 }
             }
 
-            //set height to alternative count * factor
-            if (alternatives != null)
-            {
-                alternatives.Height = Alternative.ALTERNATIVE_HEIGHT*model.Alternatives.Count;
-            }
-            else
-            {
-                return;//nothing to paint
-            }
-
 
             
 
@@ -64,9 +60,9 @@ namespace ExtendedVisioAddin1.EventHandlers
                 //alternatives.RShape.Drop(droppedAlternative, alternatives.CenterX, alternatives.CenterY - (alternatives.Height/2) + i*Alternative.ALTERNATIVE_HEIGHT);
             }
             //add the shapes to the alternatives shape
-        }
+        }*/
 
-        public void UpdateAlternativeTitles()
+        /*public void UpdateAlternativeTitles()
         {
             //get all title shapes
             foreach (Shape s in Globals.ThisAddIn.Application.ActivePage.Shapes)
@@ -78,6 +74,6 @@ namespace ExtendedVisioAddin1.EventHandlers
                     model.Alternatives[c.AlternativeIndex].Title = c.Text;
                 }
             }
-        }
+        }*/
     }
 }

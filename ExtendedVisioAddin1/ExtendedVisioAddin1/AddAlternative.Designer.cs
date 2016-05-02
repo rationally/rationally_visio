@@ -48,7 +48,7 @@
             // 
             this.alternativeName.Location = new System.Drawing.Point(16, 30);
             this.alternativeName.Name = "alternativeName";
-            this.alternativeName.Size = new System.Drawing.Size(196, 20);
+            this.alternativeName.Size = new System.Drawing.Size(231, 20);
             this.alternativeName.TabIndex = 1;
             // 
             // label2
@@ -65,14 +65,14 @@
             this.alternativeStatus.FormattingEnabled = true;
             this.alternativeStatus.Location = new System.Drawing.Point(16, 74);
             this.alternativeStatus.Name = "alternativeStatus";
-            this.alternativeStatus.Size = new System.Drawing.Size(196, 21);
+            this.alternativeStatus.Size = new System.Drawing.Size(231, 21);
             this.alternativeStatus.TabIndex = 3;
             // 
             // createAlternative
             // 
             this.createAlternative.Location = new System.Drawing.Point(16, 110);
             this.createAlternative.Name = "createAlternative";
-            this.createAlternative.Size = new System.Drawing.Size(196, 23);
+            this.createAlternative.Size = new System.Drawing.Size(231, 23);
             this.createAlternative.TabIndex = 4;
             this.createAlternative.Text = "Create";
             this.createAlternative.UseVisualStyleBackColor = true;
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(236, 141);
+            this.ClientSize = new System.Drawing.Size(259, 141);
             this.Controls.Add(this.createAlternative);
             this.Controls.Add(this.alternativeStatus);
             this.Controls.Add(this.label2);

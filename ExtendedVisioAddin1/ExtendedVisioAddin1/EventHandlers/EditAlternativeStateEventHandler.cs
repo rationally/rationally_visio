@@ -19,6 +19,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 RationallyComponent c = new RationallyComponent(s);
                 if (c.Type == "alternativeState")
                 {
+                    var x = "DebugVar";
                     //todo get alternative by identifier
                     //TODO update alternative to new state (alternative.editStatusBox.selectedText)
                     //todo REPAINT

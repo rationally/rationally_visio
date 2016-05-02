@@ -17,7 +17,7 @@ namespace ExtendedVisioAddin1.View
             //1) state box
             Master stateRectangleMaster = basicDocument.Masters["Rectangle"];
             Shape stateRectangle = page.Drop(stateRectangleMaster, (STATUS_WIDTH / 2), 0);
-            RComponent stateComponent = new TextLabel(page, alternative.Status);
+            RComponent stateComponent = new AlternativeStateComponent(page, alternative.Status);
             stateComponent.RShape = stateRectangle;
 
             stateRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "rationallyType", (short)VisRowTags.visTagDefault);
@@ -48,8 +48,9 @@ namespace ExtendedVisioAddin1.View
             Shape identifierRectangle = page.Drop(identifierRectangleMaster, STATUS_WIDTH + MARGIN + (IDENTIFIER_WIDTH / 2), 0);
             RComponent identifierComponent = new TextLabel(page, identifier);
             identifierComponent.RShape = identifierRectangle;
-
             identifierComponent.ToggleBoldFont(true);
+
+            //events
             identifierRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "rationallyType", (short)VisRowTags.visTagDefault);
             identifierComponent.RationallyType = "alternativeIdentifier";
             identifierRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
@@ -60,12 +61,10 @@ namespace ExtendedVisioAddin1.View
             Master titleRectangleMaster = basicDocument.Masters["Rectangle"];
             Shape titleRectangle = page.Drop(titleRectangleMaster, STATUS_WIDTH + MARGIN + IDENTIFIER_WIDTH + MARGIN + (TITLE_WIDTH / 2), 0);
 
-            RComponent titleComponent = new RComponent(page);
+            RComponent titleComponent = new TextLabel(page, alternative.Title);
             titleComponent.RShape = titleRectangle;
 
-            titleComponent.Width = TITLE_WIDTH;
-            titleComponent.Height = TOP_ROW_HEIGHT;
-            titleComponent.Text = alternative.Title;
+            //events
             titleRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "rationallyType", (short)VisRowTags.visTagDefault);
             titleComponent.RationallyType = "alternativeTitle";
             titleRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
@@ -75,19 +74,52 @@ namespace ExtendedVisioAddin1.View
             Master descRectangleMaster = basicDocument.Masters["Rectangle"];
             Shape descRectangle = page.Drop(descRectangleMaster, ALTERNATIVE_WIDTH / 2, -((TOP_ROW_HEIGHT / 2) + MARGIN + (DESCRIPTION_HEIGHT / 2)));
 
-            RComponent descComponent = new RComponent(activePage);
+            RComponent descComponent = new RComponent(page);
             descComponent.RShape = descRectangle;
 
             descComponent.Width = ALTERNATIVE_WIDTH;
             descComponent.Height = DESCRIPTION_HEIGHT;
             descComponent.Text = alternative.Description;
+
+            //events
             descRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "rationallyType", (short)VisRowTags.visTagDefault);
             descComponent.RationallyType = "alternativeDescription";
             descRectangle.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             descComponent.AlternativeIndex = alternativeIndex;
 
 
-            
+            //locks
+            /*stateComponent.LockDelete = true;
+            stateComponent.LockRotate = true;
+            stateComponent.LockMoveX = true;
+            stateComponent.LockMoveY = true;
+            stateComponent.LockHeight = true;
+            stateComponent.LockTextEdit = true;
+            stateComponent.LockWidth = true;
+
+            identifierComponent.LockDelete = true;
+            identifierComponent.LockRotate = true;
+            identifierComponent.LockMoveX = true;
+            identifierComponent.LockMoveY = true;
+            identifierComponent.LockHeight = true;
+            identifierComponent.LockTextEdit = true;
+            identifierComponent.LockWidth = true;
+
+            titleComponent.LockDelete = true;
+            titleComponent.LockRotate = true;
+            titleComponent.LockMoveX = true;
+            titleComponent.LockMoveY = true;
+
+            alternative.LockDelete = true;
+            alternative.LockRotate = true;
+            alternative.LockMoveX = true;
+            alternative.LockMoveY = true;
+            alternative.LockTextEdit = true;
+
+            descComponent.LockDelete = true;
+            descComponent.LockRotate = true;
+            descComponent.LockMoveX = true;
+            descComponent.LockMoveY = true;*/
 
 
             Children.Add(stateComponent);

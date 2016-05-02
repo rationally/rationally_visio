@@ -32,21 +32,12 @@ namespace ExtendedVisioAddin1.Model
 
         public IVShape Paint(IVShape alternatives, int alternativeIndex, RModel model)
         {
-            
-
-
-            
+            Application application = Globals.ThisAddIn.Application;
             Page activePage = application.ActivePage;
             Window activeWindow = application.ActiveWindow;
 
             RComponent altComponent = new RComponent(activePage);
             altComponent.RShape = alternatives;
-
-            double ALTERNATIVE_WIDTH = altComponent.Width; //inches
-
-            
-
-            //wrapper for one whole alternative
 
             //--- define sub parts of the alternative. Only a Selection can be used to fill a container, so empty the current selection of the window and fill it with sub parts
             activeWindow.DeselectAll();
@@ -83,51 +74,14 @@ namespace ExtendedVisioAddin1.Model
             altComponent.RShape.ContainerProperties.AddMember(droppedAlternative,VisMemberAddOptions.visMemberAddUseResizeSetting);
             //alternative.CenterY = altComponent.CenterY;
 
-            //locks
-            /*stateComponent.LockDelete = true;
-            stateComponent.LockRotate = true;
-            stateComponent.LockMoveX = true;
-            stateComponent.LockMoveY = true;
-            stateComponent.LockHeight = true;
-            stateComponent.LockTextEdit = true;
-            stateComponent.LockWidth = true;
-
-            identifierComponent.LockDelete = true;
-            identifierComponent.LockRotate = true;
-            identifierComponent.LockMoveX = true;
-            identifierComponent.LockMoveY = true;
-            identifierComponent.LockHeight = true;
-            identifierComponent.LockTextEdit = true;
-            identifierComponent.LockWidth = true;
-
-            titleComponent.LockDelete = true;
-            titleComponent.LockRotate = true;
-            titleComponent.LockMoveX = true;
-            titleComponent.LockMoveY = true;
-
-            alternative.LockDelete = true;
-            alternative.LockRotate = true;
-            alternative.LockMoveX = true;
-            alternative.LockMoveY = true;
-            alternative.LockTextEdit = true;
-
-            descComponent.LockDelete = true;
-            descComponent.LockRotate = true;
-            descComponent.LockMoveX = true;
-            descComponent.LockMoveY = true;*/
-
             //Events
             droppedAlternative.AddNamedRow((short)VisSectionIndices.visSectionAction, "Action_1", (short)VisRowTags.visTagDefault);
             droppedAlternative.CellsU["Actions.Action_1.Action"].Formula = "QUEUEMARKEREVENT(\"deleteAlternative\")";
             droppedAlternative.CellsU["Actions.Action_1.Menu"].Formula = "\"Delete alternative\"";
 
-
-
-
             //alternatives.ContainerProperties.ResizeAsNeeded = VisContainerAutoResize.visContainerAutoResizeExpandContract;
             //droppedAlternative.AddToContainers();//TODO position alternative above alternatives
             altComponent.MsvSdContainerLocked = true;
-            basicDocument.Close();
 
             return droppedAlternative;
         }

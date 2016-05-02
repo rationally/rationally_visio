@@ -62,6 +62,7 @@
             // 
             // alternativeStatus
             // 
+            this.alternativeStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.alternativeStatus.FormattingEnabled = true;
             this.alternativeStatus.Location = new System.Drawing.Point(16, 74);
             this.alternativeStatus.Name = "alternativeStatus";

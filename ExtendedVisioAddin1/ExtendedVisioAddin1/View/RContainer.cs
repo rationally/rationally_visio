@@ -7,7 +7,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
-    internal class RContainer : RComponent
+    public class RContainer : RComponent
     {
         public List<RComponent> Children { get; set; }
         public ILayoutManager LayoutManager { get; set; }

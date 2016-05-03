@@ -4,6 +4,7 @@ using rationally_visio;
 using Microsoft.Office.Interop.Visio;
 using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.Model;
+using ExtendedVisioAddin1.View;
 
 namespace ExtendedVisioAddin1
 {
@@ -11,13 +12,14 @@ namespace ExtendedVisioAddin1
     {
         //TODO: application static kan mss mooier
         public RModel model { get; set; }
-
+        public RView View { get; set; }
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             model = new RModel();
             model.Alternatives.Add(new Alternative("titelo","Accepted","dessehcription"));
-            
+            View = new RView(Application.ActivePage);
+            model.AddObserver(View);
             Application.MarkerEvent += new EApplication_MarkerEventEventHandler(Application_MarkerEvent);
             Application.TemplatePaths = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
             Application.DocumentCreated += new EApplication_DocumentCreatedEventHandler(DelegateCreateDocumentEvent);

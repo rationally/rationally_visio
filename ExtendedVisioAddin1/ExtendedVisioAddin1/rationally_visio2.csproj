@@ -109,6 +109,8 @@
       <DependentUpon>AddAlternative.cs</DependentUpon>
     </Compile>
     <Compile Include="AddinCommandBars.cs" />
+    <Compile Include="Model\IObservable.cs" />
+    <Compile Include="Model\IObserver.cs" />
     <Compile Include="View\AlternativeContainer.cs" />
     <Compile Include="View\AlternativeDescriptionComponent.cs" />
     <Compile Include="View\AlternativeIdentifierComponent.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="View\InlineLayout.cs" />
     <Compile Include="View\RComponent.cs" />
     <Compile Include="View\RContainer.cs" />
+    <Compile Include="View\RView.cs" />
     <Compile Include="View\SizingPolicy.cs" />
   </ItemGroup>
   <ItemGroup>

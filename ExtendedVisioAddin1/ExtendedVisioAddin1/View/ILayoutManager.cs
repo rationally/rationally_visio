@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ExtendedVisioAddin1.View
 {
-    internal interface ILayoutManager
+    public interface ILayoutManager
     {
         void Repaint(); 
     }

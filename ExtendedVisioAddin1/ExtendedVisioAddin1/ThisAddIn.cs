@@ -86,8 +86,7 @@ namespace ExtendedVisioAddin1
                 {
                     if (shape.Name == "Alternatives")
                     {
-                        
-                        
+                        View.Children.Add(new AlternativesContainer(Application.ActivePage, shape));
                     }
                 }
             }

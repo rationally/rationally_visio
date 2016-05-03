@@ -26,12 +26,12 @@ namespace ExtendedVisioAddin1.View
             this.MsvSdContainerLocked = true;
         }
 
-        public AlternativesContainer(Page page, Shape alternativesContainer) : base(page)
+        public AlternativesContainer(Page page, IVShape alternativesContainer) : base(page)
         {
             RShape = alternativesContainer;
             this.MsvSdContainerLocked = false;
-
-            foreach (int shapeIdentifier in alternativesContainer.ContainerProperties.GetMemberShapes(0))
+            Array ident = alternativesContainer.ContainerProperties.GetMemberShapes(0);
+            foreach (int shapeIdentifier in ident)
             {
                 Shape alternative = page.Shapes.ItemFromID[shapeIdentifier];
                 this.Children.Add(new AlternativeContainer(page, alternative));

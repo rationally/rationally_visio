@@ -108,7 +108,7 @@ namespace ExtendedVisioAddin1.View
             RShape.AddNamedRow((short)VisSectionIndices.visSectionAction, fieldName, (short)VisRowTags.visTagDefault);
             RShape.CellsU["Actions." + fieldName + ".Action"].Formula = action;
             RShape.CellsU["Actions." + fieldName + ".Menu"].Formula = name;
-            RShape.CellsU["Actions." + fieldName + "FlyoutChild"].Formula = flyout.ToString().ToUpper();
+            RShape.CellsU["Actions." + fieldName + ".FlyoutChild"].Formula = flyout.ToString().ToUpper();
         }
 
         public void AddUserRow(string fieldName)

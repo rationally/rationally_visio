@@ -11,14 +11,8 @@ namespace ExtendedVisioAddin1.View
     {
         public AlternativesContainer(Page page, List<Alternative> alternatives) : base(page)
         {
-            Application application = Globals.ThisAddIn.Application;
-            Document containerDocument = application.Documents.OpenEx(application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers, VisMeasurementSystem.visMSUS), (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenHidden);
-            Master containerMaster = containerDocument.Masters["Plain"];
-
+            Master containerMaster = Globals.ThisAddIn.model.RationallyDocument.Masters["Alternatives"];
             RShape = Page.DropContainer(containerMaster, null);
-            containerDocument.Close();
-            this.Width = 5;
-            this.Height = 10;
             this.CenterX = 10;
             this.CenterY = 10;
 

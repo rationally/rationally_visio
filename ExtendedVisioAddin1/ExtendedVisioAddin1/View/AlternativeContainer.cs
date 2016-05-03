@@ -37,9 +37,13 @@ namespace ExtendedVisioAddin1.View
             AlternativeDescriptionComponent descComponent = new AlternativeDescriptionComponent(page, alternativeIndex, alternative.Description);
 
             Children.Add(stateComponent);
+            //this.RShape.ContainerProperties.AddMember(stateComponent.RShape,VisMemberAddOptions.visMemberAddDoNotExpand);
             Children.Add(identifierComponent);
+            //this.RShape.ContainerProperties.AddMember(identifierComponent.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
             Children.Add(titleComponent);
+            //this.RShape.ContainerProperties.AddMember(titleComponent.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
             Children.Add(descComponent);
+            //this.RShape.ContainerProperties.AddMember(descComponent.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
 
             this.AddUserRow("rationallyType");
             this.RationallyType = "alternative";
@@ -47,11 +51,11 @@ namespace ExtendedVisioAddin1.View
             this.AlternativeIndex = alternativeIndex;
 
             //locks
-            this.LockDelete = true;
+            /*this.LockDelete = true;
             this.LockRotate = true;
             this.LockMoveX = true;
             this.LockMoveY = true;
-            this.LockTextEdit = true;
+            this.LockTextEdit = true;*/
 
             //Events
             this.AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"deleteAlternative\")", "\"Delete alternative\"", false);

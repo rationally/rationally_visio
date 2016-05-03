@@ -19,7 +19,8 @@ namespace ExtendedVisioAddin1.View
             this.MsvSdContainerLocked = false;
             for (int i = 0; i < alternatives.Count; i++)
             {
-                this.Children.Add(new AlternativeContainer(page, i, alternatives[i]));
+                AlternativeContainer a = new AlternativeContainer(page, i, alternatives[i]);
+                this.Children.Add(a);
             }
             this.UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded & SizingPolicy.ExpandYIfNeeded;
             this.LayoutManager = new InlineLayout(this);

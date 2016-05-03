@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
@@ -47,6 +48,14 @@ namespace ExtendedVisioAddin1.View
             double deltaY = dropY - toDraw.CenterY;
             toDraw.CenterX = dropX;
             toDraw.CenterY = dropY;
+            
+            /*if (toManage is RContainer)
+            {
+                bool containerLocked = toManage.MsvSdContainerLocked;
+                toManage.MsvSdContainerLocked = false;
+                toManage.RShape.ContainerProperties.AddMember(toDraw.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
+                toManage.MsvSdContainerLocked = containerLocked;
+            }*/
             //toDraw can have children, that should maintain on the same relative position
             if (toDraw is RContainer)
             {

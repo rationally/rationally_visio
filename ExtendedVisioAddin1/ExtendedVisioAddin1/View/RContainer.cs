@@ -24,5 +24,21 @@ namespace ExtendedVisioAddin1.View
             LayoutManager.Repaint();
         }
 
+        public override void PlaceChildren()
+        {
+            foreach (RComponent c in this.Children)
+            {
+                if (c is RContainer)
+                {
+                    bool lockContainer = c.MsvSdContainerLocked;
+                    c.MsvSdContainerLocked = false;
+                    this.RShape.ContainerProperties.AddMember(c.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
+                    c.MsvSdContainerLocked = lockContainer;
+                }
+            }
+
+            this.Children.ForEach(c => c.PlaceChildren());
+        }
+
     }
 }

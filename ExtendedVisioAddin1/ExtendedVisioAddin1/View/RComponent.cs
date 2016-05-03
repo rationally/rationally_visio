@@ -220,5 +220,10 @@ namespace ExtendedVisioAddin1.View
         {
 
         }
+
+        public virtual void PlaceChildren()
+        {
+            
+        }
     }
 }

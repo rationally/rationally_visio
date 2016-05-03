@@ -22,6 +22,7 @@ namespace ExtendedVisioAddin1.EventHandlers
             if (model.Alternatives.Count > 0)
             {
                 AlternativesContainer alternativesContainer = new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage,model.Alternatives);
+                alternativesContainer.PlaceChildren();
                 alternativesContainer.Repaint();
             }
             //Globals.ThisAddIn.View.Repaint();

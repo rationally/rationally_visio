@@ -45,9 +45,7 @@ namespace ExtendedVisioAddin1.View
             this.LockTextEdit = true;
 
             //Events
-            this.RShape.AddNamedRow((short)VisSectionIndices.visSectionAction, "Action_1", (short)VisRowTags.visTagDefault);
-            this.RShape.CellsU["Actions.Action_1.Action"].Formula = "QUEUEMARKEREVENT(\"deleteAlternative\")";
-            this.RShape.CellsU["Actions.Action_1.Menu"].Formula = "\"Delete alternative\"";
+            this.AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"deleteAlternative\")", "\"Delete alternative\"", false);
         }
     }
 }

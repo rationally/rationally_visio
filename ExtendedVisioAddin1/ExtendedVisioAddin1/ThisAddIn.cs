@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using ExtendedVisioAddin1.Components;
 using rationally_visio;
@@ -85,7 +86,7 @@ namespace ExtendedVisioAddin1
                 {
                     if (shape.Name == "Alternatives")
                     {
-                        var debugvar = 0;
+                        View.Children.Add(new AlternativesContainer(Application.ActivePage, shape));
                     }
                 }
             }

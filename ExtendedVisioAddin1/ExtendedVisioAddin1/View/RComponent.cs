@@ -28,6 +28,18 @@ namespace ExtendedVisioAddin1.View
         //---
         //property wrappers
         //---
+        public string Name
+        {
+            get
+            {
+                return RShape.Name;
+            }
+            set
+            {
+                RShape.Name = value;
+            }
+        }
+
 
         //type related
         public string Type => RShape.CellsU["User.rationallyType"].ResultStr["Value"];

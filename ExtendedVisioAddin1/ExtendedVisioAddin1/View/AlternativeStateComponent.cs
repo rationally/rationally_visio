@@ -10,6 +10,11 @@ namespace ExtendedVisioAddin1.View
 {
     internal class AlternativeStateComponent : TextLabel
     {
+        public AlternativeStateComponent(Page page, IVShape alternativeComponent)
+        {
+            this.RShape= alternativeComponent;
+        }
+
         public AlternativeStateComponent(Page page, int alternativeIndex, string state ) : base(page, state)
         {
             this.AddUserRow("rationallyType");
@@ -17,6 +22,7 @@ namespace ExtendedVisioAddin1.View
             this.AddUserRow("alternativeIndex");
             this.AlternativeIndex = alternativeIndex;
 
+            this.Name = "AlternativeState";
             //Events
             this.AddAction("changeState", "", "\"Change state\"", false);
 

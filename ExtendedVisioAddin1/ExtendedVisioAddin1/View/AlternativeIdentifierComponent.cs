@@ -9,6 +9,13 @@ namespace ExtendedVisioAddin1.View
 {
     class AlternativeIdentifierComponent : TextLabel
     {
+        private IVShape alternativeComponent;
+
+        public AlternativeIdentifierComponent(Page page, IVShape alternativeComponent)
+        {
+            this.RShape = alternativeComponent;
+        }
+
         public AlternativeIdentifierComponent(Page page, int alternativeIndex, string text) : base(page, text)
         {
             this.AddUserRow("rationallyType");
@@ -16,6 +23,7 @@ namespace ExtendedVisioAddin1.View
             this.AddUserRow("alternativeIndex");
             this.AlternativeIndex = alternativeIndex;
 
+            this.Name = "AlternativeIdent";
             //Locks
             /*this.LockDelete = true;
             this.LockRotate = true;

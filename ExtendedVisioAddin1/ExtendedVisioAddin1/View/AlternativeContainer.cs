@@ -13,10 +13,25 @@ namespace ExtendedVisioAddin1.View
         public AlternativeContainer(Page page, IVShape alternative) : base(page)
         {
             this.RShape = alternative;
-            foreach (int shapeIdentifier in alternative.ContainerProperties.GetMemberShapes(0))
+            foreach (int shapeIdentifier in alternative.ContainerProperties.GetMemberShapes(16))
             {
-                Shape alternativeComponent = page.Shapes.ItemFromID[shapeIdentifier];
-                //this.Children.Add(new AlternativeContainer(page, alternative));
+                IVShape alternativeComponent = page.Shapes.ItemFromID[shapeIdentifier];
+                if (alternativeComponent.Name == "AlternativeTitle")
+                {
+                    this.Children.Add(new AlternativeTitleComponent(page, alternativeComponent));
+                }
+                else if (alternativeComponent.Name == "AlternativeState")
+                {
+                    this.Children.Add(new AlternativeStateComponent(page, alternativeComponent));
+                }
+                else if (alternativeComponent.Name == "AlternativeIdent")
+                {
+                    this.Children.Add(new AlternativeIdentifierComponent(page, alternativeComponent));
+                }
+                else if (alternativeComponent.Name == "AlternativeDescription")
+                {
+                    this.Children.Add(new AlternativeDescriptionComponent(page, alternativeComponent));
+                }
             }
         }
 
@@ -45,6 +60,7 @@ namespace ExtendedVisioAddin1.View
             Children.Add(descComponent);
             //this.RShape.ContainerProperties.AddMember(descComponent.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
 
+            this.Name = "Alternative";
             this.AddUserRow("rationallyType");
             this.RationallyType = "alternative";
             this.AddUserRow("alternativeIndex");

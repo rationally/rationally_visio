@@ -16,6 +16,12 @@ namespace ExtendedVisioAddin1.View
             this.RationallyType = "alternativeTitle";
             this.RShape.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
             this.AlternativeIndex = alternativeIndex;
+
+            //Locks
+            /*this.LockDelete = true;
+            this.LockRotate = true;
+            this.LockMoveX = true;
+            this.LockMoveY = true;*/
         }
     }
 }

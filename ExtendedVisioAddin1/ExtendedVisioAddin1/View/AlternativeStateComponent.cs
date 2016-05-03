@@ -31,6 +31,15 @@ namespace ExtendedVisioAddin1.View
                 this.RShape.CellsU["Actions." + stateName + ".Menu"].Formula = "\"" + model.AlternativeStates[i] + "\"";
                 this.RShape.CellsU["Actions." + stateName + ".FlyoutChild"].Formula = "TRUE";
             }
+
+            //locks
+            /*this.LockDelete = true;
+            this.LockRotate = true;
+            this.LockMoveX = true;
+            this.LockMoveY = true;
+            this.LockHeight = true;
+            this.LockTextEdit = true;
+            this.LockWidth = true;*/
         }
     }
 }

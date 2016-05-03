@@ -17,9 +17,9 @@ namespace ExtendedVisioAddin1.View
 
             this.RShape = page.Drop(descRectangleMaster, 0, 0);
 
-            this.RShape.AddNamedRow((short)VisSectionIndices.visSectionUser, "rationallyType", (short)VisRowTags.visTagDefault);
+            this.AddUserRow("rationallyType");
             this.RationallyType = "alternativeDescription";
-            this.RShape.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
+            this.AddUserRow("alternativeIndex");
             this.AlternativeIndex = alternativeIndex;
 
             this.Text = description;

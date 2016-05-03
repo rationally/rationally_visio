@@ -34,43 +34,73 @@ namespace ExtendedVisioAddin1.View
 
         public string RationallyType
         {
-            get { return RShape.CellsU["User.rationallyType"].ResultStr["Value"]; }
+            get
+            {
+                return RShape.CellsU["User.rationallyType"].ResultStr["Value"];
+            }
             set
             {
-                //if (RShape.RowExists["User.rationallyType.Value",0] > 0)
-                // {
                 RShape.Cells["User.rationallyType.Value"].Formula = "\"" + value + "\"";
-                //}
             }
         }
 
         public int AlternativeIndex
         {
-            get { return (int)RShape.CellsU["User.alternativeIndex"].ResultIU; }
-            set { RShape.CellsU["User.alternativeIndex.Value"].ResultIU = value; }
+            get
+            {
+                return (int)RShape.CellsU["User.alternativeIndex"].ResultIU;
+            }
+            set
+            {
+                RShape.CellsU["User.alternativeIndex.Value"].ResultIU = value;
+            }
         }
 
         public double Width
         {
-            get { return RShape.CellsU["Width"].ResultIU; }
-            set { RShape.CellsU["Width"].ResultIU = value; }
+            get
+            {
+                return RShape.CellsU["Width"].ResultIU;
+            }
+            set
+            {
+                RShape.CellsU["Width"].ResultIU = value;
+            }
         }
 
         public double Height
         {
-            get { return RShape.CellsU["Height"].ResultIU; }
-            set { RShape.CellsU["Height"].ResultIU = value; }
+            get
+            {
+                return RShape.CellsU["Height"].ResultIU;
+            }
+            set
+            {
+                RShape.CellsU["Height"].ResultIU = value;
+            }
         }
         public double CenterX
         {
-            get { return RShape.CellsU["pinX"].Result[VisUnitCodes.visInches]; }
-            set { RShape.CellsU["pinX"].Result[VisUnitCodes.visInches] = value; }
+            get
+            {
+                return RShape.CellsU["pinX"].Result[VisUnitCodes.visInches];
+            }
+            set
+            {
+                RShape.CellsU["pinX"].Result[VisUnitCodes.visInches] = value;
+            }
         }
 
         public double CenterY
         {
-            get { return RShape.CellsU["pinY"].Result[VisUnitCodes.visInches]; }
-            set { RShape.CellsU["pinY"].Result[VisUnitCodes.visInches] = value; }
+            get
+            {
+                return RShape.CellsU["pinY"].Result[VisUnitCodes.visInches];
+            }
+            set
+            {
+                RShape.CellsU["pinY"].Result[VisUnitCodes.visInches] = value;
+            }
         }
 
         public void AddAction(string fieldName, string action, string name, bool flyout)
@@ -79,6 +109,11 @@ namespace ExtendedVisioAddin1.View
             RShape.CellsU["Actions." + fieldName + ".Action"].Formula = action;
             RShape.CellsU["Actions." + fieldName + ".Menu"].Formula = name;
             RShape.CellsU["Actions." + fieldName + "FlyoutChild"].Formula = flyout.ToString().ToUpper();
+        }
+
+        public void AddUserRow(string fieldName)
+        {
+            RShape.AddNamedRow((short)VisSectionIndices.visSectionUser, fieldName, (short)VisRowTags.visTagDefault);
         }
 
         //content related

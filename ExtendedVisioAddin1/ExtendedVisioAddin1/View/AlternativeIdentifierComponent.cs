@@ -11,9 +11,9 @@ namespace ExtendedVisioAddin1.View
     {
         public AlternativeIdentifierComponent(Page page, int alternativeIndex, string text) : base(page, text)
         {
-            this.RShape.AddNamedRow((short)VisSectionIndices.visSectionUser, "rationallyType", (short)VisRowTags.visTagDefault);
+            this.AddUserRow("rationallyType");
             this.RationallyType = "alternativeIdentifier";
-            this.RShape.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
+            this.AddUserRow("alternativeIndex");
             this.AlternativeIndex = alternativeIndex;
 
             //Locks

@@ -12,9 +12,9 @@ namespace ExtendedVisioAddin1.View
     {
         public AlternativeStateComponent(Page page, int alternativeIndex, string state ) : base(page, state)
         {
-            this.RShape.AddNamedRow((short)VisSectionIndices.visSectionUser, "rationallyType", (short)VisRowTags.visTagDefault);
+            this.AddUserRow("rationallyType");
             this.RationallyType = "alternativeState";
-            this.RShape.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
+            this.AddUserRow("alternativeIndex");
             this.AlternativeIndex = alternativeIndex;
 
             //Events

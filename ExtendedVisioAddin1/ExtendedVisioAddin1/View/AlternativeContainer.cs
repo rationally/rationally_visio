@@ -32,9 +32,9 @@ namespace ExtendedVisioAddin1.View
             Children.Add(titleComponent);
             Children.Add(descComponent);
 
-            this.RShape.AddNamedRow((short)VisSectionIndices.visSectionUser, "rationallyType", (short)VisRowTags.visTagDefault);
+            this.AddUserRow("rationallyType");
             this.RationallyType = "alternative";
-            this.RShape.AddNamedRow((short)VisSectionIndices.visSectionUser, "alternativeIndex", (short)VisRowTags.visTagDefault);
+            this.AddUserRow("alternativeIndex");
             this.AlternativeIndex = alternativeIndex;
 
             //locks

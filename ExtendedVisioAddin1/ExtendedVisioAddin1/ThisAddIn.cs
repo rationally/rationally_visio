@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using ExtendedVisioAddin1.Components;
 using rationally_visio;
 using Microsoft.Office.Interop.Visio;
 using ExtendedVisioAddin1.EventHandlers;
@@ -24,6 +25,11 @@ namespace ExtendedVisioAddin1
             Application.TemplatePaths = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
             Application.DocumentCreated += new EApplication_DocumentCreatedEventHandler(DelegateCreateDocumentEvent);
             Application.DocumentOpened += new EApplication_DocumentOpenedEventHandler(Application_DocumentOpenedEvent);
+            Application.ShapeAdded += new EApplication_ShapeAddedEventHandler(Application_ShapeAddedEvent);
+            Application.ShapeChanged += new EApplication_ShapeChangedEventHandler(Application_ShapeChangedEvent);
+            Application.MasterAdded += new EApplication_MasterAddedEventHandler(Application_MasterAddedEvent);
+            Application.MasterChanged += new EApplication_MasterChangedEventHandler(Application_MasterChangedEvent);
+
         }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e)
@@ -73,8 +79,38 @@ namespace ExtendedVisioAddin1
 
         private void Application_DocumentOpenedEvent(IVDocument d)
         {
+            if (Application.ActiveDocument.Template.ToLower().Contains("rationally"))
+            {
+                foreach (IVShape shape in Application.ActivePage.Shapes)
+                {
+                    if (shape.Name == "Alternatives")
+                    {
+                        var debugvar = 0;
+                    }
+                }
+            }
         }
 
+        private void Application_ShapeAddedEvent(Shape s)
+        {
+            string yx = ((IVShape)s.ContainingShape).Name;
+            var x = 0;
+        }
+
+        private void Application_ShapeChangedEvent(Shape s)
+        {
+            var x = 0;
+        }
+
+        private void Application_MasterAddedEvent(Master m)
+        {
+            var x = 0;
+        }
+
+        private void Application_MasterChangedEvent(Master m)
+        {
+            var x = 0;
+        }
 
         /// <summary>
         /// Required method for Designer support - do not modify

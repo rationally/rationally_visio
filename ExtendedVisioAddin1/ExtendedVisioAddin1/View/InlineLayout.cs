@@ -7,7 +7,7 @@ namespace ExtendedVisioAddin1.View
 {
     internal class InlineLayout : ILayoutManager
     {
-        private RContainer toManage;
+        private readonly RContainer toManage;
 
         public InlineLayout(RContainer toManage)
         {
@@ -50,7 +50,7 @@ namespace ExtendedVisioAddin1.View
             //toDraw can have children, that should maintain on the same relative position
             if (toDraw is RContainer)
             {
-                foreach (var c in ((RContainer) toDraw).Children)
+                foreach (RComponent c in ((RContainer) toDraw).Children)
                 {
                     c.CenterX += deltaX;
                     c.CenterY += deltaY;

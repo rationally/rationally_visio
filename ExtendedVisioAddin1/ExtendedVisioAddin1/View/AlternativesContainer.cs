@@ -12,7 +12,6 @@ namespace ExtendedVisioAddin1.View
         public AlternativesContainer(Page page, List<Alternative> alternatives) : base(page)
         {
             Master containerMaster = Globals.ThisAddIn.model.RationallyDocument.Masters["Alternatives"];
-
             RShape = Page.DropContainer(containerMaster, null);
             this.CenterX = 10;
             this.CenterY = 10;

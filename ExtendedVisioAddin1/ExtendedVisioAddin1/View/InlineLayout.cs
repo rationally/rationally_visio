@@ -43,7 +43,9 @@ namespace ExtendedVisioAddin1.View
 
             double dropX = x + toDraw.MarginLeft + (toDraw.Width/2.0);
             double dropY = y - toDraw.MarginTop - (toDrawHeight/2.0);
-            toManage.Page.Drop(toDraw.RShape,dropX,dropY);
+
+            toDraw.CenterX = dropX;
+            toDraw.CenterY = dropY;
 
             x = x + toDrawWidth;
             currentLineHeight = Math.Max(currentLineHeight, toDrawHeight);

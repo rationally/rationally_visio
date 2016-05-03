@@ -16,6 +16,8 @@ namespace ExtendedVisioAddin1.View
             this.CenterX = 10;
             this.CenterY = 10;
 
+            this.Name = "Alternatives";
+
             this.MsvSdContainerLocked = false;
             for (int i = 0; i < alternatives.Count; i++)
             {
@@ -29,16 +31,13 @@ namespace ExtendedVisioAddin1.View
         public AlternativesContainer(Page page, IVShape alternativesContainer) : base(page)
         {
             RShape = alternativesContainer;
-            this.MsvSdContainerLocked = false;
-            Array ident = alternativesContainer.ContainerProperties.GetMemberShapes(0);
+            Array ident = alternativesContainer.ContainerProperties.GetMemberShapes(16);
             foreach (int shapeIdentifier in ident)
             {
                 Shape alternative = page.Shapes.ItemFromID[shapeIdentifier];
                 this.Children.Add(new AlternativeContainer(page, alternative));
             }
             this.UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded & SizingPolicy.ExpandYIfNeeded;
-            this.LayoutManager = new InlineLayout(this);
-            this.MsvSdContainerLocked = true;
         }
     }
 }

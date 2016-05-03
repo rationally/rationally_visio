@@ -8,9 +8,14 @@ namespace ExtendedVisioAddin1.View
 {
     class AlternativeDescriptionComponent : RComponent
     {
+
+        public AlternativeDescriptionComponent(Page page, IVShape alternativeComponent) : base(page)
+        {
+            this.RShape = alternativeComponent;
+        }
+
         public AlternativeDescriptionComponent(Page page, int alternativeIndex, string description) : base(page)
         {
-            //TODO SCHAPH MACHEN
             Application application = Globals.ThisAddIn.Application;
             Document basicDocument = application.Documents.OpenEx("Basic Shapes.vss", (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenHidden);
             Master descRectangleMaster = basicDocument.Masters["Rectangle"];
@@ -21,6 +26,8 @@ namespace ExtendedVisioAddin1.View
             this.RationallyType = "alternativeDescription";
             this.AddUserRow("alternativeIndex");
             this.AlternativeIndex = alternativeIndex;
+
+            this.Name = "AlternativeDescription";
 
             this.Text = description;
             basicDocument.Close();

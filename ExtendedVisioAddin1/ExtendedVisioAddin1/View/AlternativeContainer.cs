@@ -10,6 +10,15 @@ namespace ExtendedVisioAddin1.View
 {
     class AlternativeContainer : HeaderlessContainer
     {
+        public AlternativeContainer(Page page, Shape alternative) : base(page)
+        {
+            this.RShape = alternative;
+            foreach (int shapeIdentifier in alternative.ContainerProperties.GetMemberShapes(0))
+            {
+                Shape alternativeComponent = page.Shapes.ItemFromID[shapeIdentifier];
+                //this.Children.Add(new AlternativeContainer(page, alternative));
+            }
+        }
 
         public AlternativeContainer(Page page, int alternativeIndex, Alternative alternative) : base(page)
         {

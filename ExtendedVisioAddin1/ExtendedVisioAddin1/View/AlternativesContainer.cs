@@ -25,5 +25,20 @@ namespace ExtendedVisioAddin1.View
             this.LayoutManager = new InlineLayout(this);
             this.MsvSdContainerLocked = true;
         }
+
+        public AlternativesContainer(Page page, Shape alternativesContainer) : base(page)
+        {
+            RShape = alternativesContainer;
+            this.MsvSdContainerLocked = false;
+
+            foreach (int shapeIdentifier in alternativesContainer.ContainerProperties.GetMemberShapes(0))
+            {
+                Shape alternative = page.Shapes.ItemFromID[shapeIdentifier];
+                this.Children.Add(new AlternativeContainer(page, alternative));
+            }
+            this.UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded & SizingPolicy.ExpandYIfNeeded;
+            this.LayoutManager = new InlineLayout(this);
+            this.MsvSdContainerLocked = true;
+        }
     }
 }

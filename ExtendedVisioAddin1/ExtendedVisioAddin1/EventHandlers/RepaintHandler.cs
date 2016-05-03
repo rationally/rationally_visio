@@ -24,7 +24,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 AlternativesContainer alternativesContainer = new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage,model.Alternatives);
                 alternativesContainer.Repaint();
             }
-
+            //Globals.ThisAddIn.View.Repaint();
         }
 
         /*public void PaintAlternatives()

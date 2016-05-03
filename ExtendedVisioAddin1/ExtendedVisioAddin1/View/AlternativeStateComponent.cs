@@ -8,7 +8,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
-    class AlternativeStateComponent : TextLabel
+    internal class AlternativeStateComponent : TextLabel
     {
         public AlternativeStateComponent(Page page, int alternativeIndex, string state ) : base(page, state)
         {
@@ -18,19 +18,23 @@ namespace ExtendedVisioAddin1.View
             this.AlternativeIndex = alternativeIndex;
 
             //Events
-            this.RShape.AddNamedRow((short)VisSectionIndices.visSectionAction, "Action_1", (short)VisRowTags.visTagDefault);
-            this.RShape.CellsU["Actions.Action_1.Action"].Formula = "";
-            this.RShape.CellsU["Actions.Action_1.Menu"].Formula = "\"Change state\"";
-            this.RShape.CellsU["Actions.Action_1.FlyoutChild"].Formula = "FALSE";
+            this.AddAction("changeState", "", "\"Change state\"", false);
+
             RModel model = Globals.ThisAddIn.model;
             for (int i = 0; i < model.AlternativeStates.Count; i++)
             {
                 string stateName = "State_" + i;
-                this.RShape.AddNamedRow((short)VisSectionIndices.visSectionAction, stateName, (short)VisRowTags.visTagDefault);
-                this.RShape.CellsU["Actions." + stateName + ".Action"].Formula = "QUEUEMARKEREVENT(\"stateChange." + model.AlternativeStates[i] + "\")";
-                this.RShape.CellsU["Actions." + stateName + ".Menu"].Formula = "\"" + model.AlternativeStates[i] + "\"";
-                this.RShape.CellsU["Actions." + stateName + ".FlyoutChild"].Formula = "TRUE";
+                this.AddAction(stateName, "QUEUEMARKEREVENT(\"stateChange." + model.AlternativeStates[i] + "\")", "\"" + model.AlternativeStates[i] + "\"", true);
             }
+
+            //locks
+            /*this.LockDelete = true;
+            this.LockRotate = true;
+            this.LockMoveX = true;
+            this.LockMoveY = true;
+            this.LockHeight = true;
+            this.LockTextEdit = true;
+            this.LockWidth = true;*/
         }
     }
 }

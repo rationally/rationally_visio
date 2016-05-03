@@ -24,6 +24,12 @@ namespace ExtendedVisioAddin1.View
 
             this.Text = description;
             basicDocument.Close();
+
+            //Locks
+            /*this.LockDelete = true;
+            this.LockRotate = true;
+            this.LockMoveX = true;
+            this.LockMoveY = true; */
         }
     }
 }

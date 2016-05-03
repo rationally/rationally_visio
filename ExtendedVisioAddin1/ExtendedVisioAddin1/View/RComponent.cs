@@ -73,6 +73,13 @@ namespace ExtendedVisioAddin1.View
             set { RShape.CellsU["pinY"].Result[VisUnitCodes.visInches] = value; }
         }
 
+        public void AddAction(string fieldName, string action, string name, bool flyout)
+        {
+            RShape.AddNamedRow((short)VisSectionIndices.visSectionAction, fieldName, (short)VisRowTags.visTagDefault);
+            RShape.CellsU["Actions." + fieldName + ".Action"].Formula = action;
+            RShape.CellsU["Actions." + fieldName + ".Menu"].Formula = name;
+            RShape.CellsU["Actions." + fieldName + "FlyoutChild"].Formula = flyout.ToString().ToUpper();
+        }
 
         //content related
         public string Text { get { return RShape.Text; } set { RShape.Text = value; } }

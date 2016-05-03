@@ -14,7 +14,7 @@ namespace ExtendedVisioAddin1.View
         public AlternativeContainer(Page page, int alternativeIndex, Alternative alternative) : base(page)
         {
             //1) state box
-            //AlternativeStateComponent stateComponent = new AlternativeStateComponent(page, alternativeIndex, alternative.Status);
+            AlternativeStateComponent stateComponent = new AlternativeStateComponent(page, alternativeIndex, alternative.Status);
 
             //2) identifier ("A:")
             string identifier = (char)(65 + alternativeIndex) + "";
@@ -25,12 +25,12 @@ namespace ExtendedVisioAddin1.View
             AlternativeTitleComponent titleComponent = new AlternativeTitleComponent(page, alternativeIndex, alternative.Title);
 
             //4) description area
-            //AlternativeDescriptionComponent descComponent = new AlternativeDescriptionComponent(page, alternativeIndex, alternative.Description);
+            AlternativeDescriptionComponent descComponent = new AlternativeDescriptionComponent(page, alternativeIndex, alternative.Description);
 
-            //Children.Add(stateComponent);
+            Children.Add(stateComponent);
             Children.Add(identifierComponent);
             Children.Add(titleComponent);
-            //Children.Add(descComponent);
+            Children.Add(descComponent);
 
             this.AddUserRow("rationallyType");
             this.RationallyType = "alternative";

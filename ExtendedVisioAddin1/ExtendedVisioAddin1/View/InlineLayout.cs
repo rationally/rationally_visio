@@ -17,7 +17,7 @@ namespace ExtendedVisioAddin1.View
         public void Repaint()
         {
             //start the drawing at the left top of the container
-            this.Draw(toManage.X-(toManage.Width/2.0), toManage.Y+(toManage.Height/2.0), 0,0,0, new Queue<RComponent>(toManage.Children));
+            this.Draw(toManage.CenterX-(toManage.Width/2.0), toManage.CenterY+(toManage.Height/2.0), 0,0,0, new Queue<RComponent>(toManage.Children));
         }
         private void Draw(double x, double y, double currentLineHeight, double contentXEnd, double contentYEnd, Queue<RComponent> components)
         {
@@ -42,10 +42,20 @@ namespace ExtendedVisioAddin1.View
             }
 
             double dropX = x + toDraw.MarginLeft + (toDraw.Width/2.0);
-            double dropY = y - toDraw.MarginTop - (toDrawHeight/2.0);
-
+            double dropY = y - toDraw.MarginTop - (toDraw.Height/2.0);
+            double deltaX = dropX - toDraw.CenterX;
+            double deltaY = dropY - toDraw.CenterY;
             toDraw.CenterX = dropX;
             toDraw.CenterY = dropY;
+            //toDraw can have children, that should maintain on the same relative position
+            if (toDraw is RContainer)
+            {
+                foreach (var c in ((RContainer) toDraw).Children)
+                {
+                    c.CenterX += deltaX;
+                    c.CenterY += deltaY;
+                }
+            }
 
             x = x + toDrawWidth;
             currentLineHeight = Math.Max(currentLineHeight, toDrawHeight);
@@ -65,8 +75,8 @@ namespace ExtendedVisioAddin1.View
         /// <param name="yIncrease">Scheduled increase of content in y.</param>
         private void PrepareContainerExpansion(double x, double y, double xIncrease, double yIncrease)
         {
-            double topLeftX = toManage.X - (toManage.Width/2.0);
-            double topLeftY = toManage.X - (toManage.Width / 2.0);
+            double topLeftX = toManage.CenterX - (toManage.Width / 2.0);
+            double topLeftY = toManage.CenterY + (toManage.Height / 2.0);
 
             bool overflowInX = (topLeftX + toManage.Width) < (x + xIncrease);
             bool overflowInY = (topLeftY - toManage.Height) < (y - yIncrease); //coordinate system starts at left bottom. Y increases when going up on the page
@@ -81,21 +91,21 @@ namespace ExtendedVisioAddin1.View
             if (overflowInX && expandXIfNeeded)
             { 
                 toManage.Width = (x + xIncrease) - topLeftX; 
-                toManage.X = (topLeftX + toManage.Width)/2.0;
+                toManage.CenterX = (topLeftX + toManage.Width)/2.0;
 
             }
 
             if (overflowInY && expandYIfNeeded)
             {
                 toManage.Height = topLeftY - (y - yIncrease);
-                toManage.Y = (topLeftY - toManage.Height)/2.0;
+                toManage.CenterY = (topLeftY - toManage.Height)/2.0;
             }
         }
 
         private void ShrinkContainer(double contentXEnd, double contentYEnd)
         {
-            double topLeftX = toManage.X - (toManage.Width / 2.0);
-            double topLeftY = toManage.X - (toManage.Width / 2.0);
+            double topLeftX = toManage.CenterX - (toManage.Width / 2.0);
+            double topLeftY = toManage.CenterY + (toManage.Height / 2.0);
 
             bool underflowInX = (topLeftX + toManage.Width) > contentXEnd;
             bool underflowInY = (topLeftY - toManage.Height) > contentYEnd;

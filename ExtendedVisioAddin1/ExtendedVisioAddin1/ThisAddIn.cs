@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using ExtendedVisioAddin1.Components;
 using rationally_visio;
 using Microsoft.Office.Interop.Visio;
 using ExtendedVisioAddin1.EventHandlers;
@@ -76,6 +77,16 @@ namespace ExtendedVisioAddin1
 
         private void Application_DocumentOpenedEvent(IVDocument d)
         {
+            if (Application.ActiveDocument.Template.ToLower().Contains("rationally"))
+            {
+                foreach (IVShape shape in Application.ActivePage.Shapes)
+                {
+                    if (shape.Name == "Alternatives")
+                    {
+                        var debugvar = 0;
+                    }
+                }
+            }
         }
 
         private void Application_ShapeAddedEvent(Shape s)

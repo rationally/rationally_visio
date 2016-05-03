@@ -11,7 +11,7 @@ namespace ExtendedVisioAddin1.View
     {
         private IVShape alternativeComponent;
 
-        public AlternativeIdentifierComponent(Page page, IVShape alternativeComponent)
+        public AlternativeIdentifierComponent(Page page, IVShape alternativeComponent) : base(page, alternativeComponent.Text, alternativeComponent.Characters.CharPropsRow[(short)VisCellIndices.visCharacterSize])
         {
             this.RShape = alternativeComponent;
         }

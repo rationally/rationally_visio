@@ -124,6 +124,7 @@
     <Compile Include="View\RContainer.cs" />
     <Compile Include="View\RView.cs" />
     <Compile Include="View\SizingPolicy.cs" />
+    <Compile Include="View\VerticalStretchLayout.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\InformationContainer.cs" />

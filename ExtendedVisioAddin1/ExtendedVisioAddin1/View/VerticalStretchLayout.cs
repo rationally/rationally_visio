@@ -85,7 +85,7 @@ namespace ExtendedVisioAddin1.View
             double topLeftY = toManage.CenterY + (toManage.Height / 2.0);
 
             bool overflowInX = (topLeftX + toManage.Width) < (x + xIncrease);
-            bool overflowInY = (topLeftY - toManage.Height) < (y - yIncrease); //coordinate system starts at left bottom. Y increases when going up on the page
+            bool overflowInY = (topLeftY - toManage.Height) > (y - yIncrease); //coordinate system starts at left bottom. Y increases when going up on the page
 
 
             bool expandXIfNeeded = ((int)toManage.UsedSizingPolicy & (int)SizingPolicy.ExpandXIfNeeded) > 0;

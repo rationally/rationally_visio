@@ -15,16 +15,18 @@ namespace ExtendedVisioAddin1.EventHandlers
 
         public RepaintHandler(RModel model)
         {
-            this.model = model;
+            //this.model = model;
             //remove all current shapes //TODO only our own
-           // foreach (IVShape s in Globals.ThisAddIn.Application.ActivePage.Shapes) {  s.Delete(); }
+            /*foreach (IVShape s in Globals.ThisAddIn.Application.ActivePage.Shapes) {  s.Delete(); }
             int a = Globals.ThisAddIn.Application.ActivePage.Shapes.Count;
             if (model.Alternatives.Count > 0)
             {
-                AlternativesContainer alternativesContainer = new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage,model.Alternatives);
-                alternativesContainer.Repaint();
-                alternativesContainer.PlaceChildren();
-            }
+                //AlternativesContainer alternativesContainer = new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage,model.Alternatives);
+                
+            }*/
+
+            Globals.ThisAddIn.View.Children.ForEach(c => c.Repaint());
+            Globals.ThisAddIn.View.Children.ForEach(c => c.PlaceChildren());
             //Globals.ThisAddIn.View.Repaint();
         }
 

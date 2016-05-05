@@ -15,6 +15,13 @@ namespace ExtendedVisioAddin1.View
         public double MarginLeft { get; set; }
         public double MarginRight { get; set; }
 
+        public void SetMargin(double m)
+        {
+            this.MarginTop = m;
+            this.MarginBottom = m;
+            this.MarginLeft = m;
+            this.MarginRight = m;
+        }
         public Page Page { get; set; }
 
 

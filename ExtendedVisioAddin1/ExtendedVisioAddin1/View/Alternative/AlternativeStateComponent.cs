@@ -13,6 +13,7 @@ namespace ExtendedVisioAddin1.View
         public AlternativeStateComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {
             this.RShape= alternativeComponent;
+            InitStyle();
         }
 
         public AlternativeStateComponent(Page page, int alternativeIndex, string state ) : base(page, state)
@@ -41,6 +42,12 @@ namespace ExtendedVisioAddin1.View
             this.LockHeight = true;
             this.LockTextEdit = true;
             this.LockWidth = true;*/
+            InitStyle();
+        }
+
+        private void InitStyle()
+        {
+            this.SetMargin(0.1);
         }
     }
 }

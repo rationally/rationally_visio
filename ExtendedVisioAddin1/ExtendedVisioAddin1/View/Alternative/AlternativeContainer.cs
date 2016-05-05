@@ -10,6 +10,7 @@ namespace ExtendedVisioAddin1.View
 {
     class AlternativeContainer : HeaderlessContainer
     {
+        
         public AlternativeContainer(Page page, Shape alternative) : base(page)
         {
             this.RShape = alternative;
@@ -33,6 +34,7 @@ namespace ExtendedVisioAddin1.View
                     this.Children.Add(new AlternativeDescriptionComponent(page, alternativeComponent));
                 }
             }
+            InitStyle();
         }
 
         public AlternativeContainer(Page page, int alternativeIndex, Alternative alternative) : base(page)
@@ -75,6 +77,13 @@ namespace ExtendedVisioAddin1.View
 
             //Events
             this.AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"deleteAlternative\")", "\"Delete alternative\"", false);
+            InitStyle();
+        }
+
+        private void InitStyle()
+        {
+            this.SetMargin(0.1);
+            this.UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
         }
     }
 }

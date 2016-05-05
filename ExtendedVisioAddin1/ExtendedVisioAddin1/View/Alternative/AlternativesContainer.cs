@@ -24,9 +24,10 @@ namespace ExtendedVisioAddin1.View
                 AlternativeContainer a = new AlternativeContainer(page, i, alternatives[i]);
                 this.Children.Add(a);
             }
-            this.UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded & SizingPolicy.ExpandYIfNeeded;
+
             this.LayoutManager = new VerticalStretchLayout(this);
             this.MsvSdContainerLocked = true;
+            InitStyle();
         }
 
         public AlternativesContainer(Page page, Shape alternativesContainer) : base(page)
@@ -38,8 +39,14 @@ namespace ExtendedVisioAddin1.View
             {
                 this.Children.Add(new AlternativeContainer(page, shape));
             }
-            this.UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded & SizingPolicy.ExpandYIfNeeded;
+
             this.LayoutManager = new VerticalStretchLayout(this);
+            InitStyle();
+        }
+
+        private void InitStyle()
+        {
+            this.UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
         }
     }
 }

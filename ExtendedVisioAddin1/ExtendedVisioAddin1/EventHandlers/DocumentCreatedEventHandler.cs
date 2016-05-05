@@ -3,10 +3,12 @@ using rationally_visio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Windows.Forms;
 using ExtendedVisioAddin1.Components;
 using ExtendedVisioAddin1.Model;
+using ExtendedVisioAddin1.View;
 
 namespace ExtendedVisioAddin1.EventHandlers
 {
@@ -29,6 +31,9 @@ namespace ExtendedVisioAddin1.EventHandlers
                 //draw the information container
                 InformationContainer informationContainer = new InformationContainer(model.Author, model.Date, model.Version);
                 informationContainer.Draw(Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches] - 8, offsetHeight);
+
+                Globals.ThisAddIn.View.Children.Add(new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage, model.Alternatives));
+                //new RepaintHandler(model);
             }
         }
 

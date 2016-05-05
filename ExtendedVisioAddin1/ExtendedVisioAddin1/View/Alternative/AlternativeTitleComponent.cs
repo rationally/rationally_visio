@@ -13,6 +13,7 @@ namespace ExtendedVisioAddin1.View
         public AlternativeTitleComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {
             this.RShape = alternativeComponent;
+            InitStyle();
         }
 
         public AlternativeTitleComponent(Page page, int alternativeIndex, string text) : base(page, text)
@@ -29,6 +30,12 @@ namespace ExtendedVisioAddin1.View
             this.LockRotate = true;
             this.LockMoveX = true;
             this.LockMoveY = true;*/
+            InitStyle();
+        }
+
+        private void InitStyle()
+        {
+            this.SetMargin(0.1);
         }
     }
 }

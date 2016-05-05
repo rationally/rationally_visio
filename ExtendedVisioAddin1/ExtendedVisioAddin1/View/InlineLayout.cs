@@ -35,7 +35,7 @@ namespace ExtendedVisioAddin1.View
 
             PrepareContainerExpansion(x,y,toDrawWidth,0); //if the container streches to support the drawing, the container height does not need to change
 
-            if (toManage.CenterX + (toDrawWidth/2) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
+            if (toManage.CenterX + (toManage.Width/2.0) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
             {
                 x = toManage.CenterX - (toManage.Width/2.0);//go to a new line
                 y -= currentLineHeight; //the new line of components should not overlap with the one above
@@ -88,7 +88,7 @@ namespace ExtendedVisioAddin1.View
             double topLeftY = toManage.CenterY + (toManage.Height / 2.0);
 
             bool overflowInX = (topLeftX + toManage.Width) < (x + xIncrease);
-            bool overflowInY = (topLeftY - toManage.Height) < (y - yIncrease); //coordinate system starts at left bottom. Y increases when going up on the page
+            bool overflowInY = (topLeftY - toManage.Height) > (y - yIncrease); //coordinate system starts at left bottom. Y increases when going up on the page
             
 
             bool expandXIfNeeded = ((int) toManage.UsedSizingPolicy & (int) SizingPolicy.ExpandXIfNeeded) > 0;

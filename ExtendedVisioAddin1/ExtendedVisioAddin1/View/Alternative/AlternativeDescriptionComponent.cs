@@ -6,7 +6,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
-    class AlternativeDescriptionComponent : RComponent
+    class AlternativeDescriptionComponent : HeaderlessContainer
     {
 
         public AlternativeDescriptionComponent(Page page, Shape alternativeComponent) : base(page)
@@ -17,10 +17,9 @@ namespace ExtendedVisioAddin1.View
         public AlternativeDescriptionComponent(Page page, int alternativeIndex, string description) : base(page)
         {
             Application application = Globals.ThisAddIn.Application;
-            Document basicDocument = application.Documents.OpenEx("Basic Shapes.vss", (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenHidden);
-            Master descRectangleMaster = basicDocument.Masters["Rectangle"];
-
-            this.RShape = page.Drop(descRectangleMaster, 0, 0);
+            this.Width = 4;
+            this.Height = 2.5;
+            this.SetMargin(0.2);
 
             this.AddUserRow("rationallyType");
             this.RationallyType = "alternativeDescription";
@@ -30,7 +29,6 @@ namespace ExtendedVisioAddin1.View
             this.Name = "AlternativeDescription";
 
             this.Text = description;
-            basicDocument.Close();
 
             //Locks
             /*this.LockDelete = true;

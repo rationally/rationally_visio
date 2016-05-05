@@ -11,6 +11,7 @@ namespace ExtendedVisioAddin1.View
     {
         public AlternativeIdentifierComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {
+            InitStyle();
         }
 
         public AlternativeIdentifierComponent(Page page, int alternativeIndex, string text) : base(page, text)
@@ -29,6 +30,12 @@ namespace ExtendedVisioAddin1.View
             this.LockHeight = true;
             this.LockTextEdit = true;
             this.LockWidth = true;*/
+            InitStyle();
+        }
+
+        private void InitStyle()
+        {
+            this.SetMargin(0.1);
         }
     }
 }

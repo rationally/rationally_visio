@@ -22,6 +22,7 @@ namespace ExtendedVisioAddin1
             model.Alternatives.Add(new Alternative("titelo","Accepted","dessehcription"));
             model.Alternatives.Add(new Alternative("titelo dos", "Accepted", "dessehcription"));
             View = new RView(Application.ActivePage);
+            
             model.AddObserver(View);
             Application.MarkerEvent += new EApplication_MarkerEventEventHandler(Application_MarkerEvent);
             Application.TemplatePaths = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
@@ -83,6 +84,7 @@ namespace ExtendedVisioAddin1
         {
             if (d.Template.ToLower().Contains("rationally"))
             {
+
                 foreach (Shape shape in Application.ActivePage.Shapes)
                 {
                     if (shape.Name == "Alternatives")
@@ -90,6 +92,8 @@ namespace ExtendedVisioAddin1
                         View.Children.Add(new AlternativesContainer(Application.ActivePage, shape));
                     }
                 }
+
+                
             }
         }
 

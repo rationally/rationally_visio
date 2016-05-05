@@ -9,11 +9,8 @@ namespace ExtendedVisioAddin1.View
 {
     class AlternativeIdentifierComponent : TextLabel
     {
-        private IVShape alternativeComponent;
-
-        public AlternativeIdentifierComponent(Page page, IVShape alternativeComponent) : base(page, alternativeComponent.Text, alternativeComponent.Characters.CharPropsRow[])
+        public AlternativeIdentifierComponent(Page page, IVShape alternativeComponent) : base(page, alternativeComponent)
         {
-            this.RShape = alternativeComponent;
         }
 
         public AlternativeIdentifierComponent(Page page, int alternativeIndex, string text) : base(page, text)

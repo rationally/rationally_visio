@@ -107,12 +107,14 @@ namespace ExtendedVisioAddin1
             }
             if (name == "Alternatives" && View.Children.Exists(x => x.Name == "Alternatives"))
             {
-                DialogResult confirmResult = MessageBox.Show("Are you sure you want to add another alternatives box? \n This may cause problems with adding or deleting alternatives", "Confirm addition", MessageBoxButtons.YesNo);
+                //TODO: turn this on, one day
+                /*DialogResult confirmResult = MessageBox.Show("Are you sure you want to add another alternatives box? \n This may cause problems with adding or deleting alternatives", "Confirm addition", MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.No)
                 {
                     s.DeleteEx(0);
                     return;
-                }
+                }*/
+                View.Children.Add(new AlternativesContainer(Application.ActivePage, s));
             }
         }
 

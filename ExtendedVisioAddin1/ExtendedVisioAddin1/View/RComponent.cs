@@ -225,7 +225,7 @@ namespace ExtendedVisioAddin1.View
         /// <param name="bold">Whether the font should be bold or not.</param>
         public void ToggleBoldFont(bool bold)
         {
-            RShape.Characters.CharProps[(short)VisCellIndices.visCharacterStyle] = (short)(RShape.Characters.CharPropsRow[(short)VisCellIndices.visCharacterStyle] | (bold ? 17 : 0));
+            RShape.Characters.CharProps[(short)VisCellIndices.visCharacterStyle] = (short)(RShape.Characters.CharPropsRow[(short)VisCellIndices.visCharacterStyle] | (short)(bold ? 17 : 0));
         }
 
         //methods
@@ -243,6 +243,13 @@ namespace ExtendedVisioAddin1.View
         public virtual void PlaceChildren()
         {
             
+        }
+
+        
+        [Obsolete]
+        public virtual void CascadingDelete()
+        {
+            this.RShape.Delete();
         }
     }
 }

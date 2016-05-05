@@ -11,7 +11,6 @@ namespace ExtendedVisioAddin1.EventHandlers
 {
     internal class RepaintHandler
     {
-        private RModel model;
 
         public RepaintHandler(RModel model)
         {

@@ -47,5 +47,14 @@ namespace ExtendedVisioAddin1.View
             this.Children.ForEach(c => c.PlaceChildren());
         }
 
+        [Obsolete]
+        public override void CascadingDelete()
+        { //TODO: remove delete locks
+            foreach (RComponent c in this.Children)
+            {
+                c.CascadingDelete();
+            }
+            this.RShape.Delete();
+        }
     }
 }

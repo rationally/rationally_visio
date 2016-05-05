@@ -32,7 +32,7 @@ namespace ExtendedVisioAddin1.View
 
             AlternativesContainer alternativesContainer = (AlternativesContainer)this.Children.First(c => c is AlternativesContainer);
             ((RContainer)Globals.ThisAddIn.View.Children.First(ch => ch is AlternativesContainer)).Children.Add(new AlternativeContainer(Globals.ThisAddIn.Application.ActivePage, Globals.ThisAddIn.model.Alternatives.Count - 1, alternative));
-            new RepaintHandler(Globals.ThisAddIn.model);
+            new RepaintHandler();
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace ExtendedVisioAddin1.View
             AlternativeContainer alternative = (AlternativeContainer) alternativesContainer.Children.First(x => x.AlternativeIndex == index && x is AlternativeContainer);
             alternativesContainer.Children.Remove(alternative);
             alternative.RShape.DeleteEx(0); //deletes the alternative, and it's child components
-            new RepaintHandler(Globals.ThisAddIn.model);
+            new RepaintHandler();
         }
     }
 }

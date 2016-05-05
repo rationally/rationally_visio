@@ -99,8 +99,21 @@ namespace ExtendedVisioAddin1
 
         private void Application_ShapeAddedEvent(Shape s)
         {
-            string yx = ((IVShape)s.ContainingShape).Name;
-            var x = 0;
+            string name = s.Name;
+            if (name.Contains("Alternatives"))
+            {
+                s.Name = "Alternatives";
+                name = "Alternatives";
+            }
+            if (name == "Alternatives" && View.Children.Exists(x => x.Name == "Alternatives"))
+            {
+                DialogResult confirmResult = MessageBox.Show("Are you sure you want to add another alternatives box? \n This may cause problems with adding or deleting alternatives", "Confirm addition", MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.No)
+                {
+                    s.DeleteEx(0);
+                    return;
+                }
+            }
         }
 
         private void Application_ShapeChangedEvent(Shape s)
@@ -132,7 +145,7 @@ namespace ExtendedVisioAddin1
         private void DelegateCreateDocumentEvent(IVDocument d)
         {
             new DocumentCreatedEventHandler(d, model);
-            new RepaintHandler(model);
+            new RepaintHandler();
         }
     }
 }

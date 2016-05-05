@@ -12,7 +12,7 @@ namespace ExtendedVisioAddin1.EventHandlers
     internal class RepaintHandler
     {
 
-        public RepaintHandler(RModel model)
+        public RepaintHandler()
         {
             //this.model = model;
             //remove all current shapes //TODO only our own

@@ -21,7 +21,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                     AlternativeContainer container = (AlternativeContainer)((AlternativesContainer)Globals.ThisAddIn.View.Children.First()).Children.Find(x => x.AlternativeIndex == index && x is AlternativeContainer);
                     AlternativeStateComponent component = (AlternativeStateComponent)container.Children.Find(x => x is AlternativeStateComponent);
                     component.Text = newState;
-                    new RepaintHandler(model);
+                    new RepaintHandler();
                 }
             }
         }

@@ -10,7 +10,7 @@ namespace ExtendedVisioAddin1.View
     class AlternativeTitleComponent : TextLabel
     {
 
-        public AlternativeTitleComponent(Page page, IVShape alternativeComponent)
+        public AlternativeTitleComponent(Page page, IVShape alternativeComponent) : base(page, alternativeComponent)
         {
             this.RShape = alternativeComponent;
         }

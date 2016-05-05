@@ -12,15 +12,11 @@ namespace ExtendedVisioAddin1.Components
         private string text;
         private short size;
 
-        public TextLabel(Page page, string text, short size) : base(page)
+        public TextLabel(Page page, IVShape shape) : base(page)
         {
-            double fac = (size / 12.0);
-            this.RShape = Globals.ThisAddIn.Application.ActivePage.DrawRectangle(0, 0, text.Length * 0.125 * fac, -0.5);
-            RShape.LineStyle = "Text Only";
-            RShape.FillStyle = "Text Only";
-            RShape.Characters.Text = text;
-            RShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = size;
-            RShape.CellsU["LinePattern"].ResultIU = 0;
+            this.RShape = shape;
+            this.text = shape.Text;
+            short size = Convert.ToInt16(shape.Cells["Char.Size"].ResultIU);
         }
 
         public TextLabel(Page page, string text) : base(page)

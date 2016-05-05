@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using ExtendedVisioAddin1.Components;
 using ExtendedVisioAddin1.Model;
@@ -14,16 +15,21 @@ namespace ExtendedVisioAddin1.View
         public AlternativeContainer(Page page, Shape alternative) : base(page)
         {
             this.RShape = alternative;
+            string title = null, state = null, desc = null;
             foreach (int shapeIdentifier in alternative.ContainerProperties.GetMemberShapes(16))
             {
                 Shape alternativeComponent = page.Shapes.ItemFromID[shapeIdentifier];
                 if (alternativeComponent.Name == "AlternativeTitle")
                 {
-                    this.Children.Add(new AlternativeTitleComponent(page, alternativeComponent));
+                    AlternativeTitleComponent comp = new AlternativeTitleComponent(page, alternativeComponent);
+                    this.Children.Add(comp);
+                    title = comp.Text;
                 }
                 else if (alternativeComponent.Name == "AlternativeState")
                 {
-                    this.Children.Add(new AlternativeStateComponent(page, alternativeComponent));
+                    AlternativeStateComponent comp = new AlternativeStateComponent(page, alternativeComponent);
+                    this.Children.Add(comp);
+                    state = comp.Text;
                 }
                 else if (alternativeComponent.Name == "AlternativeIdent")
                 {
@@ -31,8 +37,14 @@ namespace ExtendedVisioAddin1.View
                 }
                 else if (alternativeComponent.Name == "AlternativeDescription")
                 {
-                    this.Children.Add(new AlternativeDescriptionComponent(page, alternativeComponent));
+                    AlternativeDescriptionComponent comp = new AlternativeDescriptionComponent(page, alternativeComponent);
+                    this.Children.Add(comp);
+                    desc = comp.Text;
                 }
+            }
+            if (title != null && state != null && desc != null)
+            {
+                Globals.ThisAddIn.model.Alternatives.Add(new Alternative(title, state, desc));
             }
             InitStyle();
         }

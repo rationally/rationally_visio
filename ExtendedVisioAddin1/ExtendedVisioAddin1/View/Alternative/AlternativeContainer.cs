@@ -41,7 +41,7 @@ namespace ExtendedVisioAddin1.View
             AlternativeStateComponent stateComponent = new AlternativeStateComponent(page, alternativeIndex, alternative.Status);
 
             //2) identifier ("A:")
-            string identifier = (char)(65 + alternativeIndex) + "";
+            string identifier = (char)(65 + alternativeIndex) + ":";
             AlternativeIdentifierComponent identifierComponent = new AlternativeIdentifierComponent(page, alternativeIndex, identifier);
             identifierComponent.ToggleBoldFont(true);
 

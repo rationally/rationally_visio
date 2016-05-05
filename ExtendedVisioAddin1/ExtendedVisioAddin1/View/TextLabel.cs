@@ -16,7 +16,7 @@ namespace ExtendedVisioAddin1.Components
         {
             this.RShape = shape;
             this.text = shape.Text;
-            short size = Convert.ToInt16(shape.Cells["Char.Size"].ResultIU);
+            this.size = Convert.ToInt16(shape.Cells["Char.Size"].Formula.Split(' ')[0]);
         }
 
         public TextLabel(Page page, string text) : base(page)
@@ -24,7 +24,7 @@ namespace ExtendedVisioAddin1.Components
             this.text = text;
             this.size = 12;
             double fac = (size / 12.0);
-            this.RShape = Globals.ThisAddIn.Application.ActivePage.DrawRectangle(0, 0, text.Length * 0.125 * fac, - 0.5);
+            this.RShape = Globals.ThisAddIn.Application.ActivePage.DrawRectangle(0, 0, text.Length * 0.15 * fac, - 0.5); //TODO: magic numbers
             RShape.LineStyle = "Text Only";
             RShape.FillStyle = "Text Only";
             RShape.Characters.Text = text;

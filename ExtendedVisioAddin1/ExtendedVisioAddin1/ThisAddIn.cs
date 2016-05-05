@@ -19,7 +19,8 @@ namespace ExtendedVisioAddin1
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             model = new RModel();
-            //model.Alternatives.Add(new Alternative("titelo","Accepted","dessehcription"));
+            model.Alternatives.Add(new Alternative("titelo","Accepted","dessehcription"));
+            model.Alternatives.Add(new Alternative("titelo dos", "Accepted", "dessehcription"));
             View = new RView(Application.ActivePage);
             model.AddObserver(View);
             Application.MarkerEvent += new EApplication_MarkerEventEventHandler(Application_MarkerEvent);
@@ -82,7 +83,7 @@ namespace ExtendedVisioAddin1
         {
             if (d.Template.ToLower().Contains("rationally"))
             {
-                foreach (IVShape shape in Application.ActivePage.Shapes)
+                foreach (Shape shape in Application.ActivePage.Shapes)
                 {
                     if (shape.Name == "Alternatives")
                     {

@@ -25,11 +25,11 @@ namespace ExtendedVisioAddin1.View
                 this.Children.Add(a);
             }
             this.UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded & SizingPolicy.ExpandYIfNeeded;
-            this.LayoutManager = new InlineLayout(this);
+            this.LayoutManager = new VerticalStretchLayout(this);
             this.MsvSdContainerLocked = true;
         }
 
-        public AlternativesContainer(Page page, IVShape alternativesContainer) : base(page)
+        public AlternativesContainer(Page page, Shape alternativesContainer) : base(page)
         {
             RShape = alternativesContainer;
             Array ident = alternativesContainer.ContainerProperties.GetMemberShapes(16);
@@ -39,6 +39,7 @@ namespace ExtendedVisioAddin1.View
                 this.Children.Add(new AlternativeContainer(page, alternative));
             }
             this.UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded & SizingPolicy.ExpandYIfNeeded;
+            this.LayoutManager = new VerticalStretchLayout(this);
         }
     }
 }

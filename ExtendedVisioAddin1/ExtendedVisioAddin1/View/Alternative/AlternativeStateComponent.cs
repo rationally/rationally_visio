@@ -10,7 +10,7 @@ namespace ExtendedVisioAddin1.View
 {
     internal class AlternativeStateComponent : TextLabel
     {
-        public AlternativeStateComponent(Page page, IVShape alternativeComponent) : base(page, alternativeComponent)
+        public AlternativeStateComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {
             this.RShape= alternativeComponent;
         }

@@ -17,13 +17,13 @@ namespace ExtendedVisioAddin1.EventHandlers
         {
             this.model = model;
             //remove all current shapes //TODO only our own
-            foreach (IVShape s in Globals.ThisAddIn.Application.ActivePage.Shapes) {  s.Delete(); }
+           // foreach (IVShape s in Globals.ThisAddIn.Application.ActivePage.Shapes) {  s.Delete(); }
             int a = Globals.ThisAddIn.Application.ActivePage.Shapes.Count;
             if (model.Alternatives.Count > 0)
             {
                 AlternativesContainer alternativesContainer = new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage,model.Alternatives);
-                alternativesContainer.PlaceChildren();
                 alternativesContainer.Repaint();
+                alternativesContainer.PlaceChildren();
             }
             //Globals.ThisAddIn.View.Repaint();
         }

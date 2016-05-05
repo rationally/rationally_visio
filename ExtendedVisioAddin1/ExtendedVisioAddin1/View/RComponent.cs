@@ -18,7 +18,7 @@ namespace ExtendedVisioAddin1.View
         public Page Page { get; set; }
 
 
-        public IVShape RShape { get; set; }
+        public Shape RShape { get; set; }
 
         public RComponent(Page page)
         {

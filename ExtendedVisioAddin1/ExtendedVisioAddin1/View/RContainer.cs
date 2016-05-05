@@ -28,11 +28,18 @@ namespace ExtendedVisioAddin1.View
         {
             foreach (RComponent c in this.Children)
             {
+                this.MsvSdContainerLocked = false;//TODO reset
+                bool lockContainer = false;
                 if (c is RContainer)
                 {
-                    bool lockContainer = c.MsvSdContainerLocked;
+                    lockContainer = c.MsvSdContainerLocked;
                     c.MsvSdContainerLocked = false;
-                    this.RShape.ContainerProperties.AddMember(c.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
+                }
+
+                this.RShape.ContainerProperties.AddMember(c.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
+
+                if (c is RContainer)
+                {
                     c.MsvSdContainerLocked = lockContainer;
                 }
             }

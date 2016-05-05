@@ -124,11 +124,16 @@ namespace ExtendedVisioAddin1
         private void Application_MasterAddedEvent(Master m)
         {
             var x = 0;
+            if (m.Name == "Alternatives")
+            {
+                m.Delete();
+            }
         }
 
         private void Application_MasterChangedEvent(Master m)
         {
             var x = 0;
+
         }
 
         /// <summary>

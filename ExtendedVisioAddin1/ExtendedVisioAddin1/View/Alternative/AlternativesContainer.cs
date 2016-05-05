@@ -13,8 +13,8 @@ namespace ExtendedVisioAddin1.View
         {
             Master containerMaster = Globals.ThisAddIn.model.RationallyDocument.Masters["Alternatives"];
             RShape = Page.DropContainer(containerMaster, null);
-            this.CenterX = 10;
-            this.CenterY = 10;
+            this.CenterX = 3;
+            this.CenterY = 5;
 
             this.Name = "Alternatives";
 

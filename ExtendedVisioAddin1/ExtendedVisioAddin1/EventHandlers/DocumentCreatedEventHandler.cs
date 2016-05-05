@@ -26,11 +26,15 @@ namespace ExtendedVisioAddin1.EventHandlers
                 //draw the header
                 TextLabel header = new TextLabel(Globals.ThisAddIn.Application.ActivePage,model.DecisionName);
                 header.SetFontSize(22);
-                header.Draw(1, offsetHeight);
+                header.CenterX = 1;
+                header.CenterY = offsetHeight;
+                Globals.ThisAddIn.View.Children.Add(header);
 
                 //draw the information container
-                InformationContainer informationContainer = new InformationContainer(model.Author, model.Date, model.Version);
-                informationContainer.Draw(Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches] - 8, offsetHeight);
+                InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version);
+                informationContainer.CenterX = (Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches] - 8);
+                informationContainer.CenterY = offsetHeight;
+                Globals.ThisAddIn.View.Children.Add(informationContainer);
 
                 Globals.ThisAddIn.View.Children.Add(new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage, model.Alternatives));
                 //new RepaintHandler(model);

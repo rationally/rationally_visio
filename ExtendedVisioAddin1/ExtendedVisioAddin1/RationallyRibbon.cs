@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 using Office = Microsoft.Office.Core;
-using System.Windows.Forms;
 
 // TODO:  Follow these steps to enable the Ribbon (XML) item:
 
@@ -34,10 +31,6 @@ namespace rationally_visio
     {
         private Office.IRibbonUI ribbon;
 
-        public RationallyRibbon()
-        {
-        }
-
         #region IRibbonExtensibility Members
 
         public string GetCustomUI(string ribbonID)
@@ -60,7 +53,7 @@ namespace rationally_visio
         /// Visio when the custom UI is first loaded.</summary>
         /// <param name="ribbonUI">A reference to the object representing the 
         /// custom UI loaded by Visio</param>
-        public void OnRibbonLoad(Microsoft.Office.Core.IRibbonUI ribbonUI)
+        public void OnRibbonLoad(Office.IRibbonUI ribbonUI)
         {
             // Do something with the newly constructed ribbon, such as capture
             // a local reference to it for later use.
@@ -71,7 +64,7 @@ namespace rationally_visio
         /// file. It is called by Visio when the associated button defined 
         /// in the XML is clicked.</summary>
         /// <param name="control">The Ribbon UI control that was activated</param>
-        public void OnAction(Microsoft.Office.Core.IRibbonControl control)
+        public void OnAction(Office.IRibbonControl control)
         {
             //System.Windows.Forms.MessageBox.Show("OnAction");
         }
@@ -82,7 +75,7 @@ namespace rationally_visio
         /// <param name="control">The Ribbon UI control that was clicked</param>
         /// <param name="cancelDefault">If true, call the built-in command after 
         /// the custom code is complete</param>
-        public void CommandOnAction(Microsoft.Office.Core.IRibbonControl control,
+        public void CommandOnAction(Office.IRibbonControl control,
             bool cancelDefault)
         {
             // Take a custom action when the user clicks Copy.
@@ -99,16 +92,13 @@ namespace rationally_visio
         {
             Assembly asm = Assembly.GetExecutingAssembly();
             string[] resourceNames = asm.GetManifestResourceNames();
-            for (int i = 0; i < resourceNames.Length; ++i)
+            foreach (string name in resourceNames.Where(t => string.Compare(resourceName, t, StringComparison.OrdinalIgnoreCase) == 0))
             {
-                if (string.Compare(resourceName, resourceNames[i], StringComparison.OrdinalIgnoreCase) == 0)
+                using (StreamReader resourceReader = new StreamReader(asm.GetManifestResourceStream(name)))
                 {
-                    using (StreamReader resourceReader = new StreamReader(asm.GetManifestResourceStream(resourceNames[i])))
+                    if (resourceReader != null)
                     {
-                        if (resourceReader != null)
-                        {
-                            return resourceReader.ReadToEnd();
-                        }
+                        return resourceReader.ReadToEnd();
                     }
                 }
             }

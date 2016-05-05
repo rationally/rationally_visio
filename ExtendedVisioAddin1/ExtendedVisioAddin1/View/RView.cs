@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
-    public class RView : RContainer, Model.IObserver<RModel>
+    public class RView : RContainer, IObserver<RModel>
     {
         public AlternativesContainer AlternativesContainer { get; }
         public RView(Page page) : base(page)

@@ -7,20 +7,20 @@ namespace ExtendedVisioAddin1.View
     {
         public AlternativeStateComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {
-            this.RShape= alternativeComponent;
+            RShape= alternativeComponent;
             InitStyle();
         }
 
         public AlternativeStateComponent(Page page, int alternativeIndex, string state ) : base(page, state)
         {
-            this.AddUserRow("rationallyType");
-            this.RationallyType = "alternativeState";
-            this.AddUserRow("alternativeIndex");
-            this.AlternativeIndex = alternativeIndex;
+            AddUserRow("rationallyType");
+            RationallyType = "alternativeState";
+            AddUserRow("alternativeIndex");
+            AlternativeIndex = alternativeIndex;
 
-            this.Name = "AlternativeState";
+            Name = "AlternativeState";
             //Events
-            this.AddAction("changeState", "", "\"Change state\"", false);
+            AddAction("changeState", "", "\"Change state\"", false);
 
             RModel model = Globals.ThisAddIn.model;
             for (int i = 0; i < model.AlternativeStates.Count; i++)
@@ -36,7 +36,7 @@ namespace ExtendedVisioAddin1.View
                 }
                 else
                 {
-                    this.AddAction(stateName, "QUEUEMARKEREVENT(\"stateChange." + model.AlternativeStates[i] + "\")", "\"" + model.AlternativeStates[i] + "\"", true);
+                    AddAction(stateName, "QUEUEMARKEREVENT(\"stateChange." + model.AlternativeStates[i] + "\")", "\"" + model.AlternativeStates[i] + "\"", true);
                 }
             }
 
@@ -53,7 +53,7 @@ namespace ExtendedVisioAddin1.View
 
         private void InitStyle()
         {
-            this.SetMargin(0.1);
+            SetMargin(0.1);
         }
     }
 }

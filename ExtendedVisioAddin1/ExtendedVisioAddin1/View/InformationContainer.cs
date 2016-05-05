@@ -6,9 +6,9 @@ namespace ExtendedVisioAddin1.View
     {
         public InformationContainer(Page page, string author, string date, string version) : base(page)
         {
-            this.Width = 7;
-            this.Height = 1.1;
-            this.UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded; //TODO fix with expandY
+            Width = 7;
+            Height = 1.1;
+            UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded; //TODO fix with expandY
 
             TextLabel authorLabel = new TextLabel(page, "Author: " + author);
             authorLabel.SetMargin(0.1);
@@ -17,9 +17,9 @@ namespace ExtendedVisioAddin1.View
             TextLabel versionLabel = new TextLabel(page, "Version: " + version);
             versionLabel.SetMargin(0.1);
 
-            this.Children.Add(authorLabel);
-            this.Children.Add(dateLabel);
-            this.Children.Add(versionLabel);
+            Children.Add(authorLabel);
+            Children.Add(dateLabel);
+            Children.Add(versionLabel);
         }
     }
 }

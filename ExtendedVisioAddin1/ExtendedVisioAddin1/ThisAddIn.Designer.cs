@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Security.Permissions;
 using Microsoft.Office.Interop.Visio;
 using Microsoft.Office.Tools;
+using Microsoft.Office.Tools.Ribbon;
 using Microsoft.VisualStudio.Tools.Applications.Runtime;
 
 #pragma warning disable 414
@@ -180,8 +181,8 @@ namespace ExtendedVisioAddin1
     }
 
     /// 
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "12.0.0.0")]
+    [DebuggerNonUserCode()]
+    [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "12.0.0.0")]
     internal sealed partial class Globals
     {
 
@@ -192,7 +193,7 @@ namespace ExtendedVisioAddin1
 
         private static ThisAddIn _ThisAddIn;
 
-        private static global::Microsoft.Office.Tools.Factory _factory;
+        private static Factory _factory;
 
         private static ThisRibbonCollection _ThisRibbonCollection;
 
@@ -210,12 +211,12 @@ namespace ExtendedVisioAddin1
                 }
                 else
                 {
-                    throw new System.NotSupportedException();
+                    throw new NotSupportedException();
                 }
             }
         }
 
-        internal static global::Microsoft.Office.Tools.Factory Factory
+        internal static Factory Factory
         {
             get
             {
@@ -229,7 +230,7 @@ namespace ExtendedVisioAddin1
                 }
                 else
                 {
-                    throw new System.NotSupportedException();
+                    throw new NotSupportedException();
                 }
             }
         }
@@ -248,13 +249,13 @@ namespace ExtendedVisioAddin1
     }
 
     /// 
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "12.0.0.0")]
-    internal sealed partial class ThisRibbonCollection : Microsoft.Office.Tools.Ribbon.RibbonCollectionBase
+    [DebuggerNonUserCode()]
+    [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "12.0.0.0")]
+    internal sealed partial class ThisRibbonCollection : RibbonCollectionBase
     {
 
         /// 
-        internal ThisRibbonCollection(global::Microsoft.Office.Tools.Ribbon.RibbonFactory factory) :
+        internal ThisRibbonCollection(RibbonFactory factory) :
             base(factory)
         {
         }

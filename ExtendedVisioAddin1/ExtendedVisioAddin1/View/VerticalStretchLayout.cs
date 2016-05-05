@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ExtendedVisioAddin1.View
 {
@@ -33,10 +30,10 @@ namespace ExtendedVisioAddin1.View
             double heightToDraw = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;
 
             //allow container to stretch horizontally and/or vertically if the content component overflows in those directions
-            this.PrepareContainerExpansion(x,y,widthToDraw,heightToDraw);
+            PrepareContainerExpansion(x,y,widthToDraw,heightToDraw);
 
             //this layout stacks components vertically and stretches them horizontally to the width of the container
-            this.StretchComponentIfNeeded(toDraw,toManage.Width);
+            StretchComponentIfNeeded(toDraw,toManage.Width);
 
             //calculate position to draw this component
             double drawX = x + (toDraw.Width/2.0) + toDraw.MarginLeft;
@@ -68,7 +65,7 @@ namespace ExtendedVisioAddin1.View
         public void Repaint()
         {
             //draw (left top of content area) (children)
-            this.Draw(toManage.CenterX - (toManage.Width/2.0),toManage.CenterY + (toManage.Height/2.0),new Queue<RComponent>(toManage.Children));
+            Draw(toManage.CenterX - (toManage.Width/2.0),toManage.CenterY + (toManage.Height/2.0),new Queue<RComponent>(toManage.Children));
             toManage.Children.ForEach(c => c.Repaint());
         }
 

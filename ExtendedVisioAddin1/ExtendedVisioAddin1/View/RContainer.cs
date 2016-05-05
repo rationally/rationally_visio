@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ExtendedVisioAddin1.EventHandlers;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
@@ -14,8 +11,8 @@ namespace ExtendedVisioAddin1.View
         public SizingPolicy UsedSizingPolicy { get; set; }
         public RContainer(Page page) : base(page)
         {
-            this.Children = new List<RComponent>();
-            this.LayoutManager = new InlineLayout(this);
+            Children = new List<RComponent>();
+            LayoutManager = new InlineLayout(this);
         }
 
         public override void Repaint()
@@ -26,9 +23,9 @@ namespace ExtendedVisioAddin1.View
 
         public override void PlaceChildren()
         {
-            foreach (RComponent c in this.Children)
+            foreach (RComponent c in Children)
             {
-                this.MsvSdContainerLocked = false;//TODO reset
+                MsvSdContainerLocked = false;//TODO reset
                 bool lockContainer = false;
                 if (c is RContainer)
                 {
@@ -36,7 +33,7 @@ namespace ExtendedVisioAddin1.View
                     c.MsvSdContainerLocked = false;
                 }
 
-                this.RShape.ContainerProperties.AddMember(c.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
+                RShape.ContainerProperties.AddMember(c.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
 
                 if (c is RContainer)
                 {
@@ -44,17 +41,17 @@ namespace ExtendedVisioAddin1.View
                 }
             }
 
-            this.Children.ForEach(c => c.PlaceChildren());
+            Children.ForEach(c => c.PlaceChildren());
         }
 
         [Obsolete]
         public override void CascadingDelete()
         { //TODO: remove delete locks
-            foreach (RComponent c in this.Children)
+            foreach (RComponent c in Children)
             {
                 c.CascadingDelete();
             }
-            this.RShape.Delete();
+            RShape.Delete();
         }
     }
 }

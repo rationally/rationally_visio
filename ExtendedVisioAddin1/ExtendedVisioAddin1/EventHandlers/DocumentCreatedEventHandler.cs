@@ -1,9 +1,9 @@
-﻿using Microsoft.Office.Interop.Visio;
-using rationally_visio;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Forms;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
+using Microsoft.Office.Interop.Visio;
+using rationally_visio;
 
 namespace ExtendedVisioAddin1.EventHandlers
 {
@@ -26,9 +26,11 @@ namespace ExtendedVisioAddin1.EventHandlers
                 Globals.ThisAddIn.View.Children.Add(header);
 
                 //draw the information container
-                InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version);
-                informationContainer.CenterX = (Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches]);
-                informationContainer.CenterY = offsetHeight - 0.5;
+                InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version)
+                    {
+                        CenterX = (Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches]),
+                        CenterY = offsetHeight - 0.5
+                    };
                 Globals.ThisAddIn.View.Children.Add(informationContainer);
 
                 Globals.ThisAddIn.View.Children.Add(new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage, model.Alternatives.ToList()));

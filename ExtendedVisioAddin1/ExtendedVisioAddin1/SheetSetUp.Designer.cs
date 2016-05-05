@@ -1,11 +1,14 @@
-﻿namespace rationally_visio
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace rationally_visio
 {
     partial class SheetSetUp
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -136,14 +139,14 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label decisionNameHead;
-        private System.Windows.Forms.Label authorNameHEad;
-        private System.Windows.Forms.Label versionDecision;
-        public System.Windows.Forms.TextBox decisionName;
-        public System.Windows.Forms.TextBox author;
-        public System.Windows.Forms.TextBox version;
-        public System.Windows.Forms.Button submitButton;
-        private System.Windows.Forms.Label dateHeader;
-        public System.Windows.Forms.TextBox date;
+        private Label decisionNameHead;
+        private Label authorNameHEad;
+        private Label versionDecision;
+        public TextBox decisionName;
+        public TextBox author;
+        public TextBox version;
+        public Button submitButton;
+        private Label dateHeader;
+        public TextBox date;
     }
 }

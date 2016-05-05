@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace rationally_visio
+﻿namespace rationally_visio
 {
     /// <summary>This class demonstrates how to import custom UI and display it
     /// only for a specific Visio document. The custom UI is shown when the 

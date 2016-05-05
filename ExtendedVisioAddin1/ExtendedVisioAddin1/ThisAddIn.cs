@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using ExtendedVisioAddin1.Components;
 using rationally_visio;
 using Microsoft.Office.Interop.Visio;
 using ExtendedVisioAddin1.EventHandlers;
@@ -49,7 +46,7 @@ namespace ExtendedVisioAddin1
 
         private void Application_MarkerEvent(Microsoft.Office.Interop.Visio.Application application, int sequence, string context)
         {
-            Selection selection = this.Application.ActiveWindow.Selection;//event must originate from selected element
+            Selection selection = Application.ActiveWindow.Selection;//event must originate from selected element
             //for (int i = 0; i < selection.Count; i++) 
             foreach (IVShape s in selection)
             {
@@ -120,12 +117,10 @@ namespace ExtendedVisioAddin1
 
         private void Application_ShapeChangedEvent(Shape s)
         {
-            var x = 0;
         }
 
         private void Application_MasterAddedEvent(Master m)
         {
-            var x = 0;
             if (m.Name == "Alternatives")
             {
                 m.Delete();
@@ -134,8 +129,6 @@ namespace ExtendedVisioAddin1
 
         private void Application_MasterChangedEvent(Master m)
         {
-            var x = 0;
-
         }
 
         /// <summary>

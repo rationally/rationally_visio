@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ExtendedVisioAddin1.Components;
-using ExtendedVisioAddin1.Model;
+﻿using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
@@ -31,7 +26,18 @@ namespace ExtendedVisioAddin1.View
             for (int i = 0; i < model.AlternativeStates.Count; i++)
             {
                 string stateName = "State_" + i;
-                this.AddAction(stateName, "QUEUEMARKEREVENT(\"stateChange." + model.AlternativeStates[i] + "\")", "\"" + model.AlternativeStates[i] + "\"", true);
+                if (model.AlternativeStates[i] == state)
+                { //todo: extract to container class
+                    RShape.AddNamedRow((short)VisSectionIndices.visSectionAction, stateName, (short)VisRowTags.visTagDefault);
+                    RShape.CellsU["Actions." + stateName + ".Action"].Formula = "QUEUEMARKEREVENT(\"stateChange." + model.AlternativeStates[i] + "\")";
+                    RShape.CellsU["Actions." + stateName + ".Menu"].Formula = "\"" +state+ "\"";
+                    RShape.CellsU["Actions." + stateName + ".Disabled"].Formula = true.ToString().ToUpper();
+                    RShape.CellsU["Actions." + stateName + ".FlyoutChild"].Formula = true.ToString().ToUpper();
+                }
+                else
+                {
+                    this.AddAction(stateName, "QUEUEMARKEREVENT(\"stateChange." + model.AlternativeStates[i] + "\")", "\"" + model.AlternativeStates[i] + "\"", true);
+                }
             }
 
             //locks

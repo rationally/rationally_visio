@@ -52,7 +52,7 @@ namespace rationally_visio
 
         public void Ribbon_Load(Office.IRibbonUI ribbonUI)
         {
-            this.ribbon = ribbonUI;
+            ribbon = ribbonUI;
         }
 
         /// <summary>This method is a callback specified in the onLoad attribute 
@@ -64,7 +64,7 @@ namespace rationally_visio
         {
             // Do something with the newly constructed ribbon, such as capture
             // a local reference to it for later use.
-            this.ribbon = ribbonUI;
+            ribbon = ribbonUI;
         }
 
         /// <summary>This method is a callback specified in the custom UI XML 

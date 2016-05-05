@@ -7,7 +7,7 @@ namespace ExtendedVisioAddin1.View
 {
     class VerticalStretchLayout : ILayoutManager
     {
-        private RContainer toManage;
+        private readonly RContainer toManage;
 
         public VerticalStretchLayout(RContainer toManage)
         {

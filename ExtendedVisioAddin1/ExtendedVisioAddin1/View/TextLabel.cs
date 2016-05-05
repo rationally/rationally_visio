@@ -1,11 +1,7 @@
 ﻿using Microsoft.Office.Interop.Visio;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ExtendedVisioAddin1.View;
 
-namespace ExtendedVisioAddin1.Components
+namespace ExtendedVisioAddin1.View
 {
     public class TextLabel : RComponent
     {
@@ -14,17 +10,17 @@ namespace ExtendedVisioAddin1.Components
 
         public TextLabel(Page page, Shape shape) : base(page)
         {
-            this.RShape = shape;
-            this.text = shape.Text;
-            this.size = Convert.ToInt16(shape.Cells["Char.Size"].Formula.Split(' ')[0]);
+            RShape = shape;
+            text = shape.Text;
+            size = Convert.ToInt16(shape.Cells["Char.Size"].Formula.Split(' ')[0]);
         }
 
         public TextLabel(Page page, string text) : base(page)
         {
             this.text = text;
-            this.size = 12;
+            size = 12;
             double fac = (size / 12.0);
-            this.RShape = Globals.ThisAddIn.Application.ActivePage.DrawRectangle(0, 0, text.Length * 0.15 * fac, - 0.5); //TODO: magic numbers
+            RShape = Globals.ThisAddIn.Application.ActivePage.DrawRectangle(0, 0, text.Length * 0.15 * fac, - 0.5); //TODO: magic numbers
             RShape.LineStyle = "Text Only";
             RShape.FillStyle = "Text Only";
             RShape.Characters.Text = text;

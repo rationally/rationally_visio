@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Windows.Forms;
-using ExtendedVisioAddin1.Components;
+﻿using System.Windows.Forms;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
 using Microsoft.Office.Interop.Visio;

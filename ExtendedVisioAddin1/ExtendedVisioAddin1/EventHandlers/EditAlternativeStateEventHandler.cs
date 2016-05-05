@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using ExtendedVisioAddin1.Model;
+﻿using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
 using Microsoft.Office.Interop.Visio;
 

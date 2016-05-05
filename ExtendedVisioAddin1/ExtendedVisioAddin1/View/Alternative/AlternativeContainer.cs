@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using ExtendedVisioAddin1.Components;
-using ExtendedVisioAddin1.Model;
+﻿using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
@@ -14,7 +8,7 @@ namespace ExtendedVisioAddin1.View
         
         public AlternativeContainer(Page page, Shape alternative) : base(page)
         {
-            this.RShape = alternative;
+            RShape = alternative;
             string title = null, state = null, desc = null;
             foreach (int shapeIdentifier in alternative.ContainerProperties.GetMemberShapes(16))
             {
@@ -22,23 +16,23 @@ namespace ExtendedVisioAddin1.View
                 if (alternativeComponent.Name == "AlternativeTitle")
                 {
                     AlternativeTitleComponent comp = new AlternativeTitleComponent(page, alternativeComponent);
-                    this.Children.Add(comp);
+                    Children.Add(comp);
                     title = comp.Text;
                 }
                 else if (alternativeComponent.Name == "AlternativeState")
                 {
                     AlternativeStateComponent comp = new AlternativeStateComponent(page, alternativeComponent);
-                    this.Children.Add(comp);
+                    Children.Add(comp);
                     state = comp.Text;
                 }
                 else if (alternativeComponent.Name == "AlternativeIdent")
                 {
-                    this.Children.Add(new AlternativeIdentifierComponent(page, alternativeComponent));
+                    Children.Add(new AlternativeIdentifierComponent(page, alternativeComponent));
                 }
                 else if (alternativeComponent.Name == "AlternativeDescription")
                 {
                     AlternativeDescriptionComponent comp = new AlternativeDescriptionComponent(page, alternativeComponent);
-                    this.Children.Add(comp);
+                    Children.Add(comp);
                     desc = comp.Text;
                 }
             }
@@ -74,11 +68,11 @@ namespace ExtendedVisioAddin1.View
             Children.Add(descComponent);
             //this.RShape.ContainerProperties.AddMember(descComponent.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
 
-            this.Name = "Alternative";
-            this.AddUserRow("rationallyType");
-            this.RationallyType = "alternative";
-            this.AddUserRow("alternativeIndex");
-            this.AlternativeIndex = alternativeIndex;
+            Name = "Alternative";
+            AddUserRow("rationallyType");
+            RationallyType = "alternative";
+            AddUserRow("alternativeIndex");
+            AlternativeIndex = alternativeIndex;
 
             //locks
             /*this.LockDelete = true;
@@ -88,14 +82,14 @@ namespace ExtendedVisioAddin1.View
             this.LockTextEdit = true;*/
 
             //Events
-            this.AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"deleteAlternative\")", "\"Delete alternative\"", false);
+            AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"deleteAlternative\")", "\"Delete alternative\"", false);
             InitStyle();
         }
 
         private void InitStyle()
         {
-            this.SetMargin(0.1);
-            this.UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
+            SetMargin(0.1);
+            UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
         }
     }
 }

@@ -1,12 +1,7 @@
 ﻿using Microsoft.Office.Interop.Visio;
 using rationally_visio;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mime;
-using System.Text;
 using System.Windows.Forms;
-using ExtendedVisioAddin1.Components;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
 
@@ -14,7 +9,7 @@ namespace ExtendedVisioAddin1.EventHandlers
 {
     class DocumentCreatedEventHandler
     {
-        private RModel model;
+        private readonly RModel model;
 
         public DocumentCreatedEventHandler(IVDocument document, RModel model)
         {
@@ -32,7 +27,7 @@ namespace ExtendedVisioAddin1.EventHandlers
 
                 //draw the information container
                 InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version);
-                informationContainer.CenterX = (Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches] - 8);
+                informationContainer.CenterX = Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches] - 8;
                 informationContainer.CenterY = offsetHeight;
                 Globals.ThisAddIn.View.Children.Add(informationContainer);
 

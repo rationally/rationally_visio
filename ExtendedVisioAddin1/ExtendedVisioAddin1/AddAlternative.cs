@@ -9,7 +9,7 @@ namespace ExtendedVisioAddin1
         public AddAlternative(RModel model)
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterScreen;
             alternativeStatus.Items.AddRange(model.AlternativeStates.ToArray());
             alternativeStatus.SelectedIndex = 0;//TODO: what if empty
         }
@@ -19,19 +19,18 @@ namespace ExtendedVisioAddin1
             if (string.IsNullOrWhiteSpace(alternativeName.Text))
             {
                 MessageBox.Show("Enter a name for the alternative.");
-                this.DialogResult = DialogResult.None;
+                DialogResult = DialogResult.None;
                 return;
             }
             if (alternativeStatus.SelectedIndex > -1)
             {
-                this.DialogResult = DialogResult.OK;
+                DialogResult = DialogResult.OK;
             }
             else
             {
                 MessageBox.Show("Select a status.");
-                this.DialogResult = DialogResult.None;
+                DialogResult = DialogResult.None;
             }
-            return;
         }
     }
 }

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ExtendedVisioAddin1.Components;
-using ExtendedVisioAddin1.View;
-using Microsoft.Office.Interop.Visio;
-
-namespace ExtendedVisioAddin1.Model
+﻿namespace ExtendedVisioAddin1.Model
 {
     public class Alternative
     {
@@ -18,9 +10,9 @@ namespace ExtendedVisioAddin1.Model
 
         public Alternative(string title, string status, string description)
         {
-            this.Title = title;
-            this.Status = status;
-            this.Description = description;
+            Title = title;
+            Status = status;
+            Description = description;
         }
     }
 }

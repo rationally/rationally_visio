@@ -12,7 +12,7 @@ namespace ExtendedVisioAddin1.Components
         private string text;
         private short size;
 
-        public TextLabel(Page page, IVShape shape) : base(page)
+        public TextLabel(Page page, Shape shape) : base(page)
         {
             this.RShape = shape;
             this.text = shape.Text;

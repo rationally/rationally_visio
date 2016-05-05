@@ -29,8 +29,8 @@ namespace ExtendedVisioAddin1.View
             }
 
             RComponent toDraw = components.Dequeue();
-            double widthToDraw = toDraw.Width;
-            double heightToDraw = toDraw.Height;
+            double widthToDraw = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight;
+            double heightToDraw = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;
 
             //allow container to stretch horizontally and/or vertically if the content component overflows in those directions
             this.PrepareContainerExpansion(x,y,widthToDraw,heightToDraw);
@@ -41,8 +41,8 @@ namespace ExtendedVisioAddin1.View
             //calculate position to draw this component
             double drawX = x + (toDraw.Width/2.0) + toDraw.MarginLeft;
             double drawY = y - (toDraw.Height/2.0) - toDraw.MarginTop;
-            double deltaX = drawX - (toDraw.CenterX - (toDraw.Width / 2.0));
-            double deltaY = drawY - (toDraw.CenterY - (toDraw.Height / 2.0));
+            double deltaX = drawX - (toDraw.CenterX);
+            double deltaY = drawY - (toDraw.CenterY);
 
             //move the children of this container, and then the container itself
             if (toDraw is RContainer)
@@ -69,6 +69,7 @@ namespace ExtendedVisioAddin1.View
         {
             //draw (left top of content area) (children)
             this.Draw(toManage.CenterX - (toManage.Width/2.0),toManage.CenterY + (toManage.Height/2.0),new Queue<RComponent>(toManage.Children));
+            toManage.Children.ForEach(c => c.Repaint());
         }
 
         /// <summary>

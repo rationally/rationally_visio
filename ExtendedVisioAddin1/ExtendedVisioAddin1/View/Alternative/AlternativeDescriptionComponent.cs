@@ -9,7 +9,7 @@ namespace ExtendedVisioAddin1.View
     class AlternativeDescriptionComponent : RComponent
     {
 
-        public AlternativeDescriptionComponent(Page page, IVShape alternativeComponent) : base(page)
+        public AlternativeDescriptionComponent(Page page, Shape alternativeComponent) : base(page)
         {
             this.RShape = alternativeComponent;
         }

@@ -9,7 +9,7 @@ namespace ExtendedVisioAddin1.View
 {
     class AlternativeIdentifierComponent : TextLabel
     {
-        public AlternativeIdentifierComponent(Page page, IVShape alternativeComponent) : base(page, alternativeComponent)
+        public AlternativeIdentifierComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {
         }
 

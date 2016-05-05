@@ -15,7 +15,7 @@ namespace ExtendedVisioAddin1.EventHandlers
         public RemoveAlternativeEventHandler(RModel model)
         {
             Selection selectedComponents = Globals.ThisAddIn.Application.ActiveWindow.Selection;
-            foreach (IVShape s in selectedComponents)
+            foreach (Shape s in selectedComponents)
             {
                 RComponent c = new RComponent(Globals.ThisAddIn.Application.ActivePage);
                 c.RShape = s;

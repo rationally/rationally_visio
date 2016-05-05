@@ -80,8 +80,8 @@ namespace ExtendedVisioAddin1.View
         /// </summary>
         /// <param name="x">x pointer of the drawing procedure.</param>
         /// <param name="y">y pointer of the drawing procedure.</param>
-        /// <param name="xIncrease">Scheduled increase of content in x.</param>
-        /// <param name="yIncrease">Scheduled increase of content in y.</param>
+        /// <param name="xIncrease">Scheduled increase of content in x-dimension starting from x.</param>
+        /// <param name="yIncrease">Scheduled increase of content in y-dimension starting from y.</param>
         private void PrepareContainerExpansion(double x, double y, double xIncrease, double yIncrease)
         {
             double topLeftX = toManage.CenterX - (toManage.Width / 2.0);

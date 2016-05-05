@@ -7,7 +7,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
-    class AlternativesContainer : RContainer
+    public class AlternativesContainer : RContainer
     {
         public AlternativesContainer(Page page, List<Alternative> alternatives) : base(page)
         {
@@ -48,5 +48,6 @@ namespace ExtendedVisioAddin1.View
         {
             this.UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
         }
+
     }
 }

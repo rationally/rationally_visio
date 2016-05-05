@@ -26,10 +26,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                     if (confirmResult == DialogResult.Yes)
                     {
                         model.Alternatives.Remove(alternative);
-                        AlternativeContainer container = (AlternativeContainer)((AlternativesContainer) Globals.ThisAddIn.View.Children.First()).Children.Find(x => x.AlternativeIndex == index && x is AlternativeContainer);
-                        ((AlternativesContainer) Globals.ThisAddIn.View.Children.First()).Children.Remove(container); //todo fix vuige hardcode
-                        container.RShape.DeleteEx(0);
-                        new RepaintHandler(model);
+                        Globals.ThisAddIn.View.DeleteAlternative(index);
                     }
                 }
             }

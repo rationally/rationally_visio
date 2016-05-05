@@ -36,7 +36,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 informationContainer.CenterY = offsetHeight;
                 Globals.ThisAddIn.View.Children.Add(informationContainer);
 
-                Globals.ThisAddIn.View.Children.Add(new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage, model.Alternatives));
+                Globals.ThisAddIn.View.Children.Add(new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage, model.Alternatives.ToList()));
                 //new RepaintHandler(model);
             }
         }

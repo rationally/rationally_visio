@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using ExtendedVisioAddin1.View;
@@ -10,7 +12,7 @@ namespace ExtendedVisioAddin1.Model
     public class RModel : IObservable<RModel>
     {
         public Document RationallyDocument { get; }
-        public List<Alternative> Alternatives { get; set; }
+        public ObservableCollection<Alternative> Alternatives { get; set; }
         public List<string> AlternativeStates { get; set; }
 
         private List<IObserver<RModel>> observers; 
@@ -25,7 +27,8 @@ namespace ExtendedVisioAddin1.Model
 
         public RModel()
         {
-            Alternatives = new List<Alternative>();
+            Alternatives = new ObservableCollection<Alternative>();
+            Alternatives.CollectionChanged += AlternativesChangedHandler;
             observers = new List<IObserver<RModel>>();
             AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"};
             string docPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vssx";
@@ -33,6 +36,10 @@ namespace ExtendedVisioAddin1.Model
 ((short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visAddHidden)); //todo: handling for file is open
         }
 
+        private void AlternativesChangedHandler(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            this.NotifyObservers();
+        }
 
         public virtual void AddObserver(IObserver<RModel> observer)
         {
@@ -44,9 +51,11 @@ namespace ExtendedVisioAddin1.Model
             observers.Remove(observer);
         }
 
-        void notifyObservers()
+        void NotifyObservers()
         {
             observers.ForEach(obs => obs.Notify(this));
         }
+
+
     }
 }

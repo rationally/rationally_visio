@@ -16,7 +16,8 @@ namespace ExtendedVisioAddin1.View
 
         public void Notify(RModel observable)
         {
-            throw new NotImplementedException();
+            
         }
+
     }
 }

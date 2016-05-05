@@ -104,7 +104,7 @@ namespace ExtendedVisioAddin1.View
             if (overflowInY && expandYIfNeeded)
             {
                 toManage.Height = topLeftY - (y - yIncrease);
-                toManage.CenterY = (topLeftY - toManage.Height) / 2.0;
+                toManage.CenterY = topLeftY - ((toManage.Height) / 2.0);
             }
         }
 

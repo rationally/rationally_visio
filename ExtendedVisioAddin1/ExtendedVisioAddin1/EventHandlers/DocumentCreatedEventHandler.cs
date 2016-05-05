@@ -27,8 +27,8 @@ namespace ExtendedVisioAddin1.EventHandlers
 
                 //draw the information container
                 InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version);
-                informationContainer.CenterX = Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches] - 8;
-                informationContainer.CenterY = offsetHeight;
+                informationContainer.CenterX = (Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches]);
+                informationContainer.CenterY = offsetHeight - 0.5;
                 Globals.ThisAddIn.View.Children.Add(informationContainer);
 
                 Globals.ThisAddIn.View.Children.Add(new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage, model.Alternatives.ToList()));

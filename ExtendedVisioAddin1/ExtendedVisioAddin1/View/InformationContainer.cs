@@ -7,7 +7,7 @@ namespace ExtendedVisioAddin1.View
         public InformationContainer(Page page, string author, string date, string version) : base(page)
         {
             this.Width = 7;
-            this.Height = 1;
+            this.Height = 1.1;
             this.UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded; //TODO fix with expandY
 
             TextLabel authorLabel = new TextLabel(page, "Author: " + author);

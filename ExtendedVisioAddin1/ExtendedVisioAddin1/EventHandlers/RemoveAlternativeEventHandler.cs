@@ -17,16 +17,19 @@ namespace ExtendedVisioAddin1.EventHandlers
             Selection selectedComponents = Globals.ThisAddIn.Application.ActiveWindow.Selection;
             foreach (Shape s in selectedComponents)
             {
-                RComponent c = new RComponent(Globals.ThisAddIn.Application.ActivePage);
-                c.RShape = s;
+                RComponent c = new RComponent(Globals.ThisAddIn.Application.ActivePage) {RShape = s};
                 if (c.Type == "alternative")
                 {
-                    //todo get alternative by identifier
-                    DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete the " + "ALTERNATIVE NAME", "Confirm Deletion", MessageBoxButtons.YesNo); //todo alternative name
+                    int index = c.AlternativeIndex;
+                    Alternative alternative = model.Alternatives[index];
+                    DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete " + alternative.Title, "Confirm Deletion", MessageBoxButtons.YesNo);
                     if (confirmResult == DialogResult.Yes)
                     {
-                        //todo: remove alternative from list
-                        //todo repaint
+                        model.Alternatives.Remove(alternative);
+                        AlternativeContainer container = (AlternativeContainer)((AlternativesContainer) Globals.ThisAddIn.View.Children.First()).Children.Find(x => x.AlternativeIndex == index && x is AlternativeContainer);
+                        ((AlternativesContainer) Globals.ThisAddIn.View.Children.First()).Children.Remove(container); //todo fix vuige hardcode
+                        container.RShape.DeleteEx(0);
+                        new RepaintHandler(model);
                     }
                 }
             }

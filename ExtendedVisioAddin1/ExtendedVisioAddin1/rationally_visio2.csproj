@@ -119,6 +119,7 @@
     <Compile Include="View\Alternative\AlternativeTitleComponent.cs" />
     <Compile Include="View\HeaderlessContainer.cs" />
     <Compile Include="View\ILayoutManager.cs" />
+    <Compile Include="View\InformationContainer.cs" />
     <Compile Include="View\InlineLayout.cs" />
     <Compile Include="View\RComponent.cs" />
     <Compile Include="View\RContainer.cs" />
@@ -127,7 +128,6 @@
     <Compile Include="View\VerticalStretchLayout.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\InformationContainer.cs" />
     <Compile Include="View\TextLabel.cs" />
     <Compile Include="CustomUI.cs" />
     <Compile Include="EventHandlers\AddAlternativeEventHandler.cs" />
@@ -140,7 +140,6 @@
     <Compile Include="Model\Alternative.cs" />
     <Compile Include="Model\RModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Components\RationallyComponent.cs" />
     <Compile Include="RationallyRibbon.cs" />
     <Compile Include="SheetSetUp.cs">
       <SubType>Form</SubType>

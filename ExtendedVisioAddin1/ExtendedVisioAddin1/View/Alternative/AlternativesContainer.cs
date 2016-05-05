@@ -33,10 +33,10 @@ namespace ExtendedVisioAddin1.View
         {
             RShape = alternativesContainer;
             Array ident = alternativesContainer.ContainerProperties.GetMemberShapes(16);
-            foreach (int shapeIdentifier in ident)
+            List<Shape> shapes = (new List<int>((int[]) ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
+            foreach (Shape shape in shapes.Where(shape => shape.Name == "Alternative"))
             {
-                Shape alternative = page.Shapes.ItemFromID[shapeIdentifier];
-                this.Children.Add(new AlternativeContainer(page, alternative));
+                this.Children.Add(new AlternativeContainer(page, shape));
             }
             this.UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded & SizingPolicy.ExpandYIfNeeded;
         }

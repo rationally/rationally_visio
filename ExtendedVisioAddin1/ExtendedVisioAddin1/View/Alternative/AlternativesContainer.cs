@@ -46,7 +46,7 @@ namespace ExtendedVisioAddin1.View
 
         private void InitStyle()
         {
-            this.UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
+            this.UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
         }
 
     }

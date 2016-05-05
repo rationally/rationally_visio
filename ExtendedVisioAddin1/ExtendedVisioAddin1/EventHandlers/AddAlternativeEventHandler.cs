@@ -23,7 +23,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                     {
                         Alternative newAlternative = new Alternative(alternative.alternativeName.Text, alternative.alternativeStatus.SelectedItem.ToString(), "Enter a description here.");
                         model.Alternatives.Add(newAlternative);//TODO vuige code, fix me
-                        
+                        Globals.ThisAddIn.View.AddAlternative(newAlternative);
                         //model.Alternatives.Last().Paint(s,0);
                     }
                     alternative.Dispose();

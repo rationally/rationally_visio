@@ -33,6 +33,10 @@ namespace ExtendedVisioAddin1.View
             double toDrawWidth = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight; //expected increase in x
             double toDrawHeight = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;//expected height in y
 
+            if (toDraw is AlternativeContainer)
+            {
+                var a = 5;
+            }
             PrepareContainerExpansion(x,y,toDrawWidth,0); //if the container streches to support the drawing, the container height does not need to change
 
             if (toManage.CenterX + (toManage.Width/2.0) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
@@ -107,7 +111,7 @@ namespace ExtendedVisioAddin1.View
             if (overflowInY && expandYIfNeeded)
             {
                 toManage.Height = topLeftY - (y - yIncrease);
-                toManage.CenterY = (topLeftY - toManage.Height)/2.0;
+                toManage.CenterY = topLeftY - (toManage.Height/2.0);
             }
         }
 

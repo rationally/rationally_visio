@@ -11,30 +11,30 @@ namespace ExtendedVisioAddin1.View
 
         public AlternativeDescriptionComponent(Page page, Shape alternativeComponent) : base(page)
         {
-            this.RShape = alternativeComponent;
+            RShape = alternativeComponent;
         }
 
         public AlternativeDescriptionComponent(Page page, int alternativeIndex, string description) : base(page)
         {
             Application application = Globals.ThisAddIn.Application;
-            this.Width = 4;
-            this.Height = 2.5;
-            this.SetMargin(0.2);
+            Width = 4;
+            Height = 2.5;
+            SetMargin(0.2);
 
-            this.AddUserRow("rationallyType");
-            this.RationallyType = "alternativeDescription";
-            this.AddUserRow("alternativeIndex");
-            this.AlternativeIndex = alternativeIndex;
+            AddUserRow("rationallyType");
+            RationallyType = "alternativeDescription";
+            AddUserRow("alternativeIndex");
+            AlternativeIndex = alternativeIndex;
 
-            this.Name = "AlternativeDescription";
+            Name = "AlternativeDescription";
 
-            this.Text = description;
+            Text = description;
 
             //Locks
-            /*this.LockDelete = true;
-            this.LockRotate = true;
-            this.LockMoveX = true;
-            this.LockMoveY = true; */
+            /*LockDelete = true;
+            LockRotate = true;
+            LockMoveX = true;
+            LockMoveY = true; */
         }
     }
 }

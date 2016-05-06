@@ -15,7 +15,7 @@ namespace rationally_visio
         public SheetSetUp()
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterScreen;
             date.Text = DateTime.Now.ToString("dd-MM-yyyy");
         }
 
@@ -24,28 +24,28 @@ namespace rationally_visio
             if (string.IsNullOrWhiteSpace(decisionName.Text))
             {
                 MessageBox.Show("Enter a decision name.");
-                this.DialogResult = DialogResult.None;
+                DialogResult = DialogResult.None;
                 return;
             }
             if (string.IsNullOrWhiteSpace(author.Text))
             {
                 MessageBox.Show("Enter an author name.");
-                this.DialogResult = DialogResult.None;
+                DialogResult = DialogResult.None;
                 return;
             }
             if (string.IsNullOrWhiteSpace(version.Text))
             {
                 MessageBox.Show("Enter a version.");
-                this.DialogResult = DialogResult.None;
+                DialogResult = DialogResult.None;
                 return;
             }
             DateTime temp;
             if (DateTime.TryParse(date.Text, out temp))
-                this.DialogResult = DialogResult.OK;
+                DialogResult = DialogResult.OK;
             else
             {
                 MessageBox.Show("Enter a valid date.");
-                this.DialogResult = DialogResult.None;
+                DialogResult = DialogResult.None;
             }
             return;
         }

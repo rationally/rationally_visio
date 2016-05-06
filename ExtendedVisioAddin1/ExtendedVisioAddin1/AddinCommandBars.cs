@@ -125,7 +125,7 @@ namespace ExtendedVisioAddin1
             button.Mask = PictureConvert.ImageToPictureDisp(mask);*/
         }
 
-        static public void BitmapToPictureAndMask(Bitmap bm, out Bitmap picture, out Bitmap mask)
+        public static void BitmapToPictureAndMask(Bitmap bm, out Bitmap picture, out Bitmap mask)
         {
             var w = bm.Width;
             var h = bm.Height;
@@ -149,7 +149,7 @@ namespace ExtendedVisioAddin1
                     pictureData[dstIdx + 1] = bits[srcIdx + 1];
                     pictureData[dstIdx + 2] = bits[srcIdx + 2];
 
-                    var t = (bits[srcIdx + 3] < 128) ? (byte)255 : (byte)0;
+                    var t = bits[srcIdx + 3] < 128 ? (byte)255 : (byte)0;
 
                     maskData[dstIdx + 0] = t;
                     maskData[dstIdx + 1] = t;
@@ -175,7 +175,7 @@ namespace ExtendedVisioAddin1
         {
             private PictureConvert() : base("") { }
 
-            static public IPictureDisp ImageToPictureDisp(Bitmap image)
+            public static IPictureDisp ImageToPictureDisp(Bitmap image)
             {
                 return (IPictureDisp)GetIPictureDispFromPicture(image);
             }

@@ -18,7 +18,7 @@ namespace ExtendedVisioAddin1.View
         public void Repaint()
         {
             //start the drawing at the left top of the container
-            this.Draw(toManage.CenterX-(toManage.Width/2.0), toManage.CenterY+(toManage.Height/2.0), 0,0,0, new Queue<RComponent>(toManage.Children));
+            Draw(toManage.CenterX-(toManage.Width/2.0), toManage.CenterY+(toManage.Height/2.0), 0,0,0, new Queue<RComponent>(toManage.Children));
         }
         private void Draw(double x, double y, double currentLineHeight, double contentXEnd, double contentYEnd, Queue<RComponent> components)
         {

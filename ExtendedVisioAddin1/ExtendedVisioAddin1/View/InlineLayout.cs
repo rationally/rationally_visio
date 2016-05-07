@@ -38,8 +38,10 @@ namespace ExtendedVisioAddin1.View
                 var a = 5;
             }
             PrepareContainerExpansion(x,y,toDrawWidth,0); //if the container streches to support the drawing, the container height does not need to change
-
-            if (toManage.CenterX + (toManage.Width/2.0) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
+            double left = toManage.CenterX + (toManage.Width/2.0);
+            double right = x + toDrawWidth;
+            double d = left/right;//HACK: these three variables somehow fix floating errors in the values in the conditions below
+            if (toManage.CenterX + (toManage.Width/2.0) <= x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
             {
                 x = toManage.CenterX - (toManage.Width/2.0);//go to a new line
                 y -= currentLineHeight; //the new line of components should not overlap with the one above
@@ -104,7 +106,7 @@ namespace ExtendedVisioAddin1.View
             if (overflowInX && expandXIfNeeded)
             { 
                 toManage.Width = (x + xIncrease) - topLeftX; 
-                toManage.CenterX = (topLeftX + toManage.Width)/2.0;
+                toManage.CenterX = topLeftX + (toManage.Width/2.0);
 
             }
 

@@ -9,13 +9,12 @@ namespace ExtendedVisioAddin1.View.Alternatives
         public AlternativeDescriptionComponent(Page page, Shape alternativeComponent) : base(page, false)
         {
             RShape = alternativeComponent;
+            InitStyle();
         }
 
         public AlternativeDescriptionComponent(Page page, int alternativeIndex, string description) : base(page)
         {
-            Width = 4;
-            Height = 2.5;
-            SetMargin(0.2);
+            InitStyle();
 
             AddUserRow("rationallyType");
             RationallyType = "alternativeDescription";
@@ -41,6 +40,13 @@ namespace ExtendedVisioAddin1.View.Alternatives
         public static bool IsAlternativeDescription(string name)
         {
             return DescriptionRegex.IsMatch(name);
+        }
+
+        public void InitStyle()
+        {
+            Width = 4;
+            Height = 2.5;
+            SetMargin(0.2);
         }
     }
 }

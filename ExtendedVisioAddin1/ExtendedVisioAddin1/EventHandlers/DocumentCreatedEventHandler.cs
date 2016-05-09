@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
+using ExtendedVisioAddin1.View.Documents;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers
@@ -32,8 +33,13 @@ namespace ExtendedVisioAddin1.EventHandlers
                 //(Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches]);
                 Globals.ThisAddIn.View.Children.Add(informationContainer); 
 
-                //Globals.ThisAddIn.View.Children.Add(new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage, Model.Alternatives.ToList()));
-                //new RepaintHandler(Model);
+                //Globals.ThisAddIn.View.Children.Add(new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage, model.Alternatives.ToList()));
+              
+              //new RepaintHandler(model);
+                var a = new RelatedDocumentsContainer(Globals.ThisAddIn.Application.ActivePage);
+                //a.Children.Add(new RelatedFileComponent(Globals.ThisAddIn.Application.ActivePage, @"C:\Users\Ruben\Desktop\QoSA.pdf"));
+              Globals.ThisAddIn.View.Children.Add(a);
+                new RepaintHandler();
             }
         }
 

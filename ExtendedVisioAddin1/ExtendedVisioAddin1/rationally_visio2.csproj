@@ -109,6 +109,7 @@
       <DependentUpon>AddAlternative.cs</DependentUpon>
     </Compile>
     <Compile Include="AddinCommandBars.cs" />
+    <Compile Include="EventHandlers\AddRelatedUrlHandler.cs" />
     <Compile Include="Model\IObservable.cs" />
     <Compile Include="Model\IObserver.cs" />
     <Compile Include="View\Alternatives\AlternativeContainer.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="View\Alternatives\AlternativeTitleComponent.cs" />
     <Compile Include="View\Alternatives\IAlternativeComponent.cs" />
     <Compile Include="View\Documents\RelatedDocumentComponent.cs" />
+    <Compile Include="View\Documents\RelatedURLComponent.cs" />
     <Compile Include="View\HeaderlessContainer.cs" />
     <Compile Include="View\ILayoutManager.cs" />
     <Compile Include="View\InformationContainer.cs" />

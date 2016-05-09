@@ -23,7 +23,7 @@ namespace ExtendedVisioAddin1.View
         {
             RShape = relatedDocumentsContainer;
             Array ident = relatedDocumentsContainer.ContainerProperties.GetMemberShapes(16);
-            /*Regex alternativeRegex = new Regex(@"Alternative(\.\d+)?$");//TODO extract, change
+            /*//TODO extract, change
             List<Shape> shapes = (new List<int>((int[])ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
             foreach (Shape shape in shapes.Where(shape => alternativeRegex.IsMatch(shape.Name)))
             {

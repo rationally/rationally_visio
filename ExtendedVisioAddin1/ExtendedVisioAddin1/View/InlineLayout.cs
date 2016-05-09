@@ -14,6 +14,8 @@ namespace ExtendedVisioAddin1.View
 
         public void Repaint()
         {
+            if (toManage.Children.Count == 0) {  return;}
+
             //start the drawing at the left top of the container
             Draw(toManage.CenterX-(toManage.Width/2.0), toManage.CenterY+(toManage.Height/2.0), 0,0,0, new Queue<RComponent>(toManage.Children));
         }
@@ -34,7 +36,7 @@ namespace ExtendedVisioAddin1.View
             {
                 var a = 5;
             }
-            PrepareContainerExpansion(x,y,toDrawWidth,0); //if the container streches to support the drawing, the container height does not need to change
+            PrepareContainerExpansion(x,y,toDrawWidth,toDrawHeight); //if the container streches to support the drawing, the container height does not need to change
             double left = toManage.CenterX + (toManage.Width/2.0);
             double right = x + toDrawWidth;
             double d = left/right;//HACK: these three variables somehow fix floating errors in the values in the conditions below
@@ -114,16 +116,28 @@ namespace ExtendedVisioAddin1.View
             }
         }
 
-        private void ShrinkContainer(double contentXEnd, double contentYEnd)
+        private void ShrinkContainer(double contentXEnd, double contentYEnd) //TODO might be implementable by setting the size to [0.1,0.1]
         {
             double topLeftX = toManage.CenterX - (toManage.Width / 2.0);
             double topLeftY = toManage.CenterY + (toManage.Height / 2.0);
 
             bool underflowInX = (topLeftX + toManage.Width) > contentXEnd;
-            bool underflowInY = (topLeftY - toManage.Height) > contentYEnd;
+            bool underflowInY = (topLeftY - toManage.Height) < contentYEnd;
 
             bool shrinkXIfNeeded = ((int)toManage.UsedSizingPolicy & (int)SizingPolicy.ShrinkXIfNeeded) > 0;
             bool shrinkYIfNeeded = ((int)toManage.UsedSizingPolicy & (int)SizingPolicy.ShrinkYIfNeeded) > 0;
+
+            if (underflowInX && shrinkXIfNeeded)
+            {
+                toManage.Width = contentXEnd - topLeftX + 0.01;
+                toManage.CenterX = topLeftX + (toManage.Width / 2.0);
+            }
+
+            if (underflowInY && shrinkYIfNeeded)
+            {
+                toManage.Height = topLeftY - contentYEnd + 0.01;
+                toManage.CenterY = topLeftY - (toManage.Height / 2.0);
+            }
         }
     }
 }

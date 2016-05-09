@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using ExtendedVisioAddin1.View;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.Model
@@ -31,8 +28,8 @@ namespace ExtendedVisioAddin1.Model
             Alternatives.CollectionChanged += AlternativesChangedHandler;
             observers = new List<IObserver<RModel>>();
             AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"};
-            string docPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vssx";
-            RationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visAddHidden); //todo: handling for file is open
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vssx";
+            RationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden); //todo: handling for file is open
         }
 
         private void AlternativesChangedHandler(object sender, NotifyCollectionChangedEventArgs e)

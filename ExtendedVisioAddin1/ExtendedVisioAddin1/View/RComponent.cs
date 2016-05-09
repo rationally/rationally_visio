@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
@@ -17,10 +14,10 @@ namespace ExtendedVisioAddin1.View
 
         public void SetMargin(double m)
         {
-            this.MarginTop = m;
-            this.MarginBottom = m;
-            this.MarginLeft = m;
-            this.MarginRight = m;
+            MarginTop = m;
+            MarginBottom = m;
+            MarginLeft = m;
+            MarginRight = m;
         }
         public Page Page { get; set; }
 
@@ -29,7 +26,7 @@ namespace ExtendedVisioAddin1.View
 
         public RComponent(Page page)
         {
-            this.Page = page;
+            Page = page;
         }
 
         //---
@@ -249,7 +246,7 @@ namespace ExtendedVisioAddin1.View
         [Obsolete]
         public virtual void CascadingDelete()
         {
-            this.RShape.Delete();
+            RShape.Delete();
         }
     }
 }

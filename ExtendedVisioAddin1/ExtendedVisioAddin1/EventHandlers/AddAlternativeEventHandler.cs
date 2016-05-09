@@ -12,8 +12,7 @@ namespace ExtendedVisioAddin1.EventHandlers
             Selection selectedComponents = Globals.ThisAddIn.Application.ActiveWindow.Selection;
             foreach (Shape s in selectedComponents)
             {
-                RComponent c = new RComponent(Globals.ThisAddIn.Application.ActivePage);
-                c.RShape = s;
+                RComponent c = new RComponent(Globals.ThisAddIn.Application.ActivePage) {RShape = s};
                 if (c.Type == "alternatives")
                 {
                     AddAlternative alternative = new AddAlternative(model);

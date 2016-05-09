@@ -1,11 +1,14 @@
-﻿namespace ExtendedVisioAddin1
+﻿using System.ComponentModel;
+using Microsoft.Office.Tools.Ribbon;
+
+namespace ExtendedVisioAddin1
 {
-    partial class AddinRibbonComponent : Microsoft.Office.Tools.Ribbon.RibbonBase
+    partial class AddinRibbonComponent : RibbonBase
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         public AddinRibbonComponent()
             : base(Globals.Factory.GetRibbonFactory())
@@ -78,9 +81,9 @@
 
         #endregion
 
-        internal Microsoft.Office.Tools.Ribbon.RibbonTab Tab1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup Group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton Command1;
+        internal RibbonTab Tab1;
+        internal RibbonGroup Group1;
+        internal RibbonButton Command1;
     }
 
     partial class ThisRibbonCollection

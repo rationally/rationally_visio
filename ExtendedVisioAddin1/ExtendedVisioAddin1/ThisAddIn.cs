@@ -1,9 +1,12 @@
 ﻿using System;
-using rationally_visio;
-using Microsoft.Office.Interop.Visio;
+using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
+using Microsoft.Office.Core;
+using Microsoft.Office.Interop.Visio;
+using rationally_visio;
+using Shape = Microsoft.Office.Interop.Visio.Shape;
 
 namespace ExtendedVisioAddin1
 {
@@ -13,6 +16,8 @@ namespace ExtendedVisioAddin1
         public RModel model { get; set; }
         public RView View { get; set; }
 
+        public Regex AlternativesRegex = new Regex(@"Alternatives(\.\d+)?$");
+
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             model = new RModel();
@@ -21,14 +26,14 @@ namespace ExtendedVisioAddin1
             View = new RView(Application.ActivePage);
             
             model.AddObserver(View);
-            Application.MarkerEvent += new EApplication_MarkerEventEventHandler(Application_MarkerEvent);
-            Application.TemplatePaths = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
-            Application.DocumentCreated += new EApplication_DocumentCreatedEventHandler(DelegateCreateDocumentEvent);
-            Application.DocumentOpened += new EApplication_DocumentOpenedEventHandler(Application_DocumentOpenedEvent);
-            Application.ShapeAdded += new EApplication_ShapeAddedEventHandler(Application_ShapeAddedEvent);
-            Application.ShapeChanged += new EApplication_ShapeChangedEventHandler(Application_ShapeChangedEvent);
-            Application.MasterAdded += new EApplication_MasterAddedEventHandler(Application_MasterAddedEvent);
-            Application.MasterChanged += new EApplication_MasterChangedEventHandler(Application_MasterChangedEvent);
+            Application.MarkerEvent += Application_MarkerEvent;
+            Application.TemplatePaths = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
+            Application.DocumentCreated += DelegateCreateDocumentEvent;
+            Application.DocumentOpened += Application_DocumentOpenedEvent;
+            Application.ShapeAdded += Application_ShapeAddedEvent;
+            Application.ShapeChanged += Application_ShapeChangedEvent;
+            Application.MasterAdded += Application_MasterAddedEvent;
+            Application.MasterChanged += Application_MasterChangedEvent;
 
         }
 
@@ -39,12 +44,12 @@ namespace ExtendedVisioAddin1
 
 
 
-        protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
+        protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
             return new RationallyRibbon();
         }
 
-        private void Application_MarkerEvent(Microsoft.Office.Interop.Visio.Application application, int sequence, string context)
+        private void Application_MarkerEvent(Application application, int sequence, string context)
         {
             Selection selection = Application.ActiveWindow.Selection;//event must originate from selected element
             //for (int i = 0; i < selection.Count; i++) 
@@ -81,10 +86,9 @@ namespace ExtendedVisioAddin1
         {
             if (d.Template.ToLower().Contains("rationally"))
             {
-
                 foreach (Shape shape in Application.ActivePage.Shapes)
                 {
-                    if (shape.Name == "Alternatives")
+                    if (AlternativesRegex.IsMatch(shape.Name)) //Check if the shape is an Alternatives box
                     {
                         View.Children.Add(new AlternativesContainer(Application.ActivePage, shape));
                     }
@@ -97,21 +101,18 @@ namespace ExtendedVisioAddin1
 
         private void Application_ShapeAddedEvent(Shape s)
         {
-            string name = s.Name;
-            if (name.Contains("Alternatives"))
+            if (AlternativesRegex.IsMatch(s.Name))
             {
-                s.Name = "Alternatives";
-                name = "Alternatives";
-            }
-            if (name == "Alternatives" && View.Children.Exists(x => x.Name == "Alternatives"))
-            {
-                //TODO: turn this on, one day
-                /*DialogResult confirmResult = MessageBox.Show("Are you sure you want to add another alternatives box? \n This may cause problems with adding or deleting alternatives", "Confirm addition", MessageBoxButtons.YesNo);
-                if (confirmResult == DialogResult.No)
+                if (View.Children.Exists(x => AlternativesRegex.IsMatch(x.Name)))
                 {
-                    s.DeleteEx(0);
-                    return;
-                }*/
+                    //TODO: turn this on, one day
+                    /*DialogResult confirmResult = MessageBox.Show("Are you sure you want to add another alternatives box? \n This may cause problems with adding or deleting alternatives", "Confirm addition", MessageBoxButtons.YesNo);
+                    if (confirmResult == DialogResult.No)
+                    {
+                        s.DeleteEx(0);
+                        return;
+                    }*/
+                }
                 View.Children.Add(new AlternativesContainer(Application.ActivePage, s));
             }
         }
@@ -122,7 +123,7 @@ namespace ExtendedVisioAddin1
 
         private void Application_MasterAddedEvent(Master m)
         {
-            if (m.Name == "Alternatives")
+            if (m.Name == "Alternatives") //todo: wth
             {
                 m.Delete();
             }

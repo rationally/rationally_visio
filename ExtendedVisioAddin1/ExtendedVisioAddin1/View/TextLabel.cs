@@ -1,5 +1,5 @@
-﻿using Microsoft.Office.Interop.Visio;
-using System;
+﻿using System;
+using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {

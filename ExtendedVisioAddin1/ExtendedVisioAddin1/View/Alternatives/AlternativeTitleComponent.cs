@@ -9,18 +9,18 @@ namespace ExtendedVisioAddin1.View
 
         public AlternativeTitleComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {
-            this.RShape = alternativeComponent;
+            RShape = alternativeComponent;
             InitStyle();
         }
 
         public AlternativeTitleComponent(Page page, int alternativeIndex, string text) : base(page, text)
         {
-            this.AddUserRow("rationallyType");
-            this.RationallyType = "alternativeTitle";
-            this.AddUserRow("alternativeIndex");
-            this.AlternativeIndex = alternativeIndex;
+            AddUserRow("rationallyType");
+            RationallyType = "alternativeTitle";
+            AddUserRow("alternativeIndex");
+            AlternativeIndex = alternativeIndex;
 
-            this.Name = "AlternativeTitle";
+            Name = "AlternativeTitle";
 
             //Locks
             /*this.LockDelete = true;
@@ -32,7 +32,7 @@ namespace ExtendedVisioAddin1.View
 
         private void InitStyle()
         {
-            this.SetMargin(0.1);
+            SetMargin(0.1);
         }
 
         public void SetAlternativeIdentifier(int alternativeIndex)

@@ -1,11 +1,14 @@
-﻿namespace ExtendedVisioAddin1
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace ExtendedVisioAddin1
 {
     partial class AddAlternative
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -98,10 +101,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button createAlternative;
-        internal System.Windows.Forms.TextBox alternativeName;
-        internal System.Windows.Forms.ComboBox alternativeStatus;
+        private Label label1;
+        private Label label2;
+        private Button createAlternative;
+        internal TextBox alternativeName;
+        internal ComboBox alternativeStatus;
     }
 }

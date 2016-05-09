@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using Microsoft.Office.Core;
 using stdole;
-using System.Windows.Forms;
-using System.Drawing.Imaging;
 
 namespace ExtendedVisioAddin1
 {
@@ -15,7 +16,7 @@ namespace ExtendedVisioAddin1
     /// Creates and controls a custom command bar with buttons
     /// </summary>
     /// 
-    public partial class AddinUI
+    public class AddinUI
     {
         private string _toolbarName;
 
@@ -170,7 +171,7 @@ namespace ExtendedVisioAddin1
             mask.UnlockBits(maskBits);
         }
 
-        [System.ComponentModel.DesignerCategory("")]
+        [DesignerCategory("")]
         class PictureConvert : AxHost
         {
             private PictureConvert() : base("") { }

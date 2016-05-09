@@ -14,5 +14,10 @@ namespace ExtendedVisioAddin1.View
             RShape.CellsU["User.msvSDHeadingStyle"].ResultIU = 0; //Remove header
             containerDocument.Close();
         }
+
+        public HeaderlessContainer(Page page, bool makeShape) : base(page)
+        {
+            
+        }
     }
 }

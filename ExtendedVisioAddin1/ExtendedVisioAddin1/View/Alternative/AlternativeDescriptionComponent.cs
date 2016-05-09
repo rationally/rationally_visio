@@ -5,7 +5,7 @@ namespace ExtendedVisioAddin1.View
     class AlternativeDescriptionComponent : HeaderlessContainer
     {
 
-        public AlternativeDescriptionComponent(Page page, Shape alternativeComponent) : base(page)
+        public AlternativeDescriptionComponent(Page page, Shape alternativeComponent) : base(page, false)
         {
             RShape = alternativeComponent;
         }

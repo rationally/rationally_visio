@@ -18,8 +18,8 @@ namespace ExtendedVisioAddin1
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             model = new RModel();
-            model.Alternatives.Add(new Alternative("titelo","Accepted","dessehcription"));
-            model.Alternatives.Add(new Alternative("titelo dos", "Accepted", "dessehcription"));
+            //model.Alternatives.Add(new Alternative("titelo","Accepted","dessehcription"));
+            //model.Alternatives.Add(new Alternative("titelo dos", "Accepted", "dessehcription"));
             View = new RView(Application.ActivePage);
             
             model.AddObserver(View);
@@ -92,8 +92,9 @@ namespace ExtendedVisioAddin1
                     }
                 }
 
-                
+                new RepaintHandler();
             }
+
         }
 
         private void Application_ShapeAddedEvent(Shape s)
@@ -147,7 +148,7 @@ namespace ExtendedVisioAddin1
         private void DelegateCreateDocumentEvent(IVDocument d)
         {
             new DocumentCreatedEventHandler(d, model);
-            new RepaintHandler();
+            Application_DocumentOpenedEvent(d);
         }
     }
 }

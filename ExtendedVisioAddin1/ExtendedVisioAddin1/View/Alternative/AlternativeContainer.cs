@@ -6,7 +6,7 @@ namespace ExtendedVisioAddin1.View
     class AlternativeContainer : HeaderlessContainer
     {
         
-        public AlternativeContainer(Page page, Shape alternative) : base(page)
+        public AlternativeContainer(Page page, Shape alternative) : base(page, false)
         {
             RShape = alternative;
             string title = null, state = null, desc = null;
@@ -90,6 +90,7 @@ namespace ExtendedVisioAddin1.View
         {
             SetMargin(0.1);
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
+            MarginTop = 0.3;
         }
     }
 }

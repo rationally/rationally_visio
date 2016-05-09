@@ -42,6 +42,9 @@ namespace ExtendedVisioAddin1.View
             AlternativeContainer alternative = (AlternativeContainer) alternativesContainer.Children.First(x => x.AlternativeIndex == index && x is AlternativeContainer);
             alternativesContainer.Children.Remove(alternative);
             alternative.RShape.DeleteEx(0); //deletes the alternative, and it's child components
+            int i = 0;
+            alternativesContainer.Children.Where(c => c is AlternativeContainer).ToList().ForEach(c => ((AlternativeContainer)c).SetAlternativeIdentifier(i++));
+
             new RepaintHandler();
         }
     }

@@ -1,10 +1,11 @@
 ﻿using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
+using ExtendedVisioAddin1.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
-    class AlternativeContainer : HeaderlessContainer
+    class AlternativeContainer : HeaderlessContainer, IAlternativeComponent
     {
         
         public AlternativeContainer(Page page, Shape alternative) : base(page, false)
@@ -92,6 +93,12 @@ namespace ExtendedVisioAddin1.View
             SetMargin(0.1);
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
             MarginTop = 0.3;
+        }
+
+        public void SetAlternativeIdentifier(int alternativeIndex)
+        {
+            this.AlternativeIndex = alternativeIndex;
+            this.Children.ForEach(child => ((IAlternativeComponent)child).SetAlternativeIdentifier(alternativeIndex));
         }
     }
 }

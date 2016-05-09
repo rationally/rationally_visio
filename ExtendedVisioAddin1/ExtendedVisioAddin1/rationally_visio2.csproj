@@ -118,12 +118,14 @@
     <Compile Include="View\Alternatives\AlternativeStateComponent.cs" />
     <Compile Include="View\Alternatives\AlternativeTitleComponent.cs" />
     <Compile Include="View\Alternatives\IAlternativeComponent.cs" />
+    <Compile Include="View\Documents\RelatedDocumentComponent.cs" />
     <Compile Include="View\HeaderlessContainer.cs" />
     <Compile Include="View\ILayoutManager.cs" />
     <Compile Include="View\InformationContainer.cs" />
     <Compile Include="View\InlineLayout.cs" />
     <Compile Include="View\RComponent.cs" />
     <Compile Include="View\RContainer.cs" />
+    <Compile Include="View\Documents\RelatedDocumentsContainer.cs" />
     <Compile Include="View\RView.cs" />
     <Compile Include="View\SizingPolicy.cs" />
     <Compile Include="View\VerticalStretchLayout.cs" />
@@ -204,6 +206,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

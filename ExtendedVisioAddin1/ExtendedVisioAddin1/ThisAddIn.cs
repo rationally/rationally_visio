@@ -113,7 +113,11 @@ namespace ExtendedVisioAddin1
                         return;
                     }*/
                 }
-                View.Children.Add(new AlternativesContainer(Application.ActivePage, s));
+                else
+                {
+                    View.Children.Add(new AlternativesContainer(Application.ActivePage, s));
+                }
+                
             }
         }
 

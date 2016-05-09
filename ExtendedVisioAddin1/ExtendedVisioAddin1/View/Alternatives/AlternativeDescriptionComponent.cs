@@ -13,14 +13,13 @@ namespace ExtendedVisioAddin1.View
         public AlternativeDescriptionComponent(Page page, Shape alternativeComponent) : base(page, false)
         {
             RShape = alternativeComponent;
+            InitStyle();
         }
 
         public AlternativeDescriptionComponent(Page page, int alternativeIndex, string description) : base(page)
         {
             Application application = Globals.ThisAddIn.Application;
-            Width = 4;
-            Height = 2.5;
-            SetMargin(0.2);
+            InitStyle();
 
             AddUserRow("rationallyType");
             RationallyType = "alternativeDescription";
@@ -41,6 +40,13 @@ namespace ExtendedVisioAddin1.View
         public void SetAlternativeIdentifier(int alternativeIndex)
         {
             this.AlternativeIndex = alternativeIndex;
+        }
+
+        public void InitStyle()
+        {
+            Width = 4;
+            Height = 2.5;
+            SetMargin(0.2);
         }
     }
 }

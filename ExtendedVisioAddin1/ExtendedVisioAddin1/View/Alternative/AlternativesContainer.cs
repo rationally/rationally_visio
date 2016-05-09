@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
 
@@ -33,8 +34,9 @@ namespace ExtendedVisioAddin1.View
         {
             RShape = alternativesContainer;
             Array ident = alternativesContainer.ContainerProperties.GetMemberShapes(16);
+            Regex alternativeRegex = new Regex(@"Alternative(\.\d+)?$");
             List<Shape> shapes = (new List<int>((int[]) ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
-            foreach (Shape shape in shapes.Where(shape => shape.Name == "Alternative"))
+            foreach (Shape shape in shapes.Where(shape => alternativeRegex.IsMatch(shape.Name)))
             {
                 Children.Add(new AlternativeContainer(page, shape));
             }

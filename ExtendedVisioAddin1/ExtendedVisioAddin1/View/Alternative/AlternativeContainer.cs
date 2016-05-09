@@ -13,23 +13,23 @@ namespace ExtendedVisioAddin1.View
             foreach (int shapeIdentifier in alternative.ContainerProperties.GetMemberShapes(16))
             {
                 Shape alternativeComponent = page.Shapes.ItemFromID[shapeIdentifier];
-                if (alternativeComponent.Name == "AlternativeTitle")
+                if (alternativeComponent.Name.Contains("AlternativeTitle"))
                 {
                     AlternativeTitleComponent comp = new AlternativeTitleComponent(page, alternativeComponent);
                     Children.Add(comp);
                     title = comp.Text;
                 }
-                else if (alternativeComponent.Name == "AlternativeState")
+                else if (alternativeComponent.Name.Contains("AlternativeState"))
                 {
                     AlternativeStateComponent comp = new AlternativeStateComponent(page, alternativeComponent);
                     Children.Add(comp);
                     state = comp.Text;
                 }
-                else if (alternativeComponent.Name == "AlternativeIdent")
+                else if (alternativeComponent.Name.Contains("AlternativeIdent"))
                 {
                     Children.Add(new AlternativeIdentifierComponent(page, alternativeComponent));
                 }
-                else if (alternativeComponent.Name == "AlternativeDescription")
+                else if (alternativeComponent.Name.Contains("AlternativeDescription"))
                 {
                     AlternativeDescriptionComponent comp = new AlternativeDescriptionComponent(page, alternativeComponent);
                     Children.Add(comp);

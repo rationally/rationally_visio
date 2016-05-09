@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
@@ -14,6 +15,8 @@ namespace ExtendedVisioAddin1
         //TODO: application static kan mss mooier
         public RModel model { get; set; }
         public RView View { get; set; }
+
+        public Regex AlternativesRegex = new Regex(@"Alternatives(\.\d+)?$");
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
@@ -83,10 +86,9 @@ namespace ExtendedVisioAddin1
         {
             if (d.Template.ToLower().Contains("rationally"))
             {
-
                 foreach (Shape shape in Application.ActivePage.Shapes)
                 {
-                    if (shape.Name == "Alternatives")
+                    if (AlternativesRegex.IsMatch(shape.Name)) //Check if the shape is an Alternatives box
                     {
                         View.Children.Add(new AlternativesContainer(Application.ActivePage, shape));
                     }
@@ -99,21 +101,18 @@ namespace ExtendedVisioAddin1
 
         private void Application_ShapeAddedEvent(Shape s)
         {
-            string name = s.Name;
-            if (name.Contains("Alternatives"))
+            if (AlternativesRegex.IsMatch(s.Name))
             {
-                s.Name = "Alternatives";
-                name = "Alternatives";
-            }
-            if (name == "Alternatives" && View.Children.Exists(x => x.Name == "Alternatives"))
-            {
-                //TODO: turn this on, one day
-                /*DialogResult confirmResult = MessageBox.Show("Are you sure you want to add another alternatives box? \n This may cause problems with adding or deleting alternatives", "Confirm addition", MessageBoxButtons.YesNo);
-                if (confirmResult == DialogResult.No)
+                if (View.Children.Exists(x => AlternativesRegex.IsMatch(x.Name)))
                 {
-                    s.DeleteEx(0);
-                    return;
-                }*/
+                    //TODO: turn this on, one day
+                    /*DialogResult confirmResult = MessageBox.Show("Are you sure you want to add another alternatives box? \n This may cause problems with adding or deleting alternatives", "Confirm addition", MessageBoxButtons.YesNo);
+                    if (confirmResult == DialogResult.No)
+                    {
+                        s.DeleteEx(0);
+                        return;
+                    }*/
+                }
                 View.Children.Add(new AlternativesContainer(Application.ActivePage, s));
             }
         }
@@ -124,7 +123,7 @@ namespace ExtendedVisioAddin1
 
         private void Application_MasterAddedEvent(Master m)
         {
-            if (m.Name == "Alternatives")
+            if (m.Name == "Alternatives") //todo: wth
             {
                 m.Delete();
             }

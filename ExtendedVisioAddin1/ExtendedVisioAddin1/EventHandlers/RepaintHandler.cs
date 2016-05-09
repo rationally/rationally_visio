@@ -5,13 +5,13 @@
 
         public RepaintHandler()
         {
-            //this.model = model;
+            //this.Model = Model;
             //remove all current shapes //TODO only our own
             /*foreach (IVShape s in Globals.ThisAddIn.Application.ActivePage.Shapes) {  s.Delete(); }
             int a = Globals.ThisAddIn.Application.ActivePage.Shapes.Count;
-            if (model.Alternatives.Count > 0)
+            if (Model.Alternatives.Count > 0)
             {
-                //AlternativesContainer alternativesContainer = new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage,model.Alternatives);
+                //AlternativesContainer alternativesContainer = new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage,Model.Alternatives);
                 
             }*/
 
@@ -22,7 +22,7 @@
 
         /*public void PaintAlternatives()
         {
-            //sync the model with the view
+            //sync the Model with the view
             UpdateAlternativeTitles();
             //get alternatives shape
             RComponent alternatives = null;
@@ -49,9 +49,9 @@
 
             //alternatives.RShape.ContainerProperties.ResizeAsNeeded = VisContainerAutoResize.visContainerAutoResizeExpandContract;
             //loop over alternatives, paint and fetch a shape for each
-            for (int i = 0; i < model.Alternatives.Count; i++)
+            for (int i = 0; i < Model.Alternatives.Count; i++)
             {
-                IVShape droppedAlternative = model.Alternatives[i].Paint(alternatives.RShape, i, model);
+                IVShape droppedAlternative = Model.Alternatives[i].Paint(alternatives.RShape, i, Model);
                 //alternatives.RShape.Drop(droppedAlternative, alternatives.CenterX, alternatives.CenterY - (alternatives.Height/2) + i*Alternative.ALTERNATIVE_HEIGHT);
             }
             //add the shapes to the alternatives shape
@@ -66,7 +66,7 @@
                 c.RShape = s;
                 if (c.RShape.CellExistsU["User.rationallyType", 0] != 0 && c.RationallyType == "alternativeTitle")
                 {
-                    model.Alternatives[c.AlternativeIndex].Title = c.Text;
+                    Model.Alternatives[c.AlternativeIndex].Title = c.Text;
                 }
             }
         }*/

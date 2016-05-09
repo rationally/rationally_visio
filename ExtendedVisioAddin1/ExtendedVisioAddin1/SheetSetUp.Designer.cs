@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace rationally_visio
+namespace ExtendedVisioAddin1
 {
     partial class SheetSetUp
     {

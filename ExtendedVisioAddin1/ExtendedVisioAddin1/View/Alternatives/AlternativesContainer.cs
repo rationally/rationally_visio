@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
-using ExtendedVisioAddin1.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View
+namespace ExtendedVisioAddin1.View.Alternatives
 {
     public class AlternativesContainer : RContainer
     {
+        private static readonly Regex AlternativesRegex = new Regex(@"Alternatives(\.\d+)?$");
         public AlternativesContainer(Page page, List<Alternative> alternatives) : base(page)
         {
-            Master containerMaster = Globals.ThisAddIn.model.RationallyDocument.Masters["Alternatives"];
+            Master containerMaster = Globals.ThisAddIn.Model.RationallyDocument.Masters["Alternatives"];
             RShape = Page.DropContainer(containerMaster, null);
             CenterX = 3;
             CenterY = 5;
@@ -35,9 +35,8 @@ namespace ExtendedVisioAddin1.View
         {
             RShape = alternativesContainer;
             Array ident = alternativesContainer.ContainerProperties.GetMemberShapes(16);
-            Regex alternativeRegex = new Regex(@"Alternative(\.\d+)?$");
-            List<Shape> shapes = (new List<int>((int[]) ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
-            foreach (Shape shape in shapes.Where(shape => alternativeRegex.IsMatch(shape.Name)))
+            List<Shape> shapes = new List<int>((int[]) ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
+            foreach (Shape shape in shapes.Where(shape => AlternativeContainer.IsAlternativeContainer(shape.Name)))
             {
                 Children.Add(new AlternativeContainer(page, shape));
             }
@@ -51,6 +50,10 @@ namespace ExtendedVisioAddin1.View
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
         }
 
+        public static bool IsAlternativesContainer(string name)
+        {
+            return AlternativesRegex.IsMatch(name);
+        }
 
     }
 }

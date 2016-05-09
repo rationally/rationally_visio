@@ -2,7 +2,7 @@
 
 namespace ExtendedVisioAddin1.View
 {
-    class HeaderlessContainer : RContainer
+    internal class HeaderlessContainer : RContainer
     {
         public HeaderlessContainer(Page page) : base(page)
         {

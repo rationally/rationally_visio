@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ExtendedVisioAddin1.View.Alternatives;
+﻿using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View
+namespace ExtendedVisioAddin1.View.Alternatives
 {
-    class AlternativeDescriptionComponent : HeaderlessContainer, IAlternativeComponent
+    internal class AlternativeDescriptionComponent : HeaderlessContainer, IAlternativeComponent
     {
-
+        private static readonly Regex DescriptionRegex = new Regex(@"AlternativeDescription(\.\d+)?$");
         public AlternativeDescriptionComponent(Page page, Shape alternativeComponent) : base(page, false)
         {
             RShape = alternativeComponent;
@@ -17,7 +13,6 @@ namespace ExtendedVisioAddin1.View
 
         public AlternativeDescriptionComponent(Page page, int alternativeIndex, string description) : base(page)
         {
-            Application application = Globals.ThisAddIn.Application;
             Width = 4;
             Height = 2.5;
             SetMargin(0.2);
@@ -40,7 +35,12 @@ namespace ExtendedVisioAddin1.View
 
         public void SetAlternativeIdentifier(int alternativeIndex)
         {
-            this.AlternativeIndex = alternativeIndex;
+            AlternativeIndex = alternativeIndex;
+        }
+
+        public static bool IsAlternativeDescription(string name)
+        {
+            return DescriptionRegex.IsMatch(name);
         }
     }
 }

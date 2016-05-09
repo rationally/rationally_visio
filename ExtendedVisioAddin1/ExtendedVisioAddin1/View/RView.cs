@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.Model;
+using ExtendedVisioAddin1.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
     public class RView : RContainer, IObserver<RModel>
     {
-        public AlternativesContainer AlternativesContainer { get; }
         public RView(Page page) : base(page)
         {
 
@@ -26,9 +26,8 @@ namespace ExtendedVisioAddin1.View
 
         public void AddAlternative(Alternative alternative)
         {
-
-            AlternativesContainer alternativesContainer = (AlternativesContainer)Children.First(c => c is AlternativesContainer); //todo: We don't know how many
-            ((RContainer)Globals.ThisAddIn.View.Children.First(ch => ch is AlternativesContainer)).Children.Add(new AlternativeContainer(Globals.ThisAddIn.Application.ActivePage, Globals.ThisAddIn.model.Alternatives.Count - 1, alternative));
+            //todo: first is wrong, since we don;t know how many
+            ((RContainer)Globals.ThisAddIn.View.Children.First(ch => ch is AlternativesContainer)).Children.Add(new AlternativeContainer(Globals.ThisAddIn.Application.ActivePage, Globals.ThisAddIn.Model.Alternatives.Count - 1, alternative));
             new RepaintHandler();
         }
 

@@ -32,14 +32,7 @@ namespace ExtendedVisioAddin1.View
             double toDrawWidth = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight; //expected increase in x
             double toDrawHeight = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;//expected height in y
 
-            if (toDraw is AlternativeContainer)
-            {
-                var a = 5;
-            }
             PrepareContainerExpansion(x,y,toDrawWidth,toDrawHeight); //if the container streches to support the drawing, the container height does not need to change
-            double left = toManage.CenterX + (toManage.Width/2.0);
-            double right = x + toDrawWidth;
-            double d = left/right;//HACK: these three variables somehow fix floating errors in the values in the conditions below
             if (toManage.CenterX + (toManage.Width/2.0) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
             {
                 x = toManage.CenterX - (toManage.Width/2.0);//go to a new line
@@ -104,14 +97,14 @@ namespace ExtendedVisioAddin1.View
 
             if (overflowInX && expandXIfNeeded)
             { 
-                toManage.Width = (x + xIncrease) - topLeftX + 0.01; 
+                toManage.Width = x + xIncrease - topLeftX + 0.01; 
                 toManage.CenterX = topLeftX + (toManage.Width/2.0);
 
             }
 
             if (overflowInY && expandYIfNeeded)
             {
-                toManage.Height = topLeftY - (y - yIncrease) + 0.01;
+                toManage.Height = topLeftY - y - yIncrease + 0.01;
                 toManage.CenterY = topLeftY - (toManage.Height/2.0);
             }
         }

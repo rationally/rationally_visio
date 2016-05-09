@@ -5,7 +5,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers
 {
-    class RemoveAlternativeEventHandler : EventHandler
+    internal class RemoveAlternativeEventHandler : EventHandler
     {
         public RemoveAlternativeEventHandler(RModel model)
         {

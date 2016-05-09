@@ -1,13 +1,11 @@
-﻿using System.Linq;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
 using Microsoft.Office.Interop.Visio;
-using rationally_visio;
 
 namespace ExtendedVisioAddin1.EventHandlers
 {
-    class DocumentCreatedEventHandler
+    internal class DocumentCreatedEventHandler
     {
         private readonly RModel model;
 
@@ -26,13 +24,16 @@ namespace ExtendedVisioAddin1.EventHandlers
                 Globals.ThisAddIn.View.Children.Add(header);
 
                 //draw the information container
-                InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version);
-                informationContainer.CenterX = 12;//(Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches]);
-                informationContainer.CenterY = offsetHeight;
+                InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version)
+                    {
+                        CenterX = 12,
+                        CenterY = offsetHeight
+                    };
+                //(Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches]);
                 Globals.ThisAddIn.View.Children.Add(informationContainer); 
 
-                //Globals.ThisAddIn.View.Children.Add(new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage, model.Alternatives.ToList()));
-                //new RepaintHandler(model);
+                //Globals.ThisAddIn.View.Children.Add(new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage, Model.Alternatives.ToList()));
+                //new RepaintHandler(Model);
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace ExtendedVisioAddin1.EventHandlers
 {
-    class EventHandlerFactory
+    internal class EventHandlerFactory
     {
         public EventHandler this[string eventName]
         {

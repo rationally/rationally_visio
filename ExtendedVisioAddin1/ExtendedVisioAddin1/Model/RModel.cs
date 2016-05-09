@@ -47,7 +47,7 @@ namespace ExtendedVisioAddin1.Model
             observers.Remove(observer);
         }
 
-        void NotifyObservers()
+        private void NotifyObservers()
         {
             observers.ForEach(obs => obs.Notify(this));
         }

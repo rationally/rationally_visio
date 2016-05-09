@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
+using ExtendedVisioAddin1.View.Alternatives;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Visio;
 using rationally_visio;
@@ -13,19 +13,17 @@ namespace ExtendedVisioAddin1
     public partial class ThisAddIn
     {
         //TODO: application static kan mss mooier
-        public RModel model { get; set; }
+        public RModel Model { get; set; }
         public RView View { get; set; }
-
-        public Regex AlternativesRegex = new Regex(@"Alternatives(\.\d+)?$");
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
-            model = new RModel();
-            //model.Alternatives.Add(new Alternative("titelo","Accepted","dessehcription"));
-            //model.Alternatives.Add(new Alternative("titelo dos", "Accepted", "dessehcription"));
+            Model = new RModel();
+            //Model.Alternatives.Add(new Alternative("titelo","Accepted","dessehcription"));
+            //Model.Alternatives.Add(new Alternative("titelo dos", "Accepted", "dessehcription"));
             View = new RView(Application.ActivePage);
             
-            model.AddObserver(View);
+            Model.AddObserver(View);
             Application.MarkerEvent += Application_MarkerEvent;
             Application.TemplatePaths = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
             Application.DocumentCreated += DelegateCreateDocumentEvent;
@@ -58,24 +56,24 @@ namespace ExtendedVisioAddin1
                 if (s.CellsU["User.rationallyType"].ResultStr["Value"] == "forces") //TODO check context
                 {
                     //create a master
-                    Master forcesMaster = model.RationallyDocument.Masters.ItemU[@"Force"];
+                    Master forcesMaster = Model.RationallyDocument.Masters.ItemU[@"Force"];
 
                     s.Drop(forcesMaster, 1, 1);
                 } else if (s.CellsU["User.rationallyType"].ResultStr["Value"] == "alternatives")
                 {
                     
-                    AddAlternativeEventHandler a = new AddAlternativeEventHandler(model);
+                    new AddAlternativeEventHandler(Model);
                 }
                 else if (s.CellsU["User.rationallyType"].ResultStr["Value"].Contains("alternativeState"))
                 {
                     if (context.Split('.')[0] == "stateChange")
                     {
-                        EditAlternativeStateEventHandler b = new EditAlternativeStateEventHandler(model, context.Split('.')[1]);
+                        new EditAlternativeStateEventHandler(Model, context.Split('.')[1]);
                     }
                 }
                 else if (s.CellsU["User.rationallyType"].ResultStr["Value"] == "alternative")
                 {
-                    RemoveAlternativeEventHandler c = new RemoveAlternativeEventHandler(model);
+                    new RemoveAlternativeEventHandler(Model);
                 }
             }
         }
@@ -88,7 +86,7 @@ namespace ExtendedVisioAddin1
             {
                 foreach (Shape shape in Application.ActivePage.Shapes)
                 {
-                    if (AlternativesRegex.IsMatch(shape.Name)) //Check if the shape is an Alternatives box
+                    if (AlternativesContainer.IsAlternativesContainer(shape.Name)) //Check if the shape is an Alternatives box
                     {
                         View.Children.Add(new AlternativesContainer(Application.ActivePage, shape));
                     }
@@ -101,9 +99,9 @@ namespace ExtendedVisioAddin1
 
         private void Application_ShapeAddedEvent(Shape s)
         {
-            if (AlternativesRegex.IsMatch(s.Name))
+            if (AlternativesContainer.IsAlternativesContainer(s.Name))
             {
-                if (View.Children.Exists(x => AlternativesRegex.IsMatch(x.Name)))
+                if (View.Children.Exists(x => AlternativesContainer.IsAlternativesContainer(x.Name)))
                 {
                     //TODO: turn this on, one day
                     /*DialogResult confirmResult = MessageBox.Show("Are you sure you want to add another alternatives box? \n This may cause problems with adding or deleting alternatives", "Confirm addition", MessageBoxButtons.YesNo);
@@ -146,7 +144,7 @@ namespace ExtendedVisioAddin1
         //#region Event delegaters
         private void DelegateCreateDocumentEvent(IVDocument d)
         {
-            new DocumentCreatedEventHandler(d, model);
+            new DocumentCreatedEventHandler(d, Model);
             Application_DocumentOpenedEvent(d);
         }
     }

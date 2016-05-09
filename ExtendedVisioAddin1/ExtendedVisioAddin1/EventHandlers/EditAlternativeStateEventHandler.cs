@@ -1,10 +1,11 @@
 ﻿using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
+using ExtendedVisioAddin1.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers
 {
-    class EditAlternativeStateEventHandler : EventHandler
+    internal class EditAlternativeStateEventHandler : EventHandler
     {
         public EditAlternativeStateEventHandler(RModel model, string newState)
         {

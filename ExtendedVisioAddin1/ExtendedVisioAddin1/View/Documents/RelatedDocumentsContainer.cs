@@ -15,7 +15,6 @@ namespace ExtendedVisioAddin1.View
             RShape = Page.DropContainer(containerMaster, null);
             CenterX = 8;
             CenterY = 5;
-            LayoutManager = new VerticalStretchLayout(this);
             InitStyle();
         }
 

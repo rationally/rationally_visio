@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace ExtendedVisioAddin1
 {
-    partial class SheetSetUp
+    partial class SheetSetUpFormPopUp
     {
         /// <summary>
         /// Required designer variable.
@@ -117,7 +117,7 @@ namespace ExtendedVisioAddin1
             this.date.Size = new System.Drawing.Size(211, 20);
             this.date.TabIndex = 8;
             // 
-            // SheetSetUp
+            // SheetSetUpFormPopUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -131,7 +131,7 @@ namespace ExtendedVisioAddin1
             this.Controls.Add(this.authorNameHEad);
             this.Controls.Add(this.decisionNameHead);
             this.Controls.Add(this.decisionName);
-            this.Name = "SheetSetUp";
+            this.Name = "SheetSetUpFormPopUp";
             this.Text = "Decision creator";
             this.ResumeLayout(false);
             this.PerformLayout();

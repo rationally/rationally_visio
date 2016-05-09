@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace ExtendedVisioAddin1
 {
-    public partial class SheetSetUp : Form
+    public partial class SheetSetUpFormPopUp : Form
     {
-        public SheetSetUp()
+        public SheetSetUpFormPopUp()
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;

@@ -39,7 +39,7 @@ namespace ExtendedVisioAddin1.EventHandlers
 
         private void ShowMyDialogBox()
         {
-            SheetSetUp testDialog = new SheetSetUp();
+            SheetSetUpFormPopUp testDialog = new SheetSetUpFormPopUp();
 
             model.Author = "";
             model.DecisionName ="";

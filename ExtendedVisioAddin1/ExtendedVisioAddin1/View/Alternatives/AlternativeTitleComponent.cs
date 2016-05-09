@@ -1,8 +1,10 @@
-﻿using Microsoft.Office.Interop.Visio;
+﻿using ExtendedVisioAddin1.View.Alternatives;
+using ExtendedVisioAddin1.View.Alternatives;
+using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
-    class AlternativeTitleComponent : TextLabel
+    class AlternativeTitleComponent : TextLabel, IAlternativeComponent
     {
 
         public AlternativeTitleComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
@@ -31,6 +33,11 @@ namespace ExtendedVisioAddin1.View
         private void InitStyle()
         {
             this.SetMargin(0.1);
+        }
+
+        public void SetAlternativeIdentifier(int alternativeIndex)
+        {
+            this.AlternativeIndex = alternativeIndex;
         }
     }
 }

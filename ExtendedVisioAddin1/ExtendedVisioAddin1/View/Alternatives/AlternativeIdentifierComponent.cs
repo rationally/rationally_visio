@@ -1,8 +1,9 @@
-﻿using Microsoft.Office.Interop.Visio;
+﻿using ExtendedVisioAddin1.View.Alternatives;
+using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
-    class AlternativeIdentifierComponent : TextLabel
+    class AlternativeIdentifierComponent : TextLabel, IAlternativeComponent
     {
         public AlternativeIdentifierComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {
@@ -31,6 +32,12 @@ namespace ExtendedVisioAddin1.View
         private void InitStyle()
         {
             SetMargin(0.1);
+        }
+
+        public void SetAlternativeIdentifier(int alternativeIndex)
+        {
+            this.AlternativeIndex = alternativeIndex;
+            this.Text = (char)(65 + alternativeIndex) + ":";
         }
     }
 }

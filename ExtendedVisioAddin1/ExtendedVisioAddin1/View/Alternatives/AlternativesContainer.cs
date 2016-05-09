@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ExtendedVisioAddin1.Model;
+using ExtendedVisioAddin1.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
@@ -48,6 +49,7 @@ namespace ExtendedVisioAddin1.View
         {
             this.UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
         }
+
 
     }
 }

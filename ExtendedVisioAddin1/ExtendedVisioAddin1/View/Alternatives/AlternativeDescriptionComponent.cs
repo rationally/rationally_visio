@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ExtendedVisioAddin1.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
-    class AlternativeDescriptionComponent : HeaderlessContainer
+    class AlternativeDescriptionComponent : HeaderlessContainer, IAlternativeComponent
     {
 
         public AlternativeDescriptionComponent(Page page, Shape alternativeComponent) : base(page, false)
@@ -35,6 +36,11 @@ namespace ExtendedVisioAddin1.View
             LockRotate = true;
             LockMoveX = true;
             LockMoveY = true; */
+        }
+
+        public void SetAlternativeIdentifier(int alternativeIndex)
+        {
+            this.AlternativeIndex = alternativeIndex;
         }
     }
 }

@@ -41,7 +41,7 @@ namespace ExtendedVisioAddin1.View
             double left = toManage.CenterX + (toManage.Width/2.0);
             double right = x + toDrawWidth;
             double d = left/right;//HACK: these three variables somehow fix floating errors in the values in the conditions below
-            if (toManage.CenterX + (toManage.Width/2.0) <= x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
+            if (toManage.CenterX + (toManage.Width/2.0) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
             {
                 x = toManage.CenterX - (toManage.Width/2.0);//go to a new line
                 y -= currentLineHeight; //the new line of components should not overlap with the one above
@@ -105,14 +105,14 @@ namespace ExtendedVisioAddin1.View
 
             if (overflowInX && expandXIfNeeded)
             { 
-                toManage.Width = (x + xIncrease) - topLeftX; 
+                toManage.Width = (x + xIncrease) - topLeftX + 0.01; 
                 toManage.CenterX = topLeftX + (toManage.Width/2.0);
 
             }
 
             if (overflowInY && expandYIfNeeded)
             {
-                toManage.Height = topLeftY - (y - yIncrease);
+                toManage.Height = topLeftY - (y - yIncrease) + 0.01;
                 toManage.CenterY = topLeftY - (toManage.Height/2.0);
             }
         }

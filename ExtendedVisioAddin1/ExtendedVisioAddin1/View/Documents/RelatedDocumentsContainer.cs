@@ -11,7 +11,7 @@ namespace ExtendedVisioAddin1.View
     {
         public RelatedDocumentsContainer(Page page) : base(page)
         {
-            Master containerMaster = Globals.ThisAddIn.model.RationallyDocument.Masters["Related Documents"];
+            Master containerMaster = Globals.ThisAddIn.Model.RationallyDocument.Masters["Related Documents"];
             RShape = Page.DropContainer(containerMaster, null);
             CenterX = 8;
             CenterY = 5;

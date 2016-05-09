@@ -17,7 +17,7 @@ using Office = Microsoft.Office.Core;
 // 2. Create callback methods in the "Ribbon Callbacks" region of this class to handle user
 //    actions, such as clicking a button. Note: if you have exported this Ribbon from the Ribbon designer,
 //    move your code from the event handlers to the callback methods and modify the code to work with the
-//    Ribbon extensibility (RibbonX) programming model.
+//    Ribbon extensibility (RibbonX) programming Model.
 
 // 3. Assign attributes to the control tags in the Ribbon XML file to identify the appropriate callback methods in your code.  
 

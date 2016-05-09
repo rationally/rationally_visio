@@ -1,13 +1,12 @@
 ﻿using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
-using ExtendedVisioAddin1.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View
+namespace ExtendedVisioAddin1.View.Alternatives
 {
-    class AlternativeContainer : HeaderlessContainer, IAlternativeComponent
+    internal class AlternativeContainer : HeaderlessContainer, IAlternativeComponent
     {
-        
+        private static readonly Regex AlternativeRegex = new Regex(@"Alternative(\.\d+)?$");
         public AlternativeContainer(Page page, Shape alternative) : base(page, false)
         {
             RShape = alternative;
@@ -15,23 +14,23 @@ namespace ExtendedVisioAddin1.View
             foreach (int shapeIdentifier in alternative.ContainerProperties.GetMemberShapes(16))
             {
                 Shape alternativeComponent = page.Shapes.ItemFromID[shapeIdentifier];
-                if (new Regex(@"AlternativeTitle(\.\d+)?$").IsMatch(alternativeComponent.Name))
+                if (AlternativeTitleComponent.IsAlternativeTitle(alternativeComponent.Name))
                 {
                     AlternativeTitleComponent comp = new AlternativeTitleComponent(page, alternativeComponent);
                     Children.Add(comp);
                     title = comp.Text;
                 }
-                else if (new Regex(@"AlternativeState(\.\d+)?$").IsMatch(alternativeComponent.Name))
+                else if (AlternativeStateComponent.IsAlternativeState(alternativeComponent.Name))
                 {
                     AlternativeStateComponent comp = new AlternativeStateComponent(page, alternativeComponent);
                     Children.Add(comp);
                     state = comp.Text;
                 }
-                else if (new Regex(@"AlternativeIdent(\.\d+)?$").IsMatch(alternativeComponent.Name))
+                else if (AlternativeIdentifierComponent.IsIdentifierDescription(alternativeComponent.Name))
                 {
                     Children.Add(new AlternativeIdentifierComponent(page, alternativeComponent));
                 }
-                else if (new Regex(@"AlternativeDescription(\.\d+)?$").IsMatch(alternativeComponent.Name))
+                else if (AlternativeDescriptionComponent.IsAlternativeDescription(alternativeComponent.Name))
                 {
                     AlternativeDescriptionComponent comp = new AlternativeDescriptionComponent(page, alternativeComponent);
                     Children.Add(comp);
@@ -40,7 +39,7 @@ namespace ExtendedVisioAddin1.View
             }
             if (title != null && state != null && desc != null)
             {
-                Globals.ThisAddIn.model.Alternatives.Add(new Alternative(title, state, desc));
+                Globals.ThisAddIn.Model.Alternatives.Add(new Alternative(title, state, desc));
             }
             InitStyle();
         }
@@ -97,8 +96,13 @@ namespace ExtendedVisioAddin1.View
 
         public void SetAlternativeIdentifier(int alternativeIndex)
         {
-            this.AlternativeIndex = alternativeIndex;
-            this.Children.ForEach(child => ((IAlternativeComponent)child).SetAlternativeIdentifier(alternativeIndex));
+            AlternativeIndex = alternativeIndex;
+            Children.ForEach(child => ((IAlternativeComponent)child).SetAlternativeIdentifier(alternativeIndex));
+        }
+
+        public static bool IsAlternativeContainer(string name)
+        {
+            return AlternativeRegex.IsMatch(name);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace ExtendedVisioAddin1.View
 {
-    class InformationContainer : HeaderlessContainer
+    internal class InformationContainer : HeaderlessContainer
     {
         public InformationContainer(Page page, string author, string date, string version) : base(page)
         {

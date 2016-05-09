@@ -2,7 +2,7 @@
 
 namespace ExtendedVisioAddin1.View
 {
-    class VerticalStretchLayout : ILayoutManager
+    internal class VerticalStretchLayout : ILayoutManager
     {
         private readonly RContainer toManage;
 
@@ -39,8 +39,8 @@ namespace ExtendedVisioAddin1.View
             //calculate position to draw this component
             double drawX = x + (toDraw.Width/2.0) + toDraw.MarginLeft;
             double drawY = y - (toDraw.Height/2.0) - toDraw.MarginTop;
-            double deltaX = drawX - (toDraw.CenterX);
-            double deltaY = drawY - (toDraw.CenterY);
+            double deltaX = drawX - toDraw.CenterX;
+            double deltaY = drawY - toDraw.CenterY;
 
             //move the children of this container, and then the container itself
             if (toDraw is RContainer)
@@ -96,7 +96,7 @@ namespace ExtendedVisioAddin1.View
 
             if (overflowInX && expandXIfNeeded)
             {
-                toManage.Width = (x + xIncrease) - topLeftX + 0.01;
+                toManage.Width = x + xIncrease - topLeftX + 0.01;
                 toManage.CenterX = topLeftX + (toManage.Width / 2.0);
 
             }
@@ -104,7 +104,7 @@ namespace ExtendedVisioAddin1.View
             if (overflowInY && expandYIfNeeded)
             {
                 toManage.Height = topLeftY - (y - yIncrease) + 0.01;
-                toManage.CenterY = topLeftY - ((toManage.Height) / 2.0);
+                toManage.CenterY = topLeftY - (toManage.Height / 2.0);
             }
         }
 

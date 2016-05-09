@@ -1,12 +1,11 @@
-﻿using ExtendedVisioAddin1.View.Alternatives;
-using ExtendedVisioAddin1.View.Alternatives;
+﻿using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View
+namespace ExtendedVisioAddin1.View.Alternatives
 {
-    class AlternativeTitleComponent : TextLabel, IAlternativeComponent
+    internal class AlternativeTitleComponent : TextLabel, IAlternativeComponent
     {
-
+        private static readonly Regex TitleRegex = new Regex(@"AlternativeTitle(\.\d+)?$");
         public AlternativeTitleComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {
             RShape = alternativeComponent;
@@ -37,7 +36,11 @@ namespace ExtendedVisioAddin1.View
 
         public void SetAlternativeIdentifier(int alternativeIndex)
         {
-            this.AlternativeIndex = alternativeIndex;
+            AlternativeIndex = alternativeIndex;
+        }
+        public static bool IsAlternativeTitle(string name)
+        {
+            return TitleRegex.IsMatch(name);
         }
     }
 }

@@ -5,21 +5,20 @@ namespace ExtendedVisioAddin1.View
 {
     public class TextLabel : RComponent
     {
-        private string text;
         private short size;
 
         public TextLabel(Page page, Shape shape) : base(page)
         {
             RShape = shape;
-            text = shape.Text;
+            string text = shape.Text;
             size = Convert.ToInt16(shape.Cells["Char.Size"].Formula.Split(' ')[0]);
         }
 
-        public TextLabel(Page page, string text) : base(page)
+        public TextLabel(Page page, string labelText) : base(page)
         {
-            this.text = text;
+            string text = labelText;
             size = 12;
-            double fac = (size / 12.0);
+            double fac = size / 12.0;
             RShape = Globals.ThisAddIn.Application.ActivePage.DrawRectangle(0, 0, text.Length * 0.15 * fac, - 0.5); //TODO: magic numbers
             RShape.LineStyle = "Text Only";
             RShape.FillStyle = "Text Only";
@@ -28,9 +27,9 @@ namespace ExtendedVisioAddin1.View
             RShape.CellsU["LinePattern"].ResultIU = 0;
         }
 
-        public void SetFontSize(short size)
+        public void SetFontSize(short fontSize)
         {
-            this.size = size;
+            size = fontSize;
         }
     }
 }

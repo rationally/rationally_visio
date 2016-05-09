@@ -49,7 +49,7 @@ namespace ExtendedVisioAddin1
             _updateRequest = true;
         }
 
-        void ApplicationIdle(object app)
+        private void ApplicationIdle(object app)
         {
             if (!_updateRequest)
                 return;
@@ -172,7 +172,7 @@ namespace ExtendedVisioAddin1
         }
 
         [DesignerCategory("")]
-        class PictureConvert : AxHost
+        private class PictureConvert : AxHost
         {
             private PictureConvert() : base("") { }
 

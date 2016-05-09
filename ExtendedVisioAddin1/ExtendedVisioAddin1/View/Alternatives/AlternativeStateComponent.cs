@@ -1,12 +1,12 @@
-﻿using System;
+﻿using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
-using ExtendedVisioAddin1.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View
+namespace ExtendedVisioAddin1.View.Alternatives
 {
     internal class AlternativeStateComponent : TextLabel, IAlternativeComponent
     {
+        private static readonly Regex StateRegex = new Regex(@"AlternativeState(\.\d+)?$");
         public AlternativeStateComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {
             RShape= alternativeComponent;
@@ -48,7 +48,7 @@ namespace ExtendedVisioAddin1.View
         public void SetAlternativeState(string newState)
         {
             Text = newState;
-            Globals.ThisAddIn.model.Alternatives[AlternativeIndex].Status = newState;
+            Globals.ThisAddIn.Model.Alternatives[AlternativeIndex].Status = newState;
             SetStateMenu(newState);
         }
 
@@ -56,7 +56,7 @@ namespace ExtendedVisioAddin1.View
         {
             AddAction("changeState", "", "\"Change state\"", false);
 
-            RModel model = Globals.ThisAddIn.model;
+            RModel model = Globals.ThisAddIn.Model;
             for (int i = 0; i < model.AlternativeStates.Count; i++)
             {
                 string stateName = "State_" + i;
@@ -77,6 +77,10 @@ namespace ExtendedVisioAddin1.View
                     AddAction(stateName, "QUEUEMARKEREVENT(\"stateChange." + model.AlternativeStates[i] + "\")", "\"" + model.AlternativeStates[i] + "\"", true);
                 }
             }
+        }
+        public static bool IsAlternativeState(string name)
+        {
+            return StateRegex.IsMatch(name);
         }
     }
 }

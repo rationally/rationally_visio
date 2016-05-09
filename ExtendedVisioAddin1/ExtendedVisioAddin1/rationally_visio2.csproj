@@ -120,7 +120,6 @@
     <Compile Include="View\Alternatives\AlternativeStateComponent.cs" />
     <Compile Include="View\Alternatives\AlternativeTitleComponent.cs" />
     <Compile Include="View\Alternatives\IAlternativeComponent.cs" />
-    <Compile Include="View\Documents\RelatedDocumentComponent.cs" />
     <Compile Include="View\Documents\RelatedURLComponent.cs" />
     <Compile Include="View\Documents\RelatedFileComponent.cs" />
     <Compile Include="View\HeaderlessContainer.cs" />

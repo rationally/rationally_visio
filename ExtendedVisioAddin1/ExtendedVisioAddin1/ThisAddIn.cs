@@ -73,7 +73,7 @@ namespace ExtendedVisioAddin1
                 }
                 else if (s.CellsU["User.rationallyType"].ResultStr["Value"] == "alternative")
                 {
-                    RemoveAlternativeEventHandler c = new RemoveAlternativeEventHandler(model);
+                    RemoveAlternativeEventHandler c = new RemoveAlternativeEventHandler(Model);
                 } else if (s.CellsU["User.rationallyType"].ResultStr["Value"] == "relatedDocuments")
                 {
                     new AddRelatedDocumentHandler();

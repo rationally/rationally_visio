@@ -16,7 +16,7 @@ namespace ExtendedVisioAddin1.EventHandlers
             //TODO: popUp and validation? etc
             var application = Globals.ThisAddIn.Application;
             OpenFileDialog selectUrlDialog = new OpenFileDialog();
-            IVShape selectedShape = null;
+            IVShape selectedShape = null; 
             if (selectUrlDialog.ShowDialog() == DialogResult.OK)
             {
                 foreach (IVShape s in application.ActiveWindow.Selection)

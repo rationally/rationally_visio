@@ -23,6 +23,11 @@ namespace ExtendedVisioAddin1
                 MessageBox.Show("Enter a proper url, including the protocol to use.");
                 DialogResult = DialogResult.None;
                 return;
+            }else if (string.IsNullOrWhiteSpace(nameTextbox.Text))
+            {
+                MessageBox.Show("Enter a name.");
+                DialogResult = DialogResult.None;
+                return;
             }
 
             DialogResult = DialogResult.OK;

@@ -3,6 +3,7 @@ using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Alternatives;
+using ExtendedVisioAddin1.View.Documents;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Visio;
 using rationally_visio;
@@ -153,6 +154,7 @@ namespace ExtendedVisioAddin1
         {
             new DocumentCreatedEventHandler(d, Model);
             Application_DocumentOpenedEvent(d);
+            new RelatedUrlComponent(Application.ActivePage, "http://nu.nl/");
         }
     }
 }

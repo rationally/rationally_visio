@@ -15,7 +15,7 @@ namespace ExtendedVisioAddin1.EventHandlers
             this.model = model;
             if (document.Template.ToLower().Contains("rationally"))
             {
-                ShowMyDialogBox();
+                ShowSheetSetUpBox();
                 double offsetHeight =Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageHeight"].Result[VisUnitCodes.visInches] - 0.4;
                 //draw the header
                 TextLabel header = new TextLabel(Globals.ThisAddIn.Application.ActivePage,model.DecisionName);
@@ -43,7 +43,7 @@ namespace ExtendedVisioAddin1.EventHandlers
             }
         }
 
-        private void ShowMyDialogBox()
+        private void ShowSheetSetUpBox()
         {
             SheetSetUpFormPopUp testDialog = new SheetSetUpFormPopUp();
 

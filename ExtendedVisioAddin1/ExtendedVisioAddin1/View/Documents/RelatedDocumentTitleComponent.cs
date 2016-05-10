@@ -10,10 +10,12 @@ namespace ExtendedVisioAddin1.View.Documents
     {
         public RelatedDocumentTitleComponent(Page page, Shape shape) : base(page, shape)
         {
+            InitStyle();
         }
 
         public RelatedDocumentTitleComponent(Page page, string labelText) : base(page, labelText)
         {
+            InitStyle();
         }
 
         public void InitStyle()

@@ -294,7 +294,24 @@ namespace ExtendedVisioAddin1.View
             set { RShape.CellsU["Para.BulletFontSize"].ResultIU = value; }
         }
 
+        //line format
 
+            /// <summary>
+            /// set this to 0 to remove the border of a container
+            /// </summary>
+        public double LinePattern
+        {
+            get { return RShape.CellsU["LinePattern"].ResultIU; }
+            set { RShape.CellsU["LinePattern"].ResultIU = value; }
+        }
+
+        //events
+        public string EventDblClick
+        {
+            get { return RShape.CellsU["EventDblClick"].ResultStr["Value"]; }
+            set { RShape.CellsU["EventDblClick"].Formula =  value; }
+        }
+        
 
         /// <summary>
         /// Updates shapesheet of the stored IVShape. Character.Style holds information about the font style (bold, italic...) in a bitwise manner.

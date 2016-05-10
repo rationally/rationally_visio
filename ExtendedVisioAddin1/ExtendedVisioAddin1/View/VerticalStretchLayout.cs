@@ -22,6 +22,7 @@ namespace ExtendedVisioAddin1.View
             //base case
             if (components.Count == 0)
             {
+
                 ShrinkContainer(y); //y points below the last added component
                 return;
             }

@@ -29,12 +29,18 @@ namespace ExtendedVisioAddin1.EventHandlers
                         break;
                     }
                 }
-
+                //container of all related documents:
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer) Globals.ThisAddIn.View.Children.First(c => c.RShape.Equals(selectedShape));
-
+                //create a container that wraps the new document
+                RelatedDocumentContainer relatedDocumentContainer = new RelatedDocumentContainer(application.ActivePage);
+                relatedDocumentsContainer.Children.Add(relatedDocumentContainer);
+                //1) make a title component for the source and add it to the container
+                RelatedDocumentTitleComponent relatedDocumentTitleComponent = new RelatedDocumentTitleComponent(application.ActivePage, openFileDialog.SafeFileName + ":");
+                relatedDocumentContainer.Children.Add(relatedDocumentTitleComponent);
+                //2) make a shortcut to the file
                 RelatedFileComponent relatedFileComponent = new RelatedFileComponent(application.ActivePage, openFileDialog.FileName);
-
-                relatedDocumentsContainer.Children.Add(relatedFileComponent);
+                relatedDocumentContainer.Children.Add(relatedFileComponent);
+                
 
                 new RepaintHandler();
             }

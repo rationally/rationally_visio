@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
@@ -33,6 +35,7 @@ namespace ExtendedVisioAddin1
             Application.ShapeChanged += Application_ShapeChangedEvent;
             Application.MasterAdded += Application_MasterAddedEvent;
             Application.MasterChanged += Application_MasterChangedEvent;
+            Application.BeforeShapeDelete += Application_DeleteShapeEvent;
 
         }
 
@@ -139,6 +142,18 @@ namespace ExtendedVisioAddin1
         {
         }
 
+        private void Application_DeleteShapeEvent(IVShape s)
+        {
+            if (s.CellExistsU["User.rationallyType", 0] != 0 && (s.CellsU["User.rationallyType"].ResultStr["Value"] == "relatedDocumentContainer"))//TODO sub parts deleted?
+            {
+                RView view = Globals.ThisAddIn.View;
+                //select all 'related documents' containers
+                List<RelatedDocumentsContainer> relatedDocumentsContainers =  view.Children.Where(c => c is RelatedDocumentsContainer).Cast<RelatedDocumentsContainer>().ToList();
+                //for each container, remove the children of which the shape equals the to be deleted shape
+                relatedDocumentsContainers.ForEach(r => r.Children = r.Children.Where(c => !c.RShape.Equals(s)).ToList());
+                new RepaintHandler();
+            }
+        }
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.

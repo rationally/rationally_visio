@@ -17,6 +17,7 @@ namespace ExtendedVisioAddin1.EventHandlers
             var application = Globals.ThisAddIn.Application;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.CheckFileExists = true;
+            openFileDialog.CheckPathExists = true;
             IVShape selectedShape = null;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -25,6 +26,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                     if (s.Name.Contains("Related Documents")) //TODO regex
                     {
                         selectedShape = s;
+                        break;
                     }
                 }
 

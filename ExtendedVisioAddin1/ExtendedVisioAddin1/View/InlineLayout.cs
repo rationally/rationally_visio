@@ -24,6 +24,11 @@ namespace ExtendedVisioAddin1.View
             //Base Case
             if (components.Count == 0)
             {
+                //the container might still be not high enough, if the initial height is very small and expandX is true
+                if ((toManage.UsedSizingPolicy & SizingPolicy.ExpandYIfNeeded) > 0 && currentLineHeight > toManage.Height)
+                {
+                    toManage.Height = currentLineHeight;
+                }
                 ShrinkContainer(contentXEnd,contentYEnd);
                 return;
             }
@@ -32,7 +37,7 @@ namespace ExtendedVisioAddin1.View
             double toDrawWidth = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight; //expected increase in x
             double toDrawHeight = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;//expected height in y
 
-            PrepareContainerExpansion(x,y,toDrawWidth,toDrawHeight); //if the container streches to support the drawing, the container height does not need to change
+            PrepareContainerExpansion(x,y,toDrawWidth,0); //if the container streches to support the drawing, the container height does not need to change
             if (toManage.CenterX + (toManage.Width/2.0) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
             {
                 x = toManage.CenterX - (toManage.Width/2.0);//go to a new line

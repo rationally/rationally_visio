@@ -219,6 +219,82 @@ namespace ExtendedVisioAddin1.View
             set { RShape.CellsU["User.msvSDContainerLocked"].Formula = (value ? "TRUE" : "FALSE"); }
         }
 
+        public double IndFirst
+        {
+            get { return RShape.CellsU["Para.IndFirst"].ResultIU; }
+            set { RShape.CellsU["Para.IndFirst"].ResultIU = value; }
+        }
+
+        public double IndLeft
+        {
+            get { return RShape.CellsU["Para.IndLeft"].ResultIU; }
+            set { RShape.CellsU["Para.IndLeft"].ResultIU = value; }
+        }
+
+        public double IndRight
+        {
+            get { return RShape.CellsU["Para.IndRight"].ResultIU; }
+            set { RShape.CellsU["Para.IndRight"].ResultIU = value; }
+        }
+
+        public double SpLine
+        {
+            get { return RShape.CellsU["Para.SpLine"].ResultIU; }
+            set { RShape.CellsU["Para.SpLine"].ResultIU = value; }
+        }
+
+        public double SpBefore
+        {
+            get { return RShape.CellsU["Para.SpBefore"].ResultIU; }
+            set { RShape.CellsU["Para.SpBefore"].ResultIU = value; }
+        }
+
+        public double SpAfter
+        {
+            get { return RShape.CellsU["Para.SpAfter"].ResultIU; }
+            set { RShape.CellsU["Para.SpAfter"].ResultIU = value; }
+        }
+
+        /// <summary>
+        /// supported values: see  VisHorizontalAlignTypes
+        /// </summary>
+        public double HAlign
+        {
+            get { return RShape.CellsU["Para.HorzAlign"].ResultIU; }
+            set { RShape.CellsU["Para.HorzAlign"].FormulaForce = "" + value; }
+        }
+
+        public double Bullet
+        {
+            get { return RShape.CellsU["Para.Bullet"].ResultIU; }
+            set { RShape.CellsU["Para.Bullet"].ResultIU = value; }
+        }
+
+        public string BulletString
+        {
+            get { return RShape.CellsU["Para.BulletStr"].ResultStr["Value"]; }
+            set { RShape.CellsU["Para.BulletStr"].Formula = "\"" + value + "\""; }
+        }
+
+        public double BulletFont
+        {
+            get { return RShape.CellsU["Para.BulletFont"].ResultIU; }
+            set { RShape.CellsU["Para.BulletFont"].ResultIU = value; }
+        }
+
+        public double TextPosAfterBullet
+        {
+            get { return RShape.CellsU["Para.TextPosAfterBullet"].ResultIU; }
+            set { RShape.CellsU["Para.TextPosAfterBullet"].ResultIU = value; }
+        }
+
+        public double BulletSize
+        {
+            get { return RShape.CellsU["Para.BulletFontSize"].ResultIU; }
+            set { RShape.CellsU["Para.BulletFontSize"].ResultIU = value; }
+        }
+
+
 
         /// <summary>
         /// Updates shapesheet of the stored IVShape. Character.Style holds information about the font style (bold, italic...) in a bitwise manner.
@@ -230,11 +306,6 @@ namespace ExtendedVisioAddin1.View
         }
 
         //methods
-        public IVShape Draw(double x, double y)
-        {
-            return null;
-
-        }
 
         public virtual void Repaint()
         {
@@ -246,7 +317,21 @@ namespace ExtendedVisioAddin1.View
             
         }
 
-        
+        public void MakeListItem()
+        {
+            IndFirst = -0.25;
+            IndLeft = 0.25;
+            IndRight = 0;
+            SpLine = -1.2;
+            SpAfter = 0;
+            HAlign = 0;
+            Bullet = 1;
+            BulletString = "";
+            BulletFont = 0;
+            TextPosAfterBullet = 0;
+            BulletSize = -1;
+        }
+
         [Obsolete]
         public virtual void CascadingDelete()
         {

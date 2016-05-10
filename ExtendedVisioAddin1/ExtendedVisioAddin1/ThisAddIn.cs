@@ -154,7 +154,6 @@ namespace ExtendedVisioAddin1
         {
             new DocumentCreatedEventHandler(d, Model);
             Application_DocumentOpenedEvent(d);
-            new RelatedUrlComponent(Application.ActivePage, "http://nu.nl/");
         }
     }
 }

@@ -13,8 +13,8 @@ namespace ExtendedVisioAddin1.View
         {
             Master containerMaster = Globals.ThisAddIn.Model.RationallyDocument.Masters["Related Documents"];
             RShape = Page.DropContainer(containerMaster, null);
-            CenterX = 8;
-            CenterY = 5;
+            CenterX = 12;
+            CenterY = 8;
             InitStyle();
         }
 
@@ -35,7 +35,7 @@ namespace ExtendedVisioAddin1.View
 
         public void InitStyle()
         {
-            
+            MakeListItem();
         }
     }
 }

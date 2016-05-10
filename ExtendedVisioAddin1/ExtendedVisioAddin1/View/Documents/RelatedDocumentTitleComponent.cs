@@ -10,11 +10,15 @@ namespace ExtendedVisioAddin1.View.Documents
     {
         public RelatedDocumentTitleComponent(Page page, Shape shape) : base(page, shape)
         {
+            this.AddUserRow("rationallyType");
+            this.RationallyType = "relatedDocumentTitle";
             InitStyle();
         }
 
         public RelatedDocumentTitleComponent(Page page, string labelText) : base(page, labelText)
         {
+            this.AddUserRow("rationallyType");
+            this.RationallyType = "relatedDocumentTitle";
             InitStyle();
         }
 

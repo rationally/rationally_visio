@@ -57,30 +57,37 @@ namespace ExtendedVisioAddin1
             //for (int i = 0; i < selection.Count; i++) 
             foreach (IVShape s in selection)
             {
-                if (s.CellsU["User.rationallyType"].ResultStr["Value"] == "forces") //TODO check context
+                switch (s.CellsU["User.rationallyType"].ResultStr["Value"])
                 {
-                    //create a master
-                    Master forcesMaster = Model.RationallyDocument.Masters.ItemU[@"Force"];
+                    case "forces":
+                        //create a master
+                        Master forcesMaster = Model.RationallyDocument.Masters.ItemU[@"Force"];
 
-                    s.Drop(forcesMaster, 1, 1);
-                } else if (s.CellsU["User.rationallyType"].ResultStr["Value"] == "alternatives")
-                {
-                    
-                    new AddAlternativeEventHandler(Model);
-                }
-                else if (s.CellsU["User.rationallyType"].ResultStr["Value"].Contains("alternativeState"))
-                {
-                    if (context.Split('.')[0] == "stateChange")
-                    {
-                        new EditAlternativeStateEventHandler(Model, context.Split('.')[1]);
-                    }
-                }
-                else if (s.CellsU["User.rationallyType"].ResultStr["Value"] == "alternative")
-                {
-                    RemoveAlternativeEventHandler c = new RemoveAlternativeEventHandler(Model);
-                } else if (s.CellsU["User.rationallyType"].ResultStr["Value"] == "relatedDocuments")
-                {
-                    new AddRelatedDocumentHandler();
+                        s.Drop(forcesMaster, 1, 1);
+                        break;
+                    case "alternatives":
+                        new AddAlternativeEventHandler(Model);
+                        break;
+                    case ("alternativeState"):
+                        if (context.Split('.')[0] == "stateChange")
+                        {
+                            new EditAlternativeStateEventHandler(Model, context.Split('.')[1]);
+                        }
+                        break;
+                    case "alternative":
+                        RemoveAlternativeEventHandler c = new RemoveAlternativeEventHandler(Model);
+                        break;
+                    case "relatedDocuments":
+                        switch (context)
+                        {
+                            case "relatedUrlAdd":
+                                new AddRelatedUrlHandler();
+                                break;
+                            case "relatedDocumentAdd":
+                                new AddRelatedDocumentHandler();
+                                break;
+                        }
+                        break;
                 }
             }
         }

@@ -20,8 +20,9 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public void InitStyle()
         {
-            this.SetMargin(0.2);
-            this.MakeListItem();
+            SetMargin(0.2);
+            MakeListItem();
+            Width += 0.3;
         }
     }
 }

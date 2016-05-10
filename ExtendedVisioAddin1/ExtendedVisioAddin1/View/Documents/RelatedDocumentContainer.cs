@@ -10,8 +10,8 @@ namespace ExtendedVisioAddin1.View.Documents
     {
         public RelatedDocumentContainer(Page page) : base(page)
         {
-            this.AddUserRow("rationallyType");
-            this.RationallyType = "relatedDocumentContainer";
+            AddUserRow("rationallyType");
+            RationallyType = "relatedDocumentContainer";
             InitStyle();
         }
 
@@ -24,11 +24,11 @@ namespace ExtendedVisioAddin1.View.Documents
         {
 
             LinePattern = 0;//borderless
-            this.SetMargin(0.2);
-            this.MarginTop = 0.3;
-            this.MarginBottom = 0;
-            this.Height = 1;
-
+            SetMargin(0.2);
+            MarginTop = 0.3;
+            MarginBottom = 0;
+            Height = 1;
+            UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
         }
     }
 }

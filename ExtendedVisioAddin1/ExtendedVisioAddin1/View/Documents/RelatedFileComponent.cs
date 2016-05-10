@@ -14,11 +14,11 @@ namespace ExtendedVisioAddin1.View.Documents
             Master rectMaster = basicShapes.Masters["Rectangle"];*/
             //RShape = page.Drop(rectMaster, 0, 0);
             RShape = page.InsertFromFile(filePath, (short)(VisInsertObjArgs.visInsertLink | VisInsertObjArgs.visInsertIcon));
-            this.RShape.Name = "relatedDocument";
-            this.AddUserRow("rationallyType");
-            this.RationallyType = "relatedDocument";
+            RShape.Name = "relatedDocument";
+            AddUserRow("rationallyType");
+            RationallyType = "relatedDocument";
             //basicShapes.Close();
-            this.SetMargin(0.2);
+            SetMargin(0.2);
         }
     }
 }

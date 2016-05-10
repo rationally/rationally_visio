@@ -66,6 +66,7 @@
     <ManifestCertificateThumbprint>561F5F347454B139C12F50E8ADF65B7CBBDD3805</ManifestCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -113,6 +114,12 @@
     <Compile Include="EventHandlers\AddRelatedDocumentHandler.cs" />
     <Compile Include="Model\IObservable.cs" />
     <Compile Include="Model\IObserver.cs" />
+    <Compile Include="UrlSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UrlSelector.Designer.cs">
+      <DependentUpon>UrlSelector.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Alternatives\AlternativeContainer.cs" />
     <Compile Include="View\Alternatives\AlternativeDescriptionComponent.cs" />
     <Compile Include="View\Alternatives\AlternativeIdentifierComponent.cs" />
@@ -187,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SheetSetUpFormPopUp.resx">
       <DependentUpon>SheetSetUpFormPopUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UrlSelector.resx">
+      <DependentUpon>UrlSelector.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

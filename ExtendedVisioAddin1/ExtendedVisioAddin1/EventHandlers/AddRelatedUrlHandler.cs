@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Windows.Forms;
 using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Documents;
@@ -15,8 +12,10 @@ namespace ExtendedVisioAddin1.EventHandlers
         {
             //TODO: popUp and validation? etc
             var application = Globals.ThisAddIn.Application;
-            OpenFileDialog selectUrlDialog = new OpenFileDialog();
-            IVShape selectedShape = null;
+            UrlSelecter selectUrlDialog = new UrlSelecter();
+
+
+            IVShape selectedShape = null; 
             if (selectUrlDialog.ShowDialog() == DialogResult.OK)
             {
                 foreach (IVShape s in application.ActiveWindow.Selection)
@@ -32,12 +31,13 @@ namespace ExtendedVisioAddin1.EventHandlers
                     (RelatedDocumentsContainer)
                         Globals.ThisAddIn.View.Children.First(c => c.RShape.Equals(selectedShape));
 
-                RelatedUrlComponent relatedFileComponent = new RelatedUrlComponent(application.ActivePage, "");
+                RelatedUrlComponent relatedFileComponent = new RelatedUrlComponent(application.ActivePage, selectUrlDialog.urlTextBox.Text, selectUrlDialog.nameTextbox);
 
                 relatedDocumentsContainer.Children.Add(relatedFileComponent);
 
                 new RepaintHandler();
             }
+            selectUrlDialog.Dispose();
         }
     }
 }

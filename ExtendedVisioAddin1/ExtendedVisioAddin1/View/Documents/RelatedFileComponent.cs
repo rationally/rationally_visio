@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Office.Interop.Visio;
+﻿using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
 {
@@ -13,7 +9,7 @@ namespace ExtendedVisioAddin1.View.Documents
             /*Document basicShapes = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss",(short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicShapes.Masters["Rectangle"];*/
             //RShape = page.Drop(rectMaster, 0, 0);
-            RShape = page.InsertFromFile(filePath, (short)(VisInsertObjArgs.visInsertLink | VisInsertObjArgs.visInsertIcon));
+            RShape = page.InsertFromFile(filePath, (short)VisInsertObjArgs.visInsertLink | (short)VisInsertObjArgs.visInsertIcon);
             RShape.Name = "relatedFile";
             AddUserRow("rationallyType");
             RationallyType = "relatedFile";

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Windows.Forms;
-using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Documents;
 using Microsoft.Office.Interop.Visio;
-using Shape = Microsoft.Office.Core.Shape;
+using Application = Microsoft.Office.Interop.Visio.Application;
 
 namespace ExtendedVisioAddin1.EventHandlers
 {
@@ -14,10 +10,12 @@ namespace ExtendedVisioAddin1.EventHandlers
     {
         public AddRelatedDocumentHandler()
         {
-            var application = Globals.ThisAddIn.Application;
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.CheckFileExists = true;
-            openFileDialog.CheckPathExists = true;
+            Application application = Globals.ThisAddIn.Application;
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                CheckFileExists = true,
+                CheckPathExists = true
+            };
             IVShape selectedShape = null;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {

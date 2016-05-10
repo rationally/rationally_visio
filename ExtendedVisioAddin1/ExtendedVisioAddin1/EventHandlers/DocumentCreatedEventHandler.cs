@@ -36,7 +36,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 //Globals.ThisAddIn.View.Children.Add(new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage, model.Alternatives.ToList()));
               
               //new RepaintHandler(model);
-                var a = new RelatedDocumentsContainer(Globals.ThisAddIn.Application.ActivePage);
+                RelatedDocumentsContainer a = new RelatedDocumentsContainer(Globals.ThisAddIn.Application.ActivePage); //todo: dit is temp
                 //a.Children.Add(new RelatedFileComponent(Globals.ThisAddIn.Application.ActivePage, @"C:\Users\Ruben\Desktop\QoSA.pdf"));
               Globals.ThisAddIn.View.Children.Add(a);
                 new RepaintHandler();

@@ -68,14 +68,14 @@ namespace ExtendedVisioAddin1
                     case "alternatives":
                         new AddAlternativeEventHandler(Model);
                         break;
-                    case ("alternativeState"):
+                    case "alternativeState":
                         if (context.Split('.')[0] == "stateChange")
                         {
                             new EditAlternativeStateEventHandler(Model, context.Split('.')[1]);
                         }
                         break;
                     case "alternative":
-                        RemoveAlternativeEventHandler c = new RemoveAlternativeEventHandler(Model);
+                        new RemoveAlternativeEventHandler(Model);
                         break;
                     case "relatedDocuments":
                         switch (context)

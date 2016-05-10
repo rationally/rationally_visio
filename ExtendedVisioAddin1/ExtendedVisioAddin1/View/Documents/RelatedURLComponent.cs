@@ -7,7 +7,7 @@ namespace ExtendedVisioAddin1.View.Documents
     {
         public RelatedUrlComponent(Page page, string url) : base(page)
         {
-            Document basicShapes = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)Microsoft.Office.Interop.Visio.VisOpenSaveArgs.visOpenHidden);
+            Document basicShapes = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicShapes.Masters["Rectangle"]; 
             RShape = page.Drop(rectMaster, 0, 0);
             basicShapes.Close();

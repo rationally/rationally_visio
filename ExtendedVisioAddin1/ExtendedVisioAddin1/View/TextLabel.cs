@@ -10,7 +10,6 @@ namespace ExtendedVisioAddin1.View
         public TextLabel(Page page, Shape shape) : base(page)
         {
             RShape = shape;
-            string text = shape.Text;
             size = Convert.ToInt16(shape.Cells["Char.Size"].Formula.Split(' ')[0]);
         }
 

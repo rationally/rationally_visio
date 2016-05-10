@@ -31,7 +31,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                     (RelatedDocumentsContainer)
                         Globals.ThisAddIn.View.Children.First(c => c.RShape.Equals(selectedShape));
 
-                RelatedUrlComponent relatedFileComponent = new RelatedUrlComponent(application.ActivePage, selectUrlDialog.urlTextBox.Text, selectUrlDialog.nameTextbox);
+                RelatedUrlComponent relatedFileComponent = new RelatedUrlComponent(application.ActivePage, selectUrlDialog.urlTextBox.Text, selectUrlDialog.nameTextbox.Text);
 
                 relatedDocumentsContainer.Children.Add(relatedFileComponent);
 

@@ -144,14 +144,34 @@ namespace ExtendedVisioAddin1
 
         private void Application_DeleteShapeEvent(IVShape s)
         {
-            if (s.CellExistsU["User.rationallyType", 0] != 0 && (s.CellsU["User.rationallyType"].ResultStr["Value"] == "relatedDocumentContainer"))//TODO sub parts deleted?
+            if (s.CellExistsU["User.rationallyType", 0] != 0)
             {
+                string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
                 RView view = Globals.ThisAddIn.View;
                 //select all 'related documents' containers
-                List<RelatedDocumentsContainer> relatedDocumentsContainers =  view.Children.Where(c => c is RelatedDocumentsContainer).Cast<RelatedDocumentsContainer>().ToList();
-                //for each container, remove the children of which the shape equals the to be deleted shape
-                relatedDocumentsContainers.ForEach(r => r.Children = r.Children.Where(c => !c.RShape.Equals(s)).ToList());
-                new RepaintHandler();
+                List<RelatedDocumentsContainer> relatedDocumentsContainers = view.Children.Where(c => c is RelatedDocumentsContainer).Cast<RelatedDocumentsContainer>().ToList();
+
+                if (rationallyType == "relatedDocumentContainer")
+                {
+                    //for each container, remove the children of which the shape equals the to be deleted shape
+                    relatedDocumentsContainers.ForEach(r => r.Children = r.Children.Where(c => !c.RShape.Equals(s)).ToList());
+                    new RepaintHandler();
+                }
+                else if (rationallyType == "relatedUrl" || rationallyType == "relatedFile" || rationallyType == "relatedDocumentTitle") //a subpart 
+                {
+                    foreach (RelatedDocumentsContainer relatedDocumentsContainer in relatedDocumentsContainers)
+                    {
+                        foreach (RelatedDocumentContainer relatedDocumentContainer in relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().ToList())
+                        {
+                            if (relatedDocumentContainer.Children.Where(c => c.RShape.Equals(s)).ToList().Count > 0) //check if this related document contains the to be deleted component
+                            {
+                                relatedDocumentContainer.RShape.DeleteEx(0);//delete the parent wrapper of s, and it's subshapes (parallel to s)
+                                relatedDocumentsContainer.Children.Remove(relatedDocumentContainer);//remove the related document from the view tree
+                            }
+                        }
+                    }
+                }
+                
             }
         }
         /// <summary>

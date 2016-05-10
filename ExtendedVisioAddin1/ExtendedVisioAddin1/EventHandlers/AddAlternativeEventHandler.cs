@@ -19,9 +19,8 @@ namespace ExtendedVisioAddin1.EventHandlers
                     if (alternative.ShowDialog() == DialogResult.OK)
                     {
                         Alternative newAlternative = new Alternative(alternative.alternativeName.Text, alternative.alternativeStatus.SelectedItem.ToString(), "Enter a description here.");
-                        model.Alternatives.Add(newAlternative);//TODO vuige code, fix me
+                        model.Alternatives.Add(newAlternative);
                         Globals.ThisAddIn.View.AddAlternative(newAlternative);
-                        //Model.Alternatives.Last().Paint(s,0);
                     }
                     alternative.Dispose();
                 }

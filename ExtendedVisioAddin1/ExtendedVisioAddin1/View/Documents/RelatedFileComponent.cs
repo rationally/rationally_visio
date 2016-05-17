@@ -10,8 +10,9 @@ namespace ExtendedVisioAddin1.View.Documents
             Master rectMaster = basicShapes.Masters["Rectangle"];*/
             //RShape = page.Drop(rectMaster, 0, 0);
             RShape = page.InsertFromFile(filePath, (short)VisInsertObjArgs.visInsertLink | (short)VisInsertObjArgs.visInsertIcon);
-            RShape.Name = "relatedFile";
+            RShape.Name = "RelatedFile";
             AddUserRow("rationallyType");
+            AddAction("editAction","QUEUEMARKEREVENT(\"relatedFileComponentEdit\")","\"choose other file\"", false);
             RationallyType = "relatedFile";
             //basicShapes.Close();
             SetMargin(0.2);

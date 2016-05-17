@@ -112,6 +112,7 @@
     <Compile Include="AddinCommandBars.cs" />
     <Compile Include="EventHandlers\AddRelatedUrlHandler.cs" />
     <Compile Include="EventHandlers\AddRelatedDocumentHandler.cs" />
+    <Compile Include="EventHandlers\EditRelatedFileHandler.cs" />
     <Compile Include="Model\IObservable.cs" />
     <Compile Include="Model\IObserver.cs" />
     <Compile Include="UrlSelector.cs">

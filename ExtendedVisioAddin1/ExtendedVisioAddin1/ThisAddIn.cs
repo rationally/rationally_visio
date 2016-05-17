@@ -103,6 +103,9 @@ namespace ExtendedVisioAddin1
                     if (AlternativesContainer.IsAlternativesContainer(shape.Name)) //Check if the shape is an Alternatives box
                     {
                         View.Children.Add(new AlternativesContainer(Application.ActivePage, shape));
+                    } else if (RelatedDocumentsContainer.IsRelatedDocumentsContainer(shape.Name))
+                    {
+                        View.Children.Add(new RelatedDocumentsContainer(Application.ActivePage, shape));
                     }
                 }
 

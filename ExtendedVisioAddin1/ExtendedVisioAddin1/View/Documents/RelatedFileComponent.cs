@@ -17,5 +17,6 @@ namespace ExtendedVisioAddin1.View.Documents
             //basicShapes.Close();
             SetMargin(0.2);
         }
+
     }
 }

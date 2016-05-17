@@ -31,20 +31,25 @@ namespace ExtendedVisioAddin1.EventHandlers
                         break;
                     }
                 }
-                selectedShape.InsertFromFile(openFileDialog.FileName, (short)VisInsertObjArgs.visInsertLink | (short)VisInsertObjArgs.visInsertIcon);
 
-                /*//container of all related documents:
-                RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c.RShape.Equals(selectedShape));
+                //container of all related documents:
+                RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
                 //find the the RelatedDocumentContainer of the selected file
-                RelatedDocumentContainer relatedDocumentContainer  = (RelatedDocumentContainer)relatedDocumentsContainer.Children.First(f => ((RelatedDocumentContainer) f).Children.Where(c => c.RShape == selectedShape).ToList().Count > 0);
-                //update the shape of the relatedDocumentContainer link to point to the new file
-                relatedDocumentContainer.Children.First(c => c is RelatedFileComponent).RShape.
+                RelatedDocumentContainer oldRelatedDocumentContainer  = (RelatedDocumentContainer)relatedDocumentsContainer.Children.First(f => ((RelatedDocumentContainer) f).Children.Where(c => c.RShape == selectedShape).ToList().Count > 0);
+                //find out the index, so we can insert the new file on the right spot
+                int insertIndex = relatedDocumentsContainer.Children.IndexOf(oldRelatedDocumentContainer);
+                oldRelatedDocumentContainer.Children.First().RShape.Delete();//this will also trigger the deletion of its child components (thanks to an eventhandler)
+
+
+                //create a container that wraps the new document
+                RelatedDocumentContainer relatedDocumentContainer = new RelatedDocumentContainer(application.ActivePage);
+                relatedDocumentsContainer.Children.Insert(insertIndex, relatedDocumentContainer); //insert at the original index
                 //1) make a title component for the source and add it to the container
-                RelatedDocumentTitleComponent relatedDocumentTitleComponent = new RelatedDocumentTitleComponent(application.ActivePage, openFileDialog.SafeFileName + ":");
+                RelatedDocumentTitleComponent relatedDocumentTitleComponent = new RelatedDocumentTitleComponent(application.ActivePage, openFileDialog.FileName + ":");
                 relatedDocumentContainer.Children.Add(relatedDocumentTitleComponent);
                 //2) make a shortcut to the file
                 RelatedFileComponent relatedFileComponent = new RelatedFileComponent(application.ActivePage, openFileDialog.FileName);
-                relatedDocumentContainer.Children.Add(relatedFileComponent);*/
+                relatedDocumentContainer.Children.Add(relatedFileComponent);
 
 
                 new RepaintHandler();

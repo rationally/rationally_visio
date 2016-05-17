@@ -33,7 +33,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 RelatedDocumentContainer relatedDocumentContainer = new RelatedDocumentContainer(application.ActivePage);
                 relatedDocumentsContainer.Children.Add(relatedDocumentContainer);
                 //1) make a title component for the source and add it to the container
-                RelatedDocumentTitleComponent relatedDocumentTitleComponent = new RelatedDocumentTitleComponent(application.ActivePage, openFileDialog.SafeFileName + ":");
+                RelatedDocumentTitleComponent relatedDocumentTitleComponent = new RelatedDocumentTitleComponent(application.ActivePage, openFileDialog.FileName + ":");
                 relatedDocumentContainer.Children.Add(relatedDocumentTitleComponent);
                 //2) make a shortcut to the file
                 RelatedFileComponent relatedFileComponent = new RelatedFileComponent(application.ActivePage, openFileDialog.FileName);

@@ -88,6 +88,12 @@ namespace ExtendedVisioAddin1
                                 break;
                         }
                         break;
+                    case "relatedFile":
+                        if (context == "relatedFileComponentEdit")
+                        {
+                            new EditRelatedFileHandler();
+                        }
+                        break;
                 }
             }
         }

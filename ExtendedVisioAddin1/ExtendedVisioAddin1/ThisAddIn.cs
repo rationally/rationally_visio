@@ -16,11 +16,16 @@ namespace ExtendedVisioAddin1
     public partial class ThisAddIn
     {
         //TODO: application static kan mss mooier
+        public static bool PreventAddEvent;
+        public static bool PreventDeleteEvent;
+
         public RModel Model { get; set; }
         public RView View { get; set; }
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
+            PreventAddEvent = false;
+            PreventDeleteEvent = false;
             Model = new RModel();
             //Model.Alternatives.Add(new Alternative("titelo","Accepted","dessehcription"));
             //Model.Alternatives.Add(new Alternative("titelo dos", "Accepted", "dessehcription"));
@@ -122,6 +127,8 @@ namespace ExtendedVisioAddin1
 
         private void Application_ShapeAddedEvent(Shape s)
         {
+            if (PreventAddEvent) return;
+
             if (AlternativesContainer.IsAlternativesContainer(s.Name))
             {
                 if (View.Children.Exists(x => AlternativesContainer.IsAlternativesContainer(x.Name)))
@@ -159,14 +166,15 @@ namespace ExtendedVisioAddin1
         {
         }
 
-        private void Application_DeleteShapeEvent(IVShape s)
+        private void Application_DeleteShapeEvent(Shape s)
         {
+            if (PreventDeleteEvent) return;
+
             if (s.CellExistsU["User.rationallyType", 0] != 0)
             {
                 string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
-                RView view = Globals.ThisAddIn.View;
                 //select all 'related documents' containers
-                List<RelatedDocumentsContainer> relatedDocumentsContainers = view.Children.Where(c => c is RelatedDocumentsContainer).Cast<RelatedDocumentsContainer>().ToList();
+                List<RelatedDocumentsContainer> relatedDocumentsContainers = View.Children.Where(c => c is RelatedDocumentsContainer).Cast<RelatedDocumentsContainer>().ToList();
 
                 if (rationallyType == "relatedDocumentContainer")
                 {
@@ -187,8 +195,15 @@ namespace ExtendedVisioAddin1
                             }
                         }
                     }
+                } else if (rationallyType == "alternative")
+                {
+                    Selection selectedComponents = Globals.ThisAddIn.Application.ActiveWindow.Selection;
+                    AlternativesContainer alternativesContainer = (AlternativesContainer)View.Children.First(a => a is AlternativesContainer);
+                    RComponent c = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };
+                    int index = c.AlternativeIndex;
+                    Model.Alternatives.RemoveAt(index);
+                    View.DeleteAlternative(index, false);
                 }
-                
             }
         }
         /// <summary>

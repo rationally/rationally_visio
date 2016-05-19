@@ -25,7 +25,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                         break;
                     }
                 }
-
+                ThisAddIn.PreventAddEvent = true;
                 //container of all related documents:
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c.RShape.Equals(selectedShape));
                 //create a container that wraps the new document
@@ -39,6 +39,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 relatedDocumentContainer.Children.Add(relatedUrlComponent);
 
                 new RepaintHandler();
+                ThisAddIn.PreventAddEvent = false;
             }
             selectUrlDialog.Dispose();
         }

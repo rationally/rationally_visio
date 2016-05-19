@@ -17,15 +17,24 @@ namespace ExtendedVisioAddin1.View.Documents
             InitStyle();
         }
 
-        public RelatedDocumentContainer(Page page, Shape shape) : base(page, false)
+        public RelatedDocumentContainer(Page page, Shape containerShape) : base(page, false)
         {
-            RShape = shape;
-            Array ident = shape.ContainerProperties.GetMemberShapes(16);
+            RShape = containerShape;
+            Array ident = containerShape.ContainerProperties.GetMemberShapes(16);
             List<Shape> shapes = (new List<int>((int[])ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
-            /*foreach (Shape subShape in shapes.Where(subShape => RelatedDocumentContainer.IsRelatedDocumentContainer(shape.Name)))
+            Shape titleShape = shapes.FirstOrDefault(shape => RelatedDocumentTitleComponent.IsRelatedDocumentTitleContainer(shape.Name));
+            this.Children.Add(new RelatedDocumentTitleComponent(page, titleShape));
+
+            Shape fileShape = shapes.FirstOrDefault(shape => RelatedFileComponent.IsRelatedFileComponent(shape.Name));
+            if (fileShape != null)
             {
-                Children.Add(new RelatedDocumentContainer(page, shape));
-            }*/
+                this.Children.Add(new RelatedFileComponent(page, fileShape));
+            }
+            else
+            {
+                Shape urlShape = shapes.FirstOrDefault(shape => RelatedUrlComponent.IsRelatedUrlComponent(shape.Name));
+                this.Children.Add(new RelatedUrlComponent(page, urlShape));
+            }
             LayoutManager = new VerticalStretchLayout(this);
             InitStyle();
         }

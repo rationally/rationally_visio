@@ -144,6 +144,7 @@ namespace ExtendedVisioAddin1
 
         private void Application_ShapeChangedEvent(Shape s)
         {
+            var x = 0;
         }
 
         private void Application_MasterAddedEvent(Master m)

@@ -22,7 +22,7 @@ namespace ExtendedVisioAddin1.View.Documents
         {
             SetMargin(0.2);
             MakeListItem();
-            Width += 0.3;
+            //Width += 0.3;
         }
     }
 }

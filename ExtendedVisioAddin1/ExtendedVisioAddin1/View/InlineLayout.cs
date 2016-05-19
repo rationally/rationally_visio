@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ExtendedVisioAddin1.View.Alternatives;
 
 namespace ExtendedVisioAddin1.View
 {
@@ -17,7 +18,7 @@ namespace ExtendedVisioAddin1.View
             if (toManage.Children.Count == 0) {  return;}
 
             //start the drawing at the left top of the container
-            Draw(toManage.CenterX-(toManage.Width/2.0), toManage.CenterY+(toManage.Height/2.0), 0,0,0, new Queue<RComponent>(toManage.Children));
+            Draw(toManage.CenterX-(toManage.Width/2.0), toManage.CenterY+(toManage.Height/2.0), 0,0,double.MaxValue, new Queue<RComponent>(toManage.Children));
         }
         private void Draw(double x, double y, double currentLineHeight, double contentXEnd, double contentYEnd, Queue<RComponent> components)
         {
@@ -37,6 +38,10 @@ namespace ExtendedVisioAddin1.View
             double toDrawWidth = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight; //expected increase in x
             double toDrawHeight = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;//expected height in y
 
+            if (toDraw is AlternativeTitleComponent)
+            {
+                var a = 5;
+            }
             PrepareContainerExpansion(x,y,toDrawWidth,0); //if the container streches to support the drawing, the container height does not need to change
             if (toManage.CenterX + (toManage.Width/2.0) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
             {

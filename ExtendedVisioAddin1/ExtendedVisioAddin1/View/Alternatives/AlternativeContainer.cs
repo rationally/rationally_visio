@@ -90,7 +90,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
         private void InitStyle()
         {
             SetMargin(0.1);
-            UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
+            UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
             MarginTop = 0.3;
         }
 

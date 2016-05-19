@@ -15,10 +15,12 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public RelatedUrlComponent(Page page, string url) : base(page)
         {
-            Document basicShapes = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
-            Master rectMaster = basicShapes.Masters["Rectangle"]; 
+
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vssx";
+            Document rationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
+            Master rectMaster = rationallyDocument.Masters["LinkIcon"]; 
             RShape = page.Drop(rectMaster, 0, 0);
-            basicShapes.Close();
+            rationallyDocument.Close();
 
             Width = 0.6;
             Height = 0.6;
@@ -31,6 +33,10 @@ namespace ExtendedVisioAddin1.View.Documents
             Name = "RelatedUrl";
             AddUserRow("rationallyType");
             RationallyType = "relatedUrl";
+
+            //set the preview image of the url
+            
+            //RShape.ChangePicture(docPath, 0);
         }
 
         internal static bool IsRelatedUrlComponent(string name)

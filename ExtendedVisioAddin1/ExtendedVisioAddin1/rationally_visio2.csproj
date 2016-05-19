@@ -132,6 +132,7 @@
     <Compile Include="View\Documents\RelatedDocumentTitleComponent.cs" />
     <Compile Include="View\Documents\RelatedURLComponent.cs" />
     <Compile Include="View\Documents\RelatedFileComponent.cs" />
+    <Compile Include="View\Documents\RelatedURLURLComponent.cs" />
     <Compile Include="View\HeaderlessContainer.cs" />
     <Compile Include="View\ILayoutManager.cs" />
     <Compile Include="View\InformationContainer.cs" />

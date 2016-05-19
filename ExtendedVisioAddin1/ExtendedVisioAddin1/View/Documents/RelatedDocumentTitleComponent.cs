@@ -23,9 +23,9 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public void InitStyle()
         {
+            Width = 3.3;
             SetMargin(0.2);
             MakeListItem();
-            //Width += 0.3;
         }
 
         internal static bool IsRelatedDocumentTitleContainer(string name)

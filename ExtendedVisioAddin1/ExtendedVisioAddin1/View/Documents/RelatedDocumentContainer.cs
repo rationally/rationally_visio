@@ -35,7 +35,7 @@ namespace ExtendedVisioAddin1.View.Documents
                 Shape urlShape = shapes.FirstOrDefault(shape => RelatedUrlComponent.IsRelatedUrlComponent(shape.Name));
                 this.Children.Add(new RelatedUrlComponent(page, urlShape));
             }
-            LayoutManager = new VerticalStretchLayout(this);
+            //LayoutManager = new VerticalStretchLayout(this);
             InitStyle();
         }
 

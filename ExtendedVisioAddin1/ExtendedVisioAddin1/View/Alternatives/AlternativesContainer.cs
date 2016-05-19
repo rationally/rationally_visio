@@ -35,7 +35,6 @@ namespace ExtendedVisioAddin1.View.Alternatives
         {
             RShape = alternativesContainer;
             Array ident = alternativesContainer.ContainerProperties.GetMemberShapes(16);
-            //List<Shape> shapes = new List<int>((int[]) ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             foreach (Shape shape in shapes.Where(shape => AlternativeContainer.IsAlternativeContainer(shape.Name)))
             {

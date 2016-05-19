@@ -31,7 +31,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                         break;
                     }
                 }
-
+                ThisAddIn.PreventAddEvent = true;
                 //container of all related documents:
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
                 //find the the RelatedDocumentContainer of the selected file
@@ -53,6 +53,7 @@ namespace ExtendedVisioAddin1.EventHandlers
 
 
                 new RepaintHandler();
+                ThisAddIn.PreventAddEvent = false;
             }
         }
     }

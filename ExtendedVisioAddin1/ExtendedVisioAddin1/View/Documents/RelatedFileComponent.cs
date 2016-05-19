@@ -17,7 +17,7 @@ namespace ExtendedVisioAddin1.View.Documents
             RShape = page.InsertFromFile(filePath, (short)VisInsertObjArgs.visInsertLink | (short)VisInsertObjArgs.visInsertIcon);
             RShape.Name = "RelatedFile";
             AddUserRow("rationallyType");
-            AddAction("editAction","QUEUEMARKEREVENT(\"relatedFileComponentEdit\")","\"choose other file\"", false);
+            AddAction("editAction","QUEUEMARKEREVENT(\"relatedFileComponentEdit\")","\"Choose other file\"", false);
             RationallyType = "relatedFile";
             SetMargin(0.2);
         }

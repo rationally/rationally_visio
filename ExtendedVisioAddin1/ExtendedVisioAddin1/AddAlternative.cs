@@ -18,7 +18,7 @@ namespace ExtendedVisioAddin1
         {
             if (string.IsNullOrWhiteSpace(alternativeName.Text))
             {
-                MessageBox.Show("Enter a name for the alternative.");
+                MessageBox.Show("Enter a name for the alternative.", "Name missing");
                 DialogResult = DialogResult.None;
                 return;
             }
@@ -28,7 +28,7 @@ namespace ExtendedVisioAddin1
             }
             else
             {
-                MessageBox.Show("Select a status.");
+                MessageBox.Show("Select a status.", "Status missing");
                 DialogResult = DialogResult.None;
             }
         }

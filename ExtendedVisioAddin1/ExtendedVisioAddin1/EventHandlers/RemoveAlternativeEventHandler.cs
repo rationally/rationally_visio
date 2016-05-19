@@ -21,7 +21,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                     if (confirmResult == DialogResult.Yes)
                     {
                         model.Alternatives.Remove(alternative);
-                        Globals.ThisAddIn.View.DeleteAlternative(index);
+                        Globals.ThisAddIn.View.DeleteAlternative(index, true);
                     }
                 }
             }

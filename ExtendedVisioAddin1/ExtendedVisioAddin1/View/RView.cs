@@ -35,17 +35,24 @@ namespace ExtendedVisioAddin1.View
         /// Deletes an alternative container from the view.
         /// </summary>
         /// <param name="index">identifier of the alternative.</param>
-        public void DeleteAlternative(int index)
+        public void DeleteAlternative(int index, bool deleteShape)
         {
+            ThisAddIn.PreventDeleteEvent = true;
             AlternativesContainer alternativesContainer = (AlternativesContainer)Children.First(c => c is AlternativesContainer); //todo: we still don't know how many
 
-            AlternativeContainer alternative = (AlternativeContainer) alternativesContainer.Children.First(x => x.AlternativeIndex == index && x is AlternativeContainer);
-            alternativesContainer.Children.Remove(alternative);
-            alternative.RShape.DeleteEx(0); //deletes the alternative, and it's child components
-            int i = 0;
-            alternativesContainer.Children.Where(c => c is AlternativeContainer).ToList().ForEach(c => ((AlternativeContainer)c).SetAlternativeIdentifier(i++));
-
+            AlternativeContainer alternative = (AlternativeContainer) alternativesContainer.Children.FirstOrDefault(x => x.AlternativeIndex == index && x is AlternativeContainer);
+            if (alternative != null)
+            {
+                alternativesContainer.Children.Remove(alternative);
+                if (deleteShape)
+                {
+                    alternative.RShape.DeleteEx(0); //deletes the alternative, and it's child components. This should not be done when the shape is already gone, such as when the user has deleted it himself.
+                }
+                int i = 0;
+                alternativesContainer.Children.Where(c => c is AlternativeContainer).ToList().ForEach(c => ((AlternativeContainer) c).SetAlternativeIdentifier(i++));
+            }
             new RepaintHandler();
+            ThisAddIn.PreventDeleteEvent = false;
         }
     }
 }

@@ -16,19 +16,19 @@ namespace ExtendedVisioAddin1
         {
             if (string.IsNullOrWhiteSpace(decisionName.Text))
             {
-                MessageBox.Show("Enter a decision name.");
+                MessageBox.Show("Enter a decision name.", "Name missing");
                 DialogResult = DialogResult.None;
                 return;
             }
             if (string.IsNullOrWhiteSpace(author.Text))
             {
-                MessageBox.Show("Enter an author name.");
+                MessageBox.Show("Enter an author name.", "Author missing");
                 DialogResult = DialogResult.None;
                 return;
             }
             if (string.IsNullOrWhiteSpace(version.Text))
             {
-                MessageBox.Show("Enter a version.");
+                MessageBox.Show("Enter a version.", "Version missing");
                 DialogResult = DialogResult.None;
                 return;
             }
@@ -37,7 +37,7 @@ namespace ExtendedVisioAddin1
                 DialogResult = DialogResult.OK;
             else
             {
-                MessageBox.Show("Enter a valid date.");
+                MessageBox.Show("Enter a valid date.", "Date invalid");
                 DialogResult = DialogResult.None;
             }
         }

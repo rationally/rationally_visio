@@ -15,17 +15,17 @@ namespace ExtendedVisioAddin1
         {
             if (string.IsNullOrWhiteSpace(urlTextBox.Text))
             {
-                MessageBox.Show("Enter an url.");
+                MessageBox.Show("Enter an url.", "Url missing");
                 DialogResult = DialogResult.None;
                 return;
             }else if (!IsValidUrl(urlTextBox.Text))
             {
-                MessageBox.Show("Enter a proper url, including the protocol to use.");
+                MessageBox.Show("Enter a proper url, including the protocol to use.", "Url invalid");
                 DialogResult = DialogResult.None;
                 return;
             }else if (string.IsNullOrWhiteSpace(nameTextbox.Text))
             {
-                MessageBox.Show("Enter a name.");
+                MessageBox.Show("Enter a name.", "Name missing");
                 DialogResult = DialogResult.None;
                 return;
             }

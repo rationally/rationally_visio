@@ -17,6 +17,9 @@ namespace ExtendedVisioAddin1.View
             TextLabel versionLabel = new TextLabel(page, "Version: " + version);
             versionLabel.SetMargin(0.1);
 
+            AddUserRow("rationallyType");
+            RationallyType = "informationBox";
+
             Children.Add(authorLabel);
             Children.Add(dateLabel);
             Children.Add(versionLabel);

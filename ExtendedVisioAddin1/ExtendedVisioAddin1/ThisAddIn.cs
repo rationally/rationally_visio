@@ -149,6 +149,7 @@ namespace ExtendedVisioAddin1
             }
         }
 
+
         private void Application_ShapeChangedEvent(Shape s)
         {
             var x = 0;

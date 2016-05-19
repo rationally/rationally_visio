@@ -28,7 +28,7 @@ namespace ExtendedVisioAddin1.View.Documents
 
             Hyperlink link = RShape.AddHyperlink();
             link.Address = url;
-            EventDblClick = "HYPERLINK(\"" + url + "\")";
+            EventDblClick = "HYPERLINK(Hyperlink.Row_1.Address)";//"HYPERLINK(\"" + url + "\")";
 
             Name = "RelatedUrl";
             AddUserRow("rationallyType");

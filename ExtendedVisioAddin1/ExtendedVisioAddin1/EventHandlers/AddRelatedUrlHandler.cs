@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
+using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Documents;
 using Microsoft.Office.Interop.Visio;
 
@@ -34,9 +35,13 @@ namespace ExtendedVisioAddin1.EventHandlers
                 //1) make a title component for the source and add it to the container
                 RelatedDocumentTitleComponent relatedDocumentTitleComponent = new RelatedDocumentTitleComponent(application.ActivePage, selectUrlDialog.nameTextbox.Text + ":");
                 relatedDocumentContainer.Children.Add(relatedDocumentTitleComponent);
-                //2) make a shortcut to the file
+                //2) make a shortcut to the url
                 RelatedUrlComponent relatedUrlComponent = new RelatedUrlComponent(application.ActivePage, selectUrlDialog.urlTextBox.Text);
                 relatedDocumentContainer.Children.Add(relatedUrlComponent);
+                //3) add a text element that displays the full URL
+                RelatedURLURLComponent urlLabel = new RelatedURLURLComponent(application.ActivePage, selectUrlDialog.urlTextBox.Text);
+                
+                relatedDocumentContainer.Children.Add(urlLabel);
 
                 new RepaintHandler();
                 ThisAddIn.PreventAddEvent = false;

@@ -19,6 +19,8 @@ namespace ExtendedVisioAddin1.EventHandlers
                 double offsetHeight =Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageHeight"].Result[VisUnitCodes.visInches] - 0.4;
                 //draw the header
                 TextLabel header = new TextLabel(Globals.ThisAddIn.Application.ActivePage,model.DecisionName);
+                
+                
                 header.SetFontSize(22);
                 header.CenterX = 1;
                 header.CenterY = offsetHeight;

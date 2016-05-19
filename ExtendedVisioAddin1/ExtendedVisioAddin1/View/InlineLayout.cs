@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ExtendedVisioAddin1.View.Alternatives;
+using ExtendedVisioAddin1.View.Documents;
 
 namespace ExtendedVisioAddin1.View
 {
@@ -38,7 +39,7 @@ namespace ExtendedVisioAddin1.View
             double toDrawWidth = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight; //expected increase in x
             double toDrawHeight = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;//expected height in y
 
-            if (toDraw is AlternativeTitleComponent)
+            if (toDraw is RelatedDocumentTitleComponent)
             {
                 var a = 5;
             }

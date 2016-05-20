@@ -199,6 +199,16 @@ namespace ExtendedVisioAddin1
                             }
                         }
                         break;
+                    case "relatedUrlUrl":
+                        foreach (RelatedDocumentsContainer relatedDocumentsContainer in relatedDocumentsContainers)
+                        {
+                            foreach (RelatedDocumentContainer relatedDocumentContainer in relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().ToList())
+                            {
+                                relatedDocumentContainer.Children.RemoveAll(c => c.RShape.Equals(s));
+                                    //Remove the component from the tree
+                            }
+                        }
+                        break;
                     case "alternative":
                         RComponent component = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };
                         int index = component.AlternativeIndex;

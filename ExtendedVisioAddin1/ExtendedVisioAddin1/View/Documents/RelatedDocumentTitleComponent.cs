@@ -26,6 +26,7 @@ namespace ExtendedVisioAddin1.View.Documents
             Width = 3.3;
             SetMargin(0.2);
             MakeListItem();
+            UsedSizingPolicy &= ~SizingPolicy.ShrinkXIfNeeded;
         }
 
         internal static bool IsRelatedDocumentTitleContainer(string name)

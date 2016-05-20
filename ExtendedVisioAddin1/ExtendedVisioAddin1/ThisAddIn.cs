@@ -41,6 +41,7 @@ namespace ExtendedVisioAddin1
             Application.MasterAdded += Application_MasterAddedEvent;
             Application.MasterChanged += Application_MasterChangedEvent;
             Application.BeforeShapeDelete += Application_DeleteShapeEvent;
+            Application.CellChanged += Application_CellChangedEvent;
 
         }
 
@@ -103,7 +104,22 @@ namespace ExtendedVisioAddin1
             }
         }
 
-
+        private void Application_CellChangedEvent(Cell cell)
+        {
+            Shape changedShape = cell.Shape;
+            if ( cell.LocalName.Contains("Hyperlink.Row_1.SubAddress") && changedShape.Name.Contains("RelatedUrl"))
+            {
+                //find the container that holds all Related Documents
+                RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)View.Children.First(c => c is RelatedDocumentsContainer);
+                //find the related document holding the changed shape (one of his children has RShape equal to changedShape)
+                RelatedDocumentContainer relatedDocumentContainer = relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().First(dc => dc.Children.Where(c => c.RShape.Equals(changedShape)).ToList().Count > 0);
+                //update the text of the URL display component to the new url
+                RelatedURLURLComponent relatedURLURLComponent = ((RelatedURLURLComponent)relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent));
+                relatedURLURLComponent.Text = changedShape.Hyperlink.Address;
+                //new RepaintHandler();
+            }
+            
+        }
 
         private void Application_DocumentOpenedEvent(IVDocument d)
         {

@@ -113,6 +113,8 @@
     <Compile Include="EventHandlers\AddRelatedUrlHandler.cs" />
     <Compile Include="EventHandlers\AddRelatedDocumentHandler.cs" />
     <Compile Include="EventHandlers\EditRelatedFileHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlerRegistry.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandler.cs" />
     <Compile Include="Model\IObservable.cs" />
     <Compile Include="Model\IObserver.cs" />
     <Compile Include="UrlSelector.cs">
@@ -151,7 +153,6 @@
     <Compile Include="EventHandlers\DocumentCreatedEventHandler.cs" />
     <Compile Include="EventHandlers\EditAlternativeStateEventHandler.cs" />
     <Compile Include="EventHandlers\EventHandler.cs" />
-    <Compile Include="EventHandlers\EventHandlerFactory.cs" />
     <Compile Include="EventHandlers\RemoveAlternativeEventHandler.cs" />
     <Compile Include="EventHandlers\RepaintHandler.cs" />
     <Compile Include="Model\Alternative.cs" />

@@ -67,14 +67,14 @@ namespace ExtendedVisioAddin1.View.Alternatives
                         RShape.DeleteRow((short)VisSectionIndices.visSectionAction, RShape.CellsRowIndex["Actions." + stateName + ".Action"]);
                     }
                     RShape.AddNamedRow((short)VisSectionIndices.visSectionAction, stateName, (short)VisRowTags.visTagDefault);
-                    RShape.CellsU["Actions." + stateName + ".Action"].Formula = "QUEUEMARKEREVENT(\"stateChange." + model.AlternativeStates[i] + "\")";
+                    RShape.CellsU["Actions." + stateName + ".Action"].Formula = "QUEUEMARKEREVENT(\"change." + model.AlternativeStates[i] + "\")";
                     RShape.CellsU["Actions." + stateName + ".Menu"].Formula = "\"" + currentState + "\"";
                     RShape.CellsU["Actions." + stateName + ".Disabled"].Formula = true.ToString().ToUpper();
                     RShape.CellsU["Actions." + stateName + ".FlyoutChild"].Formula = true.ToString().ToUpper();
                 }
                 else
                 {
-                    AddAction(stateName, "QUEUEMARKEREVENT(\"stateChange." + model.AlternativeStates[i] + "\")", "\"" + model.AlternativeStates[i] + "\"", true);
+                    AddAction(stateName, "QUEUEMARKEREVENT(\"change." + model.AlternativeStates[i] + "\")", "\"" + model.AlternativeStates[i] + "\"", true);
                 }
             }
         }

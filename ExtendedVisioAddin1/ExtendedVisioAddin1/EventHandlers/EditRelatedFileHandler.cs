@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View.Documents;
 using Microsoft.Office.Interop.Visio;
 using Application = Microsoft.Office.Interop.Visio.Application;
 
 namespace ExtendedVisioAddin1.EventHandlers
 {
-    class EditRelatedFileHandler
+    class EditRelatedFileHandler : MarkerEventHandler
     {
-        public EditRelatedFileHandler()
+
+        public override void Execute(RModel model, Shape changedShape, string context)
         {
             Application application = Globals.ThisAddIn.Application;
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -33,12 +35,12 @@ namespace ExtendedVisioAddin1.EventHandlers
                 }
                 ThisAddIn.PreventAddEvent = true;
                 //container of all related documents:
-                RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
+                RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer) Globals.ThisAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
                 //find the the RelatedDocumentContainer of the selected file
-                RelatedDocumentContainer oldRelatedDocumentContainer  = (RelatedDocumentContainer)relatedDocumentsContainer.Children.First(f => ((RelatedDocumentContainer) f).Children.Where(c => c.RShape == selectedShape).ToList().Count > 0);
+                RelatedDocumentContainer oldRelatedDocumentContainer = (RelatedDocumentContainer) relatedDocumentsContainer.Children.First(f => ((RelatedDocumentContainer) f).Children.Where(c => c.RShape == selectedShape).ToList().Count > 0);
                 //find out the index, so we can insert the new file on the right spot
                 int insertIndex = relatedDocumentsContainer.Children.IndexOf(oldRelatedDocumentContainer);
-                oldRelatedDocumentContainer.Children.First().RShape.Delete();//this will also trigger the deletion of its child components (thanks to an eventhandler)
+                oldRelatedDocumentContainer.Children.First().RShape.Delete(); //this will also trigger the deletion of its child components (thanks to an eventhandler)
 
 
                 //create a container that wraps the new document

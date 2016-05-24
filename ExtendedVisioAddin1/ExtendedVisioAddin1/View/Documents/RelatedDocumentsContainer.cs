@@ -37,7 +37,8 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public void InitStyle()
         {
-            MakeListItem();
+            //MakeListItem();
+            this.UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
         }
 
         public static bool IsRelatedDocumentsContainer(string name)

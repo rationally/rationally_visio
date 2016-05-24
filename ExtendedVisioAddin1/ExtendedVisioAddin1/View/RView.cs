@@ -37,7 +37,6 @@ namespace ExtendedVisioAddin1.View
         /// <param name="index">identifier of the alternative.</param>
         public void DeleteAlternative(int index, bool deleteShape)
         {
-            ThisAddIn.PreventDeleteEvent = true;
             AlternativesContainer alternativesContainer = (AlternativesContainer)Children.First(c => c is AlternativesContainer); //todo: we still don't know how many
 
             AlternativeContainer alternative = (AlternativeContainer) alternativesContainer.Children.FirstOrDefault(x => x.AlternativeIndex == index && x is AlternativeContainer);
@@ -52,7 +51,24 @@ namespace ExtendedVisioAddin1.View
                 alternativesContainer.Children.Where(c => c is AlternativeContainer).ToList().ForEach(c => ((AlternativeContainer) c).SetAlternativeIdentifier(i++));
             }
             new RepaintHandler();
-            ThisAddIn.PreventDeleteEvent = false;
+        }
+
+        public override bool ExistsInTree(Shape s)
+        {
+            return Children.Exists(x => x.ExistsInTree(s));
+        }
+
+        public override void AddToTree(Shape s)
+        {
+            //todo: check if kid.
+            if (true)
+            {
+
+            }
+            else
+            {
+                Children.ForEach(r => r.AddToTree(s));
+            }
         }
     }
 }

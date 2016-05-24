@@ -53,6 +53,7 @@ namespace ExtendedVisioAddin1
             this.alternativeName.Name = "alternativeName";
             this.alternativeName.Size = new System.Drawing.Size(231, 20);
             this.alternativeName.TabIndex = 1;
+            this.alternativeName.Text = "Alternativo Name";
             // 
             // label2
             // 
@@ -84,6 +85,7 @@ namespace ExtendedVisioAddin1
             // 
             // AddAlternative
             // 
+            this.AcceptButton = this.createAlternative;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(259, 141);

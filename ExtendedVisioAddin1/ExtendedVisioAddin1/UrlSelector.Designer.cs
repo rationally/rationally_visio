@@ -50,13 +50,14 @@
             this.urlTextBox.Name = "urlTextBox";
             this.urlTextBox.Size = new System.Drawing.Size(246, 20);
             this.urlTextBox.TabIndex = 1;
+            this.urlTextBox.Text = "http://www.nu.nl/";
             // 
             // confirmButton
             // 
             this.confirmButton.Location = new System.Drawing.Point(16, 98);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(246, 23);
-            this.confirmButton.TabIndex = 2;
+            this.confirmButton.TabIndex = 3;
             this.confirmButton.Text = "Confirm";
             this.confirmButton.UseVisualStyleBackColor = true;
             this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
@@ -75,10 +76,12 @@
             this.nameTextbox.Location = new System.Drawing.Point(16, 72);
             this.nameTextbox.Name = "nameTextbox";
             this.nameTextbox.Size = new System.Drawing.Size(243, 20);
-            this.nameTextbox.TabIndex = 4;
+            this.nameTextbox.TabIndex = 2;
+            this.nameTextbox.Text = "nu.nl";
             // 
             // UrlSelecter
             // 
+            this.AcceptButton = this.confirmButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(271, 125);

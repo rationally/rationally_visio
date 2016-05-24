@@ -44,6 +44,11 @@ namespace ExtendedVisioAddin1.View
             Children.ForEach(c => c.PlaceChildren());
         }
 
+        public override bool ExistsInTree(Shape s)
+        {
+            return RShape.Equals(s) || Children.Exists(x => x.ExistsInTree(s));
+        }
+
         [Obsolete]
         public override void CascadingDelete()
         { //TODO: remove delete locks

@@ -16,11 +16,9 @@ namespace ExtendedVisioAddin1.View.Documents
         public RelatedUrlComponent(Page page, string url) : base(page)
         {
 
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vssx";
-            Document rationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
+            Document rationallyDocument = Globals.ThisAddIn.Model.RationallyDocument;
             Master rectMaster = rationallyDocument.Masters["LinkIcon"]; 
             RShape = page.Drop(rectMaster, 0, 0);
-            rationallyDocument.Close();
 
             Width = 0.6;
             Height = 0.6;

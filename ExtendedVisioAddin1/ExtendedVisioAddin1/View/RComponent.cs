@@ -121,14 +121,19 @@ namespace ExtendedVisioAddin1.View
 
         public void AddAction(string fieldName, string action, string name, bool flyout)
         {
-            if (RShape.CellExistsU["Actions." + fieldName + ".Action", 0] != 0)
-            {
-                RShape.DeleteRow((short)VisSectionIndices.visSectionAction, RShape.CellsRowIndex["Actions." + fieldName + ".Action"]);
-            }
+            DeleteAction(fieldName);
             RShape.AddNamedRow((short)VisSectionIndices.visSectionAction, fieldName, (short)VisRowTags.visTagDefault);
             RShape.CellsU["Actions." + fieldName + ".Action"].Formula = action;
             RShape.CellsU["Actions." + fieldName + ".Menu"].Formula = name;
             RShape.CellsU["Actions." + fieldName + ".FlyoutChild"].Formula = flyout.ToString().ToUpper();
+        }
+
+        public void DeleteAction(string fieldName)
+        {
+            if (RShape.CellExistsU["Actions." + fieldName + ".Action", 0] != 0)
+            {
+                RShape.DeleteRow((short)VisSectionIndices.visSectionAction, RShape.CellsRowIndex["Actions." + fieldName + ".Action"]);
+            }
         }
 
         public void AddUserRow(string fieldName)

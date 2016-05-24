@@ -104,5 +104,23 @@ namespace ExtendedVisioAddin1.View.Alternatives
         {
             return AlternativeRegex.IsMatch(name);
         }
+
+        public override void Repaint()
+        {
+            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
+            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
+
+            if (AlternativeIndex == 0)
+            {
+                DeleteAction("moveUp");
+            }
+
+            if (AlternativeIndex == Globals.ThisAddIn.Model.Alternatives.Count - 1)
+            {
+                DeleteAction("moveDown");
+            }
+
+            base.Repaint();
+        }
     }
 }

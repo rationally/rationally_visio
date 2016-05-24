@@ -42,8 +42,15 @@ namespace ExtendedVisioAddin1
             Application.MasterChanged += Application_MasterChangedEvent;
             Application.BeforeShapeDelete += Application_DeleteShapeEvent;
             Application.CellChanged += Application_CellChangedEvent;
+            Application.ShapeParentChanged += Application_ShapeParentChangedEvent;
 
             RegisterEventHandlers();
+        }
+
+        private void Application_ShapeParentChangedEvent(Shape shape)
+        {
+            /*Application.UndoEnabled = true;
+            Application.Undo();*/
         }
 
         private void RegisterEventHandlers()
@@ -55,6 +62,8 @@ namespace ExtendedVisioAddin1
             registry.Register("alternative.delete", new RemoveAlternativeEventHandler());
             registry.Register("alternativeState.change", new EditAlternativeStateEventHandler());
             registry.Register("relatedFile.edit", new EditRelatedFileHandler());
+            registry.Register("alternative.moveUp", new MoveUpAlternativeHandler());
+            registry.Register("alternative.moveDown", new MoveDownAlternativeHandler());
         }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e)
@@ -92,7 +101,7 @@ namespace ExtendedVisioAddin1
         private void Application_CellChangedEvent(Cell cell)
         {
             Shape changedShape = cell.Shape;
-            if ( cell.LocalName.Contains("Hyperlink.Row_1.SubAddress") && changedShape.Name.Contains("RelatedUrl"))
+            if ( cell.LocalName.Equals("Hyperlink.Row_1.Address") && changedShape.Name.Equals("RelatedUrl"))
             {
                 //find the container that holds all Related Documents
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)View.Children.First(c => c is RelatedDocumentsContainer);

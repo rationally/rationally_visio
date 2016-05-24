@@ -115,6 +115,8 @@
     <Compile Include="EventHandlers\EditRelatedFileHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlerRegistry.cs" />
     <Compile Include="EventHandlers\MarkerEventHandler.cs" />
+    <Compile Include="EventHandlers\MoveDownAlternativeHandler.cs" />
+    <Compile Include="EventHandlers\MoveUpAlternativeHandler.cs" />
     <Compile Include="Model\IObservable.cs" />
     <Compile Include="Model\IObserver.cs" />
     <Compile Include="UrlSelector.cs">

@@ -122,7 +122,7 @@ namespace ExtendedVisioAddin1
 
         private void Application_ShapeAddedEvent(Shape s)
         {
-            if (!View.ExistsInTree(s)) //if has rationally type
+            if (s.CellExistsU["User.rationallyType", 0] != 0 && !View.ExistsInTree(s))
             {
                 View.AddToTree(s);
             }

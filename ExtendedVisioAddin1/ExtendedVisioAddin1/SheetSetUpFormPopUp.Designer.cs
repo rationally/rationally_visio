@@ -48,6 +48,7 @@ namespace ExtendedVisioAddin1
             this.decisionName.Name = "decisionName";
             this.decisionName.Size = new System.Drawing.Size(211, 20);
             this.decisionName.TabIndex = 0;
+            this.decisionName.Text = "Name";
             // 
             // decisionNameHead
             // 
@@ -73,6 +74,7 @@ namespace ExtendedVisioAddin1
             this.author.Name = "author";
             this.author.Size = new System.Drawing.Size(211, 20);
             this.author.TabIndex = 3;
+            this.author.Text = "Author";
             // 
             // versionDecision
             // 
@@ -119,6 +121,7 @@ namespace ExtendedVisioAddin1
             // 
             // SheetSetUpFormPopUp
             // 
+            this.AcceptButton = this.submitButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(235, 228);

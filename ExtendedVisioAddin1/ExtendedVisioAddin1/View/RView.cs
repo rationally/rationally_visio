@@ -57,5 +57,18 @@ namespace ExtendedVisioAddin1.View
         {
             return Children.Exists(x => x.ExistsInTree(s));
         }
+
+        public override void AddToTree(Shape s)
+        {
+            //todo: check if kid.
+            if (true)
+            {
+
+            }
+            else
+            {
+                Children.ForEach(r => r.AddToTree(s));
+            }
+        }
     }
 }

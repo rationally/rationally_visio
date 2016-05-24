@@ -83,7 +83,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             this.LockTextEdit = true;*/
 
             //Events
-            AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"deleteAlternative\")", "\"Delete alternative\"", false);
+            AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete alternative\"", false);
             InitStyle();
         }
 

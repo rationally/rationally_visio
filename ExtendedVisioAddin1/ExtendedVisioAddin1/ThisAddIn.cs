@@ -37,6 +37,18 @@ namespace ExtendedVisioAddin1
             Application.BeforeShapeDelete += Application_DeleteShapeEvent;
             Application.CellChanged += Application_CellChangedEvent;
 
+            RegisterEventHandlers();
+        }
+
+        private void RegisterEventHandlers()
+        {
+            MarkerEventHandlerRegistry registry = MarkerEventHandlerRegistry.Instance;
+            registry.Register("alternatives.add",new AddAlternativeEventHandler());
+            registry.Register("relatedDocuments.addRelatedFile", new AddRelatedDocumentHandler());
+            registry.Register("relatedDocuments.addRelatedUrl", new AddRelatedUrlHandler());
+            registry.Register("alternative.delete", new RemoveAlternativeEventHandler());
+            registry.Register("alternativeState.change", new EditAlternativeStateEventHandler());
+            registry.Register("relatedFile.edit", new EditRelatedFileHandler());
         }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e)
@@ -55,45 +67,18 @@ namespace ExtendedVisioAddin1
         {
             Selection selection = Application.ActiveWindow.Selection;//event must originate from selected element
             //for (int i = 0; i < selection.Count; i++) 
-            foreach (IVShape s in selection)
+            foreach (Shape s in selection)
             {
-                switch (s.CellsU["User.rationallyType"].ResultStr["Value"])
+                if (s.CellExistsU["User.rationallyType",0] != 0)
                 {
-                    case "forces":
-                        //create a master
-                        Master forcesMaster = Model.RationallyDocument.Masters.ItemU[@"Force"];
+                    string identifier = context;
+                    if (context.Contains("."))
+                    {
+                        identifier = context.Split('.')[1];
+                        context = context.Split('.')[0];
+                    }
 
-                        s.Drop(forcesMaster, 1, 1);
-                        break;
-                    case "alternatives":
-                        new AddAlternativeEventHandler(Model);
-                        break;
-                    case "alternativeState":
-                        if (context.Split('.')[0] == "stateChange")
-                        {
-                            new EditAlternativeStateEventHandler(Model, context.Split('.')[1]);
-                        }
-                        break;
-                    case "alternative":
-                        new RemoveAlternativeEventHandler(Model);
-                        break;
-                    case "relatedDocuments":
-                        switch (context)
-                        {
-                            case "relatedUrlAdd":
-                                new AddRelatedUrlHandler();
-                                break;
-                            case "relatedDocumentAdd":
-                                new AddRelatedDocumentHandler();
-                                break;
-                        }
-                        break;
-                    case "relatedFile":
-                        if (context == "relatedFileComponentEdit")
-                        {
-                            new EditRelatedFileHandler();
-                        }
-                        break;
+                    MarkerEventHandlerRegistry.Instance.HandleEvent(s.CellsU["User.rationallyType"].ResultStr["Value"] + "." + context, Model, s, identifier);
                 }
             }
         }

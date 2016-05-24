@@ -1,21 +1,20 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
+using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Documents;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers
 {
-    internal class AddRelatedUrlHandler
+    internal class AddRelatedUrlHandler : MarkerEventHandler
     {
-        public AddRelatedUrlHandler()
+        public override void Execute(RModel model, Shape changedShape, string context)
         {
-            //TODO: popUp and validation? etc
             var application = Globals.ThisAddIn.Application;
             UrlSelecter selectUrlDialog = new UrlSelecter();
 
-
-            IVShape selectedShape = null; 
+            IVShape selectedShape = null;
             if (selectUrlDialog.ShowDialog() == DialogResult.OK)
             {
                 foreach (IVShape s in application.ActiveWindow.Selection)
@@ -39,7 +38,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 relatedDocumentContainer.Children.Add(relatedUrlComponent);
                 //3) add a text element that displays the full URL
                 RelatedURLURLComponent urlLabel = new RelatedURLURLComponent(application.ActivePage, selectUrlDialog.urlTextBox.Text);
-                
+
                 relatedDocumentContainer.Children.Add(urlLabel);
 
                 new RepaintHandler();

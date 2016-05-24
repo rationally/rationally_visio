@@ -1,14 +1,16 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
+using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View.Documents;
 using Microsoft.Office.Interop.Visio;
 using Application = Microsoft.Office.Interop.Visio.Application;
 
 namespace ExtendedVisioAddin1.EventHandlers
 {
-    internal class AddRelatedDocumentHandler : EventHandler
+    internal class AddRelatedDocumentHandler : MarkerEventHandler
     {
-        public AddRelatedDocumentHandler()
+
+        public override void Execute(RModel model, Shape changedShape, string identifier)
         {
             Application application = Globals.ThisAddIn.Application;
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -28,7 +30,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                     }
                 }
                 //container of all related documents:
-                RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer) Globals.ThisAddIn.View.Children.First(c => c.RShape.Equals(selectedShape));
+                RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c.RShape.Equals(selectedShape));
                 //create a container that wraps the new document
                 RelatedDocumentContainer relatedDocumentContainer = new RelatedDocumentContainer(application.ActivePage);
                 relatedDocumentsContainer.Children.Add(relatedDocumentContainer);
@@ -38,7 +40,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 //2) make a shortcut to the file
                 RelatedFileComponent relatedFileComponent = new RelatedFileComponent(application.ActivePage, openFileDialog.FileName);
                 relatedDocumentContainer.Children.Add(relatedFileComponent);
-                
+
 
                 new RepaintHandler();
             }

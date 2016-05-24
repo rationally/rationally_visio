@@ -5,25 +5,19 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers
 {
-    internal class RemoveAlternativeEventHandler : EventHandler
+    internal class RemoveAlternativeEventHandler : MarkerEventHandler
     {
-        public RemoveAlternativeEventHandler(RModel model)
+        public override void Execute(RModel model, Shape s, string context)
         {
-            Selection selectedComponents = Globals.ThisAddIn.Application.ActiveWindow.Selection;
-            foreach (Shape s in selectedComponents)
+            RComponent c = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };
+
+            int index = c.AlternativeIndex;
+            Alternative alternative = model.Alternatives[index];
+            DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete " + alternative.Title, "Confirm Deletion", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
             {
-                RComponent c = new RComponent(Globals.ThisAddIn.Application.ActivePage) {RShape = s};
-                if (c.Type == "alternative")
-                {
-                    int index = c.AlternativeIndex;
-                    Alternative alternative = model.Alternatives[index];
-                    DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete " + alternative.Title, "Confirm Deletion", MessageBoxButtons.YesNo);
-                    if (confirmResult == DialogResult.Yes)
-                    {
-                        model.Alternatives.Remove(alternative);
-                        Globals.ThisAddIn.View.DeleteAlternative(index, true);
-                    }
-                }
+                model.Alternatives.Remove(alternative);
+                Globals.ThisAddIn.View.DeleteAlternative(index, true);
             }
         }
     }

@@ -16,21 +16,15 @@ namespace ExtendedVisioAddin1
     public partial class ThisAddIn
     {
         //TODO: application static kan mss mooier
-        public static bool PreventAddEvent;
-        public static bool PreventDeleteEvent;
-
         public RModel Model { get; set; }
         public RView View { get; set; }
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
-            PreventAddEvent = false;
-            PreventDeleteEvent = false;
             Model = new RModel();
             //Model.Alternatives.Add(new Alternative("titelo","Accepted","dessehcription"));
             //Model.Alternatives.Add(new Alternative("titelo dos", "Accepted", "dessehcription"));
             View = new RView(Application.ActivePage);
-            
             Model.AddObserver(View);
             Application.MarkerEvent += Application_MarkerEvent;
             Application.TemplatePaths = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
@@ -143,25 +137,9 @@ namespace ExtendedVisioAddin1
 
         private void Application_ShapeAddedEvent(Shape s)
         {
-            if (PreventAddEvent) return;
-
-            if (AlternativesContainer.IsAlternativesContainer(s.Name))
+            if (!View.ExistsInTree(s)) //if has rationally type
             {
-                if (View.Children.Exists(x => AlternativesContainer.IsAlternativesContainer(x.Name)))
-                {
-                    //TODO: turn this on, one day
-                    /*DialogResult confirmResult = MessageBox.Show("Are you sure you want to add another alternatives box? \n This may cause problems with adding or deleting alternatives", "Confirm addition", MessageBoxButtons.YesNo);
-                    if (confirmResult == DialogResult.No)
-                    {
-                        s.DeleteEx(0);
-                        return;
-                    }*/
-                }
-                else
-                {
-                    View.Children.Add(new AlternativesContainer(Application.ActivePage, s));
-                }
-                
+                View.AddToTree(s);
             }
         }
 
@@ -185,8 +163,6 @@ namespace ExtendedVisioAddin1
 
         private void Application_DeleteShapeEvent(Shape s)
         {
-            if (PreventDeleteEvent) return;
-
             if (s.CellExistsU["User.rationallyType", 0] != 0)
             {
                 string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];

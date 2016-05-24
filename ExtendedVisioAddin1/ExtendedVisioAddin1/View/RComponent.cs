@@ -334,6 +334,16 @@ namespace ExtendedVisioAddin1.View
             
         }
 
+        public virtual bool ExistsInTree(Shape s)
+        {
+            return RShape.Equals(s);
+        }
+
+        public virtual void AddToTree(Shape s)
+        {
+            
+        }
+
         public void MakeListItem()
         {
             IndFirst = -0.25;

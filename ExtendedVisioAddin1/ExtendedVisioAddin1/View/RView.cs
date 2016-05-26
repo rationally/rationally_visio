@@ -71,13 +71,38 @@ namespace ExtendedVisioAddin1.View
         {
             if (AlternativesContainer.IsAlternativesContainer(s.Name))
             {
-                Children.Add(new AlternativesContainer(Page, s));
+                if (Children.Exists(x => AlternativesContainer.IsAlternativesContainer(s.Name)))
+                {
+                    //TODO: Show message
+                    s.DeleteEx(0);
+                }
+                else
+                {
+                    Children.Add(new AlternativesContainer(Page, s));
+                }
             } else if (RelatedDocumentsContainer.IsRelatedDocumentsContainer(s.Name))
             {
-                Children.Add(new RelatedDocumentsContainer(Page, s));
+                if (Children.Exists(x => RelatedDocumentsContainer.IsRelatedDocumentsContainer(s.Name)))
+                {
+                    //TODO: Show message
+                    s.DeleteEx(0);
+                }
+                else
+                {
+                    Children.Add(new RelatedDocumentsContainer(Page, s));
+                }
             } else if (false)
             {
-                /*todo: forces*/
+                /*todo: forces
+                 if (Children.Exists(x => RelatedDocumentsContainer.IsRelatedDocumentsContainer(s.Name)))
+                {
+                    //TODO: Show message
+                    s.DeleteEx(0);
+                }
+                else
+                {
+                    Children.Add(new RelatedDocumentsContainer(Page, s));
+                }*/
             }
             else
             {

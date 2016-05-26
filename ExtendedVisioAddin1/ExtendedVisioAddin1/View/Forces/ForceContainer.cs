@@ -25,6 +25,8 @@ namespace ExtendedVisioAddin1.View.Forces
             this.AddUserRow("rationallyType");
             this.RationallyType = "forceContainer";
             this.Name = "ForceContainer";
+            this.Height = 0.33;
+            this.UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded;
             InitStyle();
         }
 

@@ -13,7 +13,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
         public string AlternativeIdentifier
         {
-            get { return RShape.CellsU["alternativeIdentifier"].ResultStr["Value"]; }
+            get { return RShape.CellsU["User.alternativeIdentifier"].ResultStr["Value"]; }
             set { RShape.Cells["User.alternativeIdentifier.Value"].Formula = "\"" + value + "\""; }
         }
 

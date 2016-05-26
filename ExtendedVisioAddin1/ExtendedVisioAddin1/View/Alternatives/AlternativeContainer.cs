@@ -39,7 +39,8 @@ namespace ExtendedVisioAddin1.View.Alternatives
             }
             if (title != null && state != null && desc != null)
             {
-                Globals.ThisAddIn.Model.Alternatives.Add(new Alternative(title, state, desc));
+                string identifier = (char)(65 + Globals.ThisAddIn.Model.Alternatives.Count) + ":";
+                Globals.ThisAddIn.Model.Alternatives.Add(new Alternative(title, state, desc, identifier));
             }
             InitStyle();
         }

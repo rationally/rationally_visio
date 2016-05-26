@@ -8,11 +8,14 @@
 
         public string Title { get; set; }
 
-        public Alternative(string title, string status, string description)
+        public string Identifier { get; set; }
+
+        public Alternative(string title, string status, string description, string identifier)
         {
             Title = title;
             Status = status;
             Description = description;
+            Identifier = identifier;
         }
     }
 }

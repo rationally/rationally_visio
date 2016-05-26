@@ -110,6 +110,7 @@
       <DependentUpon>AddAlternative.cs</DependentUpon>
     </Compile>
     <Compile Include="AddinCommandBars.cs" />
+    <Compile Include="EventHandlers\AddForceHandler.cs" />
     <Compile Include="EventHandlers\AddRelatedUrlHandler.cs" />
     <Compile Include="EventHandlers\AddRelatedDocumentHandler.cs" />
     <Compile Include="EventHandlers\EditRelatedFileHandler.cs" />
@@ -137,6 +138,11 @@
     <Compile Include="View\Documents\RelatedURLComponent.cs" />
     <Compile Include="View\Documents\RelatedFileComponent.cs" />
     <Compile Include="View\Documents\RelatedURLURLComponent.cs" />
+    <Compile Include="View\Forces\ForceConcernComponent.cs" />
+    <Compile Include="View\Forces\ForceContainer.cs" />
+    <Compile Include="View\Forces\ForceDescriptionComponent.cs" />
+    <Compile Include="View\Forces\ForcesContainer.cs" />
+    <Compile Include="View\Forces\ForceValueComponent.cs" />
     <Compile Include="View\HeaderlessContainer.cs" />
     <Compile Include="View\ILayoutManager.cs" />
     <Compile Include="View\InformationContainer.cs" />

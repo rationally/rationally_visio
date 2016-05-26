@@ -6,6 +6,7 @@ using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Alternatives;
 using ExtendedVisioAddin1.View.Documents;
+using ExtendedVisioAddin1.View.Forces;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Visio;
 using rationally_visio;
@@ -58,6 +59,7 @@ namespace ExtendedVisioAddin1
             registry.Register("relatedFile.edit", new EditRelatedFileHandler());
             registry.Register("alternative.moveUp", new MoveUpAlternativeHandler());
             registry.Register("alternative.moveDown", new MoveDownAlternativeHandler());
+            registry.Register("forces.add", new AddForceHandler());
         }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e)
@@ -121,6 +123,9 @@ namespace ExtendedVisioAddin1
                     } else if (RelatedDocumentsContainer.IsRelatedDocumentsContainer(shape.Name))
                     {
                         View.Children.Add(new RelatedDocumentsContainer(Application.ActivePage, shape));
+                    } else if (ForcesContainer.IsForcesContainer(shape.Name))
+                    {
+                        View.Children.Add(new ForcesContainer(Application.ActivePage, shape));
                     }
                 }
 

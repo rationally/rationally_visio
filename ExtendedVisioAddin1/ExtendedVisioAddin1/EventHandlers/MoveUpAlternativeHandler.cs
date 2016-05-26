@@ -15,14 +15,15 @@ namespace ExtendedVisioAddin1.EventHandlers
         {
             AlternativeContainer toChange = new AlternativeContainer(Globals.ThisAddIn.Application.ActivePage, changedShape);
             int currentIndex = toChange.AlternativeIndex;
+            //locate the alternative to swap with
+            AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
+            AlternativeContainer other = (AlternativeContainer)alternativesContainer.Children.First(c => ((int)c.RShape.CellsU["User.alternativeIndex"].ResultIU) == (currentIndex - 1));
+
             //swap the item to move with the one below
             model.Alternatives.Move(currentIndex, currentIndex - 1);
             //update the index of the component and his children
             toChange.SetAlternativeIdentifier(currentIndex - 1);
-            //locate the alternative with the just assigned index and update his index to (index-1)
-            AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
-
-            AlternativeContainer other = (AlternativeContainer)alternativesContainer.Children.First(c => ((int)c.RShape.CellsU["User.alternativeIndex"].ResultIU) == (currentIndex - 1));
+            //same, for the other component
             other.SetAlternativeIdentifier(currentIndex);
 
             //swap the elements

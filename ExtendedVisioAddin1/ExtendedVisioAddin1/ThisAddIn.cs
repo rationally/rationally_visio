@@ -195,6 +195,9 @@ namespace ExtendedVisioAddin1
                             }
                         }
                         break;
+                    case "alternatives":
+                        View.DeleteAlternativesContainerByUser();
+                        break;
                     case "alternative":
                         RComponent component = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };
                         int index = component.AlternativeIndex;

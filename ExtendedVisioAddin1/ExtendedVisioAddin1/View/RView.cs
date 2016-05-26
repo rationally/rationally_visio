@@ -2,6 +2,7 @@
 using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View.Alternatives;
+using ExtendedVisioAddin1.View.Documents;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
@@ -35,11 +36,12 @@ namespace ExtendedVisioAddin1.View
         /// Deletes an alternative container from the view.
         /// </summary>
         /// <param name="index">identifier of the alternative.</param>
+        /// <param name="deleteShape">Shape was already deleted</param>
         public void DeleteAlternative(int index, bool deleteShape)
         {
-            AlternativesContainer alternativesContainer = (AlternativesContainer)Children.First(c => c is AlternativesContainer); //todo: we still don't know how many
+            AlternativesContainer alternativesContainer = (AlternativesContainer)Children.FirstOrDefault(c => c is AlternativesContainer); //May have been deleted by the user
 
-            AlternativeContainer alternative = (AlternativeContainer) alternativesContainer.Children.FirstOrDefault(x => x.AlternativeIndex == index && x is AlternativeContainer);
+            AlternativeContainer alternative = (AlternativeContainer) alternativesContainer?.Children.FirstOrDefault(x => x.AlternativeIndex == index && x is AlternativeContainer); //Return null if no container or no alternative with index
             if (alternative != null)
             {
                 alternativesContainer.Children.Remove(alternative);
@@ -53,6 +55,13 @@ namespace ExtendedVisioAddin1.View
             new RepaintHandler();
         }
 
+        public void DeleteAlternativesContainerByUser()
+        {
+            AlternativesContainer alternativesContainer = (AlternativesContainer)Children.First(c => c is AlternativesContainer); //We know there exists only one.
+            Children.Remove(alternativesContainer);
+            new RepaintHandler();
+        }
+
         public override bool ExistsInTree(Shape s)
         {
             return Children.Exists(x => x.ExistsInTree(s));
@@ -60,10 +69,15 @@ namespace ExtendedVisioAddin1.View
 
         public override void AddToTree(Shape s)
         {
-            //todo: check if kid.
-            if (true)
+            if (AlternativesContainer.IsAlternativesContainer(s.Name))
             {
-
+                Children.Add(new AlternativesContainer(Page, s));
+            } else if (RelatedDocumentsContainer.IsRelatedDocumentsContainer(s.Name))
+            {
+                Children.Add(new RelatedDocumentsContainer(Page, s));
+            } else if (false)
+            {
+                /*todo: forces*/
             }
             else
             {

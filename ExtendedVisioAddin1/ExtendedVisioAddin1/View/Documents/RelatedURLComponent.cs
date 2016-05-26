@@ -15,8 +15,8 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public RelatedUrlComponent(Page page, string url) : base(page)
         {
-
-            Document rationallyDocument = Globals.ThisAddIn.Model.RationallyDocument;
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\RationallyHidden.vssx";
+            Document rationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden); //todo: handling for file is open
             Master rectMaster = rationallyDocument.Masters["LinkIcon"]; 
             RShape = page.Drop(rectMaster, 0, 0);
 
@@ -32,8 +32,9 @@ namespace ExtendedVisioAddin1.View.Documents
             AddUserRow("rationallyType");
             RationallyType = "relatedUrl";
 
+            rationallyDocument.Close();
             //set the preview image of the url
-            
+
             //RShape.ChangePicture(docPath, 0);
         }
 

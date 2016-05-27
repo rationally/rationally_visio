@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
 {
     internal class ForceConcernComponent : RComponent
     {
-        private static readonly Regex forceConcernRegex = new Regex(@"ForceConcern(\.\d+)?$");
+        private static readonly Regex ForceConcernRegex = new Regex(@"ForceConcern(\.\d+)?$");
 
         public ForceConcernComponent(Page page) : base(page)
         {
@@ -18,13 +14,13 @@ namespace ExtendedVisioAddin1.View.Forces
             RShape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
 
-            this.AddUserRow("rationallyType");
-            this.RationallyType = "forceConcern";
+            AddUserRow("rationallyType");
+            RationallyType = "forceConcern";
             Name = "ForceConcern";
 
-            this.Width = 1;
-            this.Height = 0.33;
-            this.Text = "<<concern>>";
+            Width = 1;
+            Height = 0.33;
+            Text = "<<concern>>";
             InitStyle();
         }
 
@@ -40,7 +36,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
         public static bool IsForceConcern(string name)
         {
-            return forceConcernRegex.IsMatch(name);
+            return ForceConcernRegex.IsMatch(name);
         }
     }
 }

@@ -104,7 +104,7 @@ namespace ExtendedVisioAddin1
                 //find the related document holding the changed shape (one of his children has RShape equal to changedShape)
                 RelatedDocumentContainer relatedDocumentContainer = relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().First(dc => dc.Children.Where(c => c.RShape.Equals(changedShape)).ToList().Count > 0);
                 //update the text of the URL display component to the new url
-                RelatedURLURLComponent relatedURLURLComponent = ((RelatedURLURLComponent)relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent));
+                RelatedURLURLComponent relatedURLURLComponent = (RelatedURLURLComponent)relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent);
                 relatedURLURLComponent.Text = changedShape.Hyperlink.Address;
                 //new RepaintHandler();
             }
@@ -145,7 +145,6 @@ namespace ExtendedVisioAddin1
 
         private void Application_ShapeChangedEvent(Shape s)
         {
-            var x = 0;
         }
 
         private void Application_MasterAddedEvent(Master m)

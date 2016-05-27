@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
@@ -17,16 +16,16 @@ namespace ExtendedVisioAddin1.View.Forces
         public ForceContainer(Page page) : base(page)
         {
             ForceConcernComponent concern = new ForceConcernComponent(page);
-            this.Children.Add(concern);
+            Children.Add(concern);
 
             ForceDescriptionComponent description = new ForceDescriptionComponent(page);
-            this.Children.Add(description);
+            Children.Add(description);
 
-            this.AddUserRow("rationallyType");
-            this.RationallyType = "forceContainer";
-            this.Name = "ForceContainer";
-            this.Height = 0.33;
-            this.UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded;
+            AddUserRow("rationallyType");
+            RationallyType = "forceContainer";
+            Name = "ForceContainer";
+            Height = 0.33;
+            UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded;
             InitStyle();
         }
 
@@ -39,21 +38,21 @@ namespace ExtendedVisioAddin1.View.Forces
             {
                 if (ForceConcernComponent.IsForceConcern(shape.Name))
                 {
-                    this.Children.Add(new ForceConcernComponent(page, shape));
+                    Children.Add(new ForceConcernComponent(page, shape));
                 } else if (ForceDescriptionComponent.IsForceDescription(shape.Name))
                 {
-                    this.Children.Add(new ForceDescriptionComponent(page, shape));
+                    Children.Add(new ForceDescriptionComponent(page, shape));
                 } else if (ForceValueComponent.IsForceValue(shape.Name))
                 {
-                    this.Children.Add(new ForceValueComponent(page, shape));
+                    Children.Add(new ForceValueComponent(page, shape));
                 }
             }
         }
 
         private void InitStyle()
         {
-            this.UsedSizingPolicy |= (UsedSizingPolicy & SizingPolicy.ExpandXIfNeeded);
-            this.LayoutManager = new InlineLayout(this);
+            UsedSizingPolicy |= (UsedSizingPolicy & SizingPolicy.ExpandXIfNeeded);
+            LayoutManager = new InlineLayout(this);
         }
 
         [SuppressMessage("ReSharper", "SimplifyLinqExpression")]
@@ -63,12 +62,12 @@ namespace ExtendedVisioAddin1.View.Forces
             //foreach alternative in model { add a force value component, if it is not aleady there }
             ObservableCollection<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
 
-            List<ForceValueComponent> alreadyThere = this.Children.Where(c => c is ForceValueComponent).Cast<ForceValueComponent>().ToList();
-            for (int i = 0; i < alternatives.Count; i++)
+            List<ForceValueComponent> alreadyThere = Children.Where(c => c is ForceValueComponent).Cast<ForceValueComponent>().ToList();
+            foreach (Alternative alt in alternatives)
             {
-                if (this.Children.Where(c => c is ForceValueComponent && ((ForceValueComponent)c).AlternativeIdentifier == alternatives[i].Identifier).ToList().Count != 1)
+                if (Children.Where(c => c is ForceValueComponent && ((ForceValueComponent)c).AlternativeIdentifier == alt.Identifier).ToList().Count != 1)
                 {
-                    alreadyThere.Add(new ForceValueComponent(Globals.ThisAddIn.Application.ActivePage, alternatives[i].Identifier));
+                    alreadyThere.Add(new ForceValueComponent(Globals.ThisAddIn.Application.ActivePage, alt.Identifier));
                 }
             }
 
@@ -79,9 +78,9 @@ namespace ExtendedVisioAddin1.View.Forces
             alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.Identifier == fc.AlternativeIdentifier))).ToList();
 
             //remove the current force values from the force row and insert the new sorted list
-            this.Children.RemoveAll(c => c is ForceValueComponent);
+            Children.RemoveAll(c => c is ForceValueComponent);
 
-            this.Children.AddRange(alreadyThere);
+            Children.AddRange(alreadyThere);
 
 
             base.Repaint();

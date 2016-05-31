@@ -16,9 +16,10 @@ namespace ExtendedVisioAddin1.EventHandlers
             DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete " + alternative.Title, "Confirm Deletion", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
-                model.Alternatives.Remove(alternative);
+                //model.Alternatives.Remove(alternative);//TODO might need to turn this on
                 Globals.ThisAddIn.View.DeleteAlternative(index, true);
             }
+            new RepaintHandler();
         }
     }
 }

@@ -26,7 +26,6 @@ namespace ExtendedVisioAddin1.View.Forces
             this.RationallyType = "forceContainer";
             this.Name = "ForceContainer";
             this.Height = 0.33;
-            this.UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded;
             InitStyle();
         }
 
@@ -52,7 +51,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
         private void InitStyle()
         {
-            this.UsedSizingPolicy |= (UsedSizingPolicy & SizingPolicy.ExpandXIfNeeded);
+            this.UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded;
             this.LayoutManager = new InlineLayout(this);
         }
 

@@ -99,10 +99,12 @@ namespace ExtendedVisioAddin1.View
         {
             get
             {
+                var n = RShape.Name;
                 return RShape.CellsU["pinX"].Result[VisUnitCodes.visInches];
             }
             set
             {
+                var n = RShape.Name;
                 RShape.CellsU["pinX"].Result[VisUnitCodes.visInches] = value;
             }
         }

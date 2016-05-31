@@ -72,7 +72,7 @@ namespace ExtendedVisioAddin1.View
 
             x = x + toDrawWidth;
             currentLineHeight = Math.Max(currentLineHeight, toDrawHeight);
-            contentXEnd = Math.Max(contentXEnd, dropX + toDrawWidth);
+            contentXEnd = Math.Max(contentXEnd, dropX + (toDrawWidth/2.0));
             contentYEnd = Math.Min(contentYEnd, y - toDrawHeight);
 
             //Recursive Case

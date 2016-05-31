@@ -51,7 +51,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
         private void InitStyle()
         {
-            this.UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded;
+            this.UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded;
             this.LayoutManager = new InlineLayout(this);
         }
 
@@ -72,16 +72,19 @@ namespace ExtendedVisioAddin1.View.Forces
             }
 
             //at this point, all alternatives have a component in alreadyThere, but there might be components of removed alternatives in there as well
+            List<ForceValueComponent> toRemove = alreadyThere.Where(f => !alternatives.ToList().Any(alt => alt.Identifier == f.AlternativeIdentifier)).ToList();
+            
+
             alreadyThere = alreadyThere.Where(f => alternatives.ToList().Any(alt => alt.Identifier == f.AlternativeIdentifier)).ToList();
 
             //finally, order the alternative columns similar to the alternatives container
             alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.Identifier == fc.AlternativeIdentifier))).ToList();
 
-            //remove the current force values from the force row and insert the new sorted list
             Children.RemoveAll(c => c is ForceValueComponent);
-
             Children.AddRange(alreadyThere);
 
+            //remove the shapes of the deleted components
+            toRemove.ForEach(c => c.RShape.DeleteEx(0));
 
             base.Repaint();
         }

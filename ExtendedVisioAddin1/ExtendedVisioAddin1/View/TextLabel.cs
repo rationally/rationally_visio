@@ -21,6 +21,7 @@ namespace ExtendedVisioAddin1.View
         public TextLabel(Page page, string labelText) : base(page)
         {
             UsedSizingPolicy = 0 | SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded | SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
+            
 
             string text = labelText;
             size = 12;
@@ -35,13 +36,13 @@ namespace ExtendedVisioAddin1.View
             //RShape = Globals.ThisAddIn.Application.ActivePage.DrawRectangle(0, 0, contentTextWidth, - 0.5); //TODO: magic numbers
             RShape.LineStyle = "Text Only";
             RShape.FillStyle = "Text Only";
-            RShape.Text = text;
+            RShape.Characters.Text = text;
             RShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = size;
             RShape.CellsU["LinePattern"].ResultIU = 0;
+            RShape.Name = "TextLabel";
 
-            
 
-            
+
 
         }
 
@@ -64,14 +65,20 @@ namespace ExtendedVisioAddin1.View
 
                 int lineLength = (int)(Width / characterWidth);
                 string newContent = "";
-                for (int i = 0; i < (text.Length - lineLength); i += lineLength)
+                if (text.Length > lineLength)
                 {
-                    newContent += text.Substring(i, lineLength) + "\n";
-                    lineCount++;
+                    for (int i = 0; i < (text.Length - lineLength); i += lineLength)
+                    {
+                        newContent += text.Substring(i, lineLength) + "\n";
+                        lineCount++;
+                    }
+                    //add the last piece of the string
+                    newContent += text.Substring(text.Length);
+                    RShape.Characters.Text = newContent;
                 }
-                //add the last piece of the string
-                newContent += text.Substring(text.Length);
-                RShape.Text = newContent;
+
+                
+                
 
 
                 if ((Height < characterHeight * (double)lineCount) && (UsedSizingPolicy & SizingPolicy.ExpandYIfNeeded) > 0)

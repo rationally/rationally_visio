@@ -18,7 +18,7 @@ namespace ExtendedVisioAddin1.View.Forces
             CenterY = 8.375;
 
             Name = "Forces";
-            LayoutManager = new VerticalStretchLayout(this);
+            
             InitStyle();
         }
 
@@ -31,11 +31,12 @@ namespace ExtendedVisioAddin1.View.Forces
             {
                 Children.Add(new ForceContainer(page, shape));
             }
+            InitStyle();
         }
 
         private void InitStyle()
         {
-
+            LayoutManager = new VerticalStretchLayout(this);
         }
 
         public static bool IsForcesContainer(string name)

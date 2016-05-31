@@ -35,6 +35,7 @@ namespace ExtendedVisioAddin1.View
 
                 RShape.ContainerProperties.AddMember(c.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
 
+                var n = RShape.Name;
                 if (c is RContainer)
                 {
                     c.MsvSdContainerLocked = lockContainer;

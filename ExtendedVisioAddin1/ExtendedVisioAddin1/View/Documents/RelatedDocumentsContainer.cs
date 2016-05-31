@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using ExtendedVisioAddin1.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
@@ -38,7 +37,7 @@ namespace ExtendedVisioAddin1.View.Documents
         public void InitStyle()
         {
             //MakeListItem();
-            this.UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
+            UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
         }
 
         public static bool IsRelatedDocumentsContainer(string name)

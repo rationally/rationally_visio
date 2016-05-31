@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents

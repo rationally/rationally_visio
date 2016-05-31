@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
@@ -24,22 +20,22 @@ namespace ExtendedVisioAddin1.View.Forces
             RShape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
 
-            this.AddUserRow("alternativeIdentifier");
-            this.AlternativeIdentifier = "";
+            AddUserRow("alternativeIdentifier");
+            AlternativeIdentifier = "";
 
-            this.AddUserRow("rationallyType");
-            this.RationallyType = "forceValue";
+            AddUserRow("rationallyType");
+            RationallyType = "forceValue";
             Name = "ForceValue";
 
-            this.Width = (1.0/2.54);
-            this.Height = 0.33;
-            this.Text = "0";
-            this.ToggleBoldFont(true);
+            Width = 1.0/2.54;
+            Height = 0.33;
+            Text = "0";
+            ToggleBoldFont(true);
         }
 
         public ForceValueComponent(Page page, string alternativeIdentifier) : this(page)
         {
-            this.AlternativeIdentifier = alternativeIdentifier;
+            AlternativeIdentifier = alternativeIdentifier;
         }
 
         public ForceValueComponent(Page page, Shape shape) : base(page)

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
@@ -15,8 +14,8 @@ namespace ExtendedVisioAddin1.View.Forces
         {
             Master containerMaster = Globals.ThisAddIn.Model.RationallyDocument.Masters["Forces"];
             RShape = Page.DropContainer(containerMaster, null);
-            this.CenterX = 12.875;
-            this.CenterY = 8.375;
+            CenterX = 12.875;
+            CenterY = 8.375;
 
             Name = "Forces";
             LayoutManager = new VerticalStretchLayout(this);

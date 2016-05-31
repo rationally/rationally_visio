@@ -3,6 +3,7 @@ using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View.Alternatives;
 using ExtendedVisioAddin1.View.Documents;
+using ExtendedVisioAddin1.View.Forces;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
@@ -91,18 +92,17 @@ namespace ExtendedVisioAddin1.View
                 {
                     Children.Add(new RelatedDocumentsContainer(Page, s));
                 }
-            } else if (false)
+            } else if (ForcesContainer.IsForcesContainer(s.Name))
             {
-                /*todo: forces
-                 if (Children.Exists(x => RelatedDocumentsContainer.IsRelatedDocumentsContainer(s.Name)))
+                 if (Children.Exists(x => ForcesContainer.IsForcesContainer(s.Name)))
                 {
                     //TODO: Show message
                     s.DeleteEx(0);
                 }
                 else
                 {
-                    Children.Add(new RelatedDocumentsContainer(Page, s));
-                }*/
+                    Children.Add(new ForcesContainer(Page, s));
+                }
             }
             else
             {

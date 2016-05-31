@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ExtendedVisioAddin1.View.Alternatives;
 using ExtendedVisioAddin1.View.Documents;
 
 namespace ExtendedVisioAddin1.View
@@ -38,11 +37,7 @@ namespace ExtendedVisioAddin1.View
             RComponent toDraw = components.Dequeue();
             double toDrawWidth = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight; //expected increase in x
             double toDrawHeight = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;//expected height in y
-
-            if (toDraw is RelatedDocumentTitleComponent)
-            {
-                var a = 5;
-            }
+            
             PrepareContainerExpansion(x,y,toDrawWidth,0); //if the container streches to support the drawing, the container height does not need to change
             if (toManage.CenterX + (toManage.Width/2.0) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
             {

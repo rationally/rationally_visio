@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Drawing;
 using Microsoft.Office.Interop.Visio;
-using Font = System.Drawing.Font;
 
 namespace ExtendedVisioAddin1.View
 {
     public class TextLabel : RComponent
     {
-        private short size = 12;
+        private short size;
         private int lineCount = 1;
-        private double characterHeight = 0; //height of one character in inches
-        private double characterWidth = 0;
-        private double contentTextWidth = 0;
+        private readonly double characterHeight; //height of one character in inches
+        private readonly double characterWidth;
+        private readonly double contentTextWidth;
         public SizingPolicy UsedSizingPolicy { get; set; }
 
         public TextLabel(Page page, Shape shape) : base(page)
@@ -26,7 +24,7 @@ namespace ExtendedVisioAddin1.View
 
             string text = labelText;
             size = 12;
-            characterHeight = (1.0/72.0)*(double) size;
+            characterHeight = 1.0/72.0*(double) size;
             characterWidth = characterHeight*0.55;
             contentTextWidth = characterWidth * (double)text.Length + 0.2;
             
@@ -60,11 +58,11 @@ namespace ExtendedVisioAddin1.View
             {
                 if ((UsedSizingPolicy & SizingPolicy.ExpandXIfNeeded) > 0)
                 {
-                    this.Width = contentTextWidth;
+                    Width = contentTextWidth;
                 }
 
 
-                int lineLength = (int)(this.Width / characterWidth);
+                int lineLength = (int)(Width / characterWidth);
                 string newContent = "";
                 for (int i = 0; i < (text.Length - lineLength); i += lineLength)
                 {
@@ -72,7 +70,7 @@ namespace ExtendedVisioAddin1.View
                     lineCount++;
                 }
                 //add the last piece of the string
-                newContent += text.Substring((text.Length / lineLength) * lineLength);
+                newContent += text.Substring(text.Length);
                 RShape.Text = newContent;
 
 
@@ -84,12 +82,12 @@ namespace ExtendedVisioAddin1.View
 
             if (contentTextWidth < Width && (UsedSizingPolicy & SizingPolicy.ShrinkXIfNeeded) > 0)
             {
-                this.Width = contentTextWidth;
+                Width = contentTextWidth;
             }
 
             if (Height > characterHeight * (double)lineCount && (UsedSizingPolicy & SizingPolicy.ShrinkYIfNeeded) > 0)
             {
-                this.Height = characterHeight * (double)lineCount;
+                Height = characterHeight * (double)lineCount;
             }
         }
     }

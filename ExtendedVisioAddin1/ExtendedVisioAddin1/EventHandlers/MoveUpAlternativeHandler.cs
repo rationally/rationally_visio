@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Alternatives;
@@ -17,7 +14,7 @@ namespace ExtendedVisioAddin1.EventHandlers
             int currentIndex = toChange.AlternativeIndex;
             //locate the alternative to swap with
             AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
-            AlternativeContainer other = (AlternativeContainer)alternativesContainer.Children.First(c => ((int)c.RShape.CellsU["User.alternativeIndex"].ResultIU) == (currentIndex - 1));
+            AlternativeContainer other = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU["User.alternativeIndex"].ResultIU == currentIndex - 1);
 
             //swap the item to move with the one below
             model.Alternatives.Move(currentIndex, currentIndex - 1);

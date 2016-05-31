@@ -6,7 +6,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
 {
-    class RelatedDocumentContainer : HeaderlessContainer
+    internal class RelatedDocumentContainer : HeaderlessContainer
     {
         private static readonly Regex RelatedRegex = new Regex(@"Related Document(\.\d+)?$");
         public RelatedDocumentContainer(Page page) : base(page)
@@ -23,17 +23,17 @@ namespace ExtendedVisioAddin1.View.Documents
             Array ident = containerShape.ContainerProperties.GetMemberShapes(16);
             List<Shape> shapes = (new List<int>((int[])ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
             Shape titleShape = shapes.FirstOrDefault(shape => RelatedDocumentTitleComponent.IsRelatedDocumentTitleContainer(shape.Name));
-            this.Children.Add(new RelatedDocumentTitleComponent(page, titleShape));
+            Children.Add(new RelatedDocumentTitleComponent(page, titleShape));
 
             Shape fileShape = shapes.FirstOrDefault(shape => RelatedFileComponent.IsRelatedFileComponent(shape.Name));
             if (fileShape != null)
             {
-                this.Children.Add(new RelatedFileComponent(page, fileShape));
+                Children.Add(new RelatedFileComponent(page, fileShape));
             }
             else
             {
                 Shape urlShape = shapes.FirstOrDefault(shape => RelatedUrlComponent.IsRelatedUrlComponent(shape.Name));
-                this.Children.Add(new RelatedUrlComponent(page, urlShape));
+                Children.Add(new RelatedUrlComponent(page, urlShape));
             }
             //LayoutManager = new VerticalStretchLayout(this);
             InitStyle();

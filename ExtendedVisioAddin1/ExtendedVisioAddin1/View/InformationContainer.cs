@@ -19,6 +19,7 @@ namespace ExtendedVisioAddin1.View
 
             AddUserRow("rationallyType");
             RationallyType = "informationBox";
+            RShape.Name = "InformationBox";
 
             Children.Add(authorLabel);
             Children.Add(dateLabel);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ExtendedVisioAddin1.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
@@ -49,14 +50,28 @@ namespace ExtendedVisioAddin1.View
             return RShape.Equals(s) || Children.Exists(x => x.ExistsInTree(s));
         }
 
-        [Obsolete]
-        public override void CascadingDelete()
-        { //TODO: remove delete locks
+
+        public virtual bool DeleteFromTree(Shape s)
+        {
             foreach (RComponent c in Children)
             {
-                c.CascadingDelete();
+                if (c.RShape.Equals(s))
+                {
+                    Children.Remove(c);
+                    if (c is AlternativesContainer)
+                    {
+                        AlternativesContainer container = c as AlternativesContainer;
+                        container.RemoveAlternativesFromModel();
+                    }
+                    return true;
+                }
+                else if (c is RContainer)
+                {
+                    RContainer container = c as RContainer;
+                    if (container.DeleteFromTree(s)) return true;
+                }
             }
-            RShape.Delete();
+            return false;
         }
     }
 }

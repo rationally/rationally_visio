@@ -56,13 +56,6 @@ namespace ExtendedVisioAddin1.View
             new RepaintHandler();
         }
 
-        public void DeleteAlternativesContainerByUser()
-        {
-            AlternativesContainer alternativesContainer = (AlternativesContainer)Children.First(c => c is AlternativesContainer); //We know there exists only one.
-            Children.Remove(alternativesContainer);
-            new RepaintHandler();
-        }
-
         public override bool ExistsInTree(Shape s)
         {
             return Children.Exists(x => x.ExistsInTree(s));
@@ -72,7 +65,7 @@ namespace ExtendedVisioAddin1.View
         {
             if (AlternativesContainer.IsAlternativesContainer(s.Name))
             {
-                if (Children.Exists(x => AlternativesContainer.IsAlternativesContainer(s.Name)))
+                if (Children.Exists(x => AlternativesContainer.IsAlternativesContainer(x.Name)))
                 {
                     //TODO: Show message
                     s.DeleteEx(0);
@@ -83,7 +76,7 @@ namespace ExtendedVisioAddin1.View
                 }
             } else if (RelatedDocumentsContainer.IsRelatedDocumentsContainer(s.Name))
             {
-                if (Children.Exists(x => RelatedDocumentsContainer.IsRelatedDocumentsContainer(s.Name)))
+                if (Children.Exists(x => RelatedDocumentsContainer.IsRelatedDocumentsContainer(x.Name)))
                 {
                     //TODO: Show message
                     s.DeleteEx(0);
@@ -94,7 +87,7 @@ namespace ExtendedVisioAddin1.View
                 }
             } else if (ForcesContainer.IsForcesContainer(s.Name))
             {
-                 if (Children.Exists(x => ForcesContainer.IsForcesContainer(s.Name)))
+                 if (Children.Exists(x => ForcesContainer.IsForcesContainer(x.Name)))
                 {
                     //TODO: Show message
                     s.DeleteEx(0);

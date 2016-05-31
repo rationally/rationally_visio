@@ -5,7 +5,7 @@ namespace ExtendedVisioAddin1.View
 {
     public class TextLabel : RComponent
     {
-        private short size;
+        private short size = 12;
         private int lineCount = 1;
         private readonly double characterHeight; //height of one character in inches
         private readonly double characterWidth;

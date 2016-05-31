@@ -22,8 +22,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 
                 header.SetFontSize(22);
                 header.CenterX = 1;
-                header.CenterY = offsetHeight;
-                Globals.ThisAddIn.View.Children.Add(header);
+                header.CenterY = offsetHeight; //todo: layout the fuckhuge box
 
                 //draw the information container
                 InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version)

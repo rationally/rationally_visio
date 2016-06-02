@@ -14,7 +14,7 @@
                 //AlternativesContainer alternativesContainer = new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage,Model.Alternatives);
                 
             }*/
-
+            Globals.ThisAddIn.View.Children.ForEach(c => c.RemoveChildren());
             Globals.ThisAddIn.View.Children.ForEach(c => c.Repaint());
             Globals.ThisAddIn.View.Children.ForEach(c => c.PlaceChildren());
             //Globals.ThisAddIn.View.Repaint();

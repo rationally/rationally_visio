@@ -51,7 +51,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
         private void InitStyle()
         {
-            this.UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded;
+            this.UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded;
             this.LayoutManager = new InlineLayout(this);
         }
 

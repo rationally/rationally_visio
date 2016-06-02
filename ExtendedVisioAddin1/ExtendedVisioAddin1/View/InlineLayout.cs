@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ExtendedVisioAddin1.View.Documents;
+using ExtendedVisioAddin1.View.Forces;
 
 namespace ExtendedVisioAddin1.View
 {
@@ -41,6 +43,7 @@ namespace ExtendedVisioAddin1.View
             PrepareContainerExpansion(x,y,toDrawWidth,0); //if the container streches to support the drawing, the container height does not need to change
             if (toManage.CenterX + (toManage.Width/2.0) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
             {
+                var n = toManage.Name;
                 x = toManage.CenterX - (toManage.Width/2.0);//go to a new line
                 y -= currentLineHeight; //the new line of components should not overlap with the one above
                 PrepareContainerExpansion(x,y,0,toDrawHeight);   
@@ -110,6 +113,7 @@ namespace ExtendedVisioAddin1.View
 
             if (overflowInY && expandYIfNeeded)
             {
+                var n = toManage.Name;
                 toManage.Height = topLeftY - (y - yIncrease) + 0.01;
                 toManage.CenterY = topLeftY - (toManage.Height/2.0);
             }
@@ -126,8 +130,10 @@ namespace ExtendedVisioAddin1.View
             bool shrinkXIfNeeded = ((int)toManage.UsedSizingPolicy & (int)SizingPolicy.ShrinkXIfNeeded) > 0;
             bool shrinkYIfNeeded = ((int)toManage.UsedSizingPolicy & (int)SizingPolicy.ShrinkYIfNeeded) > 0;
 
+            var n = toManage.Name;
             if (underflowInX && shrinkXIfNeeded)
             {
+                var a = Globals.ThisAddIn.View.Children.Where(c => c is ForcesContainer);
                 toManage.Width = contentXEnd - topLeftX + 0.01;
                 toManage.CenterX = topLeftX + (toManage.Width / 2.0);
             }

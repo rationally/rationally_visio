@@ -341,6 +341,11 @@ namespace ExtendedVisioAddin1.View
             
         }
 
+        public virtual void RemoveChildren()
+        {
+
+        }
+
         public virtual bool ExistsInTree(Shape s)
         {
             return RShape.Equals(s);
@@ -349,6 +354,16 @@ namespace ExtendedVisioAddin1.View
         public virtual void AddToTree(Shape s)
         {
             
+        }
+
+        /// <summary>
+        /// Traverses the component tree and looks for the component whose RShape matches s.
+        /// </summary>
+        /// <param name="s">Shape to match RShape against.</param>
+        /// <returns>the component, or null.</returns>
+        public virtual RComponent GetComponentByShape(Shape s)
+        {
+            return this.RShape.Equals(s) ? this : null;
         }
 
         public void MakeListItem()

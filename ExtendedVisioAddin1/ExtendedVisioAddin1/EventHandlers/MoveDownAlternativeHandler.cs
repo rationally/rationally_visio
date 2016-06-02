@@ -11,7 +11,7 @@ namespace ExtendedVisioAddin1.EventHandlers
         public override void Execute(RModel model, Shape changedShape, string identifier)
         {
             AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
-            AlternativeContainer toChange = new AlternativeContainer(Globals.ThisAddIn.Application.ActivePage,changedShape);
+            AlternativeContainer toChange = (AlternativeContainer)Globals.ThisAddIn.View.GetComponentByShape(changedShape);
             int currentIndex = toChange.AlternativeIndex;
             //locate the alternative that we are going to swap with
             AlternativeContainer other = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU["User.alternativeIndex"].ResultIU == currentIndex + 1);

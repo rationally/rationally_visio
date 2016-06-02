@@ -80,13 +80,22 @@ namespace ExtendedVisioAddin1.View
         public override RComponent GetComponentByShape(Shape s)
         {
             //1) check if current comp is the wanted one, else check it for all the children
-            return RShape.Equals(s) ? this : Children.FirstOrDefault(c => c.RShape.Equals(s));
+            if (RShape.Equals(s))
+            {
+                return this;
+            }
+            else
+            {
+                foreach (RComponent c in Children)
+                {
+                    if (c.GetComponentByShape(s) != null)
+                    {
+                        return c.GetComponentByShape(s);
+                    }
+                }
+            }
+            return null;
         }
-
-        [Obsolete]
-        public override void CascadingDelete()
-        { //TODO: remove delete locks
-
         public virtual bool DeleteFromTree(Shape s)
         {
             foreach (RComponent c in Children)

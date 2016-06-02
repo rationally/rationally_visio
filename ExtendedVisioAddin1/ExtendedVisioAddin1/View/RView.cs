@@ -23,7 +23,7 @@ namespace ExtendedVisioAddin1.View
         private void UpdateAlternatives(RModel model)
         {
             //trace the alternatives container
-            
+
         }
 
         public void AddAlternative(Alternative alternative)
@@ -42,7 +42,7 @@ namespace ExtendedVisioAddin1.View
         {
             AlternativesContainer alternativesContainer = (AlternativesContainer)Children.FirstOrDefault(c => c is AlternativesContainer); //May have been deleted by the user
 
-            AlternativeContainer alternative = (AlternativeContainer) alternativesContainer?.Children.FirstOrDefault(x => x.AlternativeIndex == index && x is AlternativeContainer); //Return null if no container or no alternative with index
+            AlternativeContainer alternative = (AlternativeContainer)alternativesContainer?.Children.FirstOrDefault(x => x.AlternativeIndex == index && x is AlternativeContainer); //Return null if no container or no alternative with index
             if (alternative != null)
             {
                 alternativesContainer.Children.Remove(alternative);
@@ -51,7 +51,7 @@ namespace ExtendedVisioAddin1.View
                     alternative.RShape.DeleteEx(0); //deletes the alternative, and it's child components. This should not be done when the shape is already gone, such as when the user has deleted it himself.
                 }
                 int i = 0;
-                alternativesContainer.Children.Where(c => c is AlternativeContainer).ToList().ForEach(c => ((AlternativeContainer) c).SetAlternativeIdentifier(i++));
+                alternativesContainer.Children.Where(c => c is AlternativeContainer).ToList().ForEach(c => ((AlternativeContainer)c).SetAlternativeIdentifier(i++));
             }
             new RepaintHandler();
         }
@@ -74,7 +74,8 @@ namespace ExtendedVisioAddin1.View
                 {
                     Children.Add(new AlternativesContainer(Page, s));
                 }
-            } else if (RelatedDocumentsContainer.IsRelatedDocumentsContainer(s.Name))
+            }
+            else if (RelatedDocumentsContainer.IsRelatedDocumentsContainer(s.Name))
             {
                 if (Children.Exists(x => RelatedDocumentsContainer.IsRelatedDocumentsContainer(x.Name)))
                 {
@@ -85,9 +86,10 @@ namespace ExtendedVisioAddin1.View
                 {
                     Children.Add(new RelatedDocumentsContainer(Page, s));
                 }
-            } else if (ForcesContainer.IsForcesContainer(s.Name))
+            }
+            else if (ForcesContainer.IsForcesContainer(s.Name))
             {
-                 if (Children.Exists(x => ForcesContainer.IsForcesContainer(x.Name)))
+                if (Children.Exists(x => ForcesContainer.IsForcesContainer(x.Name)))
                 {
                     //TODO: Show message
                     s.DeleteEx(0);
@@ -101,6 +103,20 @@ namespace ExtendedVisioAddin1.View
             {
                 Children.ForEach(r => r.AddToTree(s));
             }
+        }
+
+        public override RComponent GetComponentByShape(Shape s)
+        {
+
+            foreach (RComponent c in Children)
+            {
+                if (c.GetComponentByShape(s) != null)
+                {
+                    return c.GetComponentByShape(s);
+                }
+            }
+
+            return null;
         }
     }
 }

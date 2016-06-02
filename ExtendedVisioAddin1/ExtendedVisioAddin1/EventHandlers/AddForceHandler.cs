@@ -10,7 +10,7 @@ namespace ExtendedVisioAddin1.EventHandlers
         public override void Execute(RModel model, Shape changedShape, string identifier)
         {
             ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
-            forcesContainer.Children.Add(new ForceContainer(changedShape.ContainingPage));
+            forcesContainer.Children.Insert(forcesContainer.Children.Count-1,new ForceContainer(changedShape.ContainingPage));
             new RepaintHandler(forcesContainer);
         }
     }

@@ -11,6 +11,7 @@ namespace ExtendedVisioAddin1.View
             Master containerMaster = containerDocument.Masters["Plain"];
 
             RShape = Page.DropContainer(containerMaster, null);
+            
             RShape.CellsU["User.msvSDHeadingStyle"].ResultIU = 0; //Remove header
             containerDocument.Close();
         }

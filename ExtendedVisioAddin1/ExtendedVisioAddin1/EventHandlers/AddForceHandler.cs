@@ -11,7 +11,7 @@ namespace ExtendedVisioAddin1.EventHandlers
         {
             ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
             forcesContainer.Children.Insert(forcesContainer.Children.Count-1,new ForceContainer(changedShape.ContainingPage));
-            new RepaintHandler();
+            new RepaintHandler(forcesContainer);
         }
     }
 }

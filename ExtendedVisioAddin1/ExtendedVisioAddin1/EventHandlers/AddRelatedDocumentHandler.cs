@@ -42,7 +42,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 relatedDocumentContainer.Children.Add(relatedFileComponent);
 
 
-                new RepaintHandler();
+                new RepaintHandler(relatedDocumentsContainer);
             }
         }
     }

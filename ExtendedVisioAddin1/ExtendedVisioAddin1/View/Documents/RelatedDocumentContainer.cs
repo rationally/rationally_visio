@@ -33,7 +33,10 @@ namespace ExtendedVisioAddin1.View.Documents
             else
             {
                 Shape urlShape = shapes.FirstOrDefault(shape => RelatedUrlComponent.IsRelatedUrlComponent(shape.Name));
-                Children.Add(new RelatedUrlComponent(page, urlShape));
+                if (urlShape != null)
+                {
+                    Children.Add(new RelatedUrlComponent(page, urlShape));
+                }
             }
             //LayoutManager = new VerticalStretchLayout(this);
             InitStyle();

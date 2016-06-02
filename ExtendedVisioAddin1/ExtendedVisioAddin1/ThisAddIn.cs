@@ -54,6 +54,7 @@ namespace ExtendedVisioAddin1
         {
             View.Children.Clear();
             Model.Alternatives.Clear();
+            View.Page = Application.ActivePage;
             Application_DocumentOpenedEvent(w.Document);
         }
 

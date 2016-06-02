@@ -43,6 +43,11 @@ namespace ExtendedVisioAddin1.View.Forces
             this.Text = id;
         }
 
+        public ForceAlternativeHeaderComponent(Page page, Shape shape) : this(page)
+        {
+            RShape = shape;
+        }
+
         public static bool IsForceAlternativeHeaderComponent(string name)
         {
             return ForceAlternativeHeaderComponentRegex.IsMatch(name);

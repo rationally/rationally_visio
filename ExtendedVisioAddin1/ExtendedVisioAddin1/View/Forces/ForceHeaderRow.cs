@@ -30,9 +30,24 @@ namespace ExtendedVisioAddin1.View.Forces
             InitStyle();
         }
 
-        public ForceHeaderRow(Page page, Shape shape) : this(page)
+        public ForceHeaderRow(Page page, Shape forceHeaderShape) : this(page)
         {
-            RShape = shape;//TODO subelements
+            RShape = forceHeaderShape;
+            Array ident = forceHeaderShape.ContainerProperties.GetMemberShapes(16);
+            List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
+            foreach (Shape shape in shapes)
+            {
+                if (ForceAlternativeHeaderComponent.IsForceAlternativeHeaderComponent(shape.Name))
+                {
+                    Children.Add(new ForceAlternativeHeaderComponent(page, shape));
+                }
+                if (shape.CellExistsU["User.rationallyType", 0] != 0)
+                {
+                    RComponent toAdd = new RComponent(page);
+                    toAdd.RShape = shape;
+                    Children.Add(toAdd);
+                }
+            }
         }
 
         private void InitChildren(Page page)
@@ -47,6 +62,7 @@ namespace ExtendedVisioAddin1.View.Forces
             concernLabel.ToggleBoldFont(true);
             concernLabel.Width = 1;
             concernLabel.Height = 0.33;
+            concernLabel.AddUserRow("rationallyType");
             Children.Add(concernLabel);
 
             RComponent descLabel = new RComponent(page);
@@ -55,6 +71,7 @@ namespace ExtendedVisioAddin1.View.Forces
             descLabel.ToggleBoldFont(true);
             descLabel.Width = 2;
             descLabel.Height = 0.33;
+            descLabel.AddUserRow("rationallyType");
             Children.Add(descLabel);
 
             basicDocument.Close();

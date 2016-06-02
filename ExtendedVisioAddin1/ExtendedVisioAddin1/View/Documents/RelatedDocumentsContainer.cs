@@ -34,6 +34,15 @@ namespace ExtendedVisioAddin1.View.Documents
             InitStyle();
         }
 
+        public override void AddToTree(Shape s)
+        {
+            if (RelatedDocumentContainer.IsRelatedDocumentContainer(s.Name))
+            {
+                Children.Add(new RelatedDocumentContainer(Page, s));
+            }
+        }
+
+
         public void InitStyle()
         {
             //MakeListItem();

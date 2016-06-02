@@ -50,6 +50,14 @@ namespace ExtendedVisioAddin1.View.Alternatives
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
         }
 
+        public override void AddToTree(Shape s)
+        {
+            if (AlternativeContainer.IsAlternativeContainer(s.Name))
+            {
+                Children.Add(new AlternativeContainer(Page, s));
+            }
+        }
+
         public static bool IsAlternativesContainer(string name)
         {
             return AlternativesRegex.IsMatch(name);

@@ -23,8 +23,6 @@ namespace ExtendedVisioAddin1
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             Model = new RModel();
-            //Model.Alternatives.Add(new Alternative("titelo","Accepted","dessehcription"));
-            //Model.Alternatives.Add(new Alternative("titelo dos", "Accepted", "dessehcription"));
             View = new RView(Application.ActivePage);
             Model.AddObserver(View);
             Application.MarkerEvent += Application_MarkerEvent;
@@ -32,12 +30,11 @@ namespace ExtendedVisioAddin1
             Application.DocumentCreated += DelegateCreateDocumentEvent;
             Application.DocumentOpened += Application_DocumentOpenedEvent;
             Application.ShapeAdded += Application_ShapeAddedEvent;
-            Application.ShapeChanged += Application_ShapeChangedEvent;
-            Application.MasterAdded += Application_MasterAddedEvent;
-            Application.MasterChanged += Application_MasterChangedEvent;
             Application.BeforeShapeDelete += Application_DeleteShapeEvent;
             Application.CellChanged += Application_CellChangedEvent;
             Application.ShapeParentChanged += Application_ShapeParentChangedEvent;
+            Application.BeforeDocumentClose += Application_BeforeDocumentCloseEvent;
+            Application.BeforePageDelete += Application_BeforePageDeleteEvent;
 
             RegisterEventHandlers();
         }
@@ -51,7 +48,7 @@ namespace ExtendedVisioAddin1
         private void RegisterEventHandlers()
         {
             MarkerEventHandlerRegistry registry = MarkerEventHandlerRegistry.Instance;
-            registry.Register("alternatives.add",new AddAlternativeEventHandler());
+            registry.Register("alternatives.add", new AddAlternativeEventHandler());
             registry.Register("relatedDocuments.addRelatedFile", new AddRelatedDocumentHandler());
             registry.Register("relatedDocuments.addRelatedUrl", new AddRelatedUrlHandler());
             registry.Register("alternative.delete", new RemoveAlternativeEventHandler());
@@ -80,7 +77,7 @@ namespace ExtendedVisioAddin1
             //for (int i = 0; i < selection.Count; i++) 
             foreach (Shape s in selection)
             {
-                if (s.CellExistsU["User.rationallyType",0] != 0)
+                if (s.CellExistsU["User.rationallyType", 0] != 0)
                 {
                     string identifier = context;
                     if (context.Contains("."))
@@ -97,7 +94,7 @@ namespace ExtendedVisioAddin1
         private void Application_CellChangedEvent(Cell cell)
         {
             Shape changedShape = cell.Shape;
-            if ( cell.LocalName.Equals("Hyperlink.Row_1.Address") && changedShape.Name.Equals("RelatedUrl"))
+            if (cell.LocalName.Equals("Hyperlink.Row_1.Address") && changedShape.Name.Equals("RelatedUrl"))
             {
                 //find the container that holds all Related Documents
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)View.Children.First(c => c is RelatedDocumentsContainer);
@@ -108,7 +105,7 @@ namespace ExtendedVisioAddin1
                 relatedURLURLComponent.Text = changedShape.Hyperlink.Address;
                 //new RepaintHandler();
             }
-            
+
         }
 
         private void Application_DocumentOpenedEvent(IVDocument d)
@@ -120,10 +117,12 @@ namespace ExtendedVisioAddin1
                     if (AlternativesContainer.IsAlternativesContainer(shape.Name)) //Check if the shape is an Alternatives box
                     {
                         View.Children.Add(new AlternativesContainer(Application.ActivePage, shape));
-                    } else if (RelatedDocumentsContainer.IsRelatedDocumentsContainer(shape.Name))
+                    }
+                    else if (RelatedDocumentsContainer.IsRelatedDocumentsContainer(shape.Name))
                     {
                         View.Children.Add(new RelatedDocumentsContainer(Application.ActivePage, shape));
-                    } else if (ForcesContainer.IsForcesContainer(shape.Name))
+                    }
+                    else if (ForcesContainer.IsForcesContainer(shape.Name))
                     {
                         View.Children.Add(new ForcesContainer(Application.ActivePage, shape));
                     }
@@ -141,22 +140,37 @@ namespace ExtendedVisioAddin1
                 View.AddToTree(s);
             }
         }
+        
 
-
-        private void Application_ShapeChangedEvent(Shape s)
+        private void Application_BeforeDocumentCloseEvent(Document d)
         {
-        }
-
-        private void Application_MasterAddedEvent(Master m)
-        {
-            if (m.Name == "Alternatives") //todo: wth
+            if (d.Template.ToLower().Contains("rationally"))
             {
-                m.Delete();
+                foreach (Page page in d.Pages)
+                {
+                    foreach (Shape shape in page.Shapes)
+                    {
+                        View.DeleteFromTree(shape);
+                    }
+                }
+
             }
         }
 
-        private void Application_MasterChangedEvent(Master m)
+        private void Application_BeforePageDeleteEvent(Page p)
         {
+            if (p.Document.Template.ToLower().Contains("rationally"))
+            {
+                foreach (Shape shape in p.Shapes)
+                {
+                    View.DeleteFromTree(shape);
+                }
+            }
+        }
+
+        private void Application_BeforeWindowPageTurn(Application window)
+        {
+            var x = 0;
         }
 
         private void Application_DeleteShapeEvent(Shape s)
@@ -194,13 +208,9 @@ namespace ExtendedVisioAddin1
                         {
                             foreach (RelatedDocumentContainer relatedDocumentContainer in relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().ToList())
                             {
-                                relatedDocumentContainer.Children.RemoveAll(c => c.RShape.Equals(s));
-                                    //Remove the component from the tree
+                                relatedDocumentContainer.Children.RemoveAll(c => c.RShape.Equals(s));//Remove the component from the tree
                             }
                         }
-                        break;
-                    case "alternatives":
-                        View.DeleteAlternativesContainerByUser();
                         break;
                     case "alternative":
                         RComponent component = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };
@@ -208,8 +218,12 @@ namespace ExtendedVisioAddin1
                         Model.Alternatives.RemoveAt(index);
                         View.DeleteAlternative(index, false);
                         break;
+                    case "alternatives":
+                    case "forces":
+                    case "relatedDocuments":
                     case "informationBox":
                         View.Children.RemoveAll(obj => obj.RShape.Equals(s));
+                        //todo extract and/or call repaint
                         break;
                 }
             }

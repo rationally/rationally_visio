@@ -55,5 +55,20 @@ namespace ExtendedVisioAddin1.View.Alternatives
             return AlternativesRegex.IsMatch(name);
         }
 
+        public void RemoveAlternativesFromModel()
+        {
+            List<int> indexList = new List<int>();
+            foreach (RComponent alternative in Children)
+            {
+                indexList.Add(alternative.AlternativeIndex);
+            }
+            indexList.Sort();
+            indexList.Reverse();
+            foreach (int index in indexList)
+            {
+                Globals.ThisAddIn.Model.Alternatives.RemoveAt(index);
+            }
+        }
+
     }
 }

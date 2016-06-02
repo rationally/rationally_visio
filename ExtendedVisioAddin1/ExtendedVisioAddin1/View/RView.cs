@@ -29,7 +29,8 @@ namespace ExtendedVisioAddin1.View
         public void AddAlternative(Alternative alternative)
         {
             //todo: first is wrong, since we don;t know how many
-            ((RContainer)Globals.ThisAddIn.View.Children.First(ch => ch is AlternativesContainer)).Children.Add(new AlternativeContainer(Globals.ThisAddIn.Application.ActivePage, Globals.ThisAddIn.Model.Alternatives.Count - 1, alternative));
+            AlternativesContainer container = (AlternativesContainer) Globals.ThisAddIn.View.Children.First(ch => ch is AlternativesContainer);
+            container.Children.Add(new AlternativeContainer(Globals.ThisAddIn.Application.ActivePage, Globals.ThisAddIn.Model.Alternatives.Count - 1, alternative));
             new RepaintHandler();
         }
 
@@ -55,7 +56,7 @@ namespace ExtendedVisioAddin1.View
             }
             new RepaintHandler();
         }
-
+        
         public override bool ExistsInTree(Shape s)
         {
             return Children.Exists(x => x.ExistsInTree(s));

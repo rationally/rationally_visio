@@ -30,15 +30,8 @@ namespace ExtendedVisioAddin1.EventHandlers
                         CenterX = 9,
                         CenterY = offsetHeight
                     };
-                //(Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageWidth"].Result[VisUnitCodes.visInches]);
                 Globals.ThisAddIn.View.Children.Add(informationContainer); 
-
-                //Globals.ThisAddIn.View.Children.Add(new AlternativesContainer(Globals.ThisAddIn.Application.ActivePage, model.Alternatives.ToList()));
               
-              //new RepaintHandler(model);
-                //RelatedDocumentsContainer a = new RelatedDocumentsContainer(Globals.ThisAddIn.Application.ActivePage); //todo: dit is temp
-                //a.Children.Add(new RelatedFileComponent(Globals.ThisAddIn.Application.ActivePage, @"C:\Users\Ruben\Desktop\QoSA.pdf"));
-              //Globals.ThisAddIn.View.Children.Add(a);
                 new RepaintHandler();
             }
         }

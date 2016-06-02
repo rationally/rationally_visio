@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
@@ -11,7 +12,7 @@ namespace ExtendedVisioAddin1.View
         public double MarginBottom { get; set; }
         public double MarginLeft { get; set; }
         public double MarginRight { get; set; }
-
+        
         public void SetMargin(double m)
         {
             MarginTop = m;
@@ -380,6 +381,7 @@ namespace ExtendedVisioAddin1.View
             TextPosAfterBullet = 0;
             BulletSize = -1;
         }
+        
 
         [Obsolete]
         public virtual void CascadingDelete()

@@ -40,7 +40,7 @@ namespace ExtendedVisioAddin1.EventHandlers
 
                 relatedDocumentContainer.Children.Add(urlLabel);
 
-                new RepaintHandler();
+                new RepaintHandler(relatedDocumentsContainer);
             }
             selectUrlDialog.Dispose();
         }

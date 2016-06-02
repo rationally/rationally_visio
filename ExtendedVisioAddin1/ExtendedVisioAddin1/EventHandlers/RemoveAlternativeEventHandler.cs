@@ -9,6 +9,7 @@ namespace ExtendedVisioAddin1.EventHandlers
     {
         public override void Execute(RModel model, Shape s, string context)
         {
+            
             RComponent c = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };
 
             int index = c.AlternativeIndex;

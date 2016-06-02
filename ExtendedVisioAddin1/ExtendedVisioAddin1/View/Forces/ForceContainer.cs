@@ -47,11 +47,12 @@ namespace ExtendedVisioAddin1.View.Forces
                     Children.Add(new ForceValueComponent(page, shape));
                 }
             }
+            InitStyle();
         }
 
         private void InitStyle()
         {
-            this.UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded;
+            this.UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkYIfNeeded;
             this.LayoutManager = new InlineLayout(this);
         }
 

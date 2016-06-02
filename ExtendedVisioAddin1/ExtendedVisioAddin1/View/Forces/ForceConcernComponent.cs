@@ -31,7 +31,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
         private void InitStyle()
         {
-            LinePattern = 0;
+
         }
 
         public static bool IsForceConcern(string name)

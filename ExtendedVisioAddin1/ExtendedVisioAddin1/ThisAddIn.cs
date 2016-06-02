@@ -32,6 +32,7 @@ namespace ExtendedVisioAddin1
             Application.ShapeAdded += Application_ShapeAddedEvent;
             Application.BeforeShapeDelete += Application_DeleteShapeEvent;
             Application.CellChanged += Application_CellChangedEvent;
+            Application.TextChanged += Application_TextChangedEvent;
             Application.ShapeParentChanged += Application_ShapeParentChangedEvent;
             Application.BeforeDocumentClose += Application_BeforeDocumentCloseEvent; //todo: Doet windowActived dit niet ook al?
 
@@ -39,6 +40,16 @@ namespace ExtendedVisioAddin1
             Application.WindowActivated += Application_WindowActivatedEvent;
 
             RegisterEventHandlers();
+        }
+
+        private void Application_TextChangedEvent(Shape shape)
+        {
+            if (ForceValueComponent.IsForceValue(shape.Name))
+            {
+                ForcesContainer forcesContainer = (ForcesContainer)View.Children.First(c => c is ForcesContainer);
+                forcesContainer.Children.Last().Repaint();
+
+            }
         }
 
         private void Application_WindowActivatedEvent(Window w)

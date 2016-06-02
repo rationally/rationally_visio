@@ -27,15 +27,42 @@ namespace ExtendedVisioAddin1.View.Forces
             RShape = forcesContainer;
             Array ident = forcesContainer.ContainerProperties.GetMemberShapes(16);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
+
             foreach (Shape shape in shapes.Where(shape => ForceContainer.IsForceContainer(shape.Name)))
             {
-                Children.Add(new ForceContainer(page, shape));
+                if (ForceHeaderRow.IsForceHeaderRow(shape.Name))
+                {
+                    Children.Add(new ForceHeaderRow(page, shape));
+                    continue;
+                }
+                if (ForceContainer.IsForceContainer(shape.Name))
+                {
+                    Children.Add(new ForceContainer(page, shape));
+                    continue;
+                }
+                if (ForceTotalsRow.IsForceTotalsRow(shape.Name))
+                {
+                    Children.Add(new ForceTotalsRow(page,shape));
+                    continue;
+                }
+            }
+            //insert header, if it is absent
+            if (Children.Count == 0 || !(Children[0] is ForceHeaderRow))
+            {
+                this.Children.Insert(0, new ForceHeaderRow(page));
+            }
+            //insert footer, if it is absent
+            if (Children.Count == 0 || !(Children[Children.Count-1] is ForceTotalsRow))
+            {
+                this.Children.Add(new ForceTotalsRow(page));
             }
             InitStyle();
         }
 
         private void InitStyle()
         {
+            this.UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandYIfNeeded;
+            
             LayoutManager = new VerticalStretchLayout(this);
         }
 

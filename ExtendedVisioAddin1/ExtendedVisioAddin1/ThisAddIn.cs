@@ -149,7 +149,9 @@ namespace ExtendedVisioAddin1
                         }
                         else if (ForcesContainer.IsForcesContainer(shape.Name))
                         {
-                            View.Children.Add(new ForcesContainer(Application.ActivePage, shape));
+                            ForcesContainer forcesContainer = new ForcesContainer(Application.ActivePage, shape);
+                            View.Children.Add(forcesContainer);
+                            new RepaintHandler(forcesContainer);
                         }
                     }
                 }

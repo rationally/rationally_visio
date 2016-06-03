@@ -133,8 +133,12 @@ namespace ExtendedVisioAddin1
             {
                 foreach (Page page in d.Pages)
                 {
-                    foreach (Shape shape in page.Shapes)
+                    foreach (Shape shape in page.Shapes) //todo Fix duplicates due to 2 calls.
                     {
+                        if (View.ExistsInTree(shape))
+                        {
+                            continue;
+                        }
                         if (AlternativesContainer.IsAlternativesContainer(shape.Name)) //Check if the shape is an Alternatives box
                         {
                             View.Children.Add(new AlternativesContainer(Application.ActivePage, shape));

@@ -36,7 +36,7 @@ namespace ExtendedVisioAddin1
             Application.ShapeParentChanged += Application_ShapeParentChangedEvent;
 
             Application.BeforePageDelete += Application_BeforePageDeleteEvent;
-            Application.WindowActivated += Application_WindowActivatedEvent;
+            //Application.WindowActivated += Application_WindowActivatedEvent;
             RegisterEventHandlers();
         }
 

@@ -37,15 +37,18 @@ namespace ExtendedVisioAddin1.View.Forces
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             foreach (Shape shape in shapes)
             {
-                if (ForceAlternativeHeaderComponent.IsForceAlternativeHeaderComponent(shape.Name))
+                if (Children.Count == 0)
                 {
-                    Children.Add(new ForceAlternativeHeaderComponent(page, shape));
-                }
-                if (shape.CellExistsU["User.rationallyType", 0] != 0)
-                {
-                    RComponent toAdd = new RComponent(page);
-                    toAdd.RShape = shape;
-                    Children.Add(toAdd);
+                    if (ForceAlternativeHeaderComponent.IsForceAlternativeHeaderComponent(shape.Name))
+                    {
+                        Children.Add(new ForceAlternativeHeaderComponent(page, shape));
+                    }
+                    if (shape.CellExistsU["User.rationallyType", 0] != 0)
+                    {
+                        RComponent toAdd = new RComponent(page);
+                        toAdd.RShape = shape;
+                        Children.Add(toAdd);
+                    }
                 }
             }
         }
@@ -59,6 +62,7 @@ namespace ExtendedVisioAddin1.View.Forces
             RComponent concernLabel = new RComponent(page);
             concernLabel.RShape = page.Drop(rectMaster, 0, 0);
             concernLabel.Text = "Concern";
+            concernLabel.Name = "ConcernLabel";
             concernLabel.ToggleBoldFont(true);
             concernLabel.Width = 1;
             concernLabel.Height = 0.33;
@@ -68,6 +72,7 @@ namespace ExtendedVisioAddin1.View.Forces
             RComponent descLabel = new RComponent(page);
             descLabel.RShape = page.Drop(rectMaster, 0, 0);
             descLabel.Text = "Description";
+            descLabel.Name = "DescriptionLabel";
             descLabel.ToggleBoldFont(true);
             descLabel.Width = 2;
             descLabel.Height = 0.33;

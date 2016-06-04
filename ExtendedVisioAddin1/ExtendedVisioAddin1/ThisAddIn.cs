@@ -175,8 +175,7 @@ namespace ExtendedVisioAddin1
             {
                 if (s.CellExistsU["User.rationallyType", 0] != 0)
                 {
-                    string rationallyType;
-                    rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
+                    string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
 
 
                     //select all 'related documents' containers

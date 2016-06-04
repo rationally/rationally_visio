@@ -47,12 +47,12 @@ namespace ExtendedVisioAddin1.View.Forces
                 }
             }
             //insert header, if it is absent
-            if (Children.Count == 0 || !(Children[0] is ForceHeaderRow))
+            if (Children.Count == 0 || !Children.Any(c => c is ForceHeaderRow))
             {
                 this.Children.Insert(0, new ForceHeaderRow(Page));
             }
             //insert footer, if it is absent
-            if (Children.Count == 0 || !(Children[Children.Count - 1] is ForceTotalsRow))
+            if (Children.Count == 0 || !Children.Any(c => c is ForceTotalsRow))
             {
                 this.Children.Add(new ForceTotalsRow(Page));
             }

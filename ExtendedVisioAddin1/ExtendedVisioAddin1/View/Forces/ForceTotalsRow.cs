@@ -29,7 +29,7 @@ namespace ExtendedVisioAddin1.View.Forces
             InitStyle();
         }
 
-        public ForceTotalsRow(Page page, Shape forceTotalsShape) : this(page)
+        public ForceTotalsRow(Page page, Shape forceTotalsShape) : base(page)
         {
             RShape = forceTotalsShape;
             Array ident = forceTotalsShape.ContainerProperties.GetMemberShapes(16);

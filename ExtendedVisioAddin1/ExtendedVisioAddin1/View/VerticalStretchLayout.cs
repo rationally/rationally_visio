@@ -122,7 +122,7 @@ namespace ExtendedVisioAddin1.View
             double marginIncludedWidth = component.MarginLeft + component.Width + component.MarginRight;
             if (marginIncludedWidth < containerWidth)
             {
-                component.Width = containerWidth - (component.MarginLeft + component.MarginRight);
+                component.Width = containerWidth - (component.MarginLeft + component.MarginRight)-0.01;
             }
         }
 

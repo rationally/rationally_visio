@@ -77,9 +77,23 @@ namespace ExtendedVisioAddin1.View.Forces
                 {
                     total += v;
                 }
+
+                if (v < 0)
+                {
+                    RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(255,128,0))";
+                }
+                else if (v > 0)
+                {
+                    RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(0,255,0))";
+                }
+                else
+                {
+                    RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(0,0,0))";
+                }
             }
 
             this.Text = total+"";
+
         }
     }
 }

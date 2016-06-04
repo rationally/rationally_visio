@@ -36,15 +36,18 @@ namespace ExtendedVisioAddin1.View.Forces
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             foreach (Shape shape in shapes)
             {
-                if (ForceTotalComponent.IsForceTotalComponent(shape.Name))
+                if (Children.Count == 0)
                 {
-                    Children.Add(new ForceTotalComponent(page,shape));
-                }
-                if (shape.CellExistsU["User.rationallyType", 0] != 0)
-                {
-                    RComponent toAdd = new RComponent(page);
-                    toAdd.RShape = shape;
-                    Children.Add(toAdd);
+                    if (ForceTotalComponent.IsForceTotalComponent(shape.Name))
+                    {
+                        Children.Add(new ForceTotalComponent(page, shape));
+                    }
+                    if (shape.CellExistsU["User.rationallyType", 0] != 0)
+                    {
+                        RComponent toAdd = new RComponent(page);
+                        toAdd.RShape = shape;
+                        Children.Add(toAdd);
+                    }
                 }
             }
         }
@@ -61,6 +64,7 @@ namespace ExtendedVisioAddin1.View.Forces
             concernDummy.Width = 1;
             concernDummy.Height = 0.33;
             concernDummy.LinePattern = 1;
+            concernDummy.Name = "ConcernDummy";
             concernDummy.AddUserRow("rationallyType");
             this.Children.Add(concernDummy);
 
@@ -70,6 +74,7 @@ namespace ExtendedVisioAddin1.View.Forces
             descDummy.Width = 2;
             descDummy.Height = 0.33;
             descDummy.LinePattern = 1;
+            descDummy.Name = "DescDummy";
             descDummy.AddUserRow("rationallyType");
             this.Children.Add(descDummy);
 

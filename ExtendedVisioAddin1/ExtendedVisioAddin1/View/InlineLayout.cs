@@ -30,7 +30,10 @@ namespace ExtendedVisioAddin1.View
                 //the container might still be not high enough, if the initial height is very small and expandX is true
                 if ((toManage.UsedSizingPolicy & SizingPolicy.ExpandYIfNeeded) > 0 && currentLineHeight > toManage.Height)
                 {
+                    double topLeftY = toManage.CenterY + (toManage.Height / 2.0);
                     toManage.Height = currentLineHeight;
+                    toManage.CenterY = topLeftY - (toManage.Height / 2.0);
+
                 }
                 ShrinkContainer(contentXEnd,contentYEnd);
                 return;

@@ -12,25 +12,19 @@ namespace ExtendedVisioAddin1.View.Forces
     class ForceHeaderRow : HeaderlessContainer
     {
         private static readonly Regex ForceHeaderRowRegex = new Regex(@"ForceHeaderRow(\.\d+)?$");
-        private Shape shape;
 
         public ForceHeaderRow(Page page) : base(page)
         {
-            this.AddUserRow("rationallyType");
-            this.RationallyType = "forceHeaderRow";
-            this.Name = "ForceHeaderRow";
+            AddUserRow("rationallyType");
+            RationallyType = "forceHeaderRow";
+            Name = "ForceHeaderRow";
 
             InitChildren(page);
             InitStyle();
         }
+        
 
-        public ForceHeaderRow(Page page, bool makeShape) : base(page, makeShape)
-        {
-            InitChildren(page);
-            InitStyle();
-        }
-
-        public ForceHeaderRow(Page page, Shape forceHeaderShape) : base(page)
+        public ForceHeaderRow(Page page, Shape forceHeaderShape) : base(page, false)
         {
             RShape = forceHeaderShape;
             Array ident = forceHeaderShape.ContainerProperties.GetMemberShapes(16);
@@ -44,7 +38,7 @@ namespace ExtendedVisioAddin1.View.Forces
                     {
                         Children.Add(new ForceAlternativeHeaderComponent(page, shape));
                     }
-                    if (shape.CellExistsU["User.rationallyType", 0] != 0)
+                    else if (shape.CellExistsU["User.rationallyType", 0] != 0)
                     {
                         RComponent toAdd = new RComponent(page);
                         toAdd.RShape = shape;
@@ -85,10 +79,10 @@ namespace ExtendedVisioAddin1.View.Forces
 
         private void InitStyle()
         {
-            this.MarginTop = 0.4;
-            this.Height = 0.33;
-            this.UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
-            this.LayoutManager = new InlineLayout(this);
+            MarginTop = 0.4;
+            Height = 0.33;
+            UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
+            LayoutManager = new InlineLayout(this);
         }
 
         public override void Repaint()

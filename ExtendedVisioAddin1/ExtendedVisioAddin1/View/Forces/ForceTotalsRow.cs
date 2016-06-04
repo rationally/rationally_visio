@@ -22,14 +22,8 @@ namespace ExtendedVisioAddin1.View.Forces
             InitChildren(page);
             InitStyle();
         }
-
-        public ForceTotalsRow(Page page, bool makeShape) : base(page, makeShape)
-        {
-            InitChildren(page);
-            InitStyle();
-        }
-
-        public ForceTotalsRow(Page page, Shape forceTotalsShape) : base(page)
+        
+        public ForceTotalsRow(Page page, Shape forceTotalsShape) : base(page, false)
         {
             RShape = forceTotalsShape;
             Array ident = forceTotalsShape.ContainerProperties.GetMemberShapes(16);
@@ -43,7 +37,7 @@ namespace ExtendedVisioAddin1.View.Forces
                     {
                         Children.Add(new ForceTotalComponent(page, shape));
                     }
-                    if (shape.CellExistsU["User.rationallyType", 0] != 0)
+                    else if (shape.CellExistsU["User.rationallyType", 0] != 0)
                     {
                         RComponent toAdd = new RComponent(page);
                         toAdd.RShape = shape;

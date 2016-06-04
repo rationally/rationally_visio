@@ -32,7 +32,7 @@ namespace ExtendedVisioAddin1.View.Forces
             InitStyle();
         }
 
-        public ForceContainer(Page page, Shape forceContainer) : base(page)
+        public ForceContainer(Page page, Shape forceContainer) : base(page, false)
         {
             RShape = forceContainer;
             Array ident = forceContainer.ContainerProperties.GetMemberShapes(16);

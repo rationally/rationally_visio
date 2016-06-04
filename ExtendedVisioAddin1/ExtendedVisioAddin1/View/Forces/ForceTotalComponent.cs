@@ -43,7 +43,7 @@ namespace ExtendedVisioAddin1.View.Forces
             AlternativeIdentifier = id;
         }
 
-        public ForceTotalComponent(Page page, Shape shape) : this(page)
+        public ForceTotalComponent(Page page, Shape shape) : base(page)
         {
             RShape = shape;
         }

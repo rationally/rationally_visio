@@ -24,6 +24,9 @@ namespace ExtendedVisioAddin1.View.Forces
             AddUserRow("rationallyType");
             RationallyType = "forceContainer";
             Name = "ForceContainer";
+
+            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete force\"", false);
+
             Height = 0.33;
             UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded;
             InitStyle();

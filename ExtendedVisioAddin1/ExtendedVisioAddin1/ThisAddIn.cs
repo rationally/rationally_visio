@@ -76,6 +76,7 @@ namespace ExtendedVisioAddin1
             registry.Register("alternative.moveUp", new MoveUpAlternativeHandler());
             registry.Register("alternative.moveDown", new MoveDownAlternativeHandler());
             registry.Register("forces.add", new AddForceHandler());
+            registry.Register("forceContainer.delete", new RemoveForceHandler());
         }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e)

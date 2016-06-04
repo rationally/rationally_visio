@@ -52,7 +52,7 @@ namespace ExtendedVisioAddin1.View.Forces
                 this.Children.Insert(0, new ForceHeaderRow(Page));
             }
             //insert footer, if it is absent
-            if (Children.Count == 0 || !(Children[Children.Count - 1] is ForceTotalsRow))
+            if (Children.Count == 0 || !Children.Any(c => c is ForceTotalsRow))
             {
                 this.Children.Add(new ForceTotalsRow(Page));
             } else if (Children.Any(c => c is ForceTotalsRow))

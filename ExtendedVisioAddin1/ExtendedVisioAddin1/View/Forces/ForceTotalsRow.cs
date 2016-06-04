@@ -34,10 +34,11 @@ namespace ExtendedVisioAddin1.View.Forces
             RShape = forceTotalsShape;
             Array ident = forceTotalsShape.ContainerProperties.GetMemberShapes(16);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
-            foreach (Shape shape in shapes)
+            if (Children.Count == 0)
             {
-                if (Children.Count == 0)
+                foreach (Shape shape in shapes)
                 {
+
                     if (ForceTotalComponent.IsForceTotalComponent(shape.Name))
                     {
                         Children.Add(new ForceTotalComponent(page, shape));

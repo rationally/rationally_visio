@@ -30,7 +30,7 @@ namespace ExtendedVisioAddin1.View.Forces
             InitStyle();
         }
 
-        public ForceHeaderRow(Page page, Shape forceHeaderShape) : this(page)
+        public ForceHeaderRow(Page page, Shape forceHeaderShape) : base(page)
         {
             RShape = forceHeaderShape;
             Array ident = forceHeaderShape.ContainerProperties.GetMemberShapes(16);

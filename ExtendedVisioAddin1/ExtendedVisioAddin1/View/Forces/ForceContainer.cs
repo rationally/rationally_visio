@@ -39,15 +39,20 @@ namespace ExtendedVisioAddin1.View.Forces
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             foreach (Shape shape in shapes)
             {
-                if (ForceConcernComponent.IsForceConcern(shape.Name))
+                if (Children.Count == 0)
                 {
-                    Children.Add(new ForceConcernComponent(page, shape));
-                } else if (ForceDescriptionComponent.IsForceDescription(shape.Name))
-                {
-                    Children.Add(new ForceDescriptionComponent(page, shape));
-                } else if (ForceValueComponent.IsForceValue(shape.Name))
-                {
-                    Children.Add(new ForceValueComponent(page, shape));
+                    if (ForceConcernComponent.IsForceConcern(shape.Name))
+                    {
+                        Children.Add(new ForceConcernComponent(page, shape));
+                    }
+                    else if (ForceDescriptionComponent.IsForceDescription(shape.Name))
+                    {
+                        Children.Add(new ForceDescriptionComponent(page, shape));
+                    }
+                    else if (ForceValueComponent.IsForceValue(shape.Name))
+                    {
+                        Children.Add(new ForceValueComponent(page, shape));
+                    }
                 }
             }
             InitStyle();

@@ -28,14 +28,13 @@ namespace ExtendedVisioAddin1
             Application.MarkerEvent += Application_MarkerEvent;
             Application.TemplatePaths = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
             Application.DocumentCreated += DelegateCreateDocumentEvent;
-            // Application.DocumentOpened += Application_DocumentOpenedEvent;
             Application.ShapeAdded += Application_ShapeAddedEvent;
             Application.BeforeShapeDelete += Application_DeleteShapeEvent;
             Application.CellChanged += Application_CellChangedEvent;
             Application.TextChanged += Application_TextChangedEvent;
 
             Application.BeforePageDelete += Application_BeforePageDeleteEvent;
-            //Application.WindowActivated += Application_WindowActivatedEvent;
+            Application.WindowActivated += Application_WindowActivatedEvent;
             RegisterEventHandlers();
         }
 
@@ -251,7 +250,6 @@ namespace ExtendedVisioAddin1
             if (d.Template.ToLower().Contains("rationally"))
             {
                 new DocumentCreatedEventHandler(d, Model);
-                //Application_DocumentOpenedEvent(d);
             }
         }
     }

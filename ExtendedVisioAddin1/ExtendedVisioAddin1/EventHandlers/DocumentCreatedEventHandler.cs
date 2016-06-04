@@ -30,9 +30,8 @@ namespace ExtendedVisioAddin1.EventHandlers
                         CenterX = 9,
                         CenterY = offsetHeight
                     };
-                Globals.ThisAddIn.View.Children.Add(informationContainer); 
               
-                new RepaintHandler();
+                new RepaintHandler(informationContainer);
             }
         }
 

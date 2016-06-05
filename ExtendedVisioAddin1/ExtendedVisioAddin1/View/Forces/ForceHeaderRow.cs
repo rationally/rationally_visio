@@ -46,6 +46,7 @@ namespace ExtendedVisioAddin1.View.Forces
                     }
                 }
             }
+            InitStyle();
         }
 
         private void InitChildren(Page page)

@@ -68,6 +68,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             Document rationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden); //todo: handling for file is open
             Master rectMaster = rationallyDocument.Masters["Alternative State"];
             RShape = page.Drop(rectMaster, 0, 0);
+            rationallyDocument.Close();
         }
 
         private void InitStyle()

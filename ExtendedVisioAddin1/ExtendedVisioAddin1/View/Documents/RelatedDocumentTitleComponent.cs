@@ -23,9 +23,10 @@ namespace ExtendedVisioAddin1.View.Documents
         public void InitStyle()
         {
             Width = 3.3;
-            SetMargin(0.2);
-            MakeListItem();
-            UsedSizingPolicy &= ~SizingPolicy.ShrinkXIfNeeded;
+            Height = 0.6;
+            SetMargin(0.1);
+            HAlign = 0;
+            SetUsedSizingPolicy(SizingPolicy.FixedSize);
         }
 
         internal static bool IsRelatedDocumentTitleContainer(string name)

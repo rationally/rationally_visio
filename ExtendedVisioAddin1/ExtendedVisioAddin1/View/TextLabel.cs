@@ -20,7 +20,7 @@ namespace ExtendedVisioAddin1.View
 
         public TextLabel(Page page, string labelText) : base(page)
         {
-            UsedSizingPolicy = 0 | SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded | SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
+            //UsedSizingPolicy = 0 | SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded | SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
             
 
             string text = labelText;
@@ -45,6 +45,12 @@ namespace ExtendedVisioAddin1.View
 
         }
 
+        public void SetUsedSizingPolicy(SizingPolicy p)
+        {
+            UsedSizingPolicy = p;
+            Repaint();
+        }
+
         public void SetFontSize(short fontSize)
         {
             size = fontSize;//TODO remove this variable and refs
@@ -55,7 +61,7 @@ namespace ExtendedVisioAddin1.View
 
         public override void Repaint()
         {
-            string text = RShape.Text;
+            string text = RShape.Text.Replace("\n","");
             characterHeight = 1.0 / 72.0 * (double)size;
             characterWidth = characterHeight * 0.55;
             contentTextWidth = characterWidth * (double)text.Length + 0.2;
@@ -79,7 +85,7 @@ namespace ExtendedVisioAddin1.View
                         lineCount++;
                     }
                     //add the last piece of the string
-                    newContent += text.Substring(text.Length);
+                    newContent += text.Substring((text.Length/lineLength)*lineLength);//integer devision
                     RShape.Characters.Text = newContent;
                 }
 

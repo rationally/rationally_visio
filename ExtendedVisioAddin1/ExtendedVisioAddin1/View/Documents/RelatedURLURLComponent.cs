@@ -1,9 +1,12 @@
-﻿using Microsoft.Office.Interop.Visio;
+﻿using System.Text.RegularExpressions;
+using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
 {
     class RelatedURLURLComponent : TextLabel
     {
+        private static readonly Regex UrlUrlRegex = new Regex(@"RelatedUrlUrl(\.\d+)?$");
+
         public RelatedURLURLComponent(Page page, Shape shape) : base(page, shape)
         {
             InitStyle();
@@ -13,14 +16,20 @@ namespace ExtendedVisioAddin1.View.Documents
         {
             AddUserRow("rationallyType");
             RationallyType = "relatedUrlUrl";
-            Name = "Related Url Url";
+            Name = "RelatedUrlUrl";
             InitStyle();
         }
 
         private void InitStyle()
         {
             Width = 4.2;
-            UsedSizingPolicy &= ~SizingPolicy.ExpandXIfNeeded;//we want to remove this one from the policy: AND with everything else on true
+            UsedSizingPolicy = SizingPolicy.All;
+            SetUsedSizingPolicy(UsedSizingPolicy &= ~SizingPolicy.ExpandXIfNeeded);//we want to remove this one from the policy: AND with everything else on true
+        }
+
+        public static bool IsRelatedUrlUrlComponent(string name)
+        {
+            return UrlUrlRegex.IsMatch(name);
         }
     }
 }

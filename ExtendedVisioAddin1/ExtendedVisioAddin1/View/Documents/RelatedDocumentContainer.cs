@@ -37,6 +37,13 @@ namespace ExtendedVisioAddin1.View.Documents
                 {
                     Children.Add(new RelatedUrlComponent(page, urlShape));
                 }
+
+                Shape urlUrlShape = shapes.FirstOrDefault(shape => RelatedURLURLComponent.IsRelatedUrlUrlComponent(shape.Name));
+                if (urlUrlShape != null)
+                {
+                    Children.Add(new RelatedURLURLComponent(page, urlUrlShape));
+                }
+
             }
             //LayoutManager = new VerticalStretchLayout(this);
             InitStyle();
@@ -44,9 +51,8 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public void InitStyle()
         {
-
-            LinePattern = 0;//borderless
-            SetMargin(0.2);
+            Width = 5;
+            LinePattern = 16;//borderless
             MarginTop = 0.3;
             MarginBottom = 0;
             Height = 1;

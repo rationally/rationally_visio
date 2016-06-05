@@ -138,7 +138,9 @@ namespace ExtendedVisioAddin1
                     }
                     else if (RelatedDocumentsContainer.IsRelatedDocumentsContainer(shape.Name))
                     {
-                        View.Children.Add(new RelatedDocumentsContainer(Application.ActivePage, shape));
+                        RelatedDocumentsContainer relatedDocumentsContainer = new RelatedDocumentsContainer(Application.ActivePage, shape);
+                        View.Children.Add(relatedDocumentsContainer);
+                        new RepaintHandler(relatedDocumentsContainer);
                     }
                     else if (ForcesContainer.IsForcesContainer(shape.Name))
                     {

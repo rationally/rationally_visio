@@ -50,7 +50,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
         }
 
-        public override void AddToTree(Shape s)
+        public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             if (AlternativeContainer.IsAlternativeContainer(s.Name))
             {

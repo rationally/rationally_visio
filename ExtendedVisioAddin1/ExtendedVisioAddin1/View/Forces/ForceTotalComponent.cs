@@ -10,7 +10,6 @@ namespace ExtendedVisioAddin1.View.Forces
     class ForceTotalComponent : RComponent
     {
         private static readonly Regex ForceTotalComponentRegex = new Regex(@"ForceTotalComponent(\.\d+)?$");
-        private Shape shape;
 
         public string AlternativeIdentifier
         {

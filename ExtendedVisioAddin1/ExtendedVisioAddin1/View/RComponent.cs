@@ -358,7 +358,7 @@ namespace ExtendedVisioAddin1.View
             return RShape.Equals(s);
         }
 
-        public virtual void AddToTree(Shape s)
+        public virtual void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             
         }

@@ -78,11 +78,6 @@ namespace ExtendedVisioAddin1.View.Forces
         {
             return ForcesRegex.IsMatch(name);
         }
-
-        public void Repaint()
-        {
-            
-            base.Repaint();
-        }
+        
     }
 }

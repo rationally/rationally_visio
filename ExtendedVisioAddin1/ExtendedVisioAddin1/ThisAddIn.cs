@@ -156,7 +156,7 @@ namespace ExtendedVisioAddin1
         {
             if (s.CellExistsU["User.rationallyType", 0] != 0 && !View.ExistsInTree(s))
             {
-                View.AddToTree(s);
+                View.AddToTree(s, true);
             }
         }
 

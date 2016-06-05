@@ -95,7 +95,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
         {
             //SetMargin(0.1);
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
-            MarginTop = 0.3;
+            MarginTop = (AlternativeIndex == 0) ? 0.3 : 0.0;
             LinePattern = 16;
         }
 
@@ -103,6 +103,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
         {
             AlternativeIndex = alternativeIndex;
             Children.ForEach(child => ((IAlternativeComponent)child).SetAlternativeIdentifier(alternativeIndex));
+            InitStyle();
         }
 
         public static bool IsAlternativeContainer(string name)

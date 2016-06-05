@@ -31,8 +31,7 @@ namespace ExtendedVisioAddin1.View
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
             RShape = page.Drop(rectMaster, 0,0);
-            basicDocument.Close();
-            //RShape = Globals.ThisAddIn.Application.ActivePage.DrawRectangle(0, 0, contentTextWidth, - 0.5); //TODO: magic numbers
+            basicDocument.Close(); //TODO: magic numbers
             RShape.LineStyle = "Text Only";
             RShape.FillStyle = "Text Only";
             RShape.Characters.Text = text;

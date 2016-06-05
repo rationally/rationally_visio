@@ -134,20 +134,7 @@ namespace ExtendedVisioAddin1
             {
                 foreach (Shape shape in page.Shapes)
                 {
-                    if (AlternativesContainer.IsAlternativesContainer(shape.Name)) //Check if the shape is an Alternatives box
-                    {
-                        View.Children.Add(new AlternativesContainer(Application.ActivePage, shape));
-                    }
-                    else if (RelatedDocumentsContainer.IsRelatedDocumentsContainer(shape.Name))
-                    {
-                        View.Children.Add(new RelatedDocumentsContainer(Application.ActivePage, shape));
-                    }
-                    else if (ForcesContainer.IsForcesContainer(shape.Name))
-                    {
-                        ForcesContainer forcesContainer = new ForcesContainer(Application.ActivePage, shape);
-                        View.Children.Add(forcesContainer);
-                        new RepaintHandler(forcesContainer);
-                    }
+                    View.AddToTree(shape, false);
                 }
             }
         }

@@ -102,7 +102,9 @@ namespace ExtendedVisioAddin1.View
                 }
                 else
                 {
-                    Children.Add(new ForcesContainer(Page, s));
+                    ForcesContainer forcesContainer = new ForcesContainer(Page, s);
+                    Children.Add(forcesContainer);
+                    new RepaintHandler(forcesContainer);
                 }
             }
             else if(allowAddOfSubpart)

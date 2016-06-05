@@ -11,7 +11,7 @@ namespace ExtendedVisioAddin1
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
             alternativeStatus.Items.AddRange(model.AlternativeStates.ToArray());
-            alternativeStatus.SelectedIndex = 0;//TODO: what if empty
+            alternativeStatus.SelectedIndex = 0;
         }
 
         private void createAlternative_Click(object sender, EventArgs e)

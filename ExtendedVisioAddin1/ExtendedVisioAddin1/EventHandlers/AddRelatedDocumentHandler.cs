@@ -23,7 +23,7 @@ namespace ExtendedVisioAddin1.EventHandlers
             {
                 foreach (IVShape s in application.ActiveWindow.Selection)
                 {
-                    if (s.Name.Contains("Related Documents")) //TODO regex
+                    if (RelatedDocumentsContainer.IsRelatedDocumentsContainer(s.Name))
                     {
                         selectedShape = s;
                         break;

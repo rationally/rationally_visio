@@ -17,7 +17,7 @@ namespace ExtendedVisioAddin1.View.Forces
             set { RShape.Cells["User.alternativeIdentifier.Value"].Formula = "\"" + value + "\""; }
         }
 
-        public ForceAlternativeHeaderComponent(Page page) : base(page) //TODO make private?
+        private ForceAlternativeHeaderComponent(Page page) : base(page) //TODO make private?
         {
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];

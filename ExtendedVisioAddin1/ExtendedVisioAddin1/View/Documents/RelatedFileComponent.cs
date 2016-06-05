@@ -18,7 +18,9 @@ namespace ExtendedVisioAddin1.View.Documents
             AddUserRow("rationallyType");
             AddAction("editAction","QUEUEMARKEREVENT(\"edit\")","\"Choose other file\"", false);
             RationallyType = "relatedFile";
-            SetMargin(0.2);
+            Width = 0.6;
+            Height = 0.6;
+            SetMargin(0.1);
         }
 
         internal static bool IsRelatedFileComponent(string name)

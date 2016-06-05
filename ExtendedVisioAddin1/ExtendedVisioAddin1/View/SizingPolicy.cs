@@ -9,6 +9,7 @@ namespace ExtendedVisioAddin1.View
         ExpandXIfNeeded = 2,
         ShrinkXIfNeeded = 4,
         ExpandYIfNeeded = 8,
-        ShrinkYIfNeeded = 16
+        ShrinkYIfNeeded = 16,
+        All = 30
     }
 }

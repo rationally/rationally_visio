@@ -22,6 +22,7 @@ namespace ExtendedVisioAddin1.View.Documents
 
             Width = 0.6;
             Height = 0.6;
+            SetMargin(0.1);
              //todo: create shappie properly
 
             Hyperlink link = RShape.AddHyperlink();

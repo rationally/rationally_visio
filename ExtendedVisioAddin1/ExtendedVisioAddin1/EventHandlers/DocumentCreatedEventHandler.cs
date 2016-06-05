@@ -18,11 +18,11 @@ namespace ExtendedVisioAddin1.EventHandlers
                 double offsetHeight =Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageHeight"].Result[VisUnitCodes.visInches] - 0.4;
                 //draw the header
                 TextLabel header = new TextLabel(Globals.ThisAddIn.Application.ActivePage,model.DecisionName);
-                
-                
+
+                header.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded | SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded);
                 header.SetFontSize(22);
                 header.CenterX = 1;
-                header.CenterY = offsetHeight; //todo: layout the fuckhuge box
+                header.CenterY = offsetHeight;
 
                 //draw the information container
                 InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version)
@@ -30,7 +30,6 @@ namespace ExtendedVisioAddin1.EventHandlers
                         CenterX = 9,
                         CenterY = offsetHeight
                     };
-              
                 new RepaintHandler(informationContainer);
             }
         }

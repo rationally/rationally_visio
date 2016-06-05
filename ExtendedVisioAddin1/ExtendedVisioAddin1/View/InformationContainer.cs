@@ -12,10 +12,13 @@ namespace ExtendedVisioAddin1.View
 
             TextLabel authorLabel = new TextLabel(page, "Author: " + author);
             authorLabel.SetMargin(0.1);
+            authorLabel.SetUsedSizingPolicy(UsedSizingPolicy);
             TextLabel dateLabel = new TextLabel(page, "Date: " + date);
             dateLabel.SetMargin(0.1);
+            dateLabel.SetUsedSizingPolicy(UsedSizingPolicy);
             TextLabel versionLabel = new TextLabel(page, "Version: " + version);
             versionLabel.SetMargin(0.1);
+            versionLabel.SetUsedSizingPolicy(UsedSizingPolicy);
 
             AddUserRow("rationallyType");
             RationallyType = "informationBox";

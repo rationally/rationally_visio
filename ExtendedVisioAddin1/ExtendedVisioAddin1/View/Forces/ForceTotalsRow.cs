@@ -62,6 +62,8 @@ namespace ExtendedVisioAddin1.View.Forces
             concernDummy.LinePattern = 1;
             concernDummy.Name = "ConcernDummy";
             concernDummy.AddUserRow("rationallyType");
+            concernDummy.ToggleBoldFont(true);
+            concernDummy.Text = "Total:";
             this.Children.Add(concernDummy);
 
             RComponent descDummy = new RComponent(page);

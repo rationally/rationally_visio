@@ -76,7 +76,7 @@ namespace ExtendedVisioAddin1.View
 
                 int lineLength = (int)(Width / characterWidth);
                 string newContent = "";
-                if (text.Length > lineLength)
+                if (!((UsedSizingPolicy & SizingPolicy.ExpandXIfNeeded) > 0) && text.Length > lineLength)
                 {
                     for (int i = 0; i < (text.Length - lineLength); i += lineLength)
                     {
@@ -107,6 +107,8 @@ namespace ExtendedVisioAddin1.View
             {
                 Height = characterHeight * (double)lineCount;
             }
+
+            Text = text;
         }
     }
 }

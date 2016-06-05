@@ -20,8 +20,10 @@ namespace ExtendedVisioAddin1.EventHandlers
                 TextLabel header = new TextLabel(Globals.ThisAddIn.Application.ActivePage,model.DecisionName);
 
                 header.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded | SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded);
+                header.Width = 7;
+                header.Height = 1;
                 header.SetFontSize(22);
-                header.CenterX = 1;
+                header.CenterX = 3.5;
                 header.CenterY = offsetHeight;
 
                 //draw the information container

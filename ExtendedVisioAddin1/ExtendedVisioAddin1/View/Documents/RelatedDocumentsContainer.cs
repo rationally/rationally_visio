@@ -34,7 +34,7 @@ namespace ExtendedVisioAddin1.View.Documents
             InitStyle();
         }
 
-        public override void AddToTree(Shape s)
+        public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             if (RelatedDocumentContainer.IsRelatedDocumentContainer(s.Name))
             {

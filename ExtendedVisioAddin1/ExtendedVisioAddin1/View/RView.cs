@@ -67,7 +67,7 @@ namespace ExtendedVisioAddin1.View
             return Children.Exists(x => x.ExistsInTree(s));
         }
 
-        public override void AddToTree(Shape s)
+        public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             if (AlternativesContainer.IsAlternativesContainer(s.Name))
             {
@@ -105,9 +105,9 @@ namespace ExtendedVisioAddin1.View
                     Children.Add(new ForcesContainer(Page, s));
                 }
             }
-            else
+            else if(allowAddOfSubpart)
             {
-                Children.ForEach(r => r.AddToTree(s));
+                Children.ForEach(r => r.AddToTree(s, true)); //todo: is this actually true forever?
             }
         }
 

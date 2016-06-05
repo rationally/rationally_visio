@@ -10,7 +10,6 @@ namespace ExtendedVisioAddin1.View.Forces
     class ForceTotalComponent : RComponent
     {
         private static readonly Regex ForceTotalComponentRegex = new Regex(@"ForceTotalComponent(\.\d+)?$");
-        private Shape shape;
 
         public string AlternativeIdentifier
         {
@@ -64,35 +63,29 @@ namespace ExtendedVisioAddin1.View.Forces
 
             foreach (ForceValueComponent fv in totalCandidates)
             {
-                string t = fv.Text;
                 int v = 0;
-                string toParse = fv.Text;
- 
-                if (t.StartsWith("+"))
-                {
-                    toParse = t.Substring(1);
-                }
+
+                string toParse = fv.Text.StartsWith("+") ? fv.Text.Substring(1) : fv.Text;
 
                 if (int.TryParse(toParse, out v))
                 {
                     total += v;
                 }
-
-                if (v < 0)
-                {
-                    RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(255,128,0))";
-                }
-                else if (v > 0)
-                {
-                    RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(0,255,0))";
-                }
-                else
-                {
-                    RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(0,0,0))";
-                }
+            }
+            if (total < 0)
+            {
+                RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(255,128,0))";
+            }
+            else if (total > 0)
+            {
+                RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(0,255,0))";
+            }
+            else
+            {
+                RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(0,0,0))";
             }
 
-            this.Text = total+"";
+            Text = total+"";
 
         }
     }

@@ -27,7 +27,7 @@ namespace ExtendedVisioAddin1.View.Forces
             RationallyType = "forceValue";
             Name = "ForceValue";
 
-            Width = 1.0/2.54;
+            Width = 1.0 / 2.54;
             Height = 0.33;
             Text = "0";
             ToggleBoldFont(true);
@@ -47,5 +47,27 @@ namespace ExtendedVisioAddin1.View.Forces
         {
             return ForceValueRegex.IsMatch(name);
         }
+
+        public override void Repaint()
+        {
+            string toParse = Text.StartsWith("+") ? Text.Substring(1) : Text;
+            int v;
+            int.TryParse(toParse, out v);
+
+            if (v < 0)
+            {
+                RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(255,128,0))";
+            }
+            else if (v > 0)
+            {
+                RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(0,255,0))";
+            }
+            else
+            {
+                RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(0,0,0))";
+            }
+        }
+
     }
 }
+

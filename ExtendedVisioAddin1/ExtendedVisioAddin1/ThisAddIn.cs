@@ -43,8 +43,10 @@ namespace ExtendedVisioAddin1
             if (shape.Document.Template.ToLower().Contains("rationally") && ForceValueComponent.IsForceValue(shape.Name))
             {
                 ForcesContainer forcesContainer = (ForcesContainer)View.Children.First(c => c is ForcesContainer);
-                forcesContainer.Children.Last().Repaint();
-
+                foreach (RComponent com in forcesContainer.Children.Skip(1))
+                {
+                    com.Repaint();
+                }
             }
         }
 
@@ -156,7 +158,7 @@ namespace ExtendedVisioAddin1
         {
             if (s.CellExistsU["User.rationallyType", 0] != 0 && !View.ExistsInTree(s))
             {
-                View.AddToTree(s);
+                View.AddToTree(s, true);
             }
         }
 

@@ -93,7 +93,6 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         private void InitStyle()
         {
-            //SetMargin(0.1);
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
             MarginTop = (AlternativeIndex == 0) ? 0.3 : 0.0;
             LinePattern = 16;

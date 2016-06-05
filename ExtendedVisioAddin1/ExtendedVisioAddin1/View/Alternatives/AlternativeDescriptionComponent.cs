@@ -44,7 +44,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         public void InitStyle()
         {
-            Width = 4;
+            Width = 4.6;
             Height = 2.5;
             SetMargin(0.2);
         }

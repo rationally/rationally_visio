@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
@@ -40,7 +36,7 @@ namespace ExtendedVisioAddin1.View.Forces
         public ForceAlternativeHeaderComponent(Page page, string id) : this(page)
         {
             AlternativeIdentifier = id;
-            this.Text = id;
+            Text = id;
         }
 
         public ForceAlternativeHeaderComponent(Page page, Shape shape) : base(page)

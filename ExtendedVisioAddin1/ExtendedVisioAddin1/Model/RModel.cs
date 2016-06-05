@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Microsoft.Office.Interop.Visio;
@@ -8,7 +7,6 @@ namespace ExtendedVisioAddin1.Model
 {
     public class RModel : IObservable<RModel>
     {
-        public Document RationallyDocument { get; }
         public ObservableCollection<Alternative> Alternatives { get; set; }
         public List<string> AlternativeStates { get; set; }
 

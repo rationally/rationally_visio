@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ExtendedVisioAddin1.View.Documents;
 using ExtendedVisioAddin1.View.Forces;
 
 namespace ExtendedVisioAddin1.View

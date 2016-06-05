@@ -18,7 +18,7 @@ namespace ExtendedVisioAddin1.View
 
         public HeaderlessContainer(Page page, bool makeShape) : base(page)
         {
-            
+            //Can't overload unless using different parameters.
         }
     }
 }

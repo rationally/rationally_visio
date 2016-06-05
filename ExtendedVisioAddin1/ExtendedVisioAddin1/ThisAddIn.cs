@@ -4,7 +4,6 @@ using System.Linq;
 using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
-using ExtendedVisioAddin1.View.Alternatives;
 using ExtendedVisioAddin1.View.Documents;
 using ExtendedVisioAddin1.View.Forces;
 using Microsoft.Office.Core;
@@ -73,12 +72,6 @@ namespace ExtendedVisioAddin1
             registry.Register("forces.add", new AddForceHandler());
             registry.Register("forceContainer.delete", new RemoveForceHandler());
         }
-
-        private void ThisAddIn_Shutdown(object sender, EventArgs e)
-        {
-
-        }
-
 
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
@@ -160,14 +153,12 @@ namespace ExtendedVisioAddin1
 
         private void Application_DeleteShapeEvent(Shape s)
         {
-            var x = s.Name;
             if (s.Document.Template.ToLower().Contains("rationally"))
             {
                 if (s.CellExistsU["User.rationallyType", 0] != 0)
                 {
                     string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
-
-
+                    
                     //select all 'related documents' containers
                     List<RelatedDocumentsContainer> relatedDocumentsContainers = View.Children.Where(c => c is RelatedDocumentsContainer).Cast<RelatedDocumentsContainer>().ToList();
 
@@ -231,7 +222,7 @@ namespace ExtendedVisioAddin1
         private void InternalStartup()
         {
             Startup += ThisAddIn_Startup;
-            Shutdown += ThisAddIn_Shutdown;
+            //Shutdown += ThisAddIn_Shutdown;
         }
 
         //#region Event delegaters

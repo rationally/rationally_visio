@@ -117,16 +117,7 @@ namespace ExtendedVisioAddin1.View
 
         public override RComponent GetComponentByShape(Shape s)
         {
-
-            foreach (RComponent c in Children)
-            {
-                if (c.GetComponentByShape(s) != null)
-                {
-                    return c.GetComponentByShape(s);
-                }
-            }
-
-            return null;
+            return Children.FirstOrDefault(c => c.GetComponentByShape(s) != null)?.GetComponentByShape(s);
         }
     }
 }

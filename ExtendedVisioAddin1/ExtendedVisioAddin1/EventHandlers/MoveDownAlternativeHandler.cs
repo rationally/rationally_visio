@@ -17,8 +17,8 @@ namespace ExtendedVisioAddin1.EventHandlers
             //locate the alternative that we are going to swap with
             AlternativeContainer other = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU["User.alternativeIndex"].ResultIU == currentIndex + 1);
 
-            string higherIndex = (char) (65 + (currentIndex + 1)) + ":";
-            string oldIndex = (char) (65 + (currentIndex)) + ":";
+            string higherIndex = (char) (65 + currentIndex + 1) + ":";
+            string oldIndex = (char) (65 + currentIndex) + ":";
             //swap the items in the model
             model.Alternatives[currentIndex].Identifier = higherIndex;
             model.Alternatives[currentIndex + 1].Identifier = oldIndex;

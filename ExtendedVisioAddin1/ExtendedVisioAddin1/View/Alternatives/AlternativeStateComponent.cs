@@ -57,8 +57,6 @@ namespace ExtendedVisioAddin1.View.Alternatives
                 case "discarded":
                     RShape.CellsU["FillForegnd"].Formula = "RGB(155,155,155)";
                     break;
-                default:
-                    break;
             }
         }
 

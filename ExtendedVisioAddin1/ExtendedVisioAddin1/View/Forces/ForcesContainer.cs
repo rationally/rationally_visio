@@ -9,7 +9,7 @@ namespace ExtendedVisioAddin1.View.Forces
     class ForcesContainer : RContainer
     {
         private static readonly Regex ForcesRegex = new Regex(@"Forces(\.\d+)?$");
-        
+
         public ForcesContainer(Page page, Shape forcesContainer) : base(page)
         {
             RShape = forcesContainer;
@@ -21,29 +21,29 @@ namespace ExtendedVisioAddin1.View.Forces
                 if (ForceHeaderRow.IsForceHeaderRow(shape.Name))
                 {
                     Children.Add(new ForceHeaderRow(page, shape));
-                    continue;
                 }
+                else
                 if (ForceContainer.IsForceContainer(shape.Name))
                 {
                     Children.Add(new ForceContainer(page, shape));
-                    continue;
                 }
+                else
                 if (ForceTotalsRow.IsForceTotalsRow(shape.Name))
                 {
-                    Children.Add(new ForceTotalsRow(page,shape));
-                    continue;
+                    Children.Add(new ForceTotalsRow(page, shape));
                 }
             }
             //insert header, if it is absent
             if (Children.Count == 0 || !Children.Any(c => c is ForceHeaderRow))
             {
-                this.Children.Insert(0, new ForceHeaderRow(Page));
+                Children.Insert(0, new ForceHeaderRow(Page));
             }
             //insert footer, if it is absent
             if (Children.Count == 0 || !Children.Any(c => c is ForceTotalsRow))
             {
-                this.Children.Add(new ForceTotalsRow(Page));
-            } else if (Children.Any(c => c is ForceTotalsRow))
+                Children.Add(new ForceTotalsRow(Page));
+            }
+            else if (Children.Any(c => c is ForceTotalsRow))
             {
                 RComponent toMove = Children.First(c => c is ForceTotalsRow);
                 int toMoveIndex = Children.IndexOf(toMove);
@@ -57,8 +57,8 @@ namespace ExtendedVisioAddin1.View.Forces
 
         private void InitStyle()
         {
-            this.UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandYIfNeeded;
-            
+            UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandYIfNeeded;
+
             LayoutManager = new VerticalStretchLayout(this);
         }
 
@@ -66,6 +66,6 @@ namespace ExtendedVisioAddin1.View.Forces
         {
             return ForcesRegex.IsMatch(name);
         }
-        
+
     }
 }

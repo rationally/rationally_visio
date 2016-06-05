@@ -61,8 +61,8 @@ namespace ExtendedVisioAddin1.View.Forces
 
         private void InitStyle()
         {
-            this.UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkYIfNeeded;
-            this.LayoutManager = new InlineLayout(this);
+            UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkYIfNeeded;
+            LayoutManager = new InlineLayout(this);
         }
 
         [SuppressMessage("ReSharper", "SimplifyLinqExpression")]
@@ -70,7 +70,7 @@ namespace ExtendedVisioAddin1.View.Forces
         {
 
             //foreach alternative in model { add a force value component, if it is not aleady there }
-            ObservableCollection<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
+            ObservableCollection<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives; //todo y u no list
 
             List<ForceValueComponent> alreadyThere = Children.Where(c => c is ForceValueComponent).Cast<ForceValueComponent>().ToList();
             foreach (Alternative alt in alternatives)

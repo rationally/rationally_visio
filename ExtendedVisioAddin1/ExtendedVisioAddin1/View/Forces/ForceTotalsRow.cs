@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
@@ -15,9 +15,9 @@ namespace ExtendedVisioAddin1.View.Forces
 
         public ForceTotalsRow(Page page) : base(page)
         {
-            this.AddUserRow("rationallyType");
-            this.RationallyType = "forceTotalsRow";
-            this.Name = "ForceTotalsRow";
+            AddUserRow("rationallyType");
+            RationallyType = "forceTotalsRow";
+            Name = "ForceTotalsRow";
 
             InitChildren(page);
             InitStyle();
@@ -39,8 +39,7 @@ namespace ExtendedVisioAddin1.View.Forces
                     }
                     else if (shape.CellExistsU["User.rationallyType", 0] != 0)
                     {
-                        RComponent toAdd = new RComponent(page);
-                        toAdd.RShape = shape;
+                        RComponent toAdd = new RComponent(page) {RShape = shape};
                         Children.Add(toAdd);
                     }
                 }
@@ -54,37 +53,41 @@ namespace ExtendedVisioAddin1.View.Forces
             Master rectMaster = basicDocument.Masters["Rectangle"];
 
             //dummy element for concern
-            RComponent concernDummy = new RComponent(page);
-            concernDummy.RShape = page.Drop(rectMaster, 0, 0);
-            concernDummy.LinePattern = 0;
-            concernDummy.Width = 1;
-            concernDummy.Height = 0.33;
+            RComponent concernDummy = new RComponent(page)
+            {
+                RShape = page.Drop(rectMaster, 0, 0),
+                LinePattern = 0,
+                Width = 1,
+                Height = 0.33,
+                Name = "ConcernDummy",
+                Text = "Total:"
+            };
             concernDummy.LinePattern = 1;
-            concernDummy.Name = "ConcernDummy";
             concernDummy.AddUserRow("rationallyType");
             concernDummy.ToggleBoldFont(true);
-            concernDummy.Text = "Total:";
-            this.Children.Add(concernDummy);
+            Children.Add(concernDummy);
 
-            RComponent descDummy = new RComponent(page);
-            descDummy.RShape = page.Drop(rectMaster, 0, 0);
-            descDummy.LinePattern = 0;
-            descDummy.Width = 2;
-            descDummy.Height = 0.33;
+            RComponent descDummy = new RComponent(page)
+            {
+                RShape = page.Drop(rectMaster, 0, 0),
+                LinePattern = 0,
+                Width = 2,
+                Height = 0.33,
+                Name = "DescDummy"
+            };
             descDummy.LinePattern = 1;
-            descDummy.Name = "DescDummy";
             descDummy.AddUserRow("rationallyType");
-            this.Children.Add(descDummy);
+            Children.Add(descDummy);
 
             basicDocument.Close();
         }
 
         private void InitStyle()
         {
-            this.MarginBottom = 0.4;
-            this.Height = 0.33;
-            this.UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
-            this.LayoutManager = new InlineLayout(this);
+            MarginBottom = 0.4;
+            Height = 0.33;
+            UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
+            LayoutManager = new InlineLayout(this);
         }
 
         public static bool IsForceTotalsRow(string name)
@@ -92,10 +95,11 @@ namespace ExtendedVisioAddin1.View.Forces
             return ForceTotalsRowRegex.IsMatch(name);
         }
 
+        [SuppressMessage("ReSharper", "SimplifyLinqExpression")]
         public override void Repaint()
         {
             //foreach alternative in model { add a force value component, if it is not aleady there }
-            ObservableCollection<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
+            ObservableCollection<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives; //todo: moet dit observable? Kan het niet met list
 
             List<ForceTotalComponent> alreadyThere = Children.Where(c => c is ForceTotalComponent).Cast<ForceTotalComponent>().ToList();
             foreach (Alternative alt in alternatives)

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
@@ -370,7 +369,7 @@ namespace ExtendedVisioAddin1.View
         /// <returns>the component, or null.</returns>
         public virtual RComponent GetComponentByShape(Shape s)
         {
-            return this.RShape.Equals(s) ? this : null;
+            return RShape.Equals(s) ? this : null;
         }
 
         public void MakeListItem()

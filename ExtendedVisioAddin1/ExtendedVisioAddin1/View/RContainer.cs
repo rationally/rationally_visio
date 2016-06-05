@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ExtendedVisioAddin1.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
@@ -79,23 +78,10 @@ namespace ExtendedVisioAddin1.View
         
         public override RComponent GetComponentByShape(Shape s)
         {
-            //1) check if current comp is the wanted one, else check it for all the children
-            if (RShape.Equals(s))
-            {
-                return this;
-            }
-            else
-            {
-                foreach (RComponent c in Children)
-                {
-                    if (c.GetComponentByShape(s) != null)
-                    {
-                        return c.GetComponentByShape(s);
-                    }
-                }
-            }
-            return null;
+            //1) check if current comp is the wanted one, else check it for all the children, then return it if it exists
+            return RShape.Equals(s) ? this : Children.FirstOrDefault(c => c.GetComponentByShape(s) != null)?.GetComponentByShape(s);
         }
+
         public virtual bool DeleteFromTree(Shape s)
         {
             foreach (RComponent c in Children)

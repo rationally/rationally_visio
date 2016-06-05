@@ -18,8 +18,8 @@ namespace ExtendedVisioAddin1.EventHandlers
             AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
             AlternativeContainer other = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU["User.alternativeIndex"].ResultIU == currentIndex - 1);
 
-            string lowerIndex = (char) (65 + (currentIndex - 1)) + ":";
-            string oldIndex = (char)(65 + (currentIndex)) + ":";
+            string lowerIndex = (char) (65 + currentIndex - 1) + ":";
+            string oldIndex = (char)(65 + currentIndex) + ":";
             //swap the item to move with the one below
             //swap the identifiers first
             model.Alternatives[currentIndex].Identifier = lowerIndex;

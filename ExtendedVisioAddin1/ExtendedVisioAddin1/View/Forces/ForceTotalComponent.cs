@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
@@ -63,7 +61,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
             foreach (ForceValueComponent fv in totalCandidates)
             {
-                int v = 0;
+                int v;
 
                 string toParse = fv.Text.StartsWith("+") ? fv.Text.Substring(1) : fv.Text;
 

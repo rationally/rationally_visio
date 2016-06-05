@@ -40,22 +40,21 @@ namespace ExtendedVisioAddin1.View
             RShape.Name = "TextLabel";
 
 
-            Repaint();
+            Repaint(); //todo: moet dit echt hier
 
         }
 
         public void SetUsedSizingPolicy(SizingPolicy p)
         {
             UsedSizingPolicy = p;
-            Repaint();
+            Repaint();//todo: moet dit echt hier
         }
 
         public void SetFontSize(short fontSize)
         {
             size = fontSize;//TODO remove this variable and refs
             FontSize = fontSize;
-            this.
-            Repaint();
+            Repaint();//todo: moet dit echt hier
         }
 
         public override void Repaint()
@@ -84,7 +83,7 @@ namespace ExtendedVisioAddin1.View
                         lineCount++;
                     }
                     //add the last piece of the string
-                    newContent += text.Substring((text.Length/lineLength)*lineLength);//integer devision
+                    newContent += text.Substring(text.Length/lineLength*lineLength);//integer devision
                     RShape.Characters.Text = newContent;
                 }
 

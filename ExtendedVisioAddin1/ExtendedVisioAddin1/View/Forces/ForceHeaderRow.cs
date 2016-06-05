@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
@@ -40,8 +40,7 @@ namespace ExtendedVisioAddin1.View.Forces
                     }
                     else if (shape.CellExistsU["User.rationallyType", 0] != 0)
                     {
-                        RComponent toAdd = new RComponent(page);
-                        toAdd.RShape = shape;
+                        RComponent toAdd = new RComponent(page) {RShape = shape};
                         Children.Add(toAdd);
                     }
                 }
@@ -55,23 +54,27 @@ namespace ExtendedVisioAddin1.View.Forces
             Master rectMaster = basicDocument.Masters["Rectangle"];
 
 
-            RComponent concernLabel = new RComponent(page);
-            concernLabel.RShape = page.Drop(rectMaster, 0, 0);
-            concernLabel.Text = "Concern";
-            concernLabel.Name = "ConcernLabel";
+            RComponent concernLabel = new RComponent(page)
+            {
+                RShape = page.Drop(rectMaster, 0, 0),
+                Text = "Concern",
+                Name = "ConcernLabel",
+                Width = 1,
+                Height = 0.33
+            };
             concernLabel.ToggleBoldFont(true);
-            concernLabel.Width = 1;
-            concernLabel.Height = 0.33;
             concernLabel.AddUserRow("rationallyType");
             Children.Add(concernLabel);
 
-            RComponent descLabel = new RComponent(page);
-            descLabel.RShape = page.Drop(rectMaster, 0, 0);
-            descLabel.Text = "Description";
-            descLabel.Name = "DescriptionLabel";
+            RComponent descLabel = new RComponent(page)
+            {
+                RShape = page.Drop(rectMaster, 0, 0),
+                Text = "Description",
+                Name = "DescriptionLabel",
+                Width = 2,
+                Height = 0.33
+            };
             descLabel.ToggleBoldFont(true);
-            descLabel.Width = 2;
-            descLabel.Height = 0.33;
             descLabel.AddUserRow("rationallyType");
             Children.Add(descLabel);
 
@@ -86,10 +89,11 @@ namespace ExtendedVisioAddin1.View.Forces
             LayoutManager = new InlineLayout(this);
         }
 
+        [SuppressMessage("ReSharper", "SimplifyLinqExpression")]
         public override void Repaint()
         {
             //foreach alternative in model { add a force value component, if it is not aleady there }
-            ObservableCollection<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
+            ObservableCollection<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives; //todo: y u no list
 
             List<ForceAlternativeHeaderComponent> alreadyThere = Children.Where(c => c is ForceAlternativeHeaderComponent).Cast<ForceAlternativeHeaderComponent>().ToList();
             foreach (Alternative alt in alternatives)

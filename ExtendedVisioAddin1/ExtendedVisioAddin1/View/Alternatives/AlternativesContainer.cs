@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Alternatives
@@ -45,11 +44,8 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         public void RemoveAlternativesFromModel()
         {
-            List<int> indexList = new List<int>();
-            foreach (RComponent alternative in Children)
-            {
-                indexList.Add(alternative.AlternativeIndex);
-            }
+            //Get a list of all alternativeIndices
+            List<int> indexList = Children.Select(alternative => alternative.AlternativeIndex).ToList();
             indexList.Sort();
             indexList.Reverse();
             foreach (int index in indexList)

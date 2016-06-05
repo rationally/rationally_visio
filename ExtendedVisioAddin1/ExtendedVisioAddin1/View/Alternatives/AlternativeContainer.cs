@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
 

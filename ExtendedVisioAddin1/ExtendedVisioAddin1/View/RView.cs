@@ -90,7 +90,9 @@ namespace ExtendedVisioAddin1.View
                 }
                 else
                 {
-                    Children.Add(new RelatedDocumentsContainer(Page, s));
+                    RelatedDocumentsContainer rdc = new RelatedDocumentsContainer(Page, s);
+                    Children.Add(rdc);
+                    new RepaintHandler(rdc);
                 }
             }
             else if (ForcesContainer.IsForcesContainer(s.Name))

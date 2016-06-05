@@ -10,27 +10,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
     public class AlternativesContainer : RContainer
     {
         private static readonly Regex AlternativesRegex = new Regex(@"Alternatives(\.\d+)?$");
-        public AlternativesContainer(Page page, List<Alternative> alternatives) : base(page)
-        {
-            Master containerMaster = Globals.ThisAddIn.Model.RationallyDocument.Masters["Alternatives"];
-            RShape = Page.DropContainer(containerMaster, null);
-            CenterX = 3;
-            CenterY = 5;
-
-            Name = "Alternatives";
-
-            MsvSdContainerLocked = false;
-            for (int i = 0; i < alternatives.Count; i++)
-            {
-                AlternativeContainer a = new AlternativeContainer(page, i, alternatives[i]);
-                Children.Add(a);
-            }
-
-            LayoutManager = new VerticalStretchLayout(this);
-            MsvSdContainerLocked = true;
-            InitStyle();
-        }
-
+        
         public AlternativesContainer(Page page, Shape alternativesContainer) : base(page)
         {
             RShape = alternativesContainer;

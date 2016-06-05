@@ -9,19 +9,7 @@ namespace ExtendedVisioAddin1.View.Forces
     class ForcesContainer : RContainer
     {
         private static readonly Regex ForcesRegex = new Regex(@"Forces(\.\d+)?$");
-
-        public ForcesContainer(Page page) : base(page)
-        {
-            Master containerMaster = Globals.ThisAddIn.Model.RationallyDocument.Masters["Forces"];
-            RShape = Page.DropContainer(containerMaster, null);
-            CenterX = 12.875;
-            CenterY = 8.375;
-
-            Name = "Forces";
-            
-            InitStyle();
-        }
-
+        
         public ForcesContainer(Page page, Shape forcesContainer) : base(page)
         {
             RShape = forcesContainer;

@@ -9,17 +9,7 @@ namespace ExtendedVisioAddin1.View.Documents
     class RelatedDocumentsContainer : RContainer
     {
         private static readonly Regex RelatedRegex = new Regex(@"Related Documents(\.\d+)?$");
-        public RelatedDocumentsContainer(Page page) : base(page)
-        {
-            Master containerMaster = Globals.ThisAddIn.Model.RationallyDocument.Masters["Related Documents"];
-            RShape = Page.DropContainer(containerMaster, null);
-            CenterX = 12;
-            CenterY = 8;
-            Name = "Related Documents";
-            LayoutManager = new VerticalStretchLayout(this);
-            InitStyle();
-        }
-
+        
         public RelatedDocumentsContainer(Page page, Shape relatedDocumentsContainer) : base(page)
         {
             RShape = relatedDocumentsContainer;

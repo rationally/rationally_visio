@@ -28,8 +28,6 @@ namespace ExtendedVisioAddin1.Model
             Alternatives.CollectionChanged += AlternativesChangedHandler;
             observers = new List<IObserver<RModel>>();
             AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"};
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\DecisionsStencil.vssx";
-            RationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden); //todo: handling for file is open
         }
 
         private void AlternativesChangedHandler(object sender, NotifyCollectionChangedEventArgs e)

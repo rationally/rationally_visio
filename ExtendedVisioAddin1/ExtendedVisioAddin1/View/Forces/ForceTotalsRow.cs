@@ -100,7 +100,7 @@ namespace ExtendedVisioAddin1.View.Forces
             {
                 if (Children.Where(c => c is ForceTotalComponent && ((ForceTotalComponent)c).AlternativeIdentifier == alt.Identifier).ToList().Count != 1)
                 {
-                    alreadyThere.Add(new ForceTotalComponent(Globals.ThisAddIn.Application.ActivePage, alt.Identifier));
+                    alreadyThere.Add(new ForceTotalComponent(Page, alt.Identifier));
                 }
             }
 

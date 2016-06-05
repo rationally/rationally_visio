@@ -96,7 +96,7 @@ namespace ExtendedVisioAddin1.View.Forces
             {
                 if (Children.Where(c => c is ForceAlternativeHeaderComponent && ((ForceAlternativeHeaderComponent)c).AlternativeIdentifier == alt.Identifier).ToList().Count != 1)
                 {
-                    alreadyThere.Add(new ForceAlternativeHeaderComponent(Globals.ThisAddIn.Application.ActivePage, alt.Identifier));
+                    alreadyThere.Add(new ForceAlternativeHeaderComponent(Page, alt.Identifier));
                 }
             }
 

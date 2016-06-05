@@ -171,6 +171,7 @@ namespace ExtendedVisioAddin1
 
         private void Application_DeleteShapeEvent(Shape s)
         {
+            var x = s.Name;
             if (s.Document.Template.ToLower().Contains("rationally"))
             {
                 if (s.CellExistsU["User.rationallyType", 0] != 0)

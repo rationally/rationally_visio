@@ -20,7 +20,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 //model.Alternatives.Remove(alternative);//TODO might need to turn this on
                 Globals.ThisAddIn.View.DeleteAlternative(index, true);
             }
-            new RepaintHandler();
+            //new RepaintHandler();
         }
     }
 }

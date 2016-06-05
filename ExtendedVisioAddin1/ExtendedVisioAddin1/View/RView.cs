@@ -28,7 +28,6 @@ namespace ExtendedVisioAddin1.View
 
         public void AddAlternative(Alternative alternative)
         {
-            //todo: first is wrong, since we don;t know how many
             AlternativesContainer container = (AlternativesContainer) Globals.ThisAddIn.View.Children.First(ch => ch is AlternativesContainer);
             container.Children.Add(new AlternativeContainer(Globals.ThisAddIn.Application.ActivePage, Globals.ThisAddIn.Model.Alternatives.Count - 1, alternative));
             new RepaintHandler();

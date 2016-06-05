@@ -8,7 +8,7 @@ namespace ExtendedVisioAddin1.View
         {
             Width = 0.1;
             Height = 0.1;
-            UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded | SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkXIfNeeded | SizingPolicy.ShrinkYIfNeeded; //TODO fix with expandY
+            UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded | SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkXIfNeeded | SizingPolicy.ShrinkYIfNeeded;
 
             TextLabel authorLabel = new TextLabel(page, "Author: " + author);
             authorLabel.SetMargin(0.1);

@@ -130,7 +130,7 @@ namespace ExtendedVisioAddin1
             Model.Alternatives.Clear();
             foreach (Page page in d.Pages)
             {
-                foreach (Shape shape in page.Shapes) //todo Fix duplicates due to 2 calls.
+                foreach (Shape shape in page.Shapes)
                 {
                     if (AlternativesContainer.IsAlternativesContainer(shape.Name)) //Check if the shape is an Alternatives box
                     {

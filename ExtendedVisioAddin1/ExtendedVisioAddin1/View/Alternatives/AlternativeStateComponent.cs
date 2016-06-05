@@ -1,19 +1,20 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Alternatives
 {
-    internal class AlternativeStateComponent : TextLabel, IAlternativeComponent
+    internal class AlternativeStateComponent : RComponent, IAlternativeComponent
     {
         private static readonly Regex StateRegex = new Regex(@"AlternativeState(\.\d+)?$");
-        public AlternativeStateComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
+        public AlternativeStateComponent(Page page, Shape alternativeComponent) : base(page)
         {
             RShape= alternativeComponent;
             InitStyle();
         }
 
-        public AlternativeStateComponent(Page page, int alternativeIndex, string state ) : base(page, state)
+        public AlternativeStateComponent(Page page, int alternativeIndex, string state ) : this(page)
         {
             AddUserRow("rationallyType");
             RationallyType = "alternativeState";
@@ -23,7 +24,9 @@ namespace ExtendedVisioAddin1.View.Alternatives
             Name = "AlternativeState";
             //Events
             SetStateMenu(state);
-
+            //Update text, and the background accordingly
+            RShape.Text = state;
+            UpdateBackgroundByState(state);
             //locks
             /*this.LockDelete = true;
             this.LockRotate = true;
@@ -33,6 +36,38 @@ namespace ExtendedVisioAddin1.View.Alternatives
             this.LockTextEdit = true;
             this.LockWidth = true;*/
             InitStyle();
+        }
+
+        public void UpdateBackgroundByState(string state)
+        {
+            switch (state.ToLower())
+            {
+                case "accepted":
+                    RShape.CellsU["FillForegnd"].Formula = "RGB(0,255,0)";
+                    break;
+                case "rejected":
+                    RShape.CellsU["FillForegnd"].Formula = "RGB(153,12,0)";
+                    break;
+                case "proposed":
+                    RShape.CellsU["FillForegnd"].Formula = "RGB(96,182,215)";
+                    break;
+                case "challenged":
+                    RShape.CellsU["FillForegnd"].Formula = "RGB(255,173,21)";
+                    break;
+                case "discarded":
+                    RShape.CellsU["FillForegnd"].Formula = "RGB(155,155,155)";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public AlternativeStateComponent(Page page) : base(page)
+        {
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\RationallyHidden.vssx";
+            Document rationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden); //todo: handling for file is open
+            Master rectMaster = rationallyDocument.Masters["Alternative State"];
+            RShape = page.Drop(rectMaster, 0, 0);
         }
 
         private void InitStyle()

@@ -96,6 +96,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             //SetMargin(0.1);
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
             MarginTop = 0.3;
+            LinePattern = 16;
         }
 
         public void SetAlternativeIdentifier(int alternativeIndex)

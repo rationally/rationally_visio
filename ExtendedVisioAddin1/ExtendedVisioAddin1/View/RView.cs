@@ -48,8 +48,8 @@ namespace ExtendedVisioAddin1.View
                 alternativesContainer.Children.Remove(alternative);
                 if (deleteShape)
                 {
-                    //alternative.RShape.DeleteEx(0); //deletes the alternative, and it's child components. This should not be done when the shape is already gone, such as when the user has deleted it himself.
-                    alternative.RShape.Delete();    
+                    alternative.RShape.DeleteEx(0); //deletes the alternative, and it's child components. This should not be done when the shape is already gone, such as when the user has deleted it himself.
+                    //alternative.RShape.Delete();    
                 }
                 int i = 0;
                 alternativesContainer.Children.Where(c => c is AlternativeContainer).ToList().ForEach(c => ((AlternativeContainer)c).SetAlternativeIdentifier(i++));

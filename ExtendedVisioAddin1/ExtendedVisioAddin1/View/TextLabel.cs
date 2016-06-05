@@ -7,9 +7,9 @@ namespace ExtendedVisioAddin1.View
     {
         private short size = 12;
         private int lineCount = 1;
-        private readonly double characterHeight; //height of one character in inches
-        private readonly double characterWidth;
-        private readonly double contentTextWidth;
+        private double characterHeight; //height of one character in inches
+        private double characterWidth;
+        private double contentTextWidth;
         public SizingPolicy UsedSizingPolicy { get; set; }
 
         public TextLabel(Page page, Shape shape) : base(page)
@@ -24,7 +24,6 @@ namespace ExtendedVisioAddin1.View
             
 
             string text = labelText;
-            size = 12;
             characterHeight = 1.0/72.0*(double) size;
             characterWidth = characterHeight*0.55;
             contentTextWidth = characterWidth * (double)text.Length + 0.2;
@@ -42,18 +41,25 @@ namespace ExtendedVisioAddin1.View
             RShape.Name = "TextLabel";
 
 
-
+            Repaint();
 
         }
 
         public void SetFontSize(short fontSize)
         {
-            size = fontSize;
+            size = fontSize;//TODO remove this variable and refs
+            FontSize = fontSize;
+            this.
+            Repaint();
         }
 
         public override void Repaint()
         {
             string text = RShape.Text;
+            characterHeight = 1.0 / 72.0 * (double)size;
+            characterWidth = characterHeight * 0.55;
+            contentTextWidth = characterWidth * (double)text.Length + 0.2;
+
             //sizing
             if (contentTextWidth > Width)
             {

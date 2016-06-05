@@ -302,6 +302,12 @@ namespace ExtendedVisioAddin1.View
             set { RShape.CellsU["Para.BulletFontSize"].ResultIU = value; }
         }
 
+        public int FontSize
+        {
+            get { return int.Parse(RShape.Cells["Char.Size"].Formula.Split(' ')[0]); }
+            set { RShape.Cells["Char.Size"].Formula = value + " pt"; }
+        }
+
         //line format
 
             /// <summary>

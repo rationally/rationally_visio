@@ -20,7 +20,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
             Width = 2;
             Height = 0.33;
-            Text = "USE THE FORCE!";
+            Text = "<<description>>";
             InitStyle();
         }
 

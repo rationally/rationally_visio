@@ -31,8 +31,9 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         private void InitStyle()
         {
+            Width = 2.9;
             SetMargin(0.1);
-            UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded;
+            UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
             Height = 0.3667;
         }
 

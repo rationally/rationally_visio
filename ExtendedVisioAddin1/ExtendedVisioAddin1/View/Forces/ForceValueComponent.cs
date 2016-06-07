@@ -27,6 +27,9 @@ namespace ExtendedVisioAddin1.View.Forces
             RationallyType = "forceValue";
             Name = "ForceValue";
 
+            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
+            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
+
             Width = 1.0 / 2.54;
             Height = 0.33;
             Text = "0";

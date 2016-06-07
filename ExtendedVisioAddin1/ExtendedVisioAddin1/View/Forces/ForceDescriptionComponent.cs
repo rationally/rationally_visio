@@ -18,6 +18,9 @@ namespace ExtendedVisioAddin1.View.Forces
             RationallyType = "forceDescription";
             Name = "ForceDescription";
 
+            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
+            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
+
             Width = 2;
             Height = 0.33;
             Text = "<<description>>";

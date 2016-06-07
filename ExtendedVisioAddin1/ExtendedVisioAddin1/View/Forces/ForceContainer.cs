@@ -25,7 +25,8 @@ namespace ExtendedVisioAddin1.View.Forces
             RationallyType = "forceContainer";
             Name = "ForceContainer";
 
-            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete force\"", false);
+            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
+            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
 
             Height = 0.33;
             UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded;

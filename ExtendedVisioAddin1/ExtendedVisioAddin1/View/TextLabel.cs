@@ -25,7 +25,7 @@ namespace ExtendedVisioAddin1.View
 
             string text = labelText;
             characterHeight = 1.0/72.0*(double) size;
-            characterWidth = characterHeight*0.55;
+            characterWidth = characterHeight*0.45;
             contentTextWidth = characterWidth * (double)text.Length + 0.2;
             
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
@@ -61,7 +61,7 @@ namespace ExtendedVisioAddin1.View
         {
             string text = RShape.Text.Replace("\n","");
             characterHeight = 1.0 / 72.0 * (double)size;
-            characterWidth = characterHeight * 0.55;
+            characterWidth = characterHeight * 0.45;
             contentTextWidth = characterWidth * (double)text.Length + 0.2;
 
             //sizing

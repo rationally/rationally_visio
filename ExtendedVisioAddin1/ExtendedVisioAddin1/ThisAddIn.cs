@@ -69,8 +69,17 @@ namespace ExtendedVisioAddin1
             registry.Register("relatedFile.edit", new EditRelatedFileHandler());
             registry.Register("alternative.moveUp", new MoveUpAlternativeHandler());
             registry.Register("alternative.moveDown", new MoveDownAlternativeHandler());
+
             registry.Register("forces.add", new AddForceHandler());
+            registry.Register("forceContainer.add", new AddForceHandler());
+            registry.Register("forceConcern.add", new AddForceHandler());
+            registry.Register("forceValue.add", new AddForceHandler());
+            registry.Register("forceDescription.add", new AddForceHandler());
+
             registry.Register("forceContainer.delete", new RemoveForceHandler());
+            registry.Register("forceConcern.delete", new RemoveForceHandler());
+            registry.Register("forceValue.delete", new RemoveForceHandler());
+            registry.Register("forceDescription.delete", new RemoveForceHandler());
         }
 
 
@@ -105,7 +114,7 @@ namespace ExtendedVisioAddin1
         private void Application_CellChangedEvent(Cell cell)
         {
             Shape changedShape = cell.Shape;
-            if (changedShape.Document.Template.ToLower().Contains("rationally") && cell.LocalName.Equals("Hyperlink.Row_1.Address") && changedShape.Name.Equals("RelatedUrl") && changedShape.CellExistsU["User.rationallyType", 0] != 0) //todo: testen of te rationallytype check het niet breekt
+            if (changedShape != null && changedShape.Document.Template.ToLower().Contains("rationally") && cell.LocalName.Equals("Hyperlink.Row_1.Address") && changedShape.Name.Equals("RelatedUrl") && changedShape.CellExistsU["User.rationallyType", 0] != 0) //todo: testen of te rationallytype check het niet breekt
             {
                 //find the container that holds all Related Documents
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)View.Children.First(c => c is RelatedDocumentsContainer);

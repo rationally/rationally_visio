@@ -215,6 +215,12 @@ namespace ExtendedVisioAddin1
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
                             //todo extract and/or call repaint
                             break;
+                        case "forceContainer":
+                        case "forceConcern":
+                        case "forceValue":
+                        case "forceDescription":
+                            MarkerEventHandlerRegistry.Instance.HandleEvent(rationallyType + ".delete", Model, s, "");
+                            break;
                     }
                 }
                 else

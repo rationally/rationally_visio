@@ -28,6 +28,11 @@ namespace ExtendedVisioAddin1.EventHandlers
             //first, remove all the child shapes of the forcecontainer
             if (forceContainerToDelete != null)
             {
+                if (forceContainerToDelete.ForceIndex >= 0)
+                {
+                    model.Forces.RemoveAt(forceContainerToDelete.ForceIndex);    
+                }
+
                 List<RComponent> toRemove = new List<RComponent>();
                 ((ForceContainer) forceContainerToDelete).Children.ForEach(c => toRemove.Add(c)); //store for deletion later
                 ((ForceContainer) forceContainerToDelete).Children.ForEach(c => Globals.ThisAddIn.View.DeleteFromTree(c.RShape)); //only deletes component from tree

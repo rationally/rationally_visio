@@ -121,6 +121,7 @@
     <Compile Include="EventHandlers\MoveUpAlternativeHandler.cs" />
     <Compile Include="EventHandlers\MoveUpForceHandler.cs" />
     <Compile Include="EventHandlers\RemoveForceHandler.cs" />
+    <Compile Include="Model\Force.cs" />
     <Compile Include="Model\RelatedDocument.cs" />
     <Compile Include="UrlSelector.cs">
       <SubType>Form</SubType>

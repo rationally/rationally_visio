@@ -79,6 +79,16 @@ namespace ExtendedVisioAddin1
             registry.Register("forceConcern.delete", new RemoveForceHandler());
             registry.Register("forceValue.delete", new RemoveForceHandler());
             registry.Register("forceDescription.delete", new RemoveForceHandler());
+
+            registry.Register("forceContainer.moveUp", new MoveUpForceHandler());
+            registry.Register("forceConcern.moveUp", new MoveUpForceHandler());
+            registry.Register("forceValue.moveUp", new MoveUpForceHandler());
+            registry.Register("forceDescription.moveUp", new MoveUpForceHandler());
+
+            registry.Register("forceContainer.moveDown", new MoveDownForceHandler());
+            registry.Register("forceConcern.moveDown", new MoveDownForceHandler());
+            registry.Register("forceValue.moveDown", new MoveDownForceHandler());
+            registry.Register("forceDescription.moveDown", new MoveDownForceHandler());
         }
 
 

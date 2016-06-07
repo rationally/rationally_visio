@@ -73,6 +73,27 @@ namespace ExtendedVisioAddin1.View
             }
         }
 
+        public int ForceIndex
+        {
+            get
+            {
+                int toReturn = -1;
+                try
+                {
+                    toReturn = (int) RShape.CellsU["User.forceIndex"].ResultIU;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
+                return toReturn;
+            }
+            set
+            {
+                RShape.CellsU["User.forceIndex.Value"].ResultIU = value;
+            }
+        }
+
         public double Width
         {
             get
@@ -382,7 +403,7 @@ namespace ExtendedVisioAddin1.View
             }
             catch (Exception e)
             {
-                Console.WriteLine("Shape could not be deleted");//what do we do here? It is not a problem if we come here...
+                Console.WriteLine("Shape could not be deleted" + e.StackTrace);//what do we do here? It is not a problem if we come here...
             }
         }
 

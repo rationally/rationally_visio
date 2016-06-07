@@ -13,7 +13,7 @@ namespace ExtendedVisioAddin1.View.Forces
             set { RShape.Cells["User.alternativeIdentifier.Value"].Formula = "\"" + value + "\""; }
         }
 
-        public ForceValueComponent(Page page) : base(page)
+        public ForceValueComponent(Page page, string alternativeIdentifier, int forceIndex) : base(page)
         {
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
@@ -22,6 +22,9 @@ namespace ExtendedVisioAddin1.View.Forces
 
             AddUserRow("alternativeIdentifier");
             AlternativeIdentifier = "";
+
+            AddUserRow("forceIndex");
+            ForceIndex = forceIndex;
 
             AddUserRow("rationallyType");
             RationallyType = "forceValue";
@@ -34,10 +37,7 @@ namespace ExtendedVisioAddin1.View.Forces
             Height = 0.33;
             Text = "0";
             ToggleBoldFont(true);
-        }
 
-        public ForceValueComponent(Page page, string alternativeIdentifier) : this(page)
-        {
             AlternativeIdentifier = alternativeIdentifier;
         }
 
@@ -51,8 +51,25 @@ namespace ExtendedVisioAddin1.View.Forces
             return ForceValueRegex.IsMatch(name);
         }
 
+        private void UpdateReorderFunctions()
+        {
+            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
+            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
+
+            if (ForceIndex == 0)
+            {
+                DeleteAction("moveUp");
+            }
+
+            if (ForceIndex == Globals.ThisAddIn.Model.Forces.Count - 1)
+            {
+                DeleteAction("moveDown");
+            }
+        }
+
         public override void Repaint()
         {
+            UpdateReorderFunctions();
             string toParse = Text.StartsWith("+") ? Text.Substring(1) : Text;
             int v;
             int.TryParse(toParse, out v);
@@ -69,7 +86,10 @@ namespace ExtendedVisioAddin1.View.Forces
             {
                 RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(0,0,0))";
             }
+            base.Repaint();
         }
+
+
 
     }
 }

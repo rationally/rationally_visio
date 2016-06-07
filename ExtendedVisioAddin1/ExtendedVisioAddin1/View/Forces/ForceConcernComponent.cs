@@ -6,9 +6,12 @@ namespace ExtendedVisioAddin1.View.Forces
     internal class ForceConcernComponent : RComponent
     {
         private static readonly Regex ForceConcernRegex = new Regex(@"ForceConcern(\.\d+)?$");
+        public static readonly string DEFAULT_CONCERN = "<<concern>>";
+        
 
-        public ForceConcernComponent(Page page) : base(page)
+        public ForceConcernComponent(Page page, int forceIndex) : base(page)
         {
+            
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
             RShape = page.Drop(rectMaster, 0, 0);
@@ -18,12 +21,16 @@ namespace ExtendedVisioAddin1.View.Forces
             RationallyType = "forceConcern";
             Name = "ForceConcern";
 
+            AddUserRow("forceIndex");
+            ForceIndex = forceIndex;
+
+
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
 
             Width = 1;
             Height = 0.33;
-            Text = "<<concern>>";
+            Text = DEFAULT_CONCERN;
             InitStyle();
         }
 
@@ -40,6 +47,28 @@ namespace ExtendedVisioAddin1.View.Forces
         public static bool IsForceConcern(string name)
         {
             return ForceConcernRegex.IsMatch(name);
+        }
+
+        private void UpdateReorderFunctions()
+        {
+            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
+            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
+
+            if (ForceIndex == 0)
+            {
+                DeleteAction("moveUp");
+            }
+
+            if (ForceIndex == Globals.ThisAddIn.Model.Forces.Count - 1)
+            {
+                DeleteAction("moveDown");
+            }
+        }
+
+        public override void Repaint()
+        {
+            UpdateReorderFunctions();
+            base.Repaint();
         }
     }
 }

@@ -117,7 +117,9 @@
     <Compile Include="EventHandlers\MarkerEventHandlerRegistry.cs" />
     <Compile Include="EventHandlers\MarkerEventHandler.cs" />
     <Compile Include="EventHandlers\MoveDownAlternativeHandler.cs" />
+    <Compile Include="EventHandlers\MoveDownForceHandler.cs" />
     <Compile Include="EventHandlers\MoveUpAlternativeHandler.cs" />
+    <Compile Include="EventHandlers\MoveUpForceHandler.cs" />
     <Compile Include="EventHandlers\RemoveForceHandler.cs" />
     <Compile Include="UrlSelector.cs">
       <SubType>Form</SubType>

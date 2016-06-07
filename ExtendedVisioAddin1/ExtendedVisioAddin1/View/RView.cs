@@ -41,7 +41,11 @@ namespace ExtendedVisioAddin1.View
         public void DeleteAlternative(int index, bool deleteShape)
         {
             AlternativesContainer alternativesContainer = (AlternativesContainer)Children.FirstOrDefault(c => c is AlternativesContainer); //May have been deleted by the user
-
+            if (alternativesContainer == null)
+            {
+                new RepaintHandler();
+                return;
+            }
             AlternativeContainer alternative = (AlternativeContainer)alternativesContainer?.Children.FirstOrDefault(x => x.AlternativeIndex == index && x is AlternativeContainer); //Return null if no container or no alternative with index
             if (alternative != null)
             {

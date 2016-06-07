@@ -8,6 +8,11 @@ namespace ExtendedVisioAddin1.EventHandlers
     {
         public override void Execute(RModel model, Shape s, string context)
         {
+            if (model.Alternatives.Count >= 5)
+            {
+                
+            }
+
             AddAlternative alternative = new AddAlternative(model);
             if (alternative.ShowDialog() == DialogResult.OK)
             {

@@ -84,7 +84,7 @@ namespace ExtendedVisioAddin1.View
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.StackTrace);
+                    Console.WriteLine("\n\n\nFORCEINDEX READ|\n\n\n" + e.StackTrace);
                 }
                 return toReturn;
             }
@@ -404,6 +404,7 @@ namespace ExtendedVisioAddin1.View
         {
             try
             {
+                var a = RShape.Name;
                 if (deleteChildShapes)
                 {
                     RShape.DeleteEx(0);

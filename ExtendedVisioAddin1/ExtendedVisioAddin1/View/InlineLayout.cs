@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ExtendedVisioAddin1.View.Forces;
+using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
@@ -16,10 +17,10 @@ namespace ExtendedVisioAddin1.View
 
         public void Repaint()
         {
-            if (toManage.Children.Count == 0) {  return;}
+            if (toManage.Children.Count == 0) { return; }
 
             //start the drawing at the left top of the container
-            Draw(toManage.CenterX-(toManage.Width/2.0), toManage.CenterY+(toManage.Height/2.0), 0,0,double.MaxValue, new Queue<RComponent>(toManage.Children));
+            Draw(toManage.CenterX - (toManage.Width / 2.0), toManage.CenterY + (toManage.Height / 2.0), 0, 0, double.MaxValue, new Queue<RComponent>(toManage.Children));
         }
         private void Draw(double x, double y, double currentLineHeight, double contentXEnd, double contentYEnd, Queue<RComponent> components)
         {
@@ -34,30 +35,30 @@ namespace ExtendedVisioAddin1.View
                     toManage.CenterY = topLeftY - (toManage.Height / 2.0);
 
                 }
-                ShrinkContainer(contentXEnd,contentYEnd);
+                ShrinkContainer(contentXEnd, contentYEnd);
                 return;
             }
 
             RComponent toDraw = components.Dequeue();
             double toDrawWidth = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight; //expected increase in x
             double toDrawHeight = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;//expected height in y
-            var nn = toManage.Name;
-            PrepareContainerExpansion(x,y,toDrawWidth,0); //if the container streches to support the drawing, the container height does not need to change
-            if (toManage.CenterX + (toManage.Width/2.0) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
+            var nn = toDraw.Name;
+            PrepareContainerExpansion(x, y, toDrawWidth, 0); //if the container streches to support the drawing, the container height does not need to change
+            if (toManage.CenterX + (toManage.Width / 2.0) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
             {
                 var n = toManage.Name;
-                x = toManage.CenterX - (toManage.Width/2.0);//go to a new line
+                x = toManage.CenterX - (toManage.Width / 2.0);//go to a new line
                 y -= currentLineHeight; //the new line of components should not overlap with the one above
-                PrepareContainerExpansion(x,y,0,toDrawHeight);   
+                PrepareContainerExpansion(x, y, 0, toDrawHeight);
             }
 
-            double dropX = x + toDraw.MarginLeft + (toDraw.Width/2.0);
-            double dropY = y - toDraw.MarginTop - (toDraw.Height/2.0);
+            double dropX = x + toDraw.MarginLeft + (toDraw.Width / 2.0);
+            double dropY = y - toDraw.MarginTop - (toDraw.Height / 2.0);
             double deltaX = dropX - toDraw.CenterX;
             double deltaY = dropY - toDraw.CenterY;
             toDraw.CenterX = dropX;
             toDraw.CenterY = dropY;
-            
+
             /*if (toManage is RContainer)
             {
                 bool containerLocked = toManage.MsvSdContainerLocked;
@@ -68,20 +69,34 @@ namespace ExtendedVisioAddin1.View
             //toDraw can have children, that should maintain on the same relative position
             if (toDraw is RContainer)
             {
-                foreach (RComponent c in ((RContainer) toDraw).Children)
+                foreach (RComponent c in ((RContainer)toDraw).Children)
                 {
                     c.CenterX += deltaX;
                     c.CenterY += deltaY;
                 }
             }
 
+            if (toDraw.RShape.ContainerProperties != null)
+            {
+                Array ident = toDraw.RShape.ContainerProperties.GetMemberShapes(0);
+                List<Shape> shapes = new List<int>((int[])ident).Select(i => toDraw.RShape.ContainingPage.Shapes.ItemFromID[i]).ToList();
+                foreach (Shape s in shapes)
+                {
+                    RComponent asComponent = new RComponent(toDraw.RShape.ContainingPage);
+                    asComponent.RShape = s;
+                    asComponent.CenterX += deltaX;
+                    asComponent.CenterY += deltaY;
+                }
+            }
+
+
             x = x + toDrawWidth;
             currentLineHeight = Math.Max(currentLineHeight, toDrawHeight);
-            contentXEnd = Math.Max(contentXEnd, dropX + (toDrawWidth/2.0));
+            contentXEnd = Math.Max(contentXEnd, dropX + (toDrawWidth / 2.0));
             contentYEnd = Math.Min(contentYEnd, y - toDrawHeight);
 
             //Recursive Case
-            Draw(x,y,currentLineHeight,contentXEnd,contentYEnd,components);
+            Draw(x, y, currentLineHeight, contentXEnd, contentYEnd, components);
         }
 
         /// <summary>
@@ -98,18 +113,18 @@ namespace ExtendedVisioAddin1.View
 
             bool overflowInX = (topLeftX + toManage.Width) < (x + xIncrease);
             bool overflowInY = (topLeftY - toManage.Height) > (y - yIncrease); //coordinate system starts at left bottom. Y increases when going up on the page
-            
 
-            bool expandXIfNeeded = ((int) toManage.UsedSizingPolicy & (int) SizingPolicy.ExpandXIfNeeded) > 0;
+
+            bool expandXIfNeeded = ((int)toManage.UsedSizingPolicy & (int)SizingPolicy.ExpandXIfNeeded) > 0;
             bool expandYIfNeeded = ((int)toManage.UsedSizingPolicy & (int)SizingPolicy.ExpandYIfNeeded) > 0;
 
             //NOTE: expansion is two directional: divided between to the left and to the right
             //update the center according to the new height and original top left (because that should stay the same)
 
             if (overflowInX && expandXIfNeeded)
-            { 
-                toManage.Width = (x + xIncrease) - topLeftX + 0.01; 
-                toManage.CenterX = topLeftX + (toManage.Width/2.0);
+            {
+                toManage.Width = (x + xIncrease) - topLeftX + 0.01;
+                toManage.CenterX = topLeftX + (toManage.Width / 2.0);
 
             }
 
@@ -117,7 +132,7 @@ namespace ExtendedVisioAddin1.View
             {
                 var n = toManage.Name;
                 toManage.Height = topLeftY - (y - yIncrease) + 0.01;
-                toManage.CenterY = topLeftY - (toManage.Height/2.0);
+                toManage.CenterY = topLeftY - (toManage.Height / 2.0);
             }
         }
 

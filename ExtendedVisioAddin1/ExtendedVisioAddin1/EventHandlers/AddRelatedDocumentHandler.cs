@@ -40,10 +40,11 @@ namespace ExtendedVisioAddin1.EventHandlers
                 //2) make a shortcut to the file
                 RelatedFileComponent relatedFileComponent = new RelatedFileComponent(application.ActivePage, openFileDialog.FileName);
                 relatedDocumentContainer.Children.Add(relatedFileComponent);
-
+                Globals.ThisAddIn.Model.Documents.Add(new RelatedDocument(openFileDialog.FileName, openFileDialog.FileName, true));
 
                 new RepaintHandler(relatedDocumentsContainer);
             }
+            openFileDialog.Dispose();
         }
     }
 }

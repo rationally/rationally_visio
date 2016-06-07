@@ -16,16 +16,21 @@ namespace ExtendedVisioAddin1.View.Documents
             RShape = containerShape;
             Array ident = containerShape.ContainerProperties.GetMemberShapes(16);
             List<Shape> shapes = (new List<int>((int[]) ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
+            string name = null, path = null;
+            bool file = false;
             Shape titleShape = shapes.FirstOrDefault(shape => RelatedDocumentTitleComponent.IsRelatedDocumentTitleContainer(shape.Name));
             if (titleShape != null)
             {
                 Children.Add(new RelatedDocumentTitleComponent(page, titleShape));
+                name = titleShape.Text;
             }
 
             Shape fileShape = shapes.FirstOrDefault(shape => RelatedFileComponent.IsRelatedFileComponent(shape.Name));
             if (fileShape != null)
             {
                 Children.Add(new RelatedFileComponent(page, fileShape));
+                path = fileShape.Text;
+                file = true;
             }
             else
             {
@@ -33,6 +38,8 @@ namespace ExtendedVisioAddin1.View.Documents
                 if (urlShape != null)
                 {
                     Children.Add(new RelatedUrlComponent(page, urlShape));
+                    path = urlShape.Text;
+                    file = false;
                 }
 
                 Shape urlUrlShape = shapes.FirstOrDefault(shape => RelatedURLURLComponent.IsRelatedUrlUrlComponent(shape.Name));
@@ -41,6 +48,18 @@ namespace ExtendedVisioAddin1.View.Documents
                     Children.Add(new RelatedURLURLComponent(page, urlUrlShape));
                 }
 
+            }
+            
+            if (name != null && path != null)
+            {
+                if (DocumentIndex <= Globals.ThisAddIn.Model.Documents.Count)
+                {
+                    Globals.ThisAddIn.Model.Documents.Insert(DocumentIndex, new RelatedDocument(path, name, file));;
+                }
+                else
+                {
+                    Globals.ThisAddIn.Model.Documents.Add(new RelatedDocument(path, name, file));
+                }
             }
             //LayoutManager = new VerticalStretchLayout(this);
             InitStyle();
@@ -86,6 +105,38 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
+            if (RelatedDocumentTitleComponent.IsRelatedDocumentTitleContainer(s.Name))
+            {
+                RelatedDocumentTitleComponent com = new RelatedDocumentTitleComponent(Page, s);
+                if (com.DocumentIndex == DocumentIndex)
+                {
+                    Children.Add(com);
+                }
+            }
+            else if (RelatedFileComponent.IsRelatedFileComponent(s.Name))
+            {
+                RelatedFileComponent com = new RelatedFileComponent(Page, s);
+                if (com.DocumentIndex == DocumentIndex)
+                {
+                    Children.Add(com);
+                }
+            }
+            else if (RelatedUrlComponent.IsRelatedUrlComponent(s.Name))
+            {
+                RelatedUrlComponent com = new RelatedUrlComponent(Page, s);
+                if (com.DocumentIndex == DocumentIndex)
+                {
+                    Children.Add(com);
+                }
+            }
+            else if (RelatedURLURLComponent.IsRelatedUrlUrlComponent(s.Name))
+            {
+                RelatedURLURLComponent com = new RelatedURLURLComponent(Page, s);
+                if (com.DocumentIndex == DocumentIndex)
+                {
+                    Children.Add(com);
+                }
+            }
         }
 
         public static bool IsRelatedDocumentContainer(string name)

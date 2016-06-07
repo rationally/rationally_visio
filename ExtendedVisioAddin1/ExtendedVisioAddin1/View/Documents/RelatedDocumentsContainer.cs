@@ -19,7 +19,7 @@ namespace ExtendedVisioAddin1.View.Documents
             {
                 Children.Add(new RelatedDocumentContainer(page, shape));
             }
-
+            Children = Children.OrderBy(c => c.DocumentIndex).ToList();
             LayoutManager = new VerticalStretchLayout(this);
             InitStyle();
         }
@@ -28,7 +28,12 @@ namespace ExtendedVisioAddin1.View.Documents
         {
             if (RelatedDocumentContainer.IsRelatedDocumentContainer(s.Name))
             {
-                Children.Add(new RelatedDocumentContainer(Page, s));
+                RelatedDocumentContainer con = new RelatedDocumentContainer(Page, s);
+                Children.Insert(con.DocumentIndex, con);
+            }
+            else
+            {
+                Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
             }
         }
 

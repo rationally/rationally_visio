@@ -40,7 +40,14 @@ namespace ExtendedVisioAddin1.View.Alternatives
             if (title != null && state != null && desc != null)
             {
                 string identifier = (char)(65 + Globals.ThisAddIn.Model.Alternatives.Count) + ":";
-                Globals.ThisAddIn.Model.Alternatives.Add(new Alternative(title, state, desc, identifier));
+                if (AlternativeIndex <= Globals.ThisAddIn.Model.Alternatives.Count)
+                {
+                    Globals.ThisAddIn.Model.Alternatives.Insert(AlternativeIndex, new Alternative(title, state, desc, identifier));
+                }
+                else
+                {
+                    Globals.ThisAddIn.Model.Alternatives.Add(new Alternative(title, state, desc, identifier));
+                }
             }
             InitStyle();
         }

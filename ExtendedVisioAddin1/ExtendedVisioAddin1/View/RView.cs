@@ -115,7 +115,7 @@ namespace ExtendedVisioAddin1.View
             }
             else if(allowAddOfSubpart)
             {
-                Children.ForEach(r => r.AddToTree(s, true)); //todo: is this actually true forever?
+                Children.ForEach(r => r.AddToTree(s, true));
             }
         }
 

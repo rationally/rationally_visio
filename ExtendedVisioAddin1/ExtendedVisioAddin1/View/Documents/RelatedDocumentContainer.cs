@@ -7,7 +7,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
 {
-    internal class RelatedDocumentContainer : HeaderlessContainer, IDocumentComponent
+    internal class RelatedDocumentContainer : HeaderlessContainer
     {
         private static readonly Regex RelatedRegex = new Regex(@"Related Document(\.\d+)?$");
 
@@ -95,7 +95,8 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public void SetDocumentIdentifier(int documentIndex)
         {
-            throw new NotImplementedException();
+            Children.ForEach(c => c.DocumentIndex = documentIndex);
+            DocumentIndex = documentIndex;
         }
 
         public void EditFile(RelatedDocument doc, int index)
@@ -110,6 +111,28 @@ namespace ExtendedVisioAddin1.View.Documents
             RelatedFileComponent relatedFileComponent = new RelatedFileComponent(Page, index, doc.Path);
             Children.Add(relatedFileComponent);
             Children.Where(c => c is RelatedDocumentTitleComponent).ToList().ForEach(x => x.Text = doc.Path);
+        }
+
+        private void UpdateReorderFunctions()
+        {
+            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
+            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
+
+            if (DocumentIndex == 0)
+            {
+                DeleteAction("moveUp");
+            }
+
+            if (DocumentIndex == Globals.ThisAddIn.Model.Documents.Count - 1)
+            {
+                DeleteAction("moveDown");
+            }
+        }
+
+        public override void Repaint()
+        {
+            UpdateReorderFunctions();
+            base.Repaint();
         }
     }
 }

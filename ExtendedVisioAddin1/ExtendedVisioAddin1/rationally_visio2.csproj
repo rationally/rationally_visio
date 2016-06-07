@@ -117,8 +117,10 @@
     <Compile Include="EventHandlers\MarkerEventHandlerRegistry.cs" />
     <Compile Include="EventHandlers\MarkerEventHandler.cs" />
     <Compile Include="EventHandlers\MoveDownAlternativeHandler.cs" />
+    <Compile Include="EventHandlers\MoveDownDocumentHandler.cs" />
     <Compile Include="EventHandlers\MoveDownForceHandler.cs" />
     <Compile Include="EventHandlers\MoveUpAlternativeHandler.cs" />
+    <Compile Include="EventHandlers\MoveUpDocumentHandler.cs" />
     <Compile Include="EventHandlers\MoveUpForceHandler.cs" />
     <Compile Include="EventHandlers\RemoveForceHandler.cs" />
     <Compile Include="Model\Force.cs" />
@@ -136,7 +138,6 @@
     <Compile Include="View\Alternatives\AlternativeStateComponent.cs" />
     <Compile Include="View\Alternatives\AlternativeTitleComponent.cs" />
     <Compile Include="View\Alternatives\IAlternativeComponent.cs" />
-    <Compile Include="View\Documents\IDocumentComponent.cs" />
     <Compile Include="View\Documents\RelatedDocumentContainer.cs" />
     <Compile Include="View\Documents\RelatedDocumentTitleComponent.cs" />
     <Compile Include="View\Documents\RelatedURLComponent.cs" />

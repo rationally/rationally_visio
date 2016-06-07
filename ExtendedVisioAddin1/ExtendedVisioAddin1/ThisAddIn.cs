@@ -223,8 +223,6 @@ namespace ExtendedVisioAddin1
                         case "relatedDocuments":
                         case "informationBox":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
-                            Model.Alternatives.RemoveAll(x => true);
-                            new RepaintHandler(View.Children.Where(c => c is RContainer).Cast<RContainer>().FirstOrDefault(c => c is ForcesContainer));
                             //todo extract
                             break;
                         case "forceContainer":

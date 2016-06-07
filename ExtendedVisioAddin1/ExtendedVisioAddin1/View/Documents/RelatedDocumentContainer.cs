@@ -6,7 +6,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
 {
-    internal class RelatedDocumentContainer : HeaderlessContainer
+    internal class RelatedDocumentContainer : HeaderlessContainer, IDocumentComponent
     {
         private static readonly Regex RelatedRegex = new Regex(@"Related Document(\.\d+)?$");
         public RelatedDocumentContainer(Page page) : base(page)
@@ -23,7 +23,10 @@ namespace ExtendedVisioAddin1.View.Documents
             Array ident = containerShape.ContainerProperties.GetMemberShapes(16);
             List<Shape> shapes = (new List<int>((int[])ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
             Shape titleShape = shapes.FirstOrDefault(shape => RelatedDocumentTitleComponent.IsRelatedDocumentTitleContainer(shape.Name));
-            Children.Add(new RelatedDocumentTitleComponent(page, titleShape));
+            if (titleShape != null)
+            {
+                Children.Add(new RelatedDocumentTitleComponent(page, titleShape));
+            }
 
             Shape fileShape = shapes.FirstOrDefault(shape => RelatedFileComponent.IsRelatedFileComponent(shape.Name));
             if (fileShape != null)
@@ -59,9 +62,18 @@ namespace ExtendedVisioAddin1.View.Documents
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
         }
 
+        public override void AddToTree(Shape s, bool allowAddOfSubpart)
+        {
+        }
+
         public static bool IsRelatedDocumentContainer(string name)
         {
             return RelatedRegex.IsMatch(name);
+        }
+
+        public void SetDocumentIdentifier(int documentIndex)
+        {
+            throw new NotImplementedException();
         }
     }
 }

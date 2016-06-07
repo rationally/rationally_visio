@@ -5,7 +5,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
 {
-    internal class RelatedUrlComponent : RComponent
+    internal class RelatedUrlComponent : RComponent, IDocumentComponent
     {
         private static readonly Regex RelatedRegex = new Regex(@"RelatedUrl(\.\d+)?$");
         public RelatedUrlComponent(Page page, Shape urlShape) : base(page)
@@ -42,6 +42,11 @@ namespace ExtendedVisioAddin1.View.Documents
         internal static bool IsRelatedUrlComponent(string name)
         {
             return RelatedRegex.IsMatch(name);
+        }
+
+        public void SetDocumentIdentifier(int documentIndex)
+        {
+            throw new NotImplementedException();
         }
     }
 }

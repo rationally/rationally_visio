@@ -47,7 +47,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             //Get a list of all alternativeIndices
             List<int> indexList = Children.Select(alternative => alternative.AlternativeIndex).ToList();
             indexList.Sort();
-            indexList.Reverse();
+            indexList.Reverse(); //Reverse so indices don't change
             foreach (int index in indexList)
             {
                 Globals.ThisAddIn.Model.Alternatives.RemoveAt(index);

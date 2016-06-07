@@ -8,6 +8,8 @@ namespace ExtendedVisioAddin1.Model
     public class RModel
     {
         public List<Alternative> Alternatives { get; set; }
+
+        public List<RelatedDocument> Documents { get; set; }
         public List<string> AlternativeStates { get; set; }
 
         public string Author { get; set; }
@@ -21,6 +23,7 @@ namespace ExtendedVisioAddin1.Model
         public RModel()
         {
             Alternatives = new List<Alternative>();
+            Documents = new List<RelatedDocument>();
             AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"};
         }
     }

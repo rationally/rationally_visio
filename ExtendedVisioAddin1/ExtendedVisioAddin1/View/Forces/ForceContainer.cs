@@ -42,6 +42,8 @@ namespace ExtendedVisioAddin1.View.Forces
             RShape = forceContainer;
             Array ident = forceContainer.ContainerProperties.GetMemberShapes(16);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
+            string concern = null;
+            string description = null;
             if (Children.Count == 0)
             {
                 foreach (Shape shape in shapes)
@@ -50,15 +52,22 @@ namespace ExtendedVisioAddin1.View.Forces
                     if (ForceConcernComponent.IsForceConcern(shape.Name))
                     {
                         Children.Add(new ForceConcernComponent(page, shape));
+                        concern = shape.Text;
                     }
                     else if (ForceDescriptionComponent.IsForceDescription(shape.Name))
                     {
                         Children.Add(new ForceDescriptionComponent(page, shape));
+                        description = shape.Text;
                     }
                     else if (ForceValueComponent.IsForceValue(shape.Name))
                     {
                         Children.Add(new ForceValueComponent(page, shape));
                     }
+                }
+
+                if (concern != null && description != null)
+                {
+                    Globals.ThisAddIn.Model.Forces.Add(new Force(concern,description));
                 }
             }
             InitStyle();

@@ -19,7 +19,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             {
                 Children.Add(new AlternativeContainer(page, shape));
             }
-
+            Children = Children.OrderBy(c => c.AlternativeIndex).ToList();
             LayoutManager = new VerticalStretchLayout(this);
             InitStyle();
         }

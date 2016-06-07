@@ -52,6 +52,9 @@ namespace ExtendedVisioAddin1.View.Forces
                 Children[toMoveIndex] = toSwapWith;
             }
 
+            //fix the order of the force containers, using ForceIndex
+            Children = Children.OrderBy(c => (c is ForceHeaderRow ? -1 : (c is ForceTotalsRow ? Children.Count : c.ForceIndex))).ToList();
+
             InitStyle();
         }
 

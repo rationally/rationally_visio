@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
@@ -360,6 +361,29 @@ namespace ExtendedVisioAddin1.View
         public virtual void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             
+        }
+
+        /// <summary>
+        /// Deletes the RShape of the component, if it still exists.
+        /// </summary>
+        /// <param name="deleteChildShapes">Determines whether to delete the child shapes of RShape as well.</param>
+        public void DeleteShape(bool deleteChildShapes)
+        {
+            try
+            {
+                if (deleteChildShapes)
+                {
+                    RShape.DeleteEx(0);
+                }
+                else
+                {
+                    RShape.Delete();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Shape could not be deleted");//what do we do here? It is not a problem if we come here...
+            }
         }
 
         /// <summary>

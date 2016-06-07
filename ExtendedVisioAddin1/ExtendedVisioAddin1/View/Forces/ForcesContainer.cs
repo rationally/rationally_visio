@@ -67,5 +67,10 @@ namespace ExtendedVisioAddin1.View.Forces
             return ForcesRegex.IsMatch(name);
         }
 
+        public override void AddToTree(Shape s, bool allowAddOfSubpart)
+        {
+            
+        }
+
     }
 }

@@ -119,6 +119,7 @@
     <Compile Include="EventHandlers\MoveDownAlternativeHandler.cs" />
     <Compile Include="EventHandlers\MoveUpAlternativeHandler.cs" />
     <Compile Include="EventHandlers\RemoveForceHandler.cs" />
+    <Compile Include="Model\RelatedDocument.cs" />
     <Compile Include="UrlSelector.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +133,7 @@
     <Compile Include="View\Alternatives\AlternativeStateComponent.cs" />
     <Compile Include="View\Alternatives\AlternativeTitleComponent.cs" />
     <Compile Include="View\Alternatives\IAlternativeComponent.cs" />
+    <Compile Include="View\Documents\IDocumentComponent.cs" />
     <Compile Include="View\Documents\RelatedDocumentContainer.cs" />
     <Compile Include="View\Documents\RelatedDocumentTitleComponent.cs" />
     <Compile Include="View\Documents\RelatedURLComponent.cs" />

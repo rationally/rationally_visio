@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
 {
-    internal class RelatedFileComponent : RComponent
+    internal class RelatedFileComponent : RComponent, IDocumentComponent
     {
         private static readonly Regex RelatedRegex = new Regex(@"RelatedFile(\.\d+)?$");
         public RelatedFileComponent(Page page, Shape fileShape) : base(page)
@@ -26,6 +26,11 @@ namespace ExtendedVisioAddin1.View.Documents
         internal static bool IsRelatedFileComponent(string name)
         {
             return RelatedRegex.IsMatch(name);
+        }
+
+        public void SetDocumentIdentifier(int documentIndex)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

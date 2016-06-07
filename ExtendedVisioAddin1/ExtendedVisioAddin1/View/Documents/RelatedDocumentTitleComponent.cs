@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
 {
-    class RelatedDocumentTitleComponent : TextLabel
+    internal class RelatedDocumentTitleComponent : TextLabel, IDocumentComponent
     {
         private static readonly Regex RelatedRegex = new Regex(@"Related Document Title(\.\d+)?$");
         public RelatedDocumentTitleComponent(Page page, Shape shape) : base(page, shape)
@@ -32,6 +32,11 @@ namespace ExtendedVisioAddin1.View.Documents
         internal static bool IsRelatedDocumentTitleContainer(string name)
         {
             return RelatedRegex.IsMatch(name);
+        }
+
+        public void SetDocumentIdentifier(int documentIndex)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

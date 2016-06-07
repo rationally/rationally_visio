@@ -14,9 +14,12 @@ namespace ExtendedVisioAddin1.EventHandlers
 
         public RepaintHandler(RContainer component)
         {
-            //component.RemoveChildren();
-            component.Repaint();
-            component.PlaceChildren();
+            if (component != null)
+            {
+                //component.RemoveChildren();
+                component.Repaint();
+                component.PlaceChildren();
+            }
         }
     }
 }

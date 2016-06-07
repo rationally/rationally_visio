@@ -17,25 +17,28 @@ namespace ExtendedVisioAddin1.EventHandlers
 
             RComponent currentComponent = new RComponent(changedShape.ContainingPage);
             currentComponent.RShape = changedShape;
-            int currentIndex = currentComponent.ForceIndex;
+            int currentForceIndex = currentComponent.ForceIndex;
+            int currentChildIndex = currentForceIndex + 1;
 
             //swap the forces in the model
-            Force currentForce = model.Forces[currentIndex];
-            model.Forces[currentIndex] = model.Forces[currentIndex - 1];
-            model.Forces[currentIndex - 1] = currentForce;
+            Force currentForce = model.Forces[currentForceIndex];
+            model.Forces[currentForceIndex] = model.Forces[currentForceIndex - 1];
+            model.Forces[currentForceIndex - 1] = currentForce;
 
-            ForceContainer toMove = forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().First(c => c.ForceIndex == currentIndex);
-            ForceContainer toSwapWith = forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().First(c => c.ForceIndex == currentIndex - 1);
+            ForceContainer toMove = forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().First(c => c.ForceIndex == currentForceIndex);
+            ForceContainer toSwapWith = forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().First(c => c.ForceIndex == currentForceIndex - 1);
 
             //update the index of the component and his children
-            toMove.Children.ForEach(c => c.ForceIndex = currentIndex - 1);
+            toMove.Children.ForEach(c => c.ForceIndex = currentForceIndex - 1);
+            toMove.ForceIndex = currentForceIndex - 1;
 
             //same, for the other component
-            toSwapWith.Children.ForEach(c => c.ForceIndex = currentIndex);
+            toSwapWith.Children.ForEach(c => c.ForceIndex = currentForceIndex);
+            toSwapWith.ForceIndex = currentForceIndex;
 
-            RComponent temp = forcesContainer.Children[currentIndex];
-            forcesContainer.Children[currentIndex] = forcesContainer.Children[currentIndex - 1];
-            forcesContainer.Children[currentIndex - 1] = temp;
+            RComponent temp = forcesContainer.Children[currentChildIndex];
+            forcesContainer.Children[currentChildIndex] = forcesContainer.Children[currentChildIndex - 1];
+            forcesContainer.Children[currentChildIndex - 1] = temp;
 
             new RepaintHandler();
         }

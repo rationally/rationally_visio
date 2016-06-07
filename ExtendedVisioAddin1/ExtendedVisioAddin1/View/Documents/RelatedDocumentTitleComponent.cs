@@ -6,17 +6,20 @@ namespace ExtendedVisioAddin1.View.Documents
     internal class RelatedDocumentTitleComponent : TextLabel, IDocumentComponent
     {
         private static readonly Regex RelatedRegex = new Regex(@"Related Document Title(\.\d+)?$");
+
         public RelatedDocumentTitleComponent(Page page, Shape shape) : base(page, shape)
         {
             RShape = shape;
             InitStyle();
         }
 
-        public RelatedDocumentTitleComponent(Page page, string labelText) : base(page, labelText)
+        public RelatedDocumentTitleComponent(Page page, int index, string text) : base(page, text)
         {
             AddUserRow("rationallyType");
             RationallyType = "relatedDocumentTitle";
             Name = "Related Document Title";
+            AddUserRow("documentIndex");
+            DocumentIndex = index;
             InitStyle();
         }
 

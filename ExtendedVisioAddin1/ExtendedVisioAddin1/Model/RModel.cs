@@ -5,12 +5,10 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.Model
 {
-    public class RModel : IObservable<RModel>
+    public class RModel
     {
-        public ObservableCollection<Alternative> Alternatives { get; set; }
+        public List<Alternative> Alternatives { get; set; }
         public List<string> AlternativeStates { get; set; }
-
-        private readonly List<IObserver<RModel>> observers; 
 
         public string Author { get; set; }
 
@@ -22,32 +20,8 @@ namespace ExtendedVisioAddin1.Model
 
         public RModel()
         {
-            Alternatives = new ObservableCollection<Alternative>();
-            Alternatives.CollectionChanged += AlternativesChangedHandler;
-            observers = new List<IObserver<RModel>>();
+            Alternatives = new List<Alternative>();
             AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"};
         }
-
-        private void AlternativesChangedHandler(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            NotifyObservers();
-        }
-
-        public virtual void AddObserver(IObserver<RModel> observer)
-        {
-            observers.Add(observer);
-        }
-
-        public virtual void RemoveObserver(IObserver<RModel> observer)
-        {
-            observers.Remove(observer);
-        }
-
-        private void NotifyObservers()
-        {
-            observers.ForEach(obs => obs.Notify(this));
-        }
-
-
     }
 }

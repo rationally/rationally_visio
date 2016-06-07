@@ -71,7 +71,7 @@ namespace ExtendedVisioAddin1.View.Forces
         {
 
             //foreach alternative in model { add a force value component, if it is not aleady there }
-            ObservableCollection<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives; //todo y u no list
+            List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
 
             List<ForceValueComponent> alreadyThere = Children.Where(c => c is ForceValueComponent).Cast<ForceValueComponent>().ToList();
             foreach (Alternative alt in alternatives)

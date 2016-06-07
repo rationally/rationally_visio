@@ -22,7 +22,9 @@ namespace ExtendedVisioAddin1.EventHandlers
             //swap the items in the model
             model.Alternatives[currentIndex].Identifier = higherIndex;
             model.Alternatives[currentIndex + 1].Identifier = oldIndex;
-            model.Alternatives.Move(currentIndex, currentIndex+1);
+            Alternative one = model.Alternatives[currentIndex];
+            model.Alternatives[currentIndex] = model.Alternatives[currentIndex + 1];
+            model.Alternatives[currentIndex + 1] = one;
 
             //update the index of the component and his children
             toChange.SetAlternativeIdentifier(currentIndex + 1);

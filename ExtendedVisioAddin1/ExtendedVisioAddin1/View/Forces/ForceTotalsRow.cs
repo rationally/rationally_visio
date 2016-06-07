@@ -99,7 +99,7 @@ namespace ExtendedVisioAddin1.View.Forces
         public override void Repaint()
         {
             //foreach alternative in model { add a force value component, if it is not aleady there }
-            ObservableCollection<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives; //todo: moet dit observable? Kan het niet met list
+            List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives; //todo: moet dit observable? Kan het niet met list
 
             List<ForceTotalComponent> alreadyThere = Children.Where(c => c is ForceTotalComponent).Cast<ForceTotalComponent>().ToList();
             foreach (Alternative alt in alternatives)

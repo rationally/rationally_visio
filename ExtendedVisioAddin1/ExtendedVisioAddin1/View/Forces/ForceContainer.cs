@@ -13,12 +13,16 @@ namespace ExtendedVisioAddin1.View.Forces
     {
         private static readonly Regex ForceContaineRegex = new Regex(@"ForceContainer(\.\d+)?$");
 
-        public ForceContainer(Page page) : base(page)
+
+        public ForceContainer(Page page, int forceIndex) : base(page)
         {
-            ForceConcernComponent concern = new ForceConcernComponent(page);
+            AddUserRow("forceIndex");
+            ForceIndex = forceIndex;
+
+            ForceConcernComponent concern = new ForceConcernComponent(page, forceIndex);
             Children.Add(concern);
 
-            ForceDescriptionComponent description = new ForceDescriptionComponent(page);
+            ForceDescriptionComponent description = new ForceDescriptionComponent(page, forceIndex);
             Children.Add(description);
 
             AddUserRow("rationallyType");
@@ -66,9 +70,27 @@ namespace ExtendedVisioAddin1.View.Forces
             LayoutManager = new InlineLayout(this);
         }
 
+        private void UpdateReorderFunctions()
+        {
+            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
+            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
+
+            if (ForceIndex == 0)
+            {
+                DeleteAction("moveUp");
+            }
+
+            if (ForceIndex == Globals.ThisAddIn.Model.Forces.Count - 1)
+            {
+                DeleteAction("moveDown");
+            }
+        }
+
         [SuppressMessage("ReSharper", "SimplifyLinqExpression")]
         public override void Repaint()
         {
+            UpdateReorderFunctions();
+
 
             //foreach alternative in model { add a force value component, if it is not aleady there }
             List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
@@ -78,7 +100,7 @@ namespace ExtendedVisioAddin1.View.Forces
             {
                 if (Children.Where(c => c is ForceValueComponent && ((ForceValueComponent)c).AlternativeIdentifier == alt.Identifier).ToList().Count != 1)
                 {
-                    alreadyThere.Add(new ForceValueComponent(Page, alt.Identifier));
+                    alreadyThere.Add(new ForceValueComponent(Page, alt.Identifier, this.ForceIndex));
                 }
             }
 

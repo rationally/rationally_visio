@@ -6,9 +6,11 @@ namespace ExtendedVisioAddin1.View.Forces
     internal class ForceDescriptionComponent : RComponent
     {
         private static readonly Regex ForceDescriptionRegex = new Regex(@"ForceDescription(\.\d+)?$");
+        public static readonly string DEFAULT_DESCRIPTION = "<<description>>";
 
-        public ForceDescriptionComponent(Page page) : base(page)
+        public ForceDescriptionComponent(Page page, int forceIndex) : base(page)
         {
+            
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
             RShape = page.Drop(rectMaster, 0, 0);
@@ -18,12 +20,16 @@ namespace ExtendedVisioAddin1.View.Forces
             RationallyType = "forceDescription";
             Name = "ForceDescription";
 
+            AddUserRow("forceIndex");
+            ForceIndex = forceIndex;
+
+
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
 
             Width = 2;
             Height = 0.33;
-            Text = "<<description>>";
+            Text = DEFAULT_DESCRIPTION;
             InitStyle();
         }
 
@@ -40,6 +46,28 @@ namespace ExtendedVisioAddin1.View.Forces
         public static bool IsForceDescription(string name)
         {
             return ForceDescriptionRegex.IsMatch(name);
+        }
+
+        private void UpdateReorderFunctions()
+        {
+            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
+            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
+
+            if (ForceIndex == 0)
+            {
+                DeleteAction("moveUp");
+            }
+
+            if (ForceIndex == Globals.ThisAddIn.Model.Forces.Count - 1)
+            {
+                DeleteAction("moveDown");
+            }
+        }
+
+        public override void Repaint()
+        {
+            UpdateReorderFunctions();
+            base.Repaint();
         }
     }
 }

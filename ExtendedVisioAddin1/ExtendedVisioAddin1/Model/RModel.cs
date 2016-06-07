@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using ExtendedVisioAddin1.View.Forces;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.Model
@@ -20,11 +21,16 @@ namespace ExtendedVisioAddin1.Model
 
         public string Version { get; set; }
 
+        public List<Force> Forces { get; set; }
+
         public RModel()
         {
             Alternatives = new List<Alternative>();
             Documents = new List<RelatedDocument>();
+            Forces = new List<Force>();
             AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"};
         }
+
+        
     }
 }

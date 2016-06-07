@@ -12,11 +12,13 @@ namespace ExtendedVisioAddin1.View.Documents
             InitStyle();
         }
 
-        public RelatedURLURLComponent(Page page, string labelText) : base(page, labelText)
+        public RelatedURLURLComponent(Page page, int index, string labelText) : base(page, labelText)
         {
             AddUserRow("rationallyType");
             RationallyType = "relatedUrlUrl";
             Name = "RelatedUrlUrl";
+            AddUserRow("documentIndex");
+            DocumentIndex = index;
             InitStyle();
         }
 

@@ -73,6 +73,18 @@ namespace ExtendedVisioAddin1.View
             }
         }
 
+        public int DocumentIndex
+        {
+            get
+            {
+                return (int)RShape.CellsU["User.documentIndex"].ResultIU;
+            }
+            set
+            {
+                RShape.CellsU["User.documentIndex.Value"].ResultIU = value;
+            }
+        }
+
         public double Width
         {
             get

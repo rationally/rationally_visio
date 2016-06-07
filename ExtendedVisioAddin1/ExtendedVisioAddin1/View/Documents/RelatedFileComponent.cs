@@ -11,13 +11,20 @@ namespace ExtendedVisioAddin1.View.Documents
             RShape = fileShape;
         }
 
-        public RelatedFileComponent(Page page, string filePath) : base(page)
+        public RelatedFileComponent(Page page, int index, string filePath) : base(page)
         {
             RShape = page.InsertFromFile(filePath, (short)VisInsertObjArgs.visInsertLink | (short)VisInsertObjArgs.visInsertIcon);
-            RShape.Name = "RelatedFile";
+            Name = "RelatedFile";
             AddUserRow("rationallyType");
             AddAction("editAction","QUEUEMARKEREVENT(\"edit\")","\"Choose other file\"", false);
             RationallyType = "relatedFile";
+            AddUserRow("documentIndex");
+            DocumentIndex = index;
+            InitStyle();
+        }
+
+        private void InitStyle()
+        {
             Width = 0.6;
             Height = 0.6;
             SetMargin(0.1);

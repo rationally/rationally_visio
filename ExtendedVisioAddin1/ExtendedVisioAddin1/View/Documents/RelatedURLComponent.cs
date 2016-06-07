@@ -13,30 +13,34 @@ namespace ExtendedVisioAddin1.View.Documents
             RShape = urlShape;
         }
 
-        public RelatedUrlComponent(Page page, string url) : base(page)
+        public RelatedUrlComponent(Page page, int index, string url) : base(page)
         {
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\RationallyHidden.vssx";
             Document rationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden); //todo: handling for file is open
             Master rectMaster = rationallyDocument.Masters["LinkIcon"]; 
             RShape = page.Drop(rectMaster, 0, 0);
-
-            Width = 0.6;
-            Height = 0.6;
-            SetMargin(0.1);
              //todo: create shappie properly
 
             Hyperlink link = RShape.AddHyperlink();
             link.Address = url;
-            EventDblClick = "HYPERLINK(Hyperlink.Row_1.Address)";//"HYPERLINK(\"" + url + "\")";
+            EventDblClick = "HYPERLINK(Hyperlink.Row_1.Address)";
+
+            InitStyle();
 
             Name = "RelatedUrl";
             AddUserRow("rationallyType");
             RationallyType = "relatedUrl";
+            AddUserRow("documentIndex");
+            DocumentIndex = index;
 
             rationallyDocument.Close();
-            //set the preview image of the url
+        }
 
-            //RShape.ChangePicture(docPath, 0);
+        private void InitStyle()
+        {
+            Width = 0.6;
+            Height = 0.6;
+            SetMargin(0.1);
         }
 
         internal static bool IsRelatedUrlComponent(string name)

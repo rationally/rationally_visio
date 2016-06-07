@@ -22,6 +22,17 @@ namespace ExtendedVisioAddin1.View
             new RepaintHandler();
         }
 
+        public void AddRelatedDocument(RelatedDocument document)
+        {
+            //container of all related documents:
+            RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
+            //create a container that wraps the new document
+            RelatedDocumentContainer relatedDocumentContainer = new RelatedDocumentContainer(Globals.ThisAddIn.Application.ActivePage, Globals.ThisAddIn.Model.Documents.Count - 1, document);
+            relatedDocumentsContainer.Children.Add(relatedDocumentContainer);
+
+            new RepaintHandler(relatedDocumentsContainer);
+        }
+
         /// <summary>
         /// Deletes an alternative container from the view.
         /// </summary>

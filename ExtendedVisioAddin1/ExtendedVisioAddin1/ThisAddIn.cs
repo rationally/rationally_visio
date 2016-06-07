@@ -23,7 +23,6 @@ namespace ExtendedVisioAddin1
         {
             Model = new RModel();
             View = new RView(Application.ActivePage);
-            Model.AddObserver(View);
             Application.MarkerEvent += Application_MarkerEvent;
             Application.TemplatePaths = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
             Application.DocumentCreated += DelegateCreateDocumentEvent;

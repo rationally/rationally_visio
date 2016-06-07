@@ -8,21 +8,10 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
-    public class RView : RContainer, IObserver<RModel>
+    public class RView : RContainer
     {
         public RView(Page page) : base(page)
         {
-
-        }
-
-        public void Notify(RModel model)
-        {
-            UpdateAlternatives(model);
-        }
-
-        private void UpdateAlternatives(RModel model)
-        {
-            //trace the alternatives container
 
         }
 

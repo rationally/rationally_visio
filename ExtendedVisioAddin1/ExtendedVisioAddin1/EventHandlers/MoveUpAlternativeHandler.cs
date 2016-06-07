@@ -27,6 +27,7 @@ namespace ExtendedVisioAddin1.EventHandlers
             Alternative one = model.Alternatives[currentIndex];
             model.Alternatives[currentIndex] = model.Alternatives[currentIndex - 1];
             model.Alternatives[currentIndex - 1] = one;
+
             //update the index of the component and his children
             toChange.SetAlternativeIdentifier(currentIndex - 1);
             //same, for the other component

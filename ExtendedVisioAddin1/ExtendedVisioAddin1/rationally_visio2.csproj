@@ -119,8 +119,6 @@
     <Compile Include="EventHandlers\MoveDownAlternativeHandler.cs" />
     <Compile Include="EventHandlers\MoveUpAlternativeHandler.cs" />
     <Compile Include="EventHandlers\RemoveForceHandler.cs" />
-    <Compile Include="Model\IObservable.cs" />
-    <Compile Include="Model\IObserver.cs" />
     <Compile Include="UrlSelector.cs">
       <SubType>Form</SubType>
     </Compile>

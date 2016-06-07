@@ -57,12 +57,14 @@ namespace ExtendedVisioAddin1
             }
         }
         
-        private void RegisterEventHandlers()
+        private static void RegisterEventHandlers()
         {
             MarkerEventHandlerRegistry registry = MarkerEventHandlerRegistry.Instance;
             registry.Register("alternatives.add", new AddAlternativeEventHandler());
             registry.Register("relatedDocuments.addRelatedFile", new AddRelatedDocumentHandler());
             registry.Register("relatedDocuments.addRelatedUrl", new AddRelatedUrlHandler());
+            registry.Register("relatedDocumentContainer.moveUp", new MoveUpDocumentHandler());
+            registry.Register("relatedDocumentContainer.moveDown", new MoveDownDocumentHandler());
             registry.Register("alternative.delete", new RemoveAlternativeEventHandler());
             registry.Register("alternativeState.change", new EditAlternativeStateEventHandler());
             registry.Register("relatedFile.edit", new EditRelatedFileHandler());
@@ -141,6 +143,8 @@ namespace ExtendedVisioAddin1
         {
             View.Children.Clear();
             Model.Alternatives.Clear();
+            Model.Documents.Clear();
+            Model.Forces.Clear();
             foreach (Page page in d.Pages)
             {
                 foreach (Shape shape in page.Shapes)

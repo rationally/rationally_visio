@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
 {
-    internal class RelatedURLURLComponent : TextLabel, IDocumentComponent
+    internal class RelatedURLURLComponent : TextLabel
     {
         private static readonly Regex UrlUrlRegex = new Regex(@"RelatedUrlUrl(\.\d+)?$");
 
@@ -32,11 +32,6 @@ namespace ExtendedVisioAddin1.View.Documents
         public static bool IsRelatedUrlUrlComponent(string name)
         {
             return UrlUrlRegex.IsMatch(name);
-        }
-
-        public void SetDocumentIdentifier(int documentIndex)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

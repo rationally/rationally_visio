@@ -67,7 +67,14 @@ namespace ExtendedVisioAddin1.View.Forces
 
                 if (concern != null && description != null)
                 {
-                    Globals.ThisAddIn.Model.Forces.Add(new Force(concern,description));
+                    if(ForceIndex <= Globals.ThisAddIn.Model.Forces.Count)
+                    {
+                        Globals.ThisAddIn.Model.Forces.Insert(ForceIndex, new Force(concern, description));
+                    }
+                    else
+                    {
+                        Globals.ThisAddIn.Model.Forces.Add(new Force(concern, description));
+                    }
                 }
             }
             InitStyle();

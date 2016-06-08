@@ -82,8 +82,10 @@ namespace ExtendedVisioAddin1.View.Forces
             {
                 RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(0,0,0))";
             }
-
-            Text = total+"";
+            if (int.Parse(Text) != total)
+            {
+                Text = total + "";
+            }
 
         }
     }

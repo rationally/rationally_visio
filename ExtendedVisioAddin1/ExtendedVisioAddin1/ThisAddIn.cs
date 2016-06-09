@@ -18,11 +18,13 @@ namespace ExtendedVisioAddin1
         //TODO: application static kan mss mooier
         public RModel Model { get; set; }
         public RView View { get; set; }
+        private bool DocumentCreation { get; set; }
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             Model = new RModel();
             View = new RView(Application.ActivePage);
+            DocumentCreation = false;
             Application.MarkerEvent += Application_MarkerEvent;
             Application.TemplatePaths = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
             Application.DocumentCreated += DelegateCreateDocumentEvent;
@@ -54,6 +56,12 @@ namespace ExtendedVisioAddin1
             {
                 View.Page = Application.ActivePage;
                 RebuildTree(w.Document);
+                if (DocumentCreation)
+                {
+                    DocumentCreation = false;
+
+                    Globals.ThisAddIn.Application.PurgeUndo(); //On day 7 he said: Don't allow undoing of creation. 
+                }
             }
         }
         
@@ -208,7 +216,7 @@ namespace ExtendedVisioAddin1
                                 {
                                     if (relatedDocumentContainer.Children.Where(c => c.RShape.Equals(s)).ToList().Count > 0) //check if this related document contains the to be deleted component
                                     {
-                                        relatedDocumentContainer.RShape.DeleteEx(0); //delete the parent wrapper of s, and it's subshapes (parallel to s)
+                                        relatedDocumentContainer.RShape.DeleteEx(0); //delete the parent wrapper of s, and it's subshapes (parallel to s) //todo: parent last
                                         relatedDocumentsContainer.Children.Remove(relatedDocumentContainer); //remove the related document from the view tree
                                     }
                                 }
@@ -267,6 +275,8 @@ namespace ExtendedVisioAddin1
             if (d.Template.ToLower().Contains("rationally"))
             {
                 new DocumentCreatedEventHandler(d, Model);
+
+                DocumentCreation = true;
             }
         }
     }

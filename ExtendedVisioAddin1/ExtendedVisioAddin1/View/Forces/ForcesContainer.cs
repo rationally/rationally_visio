@@ -37,6 +37,8 @@ namespace ExtendedVisioAddin1.View.Forces
             if (Children.Count == 0 || !Children.Any(c => c is ForceHeaderRow))
             {
                 Children.Insert(0, new ForceHeaderRow(Page));
+                
+
             }
             //insert footer, if it is absent
             if (Children.Count == 0 || !Children.Any(c => c is ForceTotalsRow))
@@ -72,7 +74,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
-            
+
         }
 
     }

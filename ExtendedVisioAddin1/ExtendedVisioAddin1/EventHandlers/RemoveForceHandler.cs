@@ -19,8 +19,16 @@ namespace ExtendedVisioAddin1.EventHandlers
 
             if (!forceComponent.Deleted) //happens when the menu option 'delete force' is called on the container
             {
-                (forceComponent as ForceContainer)?.Children.ForEach(c => c.RShape.Delete());
-                forceComponent.RShape.Delete();
+
+
+                if (forceComponent is ForceContainer) //remove the children first, but note that handlers are async
+                {
+                    ((ForceContainer) forceComponent).Children[0].RShape.Delete();
+                }
+                else
+                {
+                    forceComponent.RShape.Delete();
+                }
                 return;
             }
 

@@ -181,8 +181,16 @@ namespace ExtendedVisioAddin1
                 {
                     string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
                     
+                    //mark the deleted shape as 'deleted' in the view tree
+                    RComponent deleted = View.GetComponentByShape(s);
+                    if (deleted != null)
+                    {
+                        deleted.Deleted = true;
+                    }
+
                     //select all 'related documents' containers
                     List<RelatedDocumentsContainer> relatedDocumentsContainers = View.Children.Where(c => c is RelatedDocumentsContainer).Cast<RelatedDocumentsContainer>().ToList();
+
 
                     switch (rationallyType)
                     {

@@ -16,39 +16,50 @@ namespace ExtendedVisioAddin1.EventHandlers
             ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
             //trace force row in view tree
             RComponent forceComponent = Globals.ThisAddIn.View.GetComponentByShape(changedShape);
-            ForceContainer forceContainerToDelete = null;
+
+            if (!forceComponent.Deleted) //happens when the menu option 'delete force' is called on the container
+            {
+
+                
+                if (forceComponent is ForceContainer) //remove the children first, but note that handlers are async
+                {
+                    ((ForceContainer)forceComponent).Children.ForEach(c => c.RShape.Delete());
+                }
+                forceComponent.RShape.Delete();
+                return;
+            }
+
+            //determine relevant force container
+            ForceContainer forceContainer = null;
             if (forceComponent is ForceContainer)
             {
-                //model.Forces.RemoveAt(forceComponent.ForceIndex);
-                forceContainerToDelete = (ForceContainer)forceComponent;
-            } else if (forceComponent is ForceValueComponent || forceComponent is ForceDescriptionComponent || forceComponent is ForceConcernComponent) //changedShape is one of the child components of the whole forcerow
+                forceContainer = forceComponent as ForceContainer;
+            }
+            else
             {
-                //locate forcecontainer of the subcomponent: select it from forcesContainer.Children, as the component that has a child equal to forceComponent
-                forceContainerToDelete = forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().FirstOrDefault(fc => fc.Children.Any(fcc => fcc.Equals(forceComponent)));
-
+                forceContainer = forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().First(fc => fc.Children.Any(c => c.Equals(forceComponent)));
             }
 
-            //first, remove all the child shapes of the forcecontainer
-            if (forceContainerToDelete != null)
+            //find out the first child that is not deleted
+            RComponent nextToDelete = forceContainer.Children.FirstOrDefault(c => !c.Deleted);
+            if (nextToDelete != null && !forceContainer.Deleted) //second part: the container, on deletion, schedules deletes for the children, so let those handle the deletion
             {
-                //if (forceContainerToDelete.ForceIndex >= 0 && forceContainerToDelete.Equals(forceComponent))
-                //{
-                    //if (model.Forces.Count > forceContainerToDelete.ForceIndex)
-                    //{
-                        
-                    //}
-                //}
-
-                List<RComponent> toRemove = new List<RComponent>();
-                ((ForceContainer) forceContainerToDelete).Children.ForEach(c => toRemove.Add(c)); //store for deletion later
-                ((ForceContainer) forceContainerToDelete).Children.ForEach(c => Globals.ThisAddIn.View.DeleteFromTree(c.RShape)); //only deletes component from tree
-                toRemove.ForEach(tr => tr.DeleteShape(false));
-
-                //remove the container itself
-                Globals.ThisAddIn.View.DeleteFromTree(forceContainerToDelete.RShape);
-                forceContainerToDelete.DeleteShape(false); //tricky...
+                nextToDelete.RShape.Delete();
             }
-            //new RepaintHandler(forcesContainer);
+            else if (nextToDelete == null)
+            {
+                if (forceContainer.Deleted) //all children, plus the container are now deleted: done!
+                {
+                    int forceIndex = forcesContainer.Children.IndexOf(forceContainer) - 1;
+                    forcesContainer.Children.Remove(forceContainer);
+                    model.Forces.RemoveAt(forceIndex);
+                    new RepaintHandler();
+                }
+                else
+                {
+                    forceContainer.RShape.Delete();
+                }
+            }
         }
     }
 }

@@ -104,5 +104,23 @@ namespace ExtendedVisioAddin1.View
             }
             return false;
         }
+
+        public virtual bool DeleteFromTree(RComponent toDelete)
+        {
+            foreach (RComponent c in Children)
+            {
+                if (c.Equals(toDelete))
+                {
+                    Children.Remove(c);
+                    return true;
+                }
+                else if (c is RContainer)
+                {
+                    RContainer container = c as RContainer;
+                    if (container.DeleteFromTree(c)) return true;
+                }
+            }
+            return false;
+        }
     }
 }

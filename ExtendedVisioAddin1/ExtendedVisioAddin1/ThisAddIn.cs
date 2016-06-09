@@ -216,7 +216,8 @@ namespace ExtendedVisioAddin1
                                 {
                                     if (relatedDocumentContainer.Children.Where(c => c.RShape.Equals(s)).ToList().Count > 0) //check if this related document contains the to be deleted component
                                     {
-                                        relatedDocumentContainer.RShape.DeleteEx(0); //delete the parent wrapper of s, and it's subshapes (parallel to s) //todo: parent last
+                                        relatedDocumentContainer.Children.ForEach(c => c.RShape.Delete());//Delete the children of the parent.
+                                        relatedDocumentContainer.RShape.Delete(); //delete the parent wrapper of s
                                         relatedDocumentsContainer.Children.Remove(relatedDocumentContainer); //remove the related document from the view tree
                                     }
                                 }

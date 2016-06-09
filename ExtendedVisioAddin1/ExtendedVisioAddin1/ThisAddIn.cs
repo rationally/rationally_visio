@@ -216,9 +216,12 @@ namespace ExtendedVisioAddin1
                                 {
                                     if (relatedDocumentContainer.Children.Where(c => c.RShape.Equals(s)).ToList().Count > 0) //check if this related document contains the to be deleted component
                                     {
-                                        relatedDocumentContainer.Children.ForEach(c => c.RShape.Delete());//Delete the children of the parent.
-                                        relatedDocumentContainer.RShape.Delete(); //delete the parent wrapper of s
-                                        relatedDocumentsContainer.Children.Remove(relatedDocumentContainer); //remove the related document from the view tree
+                                        if (!relatedDocumentContainer.Deleted)
+                                        {
+                                            relatedDocumentContainer.RShape.Delete(); //delete the parent wrapper of s
+                                            relatedDocumentsContainer.Children.Remove(relatedDocumentContainer); //remove the related document from the view tree
+                                        }
+                                        relatedDocumentContainer.Children.Where(c=>!c.Deleted).ToList().ForEach(c => c.RShape.Delete());//Delete the children of the parent.
                                     }
                                 }
                             }

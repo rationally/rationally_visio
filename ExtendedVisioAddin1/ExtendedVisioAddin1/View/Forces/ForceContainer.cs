@@ -133,7 +133,7 @@ namespace ExtendedVisioAddin1.View.Forces
             Children.AddRange(alreadyThere);
 
             //remove the shapes of the deleted components
-            toRemove.ForEach(c => c.RShape.DeleteEx(0));
+            toRemove.ForEach(c => c.RShape.DeleteEx(0)); 
 
             base.Repaint();
         }

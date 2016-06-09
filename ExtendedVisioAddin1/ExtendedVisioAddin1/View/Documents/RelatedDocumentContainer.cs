@@ -97,7 +97,7 @@ namespace ExtendedVisioAddin1.View.Documents
         {
             Width = 5;
             LinePattern = 16; //borderless
-            MarginTop = 0.3;
+            MarginTop = (DocumentIndex == 0) ? 0.3 : 0.0;
             MarginBottom = 0;
             Height = 1;
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
@@ -148,6 +148,7 @@ namespace ExtendedVisioAddin1.View.Documents
         {
             Children.ForEach(c => c.DocumentIndex = documentIndex);
             DocumentIndex = documentIndex;
+            InitStyle();
         }
 
         public void EditFile(RelatedDocument doc, int index)

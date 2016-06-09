@@ -25,9 +25,12 @@ namespace ExtendedVisioAddin1.View
 
         public Shape RShape { get; set; }
 
+        public bool Deleted { get; set; }
+
         public RComponent(Page page)
         {
             Page = page;
+            Deleted = false;
         }
 
         //---

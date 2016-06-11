@@ -12,7 +12,7 @@ namespace ExtendedVisioAddin1.EventHandlers
             Globals.ThisAddIn.View.Children.ForEach(c => c.PlaceChildren());
         }
 
-        public RepaintHandler(RContainer component)
+        public RepaintHandler(RComponent component)
         {
             if (component != null)
             {

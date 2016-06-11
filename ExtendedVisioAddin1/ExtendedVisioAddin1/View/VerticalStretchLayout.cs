@@ -45,13 +45,39 @@ namespace ExtendedVisioAddin1.View
             double deltaY = drawY - toDraw.CenterY;
 
             //move the children of this container, and then the container itself
-            if (toDraw is RContainer)
+            /*if (toDraw is RContainer)
             {
                 foreach (RComponent c in ((RContainer)toDraw).Children)
                 {
                     c.CenterX += deltaX;
                     c.CenterY += deltaY;
                 }
+            }*/
+            if (toDraw is RContainer)
+            {
+                foreach (RComponent c in ((RContainer)toDraw).Children)
+                {
+                    var nnn = c.Name;
+                    if (c.RShape.ContainerProperties != null)
+                    {
+                        //moving children will disband the composite pattern between the shapes => remember children and later rebuild the pattern
+                        c.StoreChildren();
+                        c.MoveChildren(deltaX, deltaY);
+                        
+                        
+                    }
+                    c.CenterX += deltaX;
+                    c.CenterY += deltaY;
+
+                    if (c.RShape.ContainerProperties != null)
+                    {
+                        c.RestoreChildren();
+                    }
+                }
+            }
+            else
+            {
+                toDraw.MoveChildren(deltaX, deltaY);
             }
             toDraw.CenterX = drawX;
             toDraw.CenterY = drawY;

@@ -53,17 +53,14 @@ namespace ExtendedVisioAddin1.View.Forces
 
         private void UpdateReorderFunctions()
         {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-
-            if (ForceIndex == 0)
+            if (ForceIndex > 0)
             {
-                DeleteAction("moveUp");
+                AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             }
 
-            if (ForceIndex == Globals.ThisAddIn.Model.Forces.Count - 1)
+            if (ForceIndex < Globals.ThisAddIn.Model.Forces.Count - 1)
             {
-                DeleteAction("moveDown");
+                AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
             }
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using ExtendedVisioAddin1.View.Documents;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
@@ -74,7 +75,15 @@ namespace ExtendedVisioAddin1.View.Forces
 
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
-
+            if (ForceContainer.IsForceContainer(s.Name))
+            {
+                ForceContainer con = new ForceContainer(Page, s);
+                Children.Insert(con.ForceIndex + 1, con); //after header
+            }
+            else
+            {
+                Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
+            }
         }
 
     }

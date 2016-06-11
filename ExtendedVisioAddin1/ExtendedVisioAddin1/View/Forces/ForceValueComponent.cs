@@ -66,7 +66,10 @@ namespace ExtendedVisioAddin1.View.Forces
 
         public override void Repaint()
         {
-            UpdateReorderFunctions();
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                UpdateReorderFunctions();
+            }
             string toParse = Text.StartsWith("+") ? Text.Substring(1) : Text;
             int v;
             int.TryParse(toParse, out v);

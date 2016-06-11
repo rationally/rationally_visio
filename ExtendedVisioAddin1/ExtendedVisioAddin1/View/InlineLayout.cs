@@ -69,14 +69,24 @@ namespace ExtendedVisioAddin1.View
             //toDraw can have children, that should maintain on the same relative position
             if (toDraw is RContainer)
             {
-                foreach (RComponent c in ((RContainer)toDraw).Children)
+                foreach (RComponent c in ((RContainer) toDraw).Children)
                 {
+                    var nnn = c.Name;
                     c.CenterX += deltaX;
                     c.CenterY += deltaY;
+                    c.MoveChildren(deltaX, deltaY);
+                    /*if (!(c is RContainer))
+                    {
+                        c.MoveChildren(deltaX,deltaY);
+                    }*/
                 }
             }
+            else
+            {
+                toDraw.MoveChildren(deltaX, deltaY);
+            }
 
-            if (toDraw.RShape.ContainerProperties != null)
+            /*if (toDraw.RShape.ContainerProperties != null)
             {
                 Array ident = toDraw.RShape.ContainerProperties.GetMemberShapes(0);
                 List<Shape> shapes = new List<int>((int[])ident).Select(i => toDraw.RShape.ContainingPage.Shapes.ItemFromID[i]).ToList();
@@ -87,7 +97,7 @@ namespace ExtendedVisioAddin1.View
                     asComponent.CenterX += deltaX;
                     asComponent.CenterY += deltaY;
                 }
-            }
+            }*/
 
 
             x = x + toDrawWidth;

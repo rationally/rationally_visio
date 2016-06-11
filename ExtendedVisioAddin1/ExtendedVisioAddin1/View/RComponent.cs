@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Microsoft.Office.Interop.Visio;
 
@@ -24,6 +26,8 @@ namespace ExtendedVisioAddin1.View
 
 
         public Shape RShape { get; set; }
+
+        public List<Shape> BackUpShapes = new List<Shape>();
 
         public bool Deleted { get; set; }
 
@@ -74,6 +78,12 @@ namespace ExtendedVisioAddin1.View
             {
                 RShape.CellsU["User.alternativeIndex.Value"].ResultIU = value;
             }
+        }
+
+        public virtual string AlternativeIdentifier
+        {
+            get { return RShape.CellsU["User.alternativeIdentifier"].ResultStr["Value"]; }
+            set { RShape.Cells["User.alternativeIdentifier.Value"].Formula = "\"" + value + "\""; }
         }
 
         public int ForceIndex
@@ -387,6 +397,52 @@ namespace ExtendedVisioAddin1.View
         public virtual void RemoveChildren()
         {
 
+        }
+
+        public virtual void Move(double deltaX, double deltaY)
+        {
+            CenterX += deltaX;
+            CenterY += deltaY;
+
+            MoveChildren(deltaX, deltaY);
+        }
+
+
+        public virtual void MoveChildren(double deltaX, double deltaY)
+        {
+            if (RShape.ContainerProperties != null) //check if shape is a visio container
+            {
+                Array ident = RShape.ContainerProperties.GetMemberShapes(0);
+                List<Shape> shapes = new List<int>((int[]) ident).Select(i => RShape.ContainingPage.Shapes.ItemFromID[i]).ToList();
+                foreach (Shape s in shapes)
+                {
+                    RComponent asComponent = new RComponent(RShape.ContainingPage);
+                    asComponent.RShape = s;
+                    //recursive call
+                    //asComponent.MoveChildren(deltaX, deltaY); //not needed: GetMemberShapes(0)
+
+
+                    asComponent.CenterX += deltaX;
+                    asComponent.CenterY += deltaY;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Makes a back up of the current shapes that have RShape as their container.
+        /// </summary>
+        public virtual void StoreChildren()
+        {
+            Array ident = RShape.ContainerProperties.GetMemberShapes(0);
+            BackUpShapes = new List<int>((int[])ident).Select(i => RShape.ContainingPage.Shapes.ItemFromID[i]).ToList();
+        }
+
+        /// <summary>
+        /// Takes all the shapes in BackUpShapes and adds them to this container.
+        /// </summary>
+        public virtual void RestoreChildren()
+        {
+            BackUpShapes.ForEach(s => RShape.ContainerProperties.AddMember(s, VisMemberAddOptions.visMemberAddDoNotExpand));
         }
 
         public virtual bool ExistsInTree(Shape s)

@@ -40,6 +40,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
         private void InitStyle()
         {
+            LineColor = "RGB(89,131,168)";
             BackgroundColor = "RGB(255,255,255)";
             FontColor = "RGB(89,131,168)";
         }

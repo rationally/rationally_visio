@@ -48,6 +48,7 @@ namespace ExtendedVisioAddin1.View
             
             BackgroundColor = "RGB(255,255,255)";
             FontColor = "RGB(89,131,168)";
+            ShadowPattern = 0;
 
             Repaint(); //todo: moet dit echt hier
 

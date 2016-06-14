@@ -5,16 +5,10 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
 {
-    class ForceTotalComponent : RComponent
+    internal class ForceTotalComponent : RComponent
     {
         private static readonly Regex ForceTotalComponentRegex = new Regex(@"ForceTotalComponent(\.\d+)?$");
-
-        public string AlternativeIdentifier
-        {
-            get { return RShape.CellsU["User.alternativeIdentifier"].ResultStr["Value"]; }
-            set { RShape.Cells["User.alternativeIdentifier.Value"].Formula = "\"" + value + "\""; }
-        }
-
+        
         private ForceTotalComponent(Page page) : base(page)
         {
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
@@ -72,15 +66,15 @@ namespace ExtendedVisioAddin1.View.Forces
             }
             if (total < 0)
             {
-                RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(255,128,0))";
+                RShape.CellsU["FillForegnd"].Formula = "THEMEGUARD(RGB(255,128,0))";
             }
             else if (total > 0)
             {
-                RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(0,255,0))";
+                RShape.CellsU["FillForegnd"].Formula = "THEMEGUARD(RGB(0,200,0))";
             }
             else
             {
-                RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(0,0,0))";
+                RShape.CellsU["FillForegnd"].Formula = "THEMEGUARD(RGB(255,255,255))";
             }
             if (int.Parse(Text) != total)
             {

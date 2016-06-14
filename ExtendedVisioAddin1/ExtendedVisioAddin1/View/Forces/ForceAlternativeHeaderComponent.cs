@@ -3,16 +3,10 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
 {
-    class ForceAlternativeHeaderComponent : RComponent
+    internal class ForceAlternativeHeaderComponent : RComponent
     {
         private static readonly Regex ForceAlternativeHeaderComponentRegex = new Regex(@"ForceAlternativeHeaderComponent(\.\d+)?$");
-
-        public string AlternativeIdentifier
-        {
-            get { return RShape.CellsU["User.alternativeIdentifier"].ResultStr["Value"]; }
-            set { RShape.Cells["User.alternativeIdentifier.Value"].Formula = "\"" + value + "\""; }
-        }
-
+        
         private ForceAlternativeHeaderComponent(Page page) : base(page) //TODO make private?
         {
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);

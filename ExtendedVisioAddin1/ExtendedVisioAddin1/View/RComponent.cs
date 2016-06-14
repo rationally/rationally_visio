@@ -35,6 +35,7 @@ namespace ExtendedVisioAddin1.View
         {
             Page = page;
             Deleted = false;
+
         }
 
         //---
@@ -354,6 +355,12 @@ namespace ExtendedVisioAddin1.View
             set { RShape.Cells["Char.Size"].Formula = value + " pt"; }
         }
 
+        public string FontColor
+        {
+            get { return RShape.CellsU["Char.Color"].ResultStr["Value"]; }
+            set { RShape.CellsU["Char.Color"].Formula = value; }
+        }
+
         //line format
 
             /// <summary>
@@ -372,6 +379,14 @@ namespace ExtendedVisioAddin1.View
             set { RShape.CellsU["EventDblClick"].Formula =  value; }
         }
         
+        //background
+        public string BackgroundColor
+        {
+            get { return RShape.CellsU["FillForegnd"].ResultStr["Value"]; }
+            set { RShape.CellsU["FillForegnd"].Formula = value; }
+        }
+
+
 
         /// <summary>
         /// Updates shapesheet of the stored IVShape. Character.Style holds information about the font style (bold, italic...) in a bitwise manner.

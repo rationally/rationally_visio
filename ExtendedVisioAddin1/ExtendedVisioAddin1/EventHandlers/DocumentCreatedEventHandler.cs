@@ -27,11 +27,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 header.CenterY = offsetHeight;
 
                 //draw the information container
-                InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version)
-                    {
-                        CenterX = 9,
-                        CenterY = offsetHeight
-                    };
+                InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version);
                 new RepaintHandler(informationContainer);
             }
         }

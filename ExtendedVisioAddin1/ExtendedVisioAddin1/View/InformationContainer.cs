@@ -6,19 +6,34 @@ namespace ExtendedVisioAddin1.View
     {
         public InformationContainer(Page page, string author, string date, string version) : base(page)
         {
-            Width = 0.1;
-            Height = 0.1;
-            UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded | SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkXIfNeeded | SizingPolicy.ShrinkYIfNeeded;
+            Width = 5.3;
+            Height = 0.4;
+            CenterX = 13.65;
+            CenterY = 22.45;
+            UsedSizingPolicy = SizingPolicy.FixedSize;
 
             TextLabel authorLabel = new TextLabel(page, "Author: " + author);
-            authorLabel.SetMargin(0.1);
-            authorLabel.SetUsedSizingPolicy(UsedSizingPolicy);
+            
+            authorLabel.BackgroundColor = "RGB(255,255,255)";
+            authorLabel.FontColor = "RGB(89,131,168)";
+            authorLabel.Height = 0.38;
+            authorLabel.MarginTop = 0.02;
+            authorLabel.MarginLeft = 0.02;
+            authorLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded);
             TextLabel dateLabel = new TextLabel(page, "Date: " + date);
-            dateLabel.SetMargin(0.1);
-            dateLabel.SetUsedSizingPolicy(UsedSizingPolicy);
+            dateLabel.Height = 0.38;
+            dateLabel.MarginTop = 0.02;
+            dateLabel.MarginLeft = 0.02;
+            dateLabel.BackgroundColor = "RGB(255,255,255)";
+            dateLabel.FontColor = "RGB(89,131,168)";
+            dateLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded);
             TextLabel versionLabel = new TextLabel(page, "Version: " + version);
-            versionLabel.SetMargin(0.1);
-            versionLabel.SetUsedSizingPolicy(UsedSizingPolicy);
+            versionLabel.Height = 0.38;
+            versionLabel.MarginTop = 0.02;
+            versionLabel.MarginLeft = 0.02;
+            versionLabel.BackgroundColor = "RGB(255,255,255)";
+            versionLabel.FontColor = "RGB(89,131,168)";
+            versionLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded);
 
             AddUserRow("rationallyType");
             RationallyType = "informationBox";

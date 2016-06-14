@@ -39,7 +39,10 @@ namespace ExtendedVisioAddin1.View.Forces
                     }
                     else if (shape.CellExistsU["User.rationallyType", 0] != 0)
                     {
-                        RComponent toAdd = new RComponent(page) {RShape = shape};
+                        RComponent toAdd = new RComponent(page)
+                        {
+                            RShape = shape
+                        };
                         Children.Add(toAdd);
                     }
                 }
@@ -60,7 +63,9 @@ namespace ExtendedVisioAddin1.View.Forces
                 Width = 1,
                 Height = 0.33,
                 Name = "ConcernDummy",
-                Text = "Total:"
+                Text = "Total:",
+                BackgroundColor = "RGB(255,255,255)",
+                FontColor = "RGB(89,131,168)"
             };
             concernDummy.LinePattern = 1;
             concernDummy.AddUserRow("rationallyType");
@@ -73,7 +78,9 @@ namespace ExtendedVisioAddin1.View.Forces
                 LinePattern = 0,
                 Width = 2,
                 Height = 0.33,
-                Name = "DescDummy"
+                Name = "DescDummy",
+                BackgroundColor = "RGB(255,255,255)",
+                FontColor = "RGB(89,131,168)"
             };
             descDummy.LinePattern = 1;
             descDummy.AddUserRow("rationallyType");

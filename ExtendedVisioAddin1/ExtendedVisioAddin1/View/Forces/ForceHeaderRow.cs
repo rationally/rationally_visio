@@ -60,7 +60,9 @@ namespace ExtendedVisioAddin1.View.Forces
                 Text = "Concern",
                 Name = "ConcernLabel",
                 Width = 1,
-                Height = 0.33
+                Height = 0.33,
+                BackgroundColor = "RGB(255,255,255)",
+                FontColor = "RGB(89,131,168)"
             };
             concernLabel.ToggleBoldFont(true);
             concernLabel.AddUserRow("rationallyType");
@@ -72,7 +74,9 @@ namespace ExtendedVisioAddin1.View.Forces
                 Text = "Description",
                 Name = "DescriptionLabel",
                 Width = 2,
-                Height = 0.33
+                Height = 0.33,
+                BackgroundColor = "RGB(255,255,255)",
+                FontColor = "RGB(89,131,168)"
             };
             descLabel.ToggleBoldFont(true);
             descLabel.AddUserRow("rationallyType");

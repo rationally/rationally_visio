@@ -15,7 +15,7 @@ namespace ExtendedVisioAddin1.View
         private double characterWidth;
         private double contentTextWidth;
 
-        private double PIXELS_PER_INCH = 93;
+        private double PIXELS_PER_INCH = 90;
         public SizingPolicy UsedSizingPolicy { get; set; }
 
         public TextLabel(Page page, Shape shape) : base(page)
@@ -98,7 +98,8 @@ namespace ExtendedVisioAddin1.View
                 }
 
 
-                int lineLength = (int)(Width / characterWidth);
+                //int lineLength = (int)Math.Round(Width / characterWidth);
+                int lineLength = (int)(Width/characterWidth);
                 string newContent = "";
                 if (!((UsedSizingPolicy & SizingPolicy.ExpandXIfNeeded) > 0) && text.Length > lineLength)
                 {

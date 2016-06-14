@@ -36,8 +36,9 @@ namespace ExtendedVisioAddin1.View.Alternatives
             MarginRight = 0;
             MarginBottom = 0;
             MarginTop = 0.1;
-            UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded; 
+            UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded;
             Height = 0.3667;
+            Width = 0.3;
         }
 
         public void SetAlternativeIdentifier(int alternativeIndex)

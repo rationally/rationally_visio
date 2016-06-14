@@ -102,8 +102,10 @@ namespace ExtendedVisioAddin1.View.Forces
         [SuppressMessage("ReSharper", "SimplifyLinqExpression")]
         public override void Repaint()
         {
-            UpdateReorderFunctions();
-
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                UpdateReorderFunctions();
+            }
 
             //foreach alternative in model { add a force value component, if it is not aleady there }
             List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;

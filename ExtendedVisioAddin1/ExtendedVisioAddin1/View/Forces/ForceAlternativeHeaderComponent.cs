@@ -25,6 +25,13 @@ namespace ExtendedVisioAddin1.View.Forces
             Height = 0.33;
             Text = "0";
             ToggleBoldFont(true);
+            InitStyle();
+        }
+
+        private void InitStyle()
+        {
+            BackgroundColor = "RGB(255,255,255)";
+            FontColor = "RGB(89,131,168)";
         }
 
         public ForceAlternativeHeaderComponent(Page page, string id) : this(page)

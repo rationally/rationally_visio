@@ -45,7 +45,9 @@ namespace ExtendedVisioAddin1.View
             RShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = size;
             RShape.CellsU["LinePattern"].ResultIU = 0;
             RShape.Name = "TextLabel";
-
+            
+            BackgroundColor = "RGB(255,255,255)";
+            FontColor = "RGB(89,131,168)";
 
             Repaint(); //todo: moet dit echt hier
 

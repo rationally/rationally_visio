@@ -63,7 +63,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
         private void InitStyle()
         {
-            UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandYIfNeeded;
+            UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
 
             LayoutManager = new VerticalStretchLayout(this);
         }

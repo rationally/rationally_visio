@@ -26,7 +26,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         private void InitStyle()
         {
-            UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
+            UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
         }
 
         public override void AddToTree(Shape s, bool allowAddOfSubpart)

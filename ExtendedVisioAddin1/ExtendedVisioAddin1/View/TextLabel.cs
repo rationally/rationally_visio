@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Drawing;
 using Microsoft.Office.Interop.Visio;
+using Font = System.Drawing.Font;
+
+//using Font = Microsoft.Office.Interop.Visio.Font;
 
 namespace ExtendedVisioAddin1.View
 {
@@ -10,6 +14,8 @@ namespace ExtendedVisioAddin1.View
         private double characterHeight; //height of one character in inches
         private double characterWidth;
         private double contentTextWidth;
+
+        private double PIXELS_PER_INCH = 93;
         public SizingPolicy UsedSizingPolicy { get; set; }
 
         public TextLabel(Page page, Shape shape) : base(page)
@@ -25,9 +31,10 @@ namespace ExtendedVisioAddin1.View
 
             string text = labelText;
             characterHeight = 1.0/72.0*(double) size;
-            characterWidth = characterHeight*0.45;
-            contentTextWidth = characterWidth * (double)text.Length + 0.2;
-            
+
+            //characterWidth = characterHeight*0.45;
+            //contentTextWidth = characterWidth * (double)text.Length + 0.2;
+            contentTextWidth = GetWidthOfString(labelText)/ PIXELS_PER_INCH;
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
             RShape = page.Drop(rectMaster, 0,0);
@@ -57,13 +64,29 @@ namespace ExtendedVisioAddin1.View
             Repaint();//todo: moet dit echt hier
         }
 
+        private double GetWidthOfString(string str)
+        {
+            Bitmap objBitmap = default(Bitmap);
+            Graphics objGraphics = default(Graphics);
+
+            objBitmap = new Bitmap(1000, 200);
+            objGraphics = Graphics.FromImage(objBitmap);
+
+            SizeF stringSize = objGraphics.MeasureString(str, new Font("Calibri", size));
+
+            objBitmap.Dispose();
+            objGraphics.Dispose();
+            return stringSize.Width;
+        }
+
         public override void Repaint()
         {
             string text = RShape.Text.Replace("\n","");
             characterHeight = 1.0 / 72.0 * (double)size;
-            characterWidth = characterHeight * 0.45;
-            contentTextWidth = characterWidth * (double)text.Length + 0.2;
 
+            //contentTextWidth = characterWidth * (double)text.Length + 0.2;
+            contentTextWidth = GetWidthOfString(text) / PIXELS_PER_INCH;
+            characterWidth = contentTextWidth/text.Length;
             //sizing
             if (contentTextWidth > Width)
             {

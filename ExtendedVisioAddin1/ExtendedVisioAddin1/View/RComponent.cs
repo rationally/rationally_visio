@@ -244,6 +244,16 @@ namespace ExtendedVisioAddin1.View
             set { RShape.CellsU["LockRotate"].ResultIU = (value ? 1 : 0); }
         }
 
+        public int ShadowPattern
+        {
+            get
+            {
+                return int.Parse(RShape.CellsU["ShdwPattern"].ResultIU.ToString());
+            }
+
+            set { RShape.CellsU["ShdwPattern"].ResultIU = value; }
+        }
+
         public bool LockDelete
         {
             get

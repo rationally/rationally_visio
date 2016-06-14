@@ -19,21 +19,21 @@ namespace ExtendedVisioAddin1.View
             authorLabel.Height = 0.38;
             authorLabel.MarginTop = 0.02;
             authorLabel.MarginLeft = 0.02;
-            authorLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded);
+            authorLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
             TextLabel dateLabel = new TextLabel(page, "Date: " + date);
             dateLabel.Height = 0.38;
             dateLabel.MarginTop = 0.02;
             dateLabel.MarginLeft = 0.02;
             dateLabel.BackgroundColor = "RGB(255,255,255)";
             dateLabel.FontColor = "RGB(89,131,168)";
-            dateLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded);
+            dateLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
             TextLabel versionLabel = new TextLabel(page, "Version: " + version);
             versionLabel.Height = 0.38;
             versionLabel.MarginTop = 0.02;
             versionLabel.MarginLeft = 0.02;
             versionLabel.BackgroundColor = "RGB(255,255,255)";
             versionLabel.FontColor = "RGB(89,131,168)";
-            versionLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded);
+            versionLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
 
             AddUserRow("rationallyType");
             RationallyType = "informationBox";

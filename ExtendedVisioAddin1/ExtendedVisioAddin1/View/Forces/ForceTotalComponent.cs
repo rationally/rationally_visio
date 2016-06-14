@@ -66,15 +66,15 @@ namespace ExtendedVisioAddin1.View.Forces
             }
             if (total < 0)
             {
-                RShape.CellsU["FillForegnd"].Formula = "THEMEGUARD(RGB(255,128,0))";
+                BackgroundColor = "RGB(255,128,0)";
             }
             else if (total > 0)
             {
-                RShape.CellsU["FillForegnd"].Formula = "THEMEGUARD(RGB(0,200,0))";
+                BackgroundColor  = "RGB(0,200,0)";
             }
             else
             {
-                RShape.CellsU["FillForegnd"].Formula = "THEMEGUARD(RGB(255,255,255))";
+                BackgroundColor = "RGB(255,255,255)";
             }
             if (int.Parse(Text) != total)
             {

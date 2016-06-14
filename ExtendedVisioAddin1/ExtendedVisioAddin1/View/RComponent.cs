@@ -81,7 +81,7 @@ namespace ExtendedVisioAddin1.View
             }
         }
 
-        public virtual string AlternativeIdentifier
+        public string AlternativeIdentifier
         {
             get { return RShape.CellsU["User.alternativeIdentifier"].ResultStr["Value"]; }
             set { RShape.Cells["User.alternativeIdentifier.Value"].Formula = "\"" + value + "\""; }
@@ -311,7 +311,7 @@ namespace ExtendedVisioAddin1.View
         }
 
         /// <summary>
-        /// supported values: see  VisHorizontalAlignTypes
+        /// supported values: see  VisHorizontalAlignTypes (This enum is wrong)
         /// </summary>
         public double HAlign
         {

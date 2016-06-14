@@ -6,13 +6,7 @@ namespace ExtendedVisioAddin1.View.Forces
     internal class ForceValueComponent : RComponent
     {
         private static readonly Regex ForceValueRegex = new Regex(@"ForceValue(\.\d+)?$");
-
-        public string AlternativeIdentifier
-        {
-            get { return RShape.CellsU["User.alternativeIdentifier"].ResultStr["Value"]; }
-            set { RShape.Cells["User.alternativeIdentifier.Value"].Formula = "\"" + value + "\""; }
-        }
-
+        
         public ForceValueComponent(Page page, string alternativeIdentifier, int forceIndex) : base(page)
         {
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
@@ -71,20 +65,20 @@ namespace ExtendedVisioAddin1.View.Forces
                 UpdateReorderFunctions();
             }
             string toParse = Text.StartsWith("+") ? Text.Substring(1) : Text;
-            int v;
-            int.TryParse(toParse, out v);
+            int value;
+            int.TryParse(toParse, out value);
 
-            if (v < 0)
+            if (value < 0)
             {
-                RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(255,128,0))";
+                BackgroundColor = "RGB(255,128,0)";
             }
-            else if (v > 0)
+            else if (value > 0)
             {
-                RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(0,255,0))";
+                BackgroundColor = "RGB(0,200,0)";
             }
             else
             {
-                RShape.CellsU["Char.Color"].Formula = "THEMEGUARD(RGB(0,0,0))";
+                BackgroundColor = "RGB(255,255,255)";
             }
             base.Repaint();
         }

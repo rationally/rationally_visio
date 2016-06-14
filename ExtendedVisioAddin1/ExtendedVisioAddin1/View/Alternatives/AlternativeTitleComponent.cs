@@ -31,8 +31,12 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         private void InitStyle()
         {
-            Width = 2.9;
-            SetMargin(0.1);
+            Width = 3.7;
+            HAlign = 0;//Enum is wrong, align left
+            MarginLeft = 0.05;
+            MarginRight = 0;
+            MarginBottom = 0;
+            MarginTop = 0.1;
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
             Height = 0.3667;
         }

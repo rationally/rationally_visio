@@ -43,7 +43,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             switch (state.ToLower())
             {
                 case "accepted":
-                    RShape.CellsU["FillForegnd"].Formula = "RGB(0,255,0)";
+                    RShape.CellsU["FillForegnd"].Formula = "RGB(0,200,0)";
                     break;
                 case "rejected":
                     RShape.CellsU["FillForegnd"].Formula = "RGB(153,12,0)";
@@ -71,7 +71,10 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         private void InitStyle()
         {
-            SetMargin(0.1);
+            MarginLeft = 0.1;
+            MarginRight = 0;
+            MarginBottom = 0;
+            MarginTop = 0.1;
         }
 
         public void SetAlternativeIdentifier(int alternativeIndex)

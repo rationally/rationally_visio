@@ -19,12 +19,13 @@ namespace ExtendedVisioAddin1.EventHandlers
                 //draw the header
                 TextLabel header = new TextLabel(Globals.ThisAddIn.Application.ActivePage,model.DecisionName);
 
-                header.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded | SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded);
-                header.Width = 7;
-                header.Height = 1;
+                header.SetUsedSizingPolicy(SizingPolicy.FixedSize);
+                header.HAlign = 0;//left
+                header.Width = 10.5;
+                header.Height = 0.3056;
                 header.SetFontSize(22);
-                header.CenterX = 3.5;
-                header.CenterY = offsetHeight;
+                header.CenterX = 5.5;
+                header.CenterY = 22.483;
 
                 //draw the information container
                 InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version);

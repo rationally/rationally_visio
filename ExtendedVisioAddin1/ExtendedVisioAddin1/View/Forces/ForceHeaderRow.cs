@@ -63,7 +63,8 @@ namespace ExtendedVisioAddin1.View.Forces
                 Width = 1,
                 Height = 0.33,
                 BackgroundColor = "RGB(255,255,255)",
-                FontColor = "RGB(89,131,168)"
+                FontColor = "RGB(89,131,168)",
+                LineColor = "RGB(89,131,168)"
             };
             concernLabel.ToggleBoldFont(true);
             concernLabel.AddUserRow("rationallyType");
@@ -77,7 +78,8 @@ namespace ExtendedVisioAddin1.View.Forces
                 Width = 2,
                 Height = 0.33,
                 BackgroundColor = "RGB(255,255,255)",
-                FontColor = "RGB(89,131,168)"
+                FontColor = "RGB(89,131,168)",
+                LineColor = "RGB(89,131,168)"
             };
             descLabel.ToggleBoldFont(true);
             descLabel.AddUserRow("rationallyType");

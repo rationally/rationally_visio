@@ -68,7 +68,8 @@ namespace ExtendedVisioAddin1.View.Forces
                 Name = "ConcernDummy",
                 Text = "Total:",
                 BackgroundColor = "RGB(255,255,255)",
-                FontColor = "RGB(89,131,168)"
+                FontColor = "RGB(89,131,168)",
+                LineColor = "RGB(89,131,168)"
             };
             concernDummy.LinePattern = 1;
             concernDummy.AddUserRow("rationallyType");
@@ -83,7 +84,8 @@ namespace ExtendedVisioAddin1.View.Forces
                 Height = 0.33,
                 Name = "DescDummy",
                 BackgroundColor = "RGB(255,255,255)",
-                FontColor = "RGB(89,131,168)"
+                FontColor = "RGB(89,131,168)",
+                LineColor = "RGB(89,131,168)"
             };
             descDummy.LinePattern = 1;
             descDummy.AddUserRow("rationallyType");

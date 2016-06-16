@@ -8,9 +8,9 @@ namespace ExtendedVisioAddin1.EventHandlers
     {
         public override void Execute(RModel model, Shape s, string context)
         {
-            if (model.Alternatives.Count >= 5)
+            if (model.Alternatives.Count >= 3)
             {
-                
+                MessageBox.Show("Adding more than three alternative solutions may have a negative effect on the layout.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             AddAlternative alternative = new AddAlternative(model);

@@ -104,6 +104,7 @@ namespace ExtendedVisioAddin1.View
                 string newContent = "";
                 if (!((UsedSizingPolicy & SizingPolicy.ExpandXIfNeeded) > 0) && text.Length > lineLength)
                 {
+                    lineCount = 1;
                     for (int i = 0; i < (text.Length - lineLength); i += lineLength)
                     {
                         newContent += text.Substring(i, lineLength) + "\n";

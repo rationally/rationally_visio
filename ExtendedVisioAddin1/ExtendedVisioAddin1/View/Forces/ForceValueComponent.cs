@@ -31,6 +31,7 @@ namespace ExtendedVisioAddin1.View.Forces
             Height = 0.33;
             Text = "0";
             ToggleBoldFont(true);
+            LineColor = "RGB(89,131,168)";
 
             AlternativeIdentifier = alternativeIdentifier;
         }

@@ -14,7 +14,7 @@ namespace ExtendedVisioAddin1.EventHandlers
 
             int index = c.AlternativeIndex;
             Alternative alternative = model.Alternatives[index];
-            DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete " + alternative.Title, "Confirm Deletion", MessageBoxButtons.YesNo);
+            DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete " + alternative.Title + "?", "Confirm Deletion", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
                 //model.Alternatives.Remove(alternative);//TODO might need to turn this on

@@ -396,7 +396,11 @@ namespace ExtendedVisioAddin1.View
             set { RShape.CellsU["FillForegnd"].Formula = value; }
         }
 
-
+        public string LineColor
+        {
+            get { return RShape.CellsU["LineColor"].ResultStr["Value"]; }
+            set { RShape.CellsU["LineColor"].Formula = value; }
+        }
 
         /// <summary>
         /// Updates shapesheet of the stored IVShape. Character.Style holds information about the font style (bold, italic...) in a bitwise manner.

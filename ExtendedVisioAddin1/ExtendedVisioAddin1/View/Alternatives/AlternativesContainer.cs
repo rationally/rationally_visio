@@ -47,7 +47,6 @@ namespace ExtendedVisioAddin1.View.Alternatives
                     AlternativeContainer stub = (AlternativeContainer) Children.First(c => c.AlternativeIndex == shapeComponent.AlternativeIndex);
                     stub.RShape.Delete(); //NOT deleteEx
                     stub.RShape = s;
-                    //stub.Repaint();
                 }
             }
             else

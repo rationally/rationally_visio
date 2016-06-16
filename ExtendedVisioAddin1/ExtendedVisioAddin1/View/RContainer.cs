@@ -42,7 +42,10 @@ namespace ExtendedVisioAddin1.View
                     c.MsvSdContainerLocked = lockContainer;
                 }
             }
-
+            foreach (int shapeIdentifier in RShape.ContainerProperties.GetMemberShapes(16))
+            {
+                Shape alternativeComponent = Page.Shapes.ItemFromID[shapeIdentifier];
+            }
             Children.ForEach(c => c.PlaceChildren());
         }
 

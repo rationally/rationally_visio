@@ -65,7 +65,7 @@ namespace ExtendedVisioAddin1
                 }
             }
         }
-        
+
         private static void RegisterEventHandlers()
         {
             MarkerEventHandlerRegistry registry = MarkerEventHandlerRegistry.Instance;
@@ -148,9 +148,10 @@ namespace ExtendedVisioAddin1
                 RelatedURLURLComponent relatedURLURLComponent = (RelatedURLURLComponent)relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent);
                 relatedURLURLComponent.Text = changedShape.Hyperlink.Address;
                 //new RepaintHandler();
-            } else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals("User.forceIndex")) //No need to rebuild tree outside an undo
+            }
+            else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals("User.forceIndex")) //No need to rebuild tree outside an undo
             {
-                RComponent forcesComponent  = View.Children.FirstOrDefault(x => x is ForcesContainer);
+                RComponent forcesComponent = View.Children.FirstOrDefault(x => x is ForcesContainer);
                 if (forcesComponent != null)
                 {
                     Model.Forces.Clear();
@@ -230,7 +231,7 @@ namespace ExtendedVisioAddin1
                 if (s.CellExistsU["User.rationallyType", 0] != 0)
                 {
                     string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
-                    
+
                     //mark the deleted shape as 'deleted' in the view tree
                     RComponent deleted = View.GetComponentByShape(s);
                     if (deleted != null)
@@ -238,10 +239,7 @@ namespace ExtendedVisioAddin1
                         deleted.Deleted = true;
                     }
 
-                    //select all 'related documents' containers
-                    List<RelatedDocumentsContainer> relatedDocumentsContainers = View.Children.Where(c => c is RelatedDocumentsContainer).Cast<RelatedDocumentsContainer>().ToList();
-
-
+                    RelatedDocumentsContainer relatedDocumentsContainer = View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer; //todo NullReferenceMeuk
                     switch (rationallyType)
                     {
                         case "relatedDocumentContainer":
@@ -249,34 +247,47 @@ namespace ExtendedVisioAddin1
                             int docIndex = relDoc.DocumentIndex;
                             Model.Documents.RemoveAt(docIndex);
                             //for each container, remove the children of which the shape equals the to be deleted shape
-                            relatedDocumentsContainers.ForEach(r => r.Children = r.Children.Where(c => !c.RShape.Equals(s)).ToList());
-                            relatedDocumentsContainers.ForEach(r => new RepaintHandler(r));
+                            relatedDocumentsContainer.Children = relatedDocumentsContainer.Children.Where(c => !c.RShape.Equals(s)).ToList();
+                            new RepaintHandler(relatedDocumentsContainer);
                             break;
                         case "relatedUrl":
                         case "relatedFile":
                         case "relatedDocumentTitle":
-                            foreach (RelatedDocumentsContainer relatedDocumentsContainer in relatedDocumentsContainers)
+                            foreach (RelatedDocumentContainer relatedDocumentContainer in relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().ToList())
                             {
-                                foreach (RelatedDocumentContainer relatedDocumentContainer in relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().ToList())
+                                if (relatedDocumentContainer.Children.Where(c => c.RShape.Equals(s)).ToList().Count > 0) //check if this related document contains the to be deleted component
                                 {
-                                    if (relatedDocumentContainer.Children.Where(c => c.RShape.Equals(s)).ToList().Count > 0) //check if this related document contains the to be deleted component
+                                    if (!relatedDocumentContainer.Deleted)
                                     {
-                                        if (!relatedDocumentContainer.Deleted)
-                                        {
-                                            relatedDocumentContainer.RShape.Delete(); //delete the parent wrapper of s
-                                            relatedDocumentsContainer.Children.Remove(relatedDocumentContainer); //remove the related document from the view tree
-                                        }
-                                        relatedDocumentContainer.Children.Where(c=>!c.Deleted).ToList().ForEach(c => c.RShape.Delete());//Delete the children of the parent.
+                                        relatedDocumentContainer.RShape.Delete(); //delete the parent wrapper of s
+                                        relatedDocumentsContainer.Children.Remove(relatedDocumentContainer); //remove the related document from the view tree
                                     }
+                                    relatedDocumentContainer.Children.Where(c => !c.Deleted).ToList().ForEach(c => c.RShape.Delete());//Delete the children of the parent.
                                 }
                             }
+
                             break;
                         case "relatedUrlUrl":
-                            foreach (RelatedDocumentsContainer relatedDocumentsContainer in relatedDocumentsContainers)
+                            foreach (RelatedDocumentContainer relatedDocumentContainer in relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().ToList())
                             {
-                                foreach (RelatedDocumentContainer relatedDocumentContainer in relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().ToList())
+                                relatedDocumentContainer.Children.RemoveAll(c => c.RShape.Equals(s)); //Remove the component from the tree
+                            }
+                            break;
+                        case "alternativeTitle":
+                        case "alternativeIdentifier":
+                        case "alternativeDescription":
+                        case "alternativeState":
+                            AlternativesContainer cont = (AlternativesContainer) View.Children.First(x => x is AlternativesContainer);
+                            foreach (AlternativeContainer alternativeContainer in cont.Children.Where(c => c is AlternativeContainer).Cast<AlternativeContainer>().ToList())
+                            {
+                                if (alternativeContainer.Children.Where(c => c.RShape.Equals(s)).ToList().Count > 0) //check if this alternative contains the to be deleted component
                                 {
-                                    relatedDocumentContainer.Children.RemoveAll(c => c.RShape.Equals(s)); //Remove the component from the tree
+                                    if (!alternativeContainer.Deleted)
+                                    {
+                                        alternativeContainer.RShape.Delete(); //delete the parent wrapper of s
+                                        cont.Children.Remove(alternativeContainer); //remove the alternative from the view tree
+                                    }
+                                    alternativeContainer.Children.Where(c => !c.Deleted).ToList().ForEach(c => c.RShape.Delete());//Delete the children of the parent.
                                 }
                             }
                             break;
@@ -285,7 +296,6 @@ namespace ExtendedVisioAddin1
                             int index = component.AlternativeIndex;
                             Model.Alternatives.RemoveAt(index);
                             View.DeleteAlternative(index, false);
-
                             break;
                         case "alternatives":
                         case "forces":

@@ -77,8 +77,11 @@ namespace ExtendedVisioAddin1.View
             {
                 if (Children.Exists(x => AlternativesContainer.IsAlternativesContainer(x.Name)))
                 {
-                    //TODO: Show message
-                    s.DeleteEx(0);
+                    if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                    {
+                        //TODO: Show message
+                        s.DeleteEx(0);
+                    }
                 }
                 else
                 {
@@ -89,8 +92,11 @@ namespace ExtendedVisioAddin1.View
             {
                 if (Children.Exists(x => RelatedDocumentsContainer.IsRelatedDocumentsContainer(x.Name)))
                 {
-                    //TODO: Show message
-                    s.DeleteEx(0);
+                    if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                    {
+                        //TODO: Show message
+                        s.DeleteEx(0);
+                    }
                 }
                 else
                 {
@@ -106,8 +112,11 @@ namespace ExtendedVisioAddin1.View
             {
                 if (Children.Exists(x => ForcesContainer.IsForcesContainer(x.Name)))
                 {
-                    //TODO: Show message
-                    s.DeleteEx(0);
+                    if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                    {
+                        //TODO: Show message
+                        s.DeleteEx(0);
+                    }
                 }
                 else
                 {

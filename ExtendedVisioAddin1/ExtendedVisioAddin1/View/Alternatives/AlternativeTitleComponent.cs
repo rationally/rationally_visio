@@ -26,19 +26,21 @@ namespace ExtendedVisioAddin1.View.Alternatives
             this.LockRotate = true;
             this.LockMoveX = true;
             this.LockMoveY = true;*/
+            Width = 3.7;
+            Height = 0.3667;
             InitStyle();
         }
 
         private void InitStyle()
         {
-            Width = 3.7;
+            
             HAlign = 0;//Enum is wrong, align left
             MarginLeft = 0.05;
             MarginRight = 0;
             MarginBottom = 0;
             MarginTop = 0.2;
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
-            Height = 0.3667;
+            
         }
 
         public void SetAlternativeIdentifier(int alternativeIndex)

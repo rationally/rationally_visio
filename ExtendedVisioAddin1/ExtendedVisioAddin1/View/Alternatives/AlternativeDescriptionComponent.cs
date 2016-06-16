@@ -14,6 +14,8 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         public AlternativeDescriptionComponent(Page page, int alternativeIndex, string description) : base(page)
         {
+            Width = 5.15;
+            Height = 2.5;
             InitStyle();
 
             AddUserRow("rationallyType");
@@ -44,8 +46,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         public void InitStyle()
         {
-            Width = 5.15;
-            Height = 2.5;
+            
             MarginLeft = 0.1;
             MarginRight = 0.1;
             MarginBottom = 0.1;

@@ -19,12 +19,13 @@ namespace ExtendedVisioAddin1.View.Documents
             Name = "RelatedUrlUrl";
             AddUserRow("documentIndex");
             DocumentIndex = index;
+            Width = 4.2;
             InitStyle();
         }
 
         private void InitStyle()
         {
-            Width = 4.2;
+            
             UsedSizingPolicy = SizingPolicy.All;
             SetUsedSizingPolicy(UsedSizingPolicy &= ~SizingPolicy.ExpandXIfNeeded);//we want to remove this one from the policy: AND with everything else on true
         }

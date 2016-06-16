@@ -57,7 +57,7 @@ namespace ExtendedVisioAddin1.View
         public void SetUsedSizingPolicy(SizingPolicy p)
         {
             UsedSizingPolicy = p;
-            Repaint();//todo: moet dit echt hier
+            //Repaint();//todo: moet dit echt hier
         }
 
         public void SetFontSize(short fontSize)

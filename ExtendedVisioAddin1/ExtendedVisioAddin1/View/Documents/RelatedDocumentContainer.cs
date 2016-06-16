@@ -90,16 +90,18 @@ namespace ExtendedVisioAddin1.View.Documents
             Name = "Related Document";
             AddUserRow("documentIndex");
             DocumentIndex = index;
+            Width = 5;
+            Height = 1;
             InitStyle();
         }
 
         public void InitStyle()
         {
-            Width = 5;
+            
             LinePattern = 16; //borderless
             MarginTop = (DocumentIndex == 0) ? 0.3 : 0.0;
             MarginBottom = 0;
-            Height = 1;
+            
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
         }
 

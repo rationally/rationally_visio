@@ -26,14 +26,42 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
+            //make s into an rcomponent for access to wrapper
+            RComponent shapeComponent = new RComponent(Page);
+            shapeComponent.RShape = s;
+
             if (RelatedDocumentContainer.IsRelatedDocumentContainer(s.Name))
             {
-                RelatedDocumentContainer con = new RelatedDocumentContainer(Page, s);
-                Children.Insert(con.DocumentIndex, con);
+                if (Children.All(c => c.DocumentIndex != shapeComponent.DocumentIndex)) //there is no container stub with this index
+                {
+                    RelatedDocumentContainer con = new RelatedDocumentContainer(Page, s);
+                    Children.Insert(con.DocumentIndex, con);
+                }
+                else
+                {
+                    //remove stub, insert s as the shape of the stub wrapper
+                    RelatedDocumentContainer stub = (RelatedDocumentContainer)Children.First(c => c.DocumentIndex == shapeComponent.DocumentIndex);
+                    stub.RShape.Delete();//NOT deleteEx
+                    stub.RShape = s;
+                    //stub.Repaint();
+                }
+
+                
             }
             else
             {
-                Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
+                bool isDocumentChild = RelatedDocumentTitleComponent.IsRelatedDocumentTitleContainer(s.Name) || RelatedFileComponent.IsRelatedFileComponent(s.Name) || RelatedUrlComponent.IsRelatedUrlComponent(s.Name) || RelatedURLURLComponent.IsRelatedUrlUrlComponent(s.Name);
+
+                if (isDocumentChild && Children.All(c => c.DocumentIndex != shapeComponent.DocumentIndex)) //if parent not exists
+                {
+                    RelatedDocumentContainer stub = RelatedDocumentContainer.GetStub(Page, shapeComponent.DocumentIndex);
+                    Children.Insert(stub.DocumentIndex, stub);
+                    Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
+                }
+                else
+                {
+                    Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
+                }
             }
         }
 

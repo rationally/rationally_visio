@@ -69,6 +69,18 @@ namespace ExtendedVisioAddin1.View
             }
         }
 
+        public string IsStub
+        {
+            get
+            {
+                return RShape.CellsU["User.isStub"].ResultStr["Value"];
+            }
+            set
+            {
+                RShape.Cells["User.isStub.Value"].Formula = "\"" + value + "\"";
+            }
+        }
+
         public int AlternativeIndex
         {
             get

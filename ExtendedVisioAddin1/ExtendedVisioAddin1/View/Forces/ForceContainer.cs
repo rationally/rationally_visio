@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
+using ExtendedVisioAddin1.View.Documents;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
@@ -13,18 +14,18 @@ namespace ExtendedVisioAddin1.View.Forces
     {
         private static readonly Regex ForceContaineRegex = new Regex(@"ForceContainer(\.\d+)?$");
 
-
-        public ForceContainer(Page page, int forceIndex) : base(page)
+        public ForceContainer(Page page, int forceIndex, bool makeChildren) : base(page)
         {
             AddUserRow("forceIndex");
             ForceIndex = forceIndex;
+            if (makeChildren)
+            {
+                ForceConcernComponent concern = new ForceConcernComponent(page, forceIndex);
+                Children.Add(concern);
 
-            ForceConcernComponent concern = new ForceConcernComponent(page, forceIndex);
-            Children.Add(concern);
-
-            ForceDescriptionComponent description = new ForceDescriptionComponent(page, forceIndex);
-            Children.Add(description);
-
+                ForceDescriptionComponent description = new ForceDescriptionComponent(page, forceIndex);
+                Children.Add(description);
+            }
             AddUserRow("rationallyType");
             RationallyType = "forceContainer";
             Name = "ForceContainer";
@@ -37,6 +38,7 @@ namespace ExtendedVisioAddin1.View.Forces
             InitStyle();
         }
 
+ 
         public ForceContainer(Page page, Shape forceContainer) : base(page, false)
         {
             RShape = forceContainer;
@@ -137,9 +139,51 @@ namespace ExtendedVisioAddin1.View.Forces
             base.Repaint();
         }
 
+        public override void AddToTree(Shape s, bool allowAddOfSubpart)
+        {
+            if (ForceConcernComponent.IsForceConcern(s.Name))
+            {
+                ForceConcernComponent com = new ForceConcernComponent(Page, s);
+                if (com.ForceIndex == ForceIndex)
+                { 
+                    Children.Add(com);
+                }
+            }
+            else if (ForceDescriptionComponent.IsForceDescription(s.Name))
+            {
+                ForceDescriptionComponent com = new ForceDescriptionComponent(Page, s);
+                if (com.ForceIndex == ForceIndex)
+                {
+                    Children.Add(com);
+                }
+            }
+            else if (ForceValueComponent.IsForceValue(s.Name))
+            {
+                ForceValueComponent com = new ForceValueComponent(Page, s);
+                if (com.ForceIndex == ForceIndex)
+                {
+                    Children.Add(com);
+                }
+            }
+        }
+
         public static bool IsForceContainer(string name)
         {
             return ForceContaineRegex.IsMatch(name);
+        }
+
+        /// <summary>
+        /// Returns a stub ForceContainer. This shape can be deleted without any bavaviour being triggered.
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="forceIndex"></param>
+        /// <returns></returns>
+        public static ForceContainer GetStub(Page page, int forceIndex)
+        {
+            ForceContainer stub = new ForceContainer(page, forceIndex, false);
+            stub.AddUserRow("isStub");
+            stub.IsStub = "true";
+            return stub;
         }
     }
 }

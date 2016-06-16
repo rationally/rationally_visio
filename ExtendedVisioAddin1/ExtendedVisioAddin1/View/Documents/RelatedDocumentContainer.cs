@@ -95,6 +95,18 @@ namespace ExtendedVisioAddin1.View.Documents
             InitStyle();
         }
 
+        public RelatedDocumentContainer(Page page, int index) : base(page)
+        {
+            AddUserRow("rationallyType");
+            RationallyType = "relatedDocumentContainer";
+            Name = "Related Document";
+            AddUserRow("documentIndex");
+            DocumentIndex = index;
+            Width = 5;
+            Height = 1;
+            InitStyle();
+        }
+
         public void InitStyle()
         {
             
@@ -187,6 +199,20 @@ namespace ExtendedVisioAddin1.View.Documents
         {
             UpdateReorderFunctions();
             base.Repaint();
+        }
+
+        /// <summary>
+        /// Returns a stub ForceContainer. This shape can be deleted without any bavaviour being triggered.
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="documentIndex"></param>
+        /// <returns></returns>
+        public static RelatedDocumentContainer GetStub(Page page, int documentIndex)
+        {
+            RelatedDocumentContainer stub = new RelatedDocumentContainer(page, documentIndex);
+            stub.AddUserRow("isStub");
+            stub.IsStub = "true";
+            return stub;
         }
     }
 }

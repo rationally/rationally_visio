@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
+using ExtendedVisioAddin1.View.Forces;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Alternatives
@@ -26,7 +27,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
                     Children.Add(comp);
                     state = comp.Text;
                 }
-                else if (AlternativeIdentifierComponent.IsIdentifierDescription(alternativeComponent.Name))
+                else if (AlternativeIdentifierComponent.IsAlternativeIdentifier(alternativeComponent.Name))
                 {
                     Children.Add(new AlternativeIdentifierComponent(page, alternativeComponent));
                 }
@@ -54,6 +55,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         public AlternativeContainer(Page page, int alternativeIndex, Alternative alternative) : base(page)
         {
+
             //1) state box
             AlternativeStateComponent stateComponent = new AlternativeStateComponent(page, alternativeIndex, alternative.Status);
 
@@ -95,6 +97,29 @@ namespace ExtendedVisioAddin1.View.Alternatives
             InitStyle();
         }
 
+        public AlternativeContainer(Page page, int alternativeIndex) : base(page)
+        {
+
+           
+
+            Name = "Alternative";
+            AddUserRow("rationallyType");
+            RationallyType = "alternative";
+            AddUserRow("alternativeIndex");
+            AlternativeIndex = alternativeIndex;
+
+            //locks
+            /*this.LockDelete = true;
+            this.LockRotate = true;
+            this.LockMoveX = true;
+            this.LockMoveY = true;
+            this.LockTextEdit = true;*/
+
+            //Events
+            AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete alternative\"", false);
+            InitStyle();
+        }
+
         private void InitStyle()
         {
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
@@ -107,6 +132,42 @@ namespace ExtendedVisioAddin1.View.Alternatives
             AlternativeIndex = alternativeIndex;
             Children.ForEach(child => ((IAlternativeComponent)child).SetAlternativeIdentifier(alternativeIndex));
             InitStyle();
+        }
+
+        public override void AddToTree(Shape s, bool allowAddInChildren)
+        {
+            if (AlternativeStateComponent.IsAlternativeState(s.Name))
+            {
+                AlternativeStateComponent com = new AlternativeStateComponent(Page, s);
+                if (com.AlternativeIndex == AlternativeIndex)
+                {
+                    Children.Add(com);
+                }
+            }
+            else if (AlternativeIdentifierComponent.IsAlternativeIdentifier(s.Name))
+            {
+                AlternativeIdentifierComponent com = new AlternativeIdentifierComponent(Page, s);
+                if (com.AlternativeIndex == AlternativeIndex)
+                {
+                    Children.Add(com);
+                }
+            }
+            else if (AlternativeTitleComponent.IsAlternativeTitle(s.Name))
+            {
+                AlternativeTitleComponent com = new AlternativeTitleComponent(Page, s);
+                if (com.AlternativeIndex == AlternativeIndex)
+                {
+                    Children.Add(com);
+                }
+            }
+            else if (AlternativeDescriptionComponent.IsAlternativeDescription(s.Name))
+            {
+                AlternativeDescriptionComponent com = new AlternativeDescriptionComponent(Page, s);
+                if (com.AlternativeIndex == AlternativeIndex)
+                {
+                    Children.Add(com);
+                }
+            }
         }
 
         public static bool IsAlternativeContainer(string name)
@@ -130,6 +191,20 @@ namespace ExtendedVisioAddin1.View.Alternatives
             }
 
             base.Repaint();
+        }
+
+        /// <summary>
+        /// Returns a stub ForceContainer. This shape can be deleted without any bavaviour being triggered.
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="alternativeIndex"></param>
+        /// <returns></returns>
+        public static AlternativeContainer GetStub(Page page, int alternativeIndex)
+        {
+            AlternativeContainer stub = new AlternativeContainer(page, alternativeIndex);
+            stub.AddUserRow("isStub");
+            stub.IsStub = "true";
+            return stub;
         }
     }
 }

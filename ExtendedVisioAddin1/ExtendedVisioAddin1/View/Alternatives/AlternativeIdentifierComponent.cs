@@ -46,7 +46,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             AlternativeIndex = alternativeIndex;
             Text = (char)(65 + alternativeIndex) + ":";
         }
-        public static bool IsIdentifierDescription(string name)
+        public static bool IsAlternativeIdentifier(string name)
         {
             return IdentRegex.IsMatch(name);
         }

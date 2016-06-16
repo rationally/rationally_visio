@@ -239,6 +239,9 @@ namespace ExtendedVisioAddin1
                     switch (rationallyType)
                     {
                         case "relatedDocumentContainer":
+                            RComponent relDoc = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };
+                            int docIndex = relDoc.DocumentIndex;
+                            Model.Documents.RemoveAt(docIndex);
                             //for each container, remove the children of which the shape equals the to be deleted shape
                             relatedDocumentsContainers.ForEach(r => r.Children = r.Children.Where(c => !c.RShape.Equals(s)).ToList());
                             relatedDocumentsContainers.ForEach(r => new RepaintHandler(r));

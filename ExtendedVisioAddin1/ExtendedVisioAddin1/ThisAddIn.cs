@@ -4,6 +4,7 @@ using System.Linq;
 using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
+using ExtendedVisioAddin1.View.Alternatives;
 using ExtendedVisioAddin1.View.Documents;
 using ExtendedVisioAddin1.View.Forces;
 using Microsoft.Office.Core;
@@ -137,7 +138,7 @@ namespace ExtendedVisioAddin1
             {
                 return;
             }
-            if (cell.LocalName.Equals("Hyperlink.Row_1.Address") && changedShape.Name.Equals("RelatedUrl"))
+            if (RelatedUrlComponent.IsRelatedUrlComponent(changedShape.Name) && cell.LocalName.Equals("Hyperlink.Row_1.Address"))
             {
                 //find the container that holds all Related Documents
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)View.Children.First(c => c is RelatedDocumentsContainer);
@@ -147,17 +148,38 @@ namespace ExtendedVisioAddin1
                 RelatedURLURLComponent relatedURLURLComponent = (RelatedURLURLComponent)relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent);
                 relatedURLURLComponent.Text = changedShape.Hyperlink.Address;
                 //new RepaintHandler();
-            } else if (cell.LocalName.Equals("Hyperlink.Row_1.Address") && changedShape.Name.Equals("RelatedUrl"))
+            } else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals("User.forceIndex")) //No need to rebuild tree outside an undo
             {
-                
+                RComponent forcesComponent  = View.Children.FirstOrDefault(x => x is ForcesContainer);
+                if (forcesComponent != null)
+                {
+                    Model.Forces.Clear();
+                    View.Children.Remove(forcesComponent);
+                    Shape temp = forcesComponent.RShape;
+                    View.Children.Add(new ForcesContainer(temp.ContainingPage, temp));
+                }
             }
-            else if (cell.LocalName.Equals("Hyperlink.Row_1.Address") && changedShape.Name.Equals("RelatedUrl"))
+            else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals("User.alternativeIndex"))
             {
-                
+                RComponent alternativeComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
+                if (alternativeComponent != null)
+                {
+                    Model.Alternatives.Clear();
+                    View.Children.Remove(alternativeComponent);
+                    Shape temp = alternativeComponent.RShape;
+                    View.Children.Add(new AlternativesContainer(temp.ContainingPage, temp));
+                }
             }
-            else if (cell.LocalName.Equals("Hyperlink.Row_1.Address") && changedShape.Name.Equals("RelatedUrl"))
+            else if (Application.IsUndoingOrRedoing && RelatedDocumentContainer.IsRelatedDocumentContainer(changedShape.Name) && cell.LocalName.Equals("User.documentIndex"))
             {
-                
+                RComponent docComponent = View.Children.FirstOrDefault(x => x is RelatedDocumentsContainer);
+                if (docComponent != null)
+                {
+                    Model.Documents.Clear();
+                    View.Children.Remove(docComponent);
+                    Shape temp = docComponent.RShape;
+                    View.Children.Add(new RelatedDocumentsContainer(temp.ContainingPage, temp));
+                }
             }
         }
 

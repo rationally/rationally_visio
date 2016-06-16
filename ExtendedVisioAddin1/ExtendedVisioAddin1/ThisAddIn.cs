@@ -133,7 +133,11 @@ namespace ExtendedVisioAddin1
         private void Application_CellChangedEvent(Cell cell)
         {
             Shape changedShape = cell.Shape;
-            if (changedShape != null && changedShape.Document.Template.ToLower().Contains("rationally") && cell.LocalName.Equals("Hyperlink.Row_1.Address") && changedShape.Name.Equals("RelatedUrl") && changedShape.CellExistsU["User.rationallyType", 0] != 0) //todo: testen of te rationallytype check het niet breekt
+            if (changedShape == null || !changedShape.Document.Template.ToLower().Contains("rationally") || changedShape.CellExistsU["User.rationallyType", 0] == 0)
+            {
+                return;
+            }
+            if (cell.LocalName.Equals("Hyperlink.Row_1.Address") && changedShape.Name.Equals("RelatedUrl"))
             {
                 //find the container that holds all Related Documents
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)View.Children.First(c => c is RelatedDocumentsContainer);
@@ -143,8 +147,18 @@ namespace ExtendedVisioAddin1
                 RelatedURLURLComponent relatedURLURLComponent = (RelatedURLURLComponent)relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent);
                 relatedURLURLComponent.Text = changedShape.Hyperlink.Address;
                 //new RepaintHandler();
+            } else if (cell.LocalName.Equals("Hyperlink.Row_1.Address") && changedShape.Name.Equals("RelatedUrl"))
+            {
+                
             }
-
+            else if (cell.LocalName.Equals("Hyperlink.Row_1.Address") && changedShape.Name.Equals("RelatedUrl"))
+            {
+                
+            }
+            else if (cell.LocalName.Equals("Hyperlink.Row_1.Address") && changedShape.Name.Equals("RelatedUrl"))
+            {
+                
+            }
         }
 
         private void RebuildTree(IVDocument d)

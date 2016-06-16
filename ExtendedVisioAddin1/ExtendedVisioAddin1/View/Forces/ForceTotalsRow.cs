@@ -20,12 +20,15 @@ namespace ExtendedVisioAddin1.View.Forces
             Name = "ForceTotalsRow";
 
             InitChildren(page);
+            Height = 0.33;
             InitStyle();
         }
         
         public ForceTotalsRow(Page page, Shape forceTotalsShape) : base(page, false)
         {
             RShape = forceTotalsShape;
+            InitStyle();
+
             Array ident = forceTotalsShape.ContainerProperties.GetMemberShapes(16);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             if (Children.Count == 0)
@@ -47,7 +50,7 @@ namespace ExtendedVisioAddin1.View.Forces
                     }
                 }
             }
-            InitStyle();
+            
         }
 
         private void InitChildren(Page page)
@@ -92,7 +95,7 @@ namespace ExtendedVisioAddin1.View.Forces
         private void InitStyle()
         {
             MarginBottom = 0.4;
-            Height = 0.33;
+
             UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
             LayoutManager = new InlineLayout(this);
         }

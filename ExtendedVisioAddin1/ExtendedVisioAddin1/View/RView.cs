@@ -96,7 +96,10 @@ namespace ExtendedVisioAddin1.View
                 {
                     RelatedDocumentsContainer rdc = new RelatedDocumentsContainer(Page, s);
                     Children.Add(rdc);
-                    new RepaintHandler(rdc);
+                    if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                    {
+                        new RepaintHandler(rdc);
+                    }
                 }
             }
             else if (ForcesContainer.IsForcesContainer(s.Name))
@@ -110,7 +113,10 @@ namespace ExtendedVisioAddin1.View
                 {
                     ForcesContainer forcesContainer = new ForcesContainer(Page, s);
                     Children.Add(forcesContainer);
-                    new RepaintHandler(forcesContainer);
+                    if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                    {
+                        new RepaintHandler(forcesContainer);
+                    }
                 }
             }
             else if(allowAddOfSubpart)

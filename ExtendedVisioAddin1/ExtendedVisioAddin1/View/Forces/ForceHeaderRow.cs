@@ -20,6 +20,7 @@ namespace ExtendedVisioAddin1.View.Forces
             Name = "ForceHeaderRow";
 
             InitChildren(page);
+            Height = 0.33;
             InitStyle();
         }
         
@@ -88,7 +89,7 @@ namespace ExtendedVisioAddin1.View.Forces
         private void InitStyle()
         {
             MarginTop = 0.4;
-            Height = 0.33;
+            
             UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
             LayoutManager = new InlineLayout(this);
         }

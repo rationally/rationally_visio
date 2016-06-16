@@ -251,9 +251,16 @@ namespace ExtendedVisioAddin1
                             break;
                         case "forceContainer":
                         case "forceConcern":
-                        case "forceValue":
                         case "forceDescription":
                             MarkerEventHandlerRegistry.Instance.HandleEvent(rationallyType + ".delete", Model, s, "");
+                            break;
+                        case "forceValue":
+                            RComponent forceComponent = new RComponent(s.ContainingPage);
+                            forceComponent.RShape = s;
+                            if (Model.Alternatives.Any(a => a.Identifier == forceComponent.AlternativeIdentifier)) //if NOT, an alternative was deleted => so do not remove the whole force row
+                            {
+                                MarkerEventHandlerRegistry.Instance.HandleEvent(rationallyType + ".delete", Model, s, "");
+                            }
                             break;
                     }
                 }

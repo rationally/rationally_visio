@@ -8,7 +8,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers
 {
-    class QDForceComponentEventHandler : QueryDeleteEventHandler
+    internal class QDForceComponentEventHandler : QueryDeleteEventHandler
     {
         public override void Execute(string eventKey, RView view, Shape changedShape)
         {
@@ -17,8 +17,6 @@ namespace ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers
             {
                 Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("scope");
             }
-
-            
 
             ForcesContainer forcesContainer = (ForcesContainer) view.Children.First(c => c is ForcesContainer);
             foreach (ForceContainer forceContainer in forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList()) //find all candidate containers

@@ -26,8 +26,11 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         private void InitStyle()
         {
-            RShape.ContainerProperties.ResizeAsNeeded = 0;
-            ContainerPadding = 0;
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                ContainerPadding = 0;
+            }
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
         }
 
@@ -49,7 +52,8 @@ namespace ExtendedVisioAddin1.View.Alternatives
                     AlternativeContainer stub = (AlternativeContainer) Children.First(c => c.AlternativeIndex == shapeComponent.AlternativeIndex);
                     Children.Remove(stub);
                     stub.RShape.Delete(); //NOT deleteEx
-                    Children.Add(new AlternativeContainer(Page, s));
+                    AlternativeContainer con = new AlternativeContainer(Page, s);
+                    Children.Insert(con.AlternativeIndex, con);
                 }
             }
             else
@@ -59,7 +63,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
                 if (isAlternativeChild && Children.All(c => c.AlternativeIndex != shapeComponent.AlternativeIndex)) //if parent not exists
                 {
                     AlternativeContainer stub = AlternativeContainer.GetStub(Page, shapeComponent.AlternativeIndex);
-                    Children.Add(stub);
+                    Children.Insert(stub.AlternativeIndex, stub);
                     Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
                 }
                 else

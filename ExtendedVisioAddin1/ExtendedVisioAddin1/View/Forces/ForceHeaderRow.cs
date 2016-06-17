@@ -91,7 +91,11 @@ namespace ExtendedVisioAddin1.View.Forces
         private void InitStyle()
         {
             MarginTop = 0.4;
-            ContainerPadding = 0;
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                ContainerPadding = 0;
+            }
             UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
             LayoutManager = new InlineLayout(this);
         }

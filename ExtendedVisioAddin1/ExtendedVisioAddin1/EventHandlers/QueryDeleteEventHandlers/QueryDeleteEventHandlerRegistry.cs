@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ExtendedVisioAddin1.View;
 using Microsoft.Office.Interop.Visio;
 
@@ -27,7 +28,14 @@ namespace ExtendedVisioAddin1.EventHandlers
 
         public void HandleEvent(string eventKey, RView view, Shape changedShape)
         {
-            Registry[eventKey].ForEach(eh => eh.Execute(eventKey, view, changedShape));
+            if (Registry.ContainsKey(eventKey))
+            {
+                Registry[eventKey].ForEach(eh => eh.Execute(eventKey, view, changedShape));
+            }
+            else
+            {
+                Console.WriteLine("WARNING: query delete event requested on key with to registered handlers: " + eventKey);
+            }
         }
     }
 }

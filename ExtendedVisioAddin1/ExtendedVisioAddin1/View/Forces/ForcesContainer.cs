@@ -64,7 +64,11 @@ namespace ExtendedVisioAddin1.View.Forces
         private void InitStyle()
         {
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
-            ContainerPadding = 0;
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                ContainerPadding = 0;
+            }
             LayoutManager = new VerticalStretchLayout(this);
         }
 

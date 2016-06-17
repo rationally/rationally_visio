@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
 
@@ -27,7 +28,14 @@ namespace ExtendedVisioAddin1.EventHandlers
 
         public void HandleEvent(string eventKey, RModel model, Shape changedShape, string identifier)
         {
-            Registry[eventKey].ForEach(eh => eh.Execute(model, changedShape, identifier));
+            if (Registry.ContainsKey(eventKey))
+            {
+                Registry[eventKey].ForEach(eh => eh.Execute(model, changedShape, identifier));
+            }
+            else
+            {
+                Console.WriteLine("WARNING: marker event requested on key with to registered handlers: " + eventKey);
+            }
         }
     }
 }

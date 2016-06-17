@@ -43,7 +43,8 @@ namespace ExtendedVisioAddin1.View.Documents
                     RelatedDocumentContainer stub = (RelatedDocumentContainer)Children.First(c => c.DocumentIndex == shapeComponent.DocumentIndex);
                     Children.Remove(stub);
                     stub.RShape.Delete(); //NOT deleteEx
-                    Children.Add(new RelatedDocumentContainer(Page, s));
+                    RelatedDocumentContainer con = new RelatedDocumentContainer(Page, s);
+                    Children.Insert(con.DocumentIndex, con);
                 }
 
                 
@@ -70,7 +71,11 @@ namespace ExtendedVisioAddin1.View.Documents
         {
             //MakeListItem();
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
-            ContainerPadding = 0;
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                ContainerPadding = 0;
+            }
         }
 
         public static bool IsRelatedDocumentsContainer(string name)

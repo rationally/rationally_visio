@@ -124,6 +124,11 @@ namespace ExtendedVisioAddin1.View.Alternatives
         {
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
             MarginTop = (AlternativeIndex == 0) ? 0.3 : 0.0;
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                ContainerPadding = 0;
+            }
             LinePattern = 16;
         }
 

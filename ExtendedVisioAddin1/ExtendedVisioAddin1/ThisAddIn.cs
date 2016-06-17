@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using ExtendedVisioAddin1.EventHandlers;
+using ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers;
 using ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
@@ -44,38 +45,19 @@ namespace ExtendedVisioAddin1
             Application.BeforePageDelete += Application_BeforePageDeleteEvent;
             Application.WindowActivated += Application_WindowActivatedEvent;
 
+            RegisterDeleteEventHandlers();
             RegisterQueryDeleteEventHandlers();
             RegisterMarkerEventHandlers();
         }
 
-        private void Application_TextChangedEvent(Shape shape)
+
+        private void RegisterDeleteEventHandlers()
         {
-            if (shape.Document.Template.ToLower().Contains("rationally") && ForceValueComponent.IsForceValue(shape.Name))
-            {
+            DeleteEventHandlerRegistry registry = DeleteEventHandlerRegistry.Instance;
 
-                ForcesContainer forcesContainer = (ForcesContainer)View.Children.First(c => c is ForcesContainer);
-
-                    ForceValueComponent forceValue = (ForceValueComponent) View.GetComponentByShape(shape);
-                    new RepaintHandler(forceValue); //repaint the force value, for coloring
-                    ForceTotalsRow forceTotalsRow = forcesContainer.Children.First(c => c is ForceTotalsRow) as ForceTotalsRow;
-                    if (forceTotalsRow != null) new RepaintHandler(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).First(c => c.AlternativeIdentifier == forceValue.AlternativeIdentifier));
-                
-            }
-        }
-
-        private void Application_WindowActivatedEvent(Window w)
-        {
-            if (w.Type == 1 && w.Document.Template.ToLower().Contains("rationally"))
-            {
-                View.Page = Application.ActivePage;
-                RebuildTree(w.Document);
-                if (DocumentCreation)
-                {
-                    DocumentCreation = false;
-
-                    Globals.ThisAddIn.Application.PurgeUndo(); //On day 7 he said: Don't allow undoing of creation. 
-                }
-            }
+            registry.Register("forceContainer",new DeleteForceEventHandler());
+            registry.Register("relatedDocumentContainer", new DeleteRelatedDocumentEventHandler());
+            registry.Register("alternative", new DeleteAlternativeEventHandler());
         }
 
         private static void RegisterQueryDeleteEventHandlers()
@@ -86,6 +68,18 @@ namespace ExtendedVisioAddin1
             registry.Register("forceDescription", new QDForceComponentEventHandler());
             registry.Register("forceValue", new QDForceComponentEventHandler());
             registry.Register("forceContainer", new QDForceContainerEventHandler());
+
+            registry.Register("alternativeState", new QDAlternativeComponentEventHandler());
+            registry.Register("alternativeIdentifier", new QDAlternativeComponentEventHandler());
+            registry.Register("alternativeTitle", new QDAlternativeComponentEventHandler());
+            registry.Register("alternativeDescription", new QDAlternativeComponentEventHandler());
+            registry.Register("alternative", new QDAlternativeContainerEventHander());
+
+            registry.Register("relatedUrl", new QDRelatedDocumentComponentEventHandler());
+            registry.Register("relatedUrlUrl", new QDRelatedDocumentComponentEventHandler());
+            registry.Register("relatedFile", new QDRelatedDocumentComponentEventHandler());
+            registry.Register("relatedDocumentTitle", new QDRelatedDocumentComponentEventHandler());
+            registry.Register("relatedDocumentContainer", new QDRelatedDocumentContainerEventHandler());
         }
 
         private static void RegisterMarkerEventHandlers()
@@ -105,7 +99,7 @@ namespace ExtendedVisioAddin1
             registry.Register("alternativeTitle.add", new AddAlternativeEventHandler());
             registry.Register("alternativeDescription.add", new AddAlternativeEventHandler());
 
-            registry.Register("alternative.delete", new RemoveAlternativeEventHandler());
+            registry.Register("alternative.delete", new RemoveAlternativeEventHandler());//TODO split into marker and delete
             registry.Register("alternativeState.delete", new RemoveAlternativeEventHandler());
             registry.Register("alternativeIdentifier.delete", new RemoveAlternativeEventHandler());
             registry.Register("alternativeTitle.delete", new RemoveAlternativeEventHandler());
@@ -123,10 +117,10 @@ namespace ExtendedVisioAddin1
             registry.Register("forceValue.add", new AddForceHandler());
             registry.Register("forceDescription.add", new AddForceHandler());
 
-            registry.Register("forceContainer.delete", new RemoveForceHandler());
-            /*registry.Register("forceConcern.delete", new RemoveForceHandler());
-            registry.Register("forceValue.delete", new RemoveForceHandler());
-            registry.Register("forceDescription.delete", new RemoveForceHandler());*///TODO different handler, this one is delete handler
+            registry.Register("forceContainer.delete", new StartDeleteForceEventHandler());
+            registry.Register("forceConcern.delete", new StartDeleteForceEventHandler());
+            registry.Register("forceValue.delete", new StartDeleteForceEventHandler());
+            registry.Register("forceDescription.delete", new StartDeleteForceEventHandler());
 
             registry.Register("forceContainer.moveUp", new MoveUpForceHandler());
             registry.Register("forceConcern.moveUp", new MoveUpForceHandler());
@@ -143,6 +137,36 @@ namespace ExtendedVisioAddin1
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
             return new RationallyRibbon();
+        }
+
+        private void Application_TextChangedEvent(Shape shape)
+        {
+            if (shape.Document.Template.ToLower().Contains("rationally") && ForceValueComponent.IsForceValue(shape.Name))
+            {
+
+                ForcesContainer forcesContainer = (ForcesContainer)View.Children.First(c => c is ForcesContainer);
+
+                ForceValueComponent forceValue = (ForceValueComponent)View.GetComponentByShape(shape);
+                new RepaintHandler(forceValue); //repaint the force value, for coloring
+                ForceTotalsRow forceTotalsRow = forcesContainer.Children.First(c => c is ForceTotalsRow) as ForceTotalsRow;
+                if (forceTotalsRow != null) new RepaintHandler(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).First(c => c.AlternativeIdentifier == forceValue.AlternativeIdentifier));
+
+            }
+        }
+
+        private void Application_WindowActivatedEvent(Window w)
+        {
+            if (w.Type == 1 && w.Document.Template.ToLower().Contains("rationally"))
+            {
+                View.Page = Application.ActivePage;
+                RebuildTree(w.Document);
+                if (DocumentCreation)
+                {
+                    DocumentCreation = false;
+
+                    Globals.ThisAddIn.Application.PurgeUndo(); //On day 7 he said: Don't allow undoing of creation. 
+                }
+            }
         }
 
         private void Application_MarkerEvent(Application application, int sequence, string context)
@@ -267,59 +291,8 @@ namespace ExtendedVisioAddin1
                 if (s.CellExistsU["User.rationallyType", 0] != 0)
                 {
                     string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
-                    if (StartedUndoState == 0)
-                    {
-                        StartedUndoState = Application.BeginUndoScope("scope");
-                        mainDelete = rationallyType;
-                    }
-                    switch (rationallyType)
-                    {
-                        case "alternativeTitle":
-                        case "alternativeIdentifier":
-                        case "alternativeDescription":
-                        case "alternativeState":
-                            
-                            AlternativesContainer cont = (AlternativesContainer) View.Children.First(x => x is AlternativesContainer);
-                            foreach (AlternativeContainer alternativeContainer in cont.Children.Where(c => c is AlternativeContainer).Cast<AlternativeContainer>().ToList())
-                            {
-                                if (alternativeContainer.Children.Where(c => c.RShape.Equals(s)).ToList().Count > 0) //check if this alternative contains the to be deleted component
-                                {
-                                    if (!alternativeContainer.Deleted && !ExistsInSelection(alternativeContainer.RShape, e))
-                                    {
-                                        
-                                        alternativeContainer.RShape.Delete(); //delete the parent wrapper of s
-                                        
-                                        cont.Children.Remove(alternativeContainer); //remove the alternative from the view tree
-                                    }
-                                    alternativeContainer.Children.Where(c => !c.Deleted && !ExistsInSelection(c.RShape, e)).ToList().ForEach(c => c.RShape.Delete()); //Delete the children of the parent.
-                                }
-                            }
-                            break;
-                        case "relatedUrl":
-                        case "relatedFile":
-                        case "relatedDocumentTitle":
 
-                            RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)View.Children.First(x => x is RelatedDocumentsContainer);
-                            foreach (RelatedDocumentContainer relatedDocumentContainer in relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().ToList())
-                            {
-                                if (relatedDocumentContainer.Children.Where(c => c.RShape.Equals(s)).ToList().Count > 0) //check if this related document contains the to be deleted component
-                                {
-                                    if (!relatedDocumentContainer.Deleted && !ExistsInSelection(relatedDocumentContainer.RShape, e))
-                                    {
-                                        relatedDocumentContainer.RShape.Delete(); //delete the parent wrapper of s
-                                        relatedDocumentsContainer.Children.Remove(relatedDocumentContainer); //remove the related document from the view tree
-                                    }
-                                    relatedDocumentContainer.Children.Where(c => !c.Deleted && !ExistsInSelection(c.RShape, e)).ToList().ForEach(c => c.RShape.Delete());//Delete the children of the parent.
-                                }
-                            }
-                            break;
-                        case "forceConcern":
-                        case "forceDescription":
-                        case "forceValue":
-                        case "forceContainer":
-                            QueryDeleteEventHandlerRegistry.Instance.HandleEvent(rationallyType,View,s);
-                            break;
-                    }
+                    QueryDeleteEventHandlerRegistry.Instance.HandleEvent(rationallyType, View, s);
 
                 }
             }
@@ -376,12 +349,7 @@ namespace ExtendedVisioAddin1
                     switch (rationallyType)
                     {
                         case "relatedDocumentContainer":
-                            RComponent relDoc = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };
-                            int docIndex = relDoc.DocumentIndex;
-                            Model.Documents.RemoveAt(docIndex);
-                            //for each container, remove the children of which the shape equals the to be deleted shape
-                            relatedDocumentsContainer.Children = relatedDocumentsContainer.Children.Where(c => !c.RShape.Equals(s)).ToList();
-                            new RepaintHandler(relatedDocumentsContainer);
+                            DeleteEventHandlerRegistry.Instance.HandleEvent("relatedDocumentContainer", Model, s);
                             break;
                         case "relatedUrlUrl":
                             foreach (RelatedDocumentContainer relatedDocumentContainer in relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().ToList())
@@ -390,10 +358,7 @@ namespace ExtendedVisioAddin1
                             }
                             break;
                         case "alternative":
-                            RComponent component = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };
-                            int index = component.AlternativeIndex;
-                            Model.Alternatives.RemoveAt(index);
-                            View.DeleteAlternative(index, false);
+                            DeleteEventHandlerRegistry.Instance.HandleEvent("alternative", Model, s);
                             break;
                         case "alternatives":
                         case "forces":
@@ -403,7 +368,7 @@ namespace ExtendedVisioAddin1
                             //todo extract
                             break;
                         case "forceContainer":
-                            MarkerEventHandlerRegistry.Instance.HandleEvent(rationallyType + ".delete", Model, s, "");
+                            DeleteEventHandlerRegistry.Instance.HandleEvent("forceContainer", Model, s);
                             break;
                         case "forceConcern":
                         case "forceDescription":
@@ -423,7 +388,7 @@ namespace ExtendedVisioAddin1
                         Application.EndUndoScope(StartedUndoState, true);
                         StartedUndoState = 0;
                         lastDelete = "";
-                        new RepaintHandler();
+                        //new RepaintHandler();
                     }
                 }
                 else

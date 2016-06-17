@@ -11,6 +11,7 @@ namespace ExtendedVisioAddin1.View.Documents
         public RelatedUrlComponent(Page page, Shape urlShape) : base(page)
         {
             RShape = urlShape;
+            InitStyle();
         }
 
         public RelatedUrlComponent(Page page, int index, string url) : base(page)

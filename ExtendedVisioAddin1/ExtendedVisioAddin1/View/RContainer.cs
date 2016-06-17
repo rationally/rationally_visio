@@ -24,6 +24,12 @@ namespace ExtendedVisioAddin1.View
 
         public override void PlaceChildren()
         {
+            List<Shape> shappies = new List<Shape>();
+            foreach (int shapeIdentifier in RShape.ContainerProperties.GetMemberShapes(16))
+            {
+                shappies.Add(Page.Shapes.ItemFromID[shapeIdentifier]);
+            }
+
             foreach (RComponent c in Children)
             {
                 MsvSdContainerLocked = false;//TODO reset
@@ -42,10 +48,7 @@ namespace ExtendedVisioAddin1.View
                     c.MsvSdContainerLocked = lockContainer;
                 }
             }
-            foreach (int shapeIdentifier in RShape.ContainerProperties.GetMemberShapes(16))
-            {
-                Shape alternativeComponent = Page.Shapes.ItemFromID[shapeIdentifier];
-            }
+            
             Children.ForEach(c => c.PlaceChildren());
         }
 

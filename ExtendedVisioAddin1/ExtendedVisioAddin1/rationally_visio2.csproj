@@ -123,6 +123,7 @@
     <Compile Include="EventHandlers\MoveUpDocumentHandler.cs" />
     <Compile Include="EventHandlers\MoveUpForceHandler.cs" />
     <Compile Include="EventHandlers\RemoveForceHandler.cs" />
+    <Compile Include="EventHandlers\NotUndoingRepaintHandler.cs" />
     <Compile Include="Model\Force.cs" />
     <Compile Include="Model\RelatedDocument.cs" />
     <Compile Include="UrlSelector.cs">

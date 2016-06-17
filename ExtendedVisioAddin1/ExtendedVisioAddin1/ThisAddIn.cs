@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
@@ -69,6 +70,8 @@ namespace ExtendedVisioAddin1
         private static void RegisterEventHandlers()
         {
             MarkerEventHandlerRegistry registry = MarkerEventHandlerRegistry.Instance;
+
+            registry.Register("afterundo", new NotUndoingRepaintHandler());
             registry.Register("alternatives.add", new AddAlternativeEventHandler());
             registry.Register("relatedDocuments.addRelatedFile", new AddRelatedDocumentHandler());
             registry.Register("relatedDocuments.addRelatedUrl", new AddRelatedUrlHandler());
@@ -112,6 +115,11 @@ namespace ExtendedVisioAddin1
         {
             if (application.ActiveDocument.Template.ToLower().Contains("rationally"))
             {
+                if (context == "afterundo")
+                {
+                    MarkerEventHandlerRegistry.Instance.HandleEvent("afterundo", Model, null, "");
+                }
+
                 Selection selection = Application.ActiveWindow.Selection; //event must originate from selected element
                 //for (int i = 0; i < selection.Count; i++) 
                 foreach (Shape s in selection)
@@ -204,6 +212,11 @@ namespace ExtendedVisioAddin1
             if (s.CellExistsU["User.rationallyType", 0] != 0 && !View.ExistsInTree(s))
             {
                 View.AddToTree(s, true);
+                if (Application.IsUndoingOrRedoing)
+                {
+                    Application.QueueMarkerEvent("afterundo");
+                    
+                }
             }
         }
 
@@ -323,8 +336,11 @@ namespace ExtendedVisioAddin1
                 {
                     RebuildTree(s.ContainingPage.Document);
                 }
+                
             }
         }
+
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.

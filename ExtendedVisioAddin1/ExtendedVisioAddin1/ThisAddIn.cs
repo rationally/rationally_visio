@@ -22,6 +22,9 @@ namespace ExtendedVisioAddin1
         public RView View { get; set; }
         private bool DocumentCreation { get; set; }
 
+        private int id;
+        private string mainDelete;
+
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             Model = new RModel();
@@ -31,6 +34,7 @@ namespace ExtendedVisioAddin1
             Application.TemplatePaths = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
             Application.DocumentCreated += DelegateCreateDocumentEvent;
             Application.ShapeAdded += Application_ShapeAddedEvent;
+            Application.QueryCancelSelectionDelete += Application_QueryCancelSelectionDelete;
             Application.BeforeShapeDelete += Application_DeleteShapeEvent;
             Application.CellChanged += Application_CellChangedEvent;
             Application.TextChanged += Application_TextChangedEvent;
@@ -220,6 +224,34 @@ namespace ExtendedVisioAddin1
             }
         }
 
+        private bool Application_QueryCancelSelectionDelete(Selection e)
+        {
+            foreach (Shape s in e)
+            {
+                string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
+                mainDelete = rationallyType;
+                if (rationallyType == "alternativeTitle")
+                {
+                    id = Application.BeginUndoScope("scope");
+                    AlternativesContainer cont = (AlternativesContainer) View.Children.First(x => x is AlternativesContainer);
+                    foreach (AlternativeContainer alternativeContainer in cont.Children.Where(c => c is AlternativeContainer).Cast<AlternativeContainer>().ToList())
+                    {
+                        if (alternativeContainer.Children.Where(c => c.RShape.Equals(s)).ToList().Count > 0) //check if this alternative contains the to be deleted component
+                        {
+                            if (!alternativeContainer.Deleted)
+                            {
+                                alternativeContainer.RShape.Delete(); //delete the parent wrapper of s
+                                cont.Children.Remove(alternativeContainer); //remove the alternative from the view tree
+                            }
+                            alternativeContainer.Children.Where(c => !c.Deleted && c.RShape!=s).ToList().ForEach(c => c.RShape.Delete()); //Delete the children of the parent.
+                        }
+                    }
+                    
+                }
+            }
+            return false;
+        }
+
         private void Application_BeforePageDeleteEvent(Page p)
         {
             if (p.Document.Template.ToLower().Contains("rationally"))
@@ -286,11 +318,12 @@ namespace ExtendedVisioAddin1
                                 relatedDocumentContainer.Children.RemoveAll(c => c.RShape.Equals(s)); //Remove the component from the tree
                             }
                             break;
-                        case "alternativeTitle":
+                       /* case "alternativeTitle":
                         case "alternativeIdentifier":
                         case "alternativeDescription":
                         case "alternativeState":
-                            AlternativesContainer cont = (AlternativesContainer) View.Children.First(x => x is AlternativesContainer);
+
+                            AlternativesContainer cont = (AlternativesContainer)View.Children.First(x => x is AlternativesContainer);
                             foreach (AlternativeContainer alternativeContainer in cont.Children.Where(c => c is AlternativeContainer).Cast<AlternativeContainer>().ToList())
                             {
                                 if (alternativeContainer.Children.Where(c => c.RShape.Equals(s)).ToList().Count > 0) //check if this alternative contains the to be deleted component
@@ -300,10 +333,10 @@ namespace ExtendedVisioAddin1
                                         alternativeContainer.RShape.Delete(); //delete the parent wrapper of s
                                         cont.Children.Remove(alternativeContainer); //remove the alternative from the view tree
                                     }
-                                    alternativeContainer.Children.Where(c => !c.Deleted).ToList().ForEach(c => c.RShape.Delete());//Delete the children of the parent.
+                                    alternativeContainer.Children.Where(c => !c.Deleted && c.RShape != s).ToList().ForEach(c => c.RShape.Delete()); //Delete the children of the parent.
                                 }
                             }
-                            break;
+                            break;*/
                         case "alternative":
                             RComponent component = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };
                             int index = component.AlternativeIndex;
@@ -330,6 +363,10 @@ namespace ExtendedVisioAddin1
                                 MarkerEventHandlerRegistry.Instance.HandleEvent(rationallyType + ".delete", Model, s, "");
                             }
                             break;
+                    }
+                    if (Application.IsInScope[id] && rationallyType == mainDelete)
+                    {
+                        Application.EndUndoScope(id, true);
                     }
                 }
                 else

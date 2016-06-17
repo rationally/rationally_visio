@@ -48,11 +48,14 @@ namespace ExtendedVisioAddin1
         {
             if (shape.Document.Template.ToLower().Contains("rationally") && ForceValueComponent.IsForceValue(shape.Name))
             {
+
                 ForcesContainer forcesContainer = (ForcesContainer)View.Children.First(c => c is ForcesContainer);
-                ForceValueComponent forceValue = (ForceValueComponent)View.GetComponentByShape(shape);
-                new RepaintHandler(forceValue);//repaint the force value, for coloring
-                ForceTotalsRow forceTotalsRow = forcesContainer.Children.First(c => c is ForceTotalsRow) as ForceTotalsRow;
-                if (forceTotalsRow != null) new RepaintHandler(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).First(c => c.AlternativeIdentifier == forceValue.AlternativeIdentifier));
+
+                    ForceValueComponent forceValue = (ForceValueComponent) View.GetComponentByShape(shape);
+                    new RepaintHandler(forceValue); //repaint the force value, for coloring
+                    ForceTotalsRow forceTotalsRow = forcesContainer.Children.First(c => c is ForceTotalsRow) as ForceTotalsRow;
+                    if (forceTotalsRow != null) new RepaintHandler(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).First(c => c.AlternativeIdentifier == forceValue.AlternativeIdentifier));
+                
             }
         }
 

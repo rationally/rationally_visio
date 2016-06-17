@@ -218,7 +218,7 @@ namespace ExtendedVisioAddin1
                 View.AddToTree(s, true);
                 if (Application.IsUndoingOrRedoing)
                 {
-                    Application.QueueMarkerEvent("afterundo");
+                   // Application.QueueMarkerEvent("afterundo");
                     
                 }
             }
@@ -228,25 +228,31 @@ namespace ExtendedVisioAddin1
         {
             foreach (Shape s in e)
             {
-                string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
-                if (rationallyType == "alternativeTitle")
+                if (s.CellExistsU["User.rationallyType", 0] != 0)
                 {
-                    id = Application.BeginUndoScope("scope");
-                    mainDelete = rationallyType;
-                    AlternativesContainer cont = (AlternativesContainer) View.Children.First(x => x is AlternativesContainer);
-                    foreach (AlternativeContainer alternativeContainer in cont.Children.Where(c => c is AlternativeContainer).Cast<AlternativeContainer>().ToList())
+                    string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
+                    if (rationallyType == "alternativeTitle" || rationallyType == "alternativeIdentifier" || rationallyType == "alternativeDescription" || rationallyType == "alternativeState")
                     {
-                        if (alternativeContainer.Children.Where(c => c.RShape.Equals(s)).ToList().Count > 0) //check if this alternative contains the to be deleted component
+                        if (!Application.IsInScope[id])
                         {
-                            if (!alternativeContainer.Deleted)
+                            id = Application.BeginUndoScope("scope");
+
+                            mainDelete = rationallyType;
+                            AlternativesContainer cont = (AlternativesContainer) View.Children.First(x => x is AlternativesContainer);
+                            foreach (AlternativeContainer alternativeContainer in cont.Children.Where(c => c is AlternativeContainer).Cast<AlternativeContainer>().ToList())
                             {
-                                alternativeContainer.RShape.Delete(); //delete the parent wrapper of s
-                                cont.Children.Remove(alternativeContainer); //remove the alternative from the view tree
+                                if (alternativeContainer.Children.Where(c => c.RShape.Equals(s)).ToList().Count > 0) //check if this alternative contains the to be deleted component
+                                {
+                                    if (!alternativeContainer.Deleted)
+                                    {
+                                        alternativeContainer.RShape.Delete(); //delete the parent wrapper of s
+                                        cont.Children.Remove(alternativeContainer); //remove the alternative from the view tree
+                                    }
+                                    alternativeContainer.Children.Where(c => !c.Deleted && c.RShape != s).ToList().ForEach(c => c.RShape.Delete()); //Delete the children of the parent.
+                                }
                             }
-                            alternativeContainer.Children.Where(c => !c.Deleted && c.RShape!=s).ToList().ForEach(c => c.RShape.Delete()); //Delete the children of the parent.
                         }
                     }
-                    
                 }
             }
             return false;

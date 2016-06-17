@@ -43,11 +43,11 @@ namespace ExtendedVisioAddin1.View.Alternatives
                 }
                 else
                 {
-                    //remove stub, insert s as the shape of the stub wrapper
+                    //remove stub, insert s as new containers
                     AlternativeContainer stub = (AlternativeContainer) Children.First(c => c.AlternativeIndex == shapeComponent.AlternativeIndex);
+                    Children.Remove(stub);
                     stub.RShape.Delete(); //NOT deleteEx
-                    stub.RShape = s;
-                    //stub.PlaceChildren();
+                    Children.Add(new AlternativeContainer(Page, s));
                 }
             }
             else

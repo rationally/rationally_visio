@@ -81,8 +81,8 @@ namespace ExtendedVisioAddin1.View.Forces
             }
             else
             {
-                BackgroundColor = "RGB(255,255,255)";
-                FontColor = "RGB(89,131,168)";
+                BackgroundColor = "RGB(210,210,0)";
+                FontColor = "RGB(255,255,255)";
             }
             base.Repaint();
         }

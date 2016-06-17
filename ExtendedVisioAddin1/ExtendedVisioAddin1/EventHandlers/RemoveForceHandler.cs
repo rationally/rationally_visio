@@ -13,11 +13,23 @@ namespace ExtendedVisioAddin1.EventHandlers
 
         public override void Execute(RModel model, Shape changedShape, string identifier)
         {
-            ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
+            //NOTE: this eventhandler is ment to called while the changedShape is not definitely deleted. Preferrable from ShapeDeleted eventhandler.
+            
             //trace force row in view tree
             RComponent forceComponent = Globals.ThisAddIn.View.GetComponentByShape(changedShape);
 
-            if (!forceComponent.Deleted) //happens when the menu option 'delete force' is called on the container
+            if (forceComponent is ForceContainer)
+            {
+                ForceContainer containerToDelete = (ForceContainer) forceComponent;
+                containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c => { c.Deleted = true; c.RShape.Delete();} );//schedule the missing delete events (children not selected during the manual delete)
+
+                ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
+                int forceIndex = forcesContainer.Children.IndexOf(containerToDelete) - 1;
+                forcesContainer.Children.Remove(containerToDelete);
+                model.Forces.RemoveAt(forceIndex);
+                //new RepaintHandler();
+            }
+            /*if (!forceComponent.Deleted) //happens when the menu option 'delete force' is called on the container
             {
 
 
@@ -62,7 +74,7 @@ namespace ExtendedVisioAddin1.EventHandlers
                 {
                     forceContainer.RShape.Delete();
                 }
-            }
+            }*/
         }
     }
 }

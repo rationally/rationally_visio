@@ -114,6 +114,7 @@
     <Compile Include="EventHandlers\AddRelatedUrlHandler.cs" />
     <Compile Include="EventHandlers\AddRelatedDocumentHandler.cs" />
     <Compile Include="EventHandlers\EditRelatedFileHandler.cs" />
+    <Compile Include="EventHandlers\QueryDeleteEventHandlerRegistry.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlerRegistry.cs" />
     <Compile Include="EventHandlers\MarkerEventHandler.cs" />
     <Compile Include="EventHandlers\MoveDownAlternativeHandler.cs" />
@@ -122,6 +123,9 @@
     <Compile Include="EventHandlers\MoveUpAlternativeHandler.cs" />
     <Compile Include="EventHandlers\MoveUpDocumentHandler.cs" />
     <Compile Include="EventHandlers\MoveUpForceHandler.cs" />
+    <Compile Include="EventHandlers\QueryDeleteEventHandler.cs" />
+    <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDForceComponentEventHandler.cs" />
+    <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDForceContainerEventHandler.cs" />
     <Compile Include="EventHandlers\RemoveForceHandler.cs" />
     <Compile Include="EventHandlers\NotUndoingRepaintHandler.cs" />
     <Compile Include="Model\Force.cs" />

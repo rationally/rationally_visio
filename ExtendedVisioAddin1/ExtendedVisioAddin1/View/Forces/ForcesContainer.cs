@@ -92,7 +92,8 @@ namespace ExtendedVisioAddin1.View.Forces
                     ForceContainer stub = (ForceContainer)Children.Where(c => c is ForceContainer).First(c => c.ForceIndex == shapeComponent.ForceIndex);
                     Children.Remove(stub);
                     stub.RShape.Delete();//NOT deleteEx
-                    Children.Add(new ForceContainer(Page, s));
+                    ForceContainer con = new ForceContainer(Page, s);
+                    Children.Insert(con.ForceIndex + 1, con); //after header
 
                 }
             }

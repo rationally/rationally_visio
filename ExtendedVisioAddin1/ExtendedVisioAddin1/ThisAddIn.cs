@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using ExtendedVisioAddin1.EventHandlers;
+using ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Alternatives;
@@ -22,8 +23,9 @@ namespace ExtendedVisioAddin1
         public RView View { get; set; }
         private bool DocumentCreation { get; set; }
 
-        private int id;
+        public int StartedUndoState;
         private string mainDelete;
+        private string lastDelete = "";
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
@@ -41,7 +43,9 @@ namespace ExtendedVisioAddin1
 
             Application.BeforePageDelete += Application_BeforePageDeleteEvent;
             Application.WindowActivated += Application_WindowActivatedEvent;
-            RegisterEventHandlers();
+
+            RegisterQueryDeleteEventHandlers();
+            RegisterMarkerEventHandlers();
         }
 
         private void Application_TextChangedEvent(Shape shape)
@@ -74,7 +78,17 @@ namespace ExtendedVisioAddin1
             }
         }
 
-        private static void RegisterEventHandlers()
+        private static void RegisterQueryDeleteEventHandlers()
+        {
+            QueryDeleteEventHandlerRegistry registry = QueryDeleteEventHandlerRegistry.Instance;
+
+            registry.Register("forceConcern",new QDForceComponentEventHandler());
+            registry.Register("forceDescription", new QDForceComponentEventHandler());
+            registry.Register("forceValue", new QDForceComponentEventHandler());
+            registry.Register("forceContainer", new QDForceContainerEventHandler());
+        }
+
+        private static void RegisterMarkerEventHandlers()
         {
             MarkerEventHandlerRegistry registry = MarkerEventHandlerRegistry.Instance;
 
@@ -110,9 +124,9 @@ namespace ExtendedVisioAddin1
             registry.Register("forceDescription.add", new AddForceHandler());
 
             registry.Register("forceContainer.delete", new RemoveForceHandler());
-            registry.Register("forceConcern.delete", new RemoveForceHandler());
+            /*registry.Register("forceConcern.delete", new RemoveForceHandler());
             registry.Register("forceValue.delete", new RemoveForceHandler());
-            registry.Register("forceDescription.delete", new RemoveForceHandler());
+            registry.Register("forceDescription.delete", new RemoveForceHandler());*///TODO different handler, this one is delete handler
 
             registry.Register("forceContainer.moveUp", new MoveUpForceHandler());
             registry.Register("forceConcern.moveUp", new MoveUpForceHandler());
@@ -232,33 +246,39 @@ namespace ExtendedVisioAddin1
             if (s.CellExistsU["User.rationallyType", 0] != 0 && !View.ExistsInTree(s))
             {
                 View.AddToTree(s, true);
-                if (Application.IsUndoingOrRedoing)
-                {
-                    Application.QueueMarkerEvent("afterundo");
-
-                }
             }
         }
 
         private bool Application_QueryCancelSelectionDelete(Selection e)
         {
+            List<Shape> toBeDeleted = e.Cast<Shape>().ToList();
+
+            //store the rationally type of the last shape, which is responsible for ending the undo scope
+            if (String.IsNullOrEmpty(lastDelete) && toBeDeleted.Last().CellExistsU["User.rationallyType", 0] != 0)
+            {
+                lastDelete = toBeDeleted.Last().CellsU["User.rationallyType"].ResultStr["Value"];
+            }
+
+            //all shapes in the selection are already bound to be deleted. Mark them, so other pieces of code don't also try to delete them
+            toBeDeleted.ForEach(tbd => View.GetComponentByShape(tbd).Deleted = true);
+
             foreach (Shape s in e)
             {
                 if (s.CellExistsU["User.rationallyType", 0] != 0)
                 {
                     string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
+                    if (StartedUndoState == 0)
+                    {
+                        StartedUndoState = Application.BeginUndoScope("scope");
+                        mainDelete = rationallyType;
+                    }
                     switch (rationallyType)
                     {
                         case "alternativeTitle":
                         case "alternativeIdentifier":
                         case "alternativeDescription":
                         case "alternativeState":
-                            if (!Application.IsInScope[id])
-                            {
-                                id = Application.BeginUndoScope("scope");
-
-                                mainDelete = rationallyType;
-                            }
+                            
                             AlternativesContainer cont = (AlternativesContainer) View.Children.First(x => x is AlternativesContainer);
                             foreach (AlternativeContainer alternativeContainer in cont.Children.Where(c => c is AlternativeContainer).Cast<AlternativeContainer>().ToList())
                             {
@@ -266,7 +286,9 @@ namespace ExtendedVisioAddin1
                                 {
                                     if (!alternativeContainer.Deleted && !ExistsInSelection(alternativeContainer.RShape, e))
                                     {
+                                        
                                         alternativeContainer.RShape.Delete(); //delete the parent wrapper of s
+                                        
                                         cont.Children.Remove(alternativeContainer); //remove the alternative from the view tree
                                     }
                                     alternativeContainer.Children.Where(c => !c.Deleted && !ExistsInSelection(c.RShape, e)).ToList().ForEach(c => c.RShape.Delete()); //Delete the children of the parent.
@@ -276,12 +298,7 @@ namespace ExtendedVisioAddin1
                         case "relatedUrl":
                         case "relatedFile":
                         case "relatedDocumentTitle":
-                            if (!Application.IsInScope[id])
-                            {
-                                id = Application.BeginUndoScope("scope");
 
-                                mainDelete = rationallyType;
-                            }
                             RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)View.Children.First(x => x is RelatedDocumentsContainer);
                             foreach (RelatedDocumentContainer relatedDocumentContainer in relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().ToList())
                             {
@@ -296,8 +313,14 @@ namespace ExtendedVisioAddin1
                                 }
                             }
                             break;
+                        case "forceConcern":
+                        case "forceDescription":
+                        case "forceValue":
+                        case "forceContainer":
+                            QueryDeleteEventHandlerRegistry.Instance.HandleEvent(rationallyType,View,s);
+                            break;
                     }
-                //forces
+
                 }
             }
 
@@ -380,23 +403,27 @@ namespace ExtendedVisioAddin1
                             //todo extract
                             break;
                         case "forceContainer":
-                        case "forceConcern":
-                        case "forceDescription":
                             MarkerEventHandlerRegistry.Instance.HandleEvent(rationallyType + ".delete", Model, s, "");
                             break;
+                        case "forceConcern":
+                        case "forceDescription":
+                            //MarkerEventHandlerRegistry.Instance.HandleEvent(rationallyType + ".delete", Model, s, "");
+                            break;
                         case "forceValue":
-                            RComponent forceComponent = new RComponent(s.ContainingPage);
+                            /*RComponent forceComponent = new RComponent(s.ContainingPage);
                             forceComponent.RShape = s;
                             if (Model.Alternatives.Any(a => a.Identifier == forceComponent.AlternativeIdentifier)) //if NOT, an alternative was deleted => so do not remove the whole force row
                             {
                                 MarkerEventHandlerRegistry.Instance.HandleEvent(rationallyType + ".delete", Model, s, "");
-                            }
+                            }*/
                             break;
                     }
-                    if (Application.IsInScope[id] && rationallyType == mainDelete)
+                    if (StartedUndoState != 0 && rationallyType == lastDelete)
                     {
-                        Application.EndUndoScope(id, true);
-                        id = 0;
+                        Application.EndUndoScope(StartedUndoState, true);
+                        StartedUndoState = 0;
+                        lastDelete = "";
+                        new RepaintHandler();
                     }
                 }
                 else

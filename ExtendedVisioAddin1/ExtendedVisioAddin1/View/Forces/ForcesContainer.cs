@@ -90,9 +90,10 @@ namespace ExtendedVisioAddin1.View.Forces
                 {
                     //remove stub, insert s as the shape of the stub wrapper
                     ForceContainer stub = (ForceContainer)Children.Where(c => c is ForceContainer).First(c => c.ForceIndex == shapeComponent.ForceIndex);
+                    Children.Remove(stub);
                     stub.RShape.Delete();//NOT deleteEx
-                    stub.RShape = s;
-                    //stub.Repaint();
+                    Children.Add(new ForceContainer(Page, s));
+
                 }
             }
             else

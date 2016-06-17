@@ -41,9 +41,9 @@ namespace ExtendedVisioAddin1.View.Documents
                 {
                     //remove stub, insert s as the shape of the stub wrapper
                     RelatedDocumentContainer stub = (RelatedDocumentContainer)Children.First(c => c.DocumentIndex == shapeComponent.DocumentIndex);
-                    stub.RShape.Delete();//NOT deleteEx
-                    stub.RShape = s;
-                    //stub.Repaint();
+                    Children.Remove(stub);
+                    stub.RShape.Delete(); //NOT deleteEx
+                    Children.Add(new RelatedDocumentContainer(Page, s));
                 }
 
                 

@@ -229,10 +229,10 @@ namespace ExtendedVisioAddin1
             foreach (Shape s in e)
             {
                 string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
-                mainDelete = rationallyType;
                 if (rationallyType == "alternativeTitle")
                 {
                     id = Application.BeginUndoScope("scope");
+                    mainDelete = rationallyType;
                     AlternativesContainer cont = (AlternativesContainer) View.Children.First(x => x is AlternativesContainer);
                     foreach (AlternativeContainer alternativeContainer in cont.Children.Where(c => c is AlternativeContainer).Cast<AlternativeContainer>().ToList())
                     {

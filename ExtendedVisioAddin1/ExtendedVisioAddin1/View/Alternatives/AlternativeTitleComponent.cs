@@ -21,6 +21,9 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
             Name = "AlternativeTitle";
 
+            AddAction("addAlternative", "QUEUEMARKEREVENT(\"add\")", "\"Add alternative\"", false);
+            AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this alternative\"", false);
+
             //Locks
             /*this.LockDelete = true;
             this.LockRotate = true;

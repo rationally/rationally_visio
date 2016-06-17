@@ -91,7 +91,7 @@ namespace ExtendedVisioAddin1.View.Forces
         private void InitStyle()
         {
             MarginTop = 0.4;
-            
+            ContainerPadding = 0;
             UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
             LayoutManager = new InlineLayout(this);
         }

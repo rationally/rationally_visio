@@ -70,6 +70,7 @@ namespace ExtendedVisioAddin1.View.Documents
         {
             //MakeListItem();
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
+            ContainerPadding = 0;
         }
 
         public static bool IsRelatedDocumentsContainer(string name)

@@ -27,6 +27,10 @@ namespace ExtendedVisioAddin1.View.Alternatives
             //Update text, and the background accordingly
             RShape.Text = state;
             UpdateBackgroundByState(state);
+
+            AddAction("addAlternative", "QUEUEMARKEREVENT(\"add\")", "\"Add alternative\"", false);
+            AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this alternative\"", false);
+
             //locks
             /*this.LockDelete = true;
             this.LockRotate = true;

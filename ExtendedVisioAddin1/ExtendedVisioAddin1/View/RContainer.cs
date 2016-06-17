@@ -76,6 +76,12 @@ namespace ExtendedVisioAddin1.View
             Children.ForEach(c => c.RemoveChildren());
         }
 
+        public double ContainerPadding
+        {
+            get { return (double)RShape.CellsU["User.MsvSDContainerMargin"].ResultIU; }
+            set { RShape.CellsU["User.MsvSDContainerMargin"].ResultIU = value; }
+        }
+
         public override bool ExistsInTree(Shape s)
         {
             return RShape.Equals(s) || Children.Exists(x => x.ExistsInTree(s));

@@ -81,7 +81,20 @@ namespace ExtendedVisioAddin1
             registry.Register("relatedDocuments.addRelatedUrl", new AddRelatedUrlHandler());
             registry.Register("relatedDocumentContainer.moveUp", new MoveUpDocumentHandler());
             registry.Register("relatedDocumentContainer.moveDown", new MoveDownDocumentHandler());
+
+            registry.Register("alternative.add", new AddAlternativeEventHandler());
+            registry.Register("alternativeState.add", new AddAlternativeEventHandler());
+            registry.Register("alternativeIdentifier.add", new AddAlternativeEventHandler());
+            registry.Register("alternativeTitle.add", new AddAlternativeEventHandler());
+            registry.Register("alternativeDescription.add", new AddAlternativeEventHandler());
+
             registry.Register("alternative.delete", new RemoveAlternativeEventHandler());
+            registry.Register("alternativeState.delete", new RemoveAlternativeEventHandler());
+            registry.Register("alternativeIdentifier.delete", new RemoveAlternativeEventHandler());
+            registry.Register("alternativeTitle.delete", new RemoveAlternativeEventHandler());
+            registry.Register("alternativeDescription.delete", new RemoveAlternativeEventHandler());
+            
+
             registry.Register("alternativeState.change", new EditAlternativeStateEventHandler());
             registry.Register("relatedFile.edit", new EditRelatedFileHandler());
             registry.Register("alternative.moveUp", new MoveUpAlternativeHandler());

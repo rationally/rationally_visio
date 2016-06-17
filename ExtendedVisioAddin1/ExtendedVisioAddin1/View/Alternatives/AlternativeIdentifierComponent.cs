@@ -19,6 +19,9 @@ namespace ExtendedVisioAddin1.View.Alternatives
             AlternativeIndex = alternativeIndex;
 
             Name = "AlternativeIdent";
+
+            AddAction("addAlternative", "QUEUEMARKEREVENT(\"add\")", "\"Add alternative\"", false);
+            AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this alternative\"", false);
             //Locks
             /*LockDelete = true;
             LockRotate = true;

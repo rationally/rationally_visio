@@ -75,7 +75,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         private void InitStyle()
         {
-            MarginLeft = 0.1;
+            MarginLeft = 0.05;
             MarginRight = 0;
             MarginBottom = 0;
             MarginTop = 0.1;

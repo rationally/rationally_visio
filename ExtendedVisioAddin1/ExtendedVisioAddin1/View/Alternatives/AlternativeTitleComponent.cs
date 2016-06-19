@@ -30,7 +30,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             this.LockMoveX = true;
             this.LockMoveY = true;*/
             Width = 3.7;
-            Height = 0.3667;
+            Height = 0.2;
             InitStyle();
         }
 
@@ -41,7 +41,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             MarginLeft = 0.05;
             MarginRight = 0;
             MarginBottom = 0;
-            MarginTop = 0.2;
+            MarginTop = 0.1;
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
             
         }

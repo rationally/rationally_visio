@@ -69,15 +69,11 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
             //4) description area
             AlternativeDescriptionComponent descComponent = new AlternativeDescriptionComponent(page, alternativeIndex, alternative.Description);
-
-            Children.Add(stateComponent);
-            //this.RShape.ContainerProperties.AddMember(stateComponent.RShape,VisMemberAddOptions.visMemberAddDoNotExpand);
+            
             Children.Add(identifierComponent);
-            //this.RShape.ContainerProperties.AddMember(identifierComponent.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
             Children.Add(titleComponent);
-            //this.RShape.ContainerProperties.AddMember(titleComponent.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
+            Children.Add(stateComponent);
             Children.Add(descComponent);
-            //this.RShape.ContainerProperties.AddMember(descComponent.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
 
             Name = "Alternative";
             AddUserRow("rationallyType");

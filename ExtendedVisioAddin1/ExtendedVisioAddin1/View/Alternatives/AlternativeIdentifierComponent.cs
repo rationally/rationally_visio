@@ -40,7 +40,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             MarginBottom = 0;
             MarginTop = 0.1;
             UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded;
-            Height = 0.3667;
+            Height = 0.2;
             Width = 0.3;
         }
 

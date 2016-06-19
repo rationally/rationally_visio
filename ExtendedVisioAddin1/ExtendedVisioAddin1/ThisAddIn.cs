@@ -76,7 +76,7 @@ namespace ExtendedVisioAddin1
             registry.Register("alternative", new QDAlternativeContainerEventHander());
 
             registry.Register("relatedUrl", new QDRelatedDocumentComponentEventHandler());
-            registry.Register("relatedUrlUrl", new QDRelatedDocumentComponentEventHandler());
+            //registry.Register("relatedUrlUrl", new QDRelatedDocumentComponentEventHandler());
             registry.Register("relatedFile", new QDRelatedDocumentComponentEventHandler());
             registry.Register("relatedDocumentTitle", new QDRelatedDocumentComponentEventHandler());
             registry.Register("relatedDocumentContainer", new QDRelatedDocumentContainerEventHandler());
@@ -283,8 +283,8 @@ namespace ExtendedVisioAddin1
                 lastDelete = toBeDeleted.Last().CellsU["User.rationallyType"].ResultStr["Value"];
             }
 
-            //all shapes in the selection are already bound to be deleted. Mark them, so other pieces of code don't also try to delete them
-            toBeDeleted.ForEach(tbd => View.GetComponentByShape(tbd).Deleted = true);
+            //all shapes in the selection are already bound to be deleted. Mark them, so other pieces of code don't also try to delete them, if they are in the tree.
+            toBeDeleted.Where(s => View.ExistsInTree(s)).ToList().ForEach(tbd => View.GetComponentByShape(tbd).Deleted = true);
 
             foreach (Shape s in e)
             {

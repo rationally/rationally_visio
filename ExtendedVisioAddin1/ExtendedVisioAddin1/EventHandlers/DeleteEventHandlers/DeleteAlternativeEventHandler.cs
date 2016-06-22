@@ -25,8 +25,11 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                 //update model
                 int index = containerToDelete.AlternativeIndex;
                 model.Alternatives.RemoveAt(index);
+                
                 //update view tree
                 alternativesContainer.Children.Remove(containerToDelete);
+
+                model.RegenerateAlternativeIdentifiers();
                 new RepaintHandler();//requires forces to repaint as well!
             }
         }

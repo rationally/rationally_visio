@@ -41,13 +41,15 @@ namespace ExtendedVisioAddin1.View.Alternatives
             if (title != null && state != null && desc != null)
             {
                 string identifier = (char)(65 + Globals.ThisAddIn.Model.Alternatives.Count) + ":";
+                
+
                 if (AlternativeIndex <= Globals.ThisAddIn.Model.Alternatives.Count)
                 {
-                    Globals.ThisAddIn.Model.Alternatives.Insert(AlternativeIndex, new Alternative(title, state, desc, identifier));
+                    Globals.ThisAddIn.Model.Alternatives.Insert(AlternativeIndex, new Alternative(title, state, desc, identifier, TimelessId));
                 }
                 else
                 {
-                    Globals.ThisAddIn.Model.Alternatives.Add(new Alternative(title, state, desc, identifier));
+                    Globals.ThisAddIn.Model.Alternatives.Add(new Alternative(title, state, desc, identifier, TimelessId));
                 }
             }
             InitStyle();
@@ -80,6 +82,8 @@ namespace ExtendedVisioAddin1.View.Alternatives
             RationallyType = "alternative";
             AddUserRow("alternativeIndex");
             AlternativeIndex = alternativeIndex;
+            AddUserRow("timelessId");
+            TimelessId = alternative.TimelessId;
 
             //locks
             /*this.LockDelete = true;

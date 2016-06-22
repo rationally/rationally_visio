@@ -120,20 +120,20 @@ namespace ExtendedVisioAddin1.View.Forces
             List<ForceValueComponent> alreadyThere = Children.Where(c => c is ForceValueComponent).Cast<ForceValueComponent>().ToList();
             foreach (Alternative alt in alternatives)
             {
-                if (Children.Where(c => c is ForceValueComponent && ((ForceValueComponent)c).AlternativeIdentifier == alt.Identifier).ToList().Count != 1)
+                if (Children.Where(c => c is ForceValueComponent && ((ForceValueComponent)c).AlternativeTimelessId == alt.TimelessId).ToList().Count != 1)
                 {
-                    alreadyThere.Add(new ForceValueComponent(Page, alt.Identifier, this.ForceIndex));
+                    alreadyThere.Add(new ForceValueComponent(Page, alt.TimelessId, alt.Identifier, this.ForceIndex));
                 }
             }
 
             //at this point, all alternatives have a component in alreadyThere, but there might be components of removed alternatives in there as well
-            List<ForceValueComponent> toRemove = alreadyThere.Where(f => !alternatives.ToList().Any(alt => alt.Identifier == f.AlternativeIdentifier)).ToList();
+            List<ForceValueComponent> toRemove = alreadyThere.Where(f => !alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
             
 
-            alreadyThere = alreadyThere.Where(f => alternatives.ToList().Any(alt => alt.Identifier == f.AlternativeIdentifier)).ToList();
+            alreadyThere = alreadyThere.Where(f => alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
 
             //finally, order the alternative columns similar to the alternatives container
-            alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.Identifier == fc.AlternativeIdentifier))).ToList();
+            alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.TimelessId == fc.AlternativeTimelessId))).ToList();
 
             Children.RemoveAll(c => c is ForceValueComponent);
             Children.AddRange(alreadyThere);

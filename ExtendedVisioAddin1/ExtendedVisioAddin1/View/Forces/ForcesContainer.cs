@@ -100,23 +100,24 @@ namespace ExtendedVisioAddin1.View.Forces
                     Children.Insert(con.ForceIndex + 1, con); //after header
 
                 }
+                return;
             }
-            else
+            
+            if (ForceConcernComponent.IsForceConcern(s.Name) || ForceDescriptionComponent.IsForceDescription(s.Name) || ForceValueComponent.IsForceValue(s.Name))
             {
-                bool isForceContainerChild = ForceConcernComponent.IsForceConcern(s.Name) || ForceDescriptionComponent.IsForceDescription(s.Name) || ForceValueComponent.IsForceValue(s.Name);
 
-                if (isForceContainerChild && Children.Where(c => c is ForceContainer).All(c => c.ForceIndex != shapeComponent.ForceIndex)) //if parent not exists
+                if (Children.Where(c => c is ForceContainer).All(c => c.ForceIndex != shapeComponent.ForceIndex)) //if parent not exists
                 {
                     ForceContainer stub = ForceContainer.GetStub(Page, shapeComponent.ForceIndex);
                     Children.Insert(shapeComponent.ForceIndex + 1, stub); //after header
                     Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
                 }
-                else
-                {
-                    Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
-                }
-                
             }
+
+            
+
+            //default case
+            Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
         }
 
     }

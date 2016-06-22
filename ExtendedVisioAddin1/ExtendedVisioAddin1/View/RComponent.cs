@@ -93,6 +93,30 @@ namespace ExtendedVisioAddin1.View
             }
         }
 
+        public int TimelessId
+        {
+            get
+            {
+                return (int)RShape.CellsU["User.timelessId"].ResultIU;
+            }
+            set
+            {
+                RShape.CellsU["User.timelessId.Value"].ResultIU = value;
+            }
+        }
+
+        public int AlternativeTimelessId
+        {
+            get
+            {
+                return (int)RShape.CellsU["User.alternativeTimelessId"].ResultIU;
+            }
+            set
+            {
+                RShape.CellsU["User.alternativeTimelessId.Value"].ResultIU = value;
+            }
+        }
+
         public string AlternativeIdentifier
         {
             get { return RShape.CellsU["User.alternativeIdentifier"].ResultStr["Value"]; }

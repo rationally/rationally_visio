@@ -43,7 +43,7 @@ namespace ExtendedVisioAddin1.Model
             foreach (Alternative a in Alternatives)
             {
                 a.Identifier = (char)(65 + j) + ":";
-                i++;
+                j++;
             }
         }
     }

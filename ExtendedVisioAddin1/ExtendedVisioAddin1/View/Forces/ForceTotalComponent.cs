@@ -65,6 +65,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
         public override void Repaint()
         {
+            UpdateAlternativeLabels();
 
             int total = 0;
             List<ForceValueComponent> totalCandidates = new List<ForceValueComponent>();

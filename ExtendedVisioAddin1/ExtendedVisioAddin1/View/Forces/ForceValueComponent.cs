@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
+using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
@@ -61,8 +63,19 @@ namespace ExtendedVisioAddin1.View.Forces
             }
         }
 
+        public void UpdateAlternativeLabels()
+        {
+            //locate alternative from model
+            Alternative alternative = Globals.ThisAddIn.Model.Alternatives.First(a => a.TimelessId == AlternativeTimelessId);
+
+            AlternativeIdentifier = alternative.Identifier;
+            //AlternativeIndex = Globals.ThisAddIn.Model.Alternatives.IndexOf(alternative);
+        }
+
         public override void Repaint()
         {
+            UpdateAlternativeLabels();
+
             if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
                 UpdateReorderFunctions();

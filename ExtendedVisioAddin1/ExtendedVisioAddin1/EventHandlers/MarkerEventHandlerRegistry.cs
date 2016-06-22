@@ -28,7 +28,7 @@ namespace ExtendedVisioAddin1.EventHandlers
 
         public void HandleEvent(string eventKey, RModel model, Shape changedShape, string identifier)
         {
-            if (Registry.ContainsKey(eventKey))
+            if (Registry.ContainsKey(eventKey) && !Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
                 Registry[eventKey].ForEach(eh => eh.Execute(model, changedShape, identifier));
             }

@@ -15,7 +15,7 @@ namespace ExtendedVisioAddin1.View
         private double characterWidth;
         private double contentTextWidth;
 
-        private double PIXELS_PER_INCH = 90;
+        private double PIXELS_PER_INCH = 85;
         public SizingPolicy UsedSizingPolicy { get; set; }
 
         public TextLabel(Page page, Shape shape) : base(page)
@@ -49,15 +49,11 @@ namespace ExtendedVisioAddin1.View
             BackgroundColor = "RGB(255,255,255)";
             FontColor = "RGB(89,131,168)";
             ShadowPattern = 0;
-
-            Repaint(); //todo: moet dit echt hier
-
         }
 
         public void SetUsedSizingPolicy(SizingPolicy p)
         {
             UsedSizingPolicy = p;
-            //Repaint();//todo: moet dit echt hier
         }
 
         public void SetFontSize(short fontSize)

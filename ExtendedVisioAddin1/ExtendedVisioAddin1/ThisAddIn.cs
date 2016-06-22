@@ -353,20 +353,34 @@ namespace ExtendedVisioAddin1
                             DeleteEventHandlerRegistry.Instance.HandleEvent("relatedDocumentContainer", Model, s);
                             break;
                         case "relatedUrlUrl":
-                            foreach (RelatedDocumentContainer relatedDocumentContainer in relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().ToList())
+                            if (relatedDocumentsContainer != null)
                             {
-                                relatedDocumentContainer.Children.RemoveAll(c => c.RShape.Equals(s)); //Remove the component from the tree
+                                foreach (RelatedDocumentContainer relatedDocumentContainer in relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().ToList())
+                                {
+                                    relatedDocumentContainer.Children.RemoveAll(c => c.RShape.Equals(s)); //Remove the component from the tree
+                                }
                             }
                             break;
                         case "alternative":
                             DeleteEventHandlerRegistry.Instance.HandleEvent("alternative", Model, s);
                             break;
                         case "alternatives":
+                            View.Children.RemoveAll(obj => obj.RShape.Equals(s));
+                            Model.Alternatives.Clear();//todo: could be prettier
+                            //todo extract
+                            break;
                         case "forces":
+                            View.Children.RemoveAll(obj => obj.RShape.Equals(s));
+                            Model.Forces.Clear();//todo: could be prettier
+                            //todo extract
+                            break;
                         case "relatedDocuments":
+                            View.Children.RemoveAll(obj => obj.RShape.Equals(s));
+                            Model.Documents.Clear();//todo: could be prettier
+                            //todo extract
+                            break;
                         case "informationBox":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
-                            //todo extract
                             break;
                         case "forceContainer":
                             DeleteEventHandlerRegistry.Instance.HandleEvent("forceContainer", Model, s);

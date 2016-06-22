@@ -367,6 +367,7 @@ namespace ExtendedVisioAddin1
                         case "alternatives":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
                             Model.Alternatives.Clear();//todo: could be prettier
+                            new RepaintHandler();
                             //todo extract
                             break;
                         case "forces":

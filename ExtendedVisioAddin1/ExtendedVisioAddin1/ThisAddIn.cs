@@ -76,7 +76,6 @@ namespace ExtendedVisioAddin1
             registry.Register("alternative", new QDAlternativeContainerEventHander());
 
             registry.Register("relatedUrl", new QDRelatedDocumentComponentEventHandler());
-            //registry.Register("relatedUrlUrl", new QDRelatedDocumentComponentEventHandler());
             registry.Register("relatedFile", new QDRelatedDocumentComponentEventHandler());
             registry.Register("relatedDocumentTitle", new QDRelatedDocumentComponentEventHandler());
             registry.Register("relatedDocumentContainer", new QDRelatedDocumentContainerEventHandler());
@@ -395,25 +394,12 @@ namespace ExtendedVisioAddin1
                         case "forceContainer":
                             DeleteEventHandlerRegistry.Instance.HandleEvent("forceContainer", Model, s);
                             break;
-                        case "forceConcern":
-                        case "forceDescription":
-                            //MarkerEventHandlerRegistry.Instance.HandleEvent(rationallyType + ".delete", Model, s, "");
-                            break;
-                        case "forceValue":
-                            /*RComponent forceComponent = new RComponent(s.ContainingPage);
-                            forceComponent.RShape = s;
-                            if (Model.Alternatives.Any(a => a.Identifier == forceComponent.AlternativeIdentifier)) //if NOT, an alternative was deleted => so do not remove the whole force row
-                            {
-                                MarkerEventHandlerRegistry.Instance.HandleEvent(rationallyType + ".delete", Model, s, "");
-                            }*/
-                            break;
                     }
                     if (StartedUndoState != 0 && rationallyType == lastDelete)
                     {
                         Application.EndUndoScope(StartedUndoState, true);
                         StartedUndoState = 0;
                         lastDelete = "";
-                        //new RepaintHandler();
                     }
                 }
                 else

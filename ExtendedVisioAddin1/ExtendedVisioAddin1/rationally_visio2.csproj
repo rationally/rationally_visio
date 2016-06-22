@@ -184,7 +184,7 @@
     <Compile Include="EventHandlers\DocumentCreatedEventHandler.cs" />
     <Compile Include="EventHandlers\EditAlternativeStateEventHandler.cs" />
     <Compile Include="EventHandlers\EventHandler.cs" />
-    <Compile Include="EventHandlers\RemoveAlternativeEventHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MarkerDeleteAlternativeEventHandler.cs" />
     <Compile Include="EventHandlers\RepaintHandler.cs" />
     <Compile Include="Model\Alternative.cs" />
     <Compile Include="Model\RModel.cs" />

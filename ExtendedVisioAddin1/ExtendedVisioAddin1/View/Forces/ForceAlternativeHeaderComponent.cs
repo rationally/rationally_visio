@@ -7,12 +7,15 @@ namespace ExtendedVisioAddin1.View.Forces
     {
         private static readonly Regex ForceAlternativeHeaderComponentRegex = new Regex(@"ForceAlternativeHeaderComponent(\.\d+)?$");
         
-        private ForceAlternativeHeaderComponent(Page page) : base(page) //TODO make private?
+        private ForceAlternativeHeaderComponent(Page page) : base(page) 
         {
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
             RShape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
+
+            AddUserRow("alternativeTimelessId");
+            AlternativeTimelessId = -2;//for debugging, to distinguish from default highest of -1
 
             AddUserRow("alternativeIdentifier");
             AlternativeIdentifier = "";
@@ -35,10 +38,11 @@ namespace ExtendedVisioAddin1.View.Forces
             FontColor = "RGB(89,131,168)";
         }
 
-        public ForceAlternativeHeaderComponent(Page page, string id) : this(page)
+        public ForceAlternativeHeaderComponent(Page page, string altId, int id) : this(page)
         {
-            AlternativeIdentifier = id;
-            Text = id;
+            AlternativeTimelessId = id;
+            AlternativeIdentifier = altId;
+            Text = altId;
         }
 
         public ForceAlternativeHeaderComponent(Page page, Shape shape) : base(page)

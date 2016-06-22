@@ -7,15 +7,14 @@ namespace ExtendedVisioAddin1.View.Forces
     {
         private static readonly Regex ForceValueRegex = new Regex(@"ForceValue(\.\d+)?$");
         
-        public ForceValueComponent(Page page, string alternativeIdentifier, int forceIndex) : base(page)
+        public ForceValueComponent(Page page, int alternativeTimelessId, string altId, int forceIndex) : base(page)
         {
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
             RShape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
 
-            AddUserRow("alternativeIdentifier");
-            AlternativeIdentifier = "";
+            AddUserRow("alternativeTimelessId");
 
             AddUserRow("forceIndex");
             ForceIndex = forceIndex;
@@ -23,6 +22,9 @@ namespace ExtendedVisioAddin1.View.Forces
             AddUserRow("rationallyType");
             RationallyType = "forceValue";
             Name = "ForceValue";
+
+            AddUserRow("alternativeIdentifier");
+            AlternativeIdentifier = altId;
 
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
@@ -33,7 +35,7 @@ namespace ExtendedVisioAddin1.View.Forces
             ToggleBoldFont(true);
             LineColor = "RGB(89,131,168)";
 
-            AlternativeIdentifier = alternativeIdentifier;
+            AlternativeTimelessId = alternativeTimelessId;
         }
 
         public ForceValueComponent(Page page, Shape shape) : base(page)

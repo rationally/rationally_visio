@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers;
+using ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers;
 using ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
@@ -98,11 +99,11 @@ namespace ExtendedVisioAddin1
             registry.Register("alternativeTitle.add", new AddAlternativeEventHandler());
             registry.Register("alternativeDescription.add", new AddAlternativeEventHandler());
 
-            registry.Register("alternative.delete", new RemoveAlternativeEventHandler());//TODO split into marker and delete
-            registry.Register("alternativeState.delete", new RemoveAlternativeEventHandler());
-            registry.Register("alternativeIdentifier.delete", new RemoveAlternativeEventHandler());
-            registry.Register("alternativeTitle.delete", new RemoveAlternativeEventHandler());
-            registry.Register("alternativeDescription.delete", new RemoveAlternativeEventHandler());
+            registry.Register("alternative.delete", new MarkerDeleteAlternativeEventHandler());
+            registry.Register("alternativeState.delete", new MarkerDeleteAlternativeEventHandler());
+            registry.Register("alternativeIdentifier.delete", new MarkerDeleteAlternativeEventHandler());
+            registry.Register("alternativeTitle.delete", new MarkerDeleteAlternativeEventHandler());
+            registry.Register("alternativeDescription.delete", new MarkerDeleteAlternativeEventHandler());
             
 
             registry.Register("alternativeState.change", new EditAlternativeStateEventHandler());
@@ -148,7 +149,7 @@ namespace ExtendedVisioAddin1
                 ForceValueComponent forceValue = (ForceValueComponent)View.GetComponentByShape(shape);
                 new RepaintHandler(forceValue); //repaint the force value, for coloring
                 ForceTotalsRow forceTotalsRow = forcesContainer.Children.First(c => c is ForceTotalsRow) as ForceTotalsRow;
-                if (forceTotalsRow != null) new RepaintHandler(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).First(c => c.AlternativeIdentifier == forceValue.AlternativeIdentifier));
+                if (forceTotalsRow != null) new RepaintHandler(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).First(c => c.AlternativeTimelessId == forceValue.AlternativeTimelessId));
 
             }
         }

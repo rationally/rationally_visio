@@ -111,29 +111,39 @@ namespace ExtendedVisioAddin1.View.Forces
             return ForceTotalsRowRegex.IsMatch(name);
         }
 
+        public override void AddToTree(Shape s, bool allowAddOfSubpart)
+        {
+            if (ForceTotalComponent.IsForceTotalComponent(s.Name))
+            {
+                ForceTotalComponent com = new ForceTotalComponent(this.Page,s);
+                Children.Insert(2 + com.AlternativeIndex, com);
+
+            }
+        }
+
         [SuppressMessage("ReSharper", "SimplifyLinqExpression")]
         public override void Repaint()
         {
             //foreach alternative in model { add a force value component, if it is not aleady there }
-            List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives; //todo: moet dit observable? Kan het niet met list
+            List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives; 
 
             List<ForceTotalComponent> alreadyThere = Children.Where(c => c is ForceTotalComponent).Cast<ForceTotalComponent>().ToList();
             foreach (Alternative alt in alternatives)
             {
-                if (Children.Where(c => c is ForceTotalComponent && ((ForceTotalComponent)c).AlternativeIdentifier == alt.Identifier).ToList().Count != 1)
+                if (Children.Where(c => c is ForceTotalComponent && ((ForceTotalComponent)c).AlternativeTimelessId == alt.TimelessId).ToList().Count != 1)
                 {
-                    alreadyThere.Add(new ForceTotalComponent(Page, alt.Identifier));
+                    alreadyThere.Add(new ForceTotalComponent(Page, alternatives.IndexOf(alt), alt.Identifier,alt.TimelessId));
                 }
             }
 
             //at this point, all alternatives have a component in alreadyThere, but there might be components of removed alternatives in there as well
-            List<ForceTotalComponent> toRemove = alreadyThere.Where(f => !alternatives.ToList().Any(alt => alt.Identifier == f.AlternativeIdentifier)).ToList();
+            List<ForceTotalComponent> toRemove = alreadyThere.Where(f => !alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
 
 
-            alreadyThere = alreadyThere.Where(f => alternatives.ToList().Any(alt => alt.Identifier == f.AlternativeIdentifier)).ToList();
+            alreadyThere = alreadyThere.Where(f => alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
 
             //finally, order the alternative columns similar to the alternatives container
-            alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.Identifier == fc.AlternativeIdentifier))).ToList();
+            alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.TimelessId == fc.AlternativeTimelessId))).ToList();
 
             Children.RemoveAll(c => c is ForceTotalComponent);
             Children.AddRange(alreadyThere);

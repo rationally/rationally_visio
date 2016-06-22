@@ -164,7 +164,7 @@ namespace ExtendedVisioAddin1
                 {
                     DocumentCreation = false;
 
-                    Globals.ThisAddIn.Application.PurgeUndo(); //On day 7 he said: Don't allow undoing of creation. 
+                    //Globals.ThisAddIn.Application.PurgeUndo(); //On day 7 he said: Don't allow undoing of creation. 
                 }
             }
         }
@@ -366,18 +366,27 @@ namespace ExtendedVisioAddin1
                             break;
                         case "alternatives":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
-                            Model.Alternatives.Clear();//todo: could be prettier
-                            new RepaintHandler();
+                            if (!View.Children.Any(x => x is AlternativesContainer))
+                            {
+                                Model.Alternatives.Clear(); //todo: could be prettier
+                                new RepaintHandler();
+                            }
                             //todo extract
                             break;
                         case "forces":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
-                            Model.Forces.Clear();//todo: could be prettier
+                            if (!View.Children.Any(x => x is ForcesContainer))
+                            {
+                                Model.Forces.Clear(); //todo: could be prettier
+                            }
                             //todo extract
                             break;
                         case "relatedDocuments":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
-                            Model.Documents.Clear();//todo: could be prettier
+                            if (!View.Children.Any(x => x is RelatedDocumentsContainer))
+                            {
+                                Model.Documents.Clear(); //todo: could be prettier
+                            }
                             //todo extract
                             break;
                         case "informationBox":

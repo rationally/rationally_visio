@@ -105,7 +105,15 @@ namespace ExtendedVisioAddin1.View.Forces
             if (ForceAlternativeHeaderComponent.IsForceAlternativeHeaderComponent(s.Name))
             {
                 ForceAlternativeHeaderComponent com = new ForceAlternativeHeaderComponent(this.Page, s);
-                Children.Insert((int)com.RShape.Text[0]-63, com); //text is of the form "A:"; A = 65 and should be inserted at index 2, after the concern and desc column
+                int index = com.RShape.Text[0] - 63;//text is of the form "A:"; A = 65 and should be inserted at index 2, after the concern and desc column
+                if (Children.Count < index)
+                {
+                    Children.Add(com);
+                }
+                else
+                {
+                    Children.Insert(index, com);
+                }
             }
         }
 

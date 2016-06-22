@@ -26,7 +26,6 @@ namespace ExtendedVisioAddin1
         private bool DocumentCreation { get; set; }
 
         public int StartedUndoState;
-        private string mainDelete;
         private string lastDelete = "";
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
@@ -279,9 +278,10 @@ namespace ExtendedVisioAddin1
             List<Shape> toBeDeleted = e.Cast<Shape>().ToList();
 
             //store the rationally type of the last shape, which is responsible for ending the undo scope
-            if (String.IsNullOrEmpty(lastDelete) && toBeDeleted.Last().CellExistsU["User.rationallyType", 0] != 0)
+            if (String.IsNullOrEmpty(lastDelete) && toBeDeleted.Last().CellExistsU["User.rationallyType", 0] != 0 && StartedUndoState == 0)
             {
                 lastDelete = toBeDeleted.Last().CellsU["User.rationallyType"].ResultStr["Value"];
+                Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("scope");
             }
 
             //all shapes in the selection are already bound to be deleted. Mark them, so other pieces of code don't also try to delete them, if they are in the tree.

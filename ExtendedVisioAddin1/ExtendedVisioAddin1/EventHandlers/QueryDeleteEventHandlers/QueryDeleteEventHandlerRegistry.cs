@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ExtendedVisioAddin1.View;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers
+namespace ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers
 {
     class QueryDeleteEventHandlerRegistry
     {

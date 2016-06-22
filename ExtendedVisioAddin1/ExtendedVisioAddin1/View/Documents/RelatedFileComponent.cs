@@ -9,6 +9,7 @@ namespace ExtendedVisioAddin1.View.Documents
         public RelatedFileComponent(Page page, Shape fileShape) : base(page)
         {
             RShape = fileShape;
+            InitStyle();
         }
 
         public RelatedFileComponent(Page page, int index, string filePath) : base(page)

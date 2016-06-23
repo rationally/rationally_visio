@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExtendedVisioAddin1.Model;
@@ -12,7 +13,13 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
     {
         public override void Execute(string eventKey, RModel model, Shape changedShape)
         {
-            //NOTE: this eventhandler is ment to be called while the changedShape is not completely deleted. Preferrable from ShapeDeleted eventhandler.
+            //store the rationally type of the last shape, which is responsible for ending the undo scope
+            if (String.IsNullOrEmpty(Globals.ThisAddIn.lastDelete) && Globals.ThisAddIn.StartedUndoState == 0)
+            {
+                Globals.ThisAddIn.lastDelete = changedShape.Name;
+                Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("scope");
+            }
+            //NOTE: this eventhandler is meant to be called while the changedShape is not completely deleted. Preferrable from ShapeDeleted eventhandler.
 
             //trace alternative container in view tree
             RComponent alternativeComponent = Globals.ThisAddIn.View.GetComponentByShape(changedShape);
@@ -20,22 +27,7 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
             if (alternativeComponent is AlternativeContainer)
             {
                 AlternativeContainer containerToDelete = (AlternativeContainer)alternativeComponent;
-                AlternativeDescriptionComponent desc = containerToDelete.Children.Find(x => x is AlternativeDescriptionComponent) as AlternativeDescriptionComponent;
-                List<Shape> shapes = new List<Shape>();
-                foreach (int shapeIdentifier in desc.RShape.ContainerProperties.GetMemberShapes(0))
-                {
-                    Shape compShape = desc.Page.Shapes.ItemFromID[shapeIdentifier];
-                    shapes.Add(compShape);
-                    //compShape.Delete();
-                }
-                //desc.Deleted = true;
-                //desc.RShape.DeleteEx(0);
-                containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c => { c.Deleted = true; c.RShape.Delete(); });//schedule the missing delete events (children not selected during the manual delete)
-                foreach (Shape s in shapes)
-                {
-                //    s.Delete();
-                }
-
+                containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c => { c.Deleted = true; c.RShape.DeleteEx(0); });//schedule the missing delete events (children not selected during the manual delete)
                 AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
                 //update model
                 int index = containerToDelete.AlternativeIndex;
@@ -45,6 +37,11 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                 alternativesContainer.Children.Remove(containerToDelete);
 
                 model.RegenerateAlternativeIdentifiers();
+                RComponent comp = Globals.ThisAddIn.View.Children.Find(x => x is AlternativesContainer);
+                if (comp is AlternativesContainer)
+                {
+                    comp.MsvSdContainerLocked = true;
+                }
                 new RepaintHandler();//requires forces to repaint as well!
             }
         }

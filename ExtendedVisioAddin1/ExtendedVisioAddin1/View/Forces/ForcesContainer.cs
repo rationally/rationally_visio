@@ -34,25 +34,26 @@ namespace ExtendedVisioAddin1.View.Forces
                     Children.Add(new ForceTotalsRow(page, shape));
                 }
             }
-            //insert header, if it is absent
-            if (Children.Count == 0 || !Children.Any(c => c is ForceHeaderRow))
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
-                Children.Insert(0, new ForceHeaderRow(Page));
-                
-
-            }
-            //insert footer, if it is absent
-            if (Children.Count == 0 || !Children.Any(c => c is ForceTotalsRow))
-            {
-                Children.Add(new ForceTotalsRow(Page));
-            }
-            else if (Children.Any(c => c is ForceTotalsRow))
-            {
-                RComponent toMove = Children.First(c => c is ForceTotalsRow);
-                int toMoveIndex = Children.IndexOf(toMove);
-                RComponent toSwapWith = Children.Last();
-                Children[Children.Count - 1] = toMove;
-                Children[toMoveIndex] = toSwapWith;
+                //insert header, if it is absent
+                if (Children.Count == 0 || !Children.Any(c => c is ForceHeaderRow))
+                {
+                    Children.Insert(0, new ForceHeaderRow(Page));
+                }
+                //insert footer, if it is absent
+                if (Children.Count == 0 || !Children.Any(c => c is ForceTotalsRow))
+                {
+                    Children.Add(new ForceTotalsRow(Page));
+                }
+                else if (Children.Any(c => c is ForceTotalsRow))
+                {
+                    RComponent toMove = Children.First(c => c is ForceTotalsRow);
+                    int toMoveIndex = Children.IndexOf(toMove);
+                    RComponent toSwapWith = Children.Last();
+                    Children[Children.Count - 1] = toMove;
+                    Children[toMoveIndex] = toSwapWith;
+                }
             }
 
             //fix the order of the force containers, using ForceIndex

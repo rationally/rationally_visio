@@ -116,8 +116,14 @@ namespace ExtendedVisioAddin1.View.Forces
             if (ForceTotalComponent.IsForceTotalComponent(s.Name))
             {
                 ForceTotalComponent com = new ForceTotalComponent(this.Page,s);
-                Children.Insert(2 + com.AlternativeIndex, com);
-
+                if ((2 + com.AlternativeIndex) > Children.Count)
+                {
+                    Children.Add(com);
+                }
+                else
+                {
+                    Children.Insert(2 + com.AlternativeIndex, com);
+                }
             }
         }
 

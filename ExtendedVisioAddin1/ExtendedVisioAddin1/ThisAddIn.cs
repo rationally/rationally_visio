@@ -76,7 +76,6 @@ namespace ExtendedVisioAddin1
             registry.Register("alternative", new QDAlternativeContainerEventHander());
 
             registry.Register("relatedUrl", new QDRelatedDocumentComponentEventHandler());
-            //registry.Register("relatedUrlUrl", new QDRelatedDocumentComponentEventHandler());
             registry.Register("relatedFile", new QDRelatedDocumentComponentEventHandler());
             registry.Register("relatedDocumentTitle", new QDRelatedDocumentComponentEventHandler());
             registry.Register("relatedDocumentContainer", new QDRelatedDocumentContainerEventHandler());
@@ -164,7 +163,7 @@ namespace ExtendedVisioAddin1
                 {
                     DocumentCreation = false;
 
-                    Globals.ThisAddIn.Application.PurgeUndo(); //On day 7 he said: Don't allow undoing of creation. 
+                    //Globals.ThisAddIn.Application.PurgeUndo(); //On day 7 he said: Don't allow undoing of creation. 
                 }
             }
         }
@@ -278,9 +277,9 @@ namespace ExtendedVisioAddin1
             List<Shape> toBeDeleted = e.Cast<Shape>().ToList();
 
             //store the rationally type of the last shape, which is responsible for ending the undo scope
-            if (String.IsNullOrEmpty(lastDelete) && toBeDeleted.Last().CellExistsU["User.rationallyType", 0] != 0 && StartedUndoState == 0)
+            if (String.IsNullOrEmpty(lastDelete) && StartedUndoState == 0)
             {
-                lastDelete = toBeDeleted.Last().CellsU["User.rationallyType"].ResultStr["Value"];
+                lastDelete = toBeDeleted.Last().Name;
                 Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("scope");
             }
 
@@ -300,20 +299,6 @@ namespace ExtendedVisioAddin1
 
             return false;
         }
-        private bool ExistsInSelection(Shape s, Selection e)
-        {
-            bool isInList = false;
-            foreach (Shape shape in e)
-            {
-                if (shape.Equals(s))
-                {
-                    isInList = true;
-                    break;
-                }
-            }
-            return isInList;
-        }
-
         private void Application_BeforePageDeleteEvent(Page p)
         {
             if (p.Document.Template.ToLower().Contains("rationally"))
@@ -366,17 +351,27 @@ namespace ExtendedVisioAddin1
                             break;
                         case "alternatives":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
-                            Model.Alternatives.Clear();//todo: could be prettier
+                            if (!View.Children.Any(x => x is AlternativesContainer))
+                            {
+                                Model.Alternatives.Clear(); //todo: could be prettier
+                                new RepaintHandler();
+                            }
                             //todo extract
                             break;
                         case "forces":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
-                            Model.Forces.Clear();//todo: could be prettier
+                            if (!View.Children.Any(x => x is ForcesContainer))
+                            {
+                                Model.Forces.Clear(); //todo: could be prettier
+                            }
                             //todo extract
                             break;
                         case "relatedDocuments":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
-                            Model.Documents.Clear();//todo: could be prettier
+                            if (!View.Children.Any(x => x is RelatedDocumentsContainer))
+                            {
+                                Model.Documents.Clear(); //todo: could be prettier
+                            }
                             //todo extract
                             break;
                         case "informationBox":
@@ -385,32 +380,22 @@ namespace ExtendedVisioAddin1
                         case "forceContainer":
                             DeleteEventHandlerRegistry.Instance.HandleEvent("forceContainer", Model, s);
                             break;
-                        case "forceConcern":
-                        case "forceDescription":
-                            //MarkerEventHandlerRegistry.Instance.HandleEvent(rationallyType + ".delete", Model, s, "");
-                            break;
-                        case "forceValue":
-                            /*RComponent forceComponent = new RComponent(s.ContainingPage);
-                            forceComponent.RShape = s;
-                            if (Model.Alternatives.Any(a => a.Identifier == forceComponent.AlternativeIdentifier)) //if NOT, an alternative was deleted => so do not remove the whole force row
-                            {
-                                MarkerEventHandlerRegistry.Instance.HandleEvent(rationallyType + ".delete", Model, s, "");
-                            }*/
-                            break;
                     }
-                    if (StartedUndoState != 0 && rationallyType == lastDelete)
-                    {
-                        Application.EndUndoScope(StartedUndoState, true);
-                        StartedUndoState = 0;
-                        lastDelete = "";
-                        //new RepaintHandler();
-                    }
+                    
                 }
                 else
                 {
-                    RebuildTree(s.ContainingPage.Document);
+                    if (StartedUndoState == 0)
+                    {
+                        RebuildTree(s.ContainingPage.Document);
+                    }
                 }
-
+                if (StartedUndoState != 0 && s.Name == lastDelete)
+                {
+                    Application.EndUndoScope(StartedUndoState, true);
+                    StartedUndoState = 0;
+                    lastDelete = "";
+                }
             }
         }
 

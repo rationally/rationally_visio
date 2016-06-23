@@ -277,9 +277,9 @@ namespace ExtendedVisioAddin1
             List<Shape> toBeDeleted = e.Cast<Shape>().ToList();
 
             //store the rationally type of the last shape, which is responsible for ending the undo scope
-            if (String.IsNullOrEmpty(lastDelete) && toBeDeleted.Last().CellExistsU["User.rationallyType", 0] != 0 && StartedUndoState == 0)
+            if (String.IsNullOrEmpty(lastDelete) && StartedUndoState == 0)
             {
-                lastDelete = toBeDeleted.Last().CellsU["User.rationallyType"].ResultStr["Value"];
+                lastDelete = toBeDeleted.Last().Name;
                 Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("scope");
             }
 
@@ -299,20 +299,6 @@ namespace ExtendedVisioAddin1
 
             return false;
         }
-        private bool ExistsInSelection(Shape s, Selection e)
-        {
-            bool isInList = false;
-            foreach (Shape shape in e)
-            {
-                if (shape.Equals(s))
-                {
-                    isInList = true;
-                    break;
-                }
-            }
-            return isInList;
-        }
-
         private void Application_BeforePageDeleteEvent(Page p)
         {
             if (p.Document.Template.ToLower().Contains("rationally"))
@@ -395,18 +381,21 @@ namespace ExtendedVisioAddin1
                             DeleteEventHandlerRegistry.Instance.HandleEvent("forceContainer", Model, s);
                             break;
                     }
-                    if (StartedUndoState != 0 && rationallyType == lastDelete)
-                    {
-                        Application.EndUndoScope(StartedUndoState, true);
-                        StartedUndoState = 0;
-                        lastDelete = "";
-                    }
+                    
                 }
                 else
                 {
-                    RebuildTree(s.ContainingPage.Document);
+                    if (StartedUndoState == 0)
+                    {
+                        RebuildTree(s.ContainingPage.Document);
+                    }
                 }
-
+                if (StartedUndoState != 0 && s.Name == lastDelete)
+                {
+                    Application.EndUndoScope(StartedUndoState, true);
+                    StartedUndoState = 0;
+                    lastDelete = "";
+                }
             }
         }
 

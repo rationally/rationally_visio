@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using System.Linq;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
@@ -19,7 +20,21 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
             if (alternativeComponent is AlternativeContainer)
             {
                 AlternativeContainer containerToDelete = (AlternativeContainer)alternativeComponent;
+                AlternativeDescriptionComponent desc = containerToDelete.Children.Find(x => x is AlternativeDescriptionComponent) as AlternativeDescriptionComponent;
+                List<Shape> shapes = new List<Shape>();
+                foreach (int shapeIdentifier in desc.RShape.ContainerProperties.GetMemberShapes(0))
+                {
+                    Shape compShape = desc.Page.Shapes.ItemFromID[shapeIdentifier];
+                    shapes.Add(compShape);
+                    //compShape.Delete();
+                }
+                //desc.Deleted = true;
+                //desc.RShape.DeleteEx(0);
                 containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c => { c.Deleted = true; c.RShape.Delete(); });//schedule the missing delete events (children not selected during the manual delete)
+                foreach (Shape s in shapes)
+                {
+                //    s.Delete();
+                }
 
                 AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
                 //update model

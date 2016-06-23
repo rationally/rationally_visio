@@ -42,7 +42,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             MarginRight = 0;
             MarginBottom = 0;
             MarginTop = 0.1;
-            UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
+            UsedSizingPolicy = SizingPolicy.FixedSize;
             
         }
 

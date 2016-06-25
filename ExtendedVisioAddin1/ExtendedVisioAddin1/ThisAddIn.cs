@@ -270,6 +270,12 @@ namespace ExtendedVisioAddin1
             {
                 View.AddToTree(s, true);
             }
+            if (s.Name.Contains("Rectangle"))
+            {
+                RComponent com = new RComponent(Application.ActivePage) {RShape = s};
+                com.CenterX = 0;
+                com.CenterY = 0;
+            }
         }
 
         private bool Application_QueryCancelSelectionDelete(Selection e)

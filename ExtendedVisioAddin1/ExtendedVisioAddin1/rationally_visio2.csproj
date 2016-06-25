@@ -119,6 +119,7 @@
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteForceEventHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteRelatedDocumentEventHandler.cs" />
     <Compile Include="EventHandlers\EditRelatedFileHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MarkerDelayedDeleteEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDAlternativeComponentEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDAlternativeContainerEventHander.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDRelatedDocumentComponentEventHandler.cs" />

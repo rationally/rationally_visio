@@ -48,7 +48,10 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         public void InitStyle()
         {
-            
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                RShape.ContainerProperties.ResizeAsNeeded = 0;
+            }
             MarginLeft = 0.1;
             MarginRight = 0.1;
             MarginBottom = 0.1;

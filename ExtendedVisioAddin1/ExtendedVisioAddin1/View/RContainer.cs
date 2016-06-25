@@ -29,11 +29,11 @@ namespace ExtendedVisioAddin1.View
             {
                 shappies.Add(Page.Shapes.ItemFromID[shapeIdentifier]);
             }
-
+            bool oldLock = MsvSdContainerLocked;
+            MsvSdContainerLocked = false;
             foreach (RComponent c in Children)
             {
-                MsvSdContainerLocked = false;//TODO reset
-                bool lockContainer = false;
+                bool lockContainer = false; //TODO: WAT
                 if (c is RContainer)
                 {
                     lockContainer = c.MsvSdContainerLocked;
@@ -48,6 +48,7 @@ namespace ExtendedVisioAddin1.View
                     c.MsvSdContainerLocked = lockContainer;
                 }
             }
+            MsvSdContainerLocked = oldLock;
             
             Children.ForEach(c => c.PlaceChildren());
         }

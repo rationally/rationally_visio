@@ -26,7 +26,7 @@ namespace ExtendedVisioAddin1
         private bool DocumentCreation { get; set; }
 
         public int StartedUndoState;
-        private string lastDelete = "";
+        public string lastDelete = "";
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
@@ -176,8 +176,8 @@ namespace ExtendedVisioAddin1
                 {
                     MarkerEventHandlerRegistry.Instance.HandleEvent("afterundo", Model, null, "");
                 }
-
                 Selection selection = Application.ActiveWindow.Selection; //event must originate from selected element
+                
                 //for (int i = 0; i < selection.Count; i++) 
                 foreach (Shape s in selection)
                 {

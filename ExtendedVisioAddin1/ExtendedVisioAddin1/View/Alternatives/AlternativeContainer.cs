@@ -86,6 +86,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             TimelessId = alternative.TimelessId;
 
             //locks
+            MsvSdContainerLocked = true;
             /*this.LockDelete = true;
             this.LockRotate = true;
             this.LockMoveX = true;

@@ -36,6 +36,12 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                 model.Forces.RemoveAt(forceIndex);
                 //update view tree
                 forcesContainer.Children.Remove(containerToDelete);
+                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                {
+                    model.RegenerateForceIdentifiers();
+                    forcesContainer.MsvSdContainerLocked = true;
+                }
+
                 new RepaintHandler(forcesContainer);
             }
         }

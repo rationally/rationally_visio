@@ -134,7 +134,7 @@ namespace ExtendedVisioAddin1.View
                 Height = characterHeight * (double)lineCount;
             }
 
-            if (Text != text)
+            if (Text != text) //Don't update text if not needed, fixes un and redo
             {
                 Text = text;
             }

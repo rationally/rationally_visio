@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using ExtendedVisioAddin1.View.Alternatives;
+using ExtendedVisioAddin1.View.Documents;
 using ExtendedVisioAddin1.View.Forces;
 using Microsoft.Office.Interop.Visio;
 
@@ -45,6 +46,20 @@ namespace ExtendedVisioAddin1.Model
                 a.Identifier = (char)(65 + j) + ":";
                 j++;
             }
+        }
+
+        public void RegenerateDocumentIdentifiers()
+        {
+            int i = 0;
+            RelatedDocumentsContainer docsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
+            docsContainer.Children.Where(c => c is RelatedDocumentContainer).ToList().ForEach(c => ((RelatedDocumentContainer)c).SetDocumentIdentifier(i++));
+        }
+
+        public void RegenerateForceIdentifiers()
+        {
+            int i = 0;
+            ForcesContainer forcesContaineresContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
+            forcesContaineresContainer.Children.Where(c => c is ForceContainer).ToList().ForEach(c => ((ForceContainer)c).SetForceIdentifier(i++));
         }
     }
 }

@@ -43,10 +43,13 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                 //update view tree
                 alternativesContainer.Children.Remove(containerToDelete);
 
-                model.RegenerateAlternativeIdentifiers();
+                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                {
+                    model.RegenerateAlternativeIdentifiers();
 
-                alternativesContainer.MsvSdContainerLocked = true;
-                
+                    alternativesContainer.MsvSdContainerLocked = true;
+                }
+
                 new RepaintHandler();//requires forces to repaint as well!
             }
         }

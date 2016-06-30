@@ -46,7 +46,6 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                 if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                 {
                     model.RegenerateAlternativeIdentifiers();
-
                     alternativesContainer.MsvSdContainerLocked = true;
                 }
 

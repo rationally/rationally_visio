@@ -35,7 +35,11 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                 //update view tree
                 relatedDocumentsContainer.Children.Remove(containerToDelete);
 
-                relatedDocumentsContainer.MsvSdContainerLocked = true;
+                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                {
+                    model.RegenerateDocumentIdentifiers();
+                    relatedDocumentsContainer.MsvSdContainerLocked = true;
+                }
                 
                 new RepaintHandler(relatedDocumentsContainer);
             }

@@ -172,6 +172,13 @@ namespace ExtendedVisioAddin1.View.Forces
             }
         }
 
+        public void SetForceIdentifier(int forceIndex)
+        {
+            Children.ForEach(c => c.ForceIndex = forceIndex);
+            ForceIndex = forceIndex;
+            InitStyle();
+        }
+
         public static bool IsForceContainer(string name)
         {
             return ForceContaineRegex.IsMatch(name);

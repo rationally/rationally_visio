@@ -123,7 +123,7 @@ namespace ExtendedVisioAddin1.View
             set { RShape.Cells["User.alternativeIdentifier.Value"].Formula = "\"" + value + "\""; }
         }
 
-        public int ForceIndex
+        public virtual int ForceIndex
         {
             get
             {
@@ -144,7 +144,7 @@ namespace ExtendedVisioAddin1.View
             }
         }
 
-        public int DocumentIndex
+        public virtual int DocumentIndex
         {
             get
             {

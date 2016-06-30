@@ -206,18 +206,5 @@ namespace ExtendedVisioAddin1.View.Documents
             base.Repaint();
         }
 
-        /// <summary>
-        /// Returns a stub ForceContainer. This shape can be deleted without any bavaviour being triggered.
-        /// </summary>
-        /// <param name="page"></param>
-        /// <param name="documentIndex"></param>
-        /// <returns></returns>
-        public static RelatedDocumentContainer GetStub(Page page, int documentIndex)
-        {
-            RelatedDocumentContainer stub = new RelatedDocumentContainer(page, documentIndex);
-            stub.AddUserRow("isStub");
-            stub.IsStub = "true";
-            return stub;
-        }
     }
 }

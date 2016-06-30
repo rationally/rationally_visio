@@ -2,23 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View.Alternatives
+namespace ExtendedVisioAddin1.View.Documents
 {
-    class AlternativeStubContainer : RComponent
+    class RelatedDocumentStubContainer : RComponent
     {
-        public override int AlternativeIndex
+
+        public override int DocumentIndex
         {
             get;
             set;
         }
 
-
-        public AlternativeStubContainer(Page page,int alternativeIndex) : base(page)
+        public RelatedDocumentStubContainer(Page page, int documentIndex) : base(page)
         {
-            AlternativeIndex = alternativeIndex;
+            DocumentIndex = documentIndex;
         }
 
         public override bool ExistsInTree(Shape s)

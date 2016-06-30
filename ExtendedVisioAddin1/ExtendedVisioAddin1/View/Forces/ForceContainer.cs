@@ -177,18 +177,5 @@ namespace ExtendedVisioAddin1.View.Forces
             return ForceContaineRegex.IsMatch(name);
         }
 
-        /// <summary>
-        /// Returns a stub ForceContainer. This shape can be deleted without any bavaviour being triggered.
-        /// </summary>
-        /// <param name="page"></param>
-        /// <param name="forceIndex"></param>
-        /// <returns></returns>
-        public static ForceContainer GetStub(Page page, int forceIndex)
-        {
-            ForceContainer stub = new ForceContainer(page, forceIndex, false);
-            stub.AddUserRow("isStub");
-            stub.IsStub = "true";
-            return stub;
-        }
     }
 }

@@ -220,19 +220,5 @@ namespace ExtendedVisioAddin1.View.Alternatives
             }
             base.Repaint();
         }
-
-        /// <summary>
-        /// Returns a stub ForceContainer. This shape can be deleted without any bavaviour being triggered.
-        /// </summary>
-        /// <param name="page"></param>
-        /// <param name="alternativeIndex"></param>
-        /// <returns></returns>
-        public static AlternativeContainer GetStub(Page page, int alternativeIndex)
-        {
-            AlternativeContainer stub = new AlternativeContainer(page, alternativeIndex);
-            stub.AddUserRow("isStub");
-            stub.IsStub = "true";
-            return stub;
-        }
     }
 }

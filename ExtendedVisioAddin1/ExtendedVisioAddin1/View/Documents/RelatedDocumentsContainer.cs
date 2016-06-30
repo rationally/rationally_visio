@@ -40,9 +40,8 @@ namespace ExtendedVisioAddin1.View.Documents
                 else
                 {
                     //remove stub, insert s as the shape of the stub wrapper
-                    RelatedDocumentContainer stub = (RelatedDocumentContainer)Children.First(c => c.DocumentIndex == shapeComponent.DocumentIndex);
+                    RelatedDocumentStubContainer stub = (RelatedDocumentStubContainer)Children.First(c => c.DocumentIndex == shapeComponent.DocumentIndex);
                     Children.Remove(stub);
-                    stub.RShape.Delete(); //NOT deleteEx
                     RelatedDocumentContainer con = new RelatedDocumentContainer(Page, s);
                     Children.Insert(con.DocumentIndex, con);
                 }
@@ -55,7 +54,7 @@ namespace ExtendedVisioAddin1.View.Documents
 
                 if (isDocumentChild && Children.All(c => c.DocumentIndex != shapeComponent.DocumentIndex)) //if parent not exists
                 {
-                    RelatedDocumentContainer stub = RelatedDocumentContainer.GetStub(Page, shapeComponent.DocumentIndex);
+                    RelatedDocumentStubContainer stub = new RelatedDocumentStubContainer(Page, shapeComponent.DocumentIndex);
                     Children.Insert(stub.DocumentIndex, stub);
                     Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
                 }

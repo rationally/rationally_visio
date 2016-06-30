@@ -2,23 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View.Alternatives
+namespace ExtendedVisioAddin1.View.Forces
 {
-    class AlternativeStubContainer : RComponent
+    class ForceStubContainer : RComponent
     {
-        public override int AlternativeIndex
+        public override int ForceIndex
         {
             get;
             set;
         }
 
-
-        public AlternativeStubContainer(Page page,int alternativeIndex) : base(page)
+        public ForceStubContainer(Page page, int forceIndex) : base(page)
         {
-            AlternativeIndex = alternativeIndex;
+            ForceIndex = forceIndex;
         }
 
         public override bool ExistsInTree(Shape s)

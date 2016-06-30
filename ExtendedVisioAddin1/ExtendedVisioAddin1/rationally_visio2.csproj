@@ -156,6 +156,7 @@
     <Compile Include="View\Alternatives\AlternativeTitleComponent.cs" />
     <Compile Include="View\Alternatives\IAlternativeComponent.cs" />
     <Compile Include="View\Documents\RelatedDocumentContainer.cs" />
+    <Compile Include="View\Documents\RelatedDocumentStubContainer.cs" />
     <Compile Include="View\Documents\RelatedDocumentTitleComponent.cs" />
     <Compile Include="View\Documents\RelatedURLComponent.cs" />
     <Compile Include="View\Documents\RelatedFileComponent.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="View\Forces\ForceDescriptionComponent.cs" />
     <Compile Include="View\Forces\ForceHeaderRow.cs" />
     <Compile Include="View\Forces\ForcesContainer.cs" />
+    <Compile Include="View\Forces\ForceStubContainer.cs" />
     <Compile Include="View\Forces\ForceTotalComponent.cs" />
     <Compile Include="View\Forces\ForceTotalsRow.cs" />
     <Compile Include="View\Forces\ForceValueComponent.cs" />

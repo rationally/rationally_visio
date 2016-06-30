@@ -94,9 +94,8 @@ namespace ExtendedVisioAddin1.View.Forces
                 else
                 {
                     //remove stub, insert s as the shape of the stub wrapper
-                    ForceContainer stub = (ForceContainer)Children.Where(c => c is ForceContainer).First(c => c.ForceIndex == shapeComponent.ForceIndex);
+                    ForceStubContainer stub = (ForceStubContainer)Children.Where(c => c is ForceStubContainer).First(c => c.ForceIndex == shapeComponent.ForceIndex);
                     Children.Remove(stub);
-                    stub.RShape.Delete();//NOT deleteEx
                     ForceContainer con = new ForceContainer(Page, s);
                     Children.Insert(con.ForceIndex + 1, con); //after header
 
@@ -109,7 +108,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
                 if (Children.Where(c => c is ForceContainer).All(c => c.ForceIndex != shapeComponent.ForceIndex)) //if parent not exists
                 {
-                    ForceContainer stub = ForceContainer.GetStub(Page, shapeComponent.ForceIndex);
+                    ForceStubContainer stub = new ForceStubContainer(Page, shapeComponent.ForceIndex);
                     Children.Insert(shapeComponent.ForceIndex + 1, stub); //after header
                     Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
                 }

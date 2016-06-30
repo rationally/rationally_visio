@@ -19,7 +19,10 @@ namespace ExtendedVisioAddin1.View
         public override void Repaint()
         {
             Children.ForEach(c => c.Repaint());
-            LayoutManager.Repaint();
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                LayoutManager.Repaint();
+            }
         }
 
         public override void PlaceChildren()

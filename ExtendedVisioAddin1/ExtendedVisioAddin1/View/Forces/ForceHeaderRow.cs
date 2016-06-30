@@ -23,7 +23,7 @@ namespace ExtendedVisioAddin1.View.Forces
             Height = 0.33;
             InitStyle();
         }
-        
+
 
         public ForceHeaderRow(Page page, Shape forceHeaderShape) : base(page, false)
         {
@@ -41,7 +41,7 @@ namespace ExtendedVisioAddin1.View.Forces
                     }
                     else if (shape.CellExistsU["User.rationallyType", 0] != 0)
                     {
-                        RComponent toAdd = new RComponent(page) {RShape = shape};
+                        RComponent toAdd = new RComponent(page) { RShape = shape };
                         Children.Add(toAdd);
                     }
                 }
@@ -120,36 +120,38 @@ namespace ExtendedVisioAddin1.View.Forces
         [SuppressMessage("ReSharper", "SimplifyLinqExpression")]
         public override void Repaint()
         {
-            //if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
-            //{
-                //foreach alternative in model { add a force value component, if it is not aleady there }
-                List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
 
-                List<ForceAlternativeHeaderComponent> alreadyThere = Children.Where(c => c is ForceAlternativeHeaderComponent).Cast<ForceAlternativeHeaderComponent>().ToList();
-                foreach (Alternative alt in alternatives)
+            //foreach alternative in model { add a force value component, if it is not aleady there }
+            List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
+
+            List<ForceAlternativeHeaderComponent> alreadyThere = Children.Where(c => c is ForceAlternativeHeaderComponent).Cast<ForceAlternativeHeaderComponent>().ToList();
+            foreach (Alternative alt in alternatives)
+            {
+                if (Children.Where(c => c is ForceAlternativeHeaderComponent && !c.Deleted && ((ForceAlternativeHeaderComponent)c).AlternativeTimelessId == alt.TimelessId).ToList().Count != 1)
                 {
-                    if (Children.Where(c => c is ForceAlternativeHeaderComponent && ((ForceAlternativeHeaderComponent) c).AlternativeTimelessId == alt.TimelessId).ToList().Count != 1)
-                    {
-                        alreadyThere.Add(new ForceAlternativeHeaderComponent(Page, alt.Identifier, alt.TimelessId));
-                    }
+                    alreadyThere.Add(new ForceAlternativeHeaderComponent(Page, alt.Identifier, alt.TimelessId));
                 }
+            }
 
-                //at this point, all alternatives have a component in alreadyThere, but there might be components of removed alternatives in there as well
-                List<ForceAlternativeHeaderComponent> toRemove = alreadyThere.Where(f => !alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
+            //at this point, all alternatives have a component in alreadyThere, but there might be components of removed alternatives in there as well
+            List<ForceAlternativeHeaderComponent> toRemove = alreadyThere.Where(f => !alternatives.ToList().Any(alt => f.Deleted || alt.TimelessId == f.AlternativeTimelessId)).ToList();
 
+            //alreadyThere = alreadyThere - toRemove
+            alreadyThere = alreadyThere.Where(f => alternatives.ToList().Any(alt => !f.Deleted && alt.TimelessId == f.AlternativeTimelessId)).ToList();
 
-                alreadyThere = alreadyThere.Where(f => alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
+            //finally, order the alternative columns similar to the alternatives container
+            alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.TimelessId == fc.AlternativeTimelessId))).ToList();
 
-                //finally, order the alternative columns similar to the alternatives container
-                alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.TimelessId == fc.AlternativeTimelessId))).ToList();
+            Children.RemoveAll(c => c is ForceAlternativeHeaderComponent);
+            Children.AddRange(alreadyThere);
 
-                Children.RemoveAll(c => c is ForceAlternativeHeaderComponent);
-                Children.AddRange(alreadyThere);
-
-                //remove the shapes of the deleted components
+            //remove the shapes of the deleted components; undo redo do this automatically
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
                 toRemove.ForEach(c => c.RShape.DeleteEx(0));
-                base.Repaint();
-            //}
+            }
+            base.Repaint();
+
         }
 
         public static bool IsForceHeaderRow(string name)

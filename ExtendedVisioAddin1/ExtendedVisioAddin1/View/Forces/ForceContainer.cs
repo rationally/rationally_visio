@@ -38,7 +38,7 @@ namespace ExtendedVisioAddin1.View.Forces
             InitStyle();
         }
 
- 
+
         public ForceContainer(Page page, Shape forceContainer) : base(page, false)
         {
             RShape = forceContainer;
@@ -50,7 +50,7 @@ namespace ExtendedVisioAddin1.View.Forces
             {
                 foreach (Shape shape in shapes)
                 {
-                
+
                     if (ForceConcernComponent.IsForceConcern(shape.Name))
                     {
                         Children.Add(new ForceConcernComponent(page, shape));
@@ -69,7 +69,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
                 if (concern != null && description != null)
                 {
-                    if(ForceIndex <= Globals.ThisAddIn.Model.Forces.Count)
+                    if (ForceIndex <= Globals.ThisAddIn.Model.Forces.Count)
                     {
                         Globals.ThisAddIn.Model.Forces.Insert(ForceIndex, new Force(concern, description));
                     }
@@ -112,38 +112,40 @@ namespace ExtendedVisioAddin1.View.Forces
             if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
                 UpdateReorderFunctions();
+            }
+            //foreach alternative in model { add a force value component, if it is not aleady there }
+            List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
 
-                //foreach alternative in model { add a force value component, if it is not aleady there }
-                List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
-
-                List<ForceValueComponent> alreadyThere = Children.Where(c => c is ForceValueComponent).Cast<ForceValueComponent>().ToList();
-                foreach (Alternative alt in alternatives)
+            List<ForceValueComponent> alreadyThere = Children.Where(c => c is ForceValueComponent).Cast<ForceValueComponent>().ToList();
+            foreach (Alternative alt in alternatives)
+            {
+                if (Children.Where(c => c is ForceValueComponent && !c.Deleted && ((ForceValueComponent)c).AlternativeTimelessId == alt.TimelessId).ToList().Count != 1)
                 {
-                    if (Children.Where(c => c is ForceValueComponent && ((ForceValueComponent)c).AlternativeTimelessId == alt.TimelessId).ToList().Count != 1)
-                    {
-                        alreadyThere.Add(new ForceValueComponent(Page, alt.TimelessId, alt.Identifier, this.ForceIndex));
-                    }
+                    alreadyThere.Add(new ForceValueComponent(Page, alt.TimelessId, alt.Identifier, this.ForceIndex));
                 }
-
-                //at this point, all alternatives have a component in alreadyThere, but there might be components of removed alternatives in there as well
-                List<ForceValueComponent> toRemove = alreadyThere.Where(f => !alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
-
-
-                alreadyThere = alreadyThere.Where(f => alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
-
-                //finally, order the alternative columns similar to the alternatives container
-                alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.TimelessId == fc.AlternativeTimelessId))).ToList();
-
-                Children.RemoveAll(c => c is ForceValueComponent);
-                Children.AddRange(alreadyThere);
-
-                //remove the shapes of the deleted components
-                toRemove.ForEach(c => c.RShape.DeleteEx(0));
-
-                base.Repaint();
             }
 
-            
+            //at this point, all alternatives have a component in alreadyThere, but there might be components of removed alternatives in there as well
+            List<ForceValueComponent> toRemove = alreadyThere.Where(f => !alternatives.ToList().Any(alt => f.Deleted || alt.TimelessId == f.AlternativeTimelessId)).ToList();
+
+            //alreadyThere = alreadyThere - toRemove
+            alreadyThere = alreadyThere.Where(f => alternatives.ToList().Any(alt => !f.Deleted && alt.TimelessId == f.AlternativeTimelessId)).ToList();
+
+            //finally, order the alternative columns similar to the alternatives container
+            alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.TimelessId == fc.AlternativeTimelessId))).ToList();
+
+            Children.RemoveAll(c => c is ForceValueComponent);
+            Children.AddRange(alreadyThere);
+
+            //remove the shapes of the deleted components; undo redo do this automatically
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                toRemove.ForEach(c => c.RShape.DeleteEx(0));
+            }
+            base.Repaint();
+
+
+
         }
 
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
@@ -152,7 +154,7 @@ namespace ExtendedVisioAddin1.View.Forces
             {
                 ForceConcernComponent com = new ForceConcernComponent(Page, s);
                 if (com.ForceIndex == ForceIndex)
-                { 
+                {
                     Children.Add(com);
                 }
             }

@@ -120,6 +120,7 @@
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteRelatedDocumentEventHandler.cs" />
     <Compile Include="EventHandlers\EditRelatedFileHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MarkerDelayedDeleteEventHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MarkerDeleteRelatedDocumentEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDAlternativeComponentEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDAlternativeContainerEventHander.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDRelatedDocumentComponentEventHandler.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="View\Alternatives\AlternativeIdentifierComponent.cs" />
     <Compile Include="View\Alternatives\AlternativesContainer.cs" />
     <Compile Include="View\Alternatives\AlternativeStateComponent.cs" />
+    <Compile Include="View\Alternatives\AlternativeStubContainer.cs" />
     <Compile Include="View\Alternatives\AlternativeTitleComponent.cs" />
     <Compile Include="View\Alternatives\IAlternativeComponent.cs" />
     <Compile Include="View\Documents\RelatedDocumentContainer.cs" />

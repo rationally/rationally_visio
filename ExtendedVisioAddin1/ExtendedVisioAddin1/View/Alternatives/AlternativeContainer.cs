@@ -181,7 +181,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             return AlternativeRegex.IsMatch(name);
         }
 
-        public override void Repaint()
+        public void UpdateReorderFunctions()
         {
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
@@ -195,6 +195,11 @@ namespace ExtendedVisioAddin1.View.Alternatives
             {
                 DeleteAction("moveDown");
             }
+        }
+
+        public override void Repaint()
+        {
+            UpdateReorderFunctions();
             if (!(Children[0] is AlternativeIdentifierComponent))
             {
                 RComponent c = Children.Find(x => x is AlternativeIdentifierComponent);

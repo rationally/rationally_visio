@@ -90,6 +90,11 @@ namespace ExtendedVisioAddin1.View.Documents
             Name = "Related Document";
             AddUserRow("documentIndex");
             DocumentIndex = index;
+
+            AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "\"Add file\"", false);
+            AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "\"Add url\"", false);
+            AddAction("deleteRelatedDocument", "QUEUEMARKEREVENT(\"delete\")", "\"Delete document\"", false);
+
             Width = 5;
             Height = 1;
             InitStyle();

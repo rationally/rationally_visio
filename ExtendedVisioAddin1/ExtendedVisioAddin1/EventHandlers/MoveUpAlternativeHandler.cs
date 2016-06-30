@@ -11,11 +11,12 @@ namespace ExtendedVisioAddin1.EventHandlers
     {
         public override void Execute(RModel model, Shape changedShape, string identifier)
         {
-            //locate the alternative to move
-            AlternativeContainer toChange = (AlternativeContainer) Globals.ThisAddIn.View.GetComponentByShape(changedShape);
-            int currentIndex = toChange.AlternativeIndex;
+            //locate the alternative(component) to move
+            RComponent toChangeComponent = Globals.ThisAddIn.View.GetComponentByShape(changedShape);
+            int currentIndex = toChangeComponent.AlternativeIndex;
             //locate the alternative to swap with
             AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
+            AlternativeContainer toChange = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU["User.alternativeIndex"].ResultIU == currentIndex);
             AlternativeContainer other = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU["User.alternativeIndex"].ResultIU == currentIndex - 1);
 
             string lowerIndex = (char) (65 + currentIndex - 1) + ":";

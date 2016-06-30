@@ -81,7 +81,7 @@ namespace ExtendedVisioAddin1.View
             }
         }
 
-        public int AlternativeIndex
+        public virtual int AlternativeIndex
         {
             get
             {

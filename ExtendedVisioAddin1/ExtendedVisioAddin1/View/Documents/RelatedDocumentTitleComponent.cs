@@ -20,6 +20,10 @@ namespace ExtendedVisioAddin1.View.Documents
             Name = "Related Document Title";
             AddUserRow("documentIndex");
             DocumentIndex = index;
+
+            AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "\"Add file\"", false);
+            AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "\"Add url\"", false);
+            AddAction("deleteRelatedDocument", "QUEUEMARKEREVENT(\"delete\")", "\"Delete document\"", false);
             InitStyle();
         }
 
@@ -35,6 +39,28 @@ namespace ExtendedVisioAddin1.View.Documents
         internal static bool IsRelatedDocumentTitleContainer(string name)
         {
             return RelatedRegex.IsMatch(name);
+        }
+
+        private void UpdateReorderFunctions()
+        {
+            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
+            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
+
+            if (DocumentIndex == 0)
+            {
+                DeleteAction("moveUp");
+            }
+
+            if (DocumentIndex == Globals.ThisAddIn.Model.Documents.Count - 1)
+            {
+                DeleteAction("moveDown");
+            }
+        }
+
+        public override void Repaint()
+        {
+            UpdateReorderFunctions();
+            base.Repaint();
         }
     }
 }

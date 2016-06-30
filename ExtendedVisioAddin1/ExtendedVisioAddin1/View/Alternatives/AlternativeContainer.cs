@@ -123,7 +123,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         private void InitStyle()
         {
-            UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
+            UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
             MarginTop = (AlternativeIndex == 0) ? 0.3 : 0.0;
             if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {

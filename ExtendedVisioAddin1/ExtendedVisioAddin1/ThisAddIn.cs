@@ -49,7 +49,7 @@ namespace ExtendedVisioAddin1
             RegisterQueryDeleteEventHandlers();
             RegisterMarkerEventHandlers();
         }
-
+       
 
         private void RegisterDeleteEventHandlers()
         {
@@ -280,7 +280,7 @@ namespace ExtendedVisioAddin1
             if (String.IsNullOrEmpty(lastDelete) && StartedUndoState == 0)
             {
                 lastDelete = toBeDeleted.Last().Name;
-                Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("scope");
+                Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("Delete shape");
             }
 
             //all shapes in the selection are already bound to be deleted. Mark them, so other pieces of code don't also try to delete them, if they are in the tree.

@@ -184,7 +184,7 @@ namespace ExtendedVisioAddin1
                 ForceValueComponent forceValue = (ForceValueComponent)View.GetComponentByShape(shape);
                 new RepaintHandler(forceValue); //repaint the force value, for coloring
                 ForceTotalsRow forceTotalsRow = forcesContainer.Children.First(c => c is ForceTotalsRow) as ForceTotalsRow;
-                if (forceTotalsRow != null) new RepaintHandler(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).First(c => c.AlternativeTimelessId == forceValue.AlternativeTimelessId));
+                if (forceTotalsRow != null) new RepaintHandler(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).FirstOrDefault(c => c.AlternativeTimelessId == forceValue.AlternativeTimelessId));
 
             }
         }

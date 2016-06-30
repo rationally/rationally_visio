@@ -108,7 +108,10 @@ namespace ExtendedVisioAddin1.View
                     }
                     //add the last piece of the string
                     newContent += text.Substring(text.Length/lineLength*lineLength);//integer devision
-                    RShape.Characters.Text = newContent;
+                    if (RShape.Characters.Text != newContent)
+                    {
+                        RShape.Characters.Text = newContent;
+                    }
                 }
 
                 
@@ -131,7 +134,10 @@ namespace ExtendedVisioAddin1.View
                 Height = characterHeight * (double)lineCount;
             }
 
-            Text = text;
+            if (Text != text)
+            {
+                Text = text;
+            }
         }
     }
 }

@@ -127,7 +127,7 @@ namespace ExtendedVisioAddin1.View.Forces
             List<ForceAlternativeHeaderComponent> alreadyThere = Children.Where(c => c is ForceAlternativeHeaderComponent).Cast<ForceAlternativeHeaderComponent>().ToList();
             foreach (Alternative alt in alternatives)
             {
-                if (Children.Where(c => c is ForceAlternativeHeaderComponent && !c.Deleted && ((ForceAlternativeHeaderComponent)c).AlternativeTimelessId == alt.TimelessId).ToList().Count != 1)
+                if (Children.Where(c => (c is ForceAlternativeHeaderComponent && !c.Deleted && ((ForceAlternativeHeaderComponent)c).AlternativeTimelessId == alt.TimelessId)).ToList().Count != 1)
                 {
                     alreadyThere.Add(new ForceAlternativeHeaderComponent(Page, alt.Identifier, alt.TimelessId));
                 }

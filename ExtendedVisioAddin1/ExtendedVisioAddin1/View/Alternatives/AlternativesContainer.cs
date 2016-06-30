@@ -49,9 +49,8 @@ namespace ExtendedVisioAddin1.View.Alternatives
                 else
                 {
                     //remove stub, insert s as new containers
-                    AlternativeContainer stub = (AlternativeContainer) Children.First(c => c.AlternativeIndex == shapeComponent.AlternativeIndex);
+                    AlternativeStubContainer stub = (AlternativeStubContainer) Children.First(c => c.AlternativeIndex == shapeComponent.AlternativeIndex);
                     Children.Remove(stub);
-                    stub.RShape.Delete(); //NOT deleteEx
                     AlternativeContainer con = new AlternativeContainer(Page, s);
                     Children.Insert(con.AlternativeIndex, con);
                 }
@@ -62,7 +61,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
                 if (isAlternativeChild && Children.All(c => c.AlternativeIndex != shapeComponent.AlternativeIndex)) //if parent not exists
                 {
-                    AlternativeContainer stub = AlternativeContainer.GetStub(Page, shapeComponent.AlternativeIndex);
+                    AlternativeStubContainer stub = new AlternativeStubContainer(Page, shapeComponent.AlternativeIndex);
                     Children.Insert(stub.AlternativeIndex, stub);
                     Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
                 }

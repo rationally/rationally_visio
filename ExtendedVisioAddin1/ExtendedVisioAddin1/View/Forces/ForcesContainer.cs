@@ -9,7 +9,7 @@ namespace ExtendedVisioAddin1.View.Forces
 {
     class ForcesContainer : RContainer
     {
-        private static readonly Regex ForcesRegex = new Regex(@"Forces(\.\d+)?$");
+        private static readonly Regex ForcesRegex = new Regex(@"Evaluation(\.\d+)?$");
 
         public ForcesContainer(Page page, Shape forcesContainer) : base(page)
         {
@@ -86,7 +86,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
             if (ForceContainer.IsForceContainer(s.Name))
             {
-                if (Children.Where(c => c is ForceContainer).All(c => c.ForceIndex != shapeComponent.ForceIndex)) //there is no forcecontainer stub with this index
+                if (Children.All(c => c.ForceIndex != shapeComponent.ForceIndex)) //there is no forcecontainer stub with this index
                 {
                     ForceContainer con = new ForceContainer(Page, s);
                     Children.Insert(con.ForceIndex + 1, con); //after header
@@ -100,25 +100,23 @@ namespace ExtendedVisioAddin1.View.Forces
                     Children.Insert(con.ForceIndex + 1, con); //after header
 
                 }
-                return;
             }
-            
-            if (ForceConcernComponent.IsForceConcern(s.Name) || ForceDescriptionComponent.IsForceDescription(s.Name) || ForceValueComponent.IsForceValue(s.Name))
+            else
             {
+                bool isForceChild = ForceConcernComponent.IsForceConcern(s.Name) || ForceDescriptionComponent.IsForceDescription(s.Name) || ForceValueComponent.IsForceValue(s.Name);
 
-                if (Children.Where(c => c is ForceContainer).All(c => c.ForceIndex != shapeComponent.ForceIndex)) //if parent not exists
+                if (isForceChild && Children.All(c => c.ForceIndex != shapeComponent.ForceIndex)) //if parent not exists
                 {
                     ForceStubContainer stub = new ForceStubContainer(Page, shapeComponent.ForceIndex);
                     Children.Insert(shapeComponent.ForceIndex + 1, stub); //after header
                     Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
                 }
+                else
+                {
+                    //default case
+                    Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
+                }
             }
-
-            
-
-            //default case
-            Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
         }
-
     }
 }

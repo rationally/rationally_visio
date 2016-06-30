@@ -195,7 +195,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             {
                 DeleteAction("moveDown");
             }
-
+            
             base.Repaint();
         }
 

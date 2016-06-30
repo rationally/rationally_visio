@@ -37,11 +37,9 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                 alternativesContainer.Children.Remove(containerToDelete);
 
                 model.RegenerateAlternativeIdentifiers();
-                RComponent comp = Globals.ThisAddIn.View.Children.Find(x => x is AlternativesContainer);
-                if (comp is AlternativesContainer)
-                {
-                    comp.MsvSdContainerLocked = true;
-                }
+
+                alternativesContainer.MsvSdContainerLocked = true;
+                
                 new RepaintHandler();//requires forces to repaint as well!
             }
         }

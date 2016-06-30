@@ -23,7 +23,6 @@ namespace ExtendedVisioAddin1
         //TODO: application static kan mss mooier
         public RModel Model { get; set; }
         public RView View { get; set; }
-        private bool DocumentCreation { get; set; }
 
         public int StartedUndoState;
         public string lastDelete = "";
@@ -32,7 +31,6 @@ namespace ExtendedVisioAddin1
         {
             Model = new RModel();
             View = new RView(Application.ActivePage);
-            DocumentCreation = false;
             Application.MarkerEvent += Application_MarkerEvent;
             Application.TemplatePaths = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
             Application.DocumentCreated += DelegateCreateDocumentEvent;
@@ -195,12 +193,6 @@ namespace ExtendedVisioAddin1
             {
                 View.Page = Application.ActivePage;
                 RebuildTree(w.Document);
-                if (DocumentCreation)
-                {
-                    DocumentCreation = false;
-
-                    //Globals.ThisAddIn.Application.PurgeUndo(); //On day 7 he said: Don't allow undoing of creation. 
-                }
             }
         }
 
@@ -452,8 +444,6 @@ namespace ExtendedVisioAddin1
             if (d.Template.ToLower().Contains("rationally"))
             {
                 new DocumentCreatedEventHandler(d, Model);
-
-                DocumentCreation = true;
             }
         }
     }

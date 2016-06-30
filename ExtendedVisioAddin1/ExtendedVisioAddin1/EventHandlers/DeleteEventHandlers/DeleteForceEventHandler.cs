@@ -33,7 +33,10 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                 ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
                 //update model
                 int forceIndex = forcesContainer.Children.IndexOf(containerToDelete) - 1;
-                model.Forces.RemoveAt(forceIndex);
+                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                {
+                    model.Forces.RemoveAt(forceIndex);
+                }
                 //update view tree
                 forcesContainer.Children.Remove(containerToDelete);
                 if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)

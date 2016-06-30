@@ -31,7 +31,10 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
                 //update model
                 int docIndex = containerToDelete.DocumentIndex;
-                model.Documents.RemoveAt(docIndex);
+                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                {
+                    model.Documents.RemoveAt(docIndex);
+                }
                 //update view tree
                 relatedDocumentsContainer.Children.Remove(containerToDelete);
 

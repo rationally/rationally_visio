@@ -38,8 +38,11 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                 AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
                 //update model
                 int index = containerToDelete.AlternativeIndex;
-                model.Alternatives.RemoveAt(index);
-                
+                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                {
+                    model.Alternatives.RemoveAt(index);
+                }
+
                 //update view tree
                 alternativesContainer.Children.Remove(containerToDelete);
 

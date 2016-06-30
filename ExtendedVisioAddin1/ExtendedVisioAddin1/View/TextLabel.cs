@@ -108,7 +108,7 @@ namespace ExtendedVisioAddin1.View
                     }
                     //add the last piece of the string
                     newContent += text.Substring(text.Length/lineLength*lineLength);//integer devision
-                    if (RShape.Characters.Text != newContent)
+                    if (RShape.Characters.Text != newContent && !Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                     {
                         RShape.Characters.Text = newContent;
                     }

@@ -69,7 +69,10 @@ namespace ExtendedVisioAddin1.View.Forces
         public override void Repaint()
         {
             UpdateAlternativeLabels();
-            Text = AlternativeIdentifier;
+            if (Text != AlternativeIdentifier)
+            {
+                Text = AlternativeIdentifier;
+            }
             base.Repaint();
         }
     }

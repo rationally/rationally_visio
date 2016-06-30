@@ -199,7 +199,10 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         public override void Repaint()
         {
-            UpdateReorderFunctions();
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                UpdateReorderFunctions();
+            }
             if (!(Children[0] is AlternativeIdentifierComponent))
             {
                 RComponent c = Children.Find(x => x is AlternativeIdentifierComponent);

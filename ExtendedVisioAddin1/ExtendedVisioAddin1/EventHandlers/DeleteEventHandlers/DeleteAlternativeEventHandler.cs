@@ -14,10 +14,10 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
         public override void Execute(string eventKey, RModel model, Shape changedShape)
         {
             //store the rationally type of the last shape, which is responsible for ending the undo scope
-            if (String.IsNullOrEmpty(Globals.ThisAddIn.lastDelete) && Globals.ThisAddIn.StartedUndoState == 0)
+            if (String.IsNullOrEmpty(Globals.ThisAddIn.lastDelete) && Globals.ThisAddIn.StartedUndoState == 0 && !Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
                 Globals.ThisAddIn.lastDelete = changedShape.Name;
-                Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("scope");
+                Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("Delete alternative");
             }
             //NOTE: this eventhandler is meant to be called while the changedShape is not completely deleted. Preferrable from ShapeDeleted eventhandler.
 
@@ -27,7 +27,14 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
             if (alternativeComponent is AlternativeContainer)
             {
                 AlternativeContainer containerToDelete = (AlternativeContainer)alternativeComponent;
-                containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c => { c.Deleted = true; c.RShape.DeleteEx(0); });//schedule the missing delete events (children not selected during the manual delete)
+                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                {
+                    containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
+                    {
+                        c.Deleted = true;
+                        c.RShape.DeleteEx(0);
+                    }); //schedule the missing delete events (children not selected during the manual delete)
+                }
                 AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
                 //update model
                 int index = containerToDelete.AlternativeIndex;

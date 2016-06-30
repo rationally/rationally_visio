@@ -9,7 +9,10 @@ namespace ExtendedVisioAddin1.EventHandlers
         {
             //Globals.ThisAddIn.View.Children.ForEach(c => c.RemoveChildren());
             Globals.ThisAddIn.View.Children.ForEach(c => c.Repaint());
-            Globals.ThisAddIn.View.Children.ForEach(c => c.PlaceChildren());
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                Globals.ThisAddIn.View.Children.ForEach(c => c.PlaceChildren());
+            }
         }
 
         public RepaintHandler(RComponent component)
@@ -18,7 +21,10 @@ namespace ExtendedVisioAddin1.EventHandlers
             {
                 //component.RemoveChildren();
                 component.Repaint();
-                component.PlaceChildren();
+                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                {
+                    component.PlaceChildren();
+                }
             }
         }
     }

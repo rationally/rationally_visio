@@ -19,9 +19,15 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
             if (documentComponent is RelatedDocumentContainer)
             {
                 RelatedDocumentContainer containerToDelete = (RelatedDocumentContainer)documentComponent;
-                containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c => { c.Deleted = true; c.RShape.Delete(); });//schedule the missing delete events (children not selected during the manual delete)
+                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                {
+                    containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
+                    {
+                        c.Deleted = true;
+                        c.RShape.Delete();
+                    }); //schedule the missing delete events (children not selected during the manual delete)
+                }
 
-                
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
                 //update model
                 int docIndex = containerToDelete.DocumentIndex;

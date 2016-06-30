@@ -21,7 +21,14 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
             if (forceComponent is ForceContainer)
             {
                 ForceContainer containerToDelete = (ForceContainer)forceComponent;
-                containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c => { c.Deleted = true; c.RShape.Delete(); });//schedule the missing delete events (children not selected during the manual delete)
+                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                {
+                    containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
+                    {
+                        c.Deleted = true;
+                        c.RShape.Delete();
+                    }); //schedule the missing delete events (children not selected during the manual delete)
+                }
 
                 ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
                 //update model

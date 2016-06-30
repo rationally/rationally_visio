@@ -57,5 +57,27 @@ namespace ExtendedVisioAddin1.View.Alternatives
             MarginBottom = 0.1;
             MarginTop = 0.05;
         }
+
+        public void UpdateReorderFunctions()
+        {
+            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
+            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
+
+            if (AlternativeIndex == 0)
+            {
+                DeleteAction("moveUp");
+            }
+
+            if (AlternativeIndex == Globals.ThisAddIn.Model.Alternatives.Count - 1)
+            {
+                DeleteAction("moveDown");
+            }
+        }
+
+        public override void Repaint()
+        {
+            UpdateReorderFunctions();
+            base.Repaint();
+        }
     }
 }

@@ -133,8 +133,18 @@ namespace ExtendedVisioAddin1
 
             registry.Register("alternativeState.change", new EditAlternativeStateEventHandler());
             registry.Register("relatedFile.edit", new EditRelatedFileHandler());
+
             registry.Register("alternative.moveUp", new MoveUpAlternativeHandler());
+            registry.Register("alternativeState.moveUp", new MoveUpAlternativeHandler());
+            registry.Register("alternativeIdentifier.moveUp", new MoveUpAlternativeHandler());
+            registry.Register("alternativeTitle.moveUp", new MoveUpAlternativeHandler());
+            registry.Register("alternativeDescription.moveUp", new MoveUpAlternativeHandler());
+
             registry.Register("alternative.moveDown", new MoveDownAlternativeHandler());
+            registry.Register("alternativeState.moveDown", new MoveDownAlternativeHandler());
+            registry.Register("alternativeIdentifier.moveDown", new MoveDownAlternativeHandler());
+            registry.Register("alternativeTitle.moveDown", new MoveDownAlternativeHandler());
+            registry.Register("alternativeDescription.moveDown", new MoveDownAlternativeHandler());
 
             registry.Register("forces.add", new AddForceHandler());
             registry.Register("forceContainer.add", new AddForceHandler());

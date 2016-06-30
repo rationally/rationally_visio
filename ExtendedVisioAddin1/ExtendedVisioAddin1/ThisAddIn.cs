@@ -87,10 +87,36 @@ namespace ExtendedVisioAddin1
 
             registry.Register("afterundo", new NotUndoingRepaintHandler());
             registry.Register("alternatives.add", new AddAlternativeEventHandler());
+
             registry.Register("relatedDocuments.addRelatedFile", new AddRelatedDocumentHandler());
+            registry.Register("relatedUrlUrl.addRelatedFile", new AddRelatedDocumentHandler());
+            registry.Register("relatedUrl.addRelatedFile", new AddRelatedDocumentHandler());
+            registry.Register("relatedFile.addRelatedFile", new AddRelatedDocumentHandler());
+            registry.Register("relatedDocumentTitle.addRelatedFile", new AddRelatedDocumentHandler());
+
             registry.Register("relatedDocuments.addRelatedUrl", new AddRelatedUrlHandler());
+            registry.Register("relatedUrlUrl.addRelatedUrl", new AddRelatedUrlHandler());
+            registry.Register("relatedUrl.addRelatedUrl", new AddRelatedUrlHandler());
+            registry.Register("relatedFile.addRelatedUrl", new AddRelatedUrlHandler());
+            registry.Register("relatedDocumentTitle.addRelatedUrl", new AddRelatedUrlHandler());
+
             registry.Register("relatedDocumentContainer.moveUp", new MoveUpDocumentHandler());
+            registry.Register("relatedUrlUrl.moveUp", new MoveUpDocumentHandler());
+            registry.Register("relatedUrl.moveUp", new MoveUpDocumentHandler());
+            registry.Register("relatedFile.moveUp", new MoveUpDocumentHandler());
+            registry.Register("relatedDocumentTitle.moveUp", new MoveUpDocumentHandler());
+
             registry.Register("relatedDocumentContainer.moveDown", new MoveDownDocumentHandler());
+            registry.Register("relatedUrlUrl.moveDown", new MoveDownDocumentHandler());
+            registry.Register("relatedUrl.moveDown", new MoveDownDocumentHandler());
+            registry.Register("relatedFile.moveDown", new MoveDownDocumentHandler());
+            registry.Register("relatedDocumentTitle.moveDown", new MoveDownDocumentHandler());
+
+            registry.Register("relatedDocumentContainer.delete", new MarkerDeleteRelatedDocumentEventHandler());
+            registry.Register("relatedUrlUrl.delete", new MarkerDeleteRelatedDocumentEventHandler());
+            registry.Register("relatedUrl.delete", new MarkerDeleteRelatedDocumentEventHandler());
+            registry.Register("relatedFile.delete", new MarkerDeleteRelatedDocumentEventHandler());
+            registry.Register("relatedDocumentTitle.delete", new MarkerDeleteRelatedDocumentEventHandler());
 
             registry.Register("alternative.add", new AddAlternativeEventHandler());
             registry.Register("alternativeState.add", new AddAlternativeEventHandler());

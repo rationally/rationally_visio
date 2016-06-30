@@ -142,7 +142,10 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         public override void Repaint()
         {
-            UpdateReorderFunctions();
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                UpdateReorderFunctions();
+            }
             base.Repaint();
         }
     }

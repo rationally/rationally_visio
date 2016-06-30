@@ -74,10 +74,9 @@ namespace ExtendedVisioAddin1.View.Forces
 
         public override void Repaint()
         {
-            UpdateAlternativeLabels();
-
             if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
+                UpdateAlternativeLabels();
                 UpdateReorderFunctions();
             }
             string toParse = Text.StartsWith("+") ? Text.Substring(1) : Text;

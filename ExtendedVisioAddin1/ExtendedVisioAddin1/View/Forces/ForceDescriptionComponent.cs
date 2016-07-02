@@ -6,7 +6,7 @@ namespace ExtendedVisioAddin1.View.Forces
     internal class ForceDescriptionComponent : RComponent
     {
         private static readonly Regex ForceDescriptionRegex = new Regex(@"ForceDescription(\.\d+)?$");
-        public static readonly string DEFAULT_DESCRIPTION = "<<description>>";
+        public const string DefaultDescription = "<<description>>";
 
         public ForceDescriptionComponent(Page page, int forceIndex) : base(page)
         {
@@ -29,7 +29,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
             Width = 2;
             Height = 0.33;
-            Text = DEFAULT_DESCRIPTION;
+            Text = DefaultDescription;
             InitStyle();
         }
 

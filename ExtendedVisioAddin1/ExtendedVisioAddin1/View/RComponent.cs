@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
@@ -183,12 +183,10 @@ namespace ExtendedVisioAddin1.View
         {
             get
             {
-                var n = RShape.Name;
                 return RShape.CellsU["pinX"].Result[VisUnitCodes.visInches];
             }
             set
             {
-                var n = RShape.Name;
                 RShape.CellsU["pinX"].Result[VisUnitCodes.visInches] = value;
             }
         }
@@ -284,7 +282,7 @@ namespace ExtendedVisioAddin1.View
         {
             get
             {
-                return int.Parse(RShape.CellsU["ShdwPattern"].ResultIU.ToString());
+                return int.Parse(RShape.CellsU["ShdwPattern"].ResultIU.ToString(CultureInfo.CurrentCulture));
             }
 
             set { RShape.CellsU["ShdwPattern"].ResultIU = value; }
@@ -481,12 +479,7 @@ namespace ExtendedVisioAddin1.View
                 List<Shape> shapes = new List<int>((int[]) ident).Select(i => RShape.ContainingPage.Shapes.ItemFromID[i]).ToList();
                 foreach (Shape s in shapes)
                 {
-                    RComponent asComponent = new RComponent(RShape.ContainingPage);
-                    asComponent.RShape = s;
-                    //recursive call
-                    //asComponent.MoveChildren(deltaX, deltaY); //not needed: GetMemberShapes(0)
-
-
+                    RComponent asComponent = new RComponent(RShape.ContainingPage) {RShape = s};
                     asComponent.CenterX += deltaX;
                     asComponent.CenterY += deltaY;
                 }
@@ -528,7 +521,6 @@ namespace ExtendedVisioAddin1.View
         {
             try
             {
-                var a = RShape.Name;
                 if (deleteChildShapes)
                 {
                     RShape.DeleteEx(0);

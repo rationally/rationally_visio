@@ -53,18 +53,20 @@ namespace ExtendedVisioAddin1
             // decisionNameHead
             // 
             this.decisionNameHead.AutoSize = true;
+            this.decisionNameHead.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.decisionNameHead.Location = new System.Drawing.Point(12, 16);
             this.decisionNameHead.Name = "decisionNameHead";
-            this.decisionNameHead.Size = new System.Drawing.Size(77, 13);
+            this.decisionNameHead.Size = new System.Drawing.Size(90, 13);
             this.decisionNameHead.TabIndex = 1;
             this.decisionNameHead.Text = "Decision name";
             // 
             // authorNameHEad
             // 
             this.authorNameHEad.AutoSize = true;
+            this.authorNameHEad.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.authorNameHEad.Location = new System.Drawing.Point(12, 59);
             this.authorNameHEad.Name = "authorNameHEad";
-            this.authorNameHEad.Size = new System.Drawing.Size(81, 13);
+            this.authorNameHEad.Size = new System.Drawing.Size(95, 13);
             this.authorNameHEad.TabIndex = 2;
             this.authorNameHEad.Text = "Name of Author";
             // 
@@ -79,9 +81,10 @@ namespace ExtendedVisioAddin1
             // versionDecision
             // 
             this.versionDecision.AutoSize = true;
+            this.versionDecision.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.versionDecision.Location = new System.Drawing.Point(12, 103);
             this.versionDecision.Name = "versionDecision";
-            this.versionDecision.Size = new System.Drawing.Size(42, 13);
+            this.versionDecision.Size = new System.Drawing.Size(49, 13);
             this.versionDecision.TabIndex = 4;
             this.versionDecision.Text = "Version";
             // 
@@ -106,9 +109,10 @@ namespace ExtendedVisioAddin1
             // dateHeader
             // 
             this.dateHeader.AutoSize = true;
+            this.dateHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateHeader.Location = new System.Drawing.Point(12, 147);
             this.dateHeader.Name = "dateHeader";
-            this.dateHeader.Size = new System.Drawing.Size(30, 13);
+            this.dateHeader.Size = new System.Drawing.Size(34, 13);
             this.dateHeader.TabIndex = 7;
             this.dateHeader.Text = "Date";
             // 

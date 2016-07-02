@@ -3,7 +3,7 @@ using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers
+namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
     internal class EditAlternativeStateEventHandler : MarkerEventHandler
     {

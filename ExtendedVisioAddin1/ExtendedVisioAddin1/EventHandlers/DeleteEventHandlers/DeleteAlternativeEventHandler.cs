@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
@@ -14,9 +12,9 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
         public override void Execute(string eventKey, RModel model, Shape changedShape)
         {
             //store the rationally type of the last shape, which is responsible for ending the undo scope
-            if (String.IsNullOrEmpty(Globals.ThisAddIn.lastDelete) && Globals.ThisAddIn.StartedUndoState == 0 && !Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (String.IsNullOrEmpty(Globals.ThisAddIn.LastDelete) && Globals.ThisAddIn.StartedUndoState == 0 && !Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
-                Globals.ThisAddIn.lastDelete = changedShape.Name;
+                Globals.ThisAddIn.LastDelete = changedShape.Name;
                 Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("Delete alternative");
             }
             //NOTE: this eventhandler is meant to be called while the changedShape is not completely deleted. Preferrable from ShapeDeleted eventhandler.

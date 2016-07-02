@@ -1,44 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Forces;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers
+namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
-    class MoveDownForceHandler : MarkerEventHandler
+    internal class MoveUpForceHandler : MarkerEventHandler
     {
         public override void Execute(RModel model, Shape changedShape, string identifier)
         {
             ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
 
-            RComponent currentComponent = new RComponent(changedShape.ContainingPage);
-            currentComponent.RShape = changedShape;
+            RComponent currentComponent = new RComponent(changedShape.ContainingPage) {RShape = changedShape};
             int currentForceIndex = currentComponent.ForceIndex;
             int currentChildIndex = currentForceIndex + 1;
 
             //swap the forces in the model
             Force currentForce = model.Forces[currentForceIndex];
-            model.Forces[currentForceIndex] = model.Forces[currentForceIndex + 1];
-            model.Forces[currentForceIndex + 1] = currentForce;
+            model.Forces[currentForceIndex] = model.Forces[currentForceIndex - 1];
+            model.Forces[currentForceIndex - 1] = currentForce;
 
             ForceContainer toMove = forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().First(c => c.ForceIndex == currentForceIndex);
-            ForceContainer toSwapWith = forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().First(c => c.ForceIndex == currentForceIndex + 1);
+            ForceContainer toSwapWith = forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().First(c => c.ForceIndex == currentForceIndex - 1);
 
             //update the index of the component and his children
-            toMove.Children.ForEach(c => c.ForceIndex = currentForceIndex + 1);
-            toMove.ForceIndex = currentForceIndex + 1;
+            toMove.Children.ForEach(c => c.ForceIndex = currentForceIndex - 1);
+            toMove.ForceIndex = currentForceIndex - 1;
 
             //same, for the other component
             toSwapWith.Children.ForEach(c => c.ForceIndex = currentForceIndex);
             toSwapWith.ForceIndex = currentForceIndex;
 
             RComponent temp = forcesContainer.Children[currentChildIndex];
-            forcesContainer.Children[currentChildIndex] = forcesContainer.Children[currentChildIndex + 1];
-            forcesContainer.Children[currentChildIndex + 1] = temp;
+            forcesContainer.Children[currentChildIndex] = forcesContainer.Children[currentChildIndex - 1];
+            forcesContainer.Children[currentChildIndex - 1] = temp;
 
             new RepaintHandler();
         }

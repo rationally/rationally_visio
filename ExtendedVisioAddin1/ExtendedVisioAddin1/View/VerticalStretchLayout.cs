@@ -31,7 +31,6 @@ namespace ExtendedVisioAddin1.View
             double widthToDraw = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight;
             double heightToDraw = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;
 
-            var n = toManage.Name;
             //allow container to stretch horizontally and/or vertically if the content component overflows in those directions
             PrepareContainerExpansion(x,y,widthToDraw,heightToDraw);
 
@@ -57,7 +56,6 @@ namespace ExtendedVisioAddin1.View
             {
                 foreach (RComponent c in ((RContainer)toDraw).Children)
                 {
-                    var nnn = c.Name;
                     if (c.RShape.ContainerProperties != null)
                     {
                         //moving children will disband the composite pattern between the shapes => remember children and later rebuild the pattern
@@ -94,8 +92,7 @@ namespace ExtendedVisioAddin1.View
         public void Repaint()
         {
             if (toManage.Children.Count == 0) { return; }
-
-            var n = toManage.Name;
+            
             //draw (left top of content area) (children)
             Draw(toManage.CenterX - (toManage.Width/2.0),toManage.CenterY + (toManage.Height/2.0),new Queue<RComponent>(toManage.Children));
             toManage.Children.ForEach(c => c.Repaint());
@@ -144,7 +141,6 @@ namespace ExtendedVisioAddin1.View
         /// <param name="containerWidth"></param>
         private void StretchComponentIfNeeded(RComponent component, double containerWidth)
         {
-            var n = component.Name;
             double marginIncludedWidth = component.MarginLeft + component.Width + component.MarginRight;
             if (marginIncludedWidth < containerWidth)
             {

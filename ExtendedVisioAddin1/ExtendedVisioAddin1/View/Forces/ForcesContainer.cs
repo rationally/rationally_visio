@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using ExtendedVisioAddin1.View.Documents;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
@@ -81,8 +80,7 @@ namespace ExtendedVisioAddin1.View.Forces
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             //make s into an rcomponent for access to wrapper
-            RComponent shapeComponent = new RComponent(Page);
-            shapeComponent.RShape = s;
+            RComponent shapeComponent = new RComponent(Page) {RShape = s};
 
             if (ForceContainer.IsForceContainer(s.Name))
             {

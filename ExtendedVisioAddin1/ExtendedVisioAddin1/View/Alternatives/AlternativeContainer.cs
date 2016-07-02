@@ -1,6 +1,5 @@
 ﻿using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
-using ExtendedVisioAddin1.View.Forces;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Alternatives
@@ -124,7 +123,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
         private void InitStyle()
         {
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
-            MarginTop = (AlternativeIndex == 0) ? 0.3 : 0.0;
+            MarginTop = AlternativeIndex == 0 ? 0.3 : 0.0;
             if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
                 RShape.ContainerProperties.ResizeAsNeeded = 0;

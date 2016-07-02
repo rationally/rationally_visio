@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
-using ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Alternatives;

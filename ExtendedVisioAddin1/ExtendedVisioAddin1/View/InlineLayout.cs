@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using ExtendedVisioAddin1.View.Forces;
-using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View
 {
@@ -42,11 +39,10 @@ namespace ExtendedVisioAddin1.View
             RComponent toDraw = components.Dequeue();
             double toDrawWidth = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight; //expected increase in x
             double toDrawHeight = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;//expected height in y
-            var nn = toDraw.Name;
+
             PrepareContainerExpansion(x, y, toDrawWidth, 0); //if the container streches to support the drawing, the container height does not need to change
             if (toManage.CenterX + (toManage.Width / 2.0) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
             {
-                var n = toManage.Name;
                 x = toManage.CenterX - (toManage.Width / 2.0);//go to a new line
                 y -= currentLineHeight; //the new line of components should not overlap with the one above
                 PrepareContainerExpansion(x, y, 0, toDrawHeight);
@@ -58,48 +54,21 @@ namespace ExtendedVisioAddin1.View
             double deltaY = dropY - toDraw.CenterY;
             toDraw.CenterX = dropX;
             toDraw.CenterY = dropY;
-
-            /*if (toManage is RContainer)
-            {
-                bool containerLocked = toManage.MsvSdContainerLocked;
-                toManage.MsvSdContainerLocked = false;
-                toManage.RShape.ContainerProperties.AddMember(toDraw.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
-                toManage.MsvSdContainerLocked = containerLocked;
-            }*/
-            //toDraw can have children, that should maintain on the same relative position
+            
             if (toDraw is RContainer)
             {
                 foreach (RComponent c in ((RContainer) toDraw).Children)
                 {
-                    var nnn = c.Name;
                     c.CenterX += deltaX;
                     c.CenterY += deltaY;
                     c.MoveChildren(deltaX, deltaY);
-                    /*if (!(c is RContainer))
-                    {
-                        c.MoveChildren(deltaX,deltaY);
-                    }*/
                 }
             }
             else
             {
                 toDraw.MoveChildren(deltaX, deltaY);
             }
-
-            /*if (toDraw.RShape.ContainerProperties != null)
-            {
-                Array ident = toDraw.RShape.ContainerProperties.GetMemberShapes(0);
-                List<Shape> shapes = new List<int>((int[])ident).Select(i => toDraw.RShape.ContainingPage.Shapes.ItemFromID[i]).ToList();
-                foreach (Shape s in shapes)
-                {
-                    RComponent asComponent = new RComponent(toDraw.RShape.ContainingPage);
-                    asComponent.RShape = s;
-                    asComponent.CenterX += deltaX;
-                    asComponent.CenterY += deltaY;
-                }
-            }*/
-
-
+            
             x = x + toDrawWidth;
             currentLineHeight = Math.Max(currentLineHeight, toDrawHeight);
             contentXEnd = Math.Max(contentXEnd, dropX + (toDrawWidth / 2.0));
@@ -140,7 +109,6 @@ namespace ExtendedVisioAddin1.View
 
             if (overflowInY && expandYIfNeeded)
             {
-                var n = toManage.Name;
                 toManage.Height = topLeftY - (y - yIncrease) + 0.01;
                 toManage.CenterY = topLeftY - (toManage.Height / 2.0);
             }
@@ -156,11 +124,9 @@ namespace ExtendedVisioAddin1.View
 
             bool shrinkXIfNeeded = ((int)toManage.UsedSizingPolicy & (int)SizingPolicy.ShrinkXIfNeeded) > 0;
             bool shrinkYIfNeeded = ((int)toManage.UsedSizingPolicy & (int)SizingPolicy.ShrinkYIfNeeded) > 0;
-
-            var n = toManage.Name;
+            
             if (underflowInX && shrinkXIfNeeded)
             {
-                var a = Globals.ThisAddIn.View.Children.Where(c => c is ForcesContainer);
                 toManage.Width = contentXEnd - topLeftX + 0.01;
                 toManage.CenterX = topLeftX + (toManage.Width / 2.0);
             }

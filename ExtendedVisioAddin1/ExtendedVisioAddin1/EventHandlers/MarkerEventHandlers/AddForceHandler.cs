@@ -4,7 +4,7 @@ using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Forces;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers
+namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
     internal class AddForceHandler : MarkerEventHandler
     {
@@ -34,7 +34,7 @@ namespace ExtendedVisioAddin1.EventHandlers
             }
             forcesContainer.Children.Insert(forcesContainer.Children.Count-1,new ForceContainer(changedShape.ContainingPage, forcesContainer.Children.Count-2, true)); //TODO: KABOEM ZONDER HEADER/FOOTER
             //update the model as well
-            model.Forces.Add(new Force(ForceConcernComponent.DEFAULT_CONCERN,ForceDescriptionComponent.DEFAULT_DESCRIPTION));
+            model.Forces.Add(new Force(ForceConcernComponent.DefaultConcern,ForceDescriptionComponent.DefaultDescription));
             new RepaintHandler(forcesContainer);
         }
     }

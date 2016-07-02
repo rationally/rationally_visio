@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers;
 using ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers;
@@ -11,21 +10,18 @@ using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Alternatives;
 using ExtendedVisioAddin1.View.Documents;
 using ExtendedVisioAddin1.View.Forces;
-using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Visio;
-using rationally_visio;
 using Shape = Microsoft.Office.Interop.Visio.Shape;
 
 namespace ExtendedVisioAddin1
 {
     public partial class ThisAddIn
     {
-        //TODO: application static kan mss mooier
         public RModel Model { get; set; }
         public RView View { get; set; }
 
         public int StartedUndoState;
-        public string lastDelete = "";
+        public string LastDelete = "";
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
@@ -82,8 +78,6 @@ namespace ExtendedVisioAddin1
         private static void RegisterMarkerEventHandlers()
         {
             MarkerEventHandlerRegistry registry = MarkerEventHandlerRegistry.Instance;
-
-            registry.Register("afterundo", new NotUndoingRepaintHandler());
             registry.Register("alternatives.add", new AddAlternativeEventHandler());
 
             registry.Register("relatedDocuments.addRelatedFile", new AddRelatedDocumentHandler());
@@ -165,12 +159,7 @@ namespace ExtendedVisioAddin1
             registry.Register("forceValue.moveDown", new MoveDownForceHandler());
             registry.Register("forceDescription.moveDown", new MoveDownForceHandler());
         }
-
-
-        protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
-        {
-            return new RationallyRibbon();
-        }
+        
 
         private void Application_TextChangedEvent(Shape shape)
         {
@@ -305,9 +294,9 @@ namespace ExtendedVisioAddin1
             List<Shape> toBeDeleted = e.Cast<Shape>().ToList();
 
             //store the rationally type of the last shape, which is responsible for ending the undo scope
-            if (String.IsNullOrEmpty(lastDelete) && StartedUndoState == 0)
+            if (String.IsNullOrEmpty(LastDelete) && StartedUndoState == 0)
             {
-                lastDelete = toBeDeleted.Last().Name;
+                LastDelete = toBeDeleted.Last().Name;
                 Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("Delete shape");
             }
 
@@ -418,11 +407,11 @@ namespace ExtendedVisioAddin1
                         RebuildTree(s.ContainingPage.Document);
                     }
                 }
-                if (StartedUndoState != 0 && s.Name == lastDelete)
+                if (StartedUndoState != 0 && s.Name == LastDelete)
                 {
                     Application.EndUndoScope(StartedUndoState, true);
                     StartedUndoState = 0;
-                    lastDelete = "";
+                    LastDelete = "";
                 }
             }
         }

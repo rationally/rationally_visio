@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -115,8 +114,8 @@ namespace ExtendedVisioAddin1.View.Forces
         {
             if (ForceTotalComponent.IsForceTotalComponent(s.Name))
             {
-                ForceTotalComponent com = new ForceTotalComponent(this.Page, s);
-                if ((2 + com.AlternativeIndex) > Children.Count)
+                ForceTotalComponent com = new ForceTotalComponent(Page, s);
+                if (2 + com.AlternativeIndex > Children.Count)
                 {
                     Children.Add(com);
                 }
@@ -135,6 +134,7 @@ namespace ExtendedVisioAddin1.View.Forces
             List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
 
             List<ForceTotalComponent> alreadyThere = Children.Where(c => c is ForceTotalComponent).Cast<ForceTotalComponent>().ToList();
+            // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (Alternative alt in alternatives)
             {
                 if (Children.Where(c => c is ForceTotalComponent && !c.Deleted && ((ForceTotalComponent)c).AlternativeTimelessId == alt.TimelessId).ToList().Count != 1)

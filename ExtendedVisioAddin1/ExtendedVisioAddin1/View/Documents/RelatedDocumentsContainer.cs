@@ -27,8 +27,7 @@ namespace ExtendedVisioAddin1.View.Documents
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             //make s into an rcomponent for access to wrapper
-            RComponent shapeComponent = new RComponent(Page);
-            shapeComponent.RShape = s;
+            RComponent shapeComponent = new RComponent(Page) {RShape = s};
 
             if (RelatedDocumentContainer.IsRelatedDocumentContainer(s.Name))
             {

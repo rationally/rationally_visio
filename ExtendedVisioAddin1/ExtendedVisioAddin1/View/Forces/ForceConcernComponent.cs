@@ -6,7 +6,7 @@ namespace ExtendedVisioAddin1.View.Forces
     internal class ForceConcernComponent : RComponent
     {
         private static readonly Regex ForceConcernRegex = new Regex(@"ForceConcern(\.\d+)?$");
-        public static readonly string DEFAULT_CONCERN = "<<concern>>";
+        public const string DefaultConcern = "<<concern>>";
         
 
         public ForceConcernComponent(Page page, int forceIndex) : base(page)
@@ -30,7 +30,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
             Width = 1;
             Height = 0.33;
-            Text = DEFAULT_CONCERN;
+            Text = DefaultConcern;
             InitStyle();
         }
 

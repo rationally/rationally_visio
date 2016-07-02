@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
-using ExtendedVisioAddin1.View.Documents;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
@@ -117,11 +115,12 @@ namespace ExtendedVisioAddin1.View.Forces
             List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
 
             List<ForceValueComponent> alreadyThere = Children.Where(c => c is ForceValueComponent).Cast<ForceValueComponent>().ToList();
+            // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (Alternative alt in alternatives)
             {
                 if (Children.Where(c => c is ForceValueComponent && !c.Deleted && ((ForceValueComponent)c).AlternativeTimelessId == alt.TimelessId).ToList().Count != 1)
                 {
-                    alreadyThere.Add(new ForceValueComponent(Page, alt.TimelessId, alt.Identifier, this.ForceIndex));
+                    alreadyThere.Add(new ForceValueComponent(Page, alt.TimelessId, alt.Identifier, ForceIndex));
                 }
             }
 

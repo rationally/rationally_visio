@@ -4,7 +4,7 @@ using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Documents;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers
+namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
     internal class MoveDownDocumentHandler : MarkerEventHandler
     {

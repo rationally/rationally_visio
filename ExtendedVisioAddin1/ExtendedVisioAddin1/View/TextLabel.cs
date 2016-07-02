@@ -65,11 +65,8 @@ namespace ExtendedVisioAddin1.View
 
         private double GetWidthOfString(string str)
         {
-            Bitmap objBitmap = default(Bitmap);
-            Graphics objGraphics = default(Graphics);
-
-            objBitmap = new Bitmap(1000, 200);
-            objGraphics = Graphics.FromImage(objBitmap);
+            Bitmap objBitmap = new Bitmap(1000, 200);
+            Graphics objGraphics = Graphics.FromImage(objBitmap);
 
             SizeF stringSize = objGraphics.MeasureString(str, new Font("Calibri", size));
 

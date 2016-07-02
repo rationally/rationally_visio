@@ -109,35 +109,39 @@
     <Compile Include="AddAlternative.Designer.cs">
       <DependentUpon>AddAlternative.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddinCommandBars.cs" />
-    <Compile Include="EventHandlers\AddForceHandler.cs" />
-    <Compile Include="EventHandlers\AddRelatedUrlHandler.cs" />
-    <Compile Include="EventHandlers\AddRelatedDocumentHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\AddForceHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\AddRelatedUrlHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\AddRelatedDocumentHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteAlternativeEventHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteEventHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteEventHandlerRegistry.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteForceEventHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteRelatedDocumentEventHandler.cs" />
-    <Compile Include="EventHandlers\EditRelatedFileHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\EditRelatedFileHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MarkerDeleteRelatedDocumentEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDAlternativeComponentEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDAlternativeContainerEventHander.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDRelatedDocumentComponentEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDRelatedDocumentContainerEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QueryDeleteEventHandlerRegistry.cs" />
-    <Compile Include="EventHandlers\MarkerEventHandlerRegistry.cs" />
-    <Compile Include="EventHandlers\MarkerEventHandler.cs" />
-    <Compile Include="EventHandlers\MoveDownAlternativeHandler.cs" />
-    <Compile Include="EventHandlers\MoveDownDocumentHandler.cs" />
-    <Compile Include="EventHandlers\MoveDownForceHandler.cs" />
-    <Compile Include="EventHandlers\MoveUpAlternativeHandler.cs" />
-    <Compile Include="EventHandlers\MoveUpDocumentHandler.cs" />
-    <Compile Include="EventHandlers\MoveUpForceHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MarkerEventHandlerRegistry.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MarkerEventHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MoveDownAlternativeHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MoveDownDocumentHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MoveDownForceHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MoveUpAlternativeHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MoveUpDocumentHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MoveUpForceHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QueryDeleteEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDForceComponentEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDForceContainerEventHandler.cs" />
-    <Compile Include="EventHandlers\StartDeleteForceEventHandler.cs" />
-    <Compile Include="EventHandlers\NotUndoingRepaintHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\StartDeleteForceEventHandler.cs" />
+    <Compile Include="AddAlternativeWithWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddAlternativeWithWarning.Designer.cs">
+      <DependentUpon>AddAlternativeWithWarning.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Force.cs" />
     <Compile Include="Model\RelatedDocument.cs" />
     <Compile Include="UrlSelector.cs">
@@ -183,17 +187,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="View\TextLabel.cs" />
-    <Compile Include="CustomUI.cs" />
-    <Compile Include="EventHandlers\AddAlternativeEventHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\AddAlternativeEventHandler.cs" />
     <Compile Include="EventHandlers\DocumentCreatedEventHandler.cs" />
-    <Compile Include="EventHandlers\EditAlternativeStateEventHandler.cs" />
-    <Compile Include="EventHandlers\EventHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\EditAlternativeStateEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MarkerDeleteAlternativeEventHandler.cs" />
     <Compile Include="EventHandlers\RepaintHandler.cs" />
     <Compile Include="Model\Alternative.cs" />
     <Compile Include="Model\RModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RationallyRibbon.cs" />
     <Compile Include="SheetSetUpFormPopUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,6 +227,9 @@
       <DependentUpon>AddAlternative.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddAlternativeWithWarning.resx">
+      <DependentUpon>AddAlternativeWithWarning.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -238,26 +242,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="RationallyRibbon.xml" />
     <Content Include="Resources\Command1.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Command1_sm.png" />
     <Content Include="Resources\Command2_sm.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AddinRibbonComponent.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AddinRibbonComponent.Designer.cs">
-      <DependentUpon>AddinRibbonComponent.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="AddinRibbonComponent.resx">
-      <DependentUpon>AddinRibbonComponent.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -46,7 +46,7 @@ namespace ExtendedVisioAddin1.View
                 new RepaintHandler();
                 return;
             }
-            AlternativeContainer alternative = (AlternativeContainer)alternativesContainer?.Children.FirstOrDefault(x => x.AlternativeIndex == index && x is AlternativeContainer); //Return null if no container or no alternative with index
+            AlternativeContainer alternative = (AlternativeContainer)alternativesContainer.Children.FirstOrDefault(x => x.AlternativeIndex == index && x is AlternativeContainer); //Return null if no container or no alternative with index
             if (alternative != null)
             {
                 alternativesContainer.Children.Remove(alternative);
@@ -54,9 +54,6 @@ namespace ExtendedVisioAddin1.View
                 {
                     alternative.RShape.DeleteEx(0); //deletes the alternative, and it's child components. This should not be done when the shape is already gone, such as when the user has deleted it himself.
                 }
-                int i = 0;
-                
-                
                 new RepaintHandler();
             }
         }

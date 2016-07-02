@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 using ExtendedVisioAddin1.View.Alternatives;
 using ExtendedVisioAddin1.View.Documents;
 using ExtendedVisioAddin1.View.Forces;
-using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.Model
 {

@@ -39,7 +39,6 @@ namespace ExtendedVisioAddin1.View.Documents
                 {
                     Children.Add(new RelatedUrlComponent(page, urlShape));
                     path = urlShape.Text;
-                    file = false;
                 }
 
                 Shape urlUrlShape = shapes.FirstOrDefault(shape => RelatedURLURLComponent.IsRelatedUrlUrlComponent(shape.Name));
@@ -54,7 +53,7 @@ namespace ExtendedVisioAddin1.View.Documents
             {
                 if (DocumentIndex <= Globals.ThisAddIn.Model.Documents.Count)
                 {
-                    Globals.ThisAddIn.Model.Documents.Insert(DocumentIndex, new RelatedDocument(path, name, file));;
+                    Globals.ThisAddIn.Model.Documents.Insert(DocumentIndex, new RelatedDocument(path, name, file));
                 }
                 else
                 {
@@ -116,7 +115,7 @@ namespace ExtendedVisioAddin1.View.Documents
         {
             
             LinePattern = 16; //borderless
-            MarginTop = (DocumentIndex == 0) ? 0.3 : 0.0;
+            MarginTop = DocumentIndex == 0 ? 0.3 : 0.0;
             MarginBottom = 0;
             
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;

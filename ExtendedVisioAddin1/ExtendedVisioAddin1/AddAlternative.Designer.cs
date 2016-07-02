@@ -41,15 +41,16 @@ namespace ExtendedVisioAddin1
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 13);
+            this.label1.Size = new System.Drawing.Size(102, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Alternative name";
             // 
             // alternativeName
             // 
-            this.alternativeName.Location = new System.Drawing.Point(16, 30);
+            this.alternativeName.Location = new System.Drawing.Point(15, 25);
             this.alternativeName.Name = "alternativeName";
             this.alternativeName.Size = new System.Drawing.Size(231, 20);
             this.alternativeName.TabIndex = 1;
@@ -58,9 +59,10 @@ namespace ExtendedVisioAddin1
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 57);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(12, 48);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 13);
+            this.label2.Size = new System.Drawing.Size(106, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Alternative status";
             // 
@@ -68,14 +70,14 @@ namespace ExtendedVisioAddin1
             // 
             this.alternativeStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.alternativeStatus.FormattingEnabled = true;
-            this.alternativeStatus.Location = new System.Drawing.Point(16, 74);
+            this.alternativeStatus.Location = new System.Drawing.Point(15, 64);
             this.alternativeStatus.Name = "alternativeStatus";
             this.alternativeStatus.Size = new System.Drawing.Size(231, 21);
             this.alternativeStatus.TabIndex = 3;
             // 
             // createAlternative
             // 
-            this.createAlternative.Location = new System.Drawing.Point(16, 110);
+            this.createAlternative.Location = new System.Drawing.Point(13, 91);
             this.createAlternative.Name = "createAlternative";
             this.createAlternative.Size = new System.Drawing.Size(231, 23);
             this.createAlternative.TabIndex = 4;
@@ -88,7 +90,7 @@ namespace ExtendedVisioAddin1
             this.AcceptButton = this.createAlternative;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(259, 141);
+            this.ClientSize = new System.Drawing.Size(259, 116);
             this.Controls.Add(this.createAlternative);
             this.Controls.Add(this.alternativeStatus);
             this.Controls.Add(this.label2);
@@ -104,9 +106,9 @@ namespace ExtendedVisioAddin1
         #endregion
 
         private Label label1;
-        private Label label2;
-        private Button createAlternative;
         internal TextBox alternativeName;
+        private Label label2;
         internal ComboBox alternativeStatus;
+        private Button createAlternative;
     }
 }

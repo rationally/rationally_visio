@@ -27,11 +27,6 @@ namespace ExtendedVisioAddin1.View
 
         public override void PlaceChildren()
         {
-            List<Shape> shappies = new List<Shape>();
-            foreach (int shapeIdentifier in RShape.ContainerProperties.GetMemberShapes(16))
-            {
-                shappies.Add(Page.Shapes.ItemFromID[shapeIdentifier]);
-            }
             bool oldLock = MsvSdContainerLocked;
             MsvSdContainerLocked = false;
             foreach (RComponent c in Children)
@@ -44,8 +39,7 @@ namespace ExtendedVisioAddin1.View
                 }
 
                 RShape.ContainerProperties.AddMember(c.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
-
-                var n = RShape.Name;
+                
                 if (c is RContainer)
                 {
                     c.MsvSdContainerLocked = lockContainer;
@@ -69,8 +63,7 @@ namespace ExtendedVisioAddin1.View
                 }
 
                 RShape.ContainerProperties.RemoveMember(c.RShape);
-
-                var n = RShape.Name;
+                
                 if (c is RContainer)
                 {
                     c.MsvSdContainerLocked = lockContainer;
@@ -82,7 +75,7 @@ namespace ExtendedVisioAddin1.View
 
         public double ContainerPadding
         {
-            get { return (double)RShape.CellsU["User.MsvSDContainerMargin"].ResultIU; }
+            get { return RShape.CellsU["User.MsvSDContainerMargin"].ResultIU; }
             set { RShape.CellsU["User.MsvSDContainerMargin"].ResultIU = value; }
         }
 

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ExtendedVisioAddin1.Model;
-using Microsoft.Office.Interop.Visio;
+﻿using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Alternatives
 {
-    class AlternativeStubContainer : RComponent
+    internal class AlternativeStubContainer : RComponent
     {
         public override int AlternativeIndex
         {

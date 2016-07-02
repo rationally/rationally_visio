@@ -1,18 +1,14 @@
-﻿using System.Linq;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using ExtendedVisioAddin1.Model;
-using ExtendedVisioAddin1.View.Documents;
 using Microsoft.Office.Interop.Visio;
-using Application = Microsoft.Office.Interop.Visio.Application;
 
-namespace ExtendedVisioAddin1.EventHandlers
+namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
     internal class AddRelatedDocumentHandler : MarkerEventHandler
     {
 
         public override void Execute(RModel model, Shape changedShape, string identifier)
         {
-            Application application = Globals.ThisAddIn.Application;
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 CheckFileExists = true,

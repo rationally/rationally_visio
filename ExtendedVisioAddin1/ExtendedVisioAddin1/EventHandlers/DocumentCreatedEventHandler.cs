@@ -15,7 +15,6 @@ namespace ExtendedVisioAddin1.EventHandlers
             if (document.Template.ToLower().Contains("rationally"))
             {
                 ShowSheetSetUpBox();
-                double offsetHeight =Globals.ThisAddIn.Application.ActivePage.PageSheet.CellsU["PageHeight"].Result[VisUnitCodes.visInches] - 0.4;
                 //draw the header
                 TextLabel header = new TextLabel(Globals.ThisAddIn.Application.ActivePage,model.DecisionName);
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -104,7 +103,7 @@ namespace ExtendedVisioAddin1.View.Forces
         {
             if (ForceAlternativeHeaderComponent.IsForceAlternativeHeaderComponent(s.Name))
             {
-                ForceAlternativeHeaderComponent com = new ForceAlternativeHeaderComponent(this.Page, s);
+                ForceAlternativeHeaderComponent com = new ForceAlternativeHeaderComponent(Page, s);
                 int index = com.RShape.Text[0] - 63;//text is of the form "A:"; A = 65 and should be inserted at index 2, after the concern and desc column
                 if (Children.Count < index)
                 {
@@ -125,6 +124,7 @@ namespace ExtendedVisioAddin1.View.Forces
             List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
 
             List<ForceAlternativeHeaderComponent> alreadyThere = Children.Where(c => c is ForceAlternativeHeaderComponent).Cast<ForceAlternativeHeaderComponent>().ToList();
+            // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (Alternative alt in alternatives)
             {
                 if (Children.Where(c => c is ForceAlternativeHeaderComponent && !c.Deleted && ((ForceAlternativeHeaderComponent)c).AlternativeTimelessId == alt.TimelessId).ToList().Count != 1)

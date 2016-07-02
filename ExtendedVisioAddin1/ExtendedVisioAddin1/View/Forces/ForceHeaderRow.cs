@@ -127,7 +127,7 @@ namespace ExtendedVisioAddin1.View.Forces
             // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (Alternative alt in alternatives)
             {
-                if (Children.Where(c => c is ForceAlternativeHeaderComponent && !c.Deleted && ((ForceAlternativeHeaderComponent)c).AlternativeTimelessId == alt.TimelessId).ToList().Count != 1)
+                if (Children.Where(c => (c is ForceAlternativeHeaderComponent && !c.Deleted && ((ForceAlternativeHeaderComponent)c).AlternativeTimelessId == alt.TimelessId)).ToList().Count != 1)
                 {
                     alreadyThere.Add(new ForceAlternativeHeaderComponent(Page, alt.Identifier, alt.TimelessId));
                 }

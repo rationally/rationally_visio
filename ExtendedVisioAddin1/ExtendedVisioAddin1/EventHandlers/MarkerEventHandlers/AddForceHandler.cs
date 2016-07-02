@@ -16,10 +16,10 @@ namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
                 //insert header, if it is absent
                 if (forcesContainer.Children.Count == 0 || !forcesContainer.Children.Any(c => c is ForceHeaderRow))
                 {
-                    forcesContainer.Children.Insert(0, new ForceHeaderRow(Globals.ThisAddIn.Application.ActivePage)); //todo is this the right page
+                    forcesContainer.Children.Insert(0, new ForceHeaderRow(Globals.ThisAddIn.Application.ActivePage));
                 }
                 //insert footer, if it is absent
-                if (forcesContainer.Children.Count == 0 || !forcesContainer.Children.Any(c => c is ForceTotalsRow))//todo is this the right page
+                if (forcesContainer.Children.Count == 0 || !forcesContainer.Children.Any(c => c is ForceTotalsRow))
                 {
                     forcesContainer.Children.Add(new ForceTotalsRow(Globals.ThisAddIn.Application.ActivePage));
                 }
@@ -32,7 +32,7 @@ namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
                     forcesContainer.Children[toMoveIndex] = toSwapWith;
                 }
             }
-            forcesContainer.Children.Insert(forcesContainer.Children.Count-1,new ForceContainer(changedShape.ContainingPage, forcesContainer.Children.Count-2, true)); //TODO: KABOEM ZONDER HEADER/FOOTER
+            forcesContainer.Children.Insert(forcesContainer.Children.Count-1,new ForceContainer(changedShape.ContainingPage, forcesContainer.Children.Count-2, true));
             //update the model as well
             model.Forces.Add(new Force(ForceConcernComponent.DefaultConcern,ForceDescriptionComponent.DefaultDescription));
             new RepaintHandler(forcesContainer);

@@ -348,7 +348,7 @@ namespace ExtendedVisioAddin1
                         deleted.Deleted = true;
                     }
 
-                    RelatedDocumentsContainer relatedDocumentsContainer = View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer; //todo NullReferenceMeuk
+                    RelatedDocumentsContainer relatedDocumentsContainer = View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer;
                     switch (rationallyType)
                     {
                         case "relatedDocumentContainer":
@@ -370,26 +370,23 @@ namespace ExtendedVisioAddin1
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
                             if (!View.Children.Any(x => x is AlternativesContainer))
                             {
-                                Model.Alternatives.Clear(); //todo: could be prettier
+                                Model.Alternatives.Clear(); 
                                 new RepaintHandler();
                             }
-                            //todo extract
                             break;
                         case "forces":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
                             if (!View.Children.Any(x => x is ForcesContainer))
                             {
-                                Model.Forces.Clear(); //todo: could be prettier
+                                Model.Forces.Clear();
                             }
-                            //todo extract
                             break;
                         case "relatedDocuments":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
                             if (!View.Children.Any(x => x is RelatedDocumentsContainer))
                             {
-                                Model.Documents.Clear(); //todo: could be prettier
+                                Model.Documents.Clear();
                             }
-                            //todo extract
                             break;
                         case "informationBox":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));

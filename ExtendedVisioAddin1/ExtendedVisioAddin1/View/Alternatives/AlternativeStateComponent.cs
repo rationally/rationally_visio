@@ -67,7 +67,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
         public AlternativeStateComponent(Page page) : base(page)
         {
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\RationallyHidden.vssx";
-            Document rationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden); //todo: handling for file is open
+            Document rationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
             Master rectMaster = rationallyDocument.Masters["Alternative State"];
             RShape = page.Drop(rectMaster, 0, 0);
             rationallyDocument.Close();
@@ -102,7 +102,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             {
                 string stateName = "State_" + i;
                 if (model.AlternativeStates[i] == currentState)
-                { //todo: extract to container class
+                { 
                     if (RShape.CellExistsU["Actions." + stateName + ".Action", 0] != 0)
                     {
                         RShape.DeleteRow((short)VisSectionIndices.visSectionAction, RShape.CellsRowIndex["Actions." + stateName + ".Action"]);

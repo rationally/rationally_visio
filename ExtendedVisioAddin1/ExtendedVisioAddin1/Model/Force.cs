@@ -5,7 +5,7 @@
         public string Concern { get; set; }
         public string Description { get; set; }
 
-        public Force(string concern, string description) //TODO force values?
+        public Force(string concern, string description)
         {
             Concern = concern;
             Description = description;

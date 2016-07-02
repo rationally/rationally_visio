@@ -199,7 +199,7 @@ namespace ExtendedVisioAddin1.View
             }
             set
             {
-                RShape.CellsU["pinY"].Result[VisUnitCodes.visInches] = value; //TODO: KAPOT
+                RShape.CellsU["pinY"].Result[VisUnitCodes.visInches] = value;
             }
         }
 

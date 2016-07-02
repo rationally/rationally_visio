@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows.Forms;
 using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View.Alternatives;
@@ -71,7 +72,7 @@ namespace ExtendedVisioAddin1.View
                 {
                     if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                     {
-                        //TODO: Show message
+                        MessageBox.Show("Only one instance of the alternatives container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         s.DeleteEx(0);
                     }
                 }
@@ -86,7 +87,7 @@ namespace ExtendedVisioAddin1.View
                 {
                     if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                     {
-                        //TODO: Show message
+                        MessageBox.Show("Only one instance of the related documents container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         s.DeleteEx(0);
                     }
                 }
@@ -106,7 +107,7 @@ namespace ExtendedVisioAddin1.View
                 {
                     if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                     {
-                        //TODO: Show message
+                        MessageBox.Show("Only one instance of the forces container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         s.DeleteEx(0);
                     }
                 }

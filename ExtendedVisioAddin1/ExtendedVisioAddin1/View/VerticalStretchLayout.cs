@@ -148,7 +148,7 @@ namespace ExtendedVisioAddin1.View
             }
         }
 
-        private void ShrinkContainer(double contentYEnd) //TODO might be implementable by setting the size to [0.1,0.1]
+        private void ShrinkContainer(double contentYEnd)
         {
             double topLeftY = toManage.CenterY + (toManage.Height / 2.0);
 

@@ -7,10 +7,10 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
-    class EditRelatedFileHandler : MarkerEventHandler
+    class EditRelatedFileHandler : IMarkerEventHandler
     {
 
-        public override void Execute(RModel model, Shape changedShape, string context)
+        public void Execute(RModel model, Shape changedShape, string context)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {

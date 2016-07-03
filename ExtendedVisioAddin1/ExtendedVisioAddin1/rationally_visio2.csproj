@@ -125,7 +125,7 @@
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDRelatedDocumentContainerEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QueryDeleteEventHandlerRegistry.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MarkerEventHandlerRegistry.cs" />
-    <Compile Include="EventHandlers\MarkerEventHandlers\MarkerEventHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\IMarkerEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveDownAlternativeHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveDownDocumentHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveDownForceHandler.cs" />

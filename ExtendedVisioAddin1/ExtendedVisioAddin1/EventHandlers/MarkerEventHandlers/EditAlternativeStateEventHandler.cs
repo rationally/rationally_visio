@@ -5,9 +5,9 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
-    internal class EditAlternativeStateEventHandler : MarkerEventHandler
+    internal class EditAlternativeStateEventHandler : IMarkerEventHandler
     {
-        public override void Execute(RModel model, Shape s, string newState)
+        public void Execute(RModel model, Shape s, string newState)
         {
             RComponent c = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };
 

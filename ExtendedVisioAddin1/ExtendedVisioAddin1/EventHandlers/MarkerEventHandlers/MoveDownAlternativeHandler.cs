@@ -7,9 +7,9 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
-    class MoveDownAlternativeHandler : MarkerEventHandler
+    class MoveDownAlternativeHandler : IMarkerEventHandler
     {
-        public override void Execute(RModel model, Shape changedShape, string identifier)
+        public void Execute(RModel model, Shape changedShape, string identifier)
         {
             AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
 

@@ -6,9 +6,9 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
-    class MoveDownForceHandler : MarkerEventHandler
+    class MoveDownForceHandler : IMarkerEventHandler
     {
-        public override void Execute(RModel model, Shape changedShape, string identifier)
+        public void Execute(RModel model, Shape changedShape, string identifier)
         {
             ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
 

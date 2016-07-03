@@ -7,9 +7,9 @@ using Microsoft.Office.Interop.Visio;
 namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
     //simulates a manual delete on the force container
-    internal class StartDeleteForceEventHandler : MarkerEventHandler
+    internal class StartDeleteForceEventHandler : IMarkerEventHandler
     {
-        public override void Execute(RModel model, Shape changedShape, string identifier)
+        public void Execute(RModel model, Shape changedShape, string identifier)
         {
 
             //get the corresponding view tree component

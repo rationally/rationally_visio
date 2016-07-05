@@ -82,25 +82,26 @@ namespace ExtendedVisioAddin1.View.Forces
             {
                 UpdateAlternativeLabels();
                 UpdateReorderFunctions();
-            }
-            string toParse = Text.StartsWith("+") ? Text.Substring(1) : Text;
-            int value;
-            int.TryParse(toParse, out value);
 
-            if (value < 0)
-            {
-                BackgroundColor = "RGB(153,12,0)";
-                FontColor = "RGB(255,255,255)";
-            }
-            else if (value > 0)
-            {
-                BackgroundColor = "RGB(0,175,0)";
-                FontColor = "RGB(255,255,255)";
-            }
-            else
-            {
-                BackgroundColor = "RGB(210,210,0)";
-                FontColor = "RGB(255,255,255)";
+                string toParse = Text.StartsWith("+") ? Text.Substring(1) : Text;
+                int value;
+                int.TryParse(toParse, out value);
+
+                if (value < 0)
+                {
+                    BackgroundColor = "RGB(153,12,0)";
+                    FontColor = "RGB(255,255,255)";
+                }
+                else if (value > 0)
+                {
+                    BackgroundColor = "RGB(0,175,0)";
+                    FontColor = "RGB(255,255,255)";
+                }
+                else
+                {
+                    BackgroundColor = "RGB(210,210,0)";
+                    FontColor = "RGB(255,255,255)";
+                }
             }
             base.Repaint();
         }

@@ -15,7 +15,7 @@ namespace ExtendedVisioAddin1.View
         private double characterWidth;
         private double contentTextWidth;
 
-        private double PIXELS_PER_INCH = 85;
+        private const double PixelsPerInch = 85;
         public SizingPolicy UsedSizingPolicy { get; set; }
 
         public TextLabel(Page page, Shape shape) : base(page)
@@ -34,11 +34,11 @@ namespace ExtendedVisioAddin1.View
 
             //characterWidth = characterHeight*0.45;
             //contentTextWidth = characterWidth * (double)text.Length + 0.2;
-            contentTextWidth = GetWidthOfString(labelText)/ PIXELS_PER_INCH;
+            contentTextWidth = GetWidthOfString(labelText)/ PixelsPerInch;
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
             RShape = page.Drop(rectMaster, 0,0);
-            basicDocument.Close(); //TODO: magic numbers
+            basicDocument.Close();
             RShape.LineStyle = "Text Only";
             RShape.FillStyle = "Text Only";
             RShape.Characters.Text = text;
@@ -58,9 +58,9 @@ namespace ExtendedVisioAddin1.View
 
         public void SetFontSize(short fontSize)
         {
-            size = fontSize;//TODO remove this variable and refs
+            size = fontSize;
             FontSize = fontSize;
-            Repaint();//todo: moet dit echt hier
+            Repaint();
         }
 
         private double GetWidthOfString(string str)
@@ -81,7 +81,7 @@ namespace ExtendedVisioAddin1.View
             characterHeight = 1.0 / 72.0 * (double)size;
 
             //contentTextWidth = characterWidth * (double)text.Length + 0.2;
-            contentTextWidth = GetWidthOfString(text) / PIXELS_PER_INCH;
+            contentTextWidth = GetWidthOfString(text) / PixelsPerInch;
             characterWidth = contentTextWidth/text.Length;
             //sizing
             if (contentTextWidth > Width)

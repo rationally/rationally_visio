@@ -31,7 +31,7 @@ namespace ExtendedVisioAddin1.View
             MsvSdContainerLocked = false;
             foreach (RComponent c in Children)
             {
-                bool lockContainer = false; //TODO: WAT
+                bool lockContainer = false;
                 if (c is RContainer)
                 {
                     lockContainer = c.MsvSdContainerLocked;
@@ -54,7 +54,7 @@ namespace ExtendedVisioAddin1.View
         {
             foreach (RComponent c in Children)
             {
-                MsvSdContainerLocked = false;//TODO reset
+                MsvSdContainerLocked = false;
                 bool lockContainer = false;
                 if (c is RContainer)
                 {

@@ -17,10 +17,9 @@ namespace ExtendedVisioAddin1.View.Documents
         public RelatedUrlComponent(Page page, int index, string url) : base(page)
         {
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\RationallyHidden.vssx";
-            Document rationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden); //todo: handling for file is open
+            Document rationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
             Master rectMaster = rationallyDocument.Masters["LinkIcon"]; 
             RShape = page.Drop(rectMaster, 0, 0);
-             //todo: create shappie properly
 
             Hyperlink link = RShape.AddHyperlink();
             link.Address = url;

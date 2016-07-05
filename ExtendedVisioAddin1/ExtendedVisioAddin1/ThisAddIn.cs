@@ -173,6 +173,11 @@ namespace ExtendedVisioAddin1
                 ForceTotalsRow forceTotalsRow = forcesContainer.Children.First(c => c is ForceTotalsRow) as ForceTotalsRow;
                 if (forceTotalsRow != null) new RepaintHandler(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).FirstOrDefault(c => c.AlternativeTimelessId == forceValue.AlternativeTimelessId));
 
+            }else if (shape.Document.Template.ToLower().Contains("rationally") && AlternativeStateComponent.IsAlternativeState(shape.Name))
+            {
+                AlternativeStateComponent alternativeState = (AlternativeStateComponent)View.GetComponentByShape(shape);
+                int index = alternativeState.AlternativeIndex;
+                Model.Alternatives[index].Status = alternativeState.Text;
             }
         }
 
@@ -348,7 +353,7 @@ namespace ExtendedVisioAddin1
                         deleted.Deleted = true;
                     }
 
-                    RelatedDocumentsContainer relatedDocumentsContainer = View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer; //todo NullReferenceMeuk
+                    RelatedDocumentsContainer relatedDocumentsContainer = View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer;
                     switch (rationallyType)
                     {
                         case "relatedDocumentContainer":
@@ -370,26 +375,23 @@ namespace ExtendedVisioAddin1
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
                             if (!View.Children.Any(x => x is AlternativesContainer))
                             {
-                                Model.Alternatives.Clear(); //todo: could be prettier
+                                Model.Alternatives.Clear(); 
                                 new RepaintHandler();
                             }
-                            //todo extract
                             break;
                         case "forces":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
                             if (!View.Children.Any(x => x is ForcesContainer))
                             {
-                                Model.Forces.Clear(); //todo: could be prettier
+                                Model.Forces.Clear();
                             }
-                            //todo extract
                             break;
                         case "relatedDocuments":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));
                             if (!View.Children.Any(x => x is RelatedDocumentsContainer))
                             {
-                                Model.Documents.Clear(); //todo: could be prettier
+                                Model.Documents.Clear();
                             }
-                            //todo extract
                             break;
                         case "informationBox":
                             View.Children.RemoveAll(obj => obj.RShape.Equals(s));

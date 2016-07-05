@@ -122,26 +122,31 @@ namespace ExtendedVisioAddin1.View.Forces
 
             //foreach alternative in model { add a force value component, if it is not aleady there }
             List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
-
             List<ForceAlternativeHeaderComponent> alreadyThere = Children.Where(c => c is ForceAlternativeHeaderComponent).Cast<ForceAlternativeHeaderComponent>().ToList();
+
             // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (Alternative alt in alternatives)
             {
-                if (Children.Where(c => (c is ForceAlternativeHeaderComponent && !c.Deleted && ((ForceAlternativeHeaderComponent)c).AlternativeTimelessId == alt.TimelessId)).ToList().Count != 1)
+                //locate the header cell for the current alternative, if it exsists
+                ForceAlternativeHeaderComponent altHeader = (ForceAlternativeHeaderComponent)Children.FirstOrDefault(c => (c is ForceAlternativeHeaderComponent && !c.Deleted && ((ForceAlternativeHeaderComponent) c).AlternativeTimelessId == alt.TimelessId));
+                //if a deleted shape is present, there is no possiblity that we are adding an alternative. Furthermore, the deleted shape still represents an alternative, for each thus no second cell should be added!
+                if (altHeader == null && Children.All(c => !c.Deleted)) 
                 {
                     alreadyThere.Add(new ForceAlternativeHeaderComponent(Page, alt.Identifier, alt.TimelessId));
                 }
             }
 
             //at this point, all alternatives have a component in alreadyThere, but there might be components of removed alternatives in there as well
-            List<ForceAlternativeHeaderComponent> toRemove = alreadyThere.Where(f => !alternatives.ToList().Any(alt => f.Deleted || alt.TimelessId == f.AlternativeTimelessId)).ToList();
-
+            List<ForceAlternativeHeaderComponent> toRemove = alreadyThere.Where(f => !f.Deleted && !alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
+            List<ForceAlternativeHeaderComponent> toRemoveFromTree = alreadyThere.Where(f => f.Deleted || !alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
             //alreadyThere = alreadyThere - toRemove
-            alreadyThere = alreadyThere.Where(f => alternatives.ToList().Any(alt => !f.Deleted && alt.TimelessId == f.AlternativeTimelessId)).ToList();
-
+            //alreadyThere = alreadyThere.Where(f => alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();//!f.Deleted && 
+            alreadyThere.RemoveAll(a => toRemoveFromTree.Contains(a));
             //finally, order the alternative columns similar to the alternatives container
-            alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.TimelessId == fc.AlternativeTimelessId))).ToList();
-
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.TimelessId == fc.AlternativeTimelessId))).ToList();
+            }
             Children.RemoveAll(c => c is ForceAlternativeHeaderComponent);
             Children.AddRange(alreadyThere);
 

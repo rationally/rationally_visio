@@ -68,45 +68,47 @@ namespace ExtendedVisioAddin1.View.Forces
             if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
                 UpdateAlternativeLabels();
-            }
 
-            int total = 0;
-            List<ForceValueComponent> totalCandidates = new List<ForceValueComponent>();
+                int total = 0;
+                List<ForceValueComponent> totalCandidates = new List<ForceValueComponent>();
 
-            ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
-            //for each forcecontainer, look up the forcevalue related to this' total and store it in totalCandidates
-            forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(c => c.Children.Where(d => d is ForceValueComponent).ToList().Cast<ForceValueComponent>().Where(fv => fv.AlternativeTimelessId == AlternativeTimelessId).ToList().ForEach(childForTotal => totalCandidates.Add(childForTotal)));
+                ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
+                //for each forcecontainer, look up the forcevalue related to this' total and store it in totalCandidates
+                forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(c => c.Children.Where(d => d is ForceValueComponent).ToList().Cast<ForceValueComponent>().Where(fv => fv.AlternativeTimelessId == AlternativeTimelessId).ToList().ForEach(childForTotal => totalCandidates.Add(childForTotal)));
 
-            foreach (ForceValueComponent fv in totalCandidates)
-            {
-                int v;
-
-                string toParse = fv.Text.StartsWith("+") ? fv.Text.Substring(1) : fv.Text;
-
-                if (int.TryParse(toParse, out v))
+                foreach (ForceValueComponent fv in totalCandidates)
                 {
-                    total += v;
+                    int v;
+
+                    string toParse = fv.Text.StartsWith("+") ? fv.Text.Substring(1) : fv.Text;
+
+                    if (int.TryParse(toParse, out v))
+                    {
+                        total += v;
+                    }
+                }
+                if (total < 0)
+                {
+                    BackgroundColor = "RGB(153,12,0)";
+                    FontColor = "RGB(255,255,255)";
+                }
+                else if (total > 0)
+                {
+                    BackgroundColor = "RGB(0,175,0)";
+                    FontColor = "RGB(255,255,255)";
+                }
+                else
+                {
+                    BackgroundColor = "RGB(210,210,0)";
+                    FontColor = "RGB(255,255,255)";
+                }
+                if (int.Parse(Text) != total)
+                {
+                    Text = total + "";
                 }
             }
-            if (total < 0)
-            {
-                BackgroundColor = "RGB(153,12,0)";
-                FontColor = "RGB(255,255,255)";
-            }
-            else if (total > 0)
-            {
-                BackgroundColor = "RGB(0,175,0)";
-                FontColor = "RGB(255,255,255)";
-            }
-            else
-            {
-                BackgroundColor = "RGB(210,210,0)";
-                FontColor = "RGB(255,255,255)";
-            }
-            if (int.Parse(Text) != total)
-            {
-                Text = total + "";
-            }
+
+            
 
         }
     }

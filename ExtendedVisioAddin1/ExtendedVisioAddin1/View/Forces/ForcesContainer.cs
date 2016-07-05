@@ -84,7 +84,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
             if (ForceContainer.IsForceContainer(s.Name))
             {
-                if (Children.All(c => c.ForceIndex != shapeComponent.ForceIndex)) //there is no forcecontainer stub with this index
+                if (Children.Where(c => c is ForceContainer || c is ForceStubContainer).All(c => c.ForceIndex != shapeComponent.ForceIndex)) //there is no forcecontainer stub with this index
                 {
                     ForceContainer con = new ForceContainer(Page, s);
                     Children.Insert(con.ForceIndex + 1, con); //after header
@@ -103,7 +103,7 @@ namespace ExtendedVisioAddin1.View.Forces
             {
                 bool isForceChild = ForceConcernComponent.IsForceConcern(s.Name) || ForceDescriptionComponent.IsForceDescription(s.Name) || ForceValueComponent.IsForceValue(s.Name);
 
-                if (isForceChild && Children.All(c => c.ForceIndex != shapeComponent.ForceIndex)) //if parent not exists
+                if (isForceChild && Children.Where(c => c is ForceContainer || c is ForceStubContainer).All(c => c.ForceIndex != shapeComponent.ForceIndex)) //if parent not exists
                 {
                     ForceStubContainer stub = new ForceStubContainer(Page, shapeComponent.ForceIndex);
                     Children.Insert(shapeComponent.ForceIndex + 1, stub); //after header

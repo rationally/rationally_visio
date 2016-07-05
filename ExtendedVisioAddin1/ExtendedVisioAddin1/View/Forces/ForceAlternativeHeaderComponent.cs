@@ -71,11 +71,9 @@ namespace ExtendedVisioAddin1.View.Forces
             if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
                 UpdateAlternativeLabels();
-            }
-            if (Text != AlternativeIdentifier)
-            {
                 Text = AlternativeIdentifier;
             }
+
             base.Repaint();
         }
     }

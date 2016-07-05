@@ -31,6 +31,8 @@ namespace ExtendedVisioAddin1.View.Forces
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
             AlternativeTimelessId = alternativeTimelessId;
+
+            InitStyle();
         }
 
         private void InitStyle()

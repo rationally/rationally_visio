@@ -13,7 +13,7 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
             Globals.ThisAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
             if (!Globals.ThisAddIn.View.Children.Any(x => x is ForcesContainer))
             {
-                Globals.ThisAddIn.Model.Forces.Clear();
+                model.Forces.Clear();
                 new RepaintHandler();
             }
         }

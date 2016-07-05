@@ -147,6 +147,10 @@
     <Compile Include="AddAlternativeWithWarning.Designer.cs">
       <DependentUpon>AddAlternativeWithWarning.cs</DependentUpon>
     </Compile>
+    <Compile Include="EventHandlers\TextChangedEventHandlers\AlternativeStateTextChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\ForceTextChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\ITextChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\TextChangedEventHandlerRegistry.cs" />
     <Compile Include="Model\Force.cs" />
     <Compile Include="Model\RelatedDocument.cs" />
     <Compile Include="UrlSelector.cs">

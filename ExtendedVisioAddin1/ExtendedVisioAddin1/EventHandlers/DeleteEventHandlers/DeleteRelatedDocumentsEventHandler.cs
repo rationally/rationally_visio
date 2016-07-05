@@ -14,7 +14,7 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
             Globals.ThisAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
             if (!Globals.ThisAddIn.View.Children.Any(x => x is RelatedDocumentsContainer))
             {
-                Globals.ThisAddIn.Model.Documents.Clear();
+                model.Documents.Clear();
                 new RepaintHandler();
             }
         }

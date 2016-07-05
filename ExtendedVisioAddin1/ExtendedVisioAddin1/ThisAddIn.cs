@@ -5,6 +5,7 @@ using ExtendedVisioAddin1.EventHandlers;
 using ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers;
 using ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers;
 using ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers;
+using ExtendedVisioAddin1.EventHandlers.TextChangedEventHandlers;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Alternatives;
@@ -46,6 +47,7 @@ namespace ExtendedVisioAddin1
             RegisterDeleteEventHandlers();
             RegisterQueryDeleteEventHandlers();
             RegisterMarkerEventHandlers();
+            RegisterTextChangedEventHandlers();
         }
        
 
@@ -168,25 +170,20 @@ namespace ExtendedVisioAddin1
             registry.Register("forceValue.moveDown", new MoveDownForceHandler());
             registry.Register("forceDescription.moveDown", new MoveDownForceHandler());
         }
-        
+
+        private static void RegisterTextChangedEventHandlers()
+        {
+            TextChangedEventHandlerRegistry registry = TextChangedEventHandlerRegistry.Instance;
+            registry.Register("forceValue", new ForceTextChangedEventHandler());
+            registry.Register("alternativeState", new AlternativeStateTextChangedEventHandler());
+        }
 
         private void Application_TextChangedEvent(Shape shape)
         {
-            if (shape.Document.Template.Contains(TemplateName) && ForceValueComponent.IsForceValue(shape.Name))
+            if (shape.Document.Template.Contains(TemplateName) && shape.CellExistsU["User.rationallyType", 0] != 0)
             {
-
-                ForcesContainer forcesContainer = (ForcesContainer)View.Children.First(c => c is ForcesContainer);
-
-                ForceValueComponent forceValue = (ForceValueComponent)View.GetComponentByShape(shape);
-                new RepaintHandler(forceValue); //repaint the force value, for coloring
-                ForceTotalsRow forceTotalsRow = forcesContainer.Children.First(c => c is ForceTotalsRow) as ForceTotalsRow;
-                if (forceTotalsRow != null) new RepaintHandler(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).FirstOrDefault(c => c.AlternativeTimelessId == forceValue.AlternativeTimelessId));
-
-            }else if (shape.Document.Template.Contains(TemplateName) && AlternativeStateComponent.IsAlternativeState(shape.Name))
-            {
-                AlternativeStateComponent alternativeState = (AlternativeStateComponent)View.GetComponentByShape(shape);
-                int index = alternativeState.AlternativeIndex;
-                Model.Alternatives[index].Status = alternativeState.Text;
+                string rationallyType = shape.CellsU["User.rationallyType"].ResultStr["Value"];
+                TextChangedEventHandlerRegistry.Instance.HandleEvent(rationallyType, View, shape);
             }
         }
 

@@ -3,9 +3,9 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
-    internal abstract class MarkerEventHandler
+    internal interface IMarkerEventHandler
     {
-        public abstract void Execute(RModel model, Shape changedShape, string identifier);
+        void Execute(RModel model, Shape changedShape, string identifier);
 
     }
 }

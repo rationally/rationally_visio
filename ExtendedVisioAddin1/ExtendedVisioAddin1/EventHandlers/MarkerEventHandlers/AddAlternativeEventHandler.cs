@@ -4,9 +4,9 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
-    internal class AddAlternativeEventHandler : MarkerEventHandler
+    internal class AddAlternativeEventHandler : IMarkerEventHandler
     {
-        public override void Execute(RModel model, Shape s, string context)
+        public void Execute(RModel model, Shape s, string context)
         {
             if (model.Alternatives.Count >= 3)
             {

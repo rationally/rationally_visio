@@ -7,9 +7,9 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
-    internal class MarkerDeleteAlternativeEventHandler : MarkerEventHandler
+    internal class MarkerDeleteAlternativeEventHandler : IMarkerEventHandler
     {
-        public override void Execute(RModel model, Shape s, string context)
+        public void Execute(RModel model, Shape s, string context)
         {
             
             RComponent component = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };

@@ -6,9 +6,9 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
-    internal class MoveDownDocumentHandler : MarkerEventHandler
+    internal class MoveDownDocumentHandler : IMarkerEventHandler
     {
-        public override void Execute(RModel model, Shape changedShape, string identifier)
+        public void Execute(RModel model, Shape changedShape, string identifier)
         {
             RelatedDocumentsContainer docsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
 

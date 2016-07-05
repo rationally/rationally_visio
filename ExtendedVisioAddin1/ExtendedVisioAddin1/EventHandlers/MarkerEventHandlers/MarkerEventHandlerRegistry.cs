@@ -8,20 +8,20 @@ namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
     class MarkerEventHandlerRegistry
     {
         private static MarkerEventHandlerRegistry eventHandlerRegistry;
-        public Dictionary<string, List<MarkerEventHandler>> Registry; 
+        public Dictionary<string, List<IMarkerEventHandler>> Registry; 
 
         private MarkerEventHandlerRegistry()
         {
-            Registry = new Dictionary<string, List<MarkerEventHandler>>();
+            Registry = new Dictionary<string, List<IMarkerEventHandler>>();
         }
 
         public static MarkerEventHandlerRegistry Instance => eventHandlerRegistry ?? (eventHandlerRegistry = new MarkerEventHandlerRegistry());
 
-        public void Register(string eventKey, MarkerEventHandler eventHandler)
+        public void Register(string eventKey, IMarkerEventHandler eventHandler)
         {
             if (!eventHandlerRegistry.Registry.ContainsKey(eventKey))
             {
-                eventHandlerRegistry.Registry[eventKey] = new List<MarkerEventHandler>();
+                eventHandlerRegistry.Registry[eventKey] = new List<IMarkerEventHandler>();
             }
             eventHandlerRegistry.Registry[eventKey].Add(eventHandler);
         }

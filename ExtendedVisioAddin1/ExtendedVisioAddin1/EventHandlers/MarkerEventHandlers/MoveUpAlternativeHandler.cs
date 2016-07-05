@@ -7,9 +7,9 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
-    internal class MoveUpAlternativeHandler : MarkerEventHandler
+    internal class MoveUpAlternativeHandler : IMarkerEventHandler
     {
-        public override void Execute(RModel model, Shape changedShape, string identifier)
+        public void Execute(RModel model, Shape changedShape, string identifier)
         {
             //locate the alternative(component) to move
             RComponent toChangeComponent = Globals.ThisAddIn.View.GetComponentByShape(changedShape);

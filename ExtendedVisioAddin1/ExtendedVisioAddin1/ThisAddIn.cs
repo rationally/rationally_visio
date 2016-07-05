@@ -173,6 +173,11 @@ namespace ExtendedVisioAddin1
                 ForceTotalsRow forceTotalsRow = forcesContainer.Children.First(c => c is ForceTotalsRow) as ForceTotalsRow;
                 if (forceTotalsRow != null) new RepaintHandler(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).FirstOrDefault(c => c.AlternativeTimelessId == forceValue.AlternativeTimelessId));
 
+            }else if (shape.Document.Template.ToLower().Contains("rationally") && AlternativeStateComponent.IsAlternativeState(shape.Name))
+            {
+                AlternativeStateComponent alternativeState = (AlternativeStateComponent)View.GetComponentByShape(shape);
+                int index = alternativeState.AlternativeIndex;
+                Model.Alternatives[index].Status = alternativeState.Text;
             }
         }
 

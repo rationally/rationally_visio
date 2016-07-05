@@ -22,14 +22,14 @@ namespace ExtendedVisioAddin1.View.Alternatives
             AlternativeIndex = alternativeIndex;
 
             Name = "AlternativeState";
-            //Events
-            SetStateMenu(state);
+            
             //Update text, and the background accordingly
             RShape.Text = state;
             UpdateBackgroundByState(state);
 
             AddAction("addAlternative", "QUEUEMARKEREVENT(\"add\")", "\"Add alternative\"", false);
             AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this alternative\"", false);
+            SetStateMenu(state);
 
             //locks
             /*this.LockDelete = true;
@@ -89,7 +89,6 @@ namespace ExtendedVisioAddin1.View.Alternatives
         public void SetAlternativeState(string newState)
         {
             Text = newState;
-            Globals.ThisAddIn.Model.Alternatives[AlternativeIndex].Status = newState;
             SetStateMenu(newState);
         }
 

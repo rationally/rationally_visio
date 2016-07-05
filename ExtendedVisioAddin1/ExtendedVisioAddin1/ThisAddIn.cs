@@ -56,6 +56,11 @@ namespace ExtendedVisioAddin1
             registry.Register("forceContainer",new DeleteForceEventHandler());
             registry.Register("relatedDocumentContainer", new DeleteRelatedDocumentEventHandler());
             registry.Register("alternative", new DeleteAlternativeEventHandler());
+            registry.Register("relatedUrlUrl", new DeletedRelatedUrlUrlEventHandler());
+            registry.Register("informationBox", new DeleteInformationBoxEventHandler());
+            registry.Register("relatedDocuments", new DeleteRelatedDocumentsEventHandler());
+            registry.Register("forces", new DeleteForcesEventHandler());
+            registry.Register("alternatives", new DeleteAlternativesEventHandler());
         }
 
         private static void RegisterQueryDeleteEventHandlers()
@@ -318,7 +323,6 @@ namespace ExtendedVisioAddin1
 
                 }
             }
-
             return false;
         }
         private void Application_BeforePageDeleteEvent(Page p)
@@ -334,14 +338,12 @@ namespace ExtendedVisioAddin1
 
         private void Application_DeleteShapeEvent(Shape s)
         {
-
             if (s.Document.Template.Contains(TemplateName))
             {
                 if (s.CellExistsU["User.isStub", 0] != 0)
                 {
                     return;
                 }
-
                 if (s.CellExistsU["User.rationallyType", 0] != 0)
                 {
                     string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
@@ -352,55 +354,7 @@ namespace ExtendedVisioAddin1
                     {
                         deleted.Deleted = true;
                     }
-
-                    RelatedDocumentsContainer relatedDocumentsContainer = View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer;
-                    switch (rationallyType)
-                    {
-                        case "relatedDocumentContainer":
-                            DeleteEventHandlerRegistry.Instance.HandleEvent("relatedDocumentContainer", Model, s);
-                            break;
-                        case "relatedUrlUrl":
-                            if (relatedDocumentsContainer != null)
-                            {
-                                foreach (RelatedDocumentContainer relatedDocumentContainer in relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().ToList())
-                                {
-                                    relatedDocumentContainer.Children.RemoveAll(c => c.RShape.Equals(s)); //Remove the component from the tree
-                                }
-                            }
-                            break;
-                        case "alternative":
-                            DeleteEventHandlerRegistry.Instance.HandleEvent("alternative", Model, s);
-                            break;
-                        case "alternatives":
-                            View.Children.RemoveAll(obj => obj.RShape.Equals(s));
-                            if (!View.Children.Any(x => x is AlternativesContainer))
-                            {
-                                Model.Alternatives.Clear(); 
-                                new RepaintHandler();
-                            }
-                            break;
-                        case "forces":
-                            View.Children.RemoveAll(obj => obj.RShape.Equals(s));
-                            if (!View.Children.Any(x => x is ForcesContainer))
-                            {
-                                Model.Forces.Clear();
-                            }
-                            break;
-                        case "relatedDocuments":
-                            View.Children.RemoveAll(obj => obj.RShape.Equals(s));
-                            if (!View.Children.Any(x => x is RelatedDocumentsContainer))
-                            {
-                                Model.Documents.Clear();
-                            }
-                            break;
-                        case "informationBox":
-                            View.Children.RemoveAll(obj => obj.RShape.Equals(s));
-                            break;
-                        case "forceContainer":
-                            DeleteEventHandlerRegistry.Instance.HandleEvent("forceContainer", Model, s);
-                            break;
-                    }
-                    
+                    DeleteEventHandlerRegistry.Instance.HandleEvent(rationallyType, Model, s);
                 }
                 else
                 {

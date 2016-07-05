@@ -109,6 +109,11 @@
     <Compile Include="AddAlternative.Designer.cs">
       <DependentUpon>AddAlternative.cs</DependentUpon>
     </Compile>
+    <Compile Include="EventHandlers\DeleteEventHandlers\DeleteAlternativesEventHandler.cs" />
+    <Compile Include="EventHandlers\DeleteEventHandlers\DeletedRelatedUrlUrlEventHandler.cs" />
+    <Compile Include="EventHandlers\DeleteEventHandlers\DeleteForcesEventHandler.cs" />
+    <Compile Include="EventHandlers\DeleteEventHandlers\DeleteInformationBoxEventHandler.cs" />
+    <Compile Include="EventHandlers\DeleteEventHandlers\DeleteRelatedDocumentsEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\AddForceHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\AddRelatedUrlHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\AddRelatedDocumentHandler.cs" />

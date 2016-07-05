@@ -5,7 +5,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Alternatives
 {
-    internal class AlternativeStateComponent : RComponent, IAlternativeComponent
+    internal sealed class AlternativeStateComponent : RComponent, IAlternativeComponent
     {
         private static readonly Regex StateRegex = new Regex(@"AlternativeState(\.\d+)?$");
         public AlternativeStateComponent(Page page, Shape alternativeComponent) : base(page)
@@ -44,7 +44,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         public void UpdateBackgroundByState(string state)
         {
-            switch (state.ToLower())
+            switch (state.ToLower())  //Currently hardcoded, could be made user setting in the future
             {
                 case "accepted":
                     RShape.CellsU["FillForegnd"].Formula = "RGB(0,175,0)";
@@ -61,12 +61,15 @@ namespace ExtendedVisioAddin1.View.Alternatives
                 case "discarded":
                     RShape.CellsU["FillForegnd"].Formula = "RGB(155,155,155)";
                     break;
+                default:
+                    RShape.CellsU["FillForegnd"].Formula = "RGB(255,255,255)";
+                    break;
             }
         }
 
         public AlternativeStateComponent(Page page) : base(page)
         {
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\RationallyHidden.vssx";
+            string docPath = Globals.ThisAddIn.FolderPath + "RationallyHidden.vssx";
             Document rationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
             Master rectMaster = rationallyDocument.Masters["Alternative State"];
             RShape = page.Drop(rectMaster, 0, 0);
@@ -141,7 +144,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //undo's should not edit the shape again, visio handles that for us
             {
                 UpdateReorderFunctions();
             }

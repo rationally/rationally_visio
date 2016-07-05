@@ -2,7 +2,7 @@
 
 namespace ExtendedVisioAddin1.View.Forces
 {
-    class ForceStubContainer : RComponent
+    internal sealed class ForceStubContainer : RComponent
     {
         public override int ForceIndex
         {

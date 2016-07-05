@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
 {
-    internal class RelatedURLURLComponent : TextLabel
+    internal sealed class RelatedURLURLComponent : TextLabel
     {
         private static readonly Regex UrlUrlRegex = new Regex(@"RelatedUrlUrl(\.\d+)?$");
 
@@ -58,7 +58,7 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Visio does this for us
             {
                 UpdateReorderFunctions();
             }

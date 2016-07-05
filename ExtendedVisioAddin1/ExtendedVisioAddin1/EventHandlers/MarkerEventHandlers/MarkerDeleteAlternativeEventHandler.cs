@@ -36,7 +36,6 @@ namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
                 }
                 //initiate a delete handler with the container's shape
                 shapeToPass.Delete();
-                //DeleteEventHandlerRegistry.Instance.HandleEvent("alternative",model, shapeToPass);
             }
         }
     }

@@ -2,7 +2,7 @@
 
 namespace ExtendedVisioAddin1.View.Alternatives
 {
-    internal class AlternativeStubContainer : RComponent
+    internal sealed class AlternativeStubContainer : RComponent
     {
         public override int AlternativeIndex
         {

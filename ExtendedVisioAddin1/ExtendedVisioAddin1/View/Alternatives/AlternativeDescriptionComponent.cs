@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Alternatives
 {
-    internal class AlternativeDescriptionComponent : HeaderlessContainer, IAlternativeComponent
+    internal sealed class AlternativeDescriptionComponent : HeaderlessContainer, IAlternativeComponent
     {
         private static readonly Regex DescriptionRegex = new Regex(@"AlternativeDescription(\.\d+)?$");
         public AlternativeDescriptionComponent(Page page, Shape alternativeComponent) : base(page, false)
@@ -76,7 +76,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Visio already handles this for us and does not allow us to do it during an undo
             {
                 UpdateReorderFunctions();
             }

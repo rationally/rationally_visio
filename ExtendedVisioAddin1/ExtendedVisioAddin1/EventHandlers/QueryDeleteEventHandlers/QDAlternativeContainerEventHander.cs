@@ -4,9 +4,9 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers
 {
-    internal class QDAlternativeContainerEventHander : QueryDeleteEventHandler
+    internal class QDAlternativeContainerEventHander : IQueryDeleteEventHandler
     {
-        public override void Execute(string eventKey, RView view, Shape changedShape)
+        public void Execute(string eventKey, RView view, Shape changedShape)
         {
             RComponent comp = view.Children.Find(x => x is AlternativesContainer);
             if (comp is AlternativesContainer)

@@ -4,7 +4,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Alternatives
 {
-    internal class AlternativeContainer : HeaderlessContainer, IAlternativeComponent
+    internal sealed class AlternativeContainer : HeaderlessContainer, IAlternativeComponent
     {
         private static readonly Regex AlternativeRegex = new Regex(@"Alternative(\.\d+)?$");
         public AlternativeContainer(Page page, Shape alternative) : base(page, false)
@@ -99,9 +99,6 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         public AlternativeContainer(Page page, int alternativeIndex) : base(page)
         {
-
-           
-
             Name = "Alternative";
             AddUserRow("rationallyType");
             RationallyType = "alternative";
@@ -198,7 +195,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Visio takes care of this
             {
                 UpdateReorderFunctions();
             }

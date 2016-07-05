@@ -14,7 +14,7 @@ namespace ExtendedVisioAddin1.View
         public double MarginBottom { get; set; }
         public double MarginLeft { get; set; }
         public double MarginRight { get; set; }
-        
+
         public void SetMargin(double m)
         {
             MarginTop = m;
@@ -43,14 +43,8 @@ namespace ExtendedVisioAddin1.View
         //---
         public string Name
         {
-            get
-            {
-                return RShape.Name;
-            }
-            set
-            {
-                RShape.Name = value;
-            }
+            get { return RShape.Name; }
+            set { RShape.Name = value; }
         }
 
 
@@ -59,62 +53,32 @@ namespace ExtendedVisioAddin1.View
 
         public string RationallyType
         {
-            get
-            {
-                return RShape.CellsU["User.rationallyType"].ResultStr["Value"];
-            }
-            set
-            {
-                RShape.Cells["User.rationallyType.Value"].Formula = "\"" + value + "\"";
-            }
+            get { return RShape.CellsU["User.rationallyType"].ResultStr["Value"]; }
+            set { RShape.Cells["User.rationallyType.Value"].Formula = "\"" + value + "\""; }
         }
 
         public string IsStub
         {
-            get
-            {
-                return RShape.CellsU["User.isStub"].ResultStr["Value"];
-            }
-            set
-            {
-                RShape.Cells["User.isStub.Value"].Formula = "\"" + value + "\"";
-            }
+            get { return RShape.CellsU["User.isStub"].ResultStr["Value"]; }
+            set { RShape.Cells["User.isStub.Value"].Formula = "\"" + value + "\""; }
         }
 
         public virtual int AlternativeIndex
         {
-            get
-            {
-                return (int)RShape.CellsU["User.alternativeIndex"].ResultIU;
-            }
-            set
-            {
-                RShape.CellsU["User.alternativeIndex.Value"].ResultIU = value;
-            }
+            get { return (int)RShape.CellsU["User.alternativeIndex"].ResultIU; }
+            set { RShape.CellsU["User.alternativeIndex.Value"].ResultIU = value; }
         }
 
         public int TimelessId
         {
-            get
-            {
-                return (int)RShape.CellsU["User.timelessId"].ResultIU;
-            }
-            set
-            {
-                RShape.CellsU["User.timelessId.Value"].ResultIU = value;
-            }
+            get { return (int)RShape.CellsU["User.timelessId"].ResultIU; }
+            set { RShape.CellsU["User.timelessId.Value"].ResultIU = value; }
         }
 
         public int AlternativeTimelessId
         {
-            get
-            {
-                return (int)RShape.CellsU["User.alternativeTimelessId"].ResultIU;
-            }
-            set
-            {
-                RShape.CellsU["User.alternativeTimelessId.Value"].ResultIU = value;
-            }
+            get { return (int)RShape.CellsU["User.alternativeTimelessId"].ResultIU; }
+            set { RShape.CellsU["User.alternativeTimelessId.Value"].ResultIU = value; }
         }
 
         public string AlternativeIdentifier
@@ -125,82 +89,37 @@ namespace ExtendedVisioAddin1.View
 
         public virtual int ForceIndex
         {
-            get
-            {
-                int toReturn = -1;
-                try
-                {
-                    toReturn = (int) RShape.CellsU["User.forceIndex"].ResultIU;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("\n\n\nFORCEINDEX READ|\n\n\n" + e.StackTrace);
-                }
-                return toReturn;
-            }
-            set
-            {
-                RShape.CellsU["User.forceIndex.Value"].ResultIU = value;
-            }
+            get { return (int)RShape.CellsU["User.forceIndex"].ResultIU; }
+            set { RShape.CellsU["User.forceIndex.Value"].ResultIU = value; }
         }
 
         public virtual int DocumentIndex
         {
-            get
-            {
-                return (int)RShape.CellsU["User.documentIndex"].ResultIU;
-            }
-            set
-            {
-                RShape.CellsU["User.documentIndex.Value"].ResultIU = value;
-            }
+            get { return (int)RShape.CellsU["User.documentIndex"].ResultIU; }
+            set { RShape.CellsU["User.documentIndex.Value"].ResultIU = value; }
         }
 
         public double Width
         {
-            get
-            {
-                return RShape.CellsU["Width"].ResultIU;
-            }
-            set
-            {
-                RShape.CellsU["Width"].ResultIU = value;
-            }
+            get { return RShape.CellsU["Width"].ResultIU; }
+            set { RShape.CellsU["Width"].ResultIU = value; }
         }
 
         public double Height
         {
-            get
-            {
-                return RShape.CellsU["Height"].ResultIU;
-            }
-            set
-            {
-                RShape.CellsU["Height"].ResultIU = value;
-            }
+            get { return RShape.CellsU["Height"].ResultIU; }
+            set { RShape.CellsU["Height"].ResultIU = value; }
         }
         public double CenterX
         {
-            get
-            {
-                return RShape.CellsU["pinX"].Result[VisUnitCodes.visInches];
-            }
-            set
-            {
-                RShape.CellsU["pinX"].Result[VisUnitCodes.visInches] = value;
-            }
+            get { return RShape.CellsU["pinX"].Result[VisUnitCodes.visInches]; }
+            set { RShape.CellsU["pinX"].Result[VisUnitCodes.visInches] = value; }
         }
 
         public double CenterY
         {
-            get
-            {
-                return RShape.CellsU["pinY"].Result[VisUnitCodes.visInches];
-            }
-            set
-            {
-                RShape.CellsU["pinY"].Result[VisUnitCodes.visInches] = value;
-            }
+            get { return RShape.CellsU["pinY"].Result[VisUnitCodes.visInches]; }
+            set { RShape.CellsU["pinY"].Result[VisUnitCodes.visInches] = value; }
         }
 
         public void AddAction(string fieldName, string action, string name, bool flyout)
@@ -226,95 +145,63 @@ namespace ExtendedVisioAddin1.View
         }
 
         //content related
-        public string Text { get { return RShape.Text; } set { RShape.Text = value; } }
+        public string Text
+        {
+            get { return RShape.Text; }
+            set { RShape.Text = value; }
+        }
 
         //lock related msvSDContainerLocked
 
         public bool LockWidth
         {
-            get
-            {
-                return RShape.CellsU["LockWidth"].ResultIU > 0;
-            }
-
+            get { return RShape.CellsU["LockWidth"].ResultIU > 0; }
             set { RShape.CellsU["LockWidth"].ResultIU = (value ? 1 : 0); }
         }
         public bool LockHeight
         {
-            get
-            {
-                return RShape.CellsU["LockHeight"].ResultIU > 0;
-            }
-
+            get { return RShape.CellsU["LockHeight"].ResultIU > 0; }
             set { RShape.CellsU["LockHeight"].ResultIU = (value ? 1 : 0); }
         }
 
         public bool LockMoveX
         {
-            get
-            {
-                return RShape.CellsU["LockMoveX"].ResultIU > 0;
-            }
-
+            get { return RShape.CellsU["LockMoveX"].ResultIU > 0; }
             set { RShape.CellsU["LockMoveX"].ResultIU = (value ? 1 : 0); }
         }
         public bool LockMoveY
         {
-            get
-            {
-                return RShape.CellsU["LockMoveY"].ResultIU > 0;
-            }
-
+            get { return RShape.CellsU["LockMoveY"].ResultIU > 0; }
             set { RShape.CellsU["LockMoveY"].ResultIU = (value ? 1 : 0); }
         }
 
         public bool LockRotate
         {
-            get
-            {
-                return RShape.CellsU["LockRotate"].ResultIU > 0;
-            }
-
+            get { return RShape.CellsU["LockRotate"].ResultIU > 0; }
             set { RShape.CellsU["LockRotate"].ResultIU = (value ? 1 : 0); }
         }
 
         public int ShadowPattern
         {
-            get
-            {
-                return int.Parse(RShape.CellsU["ShdwPattern"].ResultIU.ToString(CultureInfo.CurrentCulture));
-            }
-
+            get { return int.Parse(RShape.CellsU["ShdwPattern"].ResultIU.ToString(CultureInfo.CurrentCulture)); }
             set { RShape.CellsU["ShdwPattern"].ResultIU = value; }
         }
 
         public bool LockDelete
         {
-            get
-            {
-                return RShape.CellsU["LockDelete"].ResultIU > 0;
-            }
-
+            get { return RShape.CellsU["LockDelete"].ResultIU > 0; }
             set { RShape.CellsU["LockDelete"].ResultIU = (value ? 1 : 0); }
         }
 
         public bool LockTextEdit
         {
-            get
-            {
-                return RShape.CellsU["LockTextEdit"].ResultIU > 0;
-            }
-
+            get { return RShape.CellsU["LockTextEdit"].ResultIU > 0; }
             set { RShape.CellsU["LockTextEdit"].ResultIU = (value ? 1 : 0); }
         }
 
         public bool MsvSdContainerLocked
         {
-            get
-            {
-                return RShape.CellsU["User.msvSDContainerLocked"].ResultStr["Value"] == "TRUE";
-            }
-
+            get { return RShape.CellsU["User.msvSDContainerLocked"].ResultStr["Value"] == "TRUE"; }
             set { RShape.CellsU["User.msvSDContainerLocked"].Formula = (value ? "TRUE" : "FALSE"); }
         }
 
@@ -407,9 +294,9 @@ namespace ExtendedVisioAddin1.View
 
         //line format
 
-            /// <summary>
-            /// set this to 0 to remove the border of a container
-            /// </summary>
+        /// <summary>
+        /// set this to 0 to remove the border of a container
+        /// </summary>
         public double LinePattern
         {
             get { return RShape.CellsU["LinePattern"].ResultIU; }
@@ -420,9 +307,9 @@ namespace ExtendedVisioAddin1.View
         public string EventDblClick
         {
             get { return RShape.CellsU["EventDblClick"].ResultStr["Value"]; }
-            set { RShape.CellsU["EventDblClick"].Formula =  value; }
+            set { RShape.CellsU["EventDblClick"].Formula = value; }
         }
-        
+
         //background
         public string BackgroundColor
         {
@@ -454,7 +341,7 @@ namespace ExtendedVisioAddin1.View
 
         public virtual void PlaceChildren()
         {
-            
+
         }
 
         public virtual void RemoveChildren()
@@ -476,10 +363,9 @@ namespace ExtendedVisioAddin1.View
             if (RShape.ContainerProperties != null) //check if shape is a visio container
             {
                 Array ident = RShape.ContainerProperties.GetMemberShapes(0);
-                List<Shape> shapes = new List<int>((int[]) ident).Select(i => RShape.ContainingPage.Shapes.ItemFromID[i]).ToList();
-                foreach (Shape s in shapes)
+                List<Shape> shapes = new List<int>((int[])ident).Select(i => RShape.ContainingPage.Shapes.ItemFromID[i]).ToList();
+                foreach (RComponent asComponent in shapes.Select(s => new RComponent(RShape.ContainingPage) { RShape = s }))
                 {
-                    RComponent asComponent = new RComponent(RShape.ContainingPage) {RShape = s};
                     asComponent.CenterX += deltaX;
                     asComponent.CenterY += deltaY;
                 }
@@ -510,32 +396,9 @@ namespace ExtendedVisioAddin1.View
 
         public virtual void AddToTree(Shape s, bool allowAddOfSubpart)
         {
-            
-        }
 
-        /// <summary>
-        /// Deletes the RShape of the component, if it still exists.
-        /// </summary>
-        /// <param name="deleteChildShapes">Determines whether to delete the child shapes of RShape as well.</param>
-        public void DeleteShape(bool deleteChildShapes)
-        {
-            try
-            {
-                if (deleteChildShapes)
-                {
-                    RShape.DeleteEx(0);
-                }
-                else
-                {
-                    RShape.Delete();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Shape could not be deleted" + e.StackTrace);//what do we do here? It is not a problem if we come here...
-            }
         }
-
+        
         /// <summary>
         /// Traverses the component tree and looks for the component whose RShape matches s.
         /// </summary>
@@ -544,28 +407,6 @@ namespace ExtendedVisioAddin1.View
         public virtual RComponent GetComponentByShape(Shape s)
         {
             return RShape.Equals(s) ? this : null;
-        }
-
-        public void MakeListItem()
-        {
-            IndFirst = -0.25;
-            IndLeft = 0.25;
-            IndRight = 0;
-            SpLine = -1.2;
-            SpAfter = 0;
-            HAlign = 0;
-            Bullet = 1;
-            BulletString = "";
-            BulletFont = 0;
-            TextPosAfterBullet = 0;
-            BulletSize = -1;
-        }
-        
-
-        [Obsolete]
-        public virtual void CascadingDelete()
-        {
-            RShape.Delete();
         }
     }
 }

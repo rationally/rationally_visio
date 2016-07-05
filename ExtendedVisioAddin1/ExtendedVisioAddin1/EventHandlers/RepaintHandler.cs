@@ -7,9 +7,8 @@ namespace ExtendedVisioAddin1.EventHandlers
 
         public RepaintHandler()
         {
-            //Globals.ThisAddIn.View.Children.ForEach(c => c.RemoveChildren());
             Globals.ThisAddIn.View.Children.ForEach(c => c.Repaint());
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)//Shapes may not be updated during an undo or redo, so don't place the children ourselves
             {
                 Globals.ThisAddIn.View.Children.ForEach(c => c.PlaceChildren());
             }
@@ -19,9 +18,8 @@ namespace ExtendedVisioAddin1.EventHandlers
         {
             if (component != null)
             {
-                //component.RemoveChildren();
                 component.Repaint();
-                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Shapes may not be updated during an undo or redo, so don't place the children ourselves
                 {
                     component.PlaceChildren();
                 }

@@ -12,14 +12,14 @@ namespace ExtendedVisioAddin1.EventHandlers
         public DocumentCreatedEventHandler(IVDocument document, RModel model)
         {
             this.model = model;
-            if (document.Template.ToLower().Contains("rationally"))
+            if (document.Template.Contains(ThisAddIn.TemplateName))
             {
                 ShowSheetSetUpBox();
                 //draw the header
                 TextLabel header = new TextLabel(Globals.ThisAddIn.Application.ActivePage,model.DecisionName);
 
                 header.SetUsedSizingPolicy(SizingPolicy.FixedSize);
-                header.HAlign = 0;//left
+                header.HAlign = 0;//left, since the enum is wrong
                 header.Width = 10.5;
                 header.Height = 0.3056;
                 header.SetFontSize(22);

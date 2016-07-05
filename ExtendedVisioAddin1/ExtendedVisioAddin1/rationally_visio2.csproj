@@ -113,7 +113,7 @@
     <Compile Include="EventHandlers\MarkerEventHandlers\AddRelatedUrlHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\AddRelatedDocumentHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteAlternativeEventHandler.cs" />
-    <Compile Include="EventHandlers\DeleteEventHandlers\DeleteEventHandler.cs" />
+    <Compile Include="EventHandlers\DeleteEventHandlers\IDeleteEventHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteEventHandlerRegistry.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteForceEventHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteRelatedDocumentEventHandler.cs" />
@@ -132,7 +132,7 @@
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveUpAlternativeHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveUpDocumentHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveUpForceHandler.cs" />
-    <Compile Include="EventHandlers\QueryDeleteEventHandlers\QueryDeleteEventHandler.cs" />
+    <Compile Include="EventHandlers\QueryDeleteEventHandlers\IQueryDeleteEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDForceComponentEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDForceContainerEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\StartDeleteForceEventHandler.cs" />

@@ -7,7 +7,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
-    class MarkerDeleteRelatedDocumentEventHandler : IMarkerEventHandler
+    internal class MarkerDeleteRelatedDocumentEventHandler : IMarkerEventHandler
     {
         public void Execute(RModel model, Shape s, string identifier)
         {

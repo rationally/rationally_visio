@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
 {
-    internal class ForceDescriptionComponent : RComponent
+    internal sealed class ForceDescriptionComponent : RComponent
     {
         private static readonly Regex ForceDescriptionRegex = new Regex(@"ForceDescription(\.\d+)?$");
         public const string DefaultDescription = "<<description>>";
@@ -22,14 +22,9 @@ namespace ExtendedVisioAddin1.View.Forces
 
             AddUserRow("forceIndex");
             ForceIndex = forceIndex;
-
-
+            
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
-
-            Width = 2;
-            Height = 0.33;
-            Text = DefaultDescription;
             InitStyle();
         }
 
@@ -40,6 +35,9 @@ namespace ExtendedVisioAddin1.View.Forces
 
         private void InitStyle()
         {
+            Width = 2;
+            Height = 0.33;
+            Text = DefaultDescription;
             LineColor = "RGB(89,131,168)";
             BackgroundColor = "RGB(255,255,255)";
             FontColor = "RGB(89,131,168)";

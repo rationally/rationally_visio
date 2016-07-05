@@ -5,7 +5,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
-    class MarkerEventHandlerRegistry
+    internal class MarkerEventHandlerRegistry
     {
         private static MarkerEventHandlerRegistry eventHandlerRegistry;
         public Dictionary<string, List<IMarkerEventHandler>> Registry; 

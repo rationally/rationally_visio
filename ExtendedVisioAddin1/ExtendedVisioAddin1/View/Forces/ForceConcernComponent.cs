@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
 {
-    internal class ForceConcernComponent : RComponent
+    internal sealed class ForceConcernComponent : RComponent
     {
         private static readonly Regex ForceConcernRegex = new Regex(@"ForceConcern(\.\d+)?$");
         public const string DefaultConcern = "<<concern>>";
@@ -28,9 +28,7 @@ namespace ExtendedVisioAddin1.View.Forces
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
 
-            Width = 1;
-            Height = 0.33;
-            Text = DefaultConcern;
+            
             InitStyle();
         }
 
@@ -41,6 +39,9 @@ namespace ExtendedVisioAddin1.View.Forces
 
         private void InitStyle()
         {
+            Width = 1;
+            Height = 0.33;
+            Text = DefaultConcern;
             LineColor = "RGB(89,131,168)";
             BackgroundColor = "RGB(255,255,255)";
             FontColor = "RGB(89,131,168)";
@@ -66,7 +67,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Visio does this for us
             {
                 UpdateReorderFunctions();
             }

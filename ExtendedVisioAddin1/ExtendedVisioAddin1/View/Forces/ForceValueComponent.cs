@@ -5,7 +5,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
 {
-    internal class ForceValueComponent : RComponent
+    internal sealed class ForceValueComponent : RComponent
     {
         private static readonly Regex ForceValueRegex = new Regex(@"ForceValue(\.\d+)?$");
         
@@ -30,14 +30,16 @@ namespace ExtendedVisioAddin1.View.Forces
 
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
+            AlternativeTimelessId = alternativeTimelessId;
+        }
 
+        private void InitStyle()
+        {
             Width = 1.0 / 2.54;
             Height = 0.33;
             Text = "0";
             ToggleBoldFont(true);
             LineColor = "RGB(89,131,168)";
-
-            AlternativeTimelessId = alternativeTimelessId;
         }
 
         public ForceValueComponent(Page page, Shape shape) : base(page)
@@ -74,7 +76,7 @@ namespace ExtendedVisioAddin1.View.Forces
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
             {
                 UpdateAlternativeLabels();
                 UpdateReorderFunctions();

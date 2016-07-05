@@ -23,12 +23,16 @@ namespace ExtendedVisioAddin1
         public int StartedUndoState;
         public string LastDelete = "";
 
+        public readonly string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
+
+        public const string TemplateName = "Rationally Template";
+
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             Model = new RModel();
             View = new RView(Application.ActivePage);
             Application.MarkerEvent += Application_MarkerEvent;
-            Application.TemplatePaths = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
+            Application.TemplatePaths = FolderPath;
             Application.DocumentCreated += DelegateCreateDocumentEvent;
             Application.ShapeAdded += Application_ShapeAddedEvent;
             Application.QueryCancelSelectionDelete += Application_QueryCancelSelectionDelete;
@@ -163,7 +167,7 @@ namespace ExtendedVisioAddin1
 
         private void Application_TextChangedEvent(Shape shape)
         {
-            if (shape.Document.Template.ToLower().Contains("rationally") && ForceValueComponent.IsForceValue(shape.Name))
+            if (shape.Document.Template.Contains(TemplateName) && ForceValueComponent.IsForceValue(shape.Name))
             {
 
                 ForcesContainer forcesContainer = (ForcesContainer)View.Children.First(c => c is ForcesContainer);
@@ -173,7 +177,7 @@ namespace ExtendedVisioAddin1
                 ForceTotalsRow forceTotalsRow = forcesContainer.Children.First(c => c is ForceTotalsRow) as ForceTotalsRow;
                 if (forceTotalsRow != null) new RepaintHandler(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).FirstOrDefault(c => c.AlternativeTimelessId == forceValue.AlternativeTimelessId));
 
-            }else if (shape.Document.Template.ToLower().Contains("rationally") && AlternativeStateComponent.IsAlternativeState(shape.Name))
+            }else if (shape.Document.Template.Contains(TemplateName) && AlternativeStateComponent.IsAlternativeState(shape.Name))
             {
                 AlternativeStateComponent alternativeState = (AlternativeStateComponent)View.GetComponentByShape(shape);
                 int index = alternativeState.AlternativeIndex;
@@ -183,7 +187,7 @@ namespace ExtendedVisioAddin1
 
         private void Application_WindowActivatedEvent(Window w)
         {
-            if (w.Type == 1 && w.Document.Template.ToLower().Contains("rationally"))
+            if (w.Type == 1 && w.Document.Template.Contains(TemplateName))
             {
                 View.Page = Application.ActivePage;
                 RebuildTree(w.Document);
@@ -192,12 +196,8 @@ namespace ExtendedVisioAddin1
 
         private void Application_MarkerEvent(Application application, int sequence, string context)
         {
-            if (application.ActiveDocument.Template.ToLower().Contains("rationally"))
+            if (application.ActiveDocument.Template.Contains(TemplateName))
             {
-                if (context == "afterundo")
-                {
-                    MarkerEventHandlerRegistry.Instance.HandleEvent("afterundo", Model, null, "");
-                }
                 Selection selection = Application.ActiveWindow.Selection; //event must originate from selected element
                 
                 //for (int i = 0; i < selection.Count; i++) 
@@ -221,7 +221,7 @@ namespace ExtendedVisioAddin1
         private void Application_CellChangedEvent(Cell cell)
         {
             Shape changedShape = cell.Shape;
-            if (changedShape == null || !changedShape.Document.Template.ToLower().Contains("rationally") || changedShape.CellExistsU["User.rationallyType", 0] == 0)
+            if (changedShape == null || !changedShape.Document.Template.Contains(TemplateName) || changedShape.CellExistsU["User.rationallyType", 0] == 0)
             {
                 return;
             }
@@ -299,7 +299,7 @@ namespace ExtendedVisioAddin1
             List<Shape> toBeDeleted = e.Cast<Shape>().ToList();
 
             //store the rationally type of the last shape, which is responsible for ending the undo scope
-            if (String.IsNullOrEmpty(LastDelete) && StartedUndoState == 0)
+            if (string.IsNullOrEmpty(LastDelete) && StartedUndoState == 0)
             {
                 LastDelete = toBeDeleted.Last().Name;
                 Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("Delete shape");
@@ -323,7 +323,7 @@ namespace ExtendedVisioAddin1
         }
         private void Application_BeforePageDeleteEvent(Page p)
         {
-            if (p.Document.Template.ToLower().Contains("rationally"))
+            if (p.Document.Template.Contains(TemplateName))
             {
                 foreach (Shape shape in p.Shapes)
                 {
@@ -335,7 +335,7 @@ namespace ExtendedVisioAddin1
         private void Application_DeleteShapeEvent(Shape s)
         {
 
-            if (s.Document.Template.ToLower().Contains("rationally"))
+            if (s.Document.Template.Contains(TemplateName))
             {
                 if (s.CellExistsU["User.isStub", 0] != 0)
                 {
@@ -418,21 +418,15 @@ namespace ExtendedVisioAddin1
             }
         }
 
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
+        //Designer method. Called when application is started.
         private void InternalStartup()
         {
             Startup += ThisAddIn_Startup;
-            //Shutdown += ThisAddIn_Shutdown;
         }
-
-        //#region Event delegaters
+        
         private void DelegateCreateDocumentEvent(IVDocument d)
         {
-            if (d.Template.ToLower().Contains("rationally"))
+            if (d.Template.Contains(TemplateName))
             {
                 new DocumentCreatedEventHandler(d, Model);
             }

@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Alternatives
 {
-    internal class AlternativeTitleComponent : TextLabel, IAlternativeComponent
+    internal sealed class AlternativeTitleComponent : TextLabel, IAlternativeComponent
     {
         private static readonly Regex TitleRegex = new Regex(@"AlternativeTitle(\.\d+)?$");
         public AlternativeTitleComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)

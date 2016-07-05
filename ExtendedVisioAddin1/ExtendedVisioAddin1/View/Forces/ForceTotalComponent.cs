@@ -6,7 +6,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
 {
-    internal class ForceTotalComponent : RComponent
+    internal sealed class ForceTotalComponent : RComponent
     {
         private static readonly Regex ForceTotalComponentRegex = new Regex(@"ForceTotalComponent(\.\d+)?$");
         
@@ -29,7 +29,10 @@ namespace ExtendedVisioAddin1.View.Forces
             AddUserRow("rationallyType");
             RationallyType = "forceTotalComponent";
             Name = "ForceTotalComponent";
+        }
 
+        private void InitStyle()
+        {
             Width = 1.0 / 2.54;
             Height = 0.33;
             Text = "0";

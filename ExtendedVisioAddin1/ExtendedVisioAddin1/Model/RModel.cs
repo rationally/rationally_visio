@@ -28,7 +28,7 @@ namespace ExtendedVisioAddin1.Model
             Alternatives = new List<Alternative>();
             Documents = new List<RelatedDocument>();
             Forces = new List<Force>();
-            AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"};
+            AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"}; //Currently handcoded, could be user setting in future product.
         }
 
         public void RegenerateAlternativeIdentifiers()

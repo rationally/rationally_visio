@@ -5,7 +5,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
 {
-    internal class RelatedUrlComponent : RComponent
+    internal sealed class RelatedUrlComponent : RComponent
     {
         private static readonly Regex RelatedRegex = new Regex(@"RelatedUrl(\.\d+)?$");
         public RelatedUrlComponent(Page page, Shape urlShape) : base(page)
@@ -16,7 +16,7 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public RelatedUrlComponent(Page page, int index, string url) : base(page)
         {
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\RationallyHidden.vssx";
+            string docPath = Globals.ThisAddIn.FolderPath + "RationallyHidden.vssx";
             Document rationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
             Master rectMaster = rationallyDocument.Masters["LinkIcon"]; 
             RShape = page.Drop(rectMaster, 0, 0);
@@ -70,7 +70,7 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
             {
                 UpdateReorderFunctions();
             }

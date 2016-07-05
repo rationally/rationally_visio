@@ -3,8 +3,8 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
 {
-    abstract class DeleteEventHandler
+    internal interface IDeleteEventHandler
     {
-        public abstract void Execute(string eventKey, RModel model, Shape changedShape);
+        void Execute(string eventKey, RModel model, Shape changedShape);
     }
 }

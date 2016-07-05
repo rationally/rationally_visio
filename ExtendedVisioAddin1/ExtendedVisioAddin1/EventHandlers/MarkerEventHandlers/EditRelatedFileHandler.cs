@@ -7,7 +7,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 {
-    class EditRelatedFileHandler : IMarkerEventHandler
+    internal class EditRelatedFileHandler : IMarkerEventHandler
     {
 
         public void Execute(RModel model, Shape changedShape, string context)

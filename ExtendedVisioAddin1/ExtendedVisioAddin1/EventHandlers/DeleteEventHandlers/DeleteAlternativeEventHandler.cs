@@ -7,12 +7,12 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
 {
-    internal class DeleteAlternativeEventHandler : DeleteEventHandler
+    internal class DeleteAlternativeEventHandler : IDeleteEventHandler
     {
-        public override void Execute(string eventKey, RModel model, Shape changedShape)
+        public void Execute(string eventKey, RModel model, Shape changedShape)
         {
             //store the rationally type of the last shape, which is responsible for ending the undo scope
-            if (String.IsNullOrEmpty(Globals.ThisAddIn.LastDelete) && Globals.ThisAddIn.StartedUndoState == 0 && !Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (string.IsNullOrEmpty(Globals.ThisAddIn.LastDelete) && Globals.ThisAddIn.StartedUndoState == 0 && !Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
                 Globals.ThisAddIn.LastDelete = changedShape.Name;
                 Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("Delete alternative");

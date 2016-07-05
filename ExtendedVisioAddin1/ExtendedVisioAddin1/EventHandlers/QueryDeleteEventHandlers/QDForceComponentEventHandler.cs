@@ -5,20 +5,17 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers
 {
-    internal class QDForceComponentEventHandler : QueryDeleteEventHandler
+    internal class QDForceComponentEventHandler : IQueryDeleteEventHandler
     {
-        public override void Execute(string eventKey, RView view, Shape changedShape)
+        public void Execute(string eventKey, RView view, Shape changedShape)
         {
-            ForcesContainer forcesContainer = (ForcesContainer) view.Children.First(c => c is ForcesContainer);
+            ForcesContainer forcesContainer = (ForcesContainer)view.Children.First(c => c is ForcesContainer);
             foreach (ForceContainer forceContainer in forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList()) //find all candidate containers
             {
-                if (forceContainer.Children.Where(c => c.RShape.Equals(changedShape)).ToList().Count > 0)//find the right container of changedShape
+                if (forceContainer.Children.Where(c => c.RShape.Equals(changedShape)).ToList().Count > 0 && !forceContainer.Deleted)//find the right container of changedShape and the container was not part of the selection at the querycancel shapedelete event
                 {
-                    if (!forceContainer.Deleted) //the container was not part of the selection at the querycancel shapedelete event
-                    {
-                        forceContainer.Deleted = true;
-                        forceContainer.RShape.Delete();
-                    }
+                    forceContainer.Deleted = true;
+                    forceContainer.RShape.Delete();
                 }
             }
         }

@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
 {
-    internal class RelatedDocumentTitleComponent : TextLabel
+    internal sealed class RelatedDocumentTitleComponent : TextLabel
     {
         private static readonly Regex RelatedRegex = new Regex(@"Related Document Title(\.\d+)?$");
 
@@ -59,7 +59,7 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
             {
                 UpdateReorderFunctions();
             }

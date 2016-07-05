@@ -8,7 +8,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
 {
-    class ForceHeaderRow : HeaderlessContainer
+    internal class ForceHeaderRow : HeaderlessContainer
     {
         private static readonly Regex ForceHeaderRowRegex = new Regex(@"ForceHeaderRow(\.\d+)?$");
 

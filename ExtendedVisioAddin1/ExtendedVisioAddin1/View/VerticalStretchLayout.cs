@@ -42,16 +42,7 @@ namespace ExtendedVisioAddin1.View
             double drawY = y - (toDraw.Height/2.0) - toDraw.MarginTop;
             double deltaX = drawX - toDraw.CenterX;
             double deltaY = drawY - toDraw.CenterY;
-
-            //move the children of this container, and then the container itself
-            /*if (toDraw is RContainer)
-            {
-                foreach (RComponent c in ((RContainer)toDraw).Children)
-                {
-                    c.CenterX += deltaX;
-                    c.CenterY += deltaY;
-                }
-            }*/
+            
             if (toDraw is RContainer)
             {
                 foreach (RComponent c in ((RContainer)toDraw).Children)

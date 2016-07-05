@@ -25,16 +25,16 @@ namespace ExtendedVisioAddin1.View.Forces
             AddUserRow("rationallyType");
             RationallyType = "forceAlternativeHeaderComponent";
             Name = "ForceAlternativeHeaderComponent";
-
-            Width = 1.0 / 2.54;
-            Height = 0.33;
-            Text = "0";
-            ToggleBoldFont(true);
+            
             InitStyle();
         }
 
         private void InitStyle()
         {
+            Width = 1.0 / 2.54;
+            Height = 0.33;
+            Text = "0";
+            ToggleBoldFont(true);
             LineColor = "RGB(89,131,168)";
             BackgroundColor = "RGB(255,255,255)";
             FontColor = "RGB(89,131,168)";
@@ -63,16 +63,15 @@ namespace ExtendedVisioAddin1.View.Forces
             Alternative alternative = Globals.ThisAddIn.Model.Alternatives.First(a => a.TimelessId == AlternativeTimelessId);
 
             AlternativeIdentifier = alternative.Identifier;
-            //AlternativeIndex = Globals.ThisAddIn.Model.Alternatives.IndexOf(alternative);
         }
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Visio does this for us
             {
                 UpdateAlternativeLabels();
             }
-            if (Text != AlternativeIdentifier)
+            if (Text != AlternativeIdentifier) //Don't perform useless operations
             {
                 Text = AlternativeIdentifier;
             }

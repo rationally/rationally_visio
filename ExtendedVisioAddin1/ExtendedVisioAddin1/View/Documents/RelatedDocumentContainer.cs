@@ -7,7 +7,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
 {
-    internal class RelatedDocumentContainer : HeaderlessContainer
+    internal sealed class RelatedDocumentContainer : HeaderlessContainer
     {
         private static readonly Regex RelatedRegex = new Regex(@"Related Document(\.\d+)?$");
 
@@ -201,7 +201,7 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
             {
                 UpdateReorderFunctions();
             }

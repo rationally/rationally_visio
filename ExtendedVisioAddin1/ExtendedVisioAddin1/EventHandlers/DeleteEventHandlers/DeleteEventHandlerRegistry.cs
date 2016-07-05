@@ -5,23 +5,23 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
 {
-    class DeleteEventHandlerRegistry
+    internal class DeleteEventHandlerRegistry
     {
         private static DeleteEventHandlerRegistry eventHandlerRegistry;
-        public Dictionary<string, List<DeleteEventHandler>> Registry;
+        public Dictionary<string, List<IDeleteEventHandler>> Registry;
 
         private DeleteEventHandlerRegistry()
         {
-            Registry = new Dictionary<string, List<DeleteEventHandler>>();
+            Registry = new Dictionary<string, List<IDeleteEventHandler>>();
         }
 
         public static DeleteEventHandlerRegistry Instance => eventHandlerRegistry ?? (eventHandlerRegistry = new DeleteEventHandlerRegistry());
 
-        public void Register(string eventKey, DeleteEventHandler eventHandler)
+        public void Register(string eventKey, IDeleteEventHandler eventHandler)
         {
             if (!eventHandlerRegistry.Registry.ContainsKey(eventKey))
             {
-                eventHandlerRegistry.Registry[eventKey] = new List<DeleteEventHandler>();
+                eventHandlerRegistry.Registry[eventKey] = new List<IDeleteEventHandler>();
             }
             eventHandlerRegistry.Registry[eventKey].Add(eventHandler);
         }

@@ -2,7 +2,7 @@
 
 namespace ExtendedVisioAddin1.View.Documents
 {
-    class RelatedDocumentStubContainer : RComponent
+    internal sealed class RelatedDocumentStubContainer : RComponent
     {
 
         public override int DocumentIndex

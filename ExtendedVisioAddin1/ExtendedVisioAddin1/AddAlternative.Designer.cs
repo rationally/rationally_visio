@@ -97,7 +97,7 @@ namespace ExtendedVisioAddin1
             this.Controls.Add(this.alternativeName);
             this.Controls.Add(this.label1);
             this.Name = "AddAlternative";
-            this.Text = "AddAlternative";
+            this.Text = "Add alternative";
             this.ResumeLayout(false);
             this.PerformLayout();
 

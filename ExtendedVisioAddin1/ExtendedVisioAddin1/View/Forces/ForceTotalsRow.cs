@@ -8,7 +8,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
 {
-    class ForceTotalsRow : HeaderlessContainer
+    internal class ForceTotalsRow : HeaderlessContainer
     {
         private static readonly Regex ForceTotalsRowRegex = new Regex(@"ForceTotalsRow(\.\d+)?$");
 

@@ -3,8 +3,6 @@ using System.Drawing;
 using Microsoft.Office.Interop.Visio;
 using Font = System.Drawing.Font;
 
-//using Font = Microsoft.Office.Interop.Visio.Font;
-
 namespace ExtendedVisioAddin1.View
 {
     public class TextLabel : RComponent
@@ -26,14 +24,9 @@ namespace ExtendedVisioAddin1.View
 
         public TextLabel(Page page, string labelText) : base(page)
         {
-            //UsedSizingPolicy = 0 | SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded | SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
-            
-
             string text = labelText;
             characterHeight = 1.0/72.0*(double) size;
-
-            //characterWidth = characterHeight*0.45;
-            //contentTextWidth = characterWidth * (double)text.Length + 0.2;
+            
             contentTextWidth = GetWidthOfString(labelText)/ PixelsPerInch;
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
@@ -79,8 +72,7 @@ namespace ExtendedVisioAddin1.View
         {
             string text = RShape.Text.Replace("\n","");
             characterHeight = 1.0 / 72.0 * (double)size;
-
-            //contentTextWidth = characterWidth * (double)text.Length + 0.2;
+            
             contentTextWidth = GetWidthOfString(text) / PixelsPerInch;
             characterWidth = contentTextWidth/text.Length;
             //sizing
@@ -90,9 +82,7 @@ namespace ExtendedVisioAddin1.View
                 {
                     Width = contentTextWidth;
                 }
-
-
-                //int lineLength = (int)Math.Round(Width / characterWidth);
+                
                 int lineLength = (int)(Width/characterWidth);
                 string newContent = "";
                 if (!((UsedSizingPolicy & SizingPolicy.ExpandXIfNeeded) > 0) && text.Length > lineLength)

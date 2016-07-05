@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Alternatives
 {
-    internal class AlternativeIdentifierComponent : TextLabel, IAlternativeComponent
+    internal sealed class AlternativeIdentifierComponent : TextLabel, IAlternativeComponent
     {
         private static readonly Regex IdentRegex = new Regex(@"AlternativeIdent(\.\d+)?$");
         public AlternativeIdentifierComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
@@ -72,7 +72,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //No need to do this during an update, Visio handles this
             {
                 UpdateReorderFunctions();
             }

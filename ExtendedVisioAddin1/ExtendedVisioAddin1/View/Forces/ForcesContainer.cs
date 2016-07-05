@@ -6,7 +6,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
 {
-    class ForcesContainer : RContainer
+    internal class ForcesContainer : RContainer
     {
         private static readonly Regex ForcesRegex = new Regex(@"Evaluation(\.\d+)?$");
 

@@ -6,9 +6,9 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
 {
-    internal class DeleteForceEventHandler : DeleteEventHandler
+    internal class DeleteForceEventHandler : IDeleteEventHandler
     {
-        public override void Execute(string eventKey, RModel model, Shape changedShape)
+        public void Execute(string eventKey, RModel model, Shape changedShape)
         {
             //NOTE: this eventhandler is ment to be called while the changedShape is not completely deleted. Preferrable from ShapeDeleted eventhandler.
 

@@ -6,7 +6,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Documents
 {
-    class RelatedDocumentsContainer : RContainer
+    internal class RelatedDocumentsContainer : RContainer
     {
         private static readonly Regex RelatedRegex = new Regex(@"Related Documents(\.\d+)?$");
         

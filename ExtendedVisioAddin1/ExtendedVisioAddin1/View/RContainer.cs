@@ -19,7 +19,7 @@ namespace ExtendedVisioAddin1.View
         public override void Repaint()
         {
             Children.ForEach(c => c.Repaint());
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Visio handles this for us
             {
                 LayoutManager.Repaint();
             }
@@ -123,7 +123,8 @@ namespace ExtendedVisioAddin1.View
                     Children.Remove(c);
                     return true;
                 }
-                else if (c is RContainer)
+
+                if (c is RContainer)
                 {
                     RContainer container = c as RContainer;
                     if (container.DeleteFromTree(c)) return true;

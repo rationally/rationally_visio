@@ -8,7 +8,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.View.Forces
 {
-    internal class ForceContainer : HeaderlessContainer
+    internal sealed class ForceContainer : HeaderlessContainer
     {
         private static readonly Regex ForceContaineRegex = new Regex(@"ForceContainer(\.\d+)?$");
 
@@ -107,7 +107,7 @@ namespace ExtendedVisioAddin1.View.Forces
         [SuppressMessage("ReSharper", "SimplifyLinqExpression")]
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Visio does this for us
             {
                 UpdateReorderFunctions();
             }

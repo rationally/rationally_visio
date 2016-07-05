@@ -33,10 +33,12 @@ namespace ExtendedVisioAddin1.Model
 
         public void RegenerateAlternativeIdentifiers()
         {
-            int i = 0;
-            AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
-            alternativesContainer.Children.Where(c => c is AlternativeContainer).ToList().ForEach(c => ((AlternativeContainer)c).SetAlternativeIdentifier(i++));
-
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            {
+                int i = 0;
+                AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
+                alternativesContainer.Children.Where(c => c is AlternativeContainer).ToList().ForEach(c => ((AlternativeContainer) c).SetAlternativeIdentifier(i++));
+            }
             int j = 0;
             foreach (Alternative a in Alternatives)
             {

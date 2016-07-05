@@ -8,6 +8,7 @@ namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
     {
         public void Execute(RModel model, Shape s, string context)
         {
+            model.RegenerateAlternativeIdentifiers();
             if (model.Alternatives.Count >= 3)
             {
                 AddAlternativeWithWarning alternative = new AddAlternativeWithWarning(model);

@@ -254,7 +254,8 @@ namespace ExtendedVisioAddin1
                 RComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
                 if (alternativesComponent != null)
                 {
-                    Model.RegenerateAlternativeIdentifiers();
+                    var x= 0;
+                    //Model.RegenerateAlternativeIdentifiers();
                     /*  Model.Alternatives.Clear();
                       View.Children.Remove(alternativesComponent);
                       Shape temp = alternativesComponent.RShape;

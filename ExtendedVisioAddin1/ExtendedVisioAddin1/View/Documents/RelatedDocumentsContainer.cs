@@ -69,11 +69,11 @@ namespace ExtendedVisioAddin1.View.Documents
         {
             //MakeListItem();
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            /*if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
-            }
+            }*/
         }
 
         public static bool IsRelatedDocumentsContainer(string name)

@@ -198,6 +198,12 @@ namespace ExtendedVisioAddin1
 
         private void Application_MarkerEvent(Application application, int sequence, string context)
         {
+            if (context == "String")
+            {
+               // Model.RegenerateAlternativeIdentifiers();
+                RebuildTree(application.ActiveDocument);
+                return;
+            }
             if (application.ActiveDocument.Template.Contains(TemplateName))
             {
                 Selection selection = Application.ActiveWindow.Selection; //event must originate from selected element
@@ -254,12 +260,12 @@ namespace ExtendedVisioAddin1
                 RComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
                 if (alternativesComponent != null)
                 {
-                    var x= 0;
+                    Application.QueueMarkerEvent("String");
+                    //var x= 0;
+
                     //Model.RegenerateAlternativeIdentifiers();
-                    /*  Model.Alternatives.Clear();
-                      View.Children.Remove(alternativesComponent);
-                      Shape temp = alternativesComponent.RShape;
-                      View.Children.Add(new AlternativesContainer(temp.ContainingPage, temp));*/
+
+                    //View.Children.Add(new AlternativesContainer(temp.ContainingPage, temp));*/
                 }
             }
             else if (Application.IsUndoingOrRedoing && RelatedDocumentContainer.IsRelatedDocumentContainer(changedShape.Name) && cell.LocalName.Equals("User.documentIndex"))

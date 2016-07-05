@@ -251,13 +251,14 @@ namespace ExtendedVisioAddin1
             }
             else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals("User.alternativeIndex"))
             {
-                RComponent alternativeComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
-                if (alternativeComponent != null)
+                RComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
+                if (alternativesComponent != null)
                 {
-                    Model.Alternatives.Clear();
-                    View.Children.Remove(alternativeComponent);
-                    Shape temp = alternativeComponent.RShape;
-                    View.Children.Add(new AlternativesContainer(temp.ContainingPage, temp));
+                    Model.RegenerateAlternativeIdentifiers();
+                    /*  Model.Alternatives.Clear();
+                      View.Children.Remove(alternativesComponent);
+                      Shape temp = alternativesComponent.RShape;
+                      View.Children.Add(new AlternativesContainer(temp.ContainingPage, temp));*/
                 }
             }
             else if (Application.IsUndoingOrRedoing && RelatedDocumentContainer.IsRelatedDocumentContainer(changedShape.Name) && cell.LocalName.Equals("User.documentIndex"))
@@ -273,7 +274,7 @@ namespace ExtendedVisioAddin1
             }
         }
 
-        private void RebuildTree(IVDocument d)
+        public void RebuildTree(IVDocument d)
         {
             View.Children.Clear();
             Model.Alternatives.Clear();

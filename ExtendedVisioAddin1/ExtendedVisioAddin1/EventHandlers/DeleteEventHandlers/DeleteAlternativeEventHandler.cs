@@ -37,7 +37,7 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                 int index = containerToDelete.AlternativeIndex;
                 //if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                 //{
-                model.Alternatives.RemoveAll(a => a.TimelessId == containerToDelete.AlternativeTimelessId);
+                model.Alternatives.RemoveAll(a => a.TimelessId == containerToDelete.TimelessId);
                 //}
 
                 //update view tree
@@ -48,7 +48,7 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                     model.RegenerateAlternativeIdentifiers();
                     alternativesContainer.MsvSdContainerLocked = true;
                 }
-
+                
                 new RepaintHandler();//requires forces to repaint as well!
             }
         }

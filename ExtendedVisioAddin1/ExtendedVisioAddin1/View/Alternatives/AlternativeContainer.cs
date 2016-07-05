@@ -199,6 +199,8 @@ namespace ExtendedVisioAddin1.View.Alternatives
             {
                 UpdateReorderFunctions();
             }
+            if (Children.Count == 4)
+            {
                 if (!(Children[0] is AlternativeIdentifierComponent))
                 {
                     RComponent c = Children.Find(x => x is AlternativeIdentifierComponent);
@@ -217,6 +219,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
                     Children.Remove(c);
                     Children.Insert(2, c);
                 }
+            }
             base.Repaint();
         }
     }

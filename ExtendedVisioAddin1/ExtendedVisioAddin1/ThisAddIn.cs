@@ -23,6 +23,7 @@ namespace ExtendedVisioAddin1
 
         public int StartedUndoState;
         public string LastDelete = "";
+        public bool rebuildTree;
 
         public readonly string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
 
@@ -32,6 +33,7 @@ namespace ExtendedVisioAddin1
         {
             Model = new RModel();
             View = new RView(Application.ActivePage);
+            rebuildTree = false;
             Application.MarkerEvent += Application_MarkerEvent;
             Application.TemplatePaths = FolderPath;
             Application.DocumentCreated += DelegateCreateDocumentEvent;
@@ -40,6 +42,7 @@ namespace ExtendedVisioAddin1
             Application.BeforeShapeDelete += Application_DeleteShapeEvent;
             Application.CellChanged += Application_CellChangedEvent;
             Application.TextChanged += Application_TextChangedEvent;
+            Application.NoEventsPending += Test;
 
             Application.BeforePageDelete += Application_BeforePageDeleteEvent;
             Application.WindowActivated += Application_WindowActivatedEvent;
@@ -49,7 +52,16 @@ namespace ExtendedVisioAddin1
             RegisterMarkerEventHandlers();
             RegisterTextChangedEventHandlers();
         }
-       
+
+        private void Test(Application app)
+        {
+            if (!app.IsUndoingOrRedoing && rebuildTree)
+            {
+                RebuildTree(app.ActiveDocument);
+                rebuildTree = false;
+            }
+        }
+
 
         private void RegisterDeleteEventHandlers()
         {
@@ -261,7 +273,8 @@ namespace ExtendedVisioAddin1
                 RComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
                 if (alternativesComponent != null)
                 {
-                    Application.QueueMarkerEvent("String");
+                    rebuildTree = true;
+                    //Application.QueueMarkerEvent("String");
                     //var x= 0;
 
                     //Model.RegenerateAlternativeIdentifiers();

@@ -26,7 +26,11 @@ namespace ExtendedVisioAddin1.View.Forces
         public ForceTotalsRow(Page page, Shape forceTotalsShape) : base(page, false)
         {
             RShape = forceTotalsShape;
-            InitStyle();
+
+            //InitStyle();
+            UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
+            LayoutManager = new InlineLayout(this);
+            MarginBottom = 0.4;
 
             Array ident = forceTotalsShape.ContainerProperties.GetMemberShapes(16);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();

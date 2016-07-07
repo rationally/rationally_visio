@@ -45,7 +45,10 @@ namespace ExtendedVisioAddin1.View.Forces
                     }
                 }
             }
-            InitStyle();
+            //InitStyle();
+            MarginTop = 0.4;
+            UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
+            LayoutManager = new InlineLayout(this);
         }
 
         private void InitChildren(Page page)

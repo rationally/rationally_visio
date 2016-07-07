@@ -97,18 +97,9 @@ namespace ExtendedVisioAddin1.View.Documents
             AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "\"Add url\"", false);
             AddAction("deleteRelatedDocument", "QUEUEMARKEREVENT(\"delete\")", "\"Delete document\"", false);
 
-            Width = 5;
-            Height = 1;
-            InitStyle();
-        }
+            MsvSdContainerLocked = true;
+            
 
-        public RelatedDocumentContainer(Page page, int index) : base(page)
-        {
-            AddUserRow("rationallyType");
-            RationallyType = "relatedDocumentContainer";
-            Name = "Related Document";
-            AddUserRow("documentIndex");
-            DocumentIndex = index;
             Width = 5;
             Height = 1;
             InitStyle();

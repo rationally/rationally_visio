@@ -31,6 +31,7 @@ namespace ExtendedVisioAddin1.View.Forces
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
 
+            MsvSdContainerLocked = true;
             Height = 0.33;
             UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded;
             InitStyle();
@@ -95,14 +96,16 @@ namespace ExtendedVisioAddin1.View.Forces
 
         private void UpdateReorderFunctions()
         {
-            if (ForceIndex > 0)
+            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
+            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
+            if (ForceIndex == 0)
             {
-                AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
+                DeleteAction("moveUp");
             }
 
-            if (ForceIndex < Globals.ThisAddIn.Model.Forces.Count - 1)
+            if (ForceIndex == Globals.ThisAddIn.Model.Forces.Count - 1)
             {
-                AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
+                DeleteAction("moveDown");
             }
         }
 

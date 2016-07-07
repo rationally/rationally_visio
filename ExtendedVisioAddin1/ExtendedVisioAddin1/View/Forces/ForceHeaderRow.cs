@@ -19,6 +19,7 @@ namespace ExtendedVisioAddin1.View.Forces
             Name = "ForceHeaderRow";
 
             MsvSdContainerLocked = true;
+            LockDelete = true;
             InitChildren(page);
             Height = 0.33;
             InitStyle();
@@ -67,7 +68,8 @@ namespace ExtendedVisioAddin1.View.Forces
                 Height = 0.33,
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
-                LineColor = "RGB(89,131,168)"
+                LineColor = "RGB(89,131,168)",
+                LockDelete = true
             };
             concernLabel.ToggleBoldFont(true);
             concernLabel.AddUserRow("rationallyType");
@@ -82,7 +84,8 @@ namespace ExtendedVisioAddin1.View.Forces
                 Height = 0.33,
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
-                LineColor = "RGB(89,131,168)"
+                LineColor = "RGB(89,131,168)",
+                LockDelete = true
             };
             descLabel.ToggleBoldFont(true);
             descLabel.AddUserRow("rationallyType");

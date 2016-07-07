@@ -29,7 +29,6 @@ namespace ExtendedVisioAddin1.View.Forces
             AddUserRow("rationallyType");
             RationallyType = "forceTotalComponent";
             Name = "ForceTotalComponent";
-            LockDelete = true;
             InitStyle();
         }
 

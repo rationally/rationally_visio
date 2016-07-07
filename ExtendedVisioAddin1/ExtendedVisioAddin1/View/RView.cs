@@ -95,10 +95,6 @@ namespace ExtendedVisioAddin1.View
                 {
                     RelatedDocumentsContainer rdc = new RelatedDocumentsContainer(Page, s);
                     Children.Add(rdc);
-                    /*if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
-                    {
-                        new RepaintHandler(rdc);
-                    }*/
                 }
             }
             else if (ForcesContainer.IsForcesContainer(s.Name))

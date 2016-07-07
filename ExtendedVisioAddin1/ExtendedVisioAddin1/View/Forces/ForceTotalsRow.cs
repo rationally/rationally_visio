@@ -19,6 +19,7 @@ namespace ExtendedVisioAddin1.View.Forces
             Name = "ForceTotalsRow";
 
             MsvSdContainerLocked = true;
+            LockDelete = true;
             InitChildren(page);
             Height = 0.33;
             InitStyle();
@@ -73,7 +74,8 @@ namespace ExtendedVisioAddin1.View.Forces
                 Text = "Total:",
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
-                LineColor = "RGB(89,131,168)"
+                LineColor = "RGB(89,131,168)",
+                LockDelete = true
             };
             concernDummy.LinePattern = 1;
             concernDummy.AddUserRow("rationallyType");
@@ -89,7 +91,8 @@ namespace ExtendedVisioAddin1.View.Forces
                 Name = "DescDummy",
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
-                LineColor = "RGB(89,131,168)"
+                LineColor = "RGB(89,131,168)",
+                LockDelete = true
             };
             descDummy.LinePattern = 1;
             descDummy.AddUserRow("rationallyType");
@@ -169,7 +172,8 @@ namespace ExtendedVisioAddin1.View.Forces
             //remove the shapes of the deleted components; undo redo do this automatically
             if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
-                toRemove.ForEach(c => c.RShape.DeleteEx(0));
+                toRemove.ForEach(c => { c.LockDelete = false ;
+                                        c.RShape.DeleteEx(0);});
             }
             base.Repaint();
 

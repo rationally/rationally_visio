@@ -155,10 +155,8 @@ namespace ExtendedVisioAddin1.View.Forces
             }
 
             //at this point, all alternatives have a component in alreadyThere, but there might be components of removed alternatives in there as well
-            List<ForceTotalComponent> toRemove = alreadyThere.Where(f => !f.Deleted && !alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();//f.Deleted || 
+            List<ForceTotalComponent> toRemove = alreadyThere.Where(f => !f.Deleted && !alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
             List<ForceTotalComponent> toRemoveFromTree = alreadyThere.Where(f => f.Deleted || !alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
-            //alreadyThere = alreadyThere - toRemove
-            //alreadyThere = alreadyThere.Where(f => alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();//!f.Deleted && 
             alreadyThere.RemoveAll(a => toRemoveFromTree.Contains(a));
 
             //finally, order the alternative columns similar to the alternatives container

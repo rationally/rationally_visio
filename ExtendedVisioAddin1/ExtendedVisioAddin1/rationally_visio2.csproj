@@ -126,6 +126,7 @@
     <Compile Include="EventHandlers\MarkerEventHandlers\MarkerDeleteRelatedDocumentEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDAlternativeComponentEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDAlternativeContainerEventHander.cs" />
+    <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDForcesContainerEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDRelatedDocumentComponentEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDRelatedDocumentContainerEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QueryDeleteEventHandlerRegistry.cs" />

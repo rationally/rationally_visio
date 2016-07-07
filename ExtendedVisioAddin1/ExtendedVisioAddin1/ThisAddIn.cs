@@ -42,7 +42,7 @@ namespace ExtendedVisioAddin1
             Application.BeforeShapeDelete += Application_DeleteShapeEvent;
             Application.CellChanged += Application_CellChangedEvent;
             Application.TextChanged += Application_TextChangedEvent;
-            Application.NoEventsPending += Test;
+            Application.NoEventsPending += NoEventsPendingEventHandler;
 
             Application.BeforePageDelete += Application_BeforePageDeleteEvent;
             Application.WindowActivated += Application_WindowActivatedEvent;
@@ -52,21 +52,10 @@ namespace ExtendedVisioAddin1
             RegisterMarkerEventHandlers();
             RegisterTextChangedEventHandlers();
         }
-
-        private void Test(Application app)
-        {
-            if (!app.IsUndoingOrRedoing && rebuildTree)
-            {
-                RebuildTree(app.ActiveDocument);
-                rebuildTree = false;
-            }
-        }
-
-
-        private void RegisterDeleteEventHandlers()
+        
+        private static void RegisterDeleteEventHandlers()
         {
             DeleteEventHandlerRegistry registry = DeleteEventHandlerRegistry.Instance;
-
             registry.Register("forceContainer",new DeleteForceEventHandler());
             registry.Register("relatedDocumentContainer", new DeleteRelatedDocumentEventHandler());
             registry.Register("alternative", new DeleteAlternativeEventHandler());
@@ -207,15 +196,18 @@ namespace ExtendedVisioAddin1
                 RebuildTree(w.Document);
             }
         }
+        
+        private void NoEventsPendingEventHandler(Application app)
+        {
+            if (!app.IsUndoingOrRedoing && rebuildTree)
+            {
+                RebuildTree(app.ActiveDocument);
+                rebuildTree = false;
+            }
+        }
 
         private void Application_MarkerEvent(Application application, int sequence, string context)
         {
-            if (context == "String")
-            {
-               // Model.RegenerateAlternativeIdentifiers();
-                RebuildTree(application.ActiveDocument);
-                return;
-            }
             if (application.ActiveDocument.Template.Contains(TemplateName))
             {
                 Selection selection = Application.ActiveWindow.Selection; //event must originate from selected element
@@ -261,16 +253,11 @@ namespace ExtendedVisioAddin1
                 RComponent forcesComponent = View.Children.FirstOrDefault(x => x is ForcesContainer);
                 if (forcesComponent != null)
                 {
-                    rebuildTree = true;/*
-                    Model.Forces.Clear();
-                    View.Children.Remove(forcesComponent);
-                    Shape temp = forcesComponent.RShape;
-                    View.Children.Add(new ForcesContainer(temp.ContainingPage, temp));*/
+                    rebuildTree = true;
                 }
             }
             else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals("User.alternativeIndex"))
             {
-                
                 RComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
                 if (alternativesComponent != null)
                 {
@@ -283,10 +270,6 @@ namespace ExtendedVisioAddin1
                 if (docComponent != null)
                 {
                     rebuildTree = true;
-                    /*Model.Documents.Clear();
-                    View.Children.Remove(docComponent);
-                    Shape temp = docComponent.RShape;
-                    View.Children.Add(new RelatedDocumentsContainer(temp.ContainingPage, temp));*/
                 }
             }
         }
@@ -324,10 +307,8 @@ namespace ExtendedVisioAddin1
                 LastDelete = toBeDeleted.Last().Name;
                 Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("Delete shape");
             }
-
             //all shapes in the selection are already bound to be deleted. Mark them, so other pieces of code don't also try to delete them, if they are in the tree.
             toBeDeleted.Where(s => View.ExistsInTree(s)).ToList().ForEach(tbd => View.GetComponentByShape(tbd).Deleted = true);
-
             foreach (Shape s in e)
             {
                 if (s.CellExistsU["User.rationallyType", 0] != 0)
@@ -335,7 +316,6 @@ namespace ExtendedVisioAddin1
                     string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
 
                     QueryDeleteEventHandlerRegistry.Instance.HandleEvent(rationallyType, View, s);
-
                 }
             }
             return false;

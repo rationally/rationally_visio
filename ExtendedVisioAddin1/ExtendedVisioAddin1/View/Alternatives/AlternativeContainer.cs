@@ -94,11 +94,6 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
             //locks
             MsvSdContainerLocked = true;
-            /*this.LockDelete = true;
-            this.LockRotate = true;
-            this.LockMoveX = true;
-            this.LockMoveY = true;
-            this.LockTextEdit = true;*/
 
             //Events
             AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete alternative\"", false);
@@ -112,13 +107,6 @@ namespace ExtendedVisioAddin1.View.Alternatives
             RationallyType = "alternative";
             AddUserRow("alternativeIndex");
             AlternativeIndex = alternativeIndex;
-
-            //locks
-            /*this.LockDelete = true;
-            this.LockRotate = true;
-            this.LockMoveX = true;
-            this.LockMoveY = true;
-            this.LockTextEdit = true;*/
 
             //Events
             AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete alternative\"", false);

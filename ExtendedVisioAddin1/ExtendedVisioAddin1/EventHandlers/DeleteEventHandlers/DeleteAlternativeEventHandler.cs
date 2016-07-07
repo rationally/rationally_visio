@@ -34,11 +34,7 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                 }
                 AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
                 //update model
-                int index = containerToDelete.AlternativeIndex;
-                //if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
-                //{
                 model.Alternatives.RemoveAll(a => a.TimelessId == containerToDelete.TimelessId);
-                //}
 
                 //update view tree
                 alternativesContainer.Children.Remove(containerToDelete);

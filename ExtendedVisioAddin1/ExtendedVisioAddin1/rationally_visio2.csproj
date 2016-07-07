@@ -219,7 +219,6 @@
   <ItemGroup>
     <None Include="ExtendedVisioAddin1_TemporaryKey.pfx" />
     <None Include="rationally_visio2_1_TemporaryKey.pfx" />
-    <None Include="rationally_visio2_TemporaryKey.pfx" />
     <None Include="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.cs</DependentUpon>
     </None>

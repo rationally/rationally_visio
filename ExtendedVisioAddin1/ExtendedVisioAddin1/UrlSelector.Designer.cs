@@ -51,7 +51,6 @@
             this.urlTextBox.Name = "urlTextBox";
             this.urlTextBox.Size = new System.Drawing.Size(246, 20);
             this.urlTextBox.TabIndex = 1;
-            this.urlTextBox.Text = "http://www.nu.nl/";
             // 
             // confirmButton
             // 
@@ -79,7 +78,6 @@
             this.nameTextbox.Name = "nameTextbox";
             this.nameTextbox.Size = new System.Drawing.Size(243, 20);
             this.nameTextbox.TabIndex = 2;
-            this.nameTextbox.Text = "nu.nl";
             // 
             // UrlSelecter
             // 

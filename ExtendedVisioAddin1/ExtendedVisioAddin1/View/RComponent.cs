@@ -408,5 +408,10 @@ namespace ExtendedVisioAddin1.View
         {
             return RShape.Equals(s) ? this : null;
         }
+
+        public virtual void RemoveDeleteLock(bool recursive)
+        {
+            LockDelete = false;
+        }
     }
 }

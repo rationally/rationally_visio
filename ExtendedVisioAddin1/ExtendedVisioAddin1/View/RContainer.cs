@@ -73,6 +73,15 @@ namespace ExtendedVisioAddin1.View
             Children.ForEach(c => c.RemoveChildren());
         }
 
+        public override void RemoveDeleteLock(bool recursive)
+        {
+            LockDelete = false;
+            if (recursive)
+            {
+                Children.ForEach(c => c.RemoveDeleteLock(recursive));
+            }
+        }
+
         public double ContainerPadding
         {
             get { return RShape.CellsU["User.MsvSDContainerMargin"].ResultIU; }

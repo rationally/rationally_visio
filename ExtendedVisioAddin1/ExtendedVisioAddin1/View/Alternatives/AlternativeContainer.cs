@@ -44,7 +44,6 @@ namespace ExtendedVisioAddin1.View.Alternatives
                 {
                     string identifier = (char)(65 + AlternativeIndex) + ":";
                     Globals.ThisAddIn.Model.Alternatives.Insert(AlternativeIndex, new Alternative(title, state, desc, identifier, TimelessId));
-                    int i = AlternativeIndex;
                     foreach (Alternative alt in Globals.ThisAddIn.Model.Alternatives.Skip(AlternativeIndex+1).ToList())
                     {
                         alt.Identifier = (char) (65 + ++AlternativeIndex) + ":";

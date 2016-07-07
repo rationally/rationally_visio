@@ -261,10 +261,11 @@ namespace ExtendedVisioAddin1
                 RComponent forcesComponent = View.Children.FirstOrDefault(x => x is ForcesContainer);
                 if (forcesComponent != null)
                 {
+                    rebuildTree = true;/*
                     Model.Forces.Clear();
                     View.Children.Remove(forcesComponent);
                     Shape temp = forcesComponent.RShape;
-                    View.Children.Add(new ForcesContainer(temp.ContainingPage, temp));
+                    View.Children.Add(new ForcesContainer(temp.ContainingPage, temp));*/
                 }
             }
             else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals("User.alternativeIndex"))
@@ -274,12 +275,6 @@ namespace ExtendedVisioAddin1
                 if (alternativesComponent != null)
                 {
                     rebuildTree = true;
-                    //Application.QueueMarkerEvent("String");
-                    //var x= 0;
-
-                    //Model.RegenerateAlternativeIdentifiers();
-
-                    //View.Children.Add(new AlternativesContainer(temp.ContainingPage, temp));
                 }
             }
             else if (Application.IsUndoingOrRedoing && RelatedDocumentContainer.IsRelatedDocumentContainer(changedShape.Name) && cell.LocalName.Equals("User.documentIndex"))
@@ -287,10 +282,11 @@ namespace ExtendedVisioAddin1
                 RComponent docComponent = View.Children.FirstOrDefault(x => x is RelatedDocumentsContainer);
                 if (docComponent != null)
                 {
-                    Model.Documents.Clear();
+                    rebuildTree = true;
+                    /*Model.Documents.Clear();
                     View.Children.Remove(docComponent);
                     Shape temp = docComponent.RShape;
-                    View.Children.Add(new RelatedDocumentsContainer(temp.ContainingPage, temp));
+                    View.Children.Add(new RelatedDocumentsContainer(temp.ContainingPage, temp));*/
                 }
             }
         }

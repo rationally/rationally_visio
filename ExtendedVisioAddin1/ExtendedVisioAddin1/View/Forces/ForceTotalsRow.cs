@@ -172,8 +172,7 @@ namespace ExtendedVisioAddin1.View.Forces
             //remove the shapes of the deleted components; undo redo do this automatically
             if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
-                toRemove.ForEach(c => { c.LockDelete = false ;
-                                        c.RShape.DeleteEx(0);});
+                toRemove.ForEach(c => {c.RShape.DeleteEx(0);});
             }
             base.Repaint();
 

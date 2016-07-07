@@ -18,6 +18,7 @@ namespace ExtendedVisioAddin1.View.Forces
             RationallyType = "forceHeaderRow";
             Name = "ForceHeaderRow";
 
+            MsvSdContainerLocked = true;
             InitChildren(page);
             Height = 0.33;
             InitStyle();

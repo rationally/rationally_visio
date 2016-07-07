@@ -48,7 +48,6 @@ namespace ExtendedVisioAddin1
             this.decisionName.Name = "decisionName";
             this.decisionName.Size = new System.Drawing.Size(211, 20);
             this.decisionName.TabIndex = 0;
-            this.decisionName.Text = "Name";
             // 
             // decisionNameHead
             // 
@@ -76,7 +75,6 @@ namespace ExtendedVisioAddin1
             this.author.Name = "author";
             this.author.Size = new System.Drawing.Size(211, 20);
             this.author.TabIndex = 3;
-            this.author.Text = "Author";
             // 
             // versionDecision
             // 

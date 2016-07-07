@@ -54,7 +54,6 @@ namespace ExtendedVisioAddin1
             this.alternativeName.Name = "alternativeName";
             this.alternativeName.Size = new System.Drawing.Size(231, 20);
             this.alternativeName.TabIndex = 1;
-            this.alternativeName.Text = "Alternativo Name";
             // 
             // label2
             // 

@@ -56,7 +56,10 @@ namespace ExtendedVisioAddin1.View.Alternatives
                     Globals.ThisAddIn.Model.Alternatives.Add(new Alternative(title, state, desc, identifier, TimelessId));
                 }
             }
-            InitStyle();
+            //InitStyle();
+            UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
+            MarginTop = AlternativeIndex == 0 ? 0.3 : 0.0;
+
         }
 
         public AlternativeContainer(Page page, int alternativeIndex, Alternative alternative) : base(page)
@@ -126,12 +129,12 @@ namespace ExtendedVisioAddin1.View.Alternatives
         {
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
             MarginTop = AlternativeIndex == 0 ? 0.3 : 0.0;
-            /*if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
-            LinePattern = 16;*/
+            LinePattern = 16;
         }
 
         public void SetAlternativeIdentifier(int alternativeIndex)

@@ -201,7 +201,7 @@ namespace ExtendedVisioAddin1
             if (context == "String")
             {
                // Model.RegenerateAlternativeIdentifiers();
-                AlternativesContainer alt = (AlternativesContainer) View.Children.First(x => x is AlternativesContainer);
+                /*AlternativesContainer alt = (AlternativesContainer) View.Children.First(x => x is AlternativesContainer);
                 List<Shape> shapes = new List<Shape>();
                 foreach (RComponent al in alt.Children)
                 {
@@ -212,8 +212,8 @@ namespace ExtendedVisioAddin1
                 foreach (Shape shappie in shapes)
                 {
                     alt.AddToTree(shappie, false);
-                }
-                //RebuildTree(application.ActiveDocument);
+                }*/
+                RebuildTree(application.ActiveDocument);
                 return;
             }
             if (application.ActiveDocument.Template.Contains(TemplateName))

@@ -20,8 +20,10 @@ namespace ExtendedVisioAddin1.View.Documents
                 Children.Add(new RelatedDocumentContainer(page, shape));
             }
             Children = Children.OrderBy(c => c.DocumentIndex).ToList();
+            UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
             LayoutManager = new VerticalStretchLayout(this);
-            InitStyle();
+            //InitStyle();
+
         }
 
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
@@ -69,11 +71,11 @@ namespace ExtendedVisioAddin1.View.Documents
         {
             //MakeListItem();
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
-            /*if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
-            }*/
+            }
         }
 
         public static bool IsRelatedDocumentsContainer(string name)

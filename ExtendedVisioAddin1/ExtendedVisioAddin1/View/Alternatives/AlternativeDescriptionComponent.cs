@@ -9,7 +9,10 @@ namespace ExtendedVisioAddin1.View.Alternatives
         public AlternativeDescriptionComponent(Page page, Shape alternativeComponent) : base(page, false)
         {
             RShape = alternativeComponent;
-            InitStyle();
+            MarginLeft = 0.1;
+            MarginRight = 0.1;
+            MarginBottom = 0.1;
+            MarginTop = 0.05;
         }
 
         public AlternativeDescriptionComponent(Page page, int alternativeIndex, string description) : base(page)

@@ -61,7 +61,10 @@ namespace ExtendedVisioAddin1.View.Documents
                 }
             }
             //LayoutManager = new VerticalStretchLayout(this);
-            InitStyle();
+            MarginTop = DocumentIndex == 0 ? 0.3 : 0.0;
+            MarginBottom = 0;
+
+            UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
         }
 
         public RelatedDocumentContainer(Page page, int index, RelatedDocument document) : base(page)

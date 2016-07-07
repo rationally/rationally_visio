@@ -25,7 +25,6 @@ namespace ExtendedVisioAddin1.View.Forces
             AddUserRow("rationallyType");
             RationallyType = "forceAlternativeHeaderComponent";
             Name = "ForceAlternativeHeaderComponent";
-            
             InitStyle();
         }
 

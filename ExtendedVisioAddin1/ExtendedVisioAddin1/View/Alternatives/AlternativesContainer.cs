@@ -51,7 +51,15 @@ namespace ExtendedVisioAddin1.View.Alternatives
                     AlternativeStubContainer stub = (AlternativeStubContainer) Children.First(c => c.AlternativeIndex == shapeComponent.AlternativeIndex);
                     Children.Remove(stub);
                     AlternativeContainer con = new AlternativeContainer(Page, s);
-                    Children.Insert(con.AlternativeIndex, con);
+                    if (Children.Count < con.AlternativeIndex)
+                    {
+                        Children.Add(con);
+                    }
+                    else
+                    {
+                        Children.Insert(con.AlternativeIndex, con);
+                    }
+                    
                 }
             }
             else

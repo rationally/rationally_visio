@@ -22,14 +22,6 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
             AddAction("addAlternative", "QUEUEMARKEREVENT(\"add\")", "\"Add alternative\"", false);
             AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this alternative\"", false);
-            //Locks
-            /*LockDelete = true;
-            LockRotate = true;
-            LockMoveX = true;
-            LockMoveY = true;
-            LockHeight = true;
-            LockTextEdit = true;
-            LockWidth = true;*/
             InitStyle();
         }
 

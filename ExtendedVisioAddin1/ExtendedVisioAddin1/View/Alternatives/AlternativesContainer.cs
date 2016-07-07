@@ -26,11 +26,6 @@ namespace ExtendedVisioAddin1.View.Alternatives
 
         private void InitStyle()
         {
-            /*if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
-            {
-                RShape.ContainerProperties.ResizeAsNeeded = 0;
-                ContainerPadding = 0;
-            }*/
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
         }
 

@@ -1,5 +1,7 @@
-﻿using ExtendedVisioAddin1.View;
+﻿using System.Linq;
+using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Alternatives;
+using ExtendedVisioAddin1.View.Forces;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers

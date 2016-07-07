@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using ExtendedVisioAddin1.Model;
 using ExtendedVisioAddin1.View;
 using ExtendedVisioAddin1.View.Alternatives;
+using ExtendedVisioAddin1.View.Forces;
 using Microsoft.Office.Interop.Visio;
 
 namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
@@ -11,7 +12,7 @@ namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
     {
         public void Execute(RModel model, Shape s, string context)
         {
-            
+
             RComponent component = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };
 
             int index = component.AlternativeIndex;

@@ -85,6 +85,7 @@ namespace ExtendedVisioAddin1
             registry.Register("forceDescription", new QDForceComponentEventHandler());
             registry.Register("forceValue", new QDForceComponentEventHandler());
             registry.Register("forceContainer", new QDForceContainerEventHandler());
+            registry.Register("forces", new QDForcesContainerEventHandler());
 
             registry.Register("alternativeState", new QDAlternativeComponentEventHandler());
             registry.Register("alternativeIdentifier", new QDAlternativeComponentEventHandler());

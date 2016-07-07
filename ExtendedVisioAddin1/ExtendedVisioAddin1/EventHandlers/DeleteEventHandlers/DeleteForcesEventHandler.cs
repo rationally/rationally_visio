@@ -10,7 +10,7 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
     {
         public void Execute(string eventKey, RModel model, Shape forcesContainer)
         {
-            Globals.ThisAddIn.View.GetComponentByShape(forcesContainer).RemoveDeleteLock(true);
+            
             Globals.ThisAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(forcesContainer));
             if (!Globals.ThisAddIn.View.Children.Any(x => x is ForcesContainer))
             {

@@ -201,18 +201,6 @@ namespace ExtendedVisioAddin1
             if (context == "String")
             {
                // Model.RegenerateAlternativeIdentifiers();
-                /*AlternativesContainer alt = (AlternativesContainer) View.Children.First(x => x is AlternativesContainer);
-                List<Shape> shapes = new List<Shape>();
-                foreach (RComponent al in alt.Children)
-                {
-                    shapes.Add(al.RShape);
-                }
-                Model.Alternatives.Clear();
-                alt.Children.Clear();
-                foreach (Shape shappie in shapes)
-                {
-                    alt.AddToTree(shappie, false);
-                }*/
                 RebuildTree(application.ActiveDocument);
                 return;
             }
@@ -269,6 +257,7 @@ namespace ExtendedVisioAddin1
             }
             else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals("User.alternativeIndex"))
             {
+                
                 RComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
                 if (alternativesComponent != null)
                 {
@@ -277,7 +266,7 @@ namespace ExtendedVisioAddin1
 
                     //Model.RegenerateAlternativeIdentifiers();
 
-                    //View.Children.Add(new AlternativesContainer(temp.ContainingPage, temp));*/
+                    //View.Children.Add(new AlternativesContainer(temp.ContainingPage, temp));
                 }
             }
             else if (Application.IsUndoingOrRedoing && RelatedDocumentContainer.IsRelatedDocumentContainer(changedShape.Name) && cell.LocalName.Equals("User.documentIndex"))

@@ -42,11 +42,12 @@ namespace ExtendedVisioAddin1.View.Alternatives
             {
                 if (AlternativeIndex <= Globals.ThisAddIn.Model.Alternatives.Count)
                 {
-                    string identifier = (char)(65 + AlternativeIndex) + ":";
+                    int index = AlternativeIndex;
+                    string identifier = (char)(65 + index) + ":";
                     Globals.ThisAddIn.Model.Alternatives.Insert(AlternativeIndex, new Alternative(title, state, desc, identifier, TimelessId));
-                    foreach (Alternative alt in Globals.ThisAddIn.Model.Alternatives.Skip(AlternativeIndex+1).ToList())
+                    foreach (Alternative alt in Globals.ThisAddIn.Model.Alternatives.Skip(index + 1).ToList())
                     {
-                        alt.Identifier = (char) (65 + ++AlternativeIndex) + ":";
+                        alt.Identifier = (char) (65 + ++index) + ":";
                     }
                 }
                 else

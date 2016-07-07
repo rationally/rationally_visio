@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
 using ExtendedVisioAddin1.Model;
 using Microsoft.Office.Interop.Visio;
 
@@ -39,15 +40,19 @@ namespace ExtendedVisioAddin1.View.Alternatives
             }
             if (title != null && state != null && desc != null)
             {
-                string identifier = (char)(65 + Globals.ThisAddIn.Model.Alternatives.Count) + ":";
-                
-
                 if (AlternativeIndex <= Globals.ThisAddIn.Model.Alternatives.Count)
                 {
+                    string identifier = (char)(65 + AlternativeIndex) + ":";
                     Globals.ThisAddIn.Model.Alternatives.Insert(AlternativeIndex, new Alternative(title, state, desc, identifier, TimelessId));
+                    int i = AlternativeIndex;
+                    foreach (Alternative alt in Globals.ThisAddIn.Model.Alternatives.Skip(AlternativeIndex).ToList())
+                    {
+                        alt.Identifier = (char) (65 + ++AlternativeIndex) + ":";
+                    }
                 }
                 else
                 {
+                    string identifier = (char)(65 + Globals.ThisAddIn.Model.Alternatives.Count) + ":";
                     Globals.ThisAddIn.Model.Alternatives.Add(new Alternative(title, state, desc, identifier, TimelessId));
                 }
             }
@@ -121,12 +126,12 @@ namespace ExtendedVisioAddin1.View.Alternatives
         {
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
             MarginTop = AlternativeIndex == 0 ? 0.3 : 0.0;
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            /*if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
-            LinePattern = 16;
+            LinePattern = 16;*/
         }
 
         public void SetAlternativeIdentifier(int alternativeIndex)

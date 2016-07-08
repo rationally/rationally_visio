@@ -23,11 +23,9 @@ namespace ExtendedVisioAddin1.View.Forces
 
             AddUserRow("forceIndex");
             ForceIndex = forceIndex;
-
-
+            
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
-
             
             InitStyle();
         }

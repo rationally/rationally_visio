@@ -60,7 +60,6 @@ namespace ExtendedVisioAddin1.View.Documents
                     Globals.ThisAddIn.Model.Documents.Add(new RelatedDocument(path, name, file));
                 }
             }
-            //LayoutManager = new VerticalStretchLayout(this);
             MarginTop = DocumentIndex == 0 ? 0.3 : 0.0;
             MarginBottom = 0;
 

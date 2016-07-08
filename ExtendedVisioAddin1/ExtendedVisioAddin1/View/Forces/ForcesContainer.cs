@@ -57,23 +57,11 @@ namespace ExtendedVisioAddin1.View.Forces
 
             //fix the order of the force containers, using ForceIndex
             Children = Children.OrderBy(c => (c is ForceHeaderRow ? -1 : (c is ForceTotalsRow ? Children.Count : c.ForceIndex))).ToList();
-
-            //InitStyle();
+            
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
             LayoutManager = new VerticalStretchLayout(this);
         }
-
-        private void InitStyle()
-        {
-            UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
-            {
-                RShape.ContainerProperties.ResizeAsNeeded = 0;
-                ContainerPadding = 0;
-            }
-            LayoutManager = new VerticalStretchLayout(this);
-        }
-
+        
         public static bool IsForcesContainer(string name)
         {
             return ForcesRegex.IsMatch(name);

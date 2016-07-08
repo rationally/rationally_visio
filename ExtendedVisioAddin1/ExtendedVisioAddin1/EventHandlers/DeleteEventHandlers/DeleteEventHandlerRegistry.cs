@@ -35,7 +35,7 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
             }
             else
             {
-                Console.WriteLine("WARNING: delete event requested on key with to registered handlers: " + eventKey);
+                Console.WriteLine("NOTICE: delete event requested on key with to registered handlers: " + eventKey);
             }
         }
     }

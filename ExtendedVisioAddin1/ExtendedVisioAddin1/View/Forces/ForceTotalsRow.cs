@@ -27,8 +27,7 @@ namespace ExtendedVisioAddin1.View.Forces
         public ForceTotalsRow(Page page, Shape forceTotalsShape) : base(page, false)
         {
             RShape = forceTotalsShape;
-
-            //InitStyle();
+            
             UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
             LayoutManager = new InlineLayout(this);
             MarginBottom = 0.4;
@@ -174,7 +173,6 @@ namespace ExtendedVisioAddin1.View.Forces
                 MsvSdContainerLocked = true;
             }
             base.Repaint();
-
         }
     }
 }

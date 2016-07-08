@@ -10,7 +10,6 @@ namespace ExtendedVisioAddin1.View.Alternatives
             set;
         }
 
-
         public AlternativeStubContainer(Page page,int alternativeIndex) : base(page)
         {
             AlternativeIndex = alternativeIndex;

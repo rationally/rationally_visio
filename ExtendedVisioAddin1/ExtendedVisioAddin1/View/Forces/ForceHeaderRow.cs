@@ -46,7 +46,6 @@ namespace ExtendedVisioAddin1.View.Forces
                     }
                 }
             }
-            //InitStyle();
             MarginTop = 0.4;
             UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
             LayoutManager = new InlineLayout(this);
@@ -123,7 +122,6 @@ namespace ExtendedVisioAddin1.View.Forces
         [SuppressMessage("ReSharper", "SimplifyLinqExpression")]
         public override void Repaint()
         {
-
             //foreach alternative in model { add a force value component, if it is not aleady there }
             List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
             List<ForceAlternativeHeaderComponent> alreadyThere = Children.Where(c => c is ForceAlternativeHeaderComponent).Cast<ForceAlternativeHeaderComponent>().ToList();
@@ -159,9 +157,7 @@ namespace ExtendedVisioAddin1.View.Forces
                 toRemove.ForEach(c => c.RShape.DeleteEx(0));
                 MsvSdContainerLocked = true;
             }
-            
             base.Repaint();
-
         }
 
         public static bool IsForceHeaderRow(string name)

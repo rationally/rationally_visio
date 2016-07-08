@@ -34,23 +34,23 @@ namespace ExtendedVisioAddin1.EventHandlers
 
         private void ShowSheetSetUpBox()
         {
-            SheetSetUpFormPopUp testDialog = new SheetSetUpFormPopUp();
+            SheetSetUpFormPopUp setupDialog = new SheetSetUpFormPopUp();
 
             model.Author = "";
             model.DecisionName ="";
             model.Date = "";
             model.Version = "";
 
-            // Show testDialog as a modal dialog and determine if DialogResult = OK.
-            if (testDialog.ShowDialog() == DialogResult.OK)
+            // Show setupDialog as a modal dialog and determine if DialogResult = OK.
+            if (setupDialog.ShowDialog() == DialogResult.OK)
             {
-                // Read the contents of testDialog's TextBox.
-                model.Author = testDialog.author.Text;
-                model.DecisionName = testDialog.decisionName.Text;
-                model.Date = testDialog.date.Text;
-                model.Version = testDialog.version.Text;
+                // Read the contents of setupDialog's TextBox.
+                model.Author = setupDialog.author.Text;
+                model.DecisionName = setupDialog.decisionName.Text;
+                model.Date = setupDialog.date.Text;
+                model.Version = setupDialog.version.Text;
             }
-            testDialog.Dispose();
+            setupDialog.Dispose();
         }
     }
 }

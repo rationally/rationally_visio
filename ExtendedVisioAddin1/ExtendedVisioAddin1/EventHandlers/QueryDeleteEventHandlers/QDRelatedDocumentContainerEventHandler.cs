@@ -11,7 +11,7 @@ namespace ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers
             RComponent comp = view.Children.Find(x => x is RelatedDocumentsContainer);
             if (comp is RelatedDocumentsContainer)
             {
-                comp.MsvSdContainerLocked = false;
+                comp.MsvSdContainerLocked = false; //Child shapes can now be removed.
             }
         }
     }

@@ -37,11 +37,12 @@ namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 
             //update the related force column value identifiers
             ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.FirstOrDefault(c => c is ForcesContainer);
-            //set all force value cells with id "higherIndex" to "temp"
-            //set all force value cells with id "oldIndex" to "higherIndex"
-            //set all force value cells with id "temp" to "oldIndex"
+            
             if (forcesContainer != null)
             {
+                //set all force value cells with id "higherIndex" to "temp"
+                //set all force value cells with id "oldIndex" to "higherIndex"
+                //set all force value cells with id "temp" to "oldIndex"
                 forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(fc => fc.Children.Where(fcc => fcc is ForceValueComponent && ((ForceValueComponent) fcc).AlternativeIdentifier == higherIndex).Cast<ForceValueComponent>().ToList().ForEach(fvc => fvc.AlternativeIdentifier = "temp"));
                 forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(fc => fc.Children.Where(fcc => fcc is ForceValueComponent && ((ForceValueComponent) fcc).AlternativeIdentifier == oldIndex).Cast<ForceValueComponent>().ToList().ForEach(fvc => fvc.AlternativeIdentifier = higherIndex));
                 forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(fc => fc.Children.Where(fcc => fcc is ForceValueComponent && ((ForceValueComponent) fcc).AlternativeIdentifier == "temp").Cast<ForceValueComponent>().ToList().ForEach(fvc => fvc.AlternativeIdentifier = oldIndex));

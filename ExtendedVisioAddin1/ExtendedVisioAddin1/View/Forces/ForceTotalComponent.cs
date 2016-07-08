@@ -111,9 +111,6 @@ namespace ExtendedVisioAddin1.View.Forces
                     Text = total + "";
                 }
             }
-
-            
-
         }
     }
 }

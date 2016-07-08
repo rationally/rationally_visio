@@ -56,7 +56,6 @@ namespace ExtendedVisioAddin1.View.Alternatives
                     Globals.ThisAddIn.Model.Alternatives.Add(new Alternative(title, state, desc, identifier, TimelessId));
                 }
             }
-            //InitStyle();
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
             MarginTop = AlternativeIndex == 0 ? 0.3 : 0.0;
 

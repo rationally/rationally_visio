@@ -34,7 +34,7 @@ namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
             }
             else
             {
-                Console.WriteLine("WARNING: marker event requested on key with to registered handlers: " + eventKey);
+                Console.WriteLine("NOTICE: marker event requested on key with to registered handlers: " + eventKey);
             }
         }
     }

@@ -8,8 +8,7 @@ namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
     {
         public void Execute(RModel model, Shape s, string context)
         {
-            //model.RegenerateAlternativeIdentifiers();
-            if (model.Alternatives.Count >= 3)
+            if (model.Alternatives.Count >= 3) //The view does not handling more than 3 alternatives well, by default.
             {
                 AddAlternativeWithWarning alternative = new AddAlternativeWithWarning(model);
                 if (alternative.ShowDialog() == DialogResult.OK)

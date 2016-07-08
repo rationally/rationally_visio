@@ -14,6 +14,9 @@ using ExtendedVisioAddin1.View.Forces;
 using Microsoft.Office.Interop.Visio;
 using Shape = Microsoft.Office.Interop.Visio.Shape;
 
+
+//Main class for the visio add in. Everything is managed from here.
+//Developed by Ruben Scheedler and Ronald Kruizinga for the University of Groningen
 namespace ExtendedVisioAddin1
 {
     public partial class ThisAddIn
@@ -21,9 +24,12 @@ namespace ExtendedVisioAddin1
         public RModel Model { get; set; }
         public RView View { get; set; }
 
+        //Variables responsible for undo-scope handling
         public int StartedUndoState;
         public string LastDelete = "";
-        public bool rebuildTree;
+
+        //Variable to use for undo/redo handling
+        private bool rebuildTree;
 
         public readonly string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
 
@@ -180,6 +186,7 @@ namespace ExtendedVisioAddin1
             registry.Register("alternativeState", new AlternativeStateTextChangedEventHandler());
         }
 
+        //Fired when any text is changed
         private void Application_TextChangedEvent(Shape shape)
         {
             if (shape.Document.Template.Contains(TemplateName) && shape.CellExistsU["User.rationallyType", 0] != 0)
@@ -189,16 +196,17 @@ namespace ExtendedVisioAddin1
             }
         }
 
+        //Fired when the user clicks on the main window from a different window.
         private void Application_WindowActivatedEvent(Window w)
         {
-            if (w.Type == 1 && w.Document.Template.Contains(TemplateName))
+            if (w.Type == (short)VisWinTypes.visDrawing && w.Document.Template.Contains(TemplateName)) //VisDrawing is the main sheet
             {
                 View.Page = Application.ActivePage;
                 RebuildTree(w.Document);
             }
         }
         
-        private void NoEventsPendingEventHandler(Application app)
+        private void NoEventsPendingEventHandler(Application app) //Executed after all other events. Ensures we are never insides an undo scope
         {
             if (!app.IsUndoingOrRedoing && rebuildTree)
             {
@@ -213,7 +221,6 @@ namespace ExtendedVisioAddin1
             {
                 Selection selection = Application.ActiveWindow.Selection; //event must originate from selected element
                 
-                //for (int i = 0; i < selection.Count; i++) 
                 foreach (Shape s in selection)
                 {
                     if (s.CellExistsU["User.rationallyType", 0] != 0)
@@ -234,11 +241,11 @@ namespace ExtendedVisioAddin1
         private void Application_CellChangedEvent(Cell cell)
         {
             Shape changedShape = cell.Shape;
-            if (changedShape == null || !changedShape.Document.Template.Contains(TemplateName) || changedShape.CellExistsU["User.rationallyType", 0] == 0)
+            if (changedShape == null || !changedShape.Document.Template.Contains(TemplateName) || changedShape.CellExistsU["User.rationallyType", 0] == 0) //No need to continue when the shape is not part of our model.
             {
                 return;
             }
-            if (RelatedUrlComponent.IsRelatedUrlComponent(changedShape.Name) && cell.LocalName.Equals("Hyperlink.Row_1.Address"))
+            if (RelatedUrlComponent.IsRelatedUrlComponent(changedShape.Name) && cell.LocalName.Equals("Hyperlink.Row_1.Address")) //Link has updated
             {
                 //find the container that holds all Related Documents
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)View.Children.First(c => c is RelatedDocumentsContainer);
@@ -247,14 +254,13 @@ namespace ExtendedVisioAddin1
                 //update the text of the URL display component to the new url
                 RelatedURLURLComponent relatedURLURLComponent = (RelatedURLURLComponent)relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent);
                 relatedURLURLComponent.Text = changedShape.Hyperlink.Address;
-                //new RepaintHandler();
             }
-            else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals("User.forceIndex")) //No need to rebuild tree outside an undo
+            else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals("User.forceIndex")) 
             {
                 RComponent forcesComponent = View.Children.FirstOrDefault(x => x is ForcesContainer);
                 if (forcesComponent != null)
                 {
-                    rebuildTree = true;
+                    rebuildTree = true; //Wait with the rebuild till the undo is done
                 }
             }
             else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals("User.alternativeIndex"))
@@ -262,7 +268,7 @@ namespace ExtendedVisioAddin1
                 RComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
                 if (alternativesComponent != null)
                 {
-                    rebuildTree = true;
+                    rebuildTree = true; //Wait with the rebuild till the undo is done
                 }
             }
             else if (Application.IsUndoingOrRedoing && RelatedDocumentContainer.IsRelatedDocumentContainer(changedShape.Name) && cell.LocalName.Equals("User.documentIndex"))
@@ -270,14 +276,14 @@ namespace ExtendedVisioAddin1
                 RComponent docComponent = View.Children.FirstOrDefault(x => x is RelatedDocumentsContainer);
                 if (docComponent != null)
                 {
-                    rebuildTree = true;
+                    rebuildTree = true; //Wait with the rebuild till the undo is done
                 }
             }
         }
 
-        public void RebuildTree(IVDocument d)
+        public void RebuildTree(IVDocument d) //Completely rebuild the model
         {
-            View.Children.Clear();
+            View.Children.Clear(); 
             Model.Alternatives.Clear();
             Model.Documents.Clear();
             Model.Forces.Clear();
@@ -298,7 +304,7 @@ namespace ExtendedVisioAddin1
             }
         }
 
-        private bool Application_QueryCancelSelectionDelete(Selection e)
+        private bool Application_QueryCancelSelectionDelete(Selection e) //Fired before a shape is deleted. Shape still exists here
         {
             List<Shape> toBeDeleted = e.Cast<Shape>().ToList();
 
@@ -332,7 +338,7 @@ namespace ExtendedVisioAddin1
             }
         }
 
-        private void Application_DeleteShapeEvent(Shape s)
+        private void Application_DeleteShapeEvent(Shape s) //Fired when a shape is deleted. Shape now no longer exists
         {
             if (s.Document.Template.Contains(TemplateName))
             {

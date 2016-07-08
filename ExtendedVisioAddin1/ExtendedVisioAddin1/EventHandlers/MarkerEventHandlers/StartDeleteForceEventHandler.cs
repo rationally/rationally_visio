@@ -21,7 +21,6 @@ namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
 
             forceContainer.Deleted = true;
             forceContainer.RShape.Delete();
-
         }
     }
 }

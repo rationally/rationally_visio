@@ -78,7 +78,6 @@ namespace ExtendedVisioAddin1.View.Forces
                     }
                 }
             }
-            //InitStyle();
             UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkYIfNeeded;
             LayoutManager = new InlineLayout(this);
         }

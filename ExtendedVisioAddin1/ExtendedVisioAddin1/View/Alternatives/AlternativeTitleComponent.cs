@@ -54,7 +54,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
 
-            if (AlternativeIndex == 0)
+            if (AlternativeIndex == 0) //Top shape can't move up
             {
                 DeleteAction("moveUp");
             }

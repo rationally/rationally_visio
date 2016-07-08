@@ -13,7 +13,7 @@ namespace ExtendedVisioAddin1.View
 
             RShape = Page.DropContainer(containerMaster, null);
 
-            RShape.CellsU["User.msvSDHeadingStyle"].ResultIU = 0; //Remove header
+            RShape.CellsU["User.msvSDHeadingStyle"].ResultIU = 0; //Remove visible header
             containerDocument.Close();
         }
 

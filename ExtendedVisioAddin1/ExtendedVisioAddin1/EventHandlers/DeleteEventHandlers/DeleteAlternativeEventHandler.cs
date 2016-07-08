@@ -16,7 +16,6 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                 Globals.ThisAddIn.LastDelete = changedShape.Name;
                 Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("Delete alternative");
             }
-            //NOTE: this eventhandler is meant to be called while the changedShape is not completely deleted. Preferrable from ShapeDeleted eventhandler.
 
             //trace alternative container in view tree
             RComponent alternativeComponent = Globals.ThisAddIn.View.GetComponentByShape(changedShape);

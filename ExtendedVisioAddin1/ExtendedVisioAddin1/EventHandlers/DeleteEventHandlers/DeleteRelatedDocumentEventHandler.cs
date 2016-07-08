@@ -11,9 +11,7 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
     {
         public void Execute(string eventKey, RModel model, Shape changedShape)
         {
-            //NOTE: this eventhandler is ment to be called while the changedShape is not completely deleted. Preferrable from ShapeDeleted eventhandler.
-
-            //trace force row in view tree
+            //trace documents container in view tree
             RComponent documentComponent = Globals.ThisAddIn.View.GetComponentByShape(changedShape);
 
             if (documentComponent is RelatedDocumentContainer)

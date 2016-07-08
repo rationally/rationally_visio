@@ -9,18 +9,12 @@ namespace ExtendedVisioAddin1.Model
     public class RModel
     {
         public List<Alternative> Alternatives { get; set; }
-
         public List<RelatedDocument> Documents { get; set; }
         public List<string> AlternativeStates { get; set; }
-
         public string Author { get; set; }
-
         public string DecisionName { get; set; }
-
         public string Date { get; set; }
-
         public string Version { get; set; }
-
         public List<Force> Forces { get; set; }
 
         public RModel()
@@ -28,12 +22,12 @@ namespace ExtendedVisioAddin1.Model
             Alternatives = new List<Alternative>();
             Documents = new List<RelatedDocument>();
             Forces = new List<Force>();
-            AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"}; //Currently handcoded, could be user setting in future product.
+            AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"}; //Currently hardcoded, could be user setting in future product.
         }
 
         public void RegenerateAlternativeIdentifiers()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Don't update the view during an undo
             {
                 int i = 0;
                 AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);

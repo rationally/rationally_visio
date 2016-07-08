@@ -22,7 +22,6 @@ namespace ExtendedVisioAddin1.View.Documents
             Children = Children.OrderBy(c => c.DocumentIndex).ToList();
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
             LayoutManager = new VerticalStretchLayout(this);
-            //InitStyle();
 
         }
 
@@ -69,7 +68,6 @@ namespace ExtendedVisioAddin1.View.Documents
 
         public void InitStyle()
         {
-            //MakeListItem();
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
             if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {

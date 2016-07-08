@@ -73,9 +73,7 @@ namespace ExtendedVisioAddin1.View.Forces
         {
             //locate alternative from model
             Alternative alternative = Globals.ThisAddIn.Model.Alternatives.First(a => a.TimelessId == AlternativeTimelessId);
-
             AlternativeIdentifier = alternative.Identifier;
-            //AlternativeIndex = Globals.ThisAddIn.Model.Alternatives.IndexOf(alternative);
         }
 
         public override void Repaint()

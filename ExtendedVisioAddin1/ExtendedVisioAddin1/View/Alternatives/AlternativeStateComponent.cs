@@ -102,7 +102,7 @@ namespace ExtendedVisioAddin1.View.Alternatives
                     RShape.AddNamedRow((short)VisSectionIndices.visSectionAction, stateName, (short)VisRowTags.visTagDefault);
                     RShape.CellsU["Actions." + stateName + ".Action"].Formula = "QUEUEMARKEREVENT(\"change." + model.AlternativeStates[i] + "\")";
                     RShape.CellsU["Actions." + stateName + ".Menu"].Formula = "\"" + currentState + "\"";
-                    RShape.CellsU["Actions." + stateName + ".Disabled"].Formula = true.ToString().ToUpper();
+                    RShape.CellsU["Actions." + stateName + ".Disabled"].Formula = true.ToString().ToUpper(); //Current state can't be selected again
                     RShape.CellsU["Actions." + stateName + ".FlyoutChild"].Formula = true.ToString().ToUpper();
                 }
                 else

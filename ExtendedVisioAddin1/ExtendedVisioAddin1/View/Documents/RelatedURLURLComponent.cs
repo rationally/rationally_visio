@@ -30,7 +30,6 @@ namespace ExtendedVisioAddin1.View.Documents
 
         private void InitStyle()
         {
-            
             UsedSizingPolicy = SizingPolicy.All;
             SetUsedSizingPolicy(UsedSizingPolicy &= ~SizingPolicy.ExpandXIfNeeded);//we want to remove this one from the policy: AND with everything else on true
         }

@@ -111,10 +111,6 @@ namespace ExtendedVisioAddin1.View
                 {
                     ForcesContainer forcesContainer = new ForcesContainer(Page, s);
                     Children.Add(forcesContainer);
-                    /*if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
-                    {
-                        new RepaintHandler(forcesContainer);
-                    }*/
                 }
             }
             else if(allowAddOfSubpart)

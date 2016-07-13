@@ -6,7 +6,7 @@ using ExtendedVisioAddin1.View.Forces;
 
 namespace ExtendedVisioAddin1.Model
 {
-    public class RModel
+    public class RModel  //TODO: What does RModel stand for? 
     {
         public List<Alternative> Alternatives { get; set; }
         public List<RelatedDocument> Documents { get; set; }
@@ -27,7 +27,7 @@ namespace ExtendedVisioAddin1.Model
 
         public void RegenerateAlternativeIdentifiers()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Don't update the view during an undo
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Don't update the view during an undo   //TODO: Have you checked thread-safety? Why not use a thread-safe semaphore? 
             {
                 int i = 0;
                 AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
@@ -36,7 +36,7 @@ namespace ExtendedVisioAddin1.Model
             int j = 0;
             foreach (Alternative a in Alternatives)
             {
-                a.Identifier = (char)(65 + j) + ":";
+                a.Identifier = (char)(65 + j) + ":"; //TODO: Generating Identifiers seems a good candidate for a GOF Builder Design Pattern  (IIdentifierGenerator, AlphabeticalGenerator, NumericalGenerator) 
                 j++;
             }
         }

@@ -20,7 +20,7 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
             //trace alternative container in view tree
             RComponent alternativeComponent = Globals.ThisAddIn.View.GetComponentByShape(changedShape);
 
-            var delete = alternativeComponent as AlternativeContainer;
+            AlternativeContainer delete = alternativeComponent as AlternativeContainer;
             if (delete != null)
             {
                 AlternativeContainer containerToDelete = delete;

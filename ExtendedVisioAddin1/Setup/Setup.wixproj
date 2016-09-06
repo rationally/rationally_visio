@@ -25,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="License.rtf" />
+    <Content Include="RationallyHidden.vssx" />
   </ItemGroup>
   <ItemGroup>
     <WixExtension Include="WixNetFxExtension">
@@ -47,6 +48,7 @@
     <Content Include="build\VisioWixExtension.dll" />
     <Content Include="build\VisioWixExtension.xsd" />
     <Content Include="DecisionsStencil.vssx" />
+    <Content Include="link.jpg" />
     <Content Include="Rationally Template.vstx" />
   </ItemGroup>
   <ItemGroup>

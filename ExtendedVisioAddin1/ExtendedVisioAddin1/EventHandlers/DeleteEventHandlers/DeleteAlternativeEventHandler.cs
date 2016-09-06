@@ -14,21 +14,22 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
             if (string.IsNullOrEmpty(Globals.ThisAddIn.LastDelete) && Globals.ThisAddIn.StartedUndoState == 0 && !Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
                 Globals.ThisAddIn.LastDelete = changedShape.Name;
-                Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("Delete alternative");
+                Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("Delete alternative");  //TODO: Magic Number 
             }
 
             //trace alternative container in view tree
             RComponent alternativeComponent = Globals.ThisAddIn.View.GetComponentByShape(changedShape);
 
-            if (alternativeComponent is AlternativeContainer)
+            var delete = alternativeComponent as AlternativeContainer;
+            if (delete != null)
             {
-                AlternativeContainer containerToDelete = (AlternativeContainer)alternativeComponent;
+                AlternativeContainer containerToDelete = delete;
                 if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                 {
                     containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
                     {
                         c.Deleted = true;
-                        c.RShape.DeleteEx(0);
+                        c.RShape.DeleteEx(0);  //TODO: Magic Number
                     }); //schedule the missing delete events (children not selected during the manual delete)
                 }
                 AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
@@ -44,7 +45,7 @@ namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
                     alternativesContainer.MsvSdContainerLocked = true;
                 }
                 
-                new RepaintHandler();//requires forces to repaint as well!
+                new RepaintHandler();//requires forces to repaint as well!  //TODO: Code smell. Should be RepaintHandler.requestRepaint() or repaint().   
             }
         }
     }

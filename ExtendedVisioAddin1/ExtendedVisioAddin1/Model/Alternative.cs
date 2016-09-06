@@ -12,7 +12,7 @@
 
         public string Identifier { get; set; }
 
-        public int TimelessId { get; set; }
+        public int TimelessId { get; set; } //TODO: What is a timelessID? 
 
         public Alternative(string title, string status, string description, string identifier, int timelessId)
         {

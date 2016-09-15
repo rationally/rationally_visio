@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using ExtendedVisioAddin1.View;
+using Rationally.Visio.View;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers.TextChangedEventHandlers
+namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
     internal class TextChangedEventHandlerRegistry
     {

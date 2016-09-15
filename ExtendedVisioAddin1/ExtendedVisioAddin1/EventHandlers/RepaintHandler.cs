@@ -1,6 +1,6 @@
-﻿using ExtendedVisioAddin1.View;
+﻿using Rationally.Visio.View;
 
-namespace ExtendedVisioAddin1.EventHandlers
+namespace Rationally.Visio.EventHandlers
 {
     internal class RepaintHandler
     {

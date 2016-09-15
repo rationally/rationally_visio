@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View
+namespace Rationally.Visio.View
 {
     public class RComponent
     {

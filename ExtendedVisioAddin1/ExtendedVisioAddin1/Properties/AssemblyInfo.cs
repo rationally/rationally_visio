@@ -5,12 +5,12 @@
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 //
-[assembly: AssemblyTitle("Rationally")]
+[assembly: AssemblyTitle("rationally_visio")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Rationally Team RUG")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCompany("University of Groningen")]
+[assembly: AssemblyProduct("rationally_visio")]
+[assembly: AssemblyCopyright("Christian Manteuffel")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

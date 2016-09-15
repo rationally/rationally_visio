@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms;
-using ExtendedVisioAddin1.Model;
+using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
+namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class AddRelatedUrlHandler : IMarkerEventHandler
     {

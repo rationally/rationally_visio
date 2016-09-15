@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
-using ExtendedVisioAddin1.EventHandlers;
-using ExtendedVisioAddin1.Model;
-using ExtendedVisioAddin1.View.Alternatives;
-using ExtendedVisioAddin1.View.Documents;
-using ExtendedVisioAddin1.View.Forces;
+using Rationally.Visio.EventHandlers;
+using Rationally.Visio.Model;
+using Rationally.Visio.View.Alternatives;
+using Rationally.Visio.View.Documents;
+using Rationally.Visio.View.Forces;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View
+namespace Rationally.Visio.View
 {
     public class RView : RContainer
     {

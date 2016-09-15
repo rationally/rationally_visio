@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ExtendedVisioAddin1.View
+namespace Rationally.Visio.View
 {
     internal class InlineLayout : ILayoutManager
     {

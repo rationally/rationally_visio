@@ -1,4 +1,4 @@
-﻿namespace ExtendedVisioAddin1.View.Alternatives
+﻿namespace Rationally.Visio.View.Alternatives
 {
     internal interface IAlternativeComponent
     {

@@ -1,4 +1,4 @@
-﻿namespace ExtendedVisioAddin1
+﻿namespace Rationally.Visio
 {
     partial class AddAlternativeWithWarning
     {

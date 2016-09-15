@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View.Forces
+namespace Rationally.Visio.View.Forces
 {
     internal class ForcesContainer : RContainer
     {

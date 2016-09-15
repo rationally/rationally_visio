@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View.Alternatives
+namespace Rationally.Visio.View.Alternatives
 {
     public class AlternativesContainer : RContainer
     {

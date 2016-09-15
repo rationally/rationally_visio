@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using ExtendedVisioAddin1.View;
-using ExtendedVisioAddin1.View.Forces;
+using Rationally.Visio.View;
+using Rationally.Visio.View.Forces;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers
+namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
     internal class QDForceComponentEventHandler : IQueryDeleteEventHandler
     {

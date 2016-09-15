@@ -1,6 +1,6 @@
 ﻿using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View.Forces
+namespace Rationally.Visio.View.Forces
 {
     internal sealed class ForceStubContainer : RComponent
     {

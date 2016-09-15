@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
-using ExtendedVisioAddin1.Model;
-using ExtendedVisioAddin1.View;
-using ExtendedVisioAddin1.View.Alternatives;
+using Rationally.Visio.Model;
+using Rationally.Visio.View;
+using Rationally.Visio.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers
+namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class MarkerDeleteAlternativeEventHandler : IMarkerEventHandler
     {

@@ -1,11 +1,9 @@
-﻿
-
-using System.Linq;
-using ExtendedVisioAddin1.Model;
-using ExtendedVisioAddin1.View.Documents;
+﻿using System.Linq;
+using Rationally.Visio.Model;
+using Rationally.Visio.View.Documents;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers
+namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
     internal class DeleteRelatedDocumentsEventHandler : IDeleteEventHandler
     {

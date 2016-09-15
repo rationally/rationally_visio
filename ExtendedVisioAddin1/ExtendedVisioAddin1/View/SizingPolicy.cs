@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ExtendedVisioAddin1.View
+namespace Rationally.Visio.View
 {
     [Flags]
     public enum SizingPolicy

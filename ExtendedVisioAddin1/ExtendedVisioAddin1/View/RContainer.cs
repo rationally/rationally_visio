@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ExtendedVisioAddin1.View.Alternatives;
+using Rationally.Visio.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View
+namespace Rationally.Visio.View
 {
     public class RContainer : RComponent
     {

@@ -3,7 +3,7 @@ using System.Drawing;
 using Microsoft.Office.Interop.Visio;
 using Font = System.Drawing.Font;
 
-namespace ExtendedVisioAddin1.View
+namespace Rationally.Visio.View
 {
     public class TextLabel : RComponent
     {

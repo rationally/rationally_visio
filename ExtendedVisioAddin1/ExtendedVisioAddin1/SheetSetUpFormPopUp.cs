@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ExtendedVisioAddin1
+namespace Rationally.Visio
 {
     public partial class SheetSetUpFormPopUp : Form
     {

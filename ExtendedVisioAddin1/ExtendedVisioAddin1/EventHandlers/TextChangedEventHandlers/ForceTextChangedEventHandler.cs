@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using ExtendedVisioAddin1.View;
-using ExtendedVisioAddin1.View.Forces;
+using Rationally.Visio.View;
+using Rationally.Visio.View.Forces;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers.TextChangedEventHandlers
+namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
     internal class ForceTextChangedEventHandler : ITextChangedEventHandler
     {

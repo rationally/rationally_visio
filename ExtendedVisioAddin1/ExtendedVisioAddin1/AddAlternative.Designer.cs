@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace ExtendedVisioAddin1
+namespace Rationally.Visio
 {
     partial class AddAlternative
     {

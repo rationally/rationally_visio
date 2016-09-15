@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ExtendedVisioAddin1.View.Alternatives;
-using ExtendedVisioAddin1.View.Documents;
-using ExtendedVisioAddin1.View.Forces;
+using Rationally.Visio.View.Alternatives;
+using Rationally.Visio.View.Documents;
+using Rationally.Visio.View.Forces;
 
-namespace ExtendedVisioAddin1.Model
+namespace Rationally.Visio.Model
 {
     public class RModel  //TODO: What does RModel stand for? 
     {

@@ -1,4 +1,4 @@
-﻿namespace ExtendedVisioAddin1.Model
+﻿namespace Rationally.Visio.Model
 {
     public class Force
     {

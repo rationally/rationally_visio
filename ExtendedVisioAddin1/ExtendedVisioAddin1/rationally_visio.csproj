@@ -6,9 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AD3CBD3E-7222-444D-A5A9-26C21345A32E}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>ExtendedVisioAddin1</RootNamespace>
+    <RootNamespace>Rationally.Visio</RootNamespace>
     <NoStandardLibraries>false</NoStandardLibraries>
-    <AssemblyName>ExtendedVisioAddin1</AssemblyName>
+    <AssemblyName>rationally-visio</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
@@ -59,11 +59,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>rationally_visio2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>561F5F347454B139C12F50E8ADF65B7CBBDD3805</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>3174639B7660DBE94F9B9CF7B47D89964AC7F9F0</ManifestCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -219,6 +218,7 @@
   <ItemGroup>
     <None Include="ExtendedVisioAddin1_TemporaryKey.pfx" />
     <None Include="rationally_visio2_1_TemporaryKey.pfx" />
+    <None Include="rationally_visio2_TemporaryKey.pfx" />
     <None Include="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.cs</DependentUpon>
     </None>
@@ -268,7 +268,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
         <ProjectProperties HostName="Visio" HostPackage="{29A7B9D7-A7F1-4328-8EF0-6B2D1A56B2C1}" OfficeVersion="15.0" VstxVersion="4.0" ApplicationType="Visio" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\16.0\Visio\InstallRoot\Path#visio.exe" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
-        <Host Name="Visio" GeneratedCodeNamespace="ExtendedVisioAddin1" IconIndex="0">
+        <Host Name="Visio" GeneratedCodeNamespace="Rationally.Visio" IconIndex="0">
           <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
         </Host>
       </FlavorProperties>

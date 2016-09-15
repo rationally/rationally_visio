@@ -1,6 +1,6 @@
 ﻿using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View
+namespace Rationally.Visio.View
 {
     internal class InformationContainer : HeaderlessContainer
     {

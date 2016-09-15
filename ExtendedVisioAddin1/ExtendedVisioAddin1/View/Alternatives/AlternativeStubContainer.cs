@@ -1,6 +1,6 @@
 ﻿using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View.Alternatives
+namespace Rationally.Visio.View.Alternatives
 {
     internal sealed class AlternativeStubContainer : RComponent
     {

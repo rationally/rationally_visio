@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
-using ExtendedVisioAddin1.Model;
+using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View.Alternatives
+namespace Rationally.Visio.View.Alternatives
 {
     internal sealed class AlternativeStateComponent : RComponent, IAlternativeComponent
     {

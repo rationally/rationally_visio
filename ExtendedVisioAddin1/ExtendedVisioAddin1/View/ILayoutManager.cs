@@ -1,4 +1,4 @@
-﻿namespace ExtendedVisioAddin1.View
+﻿namespace Rationally.Visio.View
 {
     public interface ILayoutManager
     {

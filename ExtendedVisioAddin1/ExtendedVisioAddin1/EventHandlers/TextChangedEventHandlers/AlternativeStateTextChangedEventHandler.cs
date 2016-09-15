@@ -1,8 +1,8 @@
-﻿using ExtendedVisioAddin1.View;
-using ExtendedVisioAddin1.View.Alternatives;
+﻿using Rationally.Visio.View;
+using Rationally.Visio.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers.TextChangedEventHandlers
+namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
     internal class AlternativeStateTextChangedEventHandler : ITextChangedEventHandler
     {

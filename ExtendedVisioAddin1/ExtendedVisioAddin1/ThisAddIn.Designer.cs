@@ -19,7 +19,7 @@ using Microsoft.Office.Tools.Ribbon;
 using Microsoft.VisualStudio.Tools.Applications.Runtime;
 
 #pragma warning disable 414
-namespace ExtendedVisioAddin1
+namespace Rationally.Visio
 {
 
 
@@ -191,13 +191,13 @@ namespace ExtendedVisioAddin1
         {
         }
 
-        private static ThisAddIn _ThisAddIn;
+        private static Rationally.Visio.ThisAddIn _ThisAddIn;
 
         private static Factory _factory;
 
         private static ThisRibbonCollection _ThisRibbonCollection;
 
-        internal static ThisAddIn ThisAddIn
+        internal static Rationally.Visio.ThisAddIn ThisAddIn
         {
             get
             {

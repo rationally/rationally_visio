@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using ExtendedVisioAddin1.Model;
+using Rationally.Visio.Model;
 
-namespace ExtendedVisioAddin1
+namespace Rationally.Visio
 {
     internal partial class AddAlternative : Form
     {

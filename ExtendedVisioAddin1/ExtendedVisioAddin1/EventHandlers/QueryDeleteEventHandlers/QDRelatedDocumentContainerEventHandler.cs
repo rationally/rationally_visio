@@ -1,8 +1,8 @@
-﻿using ExtendedVisioAddin1.View;
-using ExtendedVisioAddin1.View.Documents;
+﻿using Rationally.Visio.View;
+using Rationally.Visio.View.Documents;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers
+namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
     internal class QDRelatedDocumentContainerEventHandler : IQueryDeleteEventHandler
     {

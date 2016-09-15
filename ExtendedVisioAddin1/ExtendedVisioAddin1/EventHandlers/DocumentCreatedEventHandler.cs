@@ -1,9 +1,9 @@
 ﻿using System.Windows.Forms;
-using ExtendedVisioAddin1.Model;
-using ExtendedVisioAddin1.View;
+using Rationally.Visio.Model;
+using Rationally.Visio.View;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers
+namespace Rationally.Visio.EventHandlers
 {
     internal class DocumentCreatedEventHandler
     {
@@ -12,7 +12,7 @@ namespace ExtendedVisioAddin1.EventHandlers
         public DocumentCreatedEventHandler(IVDocument document, RModel model)
         {
             this.model = model;
-            if (document.Template.Contains(ThisAddIn.TemplateName))
+            if (document.Template.Contains(Rationally.Visio.ThisAddIn.TemplateName))
             {
                 ShowSheetSetUpBox();
                 //draw the header

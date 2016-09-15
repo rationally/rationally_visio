@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.View.Documents
+namespace Rationally.Visio.View.Documents
 {
     internal sealed class RelatedDocumentTitleComponent : TextLabel
     {

@@ -1,7 +1,7 @@
-﻿using ExtendedVisioAddin1.View;
+﻿using Rationally.Visio.View;
 using Microsoft.Office.Interop.Visio;
 
-namespace ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers
+namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
     internal interface IQueryDeleteEventHandler
     {

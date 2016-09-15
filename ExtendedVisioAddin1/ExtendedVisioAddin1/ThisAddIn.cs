@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ExtendedVisioAddin1.EventHandlers;
-using ExtendedVisioAddin1.EventHandlers.DeleteEventHandlers;
-using ExtendedVisioAddin1.EventHandlers.MarkerEventHandlers;
-using ExtendedVisioAddin1.EventHandlers.QueryDeleteEventHandlers;
-using ExtendedVisioAddin1.EventHandlers.TextChangedEventHandlers;
-using ExtendedVisioAddin1.Model;
-using ExtendedVisioAddin1.View;
-using ExtendedVisioAddin1.View.Alternatives;
-using ExtendedVisioAddin1.View.Documents;
-using ExtendedVisioAddin1.View.Forces;
+using Rationally.Visio.EventHandlers;
+using Rationally.Visio.EventHandlers.DeleteEventHandlers;
+using Rationally.Visio.EventHandlers.MarkerEventHandlers;
+using Rationally.Visio.EventHandlers.QueryDeleteEventHandlers;
+using Rationally.Visio.EventHandlers.TextChangedEventHandlers;
+using Rationally.Visio.Model;
+using Rationally.Visio.View;
+using Rationally.Visio.View.Alternatives;
+using Rationally.Visio.View.Documents;
+using Rationally.Visio.View.Forces;
 using Microsoft.Office.Interop.Visio;
+using Application = Microsoft.Office.Interop.Visio.Application;
 using Shape = Microsoft.Office.Interop.Visio.Shape;
 
 
 //Main class for the visio add in. Everything is managed from here.
 //Developed by Ruben Scheedler and Ronald Kruizinga for the University of Groningen
-namespace ExtendedVisioAddin1
+
+namespace Rationally.Visio
 {
     public partial class ThisAddIn
     {
@@ -29,7 +31,7 @@ namespace ExtendedVisioAddin1
         public string LastDelete = "";
 
         //Variable to use for undo/redo handling
-        private bool rebuildTree;
+        private bool _rebuildTree;
 
         public readonly string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
 
@@ -39,7 +41,7 @@ namespace ExtendedVisioAddin1
         {
             Model = new RModel();
             View = new RView(Application.ActivePage);
-            rebuildTree = false;
+            _rebuildTree = false;
             Application.MarkerEvent += Application_MarkerEvent;
             Application.TemplatePaths = FolderPath;
             Application.DocumentCreated += DelegateCreateDocumentEvent;
@@ -48,7 +50,7 @@ namespace ExtendedVisioAddin1
             Application.BeforeShapeDelete += Application_DeleteShapeEvent;
             Application.CellChanged += Application_CellChangedEvent;
             Application.TextChanged += Application_TextChangedEvent;
-            Application.NoEventsPending += NoEventsPendingEventHandler;
+           Application.NoEventsPending += NoEventsPendingEventHandler;
 
             Application.BeforePageDelete += Application_BeforePageDeleteEvent;
             Application.WindowActivated += Application_WindowActivatedEvent;
@@ -208,10 +210,10 @@ namespace ExtendedVisioAddin1
         
         private void NoEventsPendingEventHandler(Application app) //Executed after all other events. Ensures we are never insides an undo scope
         {
-            if (!app.IsUndoingOrRedoing && rebuildTree)
+            if (!app.IsUndoingOrRedoing && _rebuildTree)
             {
                 RebuildTree(app.ActiveDocument);
-                rebuildTree = false;
+                _rebuildTree = false;
             }
         }
 
@@ -260,7 +262,7 @@ namespace ExtendedVisioAddin1
                 RComponent forcesComponent = View.Children.FirstOrDefault(x => x is ForcesContainer);
                 if (forcesComponent != null)
                 {
-                    rebuildTree = true; //Wait with the rebuild till the undo is done
+                    _rebuildTree = true; //Wait with the rebuild till the undo is done
                 }
             }
             else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals("User.alternativeIndex"))
@@ -268,7 +270,7 @@ namespace ExtendedVisioAddin1
                 RComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
                 if (alternativesComponent != null)
                 {
-                    rebuildTree = true; //Wait with the rebuild till the undo is done
+                    _rebuildTree = true; //Wait with the rebuild till the undo is done
                 }
             }
             else if (Application.IsUndoingOrRedoing && RelatedDocumentContainer.IsRelatedDocumentContainer(changedShape.Name) && cell.LocalName.Equals("User.documentIndex"))
@@ -276,7 +278,7 @@ namespace ExtendedVisioAddin1
                 RComponent docComponent = View.Children.FirstOrDefault(x => x is RelatedDocumentsContainer);
                 if (docComponent != null)
                 {
-                    rebuildTree = true; //Wait with the rebuild till the undo is done
+                    _rebuildTree = true; //Wait with the rebuild till the undo is done
                 }
             }
         }
@@ -367,7 +369,7 @@ namespace ExtendedVisioAddin1
                 }
                 if (StartedUndoState != 0 && s.Name == LastDelete)
                 {
-                    Application.EndUndoScope(StartedUndoState, true);
+                   Application.EndUndoScope(StartedUndoState, true);
                     StartedUndoState = 0;
                     LastDelete = "";
                 }

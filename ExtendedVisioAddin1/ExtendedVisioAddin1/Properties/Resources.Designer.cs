@@ -17,7 +17,7 @@ using System.Globalization;
 using System.Resources;
 using System.Runtime.CompilerServices;
 
-namespace ExtendedVisioAddin1.Properties
+namespace Rationally.Visio.Properties
 {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
@@ -51,7 +51,7 @@ namespace ExtendedVisioAddin1.Properties
             {
                 if (ReferenceEquals(resourceMan, null))
                 {
-                    ResourceManager temp = new ResourceManager("ExtendedVisioAddin1.Properties.Resources", typeof(Resources).Assembly);
+                    ResourceManager temp = new ResourceManager("Rationally.Visio.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

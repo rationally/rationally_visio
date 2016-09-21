@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using log4net;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Documents;
@@ -8,8 +9,11 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
     internal class DeleteRelatedDocumentEventHandler : IDeleteEventHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public void Execute(string eventKey, RModel model, Shape changedShape)
         {
+            Log.Debug("Entered DeleteRelatedDocumentEventHandler.");
             //trace documents container in view tree
             RComponent documentComponent = Globals.ThisAddIn.View.GetComponentByShape(changedShape);
 
@@ -18,6 +22,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 RelatedDocumentContainer containerToDelete = (RelatedDocumentContainer)documentComponent;
                 if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                 {
+                    Log.Debug("Deleting child shapes of related document...");
                     containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
                     {
                         c.Deleted = true;
@@ -30,6 +35,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 int docIndex = containerToDelete.DocumentIndex;
                 if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                 {
+                    Log.Debug("Document being removed from model list...");
                     model.Documents.RemoveAt(docIndex);
                 }
                 //update view tree
@@ -38,6 +44,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                 {
                     model.RegenerateDocumentIdentifiers();
+                    Log.Debug("Regenerated identifiers of document list in model.");
                     relatedDocumentsContainer.MsvSdContainerLocked = true;
                 }
                 

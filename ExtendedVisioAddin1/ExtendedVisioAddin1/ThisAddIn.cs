@@ -31,7 +31,7 @@ namespace Rationally.Visio
         public string LastDelete = "";
 
         //Variable to use for undo/redo handling
-        private bool _rebuildTree;
+        private bool rebuildTree;
 
         public readonly string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
 
@@ -41,7 +41,7 @@ namespace Rationally.Visio
         {
             Model = new RModel();
             View = new RView(Application.ActivePage);
-            _rebuildTree = false;
+            rebuildTree = false;
             Application.MarkerEvent += Application_MarkerEvent;
             Application.TemplatePaths = FolderPath;
             Application.DocumentCreated += DelegateCreateDocumentEvent;
@@ -210,10 +210,10 @@ namespace Rationally.Visio
         
         private void NoEventsPendingEventHandler(Application app) //Executed after all other events. Ensures we are never insides an undo scope
         {
-            if (!app.IsUndoingOrRedoing && _rebuildTree)
+            if (!app.IsUndoingOrRedoing && rebuildTree)
             {
                 RebuildTree(app.ActiveDocument);
-                _rebuildTree = false;
+                rebuildTree = false;
             }
         }
 
@@ -262,7 +262,7 @@ namespace Rationally.Visio
                 RComponent forcesComponent = View.Children.FirstOrDefault(x => x is ForcesContainer);
                 if (forcesComponent != null)
                 {
-                    _rebuildTree = true; //Wait with the rebuild till the undo is done
+                    rebuildTree = true; //Wait with the rebuild till the undo is done
                 }
             }
             else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals("User.alternativeIndex"))
@@ -270,7 +270,7 @@ namespace Rationally.Visio
                 RComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
                 if (alternativesComponent != null)
                 {
-                    _rebuildTree = true; //Wait with the rebuild till the undo is done
+                    rebuildTree = true; //Wait with the rebuild till the undo is done
                 }
             }
             else if (Application.IsUndoingOrRedoing && RelatedDocumentContainer.IsRelatedDocumentContainer(changedShape.Name) && cell.LocalName.Equals("User.documentIndex"))
@@ -278,7 +278,7 @@ namespace Rationally.Visio
                 RComponent docComponent = View.Children.FirstOrDefault(x => x is RelatedDocumentsContainer);
                 if (docComponent != null)
                 {
-                    _rebuildTree = true; //Wait with the rebuild till the undo is done
+                    rebuildTree = true; //Wait with the rebuild till the undo is done
                 }
             }
         }

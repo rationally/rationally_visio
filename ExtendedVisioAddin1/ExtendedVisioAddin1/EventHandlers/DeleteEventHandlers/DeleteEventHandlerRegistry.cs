@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using log4net;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 
@@ -9,6 +10,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
     {
         private static DeleteEventHandlerRegistry eventHandlerRegistry;
         public Dictionary<string, List<IDeleteEventHandler>> Registry;
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private DeleteEventHandlerRegistry()
         {
@@ -35,7 +37,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
             }
             else
             {
-                Console.WriteLine("NOTICE: delete event requested on key with to registered handlers: " + eventKey);
+                Log.Warn("NOTICE: delete event requested on key with to registered handlers: " + eventKey);
             }
         }
     }

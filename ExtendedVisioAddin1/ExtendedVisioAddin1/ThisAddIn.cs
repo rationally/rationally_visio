@@ -14,7 +14,7 @@ using Rationally.Visio.View.Forces;
 using Microsoft.Office.Interop.Visio;
 using Application = Microsoft.Office.Interop.Visio.Application;
 using Shape = Microsoft.Office.Interop.Visio.Shape;
-
+using log4net;
 
 //Main class for the visio add in. Everything is managed from here.
 //Developed by Ruben Scheedler and Ronald Kruizinga for the University of Groningen
@@ -23,6 +23,8 @@ namespace Rationally.Visio
 {
     public partial class ThisAddIn
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public RModel Model { get; set; }
         public RView View { get; set; }
 
@@ -39,6 +41,9 @@ namespace Rationally.Visio
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
+            //init for logger
+            log4net.Config.XmlConfigurator.Configure();
+            Log.Info("Rationally started!");
             Model = new RModel();
             View = new RView(Application.ActivePage);
             rebuildTree = false;
@@ -55,10 +60,14 @@ namespace Rationally.Visio
             Application.BeforePageDelete += Application_BeforePageDeleteEvent;
             Application.WindowActivated += Application_WindowActivatedEvent;
 
+            
+
             RegisterDeleteEventHandlers();
             RegisterQueryDeleteEventHandlers();
             RegisterMarkerEventHandlers();
             RegisterTextChangedEventHandlers();
+
+            Log.Info("Eventhandlers registered succesfully");
         }
         
         private static void RegisterDeleteEventHandlers()
@@ -190,9 +199,10 @@ namespace Rationally.Visio
 
         //Fired when any text is changed
         private void Application_TextChangedEvent(Shape shape)
-        {
+        { 
             if (shape.Document.Template.Contains(TemplateName) && shape.CellExistsU["User.rationallyType", 0] != 0)
             {
+                Log.Debug("TextChanged: shapeName: " + shape.Name);
                 string rationallyType = shape.CellsU["User.rationallyType"].ResultStr["Value"];
                 TextChangedEventHandlerRegistry.Instance.HandleEvent(rationallyType, View, shape);
             }
@@ -203,6 +213,7 @@ namespace Rationally.Visio
         {
             if (w.Type == (short)VisWinTypes.visDrawing && w.Document.Template.Contains(TemplateName)) //VisDrawing is the main sheet
             {
+                Log.Debug("window activated event handler enter");
                 View.Page = Application.ActivePage;
                 RebuildTree(w.Document);
             }
@@ -212,6 +223,7 @@ namespace Rationally.Visio
         {
             if (!app.IsUndoingOrRedoing && rebuildTree)
             {
+                Log.Debug("no events pending event handler entered. Rebuilding tree...");
                 RebuildTree(app.ActiveDocument);
                 rebuildTree = false;
             }
@@ -233,7 +245,7 @@ namespace Rationally.Visio
                             identifier = context.Split('.')[1];
                             context = context.Split('.')[0];
                         }
-
+                        Log.Debug("marker event being handled for: " + s.Name);
                         MarkerEventHandlerRegistry.Instance.HandleEvent(s.CellsU["User.rationallyType"].ResultStr["Value"] + "." + context, Model, s, identifier);
                     }
                 }
@@ -249,6 +261,7 @@ namespace Rationally.Visio
             }
             if (RelatedUrlComponent.IsRelatedUrlComponent(changedShape.Name) && cell.LocalName.Equals("Hyperlink.Row_1.Address")) //Link has updated
             {
+                Log.Debug("cell changed of hyperlink shape:" + changedShape.Name);
                 //find the container that holds all Related Documents
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)View.Children.First(c => c is RelatedDocumentsContainer);
                 //find the related document holding the changed shape (one of his children has RShape equal to changedShape)
@@ -259,6 +272,7 @@ namespace Rationally.Visio
             }
             else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals("User.forceIndex")) 
             {
+                Log.Debug("forceindex cell changed of forcecontainer. shape:" + changedShape.Name);
                 RComponent forcesComponent = View.Children.FirstOrDefault(x => x is ForcesContainer);
                 if (forcesComponent != null)
                 {
@@ -267,6 +281,7 @@ namespace Rationally.Visio
             }
             else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals("User.alternativeIndex"))
             {
+                Log.Debug("alternative index cell changed of alternativecontainer. shape:" + changedShape.Name);
                 RComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
                 if (alternativesComponent != null)
                 {
@@ -275,6 +290,7 @@ namespace Rationally.Visio
             }
             else if (Application.IsUndoingOrRedoing && RelatedDocumentContainer.IsRelatedDocumentContainer(changedShape.Name) && cell.LocalName.Equals("User.documentIndex"))
             {
+                Log.Debug("document index cell changed of documentcontainer. shape:" + changedShape.Name);
                 RComponent docComponent = View.Children.FirstOrDefault(x => x is RelatedDocumentsContainer);
                 if (docComponent != null)
                 {
@@ -309,7 +325,7 @@ namespace Rationally.Visio
         private bool Application_QueryCancelSelectionDelete(Selection e) //Fired before a shape is deleted. Shape still exists here
         {
             List<Shape> toBeDeleted = e.Cast<Shape>().ToList();
-
+            Log.Debug("before shape deleted event for " + e.Count + " shapes.");
             //store the rationally type of the last shape, which is responsible for ending the undo scope
             if (string.IsNullOrEmpty(LastDelete) && StartedUndoState == 0)
             {
@@ -320,6 +336,7 @@ namespace Rationally.Visio
             toBeDeleted.Where(s => View.ExistsInTree(s)).ToList().ForEach(tbd => View.GetComponentByShape(tbd).Deleted = true);
             foreach (Shape s in e)
             {
+                Log.Debug("deleted shape name: " + s.Name);
                 if (s.CellExistsU["User.rationallyType", 0] != 0)
                 {
                     string rationallyType = s.CellsU["User.rationallyType"].ResultStr["Value"];
@@ -331,6 +348,7 @@ namespace Rationally.Visio
         }
         private void Application_BeforePageDeleteEvent(Page p)
         {
+            Log.Debug("page delete event handler entered");
             if (p.Document.Template.Contains(TemplateName))
             {
                 foreach (Shape shape in p.Shapes)
@@ -342,6 +360,7 @@ namespace Rationally.Visio
 
         private void Application_DeleteShapeEvent(Shape s) //Fired when a shape is deleted. Shape now no longer exists
         {
+            Log.Debug("shape deleted event for: " + s.Name);
             if (s.Document.Template.Contains(TemplateName))
             {
                 if (s.CellExistsU["User.isStub", 0] != 0)
@@ -369,6 +388,7 @@ namespace Rationally.Visio
                 }
                 if (StartedUndoState != 0 && s.Name == LastDelete)
                 {
+                    Log.Debug("ending undo scope");
                    Application.EndUndoScope(StartedUndoState, true);
                     StartedUndoState = 0;
                     LastDelete = "";

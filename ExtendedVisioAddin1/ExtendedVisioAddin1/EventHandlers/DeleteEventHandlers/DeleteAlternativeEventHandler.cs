@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using log4net;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Alternatives;
@@ -8,11 +9,15 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
     internal class DeleteAlternativeEventHandler : IDeleteEventHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public void Execute(string eventKey, RModel model, Shape changedShape)
         {
+            Log.Debug("Entered delete alternative event handler.");
             //store the rationally type of the last shape, which is responsible for ending the undo scope
             if (string.IsNullOrEmpty(Globals.ThisAddIn.LastDelete) && Globals.ThisAddIn.StartedUndoState == 0 && !Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
+                Log.Debug("Starting undo scope.");
                 Globals.ThisAddIn.LastDelete = changedShape.Name;
                 Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("Delete alternative");  //TODO: Magic Number 
             }
@@ -26,6 +31,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 AlternativeContainer containerToDelete = delete;
                 if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                 {
+                    Log.Debug("deleting children of the alternative to delete");
                     containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
                     {
                         c.Deleted = true;
@@ -35,11 +41,12 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
                 //update model
                 model.Alternatives.RemoveAll(a => a.TimelessId == containerToDelete.TimelessId);
-
+                Log.Debug("Alternative removed from alternatives container.");
                 //update view tree
                 alternativesContainer.Children.Remove(containerToDelete);
 
                 model.RegenerateAlternativeIdentifiers();
+                Log.Debug("Identifiers regenerated of alternatives.");
                 if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                 {
                     alternativesContainer.MsvSdContainerLocked = true;

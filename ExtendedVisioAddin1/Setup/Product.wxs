@@ -70,6 +70,14 @@
             <visio:PublishStencil MenuPath="Rationally\DecisionsStencil" />
         </File>
     </Component>
+      <Component>
+        <File Name="RationallyHidden.vssx">
+        </File>
+      </Component>
+      <Component>
+        <File Name="Link.jpg">
+        </File>
+      </Component>
     <Component>
         <File Name="Rationally Template.vstx">
             <visio:PublishTemplate MenuPath="Rationally\Rationally Template" />

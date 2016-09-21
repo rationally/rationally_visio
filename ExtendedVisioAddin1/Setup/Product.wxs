@@ -82,24 +82,24 @@
       
       <!-- Add the addin dll to the setup. Reference using project referencing -->
       <Component>
-        <File Source="$(var.rationally_visio2.TargetPath)" >
+        <File Source="$(var.rationally_visio.TargetPath)" >
           
         </File>
       </Component>
       
       <!-- VSTO framework file -->
       <Component>
-        <File Source="$(var.rationally_visio2.TargetDir)Microsoft.Office.Tools.Common.v4.0.Utilities.dll"></File>
+        <File Source="$(var.rationally_visio.TargetDir)Microsoft.Office.Tools.Common.v4.0.Utilities.dll"></File>
       </Component>
 
       <!-- Add the addin manifest file -->
       <Component>
-        <File Source="$(var.rationally_visio2.TargetPath).manifest"></File>
+        <File Source="$(var.rationally_visio.TargetPath).manifest"></File>
       </Component>
       
       <!--  The .vsto file is addin discovery file. Set up registry to point to this file using |vstolocal -->
       <Component>
-        <File Source="$(var.rationally_visio2.TargetDir)$(var.rationally_visio2.TargetName).vsto">
+        <File Source="$(var.rationally_visio.TargetDir)$(var.rationally_visio.TargetName).vsto">
           <visio:PublishAddin />
         </File>
       </Component>

@@ -61,7 +61,8 @@
         </Directory>
       </Directory>
     </Directory>
-    
+    <Icon Id="icon.ico" SourceFile="icon.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
     <!-- Visio files to be included in setup -->
     <ComponentGroup Id="VisioFiles" Directory="APPLICATIONFOLDER">
       

@@ -24,6 +24,7 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon.ico" />
     <Content Include="License.rtf" />
     <Content Include="RationallyHidden.vssx" />
   </ItemGroup>

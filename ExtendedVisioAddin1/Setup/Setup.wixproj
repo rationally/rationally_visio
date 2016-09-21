@@ -52,8 +52,8 @@
     <Content Include="Rationally Template.vstx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExtendedVisioAddin1\rationally_visio2.csproj">
-      <Name>rationally_visio2</Name>
+    <ProjectReference Include="..\ExtendedVisioAddin1\rationally_visio.csproj">
+      <Name>rationally_visio</Name>
       <Project>{ad3cbd3e-7222-444d-a5a9-26c21345a32e}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>

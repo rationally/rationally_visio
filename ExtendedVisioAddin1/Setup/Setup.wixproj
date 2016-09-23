@@ -24,8 +24,10 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="banner.bmp" />
     <Content Include="icon.ico" />
     <Content Include="License.rtf" />
+    <Content Include="logo_vertical.bmp" />
     <Content Include="RationallyHidden.vssx" />
   </ItemGroup>
   <ItemGroup>

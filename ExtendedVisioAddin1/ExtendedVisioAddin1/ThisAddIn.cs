@@ -67,6 +67,9 @@ namespace Rationally.Visio
             RegisterTextChangedEventHandlers();
 
             Log.Info("Eventhandlers registered succesfully");
+
+            ProjectSetupWizard test = new ProjectSetupWizard();
+            test.Show();
         }
         
         private static void RegisterDeleteEventHandlers()

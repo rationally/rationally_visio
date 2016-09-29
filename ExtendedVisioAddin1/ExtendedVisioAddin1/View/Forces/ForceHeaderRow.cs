@@ -154,7 +154,7 @@ namespace Rationally.Visio.View.Forces
             if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
             {
                 MsvSdContainerLocked = false;
-                toRemove.ForEach(c => c.RShape.DeleteEx(0));
+                toRemove.ForEach(c => c.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal));
                 MsvSdContainerLocked = true;
             }
             base.Repaint();

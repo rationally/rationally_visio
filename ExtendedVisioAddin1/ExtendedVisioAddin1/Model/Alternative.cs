@@ -12,7 +12,7 @@
 
         public string Identifier { get; set; }
 
-        public int TimelessId { get; set; } //TODO: What is a timelessID? 
+        public int TimelessId { get; set; } //Id that exists independent of the order of the elements. Allows for the identifying of alternatives
 
         public Alternative(string title, string status, string description, string identifier, int timelessId)
         {

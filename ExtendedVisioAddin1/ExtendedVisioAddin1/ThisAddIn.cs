@@ -36,6 +36,7 @@ namespace Rationally.Visio
         private bool rebuildTree;
 
         public readonly string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
+        //public readonly string FolderPath = GetAddInTemplatePath(); <--- Enable for working add in
 
         public const string TemplateName = "Rationally Template";
 
@@ -55,12 +56,10 @@ namespace Rationally.Visio
             Application.BeforeShapeDelete += Application_DeleteShapeEvent;
             Application.CellChanged += Application_CellChangedEvent;
             Application.TextChanged += Application_TextChangedEvent;
-           Application.NoEventsPending += NoEventsPendingEventHandler;
+            Application.NoEventsPending += NoEventsPendingEventHandler;
 
             Application.BeforePageDelete += Application_BeforePageDeleteEvent;
             Application.WindowActivated += Application_WindowActivatedEvent;
-
-            
 
             RegisterDeleteEventHandlers();
             RegisterQueryDeleteEventHandlers();
@@ -195,6 +194,11 @@ namespace Rationally.Visio
             TextChangedEventHandlerRegistry registry = TextChangedEventHandlerRegistry.Instance;
             registry.Register("forceValue", new ForceTextChangedEventHandler());
             registry.Register("alternativeState", new AlternativeStateTextChangedEventHandler());
+        }
+
+        private static string GetAddInTemplatePath()
+        {
+            return Environment.GetFolderPath(Environment.Is64BitOperatingSystem ? Environment.SpecialFolder.ProgramFilesX86 : Environment.SpecialFolder.ProgramFiles) + @"\rationally-visio\";
         }
 
         //Fired when any text is changed

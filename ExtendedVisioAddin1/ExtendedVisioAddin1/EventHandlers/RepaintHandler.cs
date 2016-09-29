@@ -4,8 +4,7 @@ namespace Rationally.Visio.EventHandlers
 {
     internal class RepaintHandler
     {
-
-        public RepaintHandler()
+        public static void Repaint()
         {
             Globals.ThisAddIn.View.Children.ForEach(c => c.Repaint());
             if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)//Shapes may not be updated during an undo or redo, so don't place the children ourselves
@@ -14,7 +13,7 @@ namespace Rationally.Visio.EventHandlers
             }
         }
 
-        public RepaintHandler(RComponent component)
+        public static void Repaint(RComponent component)
         {
             if (component != null)
             {

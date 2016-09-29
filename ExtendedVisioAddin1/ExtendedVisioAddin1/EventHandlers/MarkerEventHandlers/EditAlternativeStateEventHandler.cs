@@ -18,8 +18,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             AlternativeStateComponent component = (AlternativeStateComponent)container.Children.Find(x => x is AlternativeStateComponent);
             component.SetAlternativeState(newState);
             component.UpdateBackgroundByState(newState);
-            new RepaintHandler(container);
-
+            RepaintHandler.Repaint(container);
         }
     }
 }

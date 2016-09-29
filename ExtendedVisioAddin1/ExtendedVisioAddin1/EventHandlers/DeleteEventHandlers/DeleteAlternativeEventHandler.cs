@@ -7,8 +7,10 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
+    
     internal class DeleteAlternativeEventHandler : IDeleteEventHandler
     {
+        private const string DeleteUndoScope = "Delete alternative";
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public void Execute(string eventKey, RModel model, Shape changedShape)
@@ -19,7 +21,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
             {
                 Log.Debug("Starting undo scope.");
                 Globals.ThisAddIn.LastDelete = changedShape.Name;
-                Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("Delete alternative");  //TODO: Magic Number 
+                Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope(DeleteUndoScope);
             }
 
             //trace alternative container in view tree
@@ -35,7 +37,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                     containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
                     {
                         c.Deleted = true;
-                        c.RShape.DeleteEx(0);  //TODO: Magic Number
+                        c.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
                     }); //schedule the missing delete events (children not selected during the manual delete)
                 }
                 AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);

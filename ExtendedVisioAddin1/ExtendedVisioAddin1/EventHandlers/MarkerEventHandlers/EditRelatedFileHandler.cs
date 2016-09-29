@@ -31,7 +31,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 doc.Name = openFileDialog.FileName;
                 doc.Path = openFileDialog.FileName;
                 documentContainer.EditFile(doc, index);
-                new RepaintHandler(relatedDocumentsContainer);
+                RepaintHandler.Repaint(relatedDocumentsContainer);
             }
         }
     }

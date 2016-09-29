@@ -12,9 +12,9 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
             ForcesContainer forcesContainer = (ForcesContainer)view.Children.First(c => c is ForcesContainer);
 
             ForceValueComponent forceValue = (ForceValueComponent)view.GetComponentByShape(changedShape);
-            new RepaintHandler(forceValue); //repaint the force value, for coloring
+            RepaintHandler.Repaint(forceValue); //repaint the force value, for coloring
             ForceTotalsRow forceTotalsRow = forcesContainer.Children.First(c => c is ForceTotalsRow) as ForceTotalsRow;
-            if (forceTotalsRow != null) new RepaintHandler(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).FirstOrDefault(c => c.AlternativeTimelessId == forceValue.AlternativeTimelessId));
+            if (forceTotalsRow != null) RepaintHandler.Repaint(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).FirstOrDefault(c => c.AlternativeTimelessId == forceValue.AlternativeTimelessId));
         }
     }
 }

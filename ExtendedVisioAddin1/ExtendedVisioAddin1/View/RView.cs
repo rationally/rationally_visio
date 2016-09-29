@@ -9,6 +9,9 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View
 {
+    /// <summary>
+    /// View for the Rationally application. Name is a shorthand for Rationally View.
+    /// </summary>
     public class RView : RContainer
     {
         public RView(Page page) : base(page)
@@ -31,7 +34,7 @@ namespace Rationally.Visio.View
             RelatedDocumentContainer relatedDocumentContainer = new RelatedDocumentContainer(Globals.ThisAddIn.Application.ActivePage, Globals.ThisAddIn.Model.Documents.Count - 1, document);
             relatedDocumentsContainer.Children.Add(relatedDocumentContainer);
 
-            new RepaintHandler(relatedDocumentsContainer);
+            RepaintHandler.Repaint(relatedDocumentsContainer);
         }
 
         /// <summary>
@@ -53,7 +56,7 @@ namespace Rationally.Visio.View
                 alternativesContainer.Children.Remove(alternative);
                 if (deleteShape)
                 {
-                    alternative.RShape.DeleteEx(0); //deletes the alternative, and it's child components. This should not be done when the shape is already gone, such as when the user has deleted it himself.
+                    alternative.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal); //deletes the alternative, and it's child components. This should not be done when the shape is already gone, such as when the user has deleted it himself.
                 }
                 new RepaintHandler();
             }
@@ -73,7 +76,7 @@ namespace Rationally.Visio.View
                     if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                     {
                         MessageBox.Show("Only one instance of the alternatives container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        s.DeleteEx(0);
+                        s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
                     }
                 }
                 else
@@ -88,7 +91,7 @@ namespace Rationally.Visio.View
                     if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                     {
                         MessageBox.Show("Only one instance of the related documents container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        s.DeleteEx(0);
+                        s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
                     }
                 }
                 else
@@ -104,7 +107,7 @@ namespace Rationally.Visio.View
                     if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
                     {
                         MessageBox.Show("Only one instance of the forces container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        s.DeleteEx(0);
+                        s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
                     }
                 }
                 else

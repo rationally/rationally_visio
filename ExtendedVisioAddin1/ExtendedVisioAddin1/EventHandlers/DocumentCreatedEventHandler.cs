@@ -14,7 +14,7 @@ namespace Rationally.Visio.EventHandlers
             this.model = model;
             if (document.Template.Contains(ThisAddIn.TemplateName))
             {
-                ShowSheetSetUpBox();
+                ShowSetupWizard();
                 //draw the header
                 TextLabel header = new TextLabel(Globals.ThisAddIn.Application.ActivePage,model.DecisionName);
 
@@ -30,6 +30,12 @@ namespace Rationally.Visio.EventHandlers
                 InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version);
                 RepaintHandler.Repaint(informationContainer);
             }
+        }
+
+        private void ShowSetupWizard()
+        {
+            ProjectSetupWizard test = new ProjectSetupWizard();
+            test.Show();
         }
 
         private void ShowSheetSetUpBox()

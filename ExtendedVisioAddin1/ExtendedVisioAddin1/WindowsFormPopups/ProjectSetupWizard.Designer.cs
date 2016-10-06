@@ -1,4 +1,6 @@
-﻿namespace Rationally.Visio
+﻿using Rationally.Visio.EventHandlers.ClickEventHandlers;
+
+namespace Rationally.Visio
 {
     partial class ProjectSetupWizard
     {
@@ -316,6 +318,7 @@
             this.button2.TabIndex = 0;
             this.button2.Text = "Create Decision";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += CreateDecisionClickHandler.Execute;
             // 
             // ProjectSetupWizard
             // 
@@ -345,6 +348,7 @@
             this.ResumeLayout(false);
 
         }
+
 
         #endregion
 

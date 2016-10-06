@@ -77,8 +77,7 @@ namespace Rationally.Visio
             Log.Info("Eventhandlers registered succesfully");
 
             showRationallyUpdatePopup = newVersionAvailable = CheckRationallyVersion();
-            ProjectSetupWizard test = new ProjectSetupWizard();
-            test.Show();
+            
         }
         
         private static void RegisterDeleteEventHandlers()

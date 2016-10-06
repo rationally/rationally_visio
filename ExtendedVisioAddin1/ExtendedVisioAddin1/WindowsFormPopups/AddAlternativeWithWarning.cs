@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using Rationally.Visio.Model;
 
-namespace Rationally.Visio
+namespace Rationally.Visio.WindowsFormPopups
 {
     public partial class AddAlternativeWithWarning : Form
     {

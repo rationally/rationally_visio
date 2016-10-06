@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
-namespace Rationally.Visio
+namespace Rationally.Visio.WindowsFormPopups
 {
     public partial class ProjectSetupWizardOld : Form
     {
-        List<Button> tabList = new List<Button>();
-        List<Panel> tabPanels = new List<Panel>();
+        private readonly List<Button> tabList;
+        private List<Panel> tabPanels = new List<Panel>();
 
         private static readonly Color UnselectedButtonBackground = Color.FromArgb(220, 220, 220);
         private static readonly Color SelectedButtonBackground = Color.FromArgb(193, 206, 243);

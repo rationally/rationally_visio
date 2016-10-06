@@ -1,15 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
+using Rationally.Visio.Model;
+using Rationally.Visio.View;
 
 namespace Rationally.Visio.EventHandlers.ClickEventHandlers
 {
     class CreateDecisionClickHandler
     {
-        public static void Execute(object sender, System.EventArgs e)
+        public static void Execute(string author, string decisionName, string date)
         {
-            
+            RModel model = Globals.ThisAddIn.Model;
+
+            // Read the contents of setupDialog's TextBox.
+            model.Author = author;
+            model.DecisionName = decisionName;
+            model.Date = date;
+            model.Version = "0.0.1";
+
+
+
+            //draw the header
+            TextLabel header = new TextLabel(Globals.ThisAddIn.Application.ActivePage, model.DecisionName);
+
+            header.SetUsedSizingPolicy(SizingPolicy.FixedSize);
+            header.HAlign = 0;//left, since the enum is wrong
+            header.Width = 10.5;
+            header.Height = 0.3056;
+            header.SetFontSize(22);
+            header.CenterX = 5.5;
+            header.CenterY = 22.483;
+
+            //draw the information container
+            InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version);
+            RepaintHandler.Repaint(informationContainer);
         }
     }
 }

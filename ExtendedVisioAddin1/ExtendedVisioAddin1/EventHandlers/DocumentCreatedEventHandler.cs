@@ -16,20 +16,7 @@ namespace Rationally.Visio.EventHandlers
             if (document.Template.Contains(ThisAddIn.TemplateName))
             {
                 ShowSetupWizard();
-                //draw the header
-                TextLabel header = new TextLabel(Globals.ThisAddIn.Application.ActivePage,model.DecisionName);
-
-                header.SetUsedSizingPolicy(SizingPolicy.FixedSize);
-                header.HAlign = 0;//left, since the enum is wrong
-                header.Width = 10.5;
-                header.Height = 0.3056;
-                header.SetFontSize(22);
-                header.CenterX = 5.5;
-                header.CenterY = 22.483;
-
-                //draw the information container
-                InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version);
-                RepaintHandler.Repaint(informationContainer);
+                
             }
         }
 

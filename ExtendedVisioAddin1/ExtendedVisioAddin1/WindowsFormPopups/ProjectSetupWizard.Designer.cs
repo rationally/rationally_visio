@@ -1,4 +1,5 @@
-﻿using Rationally.Visio.EventHandlers.ClickEventHandlers;
+﻿using System;
+using Rationally.Visio.EventHandlers.ClickEventHandlers;
 
 namespace Rationally.Visio.WindowsFormPopups
 {
@@ -42,13 +43,13 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutMainContent = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutGeneralAuthor = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textAuthor = new System.Windows.Forms.TextBox();
             this.flowLayoutGeneralTopic = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textDecisionTopic = new System.Windows.Forms.TextBox();
             this.flowLayoutGeneralDate = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerCreationDate = new System.Windows.Forms.DateTimePicker();
             this.flowLayoutBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.tableLayoutForEverything.SuspendLayout();
@@ -201,7 +202,7 @@ namespace Rationally.Visio.WindowsFormPopups
             // flowLayoutGeneralAuthor
             // 
             this.flowLayoutGeneralAuthor.Controls.Add(this.label2);
-            this.flowLayoutGeneralAuthor.Controls.Add(this.textBox2);
+            this.flowLayoutGeneralAuthor.Controls.Add(this.textAuthor);
             this.flowLayoutGeneralAuthor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutGeneralAuthor.Location = new System.Drawing.Point(4, 4);
             this.flowLayoutGeneralAuthor.Margin = new System.Windows.Forms.Padding(4);
@@ -223,19 +224,19 @@ namespace Rationally.Visio.WindowsFormPopups
             this.label2.Text = "Author";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // textBox2
+            // textAuthor
             // 
-            this.textBox2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(215, 6);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(500, 27);
-            this.textBox2.TabIndex = 13;
+            this.textAuthor.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textAuthor.Location = new System.Drawing.Point(215, 6);
+            this.textAuthor.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.textAuthor.Name = "textAuthor";
+            this.textAuthor.Size = new System.Drawing.Size(500, 27);
+            this.textAuthor.TabIndex = 13;
             // 
             // flowLayoutGeneralTopic
             // 
             this.flowLayoutGeneralTopic.Controls.Add(this.label1);
-            this.flowLayoutGeneralTopic.Controls.Add(this.textBox1);
+            this.flowLayoutGeneralTopic.Controls.Add(this.textDecisionTopic);
             this.flowLayoutGeneralTopic.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutGeneralTopic.Location = new System.Drawing.Point(4, 52);
             this.flowLayoutGeneralTopic.Margin = new System.Windows.Forms.Padding(4);
@@ -257,19 +258,19 @@ namespace Rationally.Visio.WindowsFormPopups
             this.label1.Text = "Decision topic";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // textBox1
+            // textDecisionTopic
             // 
-            this.textBox1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(215, 6);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(500, 27);
-            this.textBox1.TabIndex = 17;
+            this.textDecisionTopic.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textDecisionTopic.Location = new System.Drawing.Point(215, 6);
+            this.textDecisionTopic.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.textDecisionTopic.Name = "textDecisionTopic";
+            this.textDecisionTopic.Size = new System.Drawing.Size(500, 27);
+            this.textDecisionTopic.TabIndex = 17;
             // 
             // flowLayoutGeneralDate
             // 
             this.flowLayoutGeneralDate.Controls.Add(this.label3);
-            this.flowLayoutGeneralDate.Controls.Add(this.dateTimePicker1);
+            this.flowLayoutGeneralDate.Controls.Add(this.dateTimePickerCreationDate);
             this.flowLayoutGeneralDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutGeneralDate.Location = new System.Drawing.Point(3, 99);
             this.flowLayoutGeneralDate.Name = "flowLayoutGeneralDate";
@@ -290,13 +291,13 @@ namespace Rationally.Visio.WindowsFormPopups
             this.label3.Text = "Date";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // dateTimePicker1
+            // dateTimePickerCreationDate
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(216, 6);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(6, 6, 5, 6);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(500, 27);
-            this.dateTimePicker1.TabIndex = 18;
+            this.dateTimePickerCreationDate.Location = new System.Drawing.Point(216, 6);
+            this.dateTimePickerCreationDate.Margin = new System.Windows.Forms.Padding(6, 6, 5, 6);
+            this.dateTimePickerCreationDate.Name = "dateTimePickerCreationDate";
+            this.dateTimePickerCreationDate.Size = new System.Drawing.Size(500, 27);
+            this.dateTimePickerCreationDate.TabIndex = 18;
             // 
             // flowLayoutBottomButtons
             // 
@@ -318,7 +319,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.button2.TabIndex = 0;
             this.button2.Text = "Create Decision";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += CreateDecisionClickHandler.Execute;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // ProjectSetupWizard
             // 
@@ -352,6 +353,7 @@ namespace Rationally.Visio.WindowsFormPopups
 
         #endregion
 
+
         private System.Windows.Forms.TableLayoutPanel tableLayoutForEverything;
         private System.Windows.Forms.TableLayoutPanel tableLayoutLeftColumn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutRightColumn;
@@ -359,13 +361,13 @@ namespace Rationally.Visio.WindowsFormPopups
         private System.Windows.Forms.FlowLayoutPanel flowLayoutBottomButtons;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutGeneralAuthor;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textAuthor;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutGeneralTopic;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textDecisionTopic;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutGeneralDate;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePickerCreationDate;
         private System.Windows.Forms.TableLayoutPanel tableLayoutLeftLogo;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label labelBottomLeftText;

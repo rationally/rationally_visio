@@ -5,7 +5,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
 	xmlns:visio="http://schemas.microsoft.com/wix/Visio" >
 
-  <?define Version="1.0.2"?>
+  <?define Version="1.0.3"?>
   <?define UpgradeCode = "{e2f08687-0d72-4dbc-b410-7b2b20b33fd1}" ?>
 
   <Product Id="*" Name="Rationally" Language="1033" Version="$(var.Version)" Manufacturer="Rationally Team RUG" UpgradeCode="$(var.UpgradeCode)">

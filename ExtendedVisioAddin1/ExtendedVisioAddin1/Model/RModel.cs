@@ -6,7 +6,10 @@ using Rationally.Visio.View.Forces;
 
 namespace Rationally.Visio.Model
 {
-    public class RModel  //TODO: What does RModel stand for? 
+    /// <summary>
+    /// Model for the Rationally application. Name is a shorthand for Rationally Model.
+    /// </summary>
+    public class RModel //Shorthand for Rationally Model
     {
         public List<Alternative> Alternatives { get; set; }
         public List<RelatedDocument> Documents { get; set; }
@@ -27,7 +30,7 @@ namespace Rationally.Visio.Model
 
         public void RegenerateAlternativeIdentifiers()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Don't update the view during an undo   //TODO: Have you checked thread-safety? Why not use a thread-safe semaphore? 
+            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Don't update the view during an undo, since the undo does that for us
             {
                 int i = 0;
                 AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);

@@ -33,7 +33,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             docsContainer.Children[currentIndex] = docsContainer.Children[currentIndex - 1];
             docsContainer.Children[currentIndex - 1] = temp;
 
-            new RepaintHandler(docsContainer);
+            RepaintHandler.Repaint(docsContainer);
         }
     }
 }

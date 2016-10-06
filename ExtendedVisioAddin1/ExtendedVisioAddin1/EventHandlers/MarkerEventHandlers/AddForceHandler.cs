@@ -35,7 +35,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             forcesContainer.Children.Insert(forcesContainer.Children.Count-1,new ForceContainer(changedShape.ContainingPage, forcesContainer.Children.Count-2, true));
             //update the model as well
             model.Forces.Add(new Force(ForceConcernComponent.DefaultConcern,ForceDescriptionComponent.DefaultDescription));
-            new RepaintHandler(forcesContainer);
+            RepaintHandler.Repaint(forcesContainer);
         }
     }
 }

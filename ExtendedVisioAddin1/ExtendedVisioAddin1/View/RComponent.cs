@@ -6,6 +6,9 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View
 {
+    /// <summary>
+    /// Represents a container object in Rationally. Name is a shorthand for Rationally Container.
+    /// </summary>
     public class RComponent
     {
         public double X { get; set; }

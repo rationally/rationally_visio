@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Rationally.Visio.EventHandlers;
 using Rationally.Visio.EventHandlers.DeleteEventHandlers;
 using Rationally.Visio.EventHandlers.MarkerEventHandlers;
@@ -15,6 +16,7 @@ using Microsoft.Office.Interop.Visio;
 using Application = Microsoft.Office.Interop.Visio.Application;
 using Shape = Microsoft.Office.Interop.Visio.Shape;
 using log4net;
+using Newtonsoft.Json.Linq;
 
 //Main class for the visio add in. Everything is managed from here.
 //Developed by Ruben Scheedler and Ronald Kruizinga for the University of Groningen
@@ -36,8 +38,14 @@ namespace Rationally.Visio
         private bool rebuildTree;
 
         public readonly string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\";
+        //public readonly string FolderPath = GetAddInTemplatePath(); <--- Enable for working add in
 
         public const string TemplateName = "Rationally Template";
+
+        private bool showRationallyUpdatePopup = false;
+        private bool newVersionAvailable = false;
+        public readonly Version localVersion = new Version("0.0.0");
+        public Version onlineVersion;
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
@@ -50,17 +58,16 @@ namespace Rationally.Visio
             Application.MarkerEvent += Application_MarkerEvent;
             Application.TemplatePaths = FolderPath;
             Application.DocumentCreated += DelegateCreateDocumentEvent;
+            Application.DocumentOpened += Application_DocumentOpenendEvent;
             Application.ShapeAdded += Application_ShapeAddedEvent;
             Application.QueryCancelSelectionDelete += Application_QueryCancelSelectionDelete;
             Application.BeforeShapeDelete += Application_DeleteShapeEvent;
             Application.CellChanged += Application_CellChangedEvent;
             Application.TextChanged += Application_TextChangedEvent;
-           Application.NoEventsPending += NoEventsPendingEventHandler;
+            Application.NoEventsPending += NoEventsPendingEventHandler;
 
             Application.BeforePageDelete += Application_BeforePageDeleteEvent;
             Application.WindowActivated += Application_WindowActivatedEvent;
-
-            
 
             RegisterDeleteEventHandlers();
             RegisterQueryDeleteEventHandlers();
@@ -68,8 +75,8 @@ namespace Rationally.Visio
             RegisterTextChangedEventHandlers();
 
             Log.Info("Eventhandlers registered succesfully");
-            //Form1 form1 = new Form1();
-            //form1.Show();
+
+            showRationallyUpdatePopup = newVersionAvailable = CheckRationallyVersion();
             ProjectSetupWizard test = new ProjectSetupWizard();
             test.Show();
         }
@@ -199,6 +206,11 @@ namespace Rationally.Visio
             TextChangedEventHandlerRegistry registry = TextChangedEventHandlerRegistry.Instance;
             registry.Register("forceValue", new ForceTextChangedEventHandler());
             registry.Register("alternativeState", new AlternativeStateTextChangedEventHandler());
+        }
+
+        private static string GetAddInTemplatePath()
+        {
+            return Environment.GetFolderPath(Environment.Is64BitOperatingSystem ? Environment.SpecialFolder.ProgramFilesX86 : Environment.SpecialFolder.ProgramFiles) + @"\rationally-visio\";
         }
 
         //Fired when any text is changed
@@ -400,6 +412,29 @@ namespace Rationally.Visio
             }
         }
 
+        /// <summary>
+        /// Method that performs a get request to the Github api in order to check the version of the latest release.
+        /// </summary>
+        /// <returns>A boolean representing whether there is an update available online</returns>
+        private bool CheckRationallyVersion()
+        {
+            using (WebClient webClient = new WebClient())
+            {
+                webClient.Headers.Add("User-Agent", "Rationally-Addin");
+                try
+                {
+                    string result = webClient.DownloadString("https://api.github.com/repos/rationally/rationally_visio/releases/latest");
+                    JObject json = JObject.Parse(result);
+                    onlineVersion = new Version(json["tag_name"].ToString());
+                    return onlineVersion > localVersion;
+                }
+                catch (WebException)
+                {
+                    return false;
+                }
+            }
+        }
+
         //Designer method. Called when application is started.
         private void InternalStartup()
         {
@@ -411,6 +446,15 @@ namespace Rationally.Visio
             if (d.Template.Contains(TemplateName))
             {
                 new DocumentCreatedEventHandler(d, Model);
+            }
+        }
+
+        private void Application_DocumentOpenendEvent(IVDocument d)
+        {
+            if (d.Template.Contains(TemplateName) && showRationallyUpdatePopup)
+            {
+
+                showRationallyUpdatePopup = false;
             }
         }
     }

@@ -12,7 +12,7 @@ namespace Rationally.Visio.EventHandlers
         public DocumentCreatedEventHandler(IVDocument document, RModel model)
         {
             this.model = model;
-            if (document.Template.Contains(Rationally.Visio.ThisAddIn.TemplateName))
+            if (document.Template.Contains(ThisAddIn.TemplateName))
             {
                 ShowSheetSetUpBox();
                 //draw the header
@@ -28,7 +28,7 @@ namespace Rationally.Visio.EventHandlers
 
                 //draw the information container
                 InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version);
-                new RepaintHandler(informationContainer);
+                RepaintHandler.Repaint(informationContainer);
             }
         }
 

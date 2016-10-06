@@ -17,6 +17,7 @@ using Application = Microsoft.Office.Interop.Visio.Application;
 using Shape = Microsoft.Office.Interop.Visio.Shape;
 using log4net;
 using Newtonsoft.Json.Linq;
+using Rationally.Visio.WindowsFormPopups;
 
 //Main class for the visio add in. Everything is managed from here.
 //Developed by Ruben Scheedler and Ronald Kruizinga for the University of Groningen
@@ -42,10 +43,10 @@ namespace Rationally.Visio
 
         public const string TemplateName = "Rationally Template";
 
-        private bool showRationallyUpdatePopup = false;
-        private bool newVersionAvailable = false;
-        public readonly Version localVersion = new Version("0.0.0");
-        public Version onlineVersion;
+        private bool showRationallyUpdatePopup;
+        private bool newVersionAvailable;
+        public readonly Version LocalVersion = new Version("0.0.0");
+        public Version OnlineVersion;
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
@@ -424,8 +425,8 @@ namespace Rationally.Visio
                 {
                     string result = webClient.DownloadString("https://api.github.com/repos/rationally/rationally_visio/releases/latest");
                     JObject json = JObject.Parse(result);
-                    onlineVersion = new Version(json["tag_name"].ToString());
-                    return onlineVersion > localVersion;
+                    OnlineVersion = new Version(json["tag_name"].ToString());
+                    return OnlineVersion > LocalVersion;
                 }
                 catch (WebException)
                 {

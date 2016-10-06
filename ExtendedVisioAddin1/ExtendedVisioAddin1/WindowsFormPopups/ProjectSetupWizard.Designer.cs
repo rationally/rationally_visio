@@ -1,6 +1,6 @@
 ﻿using Rationally.Visio.EventHandlers.ClickEventHandlers;
 
-namespace Rationally.Visio
+namespace Rationally.Visio.WindowsFormPopups
 {
     partial class ProjectSetupWizard
     {

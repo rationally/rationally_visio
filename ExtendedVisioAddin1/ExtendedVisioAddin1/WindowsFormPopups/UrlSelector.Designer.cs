@@ -1,4 +1,4 @@
-﻿namespace Rationally.Visio
+﻿namespace Rationally.Visio.WindowsFormPopups
 {
     partial class UrlSelecter
     {

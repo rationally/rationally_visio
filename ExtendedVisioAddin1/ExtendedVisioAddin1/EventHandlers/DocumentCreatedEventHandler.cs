@@ -2,6 +2,7 @@
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.WindowsFormPopups;
 
 namespace Rationally.Visio.EventHandlers
 {

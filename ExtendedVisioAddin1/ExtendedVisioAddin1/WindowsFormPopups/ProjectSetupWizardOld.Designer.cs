@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms.VisualStyles;
-
-namespace Rationally.Visio
+﻿namespace Rationally.Visio.WindowsFormPopups
 {
     partial class ProjectSetupWizardOld
     {

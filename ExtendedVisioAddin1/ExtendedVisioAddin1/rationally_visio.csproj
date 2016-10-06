@@ -232,10 +232,10 @@
     <Compile Include="View\RView.cs" />
     <Compile Include="View\SizingPolicy.cs" />
     <Compile Include="View\VerticalStretchLayout.cs" />
-    <Compile Include="WizardComponents\WizardFooterPanel.cs">
+    <Compile Include="WindowsFormPopups\WizardComponents\WizardFooterPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WizardComponents\WizardPanel.cs">
+    <Compile Include="WindowsFormPopups\WizardComponents\WizardPanel.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>

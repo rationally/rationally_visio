@@ -192,6 +192,12 @@
     <Compile Include="WindowsFormPopups\ProjectSetupWizardOld.Designer.cs">
       <DependentUpon>ProjectSetupWizardOld.cs</DependentUpon>
     </Compile>
+    <Compile Include="WindowsFormPopups\UpdateAvailable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WindowsFormPopups\UpdateAvailable.Designer.cs">
+      <DependentUpon>UpdateAvailable.cs</DependentUpon>
+    </Compile>
     <Compile Include="WindowsFormPopups\UrlSelector.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,10 +238,10 @@
     <Compile Include="View\RView.cs" />
     <Compile Include="View\SizingPolicy.cs" />
     <Compile Include="View\VerticalStretchLayout.cs" />
-    <Compile Include="WizardComponents\WizardFooterPanel.cs">
+    <Compile Include="WindowsFormPopups\WizardComponents\WizardFooterPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WizardComponents\WizardPanel.cs">
+    <Compile Include="WindowsFormPopups\WizardComponents\WizardPanel.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
@@ -299,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WindowsFormPopups\SheetSetUpFormPopUp.resx">
       <DependentUpon>SheetSetUpFormPopUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WindowsFormPopups\UpdateAvailable.resx">
+      <DependentUpon>UpdateAvailable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WindowsFormPopups\UrlSelector.resx">
       <DependentUpon>UrlSelector.cs</DependentUpon>

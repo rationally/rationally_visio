@@ -173,11 +173,11 @@
     <Compile Include="EventHandlers\TextChangedEventHandlers\ForceTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\ITextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\TextChangedEventHandlerRegistry.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="ProjectSetupWizard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ProjectSetupWizard.Designer.cs">
+      <DependentUpon>ProjectSetupWizard.cs</DependentUpon>
     </Compile>
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
@@ -187,11 +187,11 @@
     </Compile>
     <Compile Include="Model\Force.cs" />
     <Compile Include="Model\RelatedDocument.cs" />
-    <Compile Include="ProjectSetupWizard.cs">
+    <Compile Include="ProjectSetupWizardOld.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProjectSetupWizard.Designer.cs">
-      <DependentUpon>ProjectSetupWizard.cs</DependentUpon>
+    <Compile Include="ProjectSetupWizardOld.Designer.cs">
+      <DependentUpon>ProjectSetupWizardOld.cs</DependentUpon>
     </Compile>
     <Compile Include="UrlSelector.cs">
       <SubType>Form</SubType>
@@ -290,14 +290,14 @@
     <EmbeddedResource Include="AddAlternativeWithWarning.resx">
       <DependentUpon>AddAlternativeWithWarning.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="ProjectSetupWizard.resx">
+      <DependentUpon>ProjectSetupWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProjectSetupWizard.resx">
-      <DependentUpon>ProjectSetupWizard.cs</DependentUpon>
+    <EmbeddedResource Include="ProjectSetupWizardOld.resx">
+      <DependentUpon>ProjectSetupWizardOld.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

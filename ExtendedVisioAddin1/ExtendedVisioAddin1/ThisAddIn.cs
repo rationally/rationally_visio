@@ -68,7 +68,8 @@ namespace Rationally.Visio
             RegisterTextChangedEventHandlers();
 
             Log.Info("Eventhandlers registered succesfully");
-
+            //Form1 form1 = new Form1();
+            //form1.Show();
             ProjectSetupWizard test = new ProjectSetupWizard();
             test.Show();
         }

@@ -31,6 +31,7 @@ namespace Rationally.Visio.WindowsFormPopups
                 return;
             }
             CreateDecisionClickHandler.Execute(textAuthor.Text, textDecisionTopic.Text, dateTimePickerCreationDate.Text);
+            Close();
         }
 
         private void UpdateLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

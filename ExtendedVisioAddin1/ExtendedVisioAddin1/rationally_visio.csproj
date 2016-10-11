@@ -130,6 +130,15 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="EventHandlers\ClickEventHandlers\CreateDecisionClickHandler.cs" />
+    <Compile Include="ribbon\RationallyRibbon.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ribbon\RationallyRibbon.Designer.cs">
+      <DependentUpon>RationallyRibbon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Information\AuthorLabel.cs" />
+    <Compile Include="View\Information\DateLabel.cs" />
+    <Compile Include="View\Information\VersionLabel.cs" />
     <Compile Include="WindowsFormPopups\AddAlternative.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -288,6 +297,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <EmbeddedResource Include="ribbon\RationallyRibbon.resx">
+      <DependentUpon>RationallyRibbon.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WindowsFormPopups\AddAlternative.resx">
       <DependentUpon>AddAlternative.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -317,6 +329,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Command1.png" />
+    <None Include="ribbon\wizard.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Command1_sm.png" />

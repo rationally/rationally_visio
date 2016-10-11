@@ -295,6 +295,12 @@ namespace Rationally.Visio.View
             set { RShape.CellsU["Char.Color"].Formula = value; }
         }
 
+        public int Order
+        {
+            get { return (int)RShape.CellsU["User.order"].ResultIU; }
+            set { RShape.CellsU["User.order.Value"].ResultIU = value; }
+        }
+
         //line format
 
         /// <summary>

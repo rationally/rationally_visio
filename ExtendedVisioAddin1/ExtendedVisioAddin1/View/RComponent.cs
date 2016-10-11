@@ -136,7 +136,7 @@ namespace Rationally.Visio.View
 
         public void DeleteAction(string fieldName)
         {
-            if (RShape.CellExistsU["Actions." + fieldName + ".Action", 0] != 0)
+            if (RShape.CellExistsU["Actions." + fieldName + ".Action", (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
             {
                 RShape.DeleteRow((short)VisSectionIndices.visSectionAction, RShape.CellsRowIndex["Actions." + fieldName + ".Action"]);
             }

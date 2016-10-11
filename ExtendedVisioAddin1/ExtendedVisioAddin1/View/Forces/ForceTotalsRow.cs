@@ -43,7 +43,7 @@ namespace Rationally.Visio.View.Forces
                     {
                         Children.Add(new ForceTotalComponent(page, shape));
                     }
-                    else if (shape.CellExistsU[Constants.RationallyTypeCell, 0] != 0)
+                    else if (shape.CellExistsU[Constants.RationallyTypeCell, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                     {
                         RComponent toAdd = new RComponent(page)
                         {

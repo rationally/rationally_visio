@@ -10,7 +10,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
         {
             AlternativeStateComponent alternativeState = (AlternativeStateComponent)view.GetComponentByShape(changedShape);
             int index = alternativeState.AlternativeIndex;
-            Globals.ThisAddIn.Model.Alternatives[index].Status = alternativeState.Text;
+            Globals.RationallyAddIn.Model.Alternatives[index].Status = alternativeState.Text;
         }
     }
 }

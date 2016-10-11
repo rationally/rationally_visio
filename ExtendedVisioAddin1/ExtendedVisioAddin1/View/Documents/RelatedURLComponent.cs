@@ -14,8 +14,8 @@ namespace Rationally.Visio.View.Documents
 
         public RelatedUrlComponent(Page page, int index, string url) : base(page)
         {
-            string docPath = Globals.ThisAddIn.FolderPath + "RationallyHidden.vssx";
-            Document rationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
+            string docPath = Globals.RationallyAddIn.FolderPath + "RationallyHidden.vssx";
+            Document rationallyDocument = Globals.RationallyAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
             Master rectMaster = rationallyDocument.Masters["LinkIcon"]; 
             RShape = page.Drop(rectMaster, 0, 0);
 
@@ -60,7 +60,7 @@ namespace Rationally.Visio.View.Documents
                 DeleteAction("moveUp");
             }
 
-            if (DocumentIndex == Globals.ThisAddIn.Model.Documents.Count - 1)
+            if (DocumentIndex == Globals.RationallyAddIn.Model.Documents.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -68,7 +68,7 @@ namespace Rationally.Visio.View.Documents
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
             {
                 UpdateReorderFunctions();
             }

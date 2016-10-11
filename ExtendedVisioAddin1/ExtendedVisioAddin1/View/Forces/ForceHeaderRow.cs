@@ -53,7 +53,7 @@ namespace Rationally.Visio.View.Forces
 
         private void InitChildren(Page page)
         {
-            Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
+            Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
 
 
@@ -93,7 +93,7 @@ namespace Rationally.Visio.View.Forces
         private void InitStyle()
         {
             MarginTop = 0.4;
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
@@ -123,7 +123,7 @@ namespace Rationally.Visio.View.Forces
         public override void Repaint()
         {
             //foreach alternative in model { add a force value component, if it is not aleady there }
-            List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
+            List<Alternative> alternatives = Globals.RationallyAddIn.Model.Alternatives;
             List<ForceAlternativeHeaderComponent> alreadyThere = Children.Where(c => c is ForceAlternativeHeaderComponent).Cast<ForceAlternativeHeaderComponent>().ToList();
 
             // ReSharper disable once LoopCanBeConvertedToQuery
@@ -143,7 +143,7 @@ namespace Rationally.Visio.View.Forces
             List<ForceAlternativeHeaderComponent> toRemoveFromTree = alreadyThere.Where(f => f.Deleted || !alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
             alreadyThere.RemoveAll(a => toRemoveFromTree.Contains(a));
             //finally, order the alternative columns similar to the alternatives container
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.TimelessId == fc.AlternativeTimelessId))).ToList();
             }
@@ -151,7 +151,7 @@ namespace Rationally.Visio.View.Forces
             Children.AddRange(alreadyThere);
 
             //remove the shapes of the deleted components; undo redo do this automatically
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 MsvSdContainerLocked = false;
                 toRemove.ForEach(c => c.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal));

@@ -10,7 +10,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
     {
         public void Execute(RModel model, Shape changedShape, string identifier)
         {
-            RelatedDocumentsContainer docsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
+            RelatedDocumentsContainer docsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
 
             RComponent currentComponent = new RComponent(changedShape.ContainingPage) { RShape = changedShape };
             int currentIndex = currentComponent.DocumentIndex;

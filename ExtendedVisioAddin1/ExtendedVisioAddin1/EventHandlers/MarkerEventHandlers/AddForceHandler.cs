@@ -10,18 +10,18 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
     {
         public void Execute(RModel model, Shape changedShape, string identifier)
         {
-            ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
+            ForcesContainer forcesContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
             if (forcesContainer.Children.Count == 0)
             {
                 //insert header, if it is absent
                 if (forcesContainer.Children.Count == 0 || !forcesContainer.Children.Any(c => c is ForceHeaderRow))
                 {
-                    forcesContainer.Children.Insert(0, new ForceHeaderRow(Globals.ThisAddIn.Application.ActivePage));
+                    forcesContainer.Children.Insert(0, new ForceHeaderRow(Globals.RationallyAddIn.Application.ActivePage));
                 }
                 //insert footer, if it is absent
                 if (forcesContainer.Children.Count == 0 || !forcesContainer.Children.Any(c => c is ForceTotalsRow))
                 {
-                    forcesContainer.Children.Add(new ForceTotalsRow(Globals.ThisAddIn.Application.ActivePage));
+                    forcesContainer.Children.Add(new ForceTotalsRow(Globals.RationallyAddIn.Application.ActivePage));
                 }
                 else if (forcesContainer.Children.Any(c => c is ForceTotalsRow))
                 {

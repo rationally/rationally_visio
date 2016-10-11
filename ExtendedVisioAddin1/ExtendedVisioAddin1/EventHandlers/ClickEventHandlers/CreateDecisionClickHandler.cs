@@ -8,7 +8,7 @@ namespace Rationally.Visio.EventHandlers.ClickEventHandlers
     {
         public static void Execute(string author, string decisionName, string date)
         {
-            RModel model = Globals.ThisAddIn.Model;
+            RModel model = Globals.RationallyAddIn.Model;
 
             // Read the contents of setupDialog's TextBox.
             model.Author = author;
@@ -19,7 +19,7 @@ namespace Rationally.Visio.EventHandlers.ClickEventHandlers
 
 
             //draw the header
-            TextLabel header = new TextLabel(Globals.ThisAddIn.Application.ActivePage, model.DecisionName);
+            TextLabel header = new TextLabel(Globals.RationallyAddIn.Application.ActivePage, model.DecisionName);
 
             header.SetUsedSizingPolicy(SizingPolicy.FixedSize);
             header.HAlign = 0;//left, since the enum is wrong
@@ -30,7 +30,7 @@ namespace Rationally.Visio.EventHandlers.ClickEventHandlers
             header.CenterY = 22.483;
 
             //draw the information container
-            InformationContainer informationContainer = new InformationContainer(Globals.ThisAddIn.Application.ActivePage, model.Author, model.Date, model.Version);
+            InformationContainer informationContainer = new InformationContainer(Globals.RationallyAddIn.Application.ActivePage, model.Author, model.Date, model.Version);
             RepaintHandler.Repaint(informationContainer);
         }
     }

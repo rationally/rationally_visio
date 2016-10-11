@@ -59,8 +59,8 @@ namespace Rationally.Visio.View.Alternatives
 
         public AlternativeStateComponent(Page page) : base(page)
         {
-            string docPath = Globals.ThisAddIn.FolderPath + "RationallyHidden.vssx";
-            Document rationallyDocument = Globals.ThisAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
+            string docPath = Globals.RationallyAddIn.FolderPath + "RationallyHidden.vssx";
+            Document rationallyDocument = Globals.RationallyAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
             Master rectMaster = rationallyDocument.Masters["Alternative State"];
             RShape = page.Drop(rectMaster, 0, 0);
             rationallyDocument.Close();
@@ -89,7 +89,7 @@ namespace Rationally.Visio.View.Alternatives
         {
             AddAction("changeState", "", "\"Change state\"", false);
 
-            RModel model = Globals.ThisAddIn.Model;
+            RModel model = Globals.RationallyAddIn.Model;
             for (int i = 0; i < model.AlternativeStates.Count; i++)
             {
                 string stateName = "State_" + i;
@@ -126,7 +126,7 @@ namespace Rationally.Visio.View.Alternatives
                 DeleteAction("moveUp");
             }
 
-            if (AlternativeIndex == Globals.ThisAddIn.Model.Alternatives.Count - 1)
+            if (AlternativeIndex == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -134,7 +134,7 @@ namespace Rationally.Visio.View.Alternatives
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //undo's should not edit the shape again, visio handles that for us
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //undo's should not edit the shape again, visio handles that for us
             {
                 UpdateReorderFunctions();
             }

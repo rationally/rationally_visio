@@ -26,7 +26,7 @@ namespace Rationally.Visio
     /// 
     [StartupObject(0)]
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-    public sealed partial class ThisAddIn : AddInBase
+    public sealed partial class RationallyAddIn : AddInBase
     {
 
         [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "12.0.0.0")]
@@ -38,8 +38,8 @@ namespace Rationally.Visio
         /// 
         [DebuggerNonUserCode()]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public ThisAddIn(Factory factory, IServiceProvider serviceProvider) :
-            base(factory, serviceProvider, "AddIn", "ThisAddIn")
+        public RationallyAddIn(Factory factory, IServiceProvider serviceProvider) :
+            base(factory, serviceProvider, "AddIn", "RationallyAddIn")
         {
             Globals.Factory = factory;
         }
@@ -52,7 +52,7 @@ namespace Rationally.Visio
         {
             base.Initialize();
             this.Application = this.GetHostItem<Application>(typeof(Application), "Application");
-            Globals.ThisAddIn = this;
+            Globals.RationallyAddIn = this;
             System.Windows.Forms.Application.EnableVisualStyles();
             this.InitializeCachedData();
             this.InitializeControls();
@@ -191,23 +191,23 @@ namespace Rationally.Visio
         {
         }
 
-        private static Rationally.Visio.ThisAddIn _ThisAddIn;
+        private static Rationally.Visio.RationallyAddIn rationallyAddIn;
 
         private static Factory _factory;
 
         private static ThisRibbonCollection _ThisRibbonCollection;
 
-        internal static Rationally.Visio.ThisAddIn ThisAddIn
+        internal static Rationally.Visio.RationallyAddIn RationallyAddIn
         {
             get
             {
-                return _ThisAddIn;
+                return rationallyAddIn;
             }
             set
             {
-                if ((_ThisAddIn == null))
+                if ((rationallyAddIn == null))
                 {
-                    _ThisAddIn = value;
+                    rationallyAddIn = value;
                 }
                 else
                 {

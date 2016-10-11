@@ -11,7 +11,7 @@ namespace Rationally.Visio.View.Forces
         
         public ForceValueComponent(Page page, int alternativeTimelessId, string altId, int forceIndex) : base(page)
         {
-            Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
+            Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
             RShape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
@@ -63,7 +63,7 @@ namespace Rationally.Visio.View.Forces
                 DeleteAction("moveUp");
             }
 
-            if (ForceIndex == Globals.ThisAddIn.Model.Forces.Count - 1)
+            if (ForceIndex == Globals.RationallyAddIn.Model.Forces.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -72,13 +72,13 @@ namespace Rationally.Visio.View.Forces
         public void UpdateAlternativeLabels()
         {
             //locate alternative from model
-            Alternative alternative = Globals.ThisAddIn.Model.Alternatives.First(a => a.TimelessId == AlternativeTimelessId);
+            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.TimelessId == AlternativeTimelessId);
             AlternativeIdentifier = alternative.Identifier;
         }
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
             {
                 UpdateAlternativeLabels();
                 UpdateReorderFunctions();

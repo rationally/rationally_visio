@@ -11,9 +11,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
     {
         public void Execute(RModel model, Shape changedShape, string identifier)
         {
-            AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
+            AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.RationallyAddIn.View.Children.First(c => c is AlternativesContainer);
 
-            RComponent toChangeComponent = Globals.ThisAddIn.View.GetComponentByShape(changedShape);
+            RComponent toChangeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
             int currentIndex = toChangeComponent.AlternativeIndex;
             
             AlternativeContainer toChange = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU["User.alternativeIndex"].ResultIU == currentIndex);
@@ -36,7 +36,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             other.SetAlternativeIdentifier(currentIndex);
 
             //update the related force column value identifiers
-            ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.FirstOrDefault(c => c is ForcesContainer);
+            ForcesContainer forcesContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is ForcesContainer);
             
             if (forcesContainer != null)
             {

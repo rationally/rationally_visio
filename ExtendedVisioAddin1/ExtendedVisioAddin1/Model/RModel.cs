@@ -30,10 +30,10 @@ namespace Rationally.Visio.Model
 
         public void RegenerateAlternativeIdentifiers()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Don't update the view during an undo, since the undo does that for us
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Don't update the view during an undo, since the undo does that for us
             {
                 int i = 0;
-                AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
+                AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.RationallyAddIn.View.Children.First(c => c is AlternativesContainer);
                 alternativesContainer.Children.Where(c => c is AlternativeContainer).ToList().ForEach(c => ((AlternativeContainer) c).SetAlternativeIdentifier(i++));
             }
             int j = 0;
@@ -47,14 +47,14 @@ namespace Rationally.Visio.Model
         public void RegenerateDocumentIdentifiers()
         {
             int i = 0;
-            RelatedDocumentsContainer docsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
+            RelatedDocumentsContainer docsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
             docsContainer.Children.Where(c => c is RelatedDocumentContainer).ToList().ForEach(c => ((RelatedDocumentContainer)c).SetDocumentIdentifier(i++));
         }
 
         public void RegenerateForceIdentifiers()
         {
             int i = 0;
-            ForcesContainer forcesContaineresContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
+            ForcesContainer forcesContaineresContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
             forcesContaineresContainer.Children.Where(c => c is ForceContainer).ToList().ForEach(c => ((ForceContainer)c).SetForceIdentifier(i++));
         }
     }

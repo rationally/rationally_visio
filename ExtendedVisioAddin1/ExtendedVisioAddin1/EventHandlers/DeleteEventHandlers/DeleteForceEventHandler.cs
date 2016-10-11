@@ -15,12 +15,12 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
         {
             Log.Debug("Entered DeleteForceEventHandler.");
             //trace force row in view tree
-            RComponent forceComponent = Globals.ThisAddIn.View.GetComponentByShape(changedShape);
+            RComponent forceComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
 
             if (forceComponent is ForceContainer)
             {
                 ForceContainer containerToDelete = (ForceContainer)forceComponent;
-                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     Log.Debug("Deleting all child components of the force container...");
                     containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
@@ -30,17 +30,17 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                     }); //schedule the missing delete events (children not selected during the manual delete)
                 }
 
-                ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
+                ForcesContainer forcesContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
                 //update model
                 int forceIndex = forcesContainer.Children.IndexOf(containerToDelete) - 1;
-                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     model.Forces.RemoveAt(forceIndex);
                     Log.Debug("Deleting force from model list of forces.");
                 }
                 //update view tree
                 forcesContainer.Children.Remove(containerToDelete);
-                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     model.RegenerateForceIdentifiers();
                     Log.Debug("Regenerated force identifiers in model.");

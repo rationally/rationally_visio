@@ -49,7 +49,7 @@ namespace Rationally.Visio.View.Documents
                 DeleteAction("moveUp");
             }
 
-            if (DocumentIndex == Globals.ThisAddIn.Model.Documents.Count - 1)
+            if (DocumentIndex == Globals.RationallyAddIn.Model.Documents.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -57,7 +57,7 @@ namespace Rationally.Visio.View.Documents
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Visio does this for us
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio does this for us
             {
                 UpdateReorderFunctions();
             }

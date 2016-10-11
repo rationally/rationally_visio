@@ -69,7 +69,7 @@ namespace Rationally.Visio.View.Documents
         public void InitStyle()
         {
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;

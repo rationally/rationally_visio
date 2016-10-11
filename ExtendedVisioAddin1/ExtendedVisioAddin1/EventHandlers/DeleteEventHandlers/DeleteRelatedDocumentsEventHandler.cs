@@ -13,8 +13,8 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
         public void Execute(string eventKey, RModel model, Shape changedShape)
         {
             Log.Debug("Entered DeleteRelatedDocumentsEventHandler.");
-            Globals.ThisAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
-            if (!Globals.ThisAddIn.View.Children.Any(x => x is RelatedDocumentsContainer))
+            Globals.RationallyAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
+            if (!Globals.RationallyAddIn.View.Children.Any(x => x is RelatedDocumentsContainer))
             {
                 Log.Debug("Deleting documents in document list in model.");
                 model.Documents.Clear();

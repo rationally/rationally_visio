@@ -10,7 +10,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
     {
         public void Execute(RModel model, Shape changedShape, string identifier)
         {
-            ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
+            ForcesContainer forcesContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
 
             RComponent currentComponent = new RComponent(changedShape.ContainingPage) {RShape = changedShape};
             int currentForceIndex = currentComponent.ForceIndex;

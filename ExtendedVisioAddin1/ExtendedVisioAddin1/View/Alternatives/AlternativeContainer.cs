@@ -40,20 +40,20 @@ namespace Rationally.Visio.View.Alternatives
             }
             if (title != null && state != null && desc != null)
             {
-                if (AlternativeIndex <= Globals.ThisAddIn.Model.Alternatives.Count)
+                if (AlternativeIndex <= Globals.RationallyAddIn.Model.Alternatives.Count)
                 {
                     int index = AlternativeIndex;
                     string identifier = (char)(65 + index) + ":";
-                    Globals.ThisAddIn.Model.Alternatives.Insert(AlternativeIndex, new Alternative(title, state, desc, identifier, TimelessId));
-                    foreach (Alternative alt in Globals.ThisAddIn.Model.Alternatives.Skip(index + 1).ToList())
+                    Globals.RationallyAddIn.Model.Alternatives.Insert(AlternativeIndex, new Alternative(title, state, desc, identifier, TimelessId));
+                    foreach (Alternative alt in Globals.RationallyAddIn.Model.Alternatives.Skip(index + 1).ToList())
                     {
                         alt.Identifier = (char) (65 + ++index) + ":";
                     }
                 }
                 else
                 {
-                    string identifier = (char)(65 + Globals.ThisAddIn.Model.Alternatives.Count) + ":";
-                    Globals.ThisAddIn.Model.Alternatives.Add(new Alternative(title, state, desc, identifier, TimelessId));
+                    string identifier = (char)(65 + Globals.RationallyAddIn.Model.Alternatives.Count) + ":";
+                    Globals.RationallyAddIn.Model.Alternatives.Add(new Alternative(title, state, desc, identifier, TimelessId));
                 }
             }
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
@@ -116,7 +116,7 @@ namespace Rationally.Visio.View.Alternatives
         {
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
             MarginTop = AlternativeIndex == 0 ? 0.3 : 0.0;
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
@@ -182,7 +182,7 @@ namespace Rationally.Visio.View.Alternatives
                 DeleteAction("moveUp");
             }
 
-            if (AlternativeIndex == Globals.ThisAddIn.Model.Alternatives.Count - 1)
+            if (AlternativeIndex == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -190,7 +190,7 @@ namespace Rationally.Visio.View.Alternatives
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Visio takes care of this
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio takes care of this
             {
                 UpdateReorderFunctions();
             }

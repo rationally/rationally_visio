@@ -51,13 +51,13 @@ namespace Rationally.Visio.View.Documents
             
             if (name != null && path != null)
             {
-                if (DocumentIndex <= Globals.ThisAddIn.Model.Documents.Count)
+                if (DocumentIndex <= Globals.RationallyAddIn.Model.Documents.Count)
                 {
-                    Globals.ThisAddIn.Model.Documents.Insert(DocumentIndex, new RelatedDocument(path, name, file));
+                    Globals.RationallyAddIn.Model.Documents.Insert(DocumentIndex, new RelatedDocument(path, name, file));
                 }
                 else
                 {
-                    Globals.ThisAddIn.Model.Documents.Add(new RelatedDocument(path, name, file));
+                    Globals.RationallyAddIn.Model.Documents.Add(new RelatedDocument(path, name, file));
                 }
             }
             MarginTop = DocumentIndex == 0 ? 0.3 : 0.0;
@@ -186,7 +186,7 @@ namespace Rationally.Visio.View.Documents
                 DeleteAction("moveUp");
             }
 
-            if (DocumentIndex == Globals.ThisAddIn.Model.Documents.Count - 1)
+            if (DocumentIndex == Globals.RationallyAddIn.Model.Documents.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -194,7 +194,7 @@ namespace Rationally.Visio.View.Documents
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
             {
                 UpdateReorderFunctions();
             }

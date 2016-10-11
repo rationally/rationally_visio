@@ -33,7 +33,7 @@ namespace Rationally.Visio.View.Forces
                     Children.Add(new ForceTotalsRow(page, shape));
                 }
             }
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 //insert header, if it is absent
                 if (Children.Count == 0 || !Children.Any(c => c is ForceHeaderRow))

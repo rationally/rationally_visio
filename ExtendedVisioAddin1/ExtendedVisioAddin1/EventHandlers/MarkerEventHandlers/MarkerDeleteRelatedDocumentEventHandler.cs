@@ -11,7 +11,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
     {
         public void Execute(RModel model, Shape s, string identifier)
         {
-            RComponent component = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };
+            RComponent component = new RComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = s };
 
             int index = component.DocumentIndex;
             RelatedDocument document = model.Documents[index];
@@ -27,7 +27,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 else //subpart of document container
                 {
                     //trace documents container
-                    RelatedDocumentsContainer documentsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
+                    RelatedDocumentsContainer documentsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
                     //trace the correct document container
                     RelatedDocumentContainer documentContainer = (RelatedDocumentContainer)documentsContainer.Children.First(c => c is RelatedDocumentContainer && component.DocumentIndex == c.DocumentIndex);
 

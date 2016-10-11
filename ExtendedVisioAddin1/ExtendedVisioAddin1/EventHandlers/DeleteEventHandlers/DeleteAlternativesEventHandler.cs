@@ -12,9 +12,9 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 
         public void Execute(string eventKey, RModel model, Shape changedShape)
         {
-            Globals.ThisAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
+            Globals.RationallyAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
             Log.Debug("Handler of delete alternatives entered.");
-            if (!Globals.ThisAddIn.View.Children.Any(x => x is AlternativesContainer))
+            if (!Globals.RationallyAddIn.View.Children.Any(x => x is AlternativesContainer))
             {
                 model.Alternatives.Clear();
                 Log.Debug("model alternatives list emptied.");

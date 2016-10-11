@@ -7,7 +7,7 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
     {
         public void Execute(string eventKey, RView view, Shape forcesContainer)
         {
-            Globals.ThisAddIn.View.GetComponentByShape(forcesContainer).RemoveDeleteLock(true);
+            Globals.RationallyAddIn.View.GetComponentByShape(forcesContainer).RemoveDeleteLock(true);
         }
     }
 }

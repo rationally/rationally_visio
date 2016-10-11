@@ -15,12 +15,12 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
         {
             Log.Debug("Entered DeleteRelatedDocumentEventHandler.");
             //trace documents container in view tree
-            RComponent documentComponent = Globals.ThisAddIn.View.GetComponentByShape(changedShape);
+            RComponent documentComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
 
             if (documentComponent is RelatedDocumentContainer)
             {
                 RelatedDocumentContainer containerToDelete = (RelatedDocumentContainer)documentComponent;
-                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     Log.Debug("Deleting child shapes of related document...");
                     containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
@@ -30,10 +30,10 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                     }); //schedule the missing delete events (children not selected during the manual delete)
                 }
 
-                RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
+                RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
                 //update model
                 int docIndex = containerToDelete.DocumentIndex;
-                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     Log.Debug("Document being removed from model list...");
                     model.Documents.RemoveAt(docIndex);
@@ -41,7 +41,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 //update view tree
                 relatedDocumentsContainer.Children.Remove(containerToDelete);
 
-                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     model.RegenerateDocumentIdentifiers();
                     Log.Debug("Regenerated identifiers of document list in model.");

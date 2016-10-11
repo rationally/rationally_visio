@@ -18,7 +18,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                     int timelessId = Alternative.HighestTimelessId == -1 ? 0 : (Alternative.HighestTimelessId + 1);
                     Alternative newAlternative = new Alternative(alternative.alternativeName.Text, alternative.alternativeStatus.SelectedItem.ToString(), "Enter a description here.", identifier, timelessId);
                     model.Alternatives.Add(newAlternative);
-                    Globals.ThisAddIn.View.AddAlternative(newAlternative);
+                    Globals.RationallyAddIn.View.AddAlternative(newAlternative);
                 }
                 alternative.Dispose();
             }
@@ -31,7 +31,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                     int timelessId = Alternative.HighestTimelessId == -1 ? 0 : (Alternative.HighestTimelessId + 1);
                     Alternative newAlternative = new Alternative(alternative.alternativeName.Text, alternative.alternativeStatus.SelectedItem.ToString(), "Enter a description here.", identifier, timelessId);
                     model.Alternatives.Add(newAlternative);
-                    Globals.ThisAddIn.View.AddAlternative(newAlternative);
+                    Globals.RationallyAddIn.View.AddAlternative(newAlternative);
                 }
                 alternative.Dispose();
             }

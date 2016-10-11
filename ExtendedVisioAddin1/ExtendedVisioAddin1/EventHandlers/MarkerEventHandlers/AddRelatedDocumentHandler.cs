@@ -19,7 +19,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 //AddToModel
                 RelatedDocument document = new RelatedDocument(openFileDialog.FileName, openFileDialog.FileName, true);
                 model.Documents.Add(document);
-                Globals.ThisAddIn.View.AddRelatedDocument(document);
+                Globals.RationallyAddIn.View.AddRelatedDocument(document);
             }
             openFileDialog.Dispose();
         }

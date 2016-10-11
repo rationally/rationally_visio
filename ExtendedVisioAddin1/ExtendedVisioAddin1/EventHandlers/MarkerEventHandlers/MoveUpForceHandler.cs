@@ -36,7 +36,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             forcesContainer.Children[currentChildIndex] = forcesContainer.Children[currentChildIndex - 1];
             forcesContainer.Children[currentChildIndex - 1] = temp;
 
-            new RepaintHandler();
+            RepaintHandler.Repaint();
         }
     }
 }

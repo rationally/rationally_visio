@@ -18,7 +18,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
             {
                 model.Forces.Clear();
                 Log.Debug("Cleared model forces list.");
-                new RepaintHandler();
+                RepaintHandler.Repaint();
             }
         }
     }

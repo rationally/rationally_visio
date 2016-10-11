@@ -18,7 +18,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
             {
                 model.Alternatives.Clear();
                 Log.Debug("model alternatives list emptied.");
-                new RepaintHandler();
+                RepaintHandler.Repaint();
             }
         }
     }

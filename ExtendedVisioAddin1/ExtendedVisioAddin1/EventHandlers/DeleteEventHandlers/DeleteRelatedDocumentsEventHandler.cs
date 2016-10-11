@@ -18,7 +18,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
             {
                 Log.Debug("Deleting documents in document list in model.");
                 model.Documents.Clear();
-                new RepaintHandler();
+                RepaintHandler.Repaint();
             }
         }
     }

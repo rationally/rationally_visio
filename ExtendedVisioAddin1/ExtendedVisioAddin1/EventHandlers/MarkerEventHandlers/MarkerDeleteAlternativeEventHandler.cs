@@ -12,7 +12,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
         public void Execute(RModel model, Shape s, string context)
         {
 
-            RComponent component = new RComponent(Globals.ThisAddIn.Application.ActivePage) { RShape = s };
+            RComponent component = new RComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = s };
 
             int index = component.AlternativeIndex;
             Alternative alternative = model.Alternatives[index];
@@ -28,7 +28,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 else //subpart of alternative container
                 {
                     //trace alternatives container
-                    AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
+                    AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.RationallyAddIn.View.Children.First(c => c is AlternativesContainer);
                     //trace the correct alternative container
                     AlternativeContainer alternativeContainer = (AlternativeContainer) alternativesContainer.Children.First(c => c is AlternativeContainer && component.AlternativeIndex == c.AlternativeIndex);
                     

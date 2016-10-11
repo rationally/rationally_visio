@@ -12,7 +12,7 @@ namespace Rationally.Visio.View.Forces
         
         private ForceTotalComponent(Page page) : base(page)
         {
-            Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
+            Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
             RShape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
@@ -61,22 +61,22 @@ namespace Rationally.Visio.View.Forces
         public void UpdateAlternativeLabels()
         {
             //locate alternative from model
-            Alternative alternative = Globals.ThisAddIn.Model.Alternatives.First(a => a.TimelessId == AlternativeTimelessId);
+            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.TimelessId == AlternativeTimelessId);
             
             AlternativeIdentifier = alternative.Identifier;
-            AlternativeIndex = Globals.ThisAddIn.Model.Alternatives.IndexOf(alternative);
+            AlternativeIndex = Globals.RationallyAddIn.Model.Alternatives.IndexOf(alternative);
         }
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 UpdateAlternativeLabels();
 
                 int total = 0;
                 List<ForceValueComponent> totalCandidates = new List<ForceValueComponent>();
 
-                ForcesContainer forcesContainer = (ForcesContainer)Globals.ThisAddIn.View.Children.First(c => c is ForcesContainer);
+                ForcesContainer forcesContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
                 //for each forcecontainer, look up the forcevalue related to this' total and store it in totalCandidates
                 forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(c => c.Children.Where(d => d is ForceValueComponent).ToList().Cast<ForceValueComponent>().Where(fv => fv.AlternativeTimelessId == AlternativeTimelessId).ToList().ForEach(childForTotal => totalCandidates.Add(childForTotal)));
 

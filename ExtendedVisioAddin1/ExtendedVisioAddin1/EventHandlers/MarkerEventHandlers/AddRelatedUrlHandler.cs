@@ -14,7 +14,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             {
                 RelatedDocument document = new RelatedDocument(selectUrlDialog.urlTextBox.Text, selectUrlDialog.nameTextbox.Text, false);
                 model.Documents.Add(document);
-                Globals.ThisAddIn.View.AddRelatedDocument(document);
+                Globals.RationallyAddIn.View.AddRelatedDocument(document);
             }
             selectUrlDialog.Dispose();
         }

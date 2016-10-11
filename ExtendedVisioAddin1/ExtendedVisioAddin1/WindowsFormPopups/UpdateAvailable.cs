@@ -9,6 +9,7 @@ namespace Rationally.Visio.WindowsFormPopups
         public UpdateAvailable(Version current, Version New)
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
             CurrVer.Text = current.ToString();
             NewVer.Text = New.ToString();
         }
@@ -20,7 +21,7 @@ namespace Rationally.Visio.WindowsFormPopups
 
         private void Btn_Down_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo sInfo = new ProcessStartInfo("https://rationally.github.io/");
+            ProcessStartInfo sInfo = new ProcessStartInfo(RationallyAddIn.RationallySite);
             Process.Start(sInfo);
             Close();
         }

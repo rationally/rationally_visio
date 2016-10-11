@@ -28,7 +28,7 @@ namespace Rationally.Visio.View
             characterHeight = 1.0/72.0*(double) size;
             
             contentTextWidth = GetWidthOfString(labelText)/ PixelsPerInch;
-            Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
+            Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
             RShape = page.Drop(rectMaster, 0,0);
             basicDocument.Close();
@@ -95,7 +95,7 @@ namespace Rationally.Visio.View
                     }
                     //add the last piece of the string
                     newContent += text.Substring(text.Length/lineLength*lineLength);//integer devision
-                    if (RShape.Characters.Text != newContent && !Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                    if (RShape.Characters.Text != newContent && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                     {
                         RShape.Characters.Text = newContent;
                     }

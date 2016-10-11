@@ -17,21 +17,21 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
         {
             Log.Debug("Entered delete alternative event handler.");
             //store the rationally type of the last shape, which is responsible for ending the undo scope
-            if (string.IsNullOrEmpty(Globals.ThisAddIn.LastDelete) && Globals.ThisAddIn.StartedUndoState == 0 && !Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (string.IsNullOrEmpty(Globals.RationallyAddIn.LastDelete) && Globals.RationallyAddIn.StartedUndoState == 0 && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 Log.Debug("Starting undo scope.");
-                Globals.ThisAddIn.LastDelete = changedShape.Name;
-                Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope(DeleteUndoScope);
+                Globals.RationallyAddIn.LastDelete = changedShape.Name;
+                Globals.RationallyAddIn.StartedUndoState = Globals.RationallyAddIn.Application.BeginUndoScope(DeleteUndoScope);
             }
 
             //trace alternative container in view tree
-            RComponent alternativeComponent = Globals.ThisAddIn.View.GetComponentByShape(changedShape);
+            RComponent alternativeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
 
             AlternativeContainer delete = alternativeComponent as AlternativeContainer;
             if (delete != null)
             {
                 AlternativeContainer containerToDelete = delete;
-                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     Log.Debug("deleting children of the alternative to delete");
                     containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
@@ -40,7 +40,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                         c.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
                     }); //schedule the missing delete events (children not selected during the manual delete)
                 }
-                AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.ThisAddIn.View.Children.First(c => c is AlternativesContainer);
+                AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.RationallyAddIn.View.Children.First(c => c is AlternativesContainer);
                 //update model
                 model.Alternatives.RemoveAll(a => a.TimelessId == containerToDelete.TimelessId);
                 Log.Debug("Alternative removed from alternatives container.");
@@ -49,7 +49,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 
                 model.RegenerateAlternativeIdentifiers();
                 Log.Debug("Identifiers regenerated of alternatives.");
-                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     alternativesContainer.MsvSdContainerLocked = true;
                 }

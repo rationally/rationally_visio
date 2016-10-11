@@ -7,7 +7,7 @@ namespace Rationally.Visio.View
         public HeaderlessContainer(Page page) : base(page)
         {
 
-            Application application = Globals.ThisAddIn.Application;
+            Application application = Globals.RationallyAddIn.Application;
             Document containerDocument = application.Documents.OpenEx(application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers, VisMeasurementSystem.visMSUS), (short)VisOpenSaveArgs.visOpenHidden);
             Master containerMaster = containerDocument.Masters["Plain"];
 

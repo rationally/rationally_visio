@@ -21,17 +21,17 @@ namespace Rationally.Visio.View
 
         public void AddAlternative(Alternative alternative)
         {
-            AlternativesContainer container = (AlternativesContainer) Globals.ThisAddIn.View.Children.First(ch => ch is AlternativesContainer);
-            container.Children.Add(new AlternativeContainer(Globals.ThisAddIn.Application.ActivePage, Globals.ThisAddIn.Model.Alternatives.Count - 1, alternative));
+            AlternativesContainer container = (AlternativesContainer) Globals.RationallyAddIn.View.Children.First(ch => ch is AlternativesContainer);
+            container.Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Alternatives.Count - 1, alternative));
             new RepaintHandler();
         }
 
         public void AddRelatedDocument(RelatedDocument document)
         {
             //container of all related documents:
-            RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.ThisAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
+            RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
             //create a container that wraps the new document
-            RelatedDocumentContainer relatedDocumentContainer = new RelatedDocumentContainer(Globals.ThisAddIn.Application.ActivePage, Globals.ThisAddIn.Model.Documents.Count - 1, document);
+            RelatedDocumentContainer relatedDocumentContainer = new RelatedDocumentContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Documents.Count - 1, document);
             relatedDocumentsContainer.Children.Add(relatedDocumentContainer);
 
             RepaintHandler.Repaint(relatedDocumentsContainer);
@@ -73,7 +73,7 @@ namespace Rationally.Visio.View
             {
                 if (Children.Exists(x => AlternativesContainer.IsAlternativesContainer(x.Name)))
                 {
-                    if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                    if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                     {
                         MessageBox.Show("Only one instance of the alternatives container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
@@ -88,7 +88,7 @@ namespace Rationally.Visio.View
             {
                 if (Children.Exists(x => RelatedDocumentsContainer.IsRelatedDocumentsContainer(x.Name)))
                 {
-                    if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                    if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                     {
                         MessageBox.Show("Only one instance of the related documents container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
@@ -104,7 +104,7 @@ namespace Rationally.Visio.View
             {
                 if (Children.Exists(x => ForcesContainer.IsForcesContainer(x.Name)))
                 {
-                    if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+                    if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                     {
                         MessageBox.Show("Only one instance of the forces container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);

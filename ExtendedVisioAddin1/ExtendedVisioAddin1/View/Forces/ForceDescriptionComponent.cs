@@ -11,7 +11,7 @@ namespace Rationally.Visio.View.Forces
         public ForceDescriptionComponent(Page page, int forceIndex) : base(page)
         {
             
-            Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
+            Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
             RShape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
@@ -57,7 +57,7 @@ namespace Rationally.Visio.View.Forces
                 DeleteAction("moveUp");
             }
 
-            if (ForceIndex == Globals.ThisAddIn.Model.Forces.Count - 1)
+            if (ForceIndex == Globals.RationallyAddIn.Model.Forces.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -65,7 +65,7 @@ namespace Rationally.Visio.View.Forces
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 UpdateReorderFunctions();
             }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Diagnostics;
+using System.Windows.Forms;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
 
 namespace Rationally.Visio.WindowsFormPopups
@@ -8,12 +9,12 @@ namespace Rationally.Visio.WindowsFormPopups
         public ProjectSetupWizard()
         {
             InitializeComponent();
+            if (!Globals.RationallyAddIn.NewVersionAvailable)
+            {
+                UpdateLink.Hide();
+            }
         }
-
-        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        
 
         private void button2_Click(object sender, System.EventArgs e)
         {
@@ -30,6 +31,12 @@ namespace Rationally.Visio.WindowsFormPopups
                 return;
             }
             CreateDecisionClickHandler.Execute(textAuthor.Text, textDecisionTopic.Text, dateTimePickerCreationDate.Text);
+        }
+
+        private void UpdateLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ProcessStartInfo sInfo = new ProcessStartInfo(RationallyAddIn.RationallySite);
+            Process.Start(sInfo);
         }
     }
 }

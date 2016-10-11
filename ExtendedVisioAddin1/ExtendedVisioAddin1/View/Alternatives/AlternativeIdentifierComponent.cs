@@ -59,7 +59,7 @@ namespace Rationally.Visio.View.Alternatives
                 DeleteAction("moveUp");
             }
 
-            if (AlternativeIndex == Globals.ThisAddIn.Model.Alternatives.Count - 1)
+            if (AlternativeIndex == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -67,7 +67,7 @@ namespace Rationally.Visio.View.Alternatives
 
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //No need to do this during an update, Visio handles this
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //No need to do this during an update, Visio handles this
             {
                 UpdateReorderFunctions();
             }

@@ -87,7 +87,7 @@ namespace Rationally.Visio.View.Alternatives
             indexList.Reverse(); //Reverse so indices don't change
             foreach (int index in indexList)
             {
-                Globals.ThisAddIn.Model.Alternatives.RemoveAt(index);
+                Globals.RationallyAddIn.Model.Alternatives.RemoveAt(index);
             }
         }
 

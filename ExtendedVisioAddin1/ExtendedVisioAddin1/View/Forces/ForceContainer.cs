@@ -68,13 +68,13 @@ namespace Rationally.Visio.View.Forces
 
                 if (concern != null && description != null)
                 {
-                    if (ForceIndex <= Globals.ThisAddIn.Model.Forces.Count)
+                    if (ForceIndex <= Globals.RationallyAddIn.Model.Forces.Count)
                     {
-                        Globals.ThisAddIn.Model.Forces.Insert(ForceIndex, new Force(concern, description));
+                        Globals.RationallyAddIn.Model.Forces.Insert(ForceIndex, new Force(concern, description));
                     }
                     else
                     {
-                        Globals.ThisAddIn.Model.Forces.Add(new Force(concern, description));
+                        Globals.RationallyAddIn.Model.Forces.Add(new Force(concern, description));
                     }
                 }
             }
@@ -85,7 +85,7 @@ namespace Rationally.Visio.View.Forces
         private void InitStyle()
         {
             UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkYIfNeeded;
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
@@ -102,7 +102,7 @@ namespace Rationally.Visio.View.Forces
                 DeleteAction("moveUp");
             }
 
-            if (ForceIndex == Globals.ThisAddIn.Model.Forces.Count - 1)
+            if (ForceIndex == Globals.RationallyAddIn.Model.Forces.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -111,12 +111,12 @@ namespace Rationally.Visio.View.Forces
         [SuppressMessage("ReSharper", "SimplifyLinqExpression")]
         public override void Repaint()
         {
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Visio does this for us
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio does this for us
             {
                 UpdateReorderFunctions();
             }
             //foreach alternative in model { add a force value component, if it is not aleady there }
-            List<Alternative> alternatives = Globals.ThisAddIn.Model.Alternatives;
+            List<Alternative> alternatives = Globals.RationallyAddIn.Model.Alternatives;
 
             List<ForceValueComponent> alreadyThere = Children.Where(c => c is ForceValueComponent).Cast<ForceValueComponent>().ToList();
             // ReSharper disable once LoopCanBeConvertedToQuery
@@ -137,7 +137,7 @@ namespace Rationally.Visio.View.Forces
             List<ForceValueComponent> toRemoveFromTree = alreadyThere.Where(f => f.Deleted || !alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
             alreadyThere.RemoveAll(a => toRemoveFromTree.Contains(a));
             //finally, order the alternative columns similar to the alternatives container
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.TimelessId == fc.AlternativeTimelessId))).ToList();
             }
@@ -145,7 +145,7 @@ namespace Rationally.Visio.View.Forces
             Children.AddRange(alreadyThere);
 
             //remove the shapes of the deleted components; undo redo do this automatically
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 MsvSdContainerLocked = false;
                 toRemove.ForEach(c => c.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal));

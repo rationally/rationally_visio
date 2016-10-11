@@ -261,7 +261,7 @@
     <Compile Include="WindowsFormPopups\SheetSetUpFormPopUp.Designer.cs">
       <DependentUpon>SheetSetUpFormPopUp.cs</DependentUpon>
     </Compile>
-    <Compile Include="ThisAddIn.cs">
+    <Compile Include="RationallyAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
     <AppDesigner Include="Properties\" />
@@ -274,11 +274,11 @@
     <None Include="rationally_visio2_TemporaryKey.pfx" />
     <None Include="rationally_visio_1_TemporaryKey.pfx" />
     <None Include="rationally_visio_TemporaryKey.pfx" />
-    <None Include="ThisAddIn.Designer.xml">
-      <DependentUpon>ThisAddIn.cs</DependentUpon>
+    <None Include="RationallyAddIn.Designer.xml">
+      <DependentUpon>RationallyAddIn.cs</DependentUpon>
     </None>
-    <Compile Include="ThisAddIn.Designer.cs">
-      <DependentUpon>ThisAddIn.Designer.xml</DependentUpon>
+    <Compile Include="RationallyAddIn.Designer.cs">
+      <DependentUpon>RationallyAddIn.Designer.xml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -333,7 +333,7 @@
       <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
         <ProjectProperties HostName="Visio" HostPackage="{29A7B9D7-A7F1-4328-8EF0-6B2D1A56B2C1}" OfficeVersion="15.0" VstxVersion="4.0" ApplicationType="Visio" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\16.0\Visio\InstallRoot\Path#visio.exe" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
         <Host Name="Visio" GeneratedCodeNamespace="Rationally.Visio" IconIndex="0">
-          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
+          <HostItem Name="ThisAddIn" Code="RationallyAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="RationallyAddIn.Designer.xml" GeneratedCode="RationallyAddIn.Designer.cs" />
         </Host>
       </FlavorProperties>
     </VisualStudio>

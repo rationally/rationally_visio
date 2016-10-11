@@ -22,7 +22,7 @@ namespace Rationally.Visio.View
         public override void Repaint()
         {
             Children.ForEach(c => c.Repaint());
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Visio handles this for us
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio handles this for us
             {
                 LayoutManager.Repaint();
             }

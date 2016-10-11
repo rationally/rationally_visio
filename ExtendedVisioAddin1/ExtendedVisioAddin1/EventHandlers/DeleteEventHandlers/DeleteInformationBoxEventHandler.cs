@@ -12,7 +12,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
         public void Execute(string eventKey, RModel model, Shape changedShape)
         {
             Log.Debug("Deleting information box.");
-            Globals.ThisAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
+            Globals.RationallyAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
         }
     }
 }

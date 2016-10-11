@@ -6,10 +6,10 @@ namespace Rationally.Visio.EventHandlers
     {
         public static void Repaint()
         {
-            Globals.ThisAddIn.View.Children.ForEach(c => c.Repaint());
-            if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing)//Shapes may not be updated during an undo or redo, so don't place the children ourselves
+            Globals.RationallyAddIn.View.Children.ForEach(c => c.Repaint());
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)//Shapes may not be updated during an undo or redo, so don't place the children ourselves
             {
-                Globals.ThisAddIn.View.Children.ForEach(c => c.PlaceChildren());
+                Globals.RationallyAddIn.View.Children.ForEach(c => c.PlaceChildren());
             }
         }
 
@@ -18,7 +18,7 @@ namespace Rationally.Visio.EventHandlers
             if (component != null)
             {
                 component.Repaint();
-                if (!Globals.ThisAddIn.Application.IsUndoingOrRedoing) //Shapes may not be updated during an undo or redo, so don't place the children ourselves
+                if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Shapes may not be updated during an undo or redo, so don't place the children ourselves
                 {
                     component.PlaceChildren();
                 }

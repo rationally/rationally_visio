@@ -24,7 +24,7 @@ using Rationally.Visio.WindowsFormPopups;
 
 namespace Rationally.Visio
 {
-    public partial class ThisAddIn
+    public partial class RationallyAddIn
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -42,9 +42,10 @@ namespace Rationally.Visio
         //public readonly string FolderPath = GetAddInTemplatePath(); <--- Enable for working add in
 
         public const string TemplateName = "Rationally Template";
+        public const string RationallySite = "https://rationally.github.io/";
 
         private bool showRationallyUpdatePopup;
-        private bool newVersionAvailable;
+        public bool NewVersionAvailable;
         public readonly Version LocalVersion = new Version("0.0.0");
         public Version OnlineVersion;
 
@@ -77,7 +78,7 @@ namespace Rationally.Visio
 
             Log.Info("Eventhandlers registered succesfully");
 
-            showRationallyUpdatePopup = newVersionAvailable = CheckRationallyVersion();
+            showRationallyUpdatePopup = NewVersionAvailable = CheckRationallyVersion();
             
         }
         
@@ -346,7 +347,7 @@ namespace Rationally.Visio
             if (string.IsNullOrEmpty(LastDelete) && StartedUndoState == 0)
             {
                 LastDelete = toBeDeleted.Last().Name;
-                Globals.ThisAddIn.StartedUndoState = Globals.ThisAddIn.Application.BeginUndoScope("Delete shape");
+                Globals.RationallyAddIn.StartedUndoState = Globals.RationallyAddIn.Application.BeginUndoScope("Delete shape");
             }
             //all shapes in the selection are already bound to be deleted. Mark them, so other pieces of code don't also try to delete them, if they are in the tree.
             toBeDeleted.Where(s => View.ExistsInTree(s)).ToList().ForEach(tbd => View.GetComponentByShape(tbd).Deleted = true);

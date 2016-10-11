@@ -37,6 +37,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutLeftLogo = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelBottomLeftText = new System.Windows.Forms.Label();
+            this.UpdateLink = new System.Windows.Forms.LinkLabel();
             this.tableLayoutLeftMenu = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutRightColumn = new System.Windows.Forms.TableLayoutPanel();
@@ -102,15 +103,17 @@ namespace Rationally.Visio.WindowsFormPopups
             // tableLayoutLeftLogo
             // 
             this.tableLayoutLeftLogo.ColumnCount = 1;
-            this.tableLayoutLeftLogo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutLeftLogo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutLeftLogo.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutLeftLogo.Controls.Add(this.labelBottomLeftText, 0, 1);
+            this.tableLayoutLeftLogo.Controls.Add(this.UpdateLink, 0, 2);
             this.tableLayoutLeftLogo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutLeftLogo.Location = new System.Drawing.Point(3, 288);
             this.tableLayoutLeftLogo.Name = "tableLayoutLeftLogo";
-            this.tableLayoutLeftLogo.RowCount = 2;
-            this.tableLayoutLeftLogo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.08835F));
-            this.tableLayoutLeftLogo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 77.91164F));
+            this.tableLayoutLeftLogo.RowCount = 3;
+            this.tableLayoutLeftLogo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.61603F));
+            this.tableLayoutLeftLogo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 76.38397F));
+            this.tableLayoutLeftLogo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
             this.tableLayoutLeftLogo.Size = new System.Drawing.Size(238, 249);
             this.tableLayoutLeftLogo.TabIndex = 0;
             // 
@@ -119,7 +122,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(232, 49);
+            this.pictureBox1.Size = new System.Drawing.Size(232, 44);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -128,13 +131,24 @@ namespace Rationally.Visio.WindowsFormPopups
             // 
             this.labelBottomLeftText.AutoSize = true;
             this.labelBottomLeftText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelBottomLeftText.Location = new System.Drawing.Point(6, 58);
+            this.labelBottomLeftText.Location = new System.Drawing.Point(6, 56);
             this.labelBottomLeftText.Margin = new System.Windows.Forms.Padding(6, 3, 3, 0);
             this.labelBottomLeftText.Name = "labelBottomLeftText";
-            this.labelBottomLeftText.Size = new System.Drawing.Size(229, 191);
+            this.labelBottomLeftText.Size = new System.Drawing.Size(229, 170);
             this.labelBottomLeftText.TabIndex = 1;
             this.labelBottomLeftText.Text = "We will help you to organize and document your decisions. Just a few quick steps " +
     "to prepare the document for you and help you save some time.";
+            // 
+            // UpdateLink
+            // 
+            this.UpdateLink.AutoSize = true;
+            this.UpdateLink.Location = new System.Drawing.Point(3, 226);
+            this.UpdateLink.Name = "UpdateLink";
+            this.UpdateLink.Size = new System.Drawing.Size(119, 19);
+            this.UpdateLink.TabIndex = 2;
+            this.UpdateLink.TabStop = true;
+            this.UpdateLink.Text = "Update available";
+            this.UpdateLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.UpdateLink_LinkClicked);
             // 
             // tableLayoutLeftMenu
             // 
@@ -177,7 +191,6 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutRightColumn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutRightColumn.Size = new System.Drawing.Size(768, 540);
             this.tableLayoutRightColumn.TabIndex = 1;
-            this.tableLayoutRightColumn.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel3_Paint);
             // 
             // tableLayoutMainContent
             // 
@@ -374,5 +387,6 @@ namespace Rationally.Visio.WindowsFormPopups
         private System.Windows.Forms.TableLayoutPanel tableLayoutLeftMenu;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.LinkLabel UpdateLink;
     }
 }

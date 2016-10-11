@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 using Font = System.Drawing.Font;
 
@@ -12,13 +13,14 @@ namespace Rationally.Visio.View
         private double characterHeight; //height of one character in inches
         private double characterWidth;
         private double contentTextWidth;
-
+        private static readonly Regex TextLabelRegex = new Regex(@"TextLabel(\.\d+)?$");
         private const double PixelsPerInch = 85;
         public SizingPolicy UsedSizingPolicy { get; set; }
 
         public TextLabel(Page page, Shape shape) : base(page)
         {
             RShape = shape;
+
             size = Convert.ToInt16(shape.Cells["Char.Size"].Formula.Split(' ')[0]);
         }
 
@@ -26,7 +28,9 @@ namespace Rationally.Visio.View
         {
             string text = labelText;
             characterHeight = 1.0/72.0*(double) size;
+
             
+
             contentTextWidth = GetWidthOfString(labelText)/ PixelsPerInch;
             Document basicDocument = Globals.ThisAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
@@ -38,7 +42,9 @@ namespace Rationally.Visio.View
             RShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = size;
             RShape.CellsU["LinePattern"].ResultIU = 0;
             RShape.Name = "TextLabel";
-            
+
+            AddUserRow("order"); //allows sorting, even with same-type shapes
+
             BackgroundColor = "RGB(255,255,255)";
             FontColor = "RGB(89,131,168)";
             ShadowPattern = 0;
@@ -125,6 +131,11 @@ namespace Rationally.Visio.View
             {
                 Text = text;
             }
+        }
+        
+        public static bool IsTextLabel(string name)
+        {
+            return TextLabelRegex.IsMatch(name);
         }
     }
 }

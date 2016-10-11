@@ -30,6 +30,7 @@ namespace Rationally.Visio.WindowsFormPopups
                 return;
             }
             CreateDecisionClickHandler.Execute(textAuthor.Text, textDecisionTopic.Text, dateTimePickerCreationDate.Text);
+            Close();
         }
     }
 }

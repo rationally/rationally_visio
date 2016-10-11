@@ -32,7 +32,7 @@ namespace Rationally.Visio.View
                 FontColor = "RGB(89,131,168)",
                 Height = 0.38,
                 MarginTop = 0.02,
-                HAlign = 0, //left
+                HAlign = Constants.LeftAlignment,
                 Order = 1
             };
             authorLabelContent.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
@@ -54,7 +54,7 @@ namespace Rationally.Visio.View
                 MarginTop = 0.02,
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
-                HAlign = 0, //left
+                HAlign = Constants.LeftAlignment, 
                 Order = 3
             };
             dateLabelContent.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
@@ -76,7 +76,7 @@ namespace Rationally.Visio.View
                 MarginTop = 0.02,
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
-                HAlign = 0, //left
+                HAlign = Constants.LeftAlignment,
                 Order = 5
             };
             versionLabelContent.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);

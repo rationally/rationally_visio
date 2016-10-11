@@ -13,7 +13,7 @@ namespace Rationally.Visio.View.Documents
         public RelatedDocumentsContainer(Page page, Shape relatedDocumentsContainer) : base(page)
         {
             RShape = relatedDocumentsContainer;
-            Array ident = relatedDocumentsContainer.ContainerProperties.GetMemberShapes(16);
+            Array ident = relatedDocumentsContainer.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = (new List<int>((int[])ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
             foreach (Shape shape in shapes.Where(shape => RelatedDocumentContainer.IsRelatedDocumentContainer(shape.Name)))
             {

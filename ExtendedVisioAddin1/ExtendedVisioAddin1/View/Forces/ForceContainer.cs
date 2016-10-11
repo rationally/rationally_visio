@@ -41,7 +41,7 @@ namespace Rationally.Visio.View.Forces
         public ForceContainer(Page page, Shape forceContainer) : base(page, false)
         {
             RShape = forceContainer;
-            Array ident = forceContainer.ContainerProperties.GetMemberShapes(16);
+            Array ident = forceContainer.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             string concern = null;
             string description = null;

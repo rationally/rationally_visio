@@ -14,7 +14,7 @@ namespace Rationally.Visio.View.Documents
         public RelatedDocumentContainer(Page page, Shape containerShape) : base(page, false)
         {
             RShape = containerShape;
-            Array ident = containerShape.ContainerProperties.GetMemberShapes(16);
+            Array ident = containerShape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = (new List<int>((int[]) ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
             string name = null, path = null;
             bool file = false;

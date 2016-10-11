@@ -28,7 +28,7 @@ namespace Rationally.Visio.View.Forces
         public ForceHeaderRow(Page page, Shape forceHeaderShape) : base(page, false)
         {
             RShape = forceHeaderShape;
-            Array ident = forceHeaderShape.ContainerProperties.GetMemberShapes(16);
+            Array ident = forceHeaderShape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             if (Children.Count == 0)
             {

@@ -15,7 +15,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 if (alternative.ShowDialog() == DialogResult.OK)
                 {
                     string identifier = (char)(65 + model.Alternatives.Count) + ":";
-                    int timelessId = Alternative.HighestTimelessId == -1 ? 0 : (Alternative.HighestTimelessId + 1);
+                    int timelessId = Alternative.HighestUniqueIdentifier == -1 ? 0 : (Alternative.HighestUniqueIdentifier + 1);
                     Alternative newAlternative = new Alternative(alternative.alternativeName.Text, alternative.alternativeStatus.SelectedItem.ToString(), "Enter a description here.", identifier, timelessId);
                     model.Alternatives.Add(newAlternative);
                     Globals.RationallyAddIn.View.AddAlternative(newAlternative);
@@ -28,7 +28,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 if (alternative.ShowDialog() == DialogResult.OK)
                 {
                     string identifier = (char)(65 + model.Alternatives.Count) + ":";
-                    int timelessId = Alternative.HighestTimelessId == -1 ? 0 : (Alternative.HighestTimelessId + 1);
+                    int timelessId = Alternative.HighestUniqueIdentifier == -1 ? 0 : (Alternative.HighestUniqueIdentifier + 1);
                     Alternative newAlternative = new Alternative(alternative.alternativeName.Text, alternative.alternativeStatus.SelectedItem.ToString(), "Enter a description here.", identifier, timelessId);
                     model.Alternatives.Add(newAlternative);
                     Globals.RationallyAddIn.View.AddAlternative(newAlternative);

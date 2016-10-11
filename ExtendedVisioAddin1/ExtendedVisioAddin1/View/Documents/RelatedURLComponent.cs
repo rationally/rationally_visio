@@ -14,7 +14,7 @@ namespace Rationally.Visio.View.Documents
 
         public RelatedUrlComponent(Page page, int index, string url) : base(page)
         {
-            string docPath = Globals.RationallyAddIn.FolderPath + "RationallyHidden.vssx";
+            string docPath = Constants.FolderPath + "RationallyHidden.vssx";
             Document rationallyDocument = Globals.RationallyAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
             Master rectMaster = rationallyDocument.Masters["LinkIcon"]; 
             RShape = page.Drop(rectMaster, 0, 0);

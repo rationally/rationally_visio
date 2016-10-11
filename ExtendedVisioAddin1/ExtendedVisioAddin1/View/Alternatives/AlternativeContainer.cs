@@ -47,7 +47,7 @@ namespace Rationally.Visio.View.Alternatives
                     Globals.RationallyAddIn.Model.Alternatives.Insert(AlternativeIndex, new Alternative(title, state, desc, identifier, TimelessId));
                     foreach (Alternative alt in Globals.RationallyAddIn.Model.Alternatives.Skip(index + 1).ToList())
                     {
-                        alt.Identifier = (char) (65 + ++index) + ":";
+                        alt.IdentifierString = (char) (65 + ++index) + ":";
                     }
                 }
                 else
@@ -89,7 +89,7 @@ namespace Rationally.Visio.View.Alternatives
             AddUserRow("alternativeIndex");
             AlternativeIndex = alternativeIndex;
             AddUserRow("timelessId");
-            TimelessId = alternative.TimelessId;
+            TimelessId = alternative.UniqueIdentifier;
 
             //locks
             MsvSdContainerLocked = true;

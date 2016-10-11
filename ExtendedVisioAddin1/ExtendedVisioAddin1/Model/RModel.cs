@@ -39,7 +39,7 @@ namespace Rationally.Visio.Model
             int j = 0;
             foreach (Alternative a in Alternatives)
             {
-                a.Identifier = (char)(65 + j) + ":"; //TODO: Generating Identifiers seems a good candidate for a GOF Builder Design Pattern  (IIdentifierGenerator, AlphabeticalGenerator, NumericalGenerator) 
+                a.IdentifierString = (char)(65 + j) + ":"; //TODO: Generating Identifiers seems a good candidate for a GOF Builder Design Pattern  (IIdentifierGenerator, AlphabeticalGenerator, NumericalGenerator) 
                 j++;
             }
         }

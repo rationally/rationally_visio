@@ -21,7 +21,7 @@ namespace Rationally.Visio.WindowsFormPopups
 
         private void Btn_Down_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo sInfo = new ProcessStartInfo(RationallyAddIn.RationallySite);
+            ProcessStartInfo sInfo = new ProcessStartInfo(Constants.RationallySite);
             Process.Start(sInfo);
             Close();
         }

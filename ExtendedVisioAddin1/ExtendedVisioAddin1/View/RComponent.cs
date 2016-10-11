@@ -52,11 +52,11 @@ namespace Rationally.Visio.View
 
 
         //type related
-        public string Type => RShape.CellsU["User.rationallyType"].ResultStr["Value"];
+        public string Type => RShape.CellsU[Constants.RationallyTypeCell].ResultStr["Value"];
 
         public string RationallyType
         {
-            get { return RShape.CellsU["User.rationallyType"].ResultStr["Value"]; }
+            get { return RShape.CellsU[Constants.RationallyTypeCell].ResultStr["Value"]; }
             set { RShape.Cells["User.rationallyType.Value"].Formula = "\"" + value + "\""; }
         }
 

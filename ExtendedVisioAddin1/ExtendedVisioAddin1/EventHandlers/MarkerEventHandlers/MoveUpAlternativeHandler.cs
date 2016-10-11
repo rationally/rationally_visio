@@ -23,8 +23,8 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             string oldIndex = (char)(65 + currentIndex) + ":";
             //swap the item to move with the one below
             //swap the identifiers first
-            model.Alternatives[currentIndex].Identifier = lowerIndex;
-            model.Alternatives[currentIndex-1].Identifier = oldIndex;
+            model.Alternatives[currentIndex].IdentifierString = lowerIndex;
+            model.Alternatives[currentIndex-1].IdentifierString = oldIndex;
             Alternative one = model.Alternatives[currentIndex];
             model.Alternatives[currentIndex] = model.Alternatives[currentIndex - 1];
             model.Alternatives[currentIndex - 1] = one;

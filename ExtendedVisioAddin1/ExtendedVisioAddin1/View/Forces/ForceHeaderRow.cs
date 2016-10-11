@@ -39,7 +39,7 @@ namespace Rationally.Visio.View.Forces
                     {
                         Children.Add(new ForceAlternativeHeaderComponent(page, shape));
                     }
-                    else if (shape.CellExistsU["User.rationallyType", 0] != 0)
+                    else if (shape.CellExistsU[Constants.RationallyTypeCell, 0] != 0)
                     {
                         RComponent toAdd = new RComponent(page) { RShape = shape };
                         Children.Add(toAdd);
@@ -130,22 +130,22 @@ namespace Rationally.Visio.View.Forces
             foreach (Alternative alt in alternatives)
             {
                 //locate the header cell for the current alternative, if it exsists
-                ForceAlternativeHeaderComponent altHeader = (ForceAlternativeHeaderComponent)Children.FirstOrDefault(c => (c is ForceAlternativeHeaderComponent && !c.Deleted && ((ForceAlternativeHeaderComponent) c).AlternativeTimelessId == alt.TimelessId));
+                ForceAlternativeHeaderComponent altHeader = (ForceAlternativeHeaderComponent)Children.FirstOrDefault(c => (c is ForceAlternativeHeaderComponent && !c.Deleted && ((ForceAlternativeHeaderComponent) c).AlternativeTimelessId == alt.UniqueIdentifier));
                 //if a deleted shape is present, there is no possiblity that we are adding an alternative. Furthermore, the deleted shape still represents an alternative, for each thus no second cell should be added!
                 if (altHeader == null && Children.All(c => !c.Deleted)) 
                 {
-                    alreadyThere.Add(new ForceAlternativeHeaderComponent(Page, alt.Identifier, alt.TimelessId));
+                    alreadyThere.Add(new ForceAlternativeHeaderComponent(Page, alt.IdentifierString, alt.UniqueIdentifier));
                 }
             }
 
             //at this point, all alternatives have a component in alreadyThere, but there might be components of removed alternatives in there as well
-            List<ForceAlternativeHeaderComponent> toRemove = alreadyThere.Where(f => !f.Deleted && !alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
-            List<ForceAlternativeHeaderComponent> toRemoveFromTree = alreadyThere.Where(f => f.Deleted || !alternatives.ToList().Any(alt => alt.TimelessId == f.AlternativeTimelessId)).ToList();
+            List<ForceAlternativeHeaderComponent> toRemove = alreadyThere.Where(f => !f.Deleted && !alternatives.ToList().Any(alt => alt.UniqueIdentifier == f.AlternativeTimelessId)).ToList();
+            List<ForceAlternativeHeaderComponent> toRemoveFromTree = alreadyThere.Where(f => f.Deleted || !alternatives.ToList().Any(alt => alt.UniqueIdentifier == f.AlternativeTimelessId)).ToList();
             alreadyThere.RemoveAll(a => toRemoveFromTree.Contains(a));
             //finally, order the alternative columns similar to the alternatives container
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.TimelessId == fc.AlternativeTimelessId))).ToList();
+                alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.UniqueIdentifier == fc.AlternativeTimelessId))).ToList();
             }
             Children.RemoveAll(c => c is ForceAlternativeHeaderComponent);
             Children.AddRange(alreadyThere);

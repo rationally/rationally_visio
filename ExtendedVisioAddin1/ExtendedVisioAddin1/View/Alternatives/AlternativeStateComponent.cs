@@ -59,7 +59,7 @@ namespace Rationally.Visio.View.Alternatives
 
         public AlternativeStateComponent(Page page) : base(page)
         {
-            string docPath = Globals.RationallyAddIn.FolderPath + "RationallyHidden.vssx";
+            string docPath = Constants.FolderPath + "RationallyHidden.vssx";
             Document rationallyDocument = Globals.RationallyAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
             Master rectMaster = rationallyDocument.Masters["Alternative State"];
             RShape = page.Drop(rectMaster, 0, 0);

@@ -61,9 +61,9 @@ namespace Rationally.Visio.View.Forces
         public void UpdateAlternativeLabels()
         {
             //locate alternative from model
-            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.TimelessId == AlternativeTimelessId);
+            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.UniqueIdentifier == AlternativeTimelessId);
             
-            AlternativeIdentifier = alternative.Identifier;
+            AlternativeIdentifier = alternative.IdentifierString;
             AlternativeIndex = Globals.RationallyAddIn.Model.Alternatives.IndexOf(alternative);
         }
 

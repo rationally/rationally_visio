@@ -2,7 +2,7 @@
 {
     public class Alternative
     {
-        public static int HighestTimelessId = -1;
+        public static int HighestUniqueIdentifier = -1;
 
         public string Description { get; set; }
 
@@ -10,20 +10,20 @@
 
         public string Title { get; set; }
 
-        public string Identifier { get; set; }
+        public string IdentifierString { get; set; }
 
-        public int TimelessId { get; set; } //Id that exists independent of the order of the elements. Allows for the identifying of alternatives
+        public int UniqueIdentifier { get; set; } //Id that exists independent of the order of the elements. Allows for the identifying of alternatives
 
-        public Alternative(string title, string status, string description, string identifier, int timelessId)
+        public Alternative(string title, string status, string description, string identifierString, int uniqueIdentifier)
         {
             Title = title;
             Status = status;
             Description = description;
-            Identifier = identifier;
-            TimelessId = timelessId;
-            if (timelessId > HighestTimelessId)
+            IdentifierString = identifierString;
+            UniqueIdentifier = uniqueIdentifier;
+            if (uniqueIdentifier > HighestUniqueIdentifier)
             {
-                HighestTimelessId = timelessId;
+                HighestUniqueIdentifier = uniqueIdentifier;
             }
         }
     }

@@ -13,7 +13,7 @@ namespace Rationally.Visio.EventHandlers
         public DocumentCreatedEventHandler(IVDocument document, RModel model)
         {
             this.model = model;
-            if (document.Template.Contains(RationallyAddIn.TemplateName))
+            if (document.Template.Contains(Constants.TemplateName))
             {
                 ShowSetupWizard();
                 

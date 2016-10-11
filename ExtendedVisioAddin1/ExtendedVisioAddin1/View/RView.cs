@@ -23,7 +23,7 @@ namespace Rationally.Visio.View
         {
             AlternativesContainer container = (AlternativesContainer) Globals.RationallyAddIn.View.Children.First(ch => ch is AlternativesContainer);
             container.Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Alternatives.Count - 1, alternative));
-            new RepaintHandler();
+            RepaintHandler.Repaint();
         }
 
         public void AddRelatedDocument(RelatedDocument document)
@@ -47,7 +47,7 @@ namespace Rationally.Visio.View
             AlternativesContainer alternativesContainer = (AlternativesContainer)Children.FirstOrDefault(c => c is AlternativesContainer); //May have been deleted by the user
             if (alternativesContainer == null)
             {
-                new RepaintHandler();
+                RepaintHandler.Repaint();
                 return;
             }
             AlternativeContainer alternative = (AlternativeContainer)alternativesContainer.Children.FirstOrDefault(x => x.AlternativeIndex == index && x is AlternativeContainer); //Return null if no container or no alternative with index
@@ -58,7 +58,7 @@ namespace Rationally.Visio.View
                 {
                     alternative.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal); //deletes the alternative, and it's child components. This should not be done when the shape is already gone, such as when the user has deleted it himself.
                 }
-                new RepaintHandler();
+                RepaintHandler.Repaint();
             }
         }
         

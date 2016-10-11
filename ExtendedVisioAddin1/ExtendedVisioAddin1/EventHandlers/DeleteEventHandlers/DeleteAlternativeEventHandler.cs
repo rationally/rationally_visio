@@ -53,8 +53,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 {
                     alternativesContainer.MsvSdContainerLocked = true;
                 }
-                
-                new RepaintHandler();//requires forces to repaint as well!  //TODO: Code smell. Should be RepaintHandler.requestRepaint() or repaint().   
+                RepaintHandler.Repaint(); 
             }
         }
     }

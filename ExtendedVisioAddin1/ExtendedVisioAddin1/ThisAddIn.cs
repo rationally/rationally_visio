@@ -451,9 +451,10 @@ namespace Rationally.Visio
 
         private void Application_DocumentOpenendEvent(IVDocument d)
         {
-            if (d.Template.Contains(TemplateName) && showRationallyUpdatePopup)
+            if (Application.ActiveDocument.Template.Contains(TemplateName) && showRationallyUpdatePopup)
             {
-
+                UpdateAvailable upd = new UpdateAvailable(LocalVersion, OnlineVersion);
+                upd.Show();
                 showRationallyUpdatePopup = false;
             }
         }

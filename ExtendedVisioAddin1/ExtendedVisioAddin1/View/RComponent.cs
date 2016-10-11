@@ -68,7 +68,7 @@ namespace Rationally.Visio.View
 
         public virtual int AlternativeIndex
         {
-            get { return (int)RShape.CellsU["User.alternativeIndex"].ResultIU; }
+            get { return (int)RShape.CellsU[CellConstants.AlternativeIndex].ResultIU; }
             set { RShape.CellsU["User.alternativeIndex.Value"].ResultIU = value; }
         }
 

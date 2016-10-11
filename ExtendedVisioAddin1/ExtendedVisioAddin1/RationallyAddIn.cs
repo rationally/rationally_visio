@@ -287,7 +287,7 @@ namespace Rationally.Visio
                     rebuildTree = true; //Wait with the rebuild till the undo is done
                 }
             }
-            else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals("User.alternativeIndex"))
+            else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.AlternativeIndex))
             {
                 Log.Debug("Alternative index cell changed of alternativecontainer. shape:" + changedShape.Name);
                 RComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);

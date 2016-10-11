@@ -32,7 +32,7 @@ namespace Rationally.Visio.View.Forces
             LayoutManager = new InlineLayout(this);
             MarginBottom = 0.4;
 
-            Array ident = forceTotalsShape.ContainerProperties.GetMemberShapes(16);
+            Array ident = forceTotalsShape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             if (Children.Count == 0)
             {

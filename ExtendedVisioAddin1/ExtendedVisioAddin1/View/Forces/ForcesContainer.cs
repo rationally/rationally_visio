@@ -13,7 +13,7 @@ namespace Rationally.Visio.View.Forces
         public ForcesContainer(Page page, Shape forcesContainer) : base(page)
         {
             RShape = forcesContainer;
-            Array ident = forcesContainer.ContainerProperties.GetMemberShapes(16);
+            Array ident = forcesContainer.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
 
             foreach (Shape shape in shapes)

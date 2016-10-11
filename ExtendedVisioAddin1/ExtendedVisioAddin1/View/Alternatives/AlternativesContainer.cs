@@ -13,7 +13,7 @@ namespace Rationally.Visio.View.Alternatives
         public AlternativesContainer(Page page, Shape alternativesContainer) : base(page)
         {
             RShape = alternativesContainer;
-            Array ident = alternativesContainer.ContainerProperties.GetMemberShapes(16);
+            Array ident = alternativesContainer.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             foreach (Shape shape in shapes.Where(shape => AlternativeContainer.IsAlternativeContainer(shape.Name)))
             {

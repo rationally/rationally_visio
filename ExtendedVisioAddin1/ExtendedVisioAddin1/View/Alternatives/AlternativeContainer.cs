@@ -12,7 +12,7 @@ namespace Rationally.Visio.View.Alternatives
         {
             RShape = alternative;
             string title = null, state = null, desc = null;
-            foreach (int shapeIdentifier in alternative.ContainerProperties.GetMemberShapes(16))
+            foreach (int shapeIdentifier in alternative.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested))
             {
                 Shape alternativeComponent = page.Shapes.ItemFromID[shapeIdentifier];
                 if (AlternativeTitleComponent.IsAlternativeTitle(alternativeComponent.Name))

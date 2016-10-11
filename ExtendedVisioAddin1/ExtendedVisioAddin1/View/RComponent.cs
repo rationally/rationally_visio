@@ -371,7 +371,7 @@ namespace Rationally.Visio.View
         {
             if (RShape.ContainerProperties != null) //check if shape is a visio container
             {
-                Array ident = RShape.ContainerProperties.GetMemberShapes(0);
+                Array ident = RShape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsDefault);
                 List<Shape> shapes = new List<int>((int[])ident).Select(i => RShape.ContainingPage.Shapes.ItemFromID[i]).ToList();
                 foreach (RComponent asComponent in shapes.Select(s => new RComponent(RShape.ContainingPage) { RShape = s }))
                 {
@@ -386,7 +386,7 @@ namespace Rationally.Visio.View
         /// </summary>
         public virtual void StoreChildren()
         {
-            Array ident = RShape.ContainerProperties.GetMemberShapes(0);
+            Array ident = RShape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsDefault);
             BackUpShapes = new List<int>((int[])ident).Select(i => RShape.ContainingPage.Shapes.ItemFromID[i]).ToList();
         }
 

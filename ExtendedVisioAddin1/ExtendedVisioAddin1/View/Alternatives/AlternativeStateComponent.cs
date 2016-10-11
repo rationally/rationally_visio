@@ -95,7 +95,7 @@ namespace Rationally.Visio.View.Alternatives
                 string stateName = "State_" + i;
                 if (model.AlternativeStates[i] == currentState)
                 { 
-                    if (RShape.CellExistsU["Actions." + stateName + ".Action", 0] != 0)
+                    if (RShape.CellExistsU["Actions." + stateName + ".Action", (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                     {
                         RShape.DeleteRow((short)VisSectionIndices.visSectionAction, RShape.CellsRowIndex["Actions." + stateName + ".Action"]);
                     }

@@ -208,7 +208,7 @@ namespace Rationally.Visio
         //Fired when any text is changed
         private void Application_TextChangedEvent(Shape shape)
         { 
-            if (shape.Document.Template.Contains(Constants.TemplateName) && shape.CellExistsU[Constants.RationallyTypeCell, 0] != 0)
+            if (shape.Document.Template.Contains(Constants.TemplateName) && shape.CellExistsU[Constants.RationallyTypeCell, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
             {
                 Log.Debug("TextChanged: shapeName: " + shape.Name);
                 string rationallyType = shape.CellsU[Constants.RationallyTypeCell].ResultStr["Value"];
@@ -245,7 +245,7 @@ namespace Rationally.Visio
                 
                 foreach (Shape s in selection)
                 {
-                    if (s.CellExistsU[Constants.RationallyTypeCell, 0] != 0)
+                    if (s.CellExistsU[Constants.RationallyTypeCell, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                     {
                         string identifier = context;
                         if (context.Contains("."))
@@ -263,7 +263,7 @@ namespace Rationally.Visio
         private void Application_CellChangedEvent(Cell cell)
         {
             Shape changedShape = cell.Shape;
-            if (changedShape == null || !changedShape.Document.Template.Contains(Constants.TemplateName) || changedShape.CellExistsU[Constants.RationallyTypeCell, 0] == 0) //No need to continue when the shape is not part of our model.
+            if (changedShape == null || !changedShape.Document.Template.Contains(Constants.TemplateName) || changedShape.CellExistsU[Constants.RationallyTypeCell, (short)VisExistsFlags.visExistsAnywhere] != Constants.CellExists) //No need to continue when the shape is not part of our model.
             {
                 return;
             }
@@ -324,7 +324,7 @@ namespace Rationally.Visio
 
         private void Application_ShapeAddedEvent(Shape s)
         {
-            if (s.CellExistsU[Constants.RationallyTypeCell, 0] != 0 && !View.ExistsInTree(s))
+            if (s.CellExistsU[Constants.RationallyTypeCell, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists && !View.ExistsInTree(s))
             {
                 View.AddToTree(s, true);
             }
@@ -345,7 +345,7 @@ namespace Rationally.Visio
             foreach (Shape s in e)
             {
                 Log.Debug("deleted shape name: " + s.Name);
-                if (s.CellExistsU[Constants.RationallyTypeCell, 0] != 0)
+                if (s.CellExistsU[Constants.RationallyTypeCell, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                 {
                     string rationallyType = s.CellsU[Constants.RationallyTypeCell].ResultStr["Value"];
 
@@ -371,11 +371,11 @@ namespace Rationally.Visio
             Log.Debug("shape deleted event for: " + s.Name);
             if (s.Document.Template.Contains(Constants.TemplateName))
             {
-                if (s.CellExistsU["User.isStub", 0] != 0)
+                if (s.CellExistsU["User.isStub", (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                 {
                     return;
                 }
-                if (s.CellExistsU[Constants.RationallyTypeCell, 0] != 0)
+                if (s.CellExistsU[Constants.RationallyTypeCell, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                 {
                     string rationallyType = s.CellsU[Constants.RationallyTypeCell].ResultStr["Value"];
 

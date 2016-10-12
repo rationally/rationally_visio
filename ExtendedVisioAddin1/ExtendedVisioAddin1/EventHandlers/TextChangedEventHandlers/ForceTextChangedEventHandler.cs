@@ -14,7 +14,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
             ForceValueComponent forceValue = (ForceValueComponent)view.GetComponentByShape(changedShape);
             RepaintHandler.Repaint(forceValue); //repaint the force value, for coloring
             ForceTotalsRow forceTotalsRow = forcesContainer.Children.First(c => c is ForceTotalsRow) as ForceTotalsRow;
-            if (forceTotalsRow != null) RepaintHandler.Repaint(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).FirstOrDefault(c => c.AlternativeTimelessId == forceValue.AlternativeTimelessId));
+            if (forceTotalsRow != null) RepaintHandler.Repaint(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).FirstOrDefault(c => c.AlternativeUniqueIdentifier == forceValue.AlternativeUniqueIdentifier));
         }
     }
 }

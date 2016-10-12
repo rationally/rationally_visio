@@ -5,7 +5,6 @@ namespace Rationally.Visio
     internal class Constants
     {
         public const string TemplateName = "Rationally Template";
-        public const string RationallyTypeCell = "User.rationallyType";
         public const string RationallySite = "https://rationally.github.io/";
         public const int CellExists = -1;
 

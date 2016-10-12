@@ -42,7 +42,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 }
                 AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.RationallyAddIn.View.Children.First(c => c is AlternativesContainer);
                 //update model
-                model.Alternatives.RemoveAll(a => a.UniqueIdentifier == containerToDelete.TimelessId);
+                model.Alternatives.RemoveAll(a => a.UniqueIdentifier == containerToDelete.UniqueIdentifier);
                 Log.Debug("Alternative removed from alternatives container.");
                 //update view tree
                 alternativesContainer.Children.Remove(containerToDelete);

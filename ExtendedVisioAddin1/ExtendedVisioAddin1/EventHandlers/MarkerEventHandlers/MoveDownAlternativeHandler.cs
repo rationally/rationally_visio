@@ -16,9 +16,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             RComponent toChangeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
             int currentIndex = toChangeComponent.AlternativeIndex;
             
-            AlternativeContainer toChange = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU["User.alternativeIndex"].ResultIU == currentIndex);
+            AlternativeContainer toChange = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU[CellConstants.AlternativeIndex].ResultIU == currentIndex);
             //locate the alternative that we are going to swap with
-            AlternativeContainer other = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU["User.alternativeIndex"].ResultIU == currentIndex + 1);
+            AlternativeContainer other = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU[CellConstants.AlternativeIndex].ResultIU == currentIndex + 1);
 
             string higherIndex = (char) (65 + currentIndex + 1) + ":";
             string oldIndex = (char) (65 + currentIndex) + ":";

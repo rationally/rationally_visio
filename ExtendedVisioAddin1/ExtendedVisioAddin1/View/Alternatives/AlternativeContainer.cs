@@ -44,7 +44,7 @@ namespace Rationally.Visio.View.Alternatives
                 {
                     int index = AlternativeIndex;
                     string identifier = (char)(65 + index) + ":";
-                    Globals.RationallyAddIn.Model.Alternatives.Insert(AlternativeIndex, new Alternative(title, state, desc, identifier, TimelessId));
+                    Globals.RationallyAddIn.Model.Alternatives.Insert(AlternativeIndex, new Alternative(title, state, desc, identifier, UniqueIdentifier));
                     foreach (Alternative alt in Globals.RationallyAddIn.Model.Alternatives.Skip(index + 1).ToList())
                     {
                         alt.IdentifierString = (char) (65 + ++index) + ":";
@@ -53,7 +53,7 @@ namespace Rationally.Visio.View.Alternatives
                 else
                 {
                     string identifier = (char)(65 + Globals.RationallyAddIn.Model.Alternatives.Count) + ":";
-                    Globals.RationallyAddIn.Model.Alternatives.Add(new Alternative(title, state, desc, identifier, TimelessId));
+                    Globals.RationallyAddIn.Model.Alternatives.Add(new Alternative(title, state, desc, identifier, UniqueIdentifier));
                 }
             }
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
@@ -89,7 +89,7 @@ namespace Rationally.Visio.View.Alternatives
             AddUserRow("alternativeIndex");
             AlternativeIndex = alternativeIndex;
             AddUserRow("timelessId");
-            TimelessId = alternative.UniqueIdentifier;
+            UniqueIdentifier = alternative.UniqueIdentifier;
 
             //locks
             MsvSdContainerLocked = true;

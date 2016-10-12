@@ -31,6 +31,8 @@ namespace Rationally.Visio.EventHandlers.ClickEventHandlers
 
             //draw the information container
             InformationContainer informationContainer = new InformationContainer(Globals.RationallyAddIn.Application.ActivePage, model.Author, model.Date, model.Version);
+            Globals.RationallyAddIn.View.Children.Add(informationContainer);
+
             RepaintHandler.Repaint(informationContainer);
         }
     }

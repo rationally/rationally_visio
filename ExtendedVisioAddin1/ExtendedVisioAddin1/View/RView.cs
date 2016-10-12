@@ -116,6 +116,22 @@ namespace Rationally.Visio.View
                     Children.Add(forcesContainer);
                 }
             }
+            else if (InformationContainer.IsInformationContainer(s.Name))
+            {
+                if (Children.Exists(x => InformationContainer.IsInformationContainer(x.Name)))
+                {
+                    if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+                    {
+                        MessageBox.Show("Only one instance of the information container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
+                    }
+                }
+                else
+                {
+                    InformationContainer informationContainer = new InformationContainer(Page, s);
+                    Children.Add(informationContainer);
+                }
+            }
             else if(allowAddOfSubpart)
             {
                 Children.ForEach(r => r.AddToTree(s, true));

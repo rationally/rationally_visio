@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Information;
@@ -7,6 +8,8 @@ namespace Rationally.Visio.View
 {
     internal class InformationContainer : HeaderlessContainer
     {
+        private static readonly Regex InformationContainerRegex = new Regex(@"InformationBox(\.\d+)?$");
+
         public InformationContainer(Page page, string author, string date, string version) : base(page)
         {
             Width = 5.3;
@@ -93,6 +96,11 @@ namespace Rationally.Visio.View
             Children.Add(versionLabelContent);
         }
 
+        public InformationContainer(Page page, Shape s) : base(page)
+        {
+            RShape = s;
+        }
+
         public override void AddToTree(Shape s, bool allowAddInChildren)
         {
             if (AuthorLabel.IsAuthorLabel(s.Name))
@@ -116,28 +124,13 @@ namespace Rationally.Visio.View
         public override void Repaint()
         {
             Children = Children.OrderBy(c => c.Order).ToList();
-            /*if (Children.Count == 6)
-            {
-                if (!(Children[1] is AuthorLabel))
-                {
-                    RComponent c = Children.Find(x => x is AuthorLabel);
-                    Children.Remove(c);
-                    Children.Insert(0, c);
-                }
-                if (!(Children[2] is DateLabel))
-                {
-                    RComponent c = Children.Find(x => x is DateLabel);
-                    Children.Remove(c);
-                    Children.Insert(1, c);
-                }
-                if (!(Children[4] is VersionLabel))
-                {
-                    RComponent c = Children.Find(x => x is VersionLabel);
-                    Children.Remove(c);
-                    Children.Insert(2, c);
-                }
-            }*/
+
             base.Repaint();
+        }
+
+        public static bool IsInformationContainer(string name)
+        {
+            return InformationContainerRegex.IsMatch(name);
         }
     }
 }

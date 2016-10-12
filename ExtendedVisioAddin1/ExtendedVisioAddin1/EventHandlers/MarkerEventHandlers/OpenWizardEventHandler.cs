@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
+using Rationally.Visio.WindowsFormPopups;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
@@ -11,7 +12,8 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
     {
         public void Execute(RModel model, Shape changedShape, string identifier)
         {
-            
+            ProjectSetupWizard wizard = new ProjectSetupWizard();
+            wizard.Show();   
         }
     }
 }

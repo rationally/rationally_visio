@@ -37,7 +37,8 @@ namespace Rationally.Visio.View
                 MarginTop = 0.02,
                 HAlign = Constants.LeftAlignment,
                 Order = 1,
-                LockTextEdit = true
+                LockTextEdit = true,
+                EventDblClick = "QUEUEMARKEREVENT(\"openWizard\")"
             };
             authorLabelContent.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
 
@@ -60,7 +61,8 @@ namespace Rationally.Visio.View
                 FontColor = "RGB(89,131,168)",
                 HAlign = Constants.LeftAlignment, 
                 Order = 3,
-                LockTextEdit = true
+                LockTextEdit = true,
+                EventDblClick = "QUEUEMARKEREVENT(\"openWizard\")"
             };
             dateLabelContent.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
 
@@ -83,7 +85,8 @@ namespace Rationally.Visio.View
                 FontColor = "RGB(89,131,168)",
                 HAlign = Constants.LeftAlignment,
                 Order = 5,
-                LockTextEdit = true
+                LockTextEdit = true,
+                EventDblClick = "QUEUEMARKEREVENT(\"openWizard\")"
             };
             versionLabelContent.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
 

@@ -196,6 +196,10 @@ namespace Rationally.Visio
             registry.Register("forceConcern.moveDown", new MoveDownForceHandler());
             registry.Register("forceValue.moveDown", new MoveDownForceHandler());
             registry.Register("forceDescription.moveDown", new MoveDownForceHandler());
+
+            registry.Register("informationAuthor.openWizard", new OpenWizardEventHandler());
+            registry.Register("informationDate.openWizard", new OpenWizardEventHandler());
+            registry.Register("informationVersion.openWizard", new OpenWizardEventHandler());
         }
 
         private static void RegisterTextChangedEventHandlers()

@@ -13,10 +13,13 @@ namespace Rationally.Visio.WindowsFormPopups
             {
                 UpdateLink.Hide();
             }
+            textAuthor.Text = Globals.RationallyAddIn.Model.Author;
+            textDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
+            dateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.Date;
         }
         
 
-        private void button2_Click(object sender, System.EventArgs e)
+        private void submit_Click(object sender, System.EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textAuthor.Text))
             {

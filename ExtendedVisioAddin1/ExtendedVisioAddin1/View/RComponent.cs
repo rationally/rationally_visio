@@ -72,13 +72,13 @@ namespace Rationally.Visio.View
             set { RShape.CellsU["User.alternativeIndex.Value"].ResultIU = value; }
         }
 
-        public int TimelessId
+        public int UniqueIdentifier
         {
             get { return (int)RShape.CellsU["User.timelessId"].ResultIU; }
             set { RShape.CellsU["User.timelessId.Value"].ResultIU = value; }
         }
 
-        public int AlternativeTimelessId
+        public int AlternativeUniqueIdentifier
         {
             get { return (int)RShape.CellsU["User.alternativeTimelessId"].ResultIU; }
             set { RShape.CellsU["User.alternativeTimelessId.Value"].ResultIU = value; }

@@ -42,8 +42,8 @@ namespace Rationally.Visio
         public bool NewVersionAvailable;
 
         //Version numbers
-        public readonly Version LocalVersion = new Version("0.0.0");
-        public Version OnlineVersion;
+        public readonly Version AddInLocalVersion = new Version("0.0.0");
+        public Version AddInOnlineVersion;
 
         private void RationallyAddIn_Startup(object sender, EventArgs e)
         {
@@ -417,8 +417,8 @@ namespace Rationally.Visio
                 {
                     string result = webClient.DownloadString("https://api.github.com/repos/rationally/rationally_visio/releases/latest");
                     JObject json = JObject.Parse(result);
-                    OnlineVersion = new Version(json["tag_name"].ToString());
-                    return OnlineVersion > LocalVersion;
+                    AddInOnlineVersion = new Version(json["tag_name"].ToString());
+                    return AddInOnlineVersion > AddInLocalVersion;
                 }
                 catch (WebException)
                 {
@@ -445,7 +445,7 @@ namespace Rationally.Visio
         {
             if (Application.ActiveDocument.Template.Contains(Constants.TemplateName) && showRationallyUpdatePopup)
             {
-                UpdateAvailable upd = new UpdateAvailable(LocalVersion, OnlineVersion);
+                UpdateAvailable upd = new UpdateAvailable(AddInLocalVersion, AddInOnlineVersion);
                 upd.Show();
                 showRationallyUpdatePopup = false;
             }

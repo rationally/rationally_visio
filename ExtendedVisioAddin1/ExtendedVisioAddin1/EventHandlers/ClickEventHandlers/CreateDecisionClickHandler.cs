@@ -4,7 +4,7 @@ using Rationally.Visio.View;
 
 namespace Rationally.Visio.EventHandlers.ClickEventHandlers
 {
-    class CreateDecisionClickHandler
+    internal class CreateDecisionClickHandler
     {
         public static void Execute(string author, string decisionName, string date)
         {

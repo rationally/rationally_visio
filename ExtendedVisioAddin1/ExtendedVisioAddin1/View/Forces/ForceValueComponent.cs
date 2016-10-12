@@ -9,7 +9,7 @@ namespace Rationally.Visio.View.Forces
     {
         private static readonly Regex ForceValueRegex = new Regex(@"ForceValue(\.\d+)?$");
         
-        public ForceValueComponent(Page page, int alternativeTimelessId, string altId, int forceIndex) : base(page)
+        public ForceValueComponent(Page page, int alternativeUniqueIdentifier, string altId, int forceIndex) : base(page)
         {
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
@@ -30,7 +30,7 @@ namespace Rationally.Visio.View.Forces
 
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
-            AlternativeTimelessId = alternativeTimelessId;
+            AlternativeUniqueIdentifier = alternativeUniqueIdentifier;
 
             InitStyle();
         }
@@ -72,7 +72,7 @@ namespace Rationally.Visio.View.Forces
         public void UpdateAlternativeLabels()
         {
             //locate alternative from model
-            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.UniqueIdentifier == AlternativeTimelessId);
+            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.UniqueIdentifier == AlternativeUniqueIdentifier);
             AlternativeIdentifier = alternative.IdentifierString;
         }
 

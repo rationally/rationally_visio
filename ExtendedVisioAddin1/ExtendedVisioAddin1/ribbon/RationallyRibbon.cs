@@ -12,8 +12,7 @@ namespace Rationally.Visio
 
         private static void wizardButton_Click(object sender, RibbonControlEventArgs e)
         {
-            ProjectSetupWizard wizard = new ProjectSetupWizard();
-            wizard.Show();
+            ProjectSetupWizard.Instance.Show();
         }
     }
 }

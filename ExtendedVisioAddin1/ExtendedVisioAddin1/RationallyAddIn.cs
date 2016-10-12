@@ -437,11 +437,11 @@ namespace Rationally.Visio
             Startup += RationallyAddIn_Startup;
         }
         
-        private void DelegateCreateDocumentEvent(IVDocument d)
+        private static void DelegateCreateDocumentEvent(IVDocument d)
         {
             if (d.Template.Contains(Constants.TemplateName))
             {
-                new DocumentCreatedEventHandler(d, Model);
+                new DocumentCreatedEventHandler(d);
             }
         }
 

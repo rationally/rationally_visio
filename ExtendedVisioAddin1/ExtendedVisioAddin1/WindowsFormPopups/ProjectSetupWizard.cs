@@ -16,6 +16,8 @@ namespace Rationally.Visio.WindowsFormPopups
             textAuthor.Text = Globals.RationallyAddIn.Model.Author;
             textDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
             dateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.Date;
+
+            StartPosition = FormStartPosition.CenterScreen;
         }
         
 

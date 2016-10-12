@@ -6,7 +6,20 @@ namespace Rationally.Visio.WindowsFormPopups
 {
     public partial class ProjectSetupWizard : Form
     {
-        public ProjectSetupWizard()
+        private static ProjectSetupWizard _instance = null;
+        public static ProjectSetupWizard Instance
+        {
+            get
+            {
+                if (_instance == null || _instance.IsDisposed)
+                {
+                    _instance = new ProjectSetupWizard();
+                }
+                return _instance;
+            } 
+        }
+
+        private ProjectSetupWizard()
         {
             InitializeComponent();
             if (!Globals.RationallyAddIn.NewVersionAvailable)

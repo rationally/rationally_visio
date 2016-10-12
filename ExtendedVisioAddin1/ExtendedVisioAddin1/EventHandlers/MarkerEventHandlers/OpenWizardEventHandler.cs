@@ -12,8 +12,8 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
     {
         public void Execute(RModel model, Shape changedShape, string identifier)
         {
-            ProjectSetupWizard wizard = new ProjectSetupWizard();
-            wizard.Show();   
+            //ProjectSetupWizard wizard = new ProjectSetupWizard();
+            ProjectSetupWizard.Instance.Show();   
         }
     }
 }

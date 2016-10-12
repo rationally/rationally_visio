@@ -22,8 +22,7 @@ namespace Rationally.Visio.EventHandlers
 
         private void ShowSetupWizard()
         {
-            ProjectSetupWizard test = new ProjectSetupWizard();
-            test.Show();
+            ProjectSetupWizard.Instance.Show();
         }
 
         private void ShowSheetSetUpBox()

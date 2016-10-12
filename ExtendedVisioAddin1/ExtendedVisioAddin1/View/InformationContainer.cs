@@ -12,9 +12,9 @@ namespace Rationally.Visio.View
 
         public InformationContainer(Page page, string author, string date, string version) : base(page)
         {
-            Width = 5.3;
+            Width = 8;
             Height = 0.4;
-            CenterX = 13.65;
+            CenterX = 12.30;
             CenterY = 22.45;
             UsedSizingPolicy = SizingPolicy.FixedSize;
 

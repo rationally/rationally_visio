@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Office.Tools.Ribbon;
+﻿using Microsoft.Office.Tools.Ribbon;
+using Rationally.Visio.WindowsFormPopups;
 
 namespace Rationally.Visio
 {
@@ -10,7 +7,13 @@ namespace Rationally.Visio
     {
         private void RationallyRibbon_Load(object sender, RibbonUIEventArgs e)
         {
+            wizardButton.Click += wizardButton_Click;
+        }
 
+        private static void wizardButton_Click(object sender, RibbonControlEventArgs e)
+        {
+            ProjectSetupWizard wizard = new ProjectSetupWizard();
+            wizard.Show();
         }
     }
 }

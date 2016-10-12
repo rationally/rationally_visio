@@ -36,7 +36,7 @@
         {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.button1 = this.Factory.CreateRibbonButton();
+            this.wizardButton = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -49,17 +49,17 @@
             // 
             // group1
             // 
-            this.group1.Items.Add(this.button1);
+            this.group1.Items.Add(this.wizardButton);
             this.group1.Label = "Actions";
             this.group1.Name = "group1";
             // 
-            // button1
+            // wizardButton
             // 
-            this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.button1.Image = global::Rationally.Visio.Properties.Resources.wizard;
-            this.button1.Label = "Open Wizard";
-            this.button1.Name = "button1";
-            this.button1.ShowImage = true;
+            this.wizardButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.wizardButton.Image = global::Rationally.Visio.Properties.Resources.wizard;
+            this.wizardButton.Label = "Open Wizard";
+            this.wizardButton.Name = "wizardButton";
+            this.wizardButton.ShowImage = true;
             // 
             // RationallyRibbon
             // 
@@ -79,7 +79,7 @@
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton wizardButton;
     }
 
     partial class ThisRibbonCollection

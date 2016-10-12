@@ -130,6 +130,7 @@ namespace Rationally.Visio.View
                 {
                     InformationContainer informationContainer = new InformationContainer(Page, s);
                     Children.Add(informationContainer);
+                    informationContainer.Repaint();
                 }
             }
             else if(allowAddOfSubpart)

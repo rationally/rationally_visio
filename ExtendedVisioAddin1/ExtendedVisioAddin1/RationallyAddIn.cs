@@ -85,7 +85,7 @@ namespace Rationally.Visio
             registry.Register("relatedDocumentContainer", new DeleteRelatedDocumentEventHandler());
             registry.Register("alternative", new DeleteAlternativeEventHandler());
             registry.Register("relatedUrlUrl", new DeletedRelatedUrlUrlEventHandler());
-            registry.Register("informationBox", new DeleteInformationBoxEventHandler());
+            registry.Register("information", new DeleteInformationBoxEventHandler());
             registry.Register("relatedDocuments", new DeleteRelatedDocumentsEventHandler());
             registry.Register("forces", new DeleteForcesEventHandler());
             registry.Register("alternatives", new DeleteAlternativesEventHandler());

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Model;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Information;
 
@@ -8,16 +9,42 @@ namespace Rationally.Visio.View
 {
     internal class InformationContainer : HeaderlessContainer
     {
-        private static readonly Regex InformationContainerRegex = new Regex(@"InformationBox(\.\d+)?$");
+        private static readonly Regex InformationContainerRegex = new Regex(@"Information(\.\d+)?$");
 
         public InformationContainer(Page page, string author, string date, string version) : base(page)
+        {
+            InitStyle();
+
+            
+
+            AddUserRow("rationallyType");
+            RationallyType = "information";
+            RShape.Name = "Information";
+
+            InitContent(page, author, date, version);
+        }
+
+        public InformationContainer(Page page, Shape s) : base(page, false)
+        {
+            RShape = s;
+            if (s.ContainerProperties.GetMemberShapes((int) VisContainerFlags.visContainerFlagsExcludeNested).Length == 0)
+            {
+                RModel model = Globals.RationallyAddIn.Model;
+                InitContent(page,model.Author, model.Date, model.Version);
+            }
+        }
+
+        public void InitStyle()
         {
             Width = 8;
             Height = 0.4;
             CenterX = 12.30;
             CenterY = 22.45;
             UsedSizingPolicy = SizingPolicy.FixedSize;
+        }
 
+        public void InitContent(Page page, string author, string date, string version)
+        {
             TextLabel authorLabel = new TextLabel(page, "Author: ")
             {
                 BackgroundColor = "RGB(255,255,255)",
@@ -59,7 +86,7 @@ namespace Rationally.Visio.View
                 MarginTop = 0.02,
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
-                HAlign = Constants.LeftAlignment, 
+                HAlign = Constants.LeftAlignment,
                 Order = 3,
                 LockTextEdit = true,
                 EventDblClick = "QUEUEMARKEREVENT(\"openWizard\")"
@@ -90,21 +117,12 @@ namespace Rationally.Visio.View
             };
             versionLabelContent.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
 
-            AddUserRow("rationallyType");
-            RationallyType = "informationBox";
-            RShape.Name = "InformationBox";
-
             Children.Add(authorLabel);
             Children.Add(authorLabelContent);
             Children.Add(dateLabel);
             Children.Add(dateLabelContent);
             Children.Add(versionLabel);
             Children.Add(versionLabelContent);
-        }
-
-        public InformationContainer(Page page, Shape s) : base(page)
-        {
-            RShape = s;
         }
 
         public override void AddToTree(Shape s, bool allowAddInChildren)

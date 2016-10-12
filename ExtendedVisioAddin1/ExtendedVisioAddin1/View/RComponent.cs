@@ -151,7 +151,13 @@ namespace Rationally.Visio.View
         public string Text
         {
             get { return RShape.Text; }
-            set { RShape.Text = value; }
+            set
+            {
+                bool textEditLocked = LockTextEdit;
+                LockTextEdit = false;
+                RShape.Text = value;
+                LockTextEdit = textEditLocked;
+            }
         }
 
         //lock related msvSDContainerLocked

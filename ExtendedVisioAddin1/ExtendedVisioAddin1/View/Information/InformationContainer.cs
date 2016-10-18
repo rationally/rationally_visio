@@ -2,10 +2,10 @@
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
-using Rationally.Visio.View.Alternatives;
-using Rationally.Visio.View.Information;
+using System;
+using System.Collections.Generic;
 
-namespace Rationally.Visio.View
+namespace Rationally.Visio.View.Information
 {
     internal class InformationContainer : HeaderlessContainer
     {
@@ -18,7 +18,7 @@ namespace Rationally.Visio.View
             
 
             AddUserRow("rationallyType");
-            RationallyType = "information";
+            RationallyType = "informationBox";
             RShape.Name = "Information";
 
             InitContent(page, author, date, version);
@@ -27,11 +27,38 @@ namespace Rationally.Visio.View
         public InformationContainer(Page page, Shape s) : base(page, false)
         {
             RShape = s;
-            if (s.ContainerProperties.GetMemberShapes((int) VisContainerFlags.visContainerFlagsExcludeNested).Length == 0)
+            if (s.ContainerProperties.GetMemberShapes((int) VisContainerFlags.visContainerFlagsExcludeNested).Length == 0 && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 RModel model = Globals.RationallyAddIn.Model;
-                InitContent(page,model.Author, model.Date, model.Version);
+                InitContent(page, model.Author, model.Date, model.Version);
             }
+            else
+            {
+                Array ident = RShape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
+                List<Shape> shapes = (new List<int>((int[])ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
+                foreach (Shape shape in shapes)
+                {
+                    if (TextLabel.IsTextLabel(shape.Name))
+                    {
+                        Children.Add(new TextLabel(page, shape));
+                    }
+                    else if (AuthorLabel.IsAuthorLabel(shape.Name))
+                    {
+                        Children.Add(new AuthorLabel(page, shape));
+                    }
+                    else if (DateLabel.IsDateLabel(shape.Name))
+                    {
+                        Children.Add(new DateLabel(page, shape));
+                    }
+                    else if (VersionLabel.IsVersionLabel(shape.Name))
+                    {
+                        Children.Add(new VersionLabel(page, shape));
+                    }
+
+                }
+                Children = Children.OrderBy(c => c.Order).ToList();
+            }
+
         }
 
         public void InitStyle()
@@ -56,6 +83,7 @@ namespace Rationally.Visio.View
             };
             authorLabel.ToggleBoldFont(true);
             authorLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
+            authorLabel.RationallyType = "informationAuthorLabel";
             AuthorLabel authorLabelContent = new AuthorLabel(page, author)
             {
                 BackgroundColor = "RGB(255,255,255)",
@@ -80,6 +108,7 @@ namespace Rationally.Visio.View
             };
             dateLabel.ToggleBoldFont(true);
             dateLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
+            dateLabel.RationallyType = "informationDateLabel";
             DateLabel dateLabelContent = new DateLabel(page, date)
             {
                 Height = 0.38,
@@ -104,6 +133,7 @@ namespace Rationally.Visio.View
             };
             versionLabel.ToggleBoldFont(true);
             versionLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
+            versionLabel.RationallyType = "informationVersionLabel";
             VersionLabel versionLabelContent = new VersionLabel(page, version)
             {
                 Height = 0.38,
@@ -127,6 +157,7 @@ namespace Rationally.Visio.View
 
         public override void AddToTree(Shape s, bool allowAddInChildren)
         {
+            string rationallyType = s.CellsU[CellConstants.RationallyType].ResultStr["Value"];
             if (AuthorLabel.IsAuthorLabel(s.Name))
             {
                 Children.Add(new AuthorLabel(Page, s));
@@ -139,7 +170,7 @@ namespace Rationally.Visio.View
             {
                 Children.Add(new VersionLabel(Page, s));
             }
-            else if (TextLabel.IsTextLabel(s.Name))
+            else if (TextLabel.IsTextLabel(s.Name) && (rationallyType == "informationVersionLabel" || rationallyType == "informationDateLabel" || rationallyType == "informationAuthorLabel"))
             {
                 Children.Add(new TextLabel(Page,s));
             }

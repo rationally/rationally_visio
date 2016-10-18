@@ -44,7 +44,7 @@ namespace Rationally.Visio.View
             RShape.Name = "TextLabel";
 
             AddUserRow("order"); //allows sorting, even with same-type shapes
-
+            AddUserRow("rationallyType");
             BackgroundColor = "RGB(255,255,255)";
             FontColor = "RGB(89,131,168)";
             ShadowPattern = 0;

@@ -14,7 +14,6 @@ namespace Rationally.Visio.View.Alternatives
 
         public AlternativeTitleComponent(Page page, int alternativeIndex, string text) : base(page, text)
         {
-            AddUserRow("rationallyType");
             RationallyType = "alternativeTitle";
             AddUserRow("alternativeIndex");
             AlternativeIndex = alternativeIndex;

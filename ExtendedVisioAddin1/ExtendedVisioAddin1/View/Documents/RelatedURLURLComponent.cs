@@ -14,7 +14,6 @@ namespace Rationally.Visio.View.Documents
 
         public RelatedURLURLComponent(Page page, int index, string labelText) : base(page, labelText)
         {
-            AddUserRow("rationallyType");
             RationallyType = "relatedUrlUrl";
             Name = "RelatedUrlUrl";
             AddUserRow("documentIndex");

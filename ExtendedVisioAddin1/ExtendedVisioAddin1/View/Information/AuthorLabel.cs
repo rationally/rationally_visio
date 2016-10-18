@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Information
-{ 
-    class AuthorLabel : TextLabel
+{
+    internal class AuthorLabel : TextLabel
     {
-        private static readonly Regex AuthorRegex = new Regex(@"AuthorLabel(\.\d+)?$");
+        private static readonly Regex AuthorRegex = new Regex(@"InformationAuthor(\.\d+)?$");
 
         public AuthorLabel(Page page, Shape shape) : base(page, shape)
         {
@@ -18,15 +14,14 @@ namespace Rationally.Visio.View.Information
 
         public AuthorLabel(Page page, string labelText) : base(page, labelText)
         {
-            AddUserRow("rationallyType");
-            RationallyType = "informationVersion";
+            RationallyType = "informationAuthor";
 
-            Name = "InformationVersion";
+            Name = "InformationAuthor";
         }
 
         public override void Repaint()
         {
-            this.Text = Globals.RationallyAddIn.Model.Author;
+            Text = Globals.RationallyAddIn.Model.Author;
             base.Repaint();
         }
 

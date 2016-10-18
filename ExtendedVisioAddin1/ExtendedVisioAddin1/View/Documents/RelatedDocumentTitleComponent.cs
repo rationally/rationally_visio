@@ -15,7 +15,6 @@ namespace Rationally.Visio.View.Documents
 
         public RelatedDocumentTitleComponent(Page page, int index, string text) : base(page, text)
         {
-            AddUserRow("rationallyType");
             RationallyType = "relatedDocumentTitle";
             Name = "Related Document Title";
             AddUserRow("documentIndex");

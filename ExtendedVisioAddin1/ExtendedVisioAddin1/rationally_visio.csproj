@@ -199,12 +199,6 @@
     </Compile>
     <Compile Include="Model\Force.cs" />
     <Compile Include="Model\RelatedDocument.cs" />
-    <Compile Include="WindowsFormPopups\ProjectSetupWizardOld.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WindowsFormPopups\ProjectSetupWizardOld.Designer.cs">
-      <DependentUpon>ProjectSetupWizardOld.cs</DependentUpon>
-    </Compile>
     <Compile Include="WindowsFormPopups\UpdateAvailable.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -310,9 +304,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WindowsFormPopups\ProjectSetupWizard.resx">
       <DependentUpon>ProjectSetupWizard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WindowsFormPopups\ProjectSetupWizardOld.resx">
-      <DependentUpon>ProjectSetupWizardOld.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

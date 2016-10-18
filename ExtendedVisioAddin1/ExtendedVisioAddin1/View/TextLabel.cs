@@ -103,14 +103,12 @@ namespace Rationally.Visio.View
                     newContent += text.Substring(text.Length/lineLength*lineLength);//integer devision
                     if (RShape.Characters.Text != newContent && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                     {
+                        bool oldLock = LockTextEdit;
+                        LockTextEdit = false;
                         RShape.Characters.Text = newContent;
+                        LockTextEdit = oldLock;
                     }
                 }
-
-                
-                
-
-
                 if ((Height < characterHeight * (double)lineCount) && (UsedSizingPolicy & SizingPolicy.ExpandYIfNeeded) > 0)
                 {
                     Height = characterHeight * (double)lineCount;

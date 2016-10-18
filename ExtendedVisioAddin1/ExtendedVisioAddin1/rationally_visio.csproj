@@ -251,6 +251,9 @@
     <Compile Include="View\RView.cs" />
     <Compile Include="View\SizingPolicy.cs" />
     <Compile Include="View\VerticalStretchLayout.cs" />
+    <Compile Include="WindowsFormPopups\WizardComponents\TableLayoutMainContentAlternatives.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WindowsFormPopups\WizardComponents\TableLayoutMainContentGeneral.cs">
       <SubType>Component</SubType>
     </Compile>

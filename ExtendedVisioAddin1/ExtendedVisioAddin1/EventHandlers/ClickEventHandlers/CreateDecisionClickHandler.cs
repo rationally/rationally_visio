@@ -41,9 +41,10 @@ namespace Rationally.Visio.EventHandlers.ClickEventHandlers
             else
             {
                 RView view = Globals.RationallyAddIn.View;
-                if (view.Children.Any(x => x.RationallyType == "informationBox"))
+                if (view.Children.Any(x => x is InformationContainer))
                 {
-                    //test
+                    InformationContainer container = view.Children.FirstOrDefault(x => x is InformationContainer) as InformationContainer;
+                    RepaintHandler.Repaint(container);
                 }   
             }
             Globals.RationallyAddIn.Application.EndUndoScope(scopeId, true);

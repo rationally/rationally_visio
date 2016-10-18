@@ -245,6 +245,9 @@
     <Compile Include="View\RView.cs" />
     <Compile Include="View\SizingPolicy.cs" />
     <Compile Include="View\VerticalStretchLayout.cs" />
+    <Compile Include="WindowsFormPopups\WizardComponents\FlowLayoutAlternative.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WindowsFormPopups\WizardComponents\TableLayoutMainContentAlternatives.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -278,6 +281,8 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Rationally.Visio.Model.Alternative.datasource" />
+    <None Include="Properties\DataSources\Rationally.Visio.Model.RModel.datasource" />
     <None Include="rationally_visio_1_TemporaryKey.pfx" />
     <None Include="RationallyAddIn.Designer.xml">
       <DependentUpon>RationallyAddIn.cs</DependentUpon>

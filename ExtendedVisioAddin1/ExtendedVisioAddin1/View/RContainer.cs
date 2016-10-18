@@ -81,7 +81,7 @@ namespace Rationally.Visio.View
             LockDelete = false;
             if (recursive)
             {
-                Children.ForEach(c => c.RemoveDeleteLock(recursive));
+                Children.ForEach(c => c.RemoveDeleteLock(true));
             }
         }
 

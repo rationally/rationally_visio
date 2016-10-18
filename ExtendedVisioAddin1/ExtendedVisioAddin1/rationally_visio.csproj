@@ -131,6 +131,7 @@
     <Compile Include="CellConstants.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="EventHandlers\ClickEventHandlers\CreateDecisionClickHandler.cs" />
+    <Compile Include="EventHandlers\DeleteEventHandlers\DeleteInformationComponentEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\OpenWizardEventHandler.cs" />
     <Compile Include="ribbon\RationallyRibbon.cs">
       <SubType>Component</SubType>
@@ -242,7 +243,7 @@
     <Compile Include="View\Forces\ForceValueComponent.cs" />
     <Compile Include="View\HeaderlessContainer.cs" />
     <Compile Include="View\ILayoutManager.cs" />
-    <Compile Include="View\InformationContainer.cs" />
+    <Compile Include="View\Information\InformationContainer.cs" />
     <Compile Include="View\InlineLayout.cs" />
     <Compile Include="View\RComponent.cs" />
     <Compile Include="View\RContainer.cs" />

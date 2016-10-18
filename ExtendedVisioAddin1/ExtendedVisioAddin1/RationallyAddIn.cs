@@ -81,14 +81,23 @@ namespace Rationally.Visio
         private static void RegisterDeleteEventHandlers()
         {
             DeleteEventHandlerRegistry registry = DeleteEventHandlerRegistry.Instance;
-            registry.Register("forceContainer",new DeleteForceEventHandler());
-            registry.Register("relatedDocumentContainer", new DeleteRelatedDocumentEventHandler());
             registry.Register("alternative", new DeleteAlternativeEventHandler());
-            registry.Register("relatedUrlUrl", new DeletedRelatedUrlUrlEventHandler());
-            registry.Register("information", new DeleteInformationBoxEventHandler());
-            registry.Register("relatedDocuments", new DeleteRelatedDocumentsEventHandler());
-            registry.Register("forces", new DeleteForcesEventHandler());
             registry.Register("alternatives", new DeleteAlternativesEventHandler());
+
+            registry.Register("relatedUrlUrl", new DeletedRelatedUrlUrlEventHandler());
+            registry.Register("relatedDocumentContainer", new DeleteRelatedDocumentEventHandler());
+            registry.Register("relatedDocuments", new DeleteRelatedDocumentsEventHandler());
+
+            registry.Register("forces", new DeleteForcesEventHandler());
+            registry.Register("forceContainer", new DeleteForceEventHandler());
+
+            registry.Register("informationBox", new DeleteInformationBoxEventHandler());
+            registry.Register("informationAuthor", new DeleteInformationComponentEventHandler());
+            registry.Register("informationDate", new DeleteInformationComponentEventHandler());
+            registry.Register("informationVersion", new DeleteInformationComponentEventHandler());
+            registry.Register("informationAuthorLabel", new DeleteInformationComponentEventHandler());
+            registry.Register("informationDateLabel", new DeleteInformationComponentEventHandler());
+            registry.Register("informationVersionLabel", new DeleteInformationComponentEventHandler());
         }
 
         private static void RegisterQueryDeleteEventHandlers()

@@ -7,6 +7,8 @@ namespace Rationally.Visio.WindowsFormPopups
     public partial class ProjectSetupWizard : Form
     {
         private static ProjectSetupWizard instance = null;
+        private static bool documentCreation = false;
+
         public static ProjectSetupWizard Instance
         {
             get
@@ -19,14 +21,15 @@ namespace Rationally.Visio.WindowsFormPopups
             } 
         }
 
-        public new void Show()
+        public void ShowDialog(bool onDocumentCreation)
         {
             if (WindowState == FormWindowState.Minimized)
             { 
                 WindowState = FormWindowState.Normal;
             }
             BringToFront();
-            base.Show();
+            documentCreation = onDocumentCreation;
+            ShowDialog();
         }
 
         private ProjectSetupWizard()
@@ -60,7 +63,7 @@ namespace Rationally.Visio.WindowsFormPopups
             }
             CreateDecisionClickHandler.Execute(tableLayoutMainContentGeneral.TextAuthor.Text, 
                                                 tableLayoutMainContentGeneral.TextDecisionTopic.Text, 
-                                                tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text);
+                                                tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text, documentCreation);
             Close();
         }
 

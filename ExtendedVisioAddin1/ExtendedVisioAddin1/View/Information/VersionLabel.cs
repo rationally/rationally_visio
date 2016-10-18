@@ -6,10 +6,10 @@ using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Information
-{ 
-    class VersionLabel : TextLabel
+{
+    internal class VersionLabel : TextLabel
     {
-        private static readonly Regex VersionRegex = new Regex(@"VersionLabel(\.\d+)?$");
+        private static readonly Regex VersionRegex = new Regex(@"InformationVersion(\.\d+)?$");
 
         public VersionLabel(Page page, Shape shape) : base(page, shape)
         {
@@ -18,7 +18,6 @@ namespace Rationally.Visio.View.Information
 
         public VersionLabel(Page page, string labelText) : base(page, labelText)
         {
-            AddUserRow("rationallyType");
             RationallyType = "informationVersion";
 
             Name = "InformationVersion";
@@ -26,7 +25,7 @@ namespace Rationally.Visio.View.Information
 
         public override void Repaint()
         {
-            this.Text = Globals.RationallyAddIn.Model.Version;
+            Text = Globals.RationallyAddIn.Model.Version;
             base.Repaint();
         }
 

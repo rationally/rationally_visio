@@ -18,7 +18,7 @@ namespace Rationally.Visio.EventHandlers
 
         private static void ShowSetupWizard()
         {
-            ProjectSetupWizard.Instance.Show();
+            ProjectSetupWizard.Instance.ShowDialog(true);
         }
     }
 }

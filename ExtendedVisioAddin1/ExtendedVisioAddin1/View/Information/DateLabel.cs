@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Information
 {
-    class DateLabel : TextLabel
+    internal class DateLabel : TextLabel
     {
-        private static readonly Regex DateRegex = new Regex(@"DateLabel(\.\d+)?$");
+        private static readonly Regex DateRegex = new Regex(@"InformationDate(\.\d+)?$");
 
         public DateLabel(Page page, Shape shape) : base(page, shape)
         {
@@ -18,15 +14,14 @@ namespace Rationally.Visio.View.Information
 
         public DateLabel(Page page, string labelText) : base(page, labelText)
         {
-            AddUserRow("rationallyType");
-            RationallyType = "informationVersion";
+            RationallyType = "informationDate";
 
-            Name = "InformationVersion";
+            Name = "InformationDate";
         }
 
         public override void Repaint()
         {
-            this.Text = Globals.RationallyAddIn.Model.Date;
+            Text = Globals.RationallyAddIn.Model.Date;
             base.Repaint();
         }
 

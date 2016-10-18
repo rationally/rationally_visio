@@ -13,7 +13,6 @@ namespace Rationally.Visio.View.Alternatives
 
         public AlternativeIdentifierComponent(Page page, int alternativeIndex, string text) : base(page, text)
         {
-            AddUserRow("rationallyType");
             RationallyType = "alternativeIdentifier";
             AddUserRow("alternativeIndex");
             AlternativeIndex = alternativeIndex;

@@ -39,9 +39,9 @@ namespace Rationally.Visio.WindowsFormPopups
             {
                 UpdateLink.Hide();
             }
-            textAuthor.Text = Globals.RationallyAddIn.Model.Author;
-            textDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
-            dateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.Date;
+            this.tableLayoutMainContentGeneral.TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
+            this.tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
+            this.tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.Date;
 
             StartPosition = FormStartPosition.CenterScreen;
         }
@@ -49,19 +49,21 @@ namespace Rationally.Visio.WindowsFormPopups
 
         private void submit_Click(object sender, System.EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textAuthor.Text))
+            if (string.IsNullOrWhiteSpace(this.tableLayoutMainContentGeneral.TextAuthor.Text))
             {
                 MessageBox.Show("Enter the author's name.", "Author's name missing");
                 DialogResult = DialogResult.None;
                 return;
             }
-            if (string.IsNullOrWhiteSpace(textDecisionTopic.Text))
+            if (string.IsNullOrWhiteSpace(this.tableLayoutMainContentGeneral.TextDecisionTopic.Text))
             {
                 MessageBox.Show("Enter a decision topic.", "Decision topic missing");
                 DialogResult = DialogResult.None;
                 return;
             }
-            CreateDecisionClickHandler.Execute(textAuthor.Text, textDecisionTopic.Text, dateTimePickerCreationDate.Text, documentCreation);
+            CreateDecisionClickHandler.Execute(tableLayoutMainContentGeneral.TextAuthor.Text, 
+                                                tableLayoutMainContentGeneral.TextDecisionTopic.Text, 
+                                                tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text, documentCreation);
             Close();
         }
 

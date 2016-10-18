@@ -1,5 +1,6 @@
 ﻿using System;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
+using Rationally.Visio.WindowsFormPopups.WizardComponents;
 
 namespace Rationally.Visio.WindowsFormPopups
 {
@@ -41,16 +42,11 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutLeftMenu = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutRightColumn = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutMainContent = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutGeneralAuthor = new System.Windows.Forms.FlowLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textAuthor = new System.Windows.Forms.TextBox();
-            this.flowLayoutGeneralTopic = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textDecisionTopic = new System.Windows.Forms.TextBox();
-            this.flowLayoutGeneralDate = new System.Windows.Forms.FlowLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePickerCreationDate = new System.Windows.Forms.DateTimePicker();
+            this.tableLayoutMainContentGeneral = new TableLayoutMainContentGeneral();
+            
+            
+            
+            
             this.flowLayoutBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.tableLayoutForEverything.SuspendLayout();
@@ -59,10 +55,10 @@ namespace Rationally.Visio.WindowsFormPopups
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutLeftMenu.SuspendLayout();
             this.tableLayoutRightColumn.SuspendLayout();
-            this.tableLayoutMainContent.SuspendLayout();
-            this.flowLayoutGeneralAuthor.SuspendLayout();
-            this.flowLayoutGeneralTopic.SuspendLayout();
-            this.flowLayoutGeneralDate.SuspendLayout();
+            this.tableLayoutMainContentGeneral.SuspendLayout();
+            
+            
+            
             this.flowLayoutBottomButtons.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -180,7 +176,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutRightColumn.BackColor = System.Drawing.SystemColors.Control;
             this.tableLayoutRightColumn.ColumnCount = 1;
             this.tableLayoutRightColumn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutRightColumn.Controls.Add(this.tableLayoutMainContent, 0, 0);
+            this.tableLayoutRightColumn.Controls.Add(this.tableLayoutMainContentGeneral, 0, 0);
             this.tableLayoutRightColumn.Controls.Add(this.flowLayoutBottomButtons, 0, 1);
             this.tableLayoutRightColumn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutRightColumn.Location = new System.Drawing.Point(256, 4);
@@ -191,126 +187,12 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutRightColumn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutRightColumn.Size = new System.Drawing.Size(768, 540);
             this.tableLayoutRightColumn.TabIndex = 1;
-            // 
-            // tableLayoutMainContent
-            // 
-            this.tableLayoutMainContent.BackColor = System.Drawing.SystemColors.Control;
-            this.tableLayoutMainContent.ColumnCount = 1;
-            this.tableLayoutMainContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutMainContent.Controls.Add(this.flowLayoutGeneralAuthor, 0, 0);
-            this.tableLayoutMainContent.Controls.Add(this.flowLayoutGeneralTopic, 0, 1);
-            this.tableLayoutMainContent.Controls.Add(this.flowLayoutGeneralDate, 0, 2);
-            this.tableLayoutMainContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutMainContent.Location = new System.Drawing.Point(4, 4);
-            this.tableLayoutMainContent.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutMainContent.Name = "tableLayoutMainContent";
-            this.tableLayoutMainContent.RowCount = 4;
-            this.tableLayoutMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutMainContent.Size = new System.Drawing.Size(760, 482);
-            this.tableLayoutMainContent.TabIndex = 0;
-            // 
-            // flowLayoutGeneralAuthor
-            // 
-            this.flowLayoutGeneralAuthor.Controls.Add(this.label2);
-            this.flowLayoutGeneralAuthor.Controls.Add(this.textAuthor);
-            this.flowLayoutGeneralAuthor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutGeneralAuthor.Location = new System.Drawing.Point(4, 4);
-            this.flowLayoutGeneralAuthor.Margin = new System.Windows.Forms.Padding(4);
-            this.flowLayoutGeneralAuthor.Name = "flowLayoutGeneralAuthor";
-            this.flowLayoutGeneralAuthor.Size = new System.Drawing.Size(752, 40);
-            this.flowLayoutGeneralAuthor.TabIndex = 21;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(5, 6);
-            this.label2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.label2.MinimumSize = new System.Drawing.Size(200, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(200, 27);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "Author";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // textAuthor
-            // 
-            this.textAuthor.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textAuthor.Location = new System.Drawing.Point(215, 6);
-            this.textAuthor.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.textAuthor.Name = "textAuthor";
-            this.textAuthor.Size = new System.Drawing.Size(500, 27);
-            this.textAuthor.TabIndex = 13;
-            // 
-            // flowLayoutGeneralTopic
-            // 
-            this.flowLayoutGeneralTopic.Controls.Add(this.label1);
-            this.flowLayoutGeneralTopic.Controls.Add(this.textDecisionTopic);
-            this.flowLayoutGeneralTopic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutGeneralTopic.Location = new System.Drawing.Point(4, 52);
-            this.flowLayoutGeneralTopic.Margin = new System.Windows.Forms.Padding(4);
-            this.flowLayoutGeneralTopic.Name = "flowLayoutGeneralTopic";
-            this.flowLayoutGeneralTopic.Size = new System.Drawing.Size(752, 40);
-            this.flowLayoutGeneralTopic.TabIndex = 22;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(5, 6);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.label1.MinimumSize = new System.Drawing.Size(200, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(200, 27);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Decision topic";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // textDecisionTopic
-            // 
-            this.textDecisionTopic.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textDecisionTopic.Location = new System.Drawing.Point(215, 6);
-            this.textDecisionTopic.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.textDecisionTopic.Name = "textDecisionTopic";
-            this.textDecisionTopic.Size = new System.Drawing.Size(500, 27);
-            this.textDecisionTopic.TabIndex = 17;
-            // 
-            // flowLayoutGeneralDate
-            // 
-            this.flowLayoutGeneralDate.Controls.Add(this.label3);
-            this.flowLayoutGeneralDate.Controls.Add(this.dateTimePickerCreationDate);
-            this.flowLayoutGeneralDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutGeneralDate.Location = new System.Drawing.Point(3, 99);
-            this.flowLayoutGeneralDate.Name = "flowLayoutGeneralDate";
-            this.flowLayoutGeneralDate.Size = new System.Drawing.Size(754, 42);
-            this.flowLayoutGeneralDate.TabIndex = 23;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(5, 6);
-            this.label3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.label3.MinimumSize = new System.Drawing.Size(200, 27);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(200, 27);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "Date";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dateTimePickerCreationDate
-            // 
-            this.dateTimePickerCreationDate.Location = new System.Drawing.Point(216, 6);
-            this.dateTimePickerCreationDate.Margin = new System.Windows.Forms.Padding(6, 6, 5, 6);
-            this.dateTimePickerCreationDate.Name = "dateTimePickerCreationDate";
-            this.dateTimePickerCreationDate.Size = new System.Drawing.Size(500, 27);
-            this.dateTimePickerCreationDate.TabIndex = 18;
+            
+            
+            
+            
+            
+            
             // 
             // flowLayoutBottomButtons
             // 
@@ -351,13 +233,7 @@ namespace Rationally.Visio.WindowsFormPopups
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutLeftMenu.ResumeLayout(false);
             this.tableLayoutRightColumn.ResumeLayout(false);
-            this.tableLayoutMainContent.ResumeLayout(false);
-            this.flowLayoutGeneralAuthor.ResumeLayout(false);
-            this.flowLayoutGeneralAuthor.PerformLayout();
-            this.flowLayoutGeneralTopic.ResumeLayout(false);
-            this.flowLayoutGeneralTopic.PerformLayout();
-            this.flowLayoutGeneralDate.ResumeLayout(false);
-            this.flowLayoutGeneralDate.PerformLayout();
+            this.tableLayoutMainContentGeneral.ResumeLayout(false);
             this.flowLayoutBottomButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -370,17 +246,12 @@ namespace Rationally.Visio.WindowsFormPopups
         private System.Windows.Forms.TableLayoutPanel tableLayoutForEverything;
         private System.Windows.Forms.TableLayoutPanel tableLayoutLeftColumn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutRightColumn;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutMainContent;
+        public TableLayoutMainContentGeneral tableLayoutMainContentGeneral;//here
         private System.Windows.Forms.FlowLayoutPanel flowLayoutBottomButtons;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutGeneralAuthor;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textAuthor;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutGeneralTopic;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textDecisionTopic;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutGeneralDate;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dateTimePickerCreationDate;
+        
+        
+       
+        
         private System.Windows.Forms.TableLayoutPanel tableLayoutLeftLogo;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label labelBottomLeftText;

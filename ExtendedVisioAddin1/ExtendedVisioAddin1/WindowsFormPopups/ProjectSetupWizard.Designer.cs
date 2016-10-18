@@ -43,10 +43,11 @@ namespace Rationally.Visio.WindowsFormPopups
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutRightColumn = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutMainContentGeneral = new TableLayoutMainContentGeneral();
-            
-            
-            
-            
+            this.TableLayoutMainContentAlternatives = new TableLayoutMainContentAlternatives();
+
+
+
+
             this.flowLayoutBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.tableLayoutForEverything.SuspendLayout();
@@ -56,9 +57,10 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutLeftMenu.SuspendLayout();
             this.tableLayoutRightColumn.SuspendLayout();
             this.tableLayoutMainContentGeneral.SuspendLayout();
-            
-            
-            
+            TableLayoutMainContentAlternatives.SuspendLayout();
+
+
+
             this.flowLayoutBottomButtons.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -234,6 +236,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutLeftMenu.ResumeLayout(false);
             this.tableLayoutRightColumn.ResumeLayout(false);
             this.tableLayoutMainContentGeneral.ResumeLayout(false);
+            this.TableLayoutMainContentAlternatives.ResumeLayout(false);
             this.flowLayoutBottomButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -247,6 +250,7 @@ namespace Rationally.Visio.WindowsFormPopups
         private System.Windows.Forms.TableLayoutPanel tableLayoutLeftColumn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutRightColumn;
         public TableLayoutMainContentGeneral tableLayoutMainContentGeneral;//here
+        public TableLayoutMainContentAlternatives TableLayoutMainContentAlternatives;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutBottomButtons;
         
         

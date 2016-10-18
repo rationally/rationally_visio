@@ -1,4 +1,5 @@
 ﻿using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Model;
 using Rationally.Visio.WindowsFormPopups;
 
 namespace Rationally.Visio.EventHandlers
@@ -9,6 +10,7 @@ namespace Rationally.Visio.EventHandlers
         {
             if (document.Template.Contains(Constants.TemplateName))
             {
+                Globals.RationallyAddIn.Model = new RModel();
                 ShowSetupWizard();
             }
         }

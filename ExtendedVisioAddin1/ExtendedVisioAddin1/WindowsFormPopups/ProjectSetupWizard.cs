@@ -18,17 +18,21 @@ namespace Rationally.Visio.WindowsFormPopups
                     instance = new ProjectSetupWizard();
                 }
                 return instance;
-            } 
+            }
         }
 
         public void ShowDialog(bool onDocumentCreation)
         {
+
             if (WindowState == FormWindowState.Minimized)
-            { 
+            {
                 WindowState = FormWindowState.Normal;
             }
             BringToFront();
             documentCreation = onDocumentCreation;
+            tableLayoutMainContentGeneral.TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
+            tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
+            tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.Date;
             ShowDialog();
         }
 
@@ -39,13 +43,10 @@ namespace Rationally.Visio.WindowsFormPopups
             {
                 UpdateLink.Hide();
             }
-            tableLayoutMainContentGeneral.TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
-            tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
-            tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.Date;
 
             StartPosition = FormStartPosition.CenterScreen;
         }
-        
+
 
         private void submit_Click(object sender, System.EventArgs e)
         {
@@ -61,8 +62,8 @@ namespace Rationally.Visio.WindowsFormPopups
                 DialogResult = DialogResult.None;
                 return;
             }
-            CreateDecisionClickHandler.Execute(tableLayoutMainContentGeneral.TextAuthor.Text, 
-                                                tableLayoutMainContentGeneral.TextDecisionTopic.Text, 
+            CreateDecisionClickHandler.Execute(tableLayoutMainContentGeneral.TextAuthor.Text,
+                                                tableLayoutMainContentGeneral.TextDecisionTopic.Text,
                                                 tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text, documentCreation);
             Close();
         }

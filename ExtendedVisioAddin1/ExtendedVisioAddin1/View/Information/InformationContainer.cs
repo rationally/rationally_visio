@@ -27,9 +27,9 @@ namespace Rationally.Visio.View.Information
         public InformationContainer(Page page, Shape s) : base(page, false)
         {
             RShape = s;
+            RModel model = Globals.RationallyAddIn.Model;
             if (s.ContainerProperties.GetMemberShapes((int) VisContainerFlags.visContainerFlagsExcludeNested).Length == 0 && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                RModel model = Globals.RationallyAddIn.Model;
                 InitContent(page, model.Author, model.Date, model.Version);
             }
             else
@@ -45,14 +45,17 @@ namespace Rationally.Visio.View.Information
                     else if (AuthorLabel.IsAuthorLabel(shape.Name))
                     {
                         Children.Add(new AuthorLabel(page, shape));
+                        model.Author = shape.Text;
                     }
                     else if (DateLabel.IsDateLabel(shape.Name))
                     {
                         Children.Add(new DateLabel(page, shape));
+                        model.Date = shape.Text;
                     }
                     else if (VersionLabel.IsVersionLabel(shape.Name))
                     {
                         Children.Add(new VersionLabel(page, shape));
+                        model.Version = shape.Text;
                     }
 
                 }

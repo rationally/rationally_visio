@@ -21,7 +21,10 @@ namespace Rationally.Visio.View.Information
 
         public override void Repaint()
         {
-            Text = Globals.RationallyAddIn.Model.Author;
+            if (Text != Globals.RationallyAddIn.Model.Author)
+            {
+                Text = Globals.RationallyAddIn.Model.Author;
+            }
             base.Repaint();
         }
 

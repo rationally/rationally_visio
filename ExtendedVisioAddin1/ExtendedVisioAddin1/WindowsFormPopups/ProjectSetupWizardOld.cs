@@ -8,7 +8,6 @@ namespace Rationally.Visio.WindowsFormPopups
     public partial class ProjectSetupWizardOld : Form
     {
         private readonly List<Button> tabList;
-        private List<Panel> tabPanels = new List<Panel>();
 
         private static readonly Color UnselectedButtonBackground = Color.FromArgb(220, 220, 220);
         private static readonly Color SelectedButtonBackground = Color.FromArgb(193, 206, 243);

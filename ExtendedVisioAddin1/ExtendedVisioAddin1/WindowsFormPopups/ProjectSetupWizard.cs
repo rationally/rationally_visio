@@ -6,8 +6,8 @@ namespace Rationally.Visio.WindowsFormPopups
 {
     public partial class ProjectSetupWizard : Form
     {
-        private static ProjectSetupWizard instance = null;
-        private static bool documentCreation = false;
+        private static ProjectSetupWizard instance;
+        private static bool documentCreation;
 
         public static ProjectSetupWizard Instance
         {
@@ -39,9 +39,9 @@ namespace Rationally.Visio.WindowsFormPopups
             {
                 UpdateLink.Hide();
             }
-            this.tableLayoutMainContentGeneral.TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
-            this.tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
-            this.tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.Date;
+            tableLayoutMainContentGeneral.TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
+            tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
+            tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.Date;
 
             StartPosition = FormStartPosition.CenterScreen;
         }
@@ -49,13 +49,13 @@ namespace Rationally.Visio.WindowsFormPopups
 
         private void submit_Click(object sender, System.EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(this.tableLayoutMainContentGeneral.TextAuthor.Text))
+            if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextAuthor.Text))
             {
                 MessageBox.Show("Enter the author's name.", "Author's name missing");
                 DialogResult = DialogResult.None;
                 return;
             }
-            if (string.IsNullOrWhiteSpace(this.tableLayoutMainContentGeneral.TextDecisionTopic.Text))
+            if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextDecisionTopic.Text))
             {
                 MessageBox.Show("Enter a decision topic.", "Decision topic missing");
                 DialogResult = DialogResult.None;

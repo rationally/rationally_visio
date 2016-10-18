@@ -72,5 +72,21 @@ namespace Rationally.Visio.WindowsFormPopups
             ProcessStartInfo sInfo = new ProcessStartInfo(Constants.RationallySite);
             Process.Start(sInfo);
         }
+
+        private void buttonShowAlternatives_Click(object sender, System.EventArgs e)
+        {
+            tableLayoutRightColumn.Controls.Clear();
+            tableLayoutRightColumn.Controls.Add(TableLayoutMainContentAlternatives);
+            tableLayoutRightColumn.Controls.Add(flowLayoutBottomButtons);
+            flowLayoutBottomButtons.Refresh();
+        }
+
+        private void button1_Click(object sender, System.EventArgs e)
+        {
+            tableLayoutRightColumn.Controls.Clear();
+            tableLayoutRightColumn.Controls.Add(tableLayoutMainContentGeneral);
+            tableLayoutRightColumn.Controls.Add(flowLayoutBottomButtons);
+            flowLayoutBottomButtons.Refresh();
+        }
     }
 }

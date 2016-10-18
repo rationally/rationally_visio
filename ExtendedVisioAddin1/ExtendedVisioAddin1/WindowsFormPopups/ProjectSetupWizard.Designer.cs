@@ -42,25 +42,17 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutLeftMenu = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutRightColumn = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutMainContentGeneral = new TableLayoutMainContentGeneral();
-            this.TableLayoutMainContentAlternatives = new TableLayoutMainContentAlternatives();
-
-
-
-
             this.flowLayoutBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
+            this.buttonShowAlternatives = new System.Windows.Forms.Button();
+            this.tableLayoutMainContentGeneral = new Rationally.Visio.WindowsFormPopups.WizardComponents.TableLayoutMainContentGeneral();
+            this.TableLayoutMainContentAlternatives = new Rationally.Visio.WindowsFormPopups.WizardComponents.TableLayoutMainContentAlternatives();
             this.tableLayoutForEverything.SuspendLayout();
             this.tableLayoutLeftColumn.SuspendLayout();
             this.tableLayoutLeftLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutLeftMenu.SuspendLayout();
             this.tableLayoutRightColumn.SuspendLayout();
-            this.tableLayoutMainContentGeneral.SuspendLayout();
-            TableLayoutMainContentAlternatives.SuspendLayout();
-
-
-
             this.flowLayoutBottomButtons.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,7 +69,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutForEverything.Name = "tableLayoutForEverything";
             this.tableLayoutForEverything.RowCount = 1;
             this.tableLayoutForEverything.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutForEverything.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 801F));
+            this.tableLayoutForEverything.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 548F));
             this.tableLayoutForEverything.Size = new System.Drawing.Size(1028, 548);
             this.tableLayoutForEverything.TabIndex = 0;
             // 
@@ -151,14 +143,16 @@ namespace Rationally.Visio.WindowsFormPopups
             // tableLayoutLeftMenu
             // 
             this.tableLayoutLeftMenu.ColumnCount = 1;
-            this.tableLayoutLeftMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutLeftMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutLeftMenu.Controls.Add(this.buttonShowAlternatives, 0, 1);
             this.tableLayoutLeftMenu.Controls.Add(this.button1, 0, 0);
             this.tableLayoutLeftMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutLeftMenu.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutLeftMenu.Name = "tableLayoutLeftMenu";
-            this.tableLayoutLeftMenu.RowCount = 2;
-            this.tableLayoutLeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutLeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutLeftMenu.RowCount = 3;
+            this.tableLayoutLeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutLeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutLeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutLeftMenu.Size = new System.Drawing.Size(238, 279);
             this.tableLayoutLeftMenu.TabIndex = 1;
             // 
@@ -167,11 +161,12 @@ namespace Rationally.Visio.WindowsFormPopups
             this.button1.Dock = System.Windows.Forms.DockStyle.Top;
             this.button1.Location = new System.Drawing.Point(3, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(232, 35);
+            this.button1.Size = new System.Drawing.Size(232, 34);
             this.button1.TabIndex = 0;
             this.button1.Text = "General Information";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tableLayoutRightColumn
             // 
@@ -189,12 +184,6 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutRightColumn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutRightColumn.Size = new System.Drawing.Size(768, 540);
             this.tableLayoutRightColumn.TabIndex = 1;
-            
-            
-            
-            
-            
-            
             // 
             // flowLayoutBottomButtons
             // 
@@ -218,6 +207,52 @@ namespace Rationally.Visio.WindowsFormPopups
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.submit_Click);
             // 
+            // buttonShowAlternatives
+            // 
+            this.buttonShowAlternatives.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonShowAlternatives.Location = new System.Drawing.Point(3, 43);
+            this.buttonShowAlternatives.Name = "buttonShowAlternatives";
+            this.buttonShowAlternatives.Size = new System.Drawing.Size(232, 34);
+            this.buttonShowAlternatives.TabIndex = 1;
+            this.buttonShowAlternatives.Text = "Alternatives";
+            this.buttonShowAlternatives.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonShowAlternatives.UseVisualStyleBackColor = true;
+            this.buttonShowAlternatives.Click += new System.EventHandler(this.buttonShowAlternatives_Click);
+            // 
+            // tableLayoutMainContentGeneral
+            // 
+            this.tableLayoutMainContentGeneral.BackColor = System.Drawing.SystemColors.Control;
+            this.tableLayoutMainContentGeneral.ColumnCount = 1;
+            this.tableLayoutMainContentGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutMainContentGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutMainContentGeneral.Location = new System.Drawing.Point(4, 4);
+            this.tableLayoutMainContentGeneral.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutMainContentGeneral.Name = "tableLayoutMainContentGeneral";
+            this.tableLayoutMainContentGeneral.RowCount = 4;
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutMainContentGeneral.Size = new System.Drawing.Size(760, 482);
+            this.tableLayoutMainContentGeneral.TabIndex = 0;
+            // 
+            // TableLayoutMainContentAlternatives
+            // 
+            this.TableLayoutMainContentAlternatives.BackColor = System.Drawing.SystemColors.Control;
+            this.TableLayoutMainContentAlternatives.ColumnCount = 1;
+            this.TableLayoutMainContentAlternatives.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TableLayoutMainContentAlternatives.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TableLayoutMainContentAlternatives.Location = new System.Drawing.Point(4, 4);
+            this.TableLayoutMainContentAlternatives.Margin = new System.Windows.Forms.Padding(4);
+            this.TableLayoutMainContentAlternatives.Name = "TableLayoutMainContentAlternatives";
+            this.TableLayoutMainContentAlternatives.RowCount = 4;
+            this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.TableLayoutMainContentAlternatives.Size = new System.Drawing.Size(760, 482);
+            this.TableLayoutMainContentAlternatives.TabIndex = 0;
+            // 
             // ProjectSetupWizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
@@ -235,8 +270,6 @@ namespace Rationally.Visio.WindowsFormPopups
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutLeftMenu.ResumeLayout(false);
             this.tableLayoutRightColumn.ResumeLayout(false);
-            this.tableLayoutMainContentGeneral.ResumeLayout(false);
-            this.TableLayoutMainContentAlternatives.ResumeLayout(false);
             this.flowLayoutBottomButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -263,5 +296,6 @@ namespace Rationally.Visio.WindowsFormPopups
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.LinkLabel UpdateLink;
+        private System.Windows.Forms.Button buttonShowAlternatives;
     }
 }

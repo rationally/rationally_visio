@@ -16,7 +16,7 @@ namespace Rationally.Visio.View.Information
             RationallyType = "decisionName";
 
             Name = "DecisionName";
-
+            EventDblClick = "QUEUEMARKEREVENT(\"openWizard\")";
             InitStyle();
         }
 

@@ -132,6 +132,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="EventHandlers\ClickEventHandlers\CreateDecisionClickHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteInformationComponentEventHandler.cs" />
+    <Compile Include="EventHandlers\DeleteEventHandlers\DeleteTitleEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\OpenWizardEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\InformationAuthorTextChangedHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\InformationDateTextChangedHandler.cs" />
@@ -144,6 +145,7 @@
     </Compile>
     <Compile Include="View\Information\AuthorLabel.cs" />
     <Compile Include="View\Information\DateLabel.cs" />
+    <Compile Include="View\Information\TitleLabel.cs" />
     <Compile Include="View\Information\VersionLabel.cs" />
     <Compile Include="WindowsFormPopups\AddAlternative.cs">
       <SubType>Form</SubType>

@@ -99,6 +99,8 @@ namespace Rationally.Visio
             registry.Register("forces", new DeleteForcesEventHandler());
             registry.Register("forceContainer", new DeleteForceEventHandler());
 
+            registry.Register("decisionName", new DeleteTitleEventHandler());
+
             registry.Register("informationBox", new DeleteInformationBoxEventHandler());
             registry.Register("informationAuthor", new DeleteInformationComponentEventHandler());
             registry.Register("informationDate", new DeleteInformationComponentEventHandler());

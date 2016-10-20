@@ -22,16 +22,9 @@ namespace Rationally.Visio.EventHandlers.ClickEventHandlers
             if (documentCreation)
             {
                 //draw the header
-                TextLabel header = new TextLabel(Globals.RationallyAddIn.Application.ActivePage, model.DecisionName);
-
-                header.SetUsedSizingPolicy(SizingPolicy.FixedSize);
-                header.HAlign = 0; //left, since the enum is wrong
-                header.Width = 7.7;
-                header.Height = 0.3056;
-                header.SetFontSize(22);
-                header.CenterX = 4.15;
-                header.CenterY = 22.483;
-
+                TitleLabel header = new TitleLabel(Globals.RationallyAddIn.Application.ActivePage, model.DecisionName);
+                Globals.RationallyAddIn.View.Children.Add(header);
+                RepaintHandler.Repaint(header);
 
                 //draw the information container
                 InformationContainer informationContainer = new InformationContainer(Globals.RationallyAddIn.Application.ActivePage, model.Author, model.DateString, model.Version);
@@ -45,7 +38,12 @@ namespace Rationally.Visio.EventHandlers.ClickEventHandlers
                 {
                     InformationContainer container = view.Children.FirstOrDefault(x => x is InformationContainer) as InformationContainer;
                     RepaintHandler.Repaint(container);
-                }   
+                }
+                if (view.Children.Any(x => x is TitleLabel))
+                {
+                    TitleLabel titleLabel = view.Children.FirstOrDefault(x => x is TitleLabel) as TitleLabel;
+                    RepaintHandler.Repaint(titleLabel);
+                }
             }
             Globals.RationallyAddIn.Application.EndUndoScope(scopeId, true);
         }

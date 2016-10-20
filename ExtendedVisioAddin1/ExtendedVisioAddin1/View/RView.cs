@@ -134,6 +134,23 @@ namespace Rationally.Visio.View
                     informationContainer.Repaint();
                 }
             }
+            if (TitleLabel.IsTitleLabel(s.Name))
+            {
+                if (Children.Exists(x => TitleLabel.IsTitleLabel(x.Name)))
+                {
+                    if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+                    {
+                        MessageBox.Show("Only one instance of the title box is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
+                    }
+                }
+                else
+                {
+                    TitleLabel titleLabel = new TitleLabel(Page, s);
+                    Children.Add(titleLabel);
+                    titleLabel.Repaint();
+                }
+            }
             else if(allowAddOfSubpart)
             {
                 Children.ForEach(r => r.AddToTree(s, true));

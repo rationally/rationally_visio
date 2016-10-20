@@ -47,6 +47,9 @@ namespace Rationally.Visio.WindowsFormPopups
             this.flowLayoutBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.CreateButton = new System.Windows.Forms.Button();
             this.TableLayoutMainContentAlternatives = new Rationally.Visio.WindowsFormPopups.WizardComponents.TableLayoutMainContentAlternatives();
+            flowLayoutPanelAlternative1 = new FlowLayoutAlternative(1);
+            flowLayoutPanelAlternative2 = new FlowLayoutAlternative(2);
+            flowLayoutPanelAlternative3 = new FlowLayoutAlternative(3);
             this.tableLayoutForEverything.SuspendLayout();
             this.tableLayoutLeftColumn.SuspendLayout();
             this.tableLayoutLeftLogo.SuspendLayout();
@@ -55,6 +58,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutRightColumn.SuspendLayout();
             this.flowLayoutBottomButtons.SuspendLayout();
             this.TableLayoutMainContentAlternatives.SuspendLayout();
+
             this.SuspendLayout();
             // 
             // tableLayoutForEverything

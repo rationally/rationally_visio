@@ -1,4 +1,5 @@
-﻿using Microsoft.Office.Tools.Ribbon;
+﻿using System.Windows.Forms;
+using Microsoft.Office.Tools.Ribbon;
 using Rationally.Visio.WindowsFormPopups;
 
 namespace Rationally.Visio
@@ -12,7 +13,20 @@ namespace Rationally.Visio
 
         private static void wizardButton_Click(object sender, RibbonControlEventArgs e)
         {
-            ProjectSetupWizard.Instance.ShowDialog(false);
+            if (Globals.RationallyAddIn.Application.ActiveDocument.Template.Contains(Constants.TemplateName))
+            {
+                ProjectSetupWizard.Instance.ShowDialog(false);
+            }
+            else
+            {
+                MessageBox.Show("You can only open this wizard while working in rationally document.",
+                            "Action Not Available",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information,
+                            MessageBoxDefaultButton.Button1,
+                            MessageBoxOptions.RightAlign,
+                            false);
+            }
         }
     }
 }

@@ -33,6 +33,7 @@ namespace Rationally.Visio.WindowsFormPopups
             tableLayoutMainContentGeneral.TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
             tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
             tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.Date;
+            CreateButton.Text = documentCreation ? "Create Decision" : "Update Decision";
             ShowDialog();
         }
 

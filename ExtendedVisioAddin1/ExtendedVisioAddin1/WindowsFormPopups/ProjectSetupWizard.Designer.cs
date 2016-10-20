@@ -43,14 +43,10 @@ namespace Rationally.Visio.WindowsFormPopups
             this.buttonShowAlternatives = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutRightColumn = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.TableLayoutMainContentAlternatives = new Rationally.Visio.WindowsFormPopups.WizardComponents.TableLayoutMainContentAlternatives();
-            this.flowLayoutPanelAlternative1 = new FlowLayoutAlternative(1);
-            this.flowLayoutPanelAlternative2 = new FlowLayoutAlternative(2);
-            this.flowLayoutPanelAlternative3 = new FlowLayoutAlternative(3);
-
             this.tableLayoutMainContentGeneral = new Rationally.Visio.WindowsFormPopups.WizardComponents.TableLayoutMainContentGeneral();
+            this.flowLayoutBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
+            this.CreateButton = new System.Windows.Forms.Button();
+            this.TableLayoutMainContentAlternatives = new Rationally.Visio.WindowsFormPopups.WizardComponents.TableLayoutMainContentAlternatives();
             this.tableLayoutForEverything.SuspendLayout();
             this.tableLayoutLeftColumn.SuspendLayout();
             this.tableLayoutLeftLogo.SuspendLayout();
@@ -59,7 +55,6 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutRightColumn.SuspendLayout();
             this.flowLayoutBottomButtons.SuspendLayout();
             this.TableLayoutMainContentAlternatives.SuspendLayout();
-
             this.SuspendLayout();
             // 
             // tableLayoutForEverything
@@ -203,10 +198,37 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutRightColumn.Size = new System.Drawing.Size(768, 540);
             this.tableLayoutRightColumn.TabIndex = 1;
             // 
+            // tableLayoutMainContentGeneral
+            // 
+            this.tableLayoutMainContentGeneral.BackColor = System.Drawing.SystemColors.Control;
+            this.tableLayoutMainContentGeneral.ColumnCount = 1;
+            this.tableLayoutMainContentGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutMainContentGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutMainContentGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutMainContentGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutMainContentGeneral.Location = new System.Drawing.Point(4, 4);
+            this.tableLayoutMainContentGeneral.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutMainContentGeneral.Name = "tableLayoutMainContentGeneral";
+            this.tableLayoutMainContentGeneral.RowCount = 4;
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutMainContentGeneral.Size = new System.Drawing.Size(760, 482);
+            this.tableLayoutMainContentGeneral.TabIndex = 0;
+            // 
             // flowLayoutBottomButtons
             // 
             this.flowLayoutBottomButtons.BackColor = System.Drawing.SystemColors.Control;
-            this.flowLayoutBottomButtons.Controls.Add(this.button2);
+            this.flowLayoutBottomButtons.Controls.Add(this.CreateButton);
             this.flowLayoutBottomButtons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutBottomButtons.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutBottomButtons.Location = new System.Drawing.Point(4, 494);
@@ -215,20 +237,21 @@ namespace Rationally.Visio.WindowsFormPopups
             this.flowLayoutBottomButtons.Size = new System.Drawing.Size(760, 42);
             this.flowLayoutBottomButtons.TabIndex = 1;
             // 
-            // button2
+            // CreateButton
             // 
-            this.button2.Location = new System.Drawing.Point(557, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(200, 34);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Create Decision";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.submit_Click);
+            this.CreateButton.Location = new System.Drawing.Point(557, 3);
+            this.CreateButton.Name = "CreateButton";
+            this.CreateButton.Size = new System.Drawing.Size(200, 34);
+            this.CreateButton.TabIndex = 0;
+            this.CreateButton.Text = "Create Decision";
+            this.CreateButton.UseVisualStyleBackColor = true;
+            this.CreateButton.Click += new System.EventHandler(this.submit_Click);
             // 
             // TableLayoutMainContentAlternatives
             // 
             this.TableLayoutMainContentAlternatives.BackColor = System.Drawing.SystemColors.Control;
             this.TableLayoutMainContentAlternatives.ColumnCount = 1;
+            this.TableLayoutMainContentAlternatives.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TableLayoutMainContentAlternatives.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TableLayoutMainContentAlternatives.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TableLayoutMainContentAlternatives.Controls.Add(this.flowLayoutPanelAlternative1, 0, 0);
@@ -247,32 +270,36 @@ namespace Rationally.Visio.WindowsFormPopups
             this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.TableLayoutMainContentAlternatives.Size = new System.Drawing.Size(760, 482);
             this.TableLayoutMainContentAlternatives.TabIndex = 0;
-            
-            
             // 
-            // tableLayoutMainContentGeneral
+            // flowLayoutPanelAlternative1
             // 
-            this.tableLayoutMainContentGeneral.BackColor = System.Drawing.SystemColors.Control;
-            this.tableLayoutMainContentGeneral.ColumnCount = 1;
-            this.tableLayoutMainContentGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutMainContentGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutMainContentGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutMainContentGeneral.Location = new System.Drawing.Point(4, 4);
-            this.tableLayoutMainContentGeneral.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutMainContentGeneral.Name = "tableLayoutMainContentGeneral";
-            this.tableLayoutMainContentGeneral.RowCount = 4;
-            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutMainContentGeneral.Size = new System.Drawing.Size(760, 482);
-            this.tableLayoutMainContentGeneral.TabIndex = 0;
+            this.flowLayoutPanelAlternative1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelAlternative1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanelAlternative1.Name = "flowLayoutPanelAlternative1";
+            this.flowLayoutPanelAlternative1.Size = new System.Drawing.Size(754, 42);
+            this.flowLayoutPanelAlternative1.TabIndex = 0;
+            // 
+            // flowLayoutPanelAlternative2
+            // 
+            this.flowLayoutPanelAlternative2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelAlternative2.Location = new System.Drawing.Point(3, 51);
+            this.flowLayoutPanelAlternative2.Name = "flowLayoutPanelAlternative2";
+            this.flowLayoutPanelAlternative2.Size = new System.Drawing.Size(754, 42);
+            this.flowLayoutPanelAlternative2.TabIndex = 0;
+            // 
+            // flowLayoutPanelAlternative3
+            // 
+            this.flowLayoutPanelAlternative3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelAlternative3.Location = new System.Drawing.Point(3, 99);
+            this.flowLayoutPanelAlternative3.Name = "flowLayoutPanelAlternative3";
+            this.flowLayoutPanelAlternative3.Size = new System.Drawing.Size(754, 42);
+            this.flowLayoutPanelAlternative3.TabIndex = 0;
             // 
             // ProjectSetupWizard
             // 
@@ -316,7 +343,7 @@ namespace Rationally.Visio.WindowsFormPopups
         private System.Windows.Forms.Label labelBottomLeftText;
         private System.Windows.Forms.TableLayoutPanel tableLayoutLeftMenu;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button CreateButton;
         private System.Windows.Forms.LinkLabel UpdateLink;
         private System.Windows.Forms.Button buttonShowAlternatives;
         private FlowLayoutAlternative flowLayoutPanelAlternative1;

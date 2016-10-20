@@ -141,6 +141,7 @@
     </Compile>
     <Compile Include="View\Information\AuthorLabel.cs" />
     <Compile Include="View\Information\DateLabel.cs" />
+    <Compile Include="View\Information\TitleLabel.cs" />
     <Compile Include="View\Information\VersionLabel.cs" />
     <Compile Include="WindowsFormPopups\AddAlternative.cs">
       <SubType>Form</SubType>

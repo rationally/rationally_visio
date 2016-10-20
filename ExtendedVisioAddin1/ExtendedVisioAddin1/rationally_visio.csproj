@@ -134,6 +134,7 @@
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteInformationComponentEventHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteTitleEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\OpenWizardEventHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\DecisionNameTextChangedHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\InformationAuthorTextChangedHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\InformationDateTextChangedHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\InformationVersionTextChangedHandler.cs" />

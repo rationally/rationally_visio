@@ -228,6 +228,7 @@ namespace Rationally.Visio
             registry.Register("alternativeState", new AlternativeStateTextChangedEventHandler());
             registry.Register("informationAuthor", new InformationAuthorTextChangedHandler());
             registry.Register("informationDate", new InformationDateTextChangedHandler());
+            registry.Register("decisionName", new DecisionNameTextChangedHandler());
         }
 
         //Fired when any text is changed

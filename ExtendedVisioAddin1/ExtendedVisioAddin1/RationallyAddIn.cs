@@ -219,6 +219,7 @@ namespace Rationally.Visio
             registry.Register("informationAuthor.openWizard", new OpenWizardEventHandler());
             registry.Register("informationDate.openWizard", new OpenWizardEventHandler());
             registry.Register("informationVersion.openWizard", new OpenWizardEventHandler());
+            registry.Register("decisionName.openWizard", new OpenWizardEventHandler());
         }
 
         private static void RegisterTextChangedEventHandlers()

@@ -132,6 +132,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="EventHandlers\ClickEventHandlers\CreateDecisionClickHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteInformationComponentEventHandler.cs" />
+    <Compile Include="EventHandlers\DeleteEventHandlers\DeleteTitleEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\OpenWizardEventHandler.cs" />
     <Compile Include="ribbon\RationallyRibbon.cs">
       <SubType>Component</SubType>

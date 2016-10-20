@@ -14,7 +14,7 @@ namespace Rationally.Visio.EventHandlers.ClickEventHandlers
             // Read the contents of setupDialog's TextBox.
             model.Author = author;
             model.DecisionName = decisionName;
-            model.Date = date;
+            model.DateString = date;
             model.Version = "0.0.1";
 
 
@@ -34,7 +34,7 @@ namespace Rationally.Visio.EventHandlers.ClickEventHandlers
 
 
                 //draw the information container
-                InformationContainer informationContainer = new InformationContainer(Globals.RationallyAddIn.Application.ActivePage, model.Author, model.Date, model.Version);
+                InformationContainer informationContainer = new InformationContainer(Globals.RationallyAddIn.Application.ActivePage, model.Author, model.DateString, model.Version);
                 Globals.RationallyAddIn.View.Children.Add(informationContainer);
                 RepaintHandler.Repaint(informationContainer);
             }

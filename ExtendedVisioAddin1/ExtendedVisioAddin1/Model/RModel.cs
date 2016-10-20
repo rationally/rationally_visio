@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Documents;
@@ -16,7 +17,7 @@ namespace Rationally.Visio.Model
         public List<string> AlternativeStates { get; set; }
         public string Author { get; set; }
         public string DecisionName { get; set; }
-        public string Date { get; set; }
+        public string DateString { get; set; }
         public string Version { get; set; }
         public List<Force> Forces { get; set; }
 

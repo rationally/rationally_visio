@@ -30,7 +30,7 @@ namespace Rationally.Visio.View.Information
             RModel model = Globals.RationallyAddIn.Model;
             if (s.ContainerProperties.GetMemberShapes((int) VisContainerFlags.visContainerFlagsExcludeNested).Length == 0 && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                InitContent(page, model.Author, model.Date, model.Version);
+                InitContent(page, model.Author, model.DateString, model.Version);
             }
             else
             {
@@ -50,7 +50,7 @@ namespace Rationally.Visio.View.Information
                     else if (DateLabel.IsDateLabel(shape.Name))
                     {
                         Children.Add(new DateLabel(page, shape));
-                        model.Date = shape.Text;
+                        model.DateString = shape.Text;
                     }
                     else if (VersionLabel.IsVersionLabel(shape.Name))
                     {

@@ -133,6 +133,9 @@
     <Compile Include="EventHandlers\ClickEventHandlers\CreateDecisionClickHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteInformationComponentEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\OpenWizardEventHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\InformationAuthorTextChangedHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\InformationDateTextChangedHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\InformationVersionTextChangedHandler.cs" />
     <Compile Include="ribbon\RationallyRibbon.cs">
       <SubType>Component</SubType>
     </Compile>

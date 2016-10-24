@@ -64,7 +64,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             FlowLayoutGeneralAuthor.Controls.Add(AuthorLabel);
             FlowLayoutGeneralAuthor.Controls.Add(TextAuthor);
             FlowLayoutGeneralAuthor.Dock = DockStyle.Fill;
-            FlowLayoutGeneralAuthor.Location = new System.Drawing.Point(4, 4);
+            FlowLayoutGeneralAuthor.Location = new System.Drawing.Point(4, 52);
             FlowLayoutGeneralAuthor.Margin = new Padding(4);
             FlowLayoutGeneralAuthor.Name = "flowLayoutGeneralAuthor";
             FlowLayoutGeneralAuthor.Size = new System.Drawing.Size(752, 40);
@@ -98,7 +98,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             FlowLayoutGeneralTopic.Controls.Add(TopicLabel);
             FlowLayoutGeneralTopic.Controls.Add(TextDecisionTopic);
             FlowLayoutGeneralTopic.Dock = DockStyle.Fill;
-            FlowLayoutGeneralTopic.Location = new System.Drawing.Point(4, 52);
+            FlowLayoutGeneralTopic.Location = new System.Drawing.Point(4, 4);
             FlowLayoutGeneralTopic.Margin = new Padding(4);
             FlowLayoutGeneralTopic.Name = "flowLayoutGeneralTopic";
             FlowLayoutGeneralTopic.Size = new System.Drawing.Size(752, 40);

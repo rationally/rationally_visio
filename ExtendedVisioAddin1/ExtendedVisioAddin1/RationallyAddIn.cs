@@ -42,7 +42,7 @@ namespace Rationally.Visio
         public bool NewVersionAvailable;
 
         //Version numbers
-        public readonly Version AddInLocalVersion = new Version("0.0.1");
+        public readonly Version AddInLocalVersion = new Version("0.0.0");
         public Version AddInOnlineVersion;
 
         /*private Microsoft.Office.Core.IRibbonExtensibility ribbonObj;

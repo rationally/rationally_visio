@@ -17,21 +17,21 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
 
         public TableLayoutMainContentGeneral()
         {
-            FlowLayoutGeneralAuthor = new FlowLayoutPanel();
-            AuthorLabel = new Label();
-            TextAuthor = new TextBox();
-
             FlowLayoutGeneralTopic = new FlowLayoutPanel();
             TopicLabel = new Label();
             TextDecisionTopic = new TextBox();
+
+            FlowLayoutGeneralAuthor = new FlowLayoutPanel();
+            AuthorLabel = new Label();
+            TextAuthor = new TextBox();
 
             FlowLayoutGeneralDate = new FlowLayoutPanel();
             DateLabel = new Label();
             DateTimePickerCreationDate = new DateTimePicker();
 
             SuspendLayout();
-            FlowLayoutGeneralAuthor.SuspendLayout();
             FlowLayoutGeneralTopic.SuspendLayout();
+            FlowLayoutGeneralAuthor.SuspendLayout();
             FlowLayoutGeneralDate.SuspendLayout();
             Init();
         }
@@ -44,8 +44,8 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             BackColor = System.Drawing.SystemColors.Control;
             ColumnCount = 1;
             ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            Controls.Add(FlowLayoutGeneralAuthor, 0, 0);
-            Controls.Add(FlowLayoutGeneralTopic, 0, 1);
+            Controls.Add(FlowLayoutGeneralTopic, 0, 0);
+            Controls.Add(FlowLayoutGeneralAuthor, 0, 1);
             Controls.Add(FlowLayoutGeneralDate, 0, 2);
             Dock = DockStyle.Fill;
             Location = new System.Drawing.Point(4, 4);
@@ -115,7 +115,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             TopicLabel.Name = "label1";
             TopicLabel.Size = new System.Drawing.Size(200, 27);
             TopicLabel.TabIndex = 16;
-            TopicLabel.Text = "Decision topic";
+            TopicLabel.Text = "Topic";
             TopicLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textDecisionTopic

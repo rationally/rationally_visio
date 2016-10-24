@@ -332,6 +332,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Command1.png" />
+    <None Include="Resources\icon.png" />
+    <None Include="Resources\rationallyIcon.bmp" />
     <None Include="ribbon\wizard.png" />
   </ItemGroup>
   <ItemGroup>

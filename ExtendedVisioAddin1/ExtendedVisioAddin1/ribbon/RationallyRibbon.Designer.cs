@@ -34,6 +34,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RationallyRibbon));
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.wizardButton = this.Factory.CreateRibbonButton();
@@ -56,7 +57,7 @@
             // wizardButton
             // 
             this.wizardButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.wizardButton.Image = global::Rationally.Visio.Properties.Resources.wizard;
+            this.wizardButton.Image = ((System.Drawing.Image)(resources.GetObject("wizardButton.Image")));
             this.wizardButton.Label = "Open Wizard";
             this.wizardButton.Name = "wizardButton";
             this.wizardButton.ShowImage = true;

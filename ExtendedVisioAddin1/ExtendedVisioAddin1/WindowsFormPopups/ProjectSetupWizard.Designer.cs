@@ -47,9 +47,9 @@ namespace Rationally.Visio.WindowsFormPopups
             this.flowLayoutBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.CreateButton = new System.Windows.Forms.Button();
             this.TableLayoutMainContentAlternatives = new Rationally.Visio.WindowsFormPopups.WizardComponents.TableLayoutMainContentAlternatives();
-            flowLayoutPanelAlternative1 = new FlowLayoutAlternative(1);
-            flowLayoutPanelAlternative2 = new FlowLayoutAlternative(2);
-            flowLayoutPanelAlternative3 = new FlowLayoutAlternative(3);
+            this.flowLayoutPanelAlternative1 = new FlowLayoutAlternative(1);
+            this.flowLayoutPanelAlternative2 = new FlowLayoutAlternative(2);
+            this.flowLayoutPanelAlternative3 = new FlowLayoutAlternative(3);
             this.tableLayoutForEverything.SuspendLayout();
             this.tableLayoutLeftColumn.SuspendLayout();
             this.tableLayoutLeftLogo.SuspendLayout();
@@ -58,7 +58,6 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutRightColumn.SuspendLayout();
             this.flowLayoutBottomButtons.SuspendLayout();
             this.TableLayoutMainContentAlternatives.SuspendLayout();
-
             this.SuspendLayout();
             // 
             // tableLayoutForEverything
@@ -209,11 +208,16 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutMainContentGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutMainContentGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutMainContentGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutMainContentGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutMainContentGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutMainContentGeneral.Location = new System.Drawing.Point(4, 4);
             this.tableLayoutMainContentGeneral.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutMainContentGeneral.Name = "tableLayoutMainContentGeneral";
             this.tableLayoutMainContentGeneral.RowCount = 4;
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutMainContentGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
@@ -258,6 +262,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.TableLayoutMainContentAlternatives.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TableLayoutMainContentAlternatives.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TableLayoutMainContentAlternatives.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TableLayoutMainContentAlternatives.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TableLayoutMainContentAlternatives.Controls.Add(this.flowLayoutPanelAlternative1, 0, 0);
             this.TableLayoutMainContentAlternatives.Controls.Add(this.flowLayoutPanelAlternative2, 0, 1);
             this.TableLayoutMainContentAlternatives.Controls.Add(this.flowLayoutPanelAlternative3, 0, 2);
@@ -266,6 +271,10 @@ namespace Rationally.Visio.WindowsFormPopups
             this.TableLayoutMainContentAlternatives.Margin = new System.Windows.Forms.Padding(4);
             this.TableLayoutMainContentAlternatives.Name = "TableLayoutMainContentAlternatives";
             this.TableLayoutMainContentAlternatives.RowCount = 4;
+            this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.TableLayoutMainContentAlternatives.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
@@ -312,6 +321,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.ClientSize = new System.Drawing.Size(1028, 548);
             this.Controls.Add(this.tableLayoutForEverything);
             this.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ProjectSetupWizard";
             this.Text = "Rationally - Prepare Decision View";

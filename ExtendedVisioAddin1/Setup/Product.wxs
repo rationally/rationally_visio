@@ -88,9 +88,9 @@
             <visio:PublishTemplate MenuPath="Rationally\Rationally Template" />
         </File>
     </Component>
-      
-</ComponentGroup>
-    
+
+
+    </ComponentGroup>
     <!-- Addin files to be included in setup -->
     <ComponentGroup Id="AddinFiles" Directory="APPLICATIONFOLDER">
       

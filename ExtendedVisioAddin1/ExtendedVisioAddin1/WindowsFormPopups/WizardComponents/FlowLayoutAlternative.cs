@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Rationally.Visio.WindowsFormPopups.WizardComponents
 {
-    class FlowLayoutAlternative : FlowLayoutPanel
+    public class FlowLayoutAlternative : FlowLayoutPanel
     {
         public int AlternativeIndex;
 

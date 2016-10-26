@@ -57,7 +57,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             RowStyles.Add(new RowStyle(SizeType.Percent, 70F));
             Size = new System.Drawing.Size(760, 482);
-            TabIndex = 0;
+            TabIndex = 20;
             // 
             // flowLayoutGeneralAuthor
             // 
@@ -68,7 +68,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             FlowLayoutGeneralAuthor.Margin = new Padding(4);
             FlowLayoutGeneralAuthor.Name = "flowLayoutGeneralAuthor";
             FlowLayoutGeneralAuthor.Size = new System.Drawing.Size(752, 40);
-            FlowLayoutGeneralAuthor.TabIndex = 21;
+            FlowLayoutGeneralAuthor.TabIndex = 22;
             // 
             // label2
             // 
@@ -91,7 +91,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             TextAuthor.Margin = new Padding(5, 6, 5, 6);
             TextAuthor.Name = "textAuthor";
             TextAuthor.Size = new System.Drawing.Size(500, 27);
-            TextAuthor.TabIndex = 13;
+            TextAuthor.TabIndex = 3;
             // 
             // flowLayoutGeneralTopic
             // 
@@ -102,7 +102,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             FlowLayoutGeneralTopic.Margin = new Padding(4);
             FlowLayoutGeneralTopic.Name = "flowLayoutGeneralTopic";
             FlowLayoutGeneralTopic.Size = new System.Drawing.Size(752, 40);
-            FlowLayoutGeneralTopic.TabIndex = 22;
+            FlowLayoutGeneralTopic.TabIndex = 21;
             // 
             // label1
             // 
@@ -125,7 +125,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             TextDecisionTopic.Margin = new Padding(5, 6, 5, 6);
             TextDecisionTopic.Name = "textDecisionTopic";
             TextDecisionTopic.Size = new System.Drawing.Size(500, 27);
-            TextDecisionTopic.TabIndex = 17;
+            TextDecisionTopic.TabIndex = 2;
             // 
             // flowLayoutGeneralDate
             // 
@@ -157,7 +157,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             DateTimePickerCreationDate.Margin = new Padding(6, 6, 5, 6);
             DateTimePickerCreationDate.Name = "dateTimePickerCreationDate";
             DateTimePickerCreationDate.Size = new System.Drawing.Size(500, 27);
-            DateTimePickerCreationDate.TabIndex = 18;
+            DateTimePickerCreationDate.TabIndex = 3;
 
             FlowLayoutGeneralAuthor.ResumeLayout(false);
             FlowLayoutGeneralAuthor.PerformLayout();

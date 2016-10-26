@@ -89,7 +89,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutLeftColumn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutLeftColumn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 255F));
             this.tableLayoutLeftColumn.Size = new System.Drawing.Size(244, 540);
-            this.tableLayoutLeftColumn.TabIndex = 0;
+            this.tableLayoutLeftColumn.TabIndex = 10;
             // 
             // tableLayoutLeftLogo
             // 
@@ -155,7 +155,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.tableLayoutLeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutLeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutLeftMenu.Size = new System.Drawing.Size(238, 279);
-            this.tableLayoutLeftMenu.TabIndex = 1;
+            this.tableLayoutLeftMenu.TabIndex = 100;
             // 
             // tableLayoutRightColumn
             // 
@@ -205,7 +205,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.buttonShowAlternatives.Location = new System.Drawing.Point(3, 43);
             this.buttonShowAlternatives.Name = "buttonShowAlternatives";
             this.buttonShowAlternatives.Size = new System.Drawing.Size(232, 34);
-            this.buttonShowAlternatives.TabIndex = 1;
+            this.buttonShowAlternatives.TabIndex = 6;
             this.buttonShowAlternatives.Text = "Alternatives";
             this.buttonShowAlternatives.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonShowAlternatives.UseVisualStyleBackColor = false;
@@ -220,7 +220,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.button1.Location = new System.Drawing.Point(3, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(232, 34);
-            this.button1.TabIndex = 0;
+            this.button1.TabIndex = 5;
             this.button1.Text = "General Information";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = false;

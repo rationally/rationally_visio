@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 using Font = System.Drawing.Font;
+// ReSharper disable RedundantCast
+// ReSharper disable ArrangeRedundantParentheses
 
 namespace Rationally.Visio.View
 {

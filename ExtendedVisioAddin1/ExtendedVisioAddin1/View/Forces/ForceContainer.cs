@@ -124,7 +124,7 @@ namespace Rationally.Visio.View.Forces
             {
 
                 //locate the header cell for the current alternative, if it exsists
-                ForceValueComponent altValue = (ForceValueComponent)Children.FirstOrDefault(c => (c is ForceValueComponent && !c.Deleted && ((ForceValueComponent)c).AlternativeUniqueIdentifier == alt.UniqueIdentifier));
+                ForceValueComponent altValue = (ForceValueComponent)Children.FirstOrDefault(c => c is ForceValueComponent && !c.Deleted && ((ForceValueComponent)c).AlternativeUniqueIdentifier == alt.UniqueIdentifier);
                 //if a deleted shape is present, there is no possiblity that we are adding an alternative. Furthermore, the deleted shape still represents an alternative, for each thus no second cell should be added!
                 if (altValue == null && Children.All(c => !c.Deleted))
                 {

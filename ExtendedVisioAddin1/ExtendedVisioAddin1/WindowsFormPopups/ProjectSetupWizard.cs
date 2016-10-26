@@ -46,22 +46,31 @@ namespace Rationally.Visio.WindowsFormPopups
             }
 
             StartPosition = FormStartPosition.CenterScreen;
+            AcceptButton = CreateButton;
         }
 
 
         private void submit_Click(object sender, System.EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextAuthor.Text))
-            {
-                MessageBox.Show("Enter the author's name.", "Author's name missing");
-                DialogResult = DialogResult.None;
-                return;
-            }
             if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextDecisionTopic.Text))
             {
+#if DEBUG
+                tableLayoutMainContentGeneral.TextDecisionTopic.Text = "Title";
+#else
                 MessageBox.Show("Enter a decision topic.", "Decision topic missing");
                 DialogResult = DialogResult.None;
                 return;
+#endif
+            }
+            if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextAuthor.Text))
+            {
+#if DEBUG
+                tableLayoutMainContentGeneral.TextAuthor.Text = "Author";
+#else
+                MessageBox.Show("Enter the author's name.", "Author's name missing");
+                DialogResult = DialogResult.None;
+                return;
+#endif
             }
             CreateDecisionClickHandler.Execute(tableLayoutMainContentGeneral.TextAuthor.Text,
                                                 tableLayoutMainContentGeneral.TextDecisionTopic.Text,

@@ -33,7 +33,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             AlternativeTitleLabel = new Label();
             TextBoxAlternativeTitle = new TextBox();
             AlternativeStateLabel = new Label();
-            AlternativeStateDropdown = new ComboBox();
+            AlternativeStateDropdown = new ComboBox {DropDownStyle = ComboBoxStyle.DropDownList, FormattingEnabled = true};
 
             SuspendLayout();
             Init();
@@ -88,12 +88,8 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             // alternativeStateDropdown
             // 
             AlternativeStateDropdown.FormattingEnabled = true;
-            AlternativeStateDropdown.Items.AddRange(new object[] {
-            "Proposed",
-            "Accepted",
-            "Rejected",
-            "Challenged",
-            "Discarded"});
+            AlternativeStateDropdown.Items.AddRange(Globals.RationallyAddIn.Model.AlternativeStates.ToArray());
+            AlternativeStateDropdown.SelectedIndex = 0;
             AlternativeStateDropdown.Location = new System.Drawing.Point(466, 6);
             AlternativeStateDropdown.Margin = new Padding(3, 6, 3, 3);
             AlternativeStateDropdown.Name = "alternativeStateDropdown";

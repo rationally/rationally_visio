@@ -77,9 +77,9 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             AuthorLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             AuthorLabel.Location = new System.Drawing.Point(5, 6);
             AuthorLabel.Margin = new Padding(5, 6, 5, 6);
-            AuthorLabel.MinimumSize = new System.Drawing.Size(200, 27);
+            AuthorLabel.MinimumSize = new System.Drawing.Size(100, 27);
             AuthorLabel.Name = "label2";
-            AuthorLabel.Size = new System.Drawing.Size(200, 27);
+            AuthorLabel.Size = new System.Drawing.Size(100, 27);
             AuthorLabel.TabIndex = 15;
             AuthorLabel.Text = "Author";
             AuthorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -90,7 +90,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             TextAuthor.Location = new System.Drawing.Point(215, 6);
             TextAuthor.Margin = new Padding(5, 6, 5, 6);
             TextAuthor.Name = "textAuthor";
-            TextAuthor.Size = new System.Drawing.Size(500, 27);
+            TextAuthor.Size = new System.Drawing.Size(600, 27);
             TextAuthor.TabIndex = 3;
             // 
             // flowLayoutGeneralTopic
@@ -111,9 +111,9 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             TopicLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             TopicLabel.Location = new System.Drawing.Point(5, 6);
             TopicLabel.Margin = new Padding(5, 6, 5, 6);
-            TopicLabel.MinimumSize = new System.Drawing.Size(200, 27);
+            TopicLabel.MinimumSize = new System.Drawing.Size(100, 27);
             TopicLabel.Name = "label1";
-            TopicLabel.Size = new System.Drawing.Size(200, 27);
+            TopicLabel.Size = new System.Drawing.Size(100, 27);
             TopicLabel.TabIndex = 16;
             TopicLabel.Text = "Topic";
             TopicLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -124,7 +124,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             TextDecisionTopic.Location = new System.Drawing.Point(215, 6);
             TextDecisionTopic.Margin = new Padding(5, 6, 5, 6);
             TextDecisionTopic.Name = "textDecisionTopic";
-            TextDecisionTopic.Size = new System.Drawing.Size(500, 27);
+            TextDecisionTopic.Size = new System.Drawing.Size(600, 27);
             TextDecisionTopic.TabIndex = 2;
             // 
             // flowLayoutGeneralDate
@@ -144,9 +144,9 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             DateLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             DateLabel.Location = new System.Drawing.Point(5, 6);
             DateLabel.Margin = new Padding(5, 6, 5, 6);
-            DateLabel.MinimumSize = new System.Drawing.Size(200, 27);
+            DateLabel.MinimumSize = new System.Drawing.Size(100, 27);
             DateLabel.Name = "label3";
-            DateLabel.Size = new System.Drawing.Size(200, 27);
+            DateLabel.Size = new System.Drawing.Size(100, 27);
             DateLabel.TabIndex = 17;
             DateLabel.Text = "Date";
             DateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -156,7 +156,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             DateTimePickerCreationDate.Location = new System.Drawing.Point(216, 6);
             DateTimePickerCreationDate.Margin = new Padding(6, 6, 5, 6);
             DateTimePickerCreationDate.Name = "dateTimePickerCreationDate";
-            DateTimePickerCreationDate.Size = new System.Drawing.Size(500, 27);
+            DateTimePickerCreationDate.Size = new System.Drawing.Size(600, 27);
             DateTimePickerCreationDate.TabIndex = 3;
 
             FlowLayoutGeneralAuthor.ResumeLayout(false);

@@ -52,7 +52,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
         public void Highlight()
         {
             BackColor = Color.FromArgb(1, 194, 207, 242);
-            this.Font = boldFont;
+            Font = boldFont;
             Refresh();
         }
 

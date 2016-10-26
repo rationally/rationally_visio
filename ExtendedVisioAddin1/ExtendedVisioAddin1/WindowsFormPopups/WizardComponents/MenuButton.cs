@@ -11,33 +11,55 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
     {
         private Font normalFont;
         private Font boldFont;
-
-        public MenuButton()
+        private MenuPanel containingMenu;
+        public MenuButton(MenuPanel containingMenu)
         {
+            this.containingMenu = containingMenu;
+            
             normalFont = new Font("calibri", 12, FontStyle.Regular);
             boldFont = new Font("calibri", 12, FontStyle.Bold);
             BackColor = Color.FromArgb(1, 235, 235, 235);
             //FlatAppearance.MouseOverForeColor = 
             this.MouseEnter += button1_MouseEnter;
             this.MouseLeave += button1_MouseLeave;
-            this.MouseHover += OnMouseHover;
+            this.Click += button1_Click;
+
+            this.containingMenu.Buttons.Add(this);
         }
 
-        private void OnMouseHover(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
+            containingMenu.HighLightedButton = this;
         }
+
 
         private void button1_MouseEnter(object sender, EventArgs e)
         {
-            BackColor = Color.FromArgb(1, 194, 207, 242);
-            this.Font = boldFont;
+            if (!this.Equals(containingMenu.HighLightedButton))
+            {
+                Highlight();
+            }
         }
         private void button1_MouseLeave(object sender, EventArgs e)
         {
-            BackColor = Color.FromArgb(1,235,235,235);
-            this.Font = normalFont;
+            if (!this.Equals(containingMenu.HighLightedButton))
+            {
+                Lowlight();
+            }
         }
 
+
+        public void Highlight()
+        {
+            BackColor = Color.FromArgb(1, 194, 207, 242);
+            this.Font = boldFont;
+            Refresh();
+        }
+
+        public void Lowlight()
+        {
+            BackColor = Color.FromArgb(1, 235, 235, 235);
+            this.Font = normalFont;
+        }
     }
 }

@@ -257,6 +257,9 @@
     <Compile Include="WindowsFormPopups\WizardComponents\MenuButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WindowsFormPopups\WizardComponents\MenuPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WindowsFormPopups\WizardComponents\TableLayoutMainContentAlternatives.cs">
       <SubType>Component</SubType>
     </Compile>

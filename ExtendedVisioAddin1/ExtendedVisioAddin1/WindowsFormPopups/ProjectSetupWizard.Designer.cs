@@ -40,12 +40,12 @@ namespace Rationally.Visio.WindowsFormPopups
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelBottomLeftText = new System.Windows.Forms.Label();
             this.UpdateLink = new System.Windows.Forms.LinkLabel();
-            this.tableLayoutLeftMenu = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutLeftMenu = new MenuPanel();
             this.tableLayoutRightColumn = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.CreateButton = new System.Windows.Forms.Button();
-            this.buttonShowAlternatives = new Rationally.Visio.WindowsFormPopups.WizardComponents.MenuButton();
-            this.button1 = new Rationally.Visio.WindowsFormPopups.WizardComponents.MenuButton();
+            this.buttonShowAlternatives = new Rationally.Visio.WindowsFormPopups.WizardComponents.MenuButton(this.tableLayoutLeftMenu);
+            this.button1 = new Rationally.Visio.WindowsFormPopups.WizardComponents.MenuButton(this.tableLayoutLeftMenu);
             this.tableLayoutMainContentGeneral = new Rationally.Visio.WindowsFormPopups.WizardComponents.TableLayoutMainContentGeneral();
             this.TableLayoutMainContentAlternatives = new Rationally.Visio.WindowsFormPopups.WizardComponents.TableLayoutMainContentAlternatives();
             this.tableLayoutForEverything.SuspendLayout();
@@ -208,7 +208,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.buttonShowAlternatives.TabIndex = 1;
             this.buttonShowAlternatives.Text = "Alternatives";
             this.buttonShowAlternatives.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonShowAlternatives.UseVisualStyleBackColor = true;
+            this.buttonShowAlternatives.UseVisualStyleBackColor = false;
             this.buttonShowAlternatives.Click += new System.EventHandler(this.buttonShowAlternatives_Click);
             // 
             // button1
@@ -223,7 +223,7 @@ namespace Rationally.Visio.WindowsFormPopups
             this.button1.TabIndex = 0;
             this.button1.Text = "General Information";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tableLayoutMainContentGeneral
@@ -351,7 +351,7 @@ namespace Rationally.Visio.WindowsFormPopups
         private System.Windows.Forms.TableLayoutPanel tableLayoutLeftLogo;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label labelBottomLeftText;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutLeftMenu;
+        private MenuPanel tableLayoutLeftMenu;
         private MenuButton button1;
         private System.Windows.Forms.Button CreateButton;
         private System.Windows.Forms.LinkLabel UpdateLink;

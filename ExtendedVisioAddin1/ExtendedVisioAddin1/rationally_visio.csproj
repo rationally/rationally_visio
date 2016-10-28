@@ -130,7 +130,8 @@
   <ItemGroup>
     <Compile Include="CellConstants.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="EventHandlers\ClickEventHandlers\CreateDecisionClickHandler.cs" />
+    <Compile Include="EventHandlers\ClickEventHandlers\UpdateAlternativeHandler.cs" />
+    <Compile Include="EventHandlers\ClickEventHandlers\UpdateGeneralInformationHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteInformationComponentEventHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteTitleEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\OpenWizardEventHandler.cs" />

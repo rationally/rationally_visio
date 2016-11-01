@@ -134,7 +134,7 @@ namespace Rationally.Visio.View
                     informationContainer.Repaint();
                 }
             }
-            if (TitleLabel.IsTitleLabel(s.Name))
+            else if (TitleLabel.IsTitleLabel(s.Name))
             {
                 if (Children.Exists(x => TitleLabel.IsTitleLabel(x.Name)))
                 {

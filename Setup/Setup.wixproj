@@ -57,14 +57,13 @@
     <Content Include="link.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExtendedVisioAddin1\rationally_visio.csproj">
+    <ProjectReference Include="..\..\rationally_visio\rationally_visio.csproj">
       <Name>rationally_visio</Name>
       <Project>{ad3cbd3e-7222-444d-a5a9-26c21345a32e}</Project>
       <Private>True</Private>
-      <DoNotHarvest>
-      </DoNotHarvest>
+      <DoNotHarvest>True</DoNotHarvest>
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
-      <RefTargetDir>APPLICATIONFOLDER</RefTargetDir>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />

@@ -4,7 +4,7 @@ using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
 using System;
 using System.Collections.Generic;
-using Rationally.Visio.Constants;
+using Rationally.Visio.RationallyConstants;
 
 // ReSharper disable ArrangeRedundantParentheses
 
@@ -96,7 +96,7 @@ namespace Rationally.Visio.View.Information
                 FontColor = "RGB(89,131,168)",
                 Height = 0.38,
                 MarginTop = 0.02,
-                HAlign = Constant.LeftAlignment,
+                HAlign = Constants.LeftAlignment,
                 Order = 1,
                 LockTextEdit = true,
                 EventDblClick = "QUEUEMARKEREVENT(\"openWizard\")"
@@ -121,7 +121,7 @@ namespace Rationally.Visio.View.Information
                 MarginTop = 0.02,
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
-                HAlign = Constant.LeftAlignment,
+                HAlign = Constants.LeftAlignment,
                 Order = 3,
                 LockTextEdit = true,
                 EventDblClick = "QUEUEMARKEREVENT(\"openWizard\")"
@@ -146,7 +146,7 @@ namespace Rationally.Visio.View.Information
                 MarginTop = 0.02,
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
-                HAlign = Constant.LeftAlignment,
+                HAlign = Constants.LeftAlignment,
                 Order = 5,
                 LockTextEdit = true,
                 EventDblClick = "QUEUEMARKEREVENT(\"openWizard\")"

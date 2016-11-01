@@ -128,8 +128,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\CellConstants.cs" />
-    <Compile Include="Constants\Constant.cs" />
+    <Compile Include="RationallyConstants\CellConstants.cs" />
+    <Compile Include="RationallyConstants\Constants.cs" />
     <Compile Include="EventHandlers\ClickEventHandlers\UpdateAlternativeHandler.cs" />
     <Compile Include="EventHandlers\ClickEventHandlers\UpdateGeneralInformationHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteInformationComponentEventHandler.cs" />

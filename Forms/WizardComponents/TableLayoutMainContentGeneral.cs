@@ -1,7 +1,7 @@
 ﻿
 using System.Windows.Forms;
 
-namespace Rationally.Visio.WindowsFormPopups.WizardComponents
+namespace Rationally.Visio.Forms.WizardComponents
 {
     public class TableLayoutMainContentGeneral : TableLayoutPanel
     {

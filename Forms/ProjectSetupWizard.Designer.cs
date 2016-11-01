@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
-using Rationally.Visio.WindowsFormPopups.WizardComponents;
+using Rationally.Visio.Forms.WizardComponents;
 
-namespace Rationally.Visio.WindowsFormPopups
+namespace Rationally.Visio.Forms
 {
     partial class ProjectSetupWizard
     {
@@ -34,20 +34,20 @@ namespace Rationally.Visio.WindowsFormPopups
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectSetupWizard));
-            this.tableLayoutForEverything = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutLeftColumn = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutLeftLogo = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.labelBottomLeftText = new System.Windows.Forms.Label();
-            this.UpdateLink = new System.Windows.Forms.LinkLabel();
+            this.tableLayoutForEverything = new TableLayoutPanel();
+            this.tableLayoutLeftColumn = new TableLayoutPanel();
+            this.tableLayoutLeftLogo = new TableLayoutPanel();
+            this.pictureBox1 = new PictureBox();
+            this.labelBottomLeftText = new Label();
+            this.UpdateLink = new LinkLabel();
             this.tableLayoutLeftMenu = new MenuPanel();
-            this.tableLayoutRightColumn = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
-            this.CreateButton = new System.Windows.Forms.Button();
-            this.buttonShowAlternatives = new Rationally.Visio.WindowsFormPopups.WizardComponents.MenuButton(this.tableLayoutLeftMenu);
-            this.button1 = new Rationally.Visio.WindowsFormPopups.WizardComponents.MenuButton(this.tableLayoutLeftMenu);
-            this.tableLayoutMainContentGeneral = new Rationally.Visio.WindowsFormPopups.WizardComponents.TableLayoutMainContentGeneral();
-            this.TableLayoutMainContentAlternatives = new Rationally.Visio.WindowsFormPopups.WizardComponents.TableLayoutMainContentAlternatives();
+            this.tableLayoutRightColumn = new TableLayoutPanel();
+            this.flowLayoutBottomButtons = new FlowLayoutPanel();
+            this.CreateButton = new Button();
+            this.buttonShowAlternatives = new MenuButton(this.tableLayoutLeftMenu);
+            this.button1 = new MenuButton(this.tableLayoutLeftMenu);
+            this.tableLayoutMainContentGeneral = new TableLayoutMainContentGeneral();
+            this.TableLayoutMainContentAlternatives = new TableLayoutMainContentAlternatives();
             this.tableLayoutForEverything.SuspendLayout();
             this.tableLayoutLeftColumn.SuspendLayout();
             this.tableLayoutLeftLogo.SuspendLayout();

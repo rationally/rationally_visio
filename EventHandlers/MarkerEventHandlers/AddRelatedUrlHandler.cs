@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
-using Rationally.Visio.WindowsFormPopups;
+using Rationally.Visio.Forms;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {

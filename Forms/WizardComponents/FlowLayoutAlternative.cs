@@ -2,7 +2,7 @@
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
 using Rationally.Visio.Model;
 
-namespace Rationally.Visio.WindowsFormPopups.WizardComponents
+namespace Rationally.Visio.Forms.WizardComponents
 {
     public class FlowLayoutAlternative : FlowLayoutPanel
     {
@@ -47,14 +47,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
                 Alternative = Globals.RationallyAddIn.Model.Alternatives[AlternativeIndex - 1];//map to c-indexing
             }
             TextBoxAlternativeTitle.Text = Alternative != null ? Alternative.Title : "";
-            if (Alternative != null)
-            {
-                AlternativeStateDropdown.SelectedIndex = Globals.RationallyAddIn.Model.AlternativeStates.IndexOf(Alternative.Status);
-            }
-            else
-            {
-                AlternativeStateDropdown.SelectedIndex = 0;
-            }
+            AlternativeStateDropdown.SelectedIndex = Alternative != null ? Globals.RationallyAddIn.Model.AlternativeStates.IndexOf(Alternative.Status) : 0;
         }
 
         public void UpdateModel()

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Linq;
 using Rationally.Visio.Model;
 using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.EventHandlers.ClickEventHandlers
 {
-    class UpdateAlternativeHandler
+    internal class UpdateAlternativeHandler
     {
         public static void Execute(Alternative alternativeToUpdate, string newTitle, string newState)
         {

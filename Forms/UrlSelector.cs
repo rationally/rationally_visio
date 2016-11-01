@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Rationally.Visio.WindowsFormPopups
+namespace Rationally.Visio.Forms
 {
     public partial class UrlSelecter : Form
     {

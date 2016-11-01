@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using Rationally.Visio.Model;
 
-namespace Rationally.Visio.WindowsFormPopups
+namespace Rationally.Visio.Forms
 {
     internal partial class AddAlternative : Form
     {

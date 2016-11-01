@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Microsoft.Office.Tools.Ribbon;
-using Rationally.Visio.Constants;
-using Rationally.Visio.WindowsFormPopups;
+using Rationally.Visio.RationallyConstants;
+using Rationally.Visio.Forms;
 
 namespace Rationally.Visio
 {
@@ -14,7 +14,7 @@ namespace Rationally.Visio
 
         private static void wizardButton_Click(object sender, RibbonControlEventArgs e)
         {
-            if (Globals.RationallyAddIn.Application.ActiveDocument.Template.Contains(Constant.TemplateName))
+            if (Globals.RationallyAddIn.Application.ActiveDocument.Template.Contains(Constants.TemplateName))
             {
                 ProjectSetupWizard.Instance.ShowDialog(false);
             }

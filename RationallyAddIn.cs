@@ -17,8 +17,8 @@ using Application = Microsoft.Office.Interop.Visio.Application;
 using Shape = Microsoft.Office.Interop.Visio.Shape;
 using log4net;
 using Newtonsoft.Json.Linq;
-using Rationally.Visio.Constants;
-using Rationally.Visio.WindowsFormPopups;
+using Rationally.Visio.RationallyConstants;
+using Rationally.Visio.Forms;
 
 //Main class for the visio add in. Everything is managed from here.
 //Developed by Ruben Scheedler and Ronald Kruizinga for the University of Groningen
@@ -55,7 +55,7 @@ namespace Rationally.Visio
             View = new RationallyView(Application.ActivePage);
             rebuildTree = false;
             Application.MarkerEvent += Application_MarkerEvent;
-            Application.TemplatePaths = Constant.FolderPath;
+            Application.TemplatePaths = Constants.FolderPath;
             Application.DocumentCreated += DelegateCreateDocumentEvent;
             Application.DocumentOpened += Application_DocumentOpenendEvent;
             Application.ShapeAdded += Application_ShapeAddedEvent;
@@ -229,7 +229,7 @@ namespace Rationally.Visio
         //Fired when any text is changed
         private void Application_TextChangedEvent(Shape shape)
         { 
-            if (shape.Document.Template.Contains(Constant.TemplateName) && shape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constant.CellExists)
+            if (shape.Document.Template.Contains(Constants.TemplateName) && shape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
             {
                 Log.Debug("TextChanged: shapeName: " + shape.Name);
                 string rationallyType = shape.CellsU[CellConstants.RationallyType].ResultStr["Value"];
@@ -240,7 +240,7 @@ namespace Rationally.Visio
         //Fired when the user clicks on the main window from a different window.
         private void Application_WindowActivatedEvent(Window w)
         {
-            if (w.Type == (short)VisWinTypes.visDrawing && w.Document.Template.Contains(Constant.TemplateName)) //VisDrawing is the main sheet
+            if (w.Type == (short)VisWinTypes.visDrawing && w.Document.Template.Contains(Constants.TemplateName)) //VisDrawing is the main sheet
             {
                 Log.Debug("Window activated event handler enter");
                 View.Page = Application.ActivePage;
@@ -260,13 +260,13 @@ namespace Rationally.Visio
 
         private void Application_MarkerEvent(Application application, int sequence, string context)
         {
-            if (application.ActiveDocument.Template.Contains(Constant.TemplateName))
+            if (application.ActiveDocument.Template.Contains(Constants.TemplateName))
             {
                 Selection selection = Application.ActiveWindow.Selection; //event must originate from selected element
                 
                 foreach (Shape s in selection)
                 {
-                    if (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constant.CellExists)
+                    if (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                     {
                         string identifier = context;
                         if (context.Contains("."))
@@ -284,7 +284,7 @@ namespace Rationally.Visio
         private void Application_CellChangedEvent(Cell cell)
         {
             Shape changedShape = cell.Shape;
-            if (changedShape == null || !changedShape.Document.Template.Contains(Constant.TemplateName) || changedShape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] != Constant.CellExists) //No need to continue when the shape is not part of our model.
+            if (changedShape == null || !changedShape.Document.Template.Contains(Constants.TemplateName) || changedShape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] != Constants.CellExists) //No need to continue when the shape is not part of our model.
             {
                 return;
             }
@@ -345,7 +345,7 @@ namespace Rationally.Visio
 
         private void Application_ShapeAddedEvent(Shape s)
         {
-            if (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constant.CellExists && !View.ExistsInTree(s))
+            if (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists && !View.ExistsInTree(s))
             {
                 View.AddToTree(s, true);
             }
@@ -366,7 +366,7 @@ namespace Rationally.Visio
             foreach (Shape s in e)
             {
                 Log.Debug("deleted shape name: " + s.Name);
-                if (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constant.CellExists)
+                if (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                 {
                     string rationallyType = s.CellsU[CellConstants.RationallyType].ResultStr["Value"];
 
@@ -378,7 +378,7 @@ namespace Rationally.Visio
         private void Application_BeforePageDeleteEvent(Page p)
         {
             Log.Debug("page delete event handler entered");
-            if (p.Document.Template.Contains(Constant.TemplateName))
+            if (p.Document.Template.Contains(Constants.TemplateName))
             {
                 foreach (Shape shape in p.Shapes)
                 {
@@ -390,13 +390,13 @@ namespace Rationally.Visio
         private void Application_DeleteShapeEvent(Shape s) //Fired when a shape is deleted. Shape now no longer exists
         {
             Log.Debug("shape deleted event for: " + s.Name);
-            if (s.Document.Template.Contains(Constant.TemplateName))
+            if (s.Document.Template.Contains(Constants.TemplateName))
             {
-                if (s.CellExistsU[CellConstants.Stub, (short)VisExistsFlags.visExistsAnywhere] == Constant.CellExists)
+                if (s.CellExistsU[CellConstants.Stub, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                 {
                     return;
                 }
-                if (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constant.CellExists)
+                if (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                 {
                     string rationallyType = s.CellsU[CellConstants.RationallyType].ResultStr["Value"];
 
@@ -456,7 +456,7 @@ namespace Rationally.Visio
         
         private static void DelegateCreateDocumentEvent(IVDocument d)
         {
-            if (d.Template.Contains(Constant.TemplateName))
+            if (d.Template.Contains(Constants.TemplateName))
             {
                 new DocumentCreatedEventHandler(d);
             }
@@ -464,7 +464,7 @@ namespace Rationally.Visio
 
         private void Application_DocumentOpenendEvent(IVDocument d)
         {
-            if (Application.ActiveDocument.Template.Contains(Constant.TemplateName) && showRationallyUpdatePopup)
+            if (Application.ActiveDocument.Template.Contains(Constants.TemplateName) && showRationallyUpdatePopup)
             {
                 UpdateAvailable upd = new UpdateAvailable(AddInLocalVersion, AddInOnlineVersion);
                 upd.Show();

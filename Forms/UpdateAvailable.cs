@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using Rationally.Visio.Constants;
+using Rationally.Visio.RationallyConstants;
 
-namespace Rationally.Visio.WindowsFormPopups
+namespace Rationally.Visio.Forms
 {
     public partial class UpdateAvailable : Form
     {
@@ -22,7 +22,7 @@ namespace Rationally.Visio.WindowsFormPopups
 
         private void Btn_Down_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo sInfo = new ProcessStartInfo(Constant.RationallySite);
+            ProcessStartInfo sInfo = new ProcessStartInfo(Constants.RationallySite);
             Process.Start(sInfo);
             Close();
         }

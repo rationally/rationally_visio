@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
-using Rationally.Visio.WindowsFormPopups;
+using Rationally.Visio.Forms;
 // ReSharper disable ArrangeRedundantParentheses
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers

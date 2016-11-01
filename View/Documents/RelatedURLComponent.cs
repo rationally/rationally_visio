@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
-using Rationally.Visio.Constants;
+using Rationally.Visio.RationallyConstants;
 
 namespace Rationally.Visio.View.Documents
 {
@@ -15,7 +15,7 @@ namespace Rationally.Visio.View.Documents
 
         public RelatedUrlComponent(Page page, int index, string url) : base(page)
         {
-            string docPath = Constant.FolderPath + "RationallyHidden.vssx";
+            string docPath = Constants.FolderPath + "RationallyHidden.vssx";
             Document rationallyDocument = Globals.RationallyAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
             Master rectMaster = rationallyDocument.Masters["LinkIcon"]; 
             RShape = page.Drop(rectMaster, 0, 0);

@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Constants;
 
 namespace Rationally.Visio.View.Alternatives
 {
@@ -59,7 +60,7 @@ namespace Rationally.Visio.View.Alternatives
 
         public AlternativeStateComponent(Page page) : base(page)
         {
-            string docPath = Constants.FolderPath + "RationallyHidden.vssx";
+            string docPath = Constant.FolderPath + "RationallyHidden.vssx";
             Document rationallyDocument = Globals.RationallyAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
             Master rectMaster = rationallyDocument.Masters["Alternative State"];
             RShape = page.Drop(rectMaster, 0, 0);
@@ -95,7 +96,7 @@ namespace Rationally.Visio.View.Alternatives
                 string stateName = "State_" + i;
                 if (model.AlternativeStates[i] == currentState)
                 { 
-                    if (RShape.CellExistsU["Actions." + stateName + ".Action", (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+                    if (RShape.CellExistsU["Actions." + stateName + ".Action", (short)VisExistsFlags.visExistsAnywhere] == Constant.CellExists)
                     {
                         RShape.DeleteRow((short)VisSectionIndices.visSectionAction, RShape.CellsRowIndex["Actions." + stateName + ".Action"]);
                     }

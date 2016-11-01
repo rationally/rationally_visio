@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows.Forms;
+using Rationally.Visio.Constants;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
 
 namespace Rationally.Visio.WindowsFormPopups
@@ -87,7 +88,7 @@ namespace Rationally.Visio.WindowsFormPopups
 
         private void UpdateLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ProcessStartInfo sInfo = new ProcessStartInfo(Constants.RationallySite);
+            ProcessStartInfo sInfo = new ProcessStartInfo(Constant.RationallySite);
             Process.Start(sInfo);
         }
 

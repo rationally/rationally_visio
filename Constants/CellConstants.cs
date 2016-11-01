@@ -1,4 +1,4 @@
-﻿namespace Rationally.Visio
+﻿namespace Rationally.Visio.Constants
 {
     internal class CellConstants
     {

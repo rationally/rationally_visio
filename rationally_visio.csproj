@@ -128,8 +128,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CellConstants.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="Constants\CellConstants.cs" />
+    <Compile Include="Constants\Constant.cs" />
     <Compile Include="EventHandlers\ClickEventHandlers\UpdateAlternativeHandler.cs" />
     <Compile Include="EventHandlers\ClickEventHandlers\UpdateGeneralInformationHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteInformationComponentEventHandler.cs" />
@@ -149,10 +149,10 @@
     <Compile Include="View\Information\DateLabel.cs" />
     <Compile Include="View\Information\TitleLabel.cs" />
     <Compile Include="View\Information\VersionLabel.cs" />
-    <Compile Include="WindowsFormPopups\AddAlternative.cs">
+    <Compile Include="Forms\AddAlternative.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WindowsFormPopups\AddAlternative.Designer.cs">
+    <Compile Include="Forms\AddAlternative.Designer.cs">
       <DependentUpon>AddAlternative.cs</DependentUpon>
     </Compile>
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteAlternativesEventHandler.cs" />
@@ -188,34 +188,34 @@
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDForceComponentEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDForceContainerEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\StartDeleteForceEventHandler.cs" />
-    <Compile Include="WindowsFormPopups\AddAlternativeWithWarning.cs">
+    <Compile Include="Forms\AddAlternativeWithWarning.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WindowsFormPopups\AddAlternativeWithWarning.Designer.cs">
+    <Compile Include="Forms\AddAlternativeWithWarning.Designer.cs">
       <DependentUpon>AddAlternativeWithWarning.cs</DependentUpon>
     </Compile>
     <Compile Include="EventHandlers\TextChangedEventHandlers\AlternativeStateTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\ForceTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\ITextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\TextChangedEventHandlerRegistry.cs" />
-    <Compile Include="WindowsFormPopups\ProjectSetupWizard.cs">
+    <Compile Include="Forms\ProjectSetupWizard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WindowsFormPopups\ProjectSetupWizard.Designer.cs">
+    <Compile Include="Forms\ProjectSetupWizard.Designer.cs">
       <DependentUpon>ProjectSetupWizard.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Force.cs" />
     <Compile Include="Model\RelatedDocument.cs" />
-    <Compile Include="WindowsFormPopups\UpdateAvailable.cs">
+    <Compile Include="Forms\UpdateAvailable.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WindowsFormPopups\UpdateAvailable.Designer.cs">
+    <Compile Include="Forms\UpdateAvailable.Designer.cs">
       <DependentUpon>UpdateAvailable.cs</DependentUpon>
     </Compile>
-    <Compile Include="WindowsFormPopups\UrlSelector.cs">
+    <Compile Include="Forms\UrlSelector.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WindowsFormPopups\UrlSelector.Designer.cs">
+    <Compile Include="Forms\UrlSelector.Designer.cs">
       <DependentUpon>UrlSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Alternatives\AlternativeContainer.cs" />
@@ -252,19 +252,19 @@
     <Compile Include="View\RationallyView.cs" />
     <Compile Include="View\SizingPolicy.cs" />
     <Compile Include="View\VerticalStretchLayout.cs" />
-    <Compile Include="WindowsFormPopups\WizardComponents\FlowLayoutAlternative.cs">
+    <Compile Include="Forms\WizardComponents\FlowLayoutAlternative.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WindowsFormPopups\WizardComponents\MenuButton.cs">
+    <Compile Include="Forms\WizardComponents\MenuButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WindowsFormPopups\WizardComponents\MenuPanel.cs">
+    <Compile Include="Forms\WizardComponents\MenuPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WindowsFormPopups\WizardComponents\TableLayoutMainContentAlternatives.cs">
+    <Compile Include="Forms\WizardComponents\TableLayoutMainContentAlternatives.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WindowsFormPopups\WizardComponents\TableLayoutMainContentGeneral.cs">
+    <Compile Include="Forms\WizardComponents\TableLayoutMainContentGeneral.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
@@ -278,10 +278,10 @@
     <Compile Include="Model\Alternative.cs" />
     <Compile Include="Model\RationallyModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WindowsFormPopups\SheetSetUpFormPopUp.cs">
+    <Compile Include="Forms\SheetSetUpFormPopUp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WindowsFormPopups\SheetSetUpFormPopUp.Designer.cs">
+    <Compile Include="Forms\SheetSetUpFormPopUp.Designer.cs">
       <DependentUpon>SheetSetUpFormPopUp.cs</DependentUpon>
     </Compile>
     <Compile Include="RationallyAddIn.cs">
@@ -296,7 +296,7 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Rationally.Visio.Model.Alternative.datasource" />
     <None Include="Properties\DataSources\Rationally.Visio.Model.RModel.datasource" />
-    <None Include="rationally_visio_1_TemporaryKey.pfx" />
+    <None Include="key.pfx" />
     <None Include="RationallyAddIn.Designer.xml">
       <DependentUpon>RationallyAddIn.cs</DependentUpon>
     </None>
@@ -313,39 +313,35 @@
     <EmbeddedResource Include="Ribbon\RationallyRibbon.resx">
       <DependentUpon>RationallyRibbon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WindowsFormPopups\AddAlternative.resx">
+    <EmbeddedResource Include="Forms\AddAlternative.resx">
       <DependentUpon>AddAlternative.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WindowsFormPopups\AddAlternativeWithWarning.resx">
+    <EmbeddedResource Include="Forms\AddAlternativeWithWarning.resx">
       <DependentUpon>AddAlternativeWithWarning.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WindowsFormPopups\ProjectSetupWizard.resx">
+    <EmbeddedResource Include="Forms\ProjectSetupWizard.resx">
       <DependentUpon>ProjectSetupWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WindowsFormPopups\SheetSetUpFormPopUp.resx">
+    <EmbeddedResource Include="Forms\SheetSetUpFormPopUp.resx">
       <DependentUpon>SheetSetUpFormPopUp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WindowsFormPopups\UpdateAvailable.resx">
+    <EmbeddedResource Include="Forms\UpdateAvailable.resx">
       <DependentUpon>UpdateAvailable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WindowsFormPopups\UrlSelector.resx">
+    <EmbeddedResource Include="Forms\UrlSelector.resx">
       <DependentUpon>UrlSelector.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Command1.png" />
     <None Include="Resources\icon.png" />
     <None Include="Resources\rationallyIcon.bmp" />
     <None Include="Ribbon\wizard.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\Command1_sm.png" />
-    <Content Include="Resources\Command2_sm.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

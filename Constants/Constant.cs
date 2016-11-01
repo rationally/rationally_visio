@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Rationally.Visio
+namespace Rationally.Visio.Constants
 {
-    internal class Constants
+    internal class Constant
     {
         public const string TemplateName = "Rationally Template";
         public const string RationallySite = "https://rationally.github.io/";

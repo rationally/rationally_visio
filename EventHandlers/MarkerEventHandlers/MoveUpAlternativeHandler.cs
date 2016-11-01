@@ -4,6 +4,7 @@ using Rationally.Visio.View;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Forces;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Constants;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {

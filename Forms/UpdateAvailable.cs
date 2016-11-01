@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using Rationally.Visio.Constants;
 
 namespace Rationally.Visio.WindowsFormPopups
 {
@@ -21,7 +22,7 @@ namespace Rationally.Visio.WindowsFormPopups
 
         private void Btn_Down_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo sInfo = new ProcessStartInfo(Constants.RationallySite);
+            ProcessStartInfo sInfo = new ProcessStartInfo(Constant.RationallySite);
             Process.Start(sInfo);
             Close();
         }

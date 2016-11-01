@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Constants;
+
 // ReSharper disable ArrangeRedundantParentheses
 
 namespace Rationally.Visio.View
@@ -137,7 +139,7 @@ namespace Rationally.Visio.View
 
         public void DeleteAction(string fieldName)
         {
-            if (RShape.CellExistsU["Actions." + fieldName + ".Action", (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+            if (RShape.CellExistsU["Actions." + fieldName + ".Action", (short)VisExistsFlags.visExistsAnywhere] == Constant.CellExists)
             {
                 RShape.DeleteRow((short)VisSectionIndices.visSectionAction, RShape.CellsRowIndex["Actions." + fieldName + ".Action"]);
             }

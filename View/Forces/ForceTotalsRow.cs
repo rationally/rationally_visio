@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Constants;
 
 namespace Rationally.Visio.View.Forces
 {
@@ -43,7 +44,7 @@ namespace Rationally.Visio.View.Forces
                     {
                         Children.Add(new ForceTotalComponent(page, shape));
                     }
-                    else if (shape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+                    else if (shape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constant.CellExists)
                     {
                         RationallyComponent toAdd = new RationallyComponent(page)
                         {

@@ -33,9 +33,9 @@ namespace Rationally.Visio.WindowsFormPopups
             tableLayoutMainContentGeneral.TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
             tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
             tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.DateString;
-            TableLayoutMainContentAlternatives.flowLayoutPanelAlternative1.UpdateData();
-            TableLayoutMainContentAlternatives.flowLayoutPanelAlternative2.UpdateData();
-            TableLayoutMainContentAlternatives.flowLayoutPanelAlternative3.UpdateData();
+            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative1.UpdateData();
+            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative2.UpdateData();
+            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative3.UpdateData();
             CreateButton.Text = documentCreation ? "Create Decision" : "Update Decision";
             ShowDialog();
         }
@@ -79,9 +79,9 @@ namespace Rationally.Visio.WindowsFormPopups
                                                 tableLayoutMainContentGeneral.TextDecisionTopic.Text,
                                                 tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text, documentCreation);
 
-            TableLayoutMainContentAlternatives.flowLayoutPanelAlternative1.UpdateModel();
-            TableLayoutMainContentAlternatives.flowLayoutPanelAlternative2.UpdateModel();
-            TableLayoutMainContentAlternatives.flowLayoutPanelAlternative3.UpdateModel();
+            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative1.UpdateModel();
+            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative2.UpdateModel();
+            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative3.UpdateModel();
             Close();
         }
 

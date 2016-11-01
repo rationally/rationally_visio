@@ -92,7 +92,10 @@
         <File Name="log4net.dll">
         </File>
       </Component>
-
+      <Component>
+        <File Name="Newtonsoft.Json.dll">
+        </File>
+      </Component>
 
     </ComponentGroup>
     <!-- Addin files to be included in setup -->

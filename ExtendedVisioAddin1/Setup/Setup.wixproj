@@ -29,6 +29,7 @@
     <Content Include="License.rtf" />
     <Content Include="log4net.dll" />
     <Content Include="logo_vertical.bmp" />
+    <Content Include="Newtonsoft.Json.dll" />
     <Content Include="RationallyHidden.vssx" />
   </ItemGroup>
   <ItemGroup>

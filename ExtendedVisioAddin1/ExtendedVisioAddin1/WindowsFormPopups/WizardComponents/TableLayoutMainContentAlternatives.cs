@@ -5,15 +5,15 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
 {
     public class TableLayoutMainContentAlternatives : TableLayoutPanel
     {
-        public FlowLayoutAlternative flowLayoutPanelAlternative1 = new FlowLayoutAlternative(1);
-        public FlowLayoutAlternative flowLayoutPanelAlternative2 = new FlowLayoutAlternative(2);
-        public FlowLayoutAlternative flowLayoutPanelAlternative3 = new FlowLayoutAlternative(3);
+        public FlowLayoutAlternative FlowLayoutPanelAlternative1 = new FlowLayoutAlternative(1);
+        public FlowLayoutAlternative FlowLayoutPanelAlternative2 = new FlowLayoutAlternative(2);
+        public FlowLayoutAlternative FlowLayoutPanelAlternative3 = new FlowLayoutAlternative(3);
 
         public TableLayoutMainContentAlternatives()
         {
-            Controls.Add(this.flowLayoutPanelAlternative1, 0, 0);
-            Controls.Add(this.flowLayoutPanelAlternative2, 0, 1);
-            Controls.Add(this.flowLayoutPanelAlternative3, 0, 2);
+            Controls.Add(FlowLayoutPanelAlternative1, 0, 0);
+            Controls.Add(FlowLayoutPanelAlternative2, 0, 1);
+            Controls.Add(FlowLayoutPanelAlternative3, 0, 2);
             Init();
         }
 
@@ -41,27 +41,27 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             // 
             // flowLayoutPanelAlternative1
             // 
-            this.flowLayoutPanelAlternative1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelAlternative1.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanelAlternative1.Name = "flowLayoutPanelAlternative1";
-            this.flowLayoutPanelAlternative1.Size = new System.Drawing.Size(754, 42);
-            this.flowLayoutPanelAlternative1.TabIndex = 0;
+            FlowLayoutPanelAlternative1.Dock = DockStyle.Fill;
+            FlowLayoutPanelAlternative1.Location = new System.Drawing.Point(3, 3);
+            FlowLayoutPanelAlternative1.Name = "flowLayoutPanelAlternative1";
+            FlowLayoutPanelAlternative1.Size = new System.Drawing.Size(754, 42);
+            FlowLayoutPanelAlternative1.TabIndex = 0;
             // 
             // flowLayoutPanelAlternative2
             // 
-            this.flowLayoutPanelAlternative2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelAlternative2.Location = new System.Drawing.Point(3, 51);
-            this.flowLayoutPanelAlternative2.Name = "flowLayoutPanelAlternative2";
-            this.flowLayoutPanelAlternative2.Size = new System.Drawing.Size(754, 42);
-            this.flowLayoutPanelAlternative2.TabIndex = 0;
+            FlowLayoutPanelAlternative2.Dock = DockStyle.Fill;
+            FlowLayoutPanelAlternative2.Location = new System.Drawing.Point(3, 51);
+            FlowLayoutPanelAlternative2.Name = "flowLayoutPanelAlternative2";
+            FlowLayoutPanelAlternative2.Size = new System.Drawing.Size(754, 42);
+            FlowLayoutPanelAlternative2.TabIndex = 0;
             // 
             // flowLayoutPanelAlternative3
             // 
-            this.flowLayoutPanelAlternative3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelAlternative3.Location = new System.Drawing.Point(3, 99);
-            this.flowLayoutPanelAlternative3.Name = "flowLayoutPanelAlternative3";
-            this.flowLayoutPanelAlternative3.Size = new System.Drawing.Size(754, 42);
-            this.flowLayoutPanelAlternative3.TabIndex = 0;
+            FlowLayoutPanelAlternative3.Dock = DockStyle.Fill;
+            FlowLayoutPanelAlternative3.Location = new System.Drawing.Point(3, 99);
+            FlowLayoutPanelAlternative3.Name = "flowLayoutPanelAlternative3";
+            FlowLayoutPanelAlternative3.Size = new System.Drawing.Size(754, 42);
+            FlowLayoutPanelAlternative3.TabIndex = 0;
         }
     }
 }

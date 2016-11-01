@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Rationally.Visio.WindowsFormPopups.WizardComponents
 {
-    class MenuButton : Button
+    internal class MenuButton : Button
     {
-        private Font normalFont;
-        private Font boldFont;
-        private MenuPanel containingMenu;
+        private readonly Font normalFont;
+        private readonly Font boldFont;
+        private readonly MenuPanel containingMenu;
         public MenuButton(MenuPanel containingMenu)
         {
             this.containingMenu = containingMenu;
@@ -20,9 +17,9 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             boldFont = new Font("calibri", 12, FontStyle.Bold);
             BackColor = Color.FromArgb(1, 235, 235, 235);
             //FlatAppearance.MouseOverForeColor = 
-            this.MouseEnter += button1_MouseEnter;
-            this.MouseLeave += button1_MouseLeave;
-            this.Click += button1_Click;
+            MouseEnter += button1_MouseEnter;
+            MouseLeave += button1_MouseLeave;
+            Click += button1_Click;
 
             this.containingMenu.Buttons.Add(this);
         }
@@ -35,14 +32,14 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
 
         private void button1_MouseEnter(object sender, EventArgs e)
         {
-            if (!this.Equals(containingMenu.HighLightedButton))
+            if (!Equals(containingMenu.HighLightedButton))
             {
                 Highlight();
             }
         }
         private void button1_MouseLeave(object sender, EventArgs e)
         {
-            if (!this.Equals(containingMenu.HighLightedButton))
+            if (!Equals(containingMenu.HighLightedButton))
             {
                 Lowlight();
             }
@@ -59,7 +56,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
         public void Lowlight()
         {
             BackColor = Color.FromArgb(1, 235, 235, 235);
-            this.Font = normalFont;
+            Font = normalFont;
         }
     }
 }

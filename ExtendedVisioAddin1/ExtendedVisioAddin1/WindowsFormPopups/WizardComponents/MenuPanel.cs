@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Rationally.Visio.WindowsFormPopups.WizardComponents
 {
-    class MenuPanel : TableLayoutPanel
+    internal class MenuPanel : TableLayoutPanel
     {
         public List<MenuButton> Buttons;
 

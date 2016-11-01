@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Office.Interop.Visio;
+// ReSharper disable ArrangeRedundantParentheses
 
 namespace Rationally.Visio.View
 {

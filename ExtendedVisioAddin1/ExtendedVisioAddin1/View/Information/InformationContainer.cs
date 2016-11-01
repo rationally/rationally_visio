@@ -4,6 +4,7 @@ using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
 using System;
 using System.Collections.Generic;
+// ReSharper disable ArrangeRedundantParentheses
 
 namespace Rationally.Visio.View.Information
 {

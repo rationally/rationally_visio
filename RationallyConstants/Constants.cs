@@ -15,4 +15,5 @@ namespace Rationally.Visio.RationallyConstants
 #endif
         public const int LeftAlignment = 0;
     }
+
 }

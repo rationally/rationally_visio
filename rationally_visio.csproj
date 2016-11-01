@@ -84,12 +84,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\..\rationally_visio\packages\log4net.2.0.5\lib\net40-client\log4net.dll</HintPath>
+      <HintPath>rationally_visio\packages\log4net.2.0.5\lib\net40-client\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\rationally_visio\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>rationally_visio\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -139,10 +139,10 @@
     <Compile Include="EventHandlers\TextChangedEventHandlers\InformationAuthorTextChangedHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\InformationDateTextChangedHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\InformationVersionTextChangedHandler.cs" />
-    <Compile Include="ribbon\RationallyRibbon.cs">
+    <Compile Include="Ribbon\RationallyRibbon.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ribbon\RationallyRibbon.Designer.cs">
+    <Compile Include="Ribbon\RationallyRibbon.Designer.cs">
       <DependentUpon>RationallyRibbon.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Information\AuthorLabel.cs" />
@@ -310,7 +310,7 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <EmbeddedResource Include="ribbon\RationallyRibbon.resx">
+    <EmbeddedResource Include="Ribbon\RationallyRibbon.resx">
       <DependentUpon>RationallyRibbon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WindowsFormPopups\AddAlternative.resx">
@@ -341,7 +341,7 @@
     <Content Include="Resources\Command1.png" />
     <None Include="Resources\icon.png" />
     <None Include="Resources\rationallyIcon.bmp" />
-    <None Include="ribbon\wizard.png" />
+    <None Include="Ribbon\wizard.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Command1_sm.png" />

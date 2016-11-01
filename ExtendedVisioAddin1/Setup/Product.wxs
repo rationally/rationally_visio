@@ -13,7 +13,7 @@
 
     
       
-    <!-- check taht .NET 4 (client profile at least) is installed -->
+    <!-- check that .NET 4 (client profile at least) is installed -->
     <PropertyRef Id="NETFRAMEWORK40CLIENT" />
     <PropertyRef Id="NETFRAMEWORK40FULL" />
     <PropertyRef Id="NETFRAMEWORK45" />
@@ -92,6 +92,7 @@
 
     </ComponentGroup>
     <!-- Addin files to be included in setup -->
+    
     <ComponentGroup Id="AddinFiles" Directory="APPLICATIONFOLDER">
       
       <!-- Add the addin dll to the setup. Reference using project referencing -->

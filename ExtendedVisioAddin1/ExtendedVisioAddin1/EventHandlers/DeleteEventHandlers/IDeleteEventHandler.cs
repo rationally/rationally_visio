@@ -5,6 +5,6 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
     internal interface IDeleteEventHandler
     {
-        void Execute(string eventKey, RModel model, Shape changedShape);
+        void Execute(string eventKey, RationallyModel model, Shape changedShape);
     }
 }

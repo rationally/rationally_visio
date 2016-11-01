@@ -10,7 +10,7 @@ namespace Rationally.Visio.EventHandlers
         {
             if (document.Template.Contains(Constants.TemplateName))
             {
-                Globals.RationallyAddIn.Model = new RModel();
+                Globals.RationallyAddIn.Model = new RationallyModel();
                 ShowSetupWizard();
             }
         }

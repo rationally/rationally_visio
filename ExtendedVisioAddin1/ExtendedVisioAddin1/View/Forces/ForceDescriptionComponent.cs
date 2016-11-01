@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Forces
 {
-    internal sealed class ForceDescriptionComponent : RComponent
+    internal sealed class ForceDescriptionComponent : RationallyComponent
     {
         private static readonly Regex ForceDescriptionRegex = new Regex(@"ForceDescription(\.\d+)?$");
         public const string DefaultDescription = "<<description>>";

@@ -6,9 +6,9 @@ namespace Rationally.Visio.View
 {
     internal class InlineLayout : ILayoutManager
     {
-        private readonly RContainer toManage;
+        private readonly RationallyContainer toManage;
 
-        public InlineLayout(RContainer toManage)
+        public InlineLayout(RationallyContainer toManage)
         {
             this.toManage = toManage;
         }
@@ -18,9 +18,9 @@ namespace Rationally.Visio.View
             if (toManage.Children.Count == 0) { return; }
 
             //start the drawing at the left top of the container
-            Draw(toManage.CenterX - (toManage.Width / 2.0), toManage.CenterY + (toManage.Height / 2.0), 0, 0, double.MaxValue, new Queue<RComponent>(toManage.Children));
+            Draw(toManage.CenterX - (toManage.Width / 2.0), toManage.CenterY + (toManage.Height / 2.0), 0, 0, double.MaxValue, new Queue<RationallyComponent>(toManage.Children));
         }
-        private void Draw(double x, double y, double currentLineHeight, double contentXEnd, double contentYEnd, Queue<RComponent> components)
+        private void Draw(double x, double y, double currentLineHeight, double contentXEnd, double contentYEnd, Queue<RationallyComponent> components)
         {
             //Base Case
             if (components.Count == 0)
@@ -37,7 +37,7 @@ namespace Rationally.Visio.View
                 return;
             }
 
-            RComponent toDraw = components.Dequeue();
+            RationallyComponent toDraw = components.Dequeue();
             double toDrawWidth = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight; //expected increase in x
             double toDrawHeight = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;//expected height in y
 
@@ -56,9 +56,9 @@ namespace Rationally.Visio.View
             toDraw.CenterX = dropX;
             toDraw.CenterY = dropY;
             
-            if (toDraw is RContainer)
+            if (toDraw is RationallyContainer)
             {
-                foreach (RComponent c in ((RContainer) toDraw).Children)
+                foreach (RationallyComponent c in ((RationallyContainer) toDraw).Children)
                 {
                     c.CenterX += deltaX;
                     c.CenterY += deltaY;

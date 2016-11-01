@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Documents
 {
-    internal sealed class RelatedFileComponent : RComponent
+    internal sealed class RelatedFileComponent : RationallyComponent
     {
         private static readonly Regex RelatedRegex = new Regex(@"RelatedFile(\.\d+)?$");
         public RelatedFileComponent(Page page, Shape fileShape) : base(page)

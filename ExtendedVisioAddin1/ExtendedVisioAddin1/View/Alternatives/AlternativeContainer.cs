@@ -198,19 +198,19 @@ namespace Rationally.Visio.View.Alternatives
             {
                 if (!(Children[0] is AlternativeIdentifierComponent))
                 {
-                    RComponent c = Children.Find(x => x is AlternativeIdentifierComponent);
+                    RationallyComponent c = Children.Find(x => x is AlternativeIdentifierComponent);
                     Children.Remove(c);
                     Children.Insert(0, c);
                 }
                 if (!(Children[1] is AlternativeTitleComponent))
                 {
-                    RComponent c = Children.Find(x => x is AlternativeTitleComponent);
+                    RationallyComponent c = Children.Find(x => x is AlternativeTitleComponent);
                     Children.Remove(c);
                     Children.Insert(1, c);
                 }
                 if (!(Children[2] is AlternativeStateComponent))
                 {
-                    RComponent c = Children.Find(x => x is AlternativeStateComponent);
+                    RationallyComponent c = Children.Find(x => x is AlternativeStateComponent);
                     Children.Remove(c);
                     Children.Insert(2, c);
                 }

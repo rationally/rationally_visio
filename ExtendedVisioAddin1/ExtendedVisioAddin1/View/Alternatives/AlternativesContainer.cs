@@ -6,7 +6,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Alternatives
 {
-    public class AlternativesContainer : RContainer
+    public class AlternativesContainer : RationallyContainer
     {
         private static readonly Regex AlternativesRegex = new Regex(@"Alternatives(\.\d+)?$");
         
@@ -32,7 +32,7 @@ namespace Rationally.Visio.View.Alternatives
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             //make s into an rcomponent for access to wrapper
-            RComponent shapeComponent = new RComponent(Page) {RShape = s};
+            RationallyComponent shapeComponent = new RationallyComponent(Page) {RShape = s};
 
             if (AlternativeContainer.IsAlternativeContainer(s.Name))
             {

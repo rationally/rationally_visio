@@ -26,7 +26,7 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
             eventHandlerRegistry.Registry[eventKey].Add(eventHandler);
         }
 
-        public void HandleEvent(string eventKey, RView view, Shape changedShape)
+        public void HandleEvent(string eventKey, RationallyView view, Shape changedShape)
         {
             if (Registry.ContainsKey(eventKey))
             {

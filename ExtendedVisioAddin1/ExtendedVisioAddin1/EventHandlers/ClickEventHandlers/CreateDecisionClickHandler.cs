@@ -9,7 +9,7 @@ namespace Rationally.Visio.EventHandlers.ClickEventHandlers
     {
         public static void Execute(string author, string decisionName, string date, bool documentCreation)
         {
-            RModel model = Globals.RationallyAddIn.Model;
+            RationallyModel model = Globals.RationallyAddIn.Model;
 
             // Read the contents of setupDialog's TextBox.
             model.Author = author;
@@ -33,7 +33,7 @@ namespace Rationally.Visio.EventHandlers.ClickEventHandlers
             }
             else
             {
-                RView view = Globals.RationallyAddIn.View;
+                RationallyView view = Globals.RationallyAddIn.View;
                 if (view.Children.Any(x => x is InformationContainer))
                 {
                     InformationContainer container = view.Children.FirstOrDefault(x => x is InformationContainer) as InformationContainer;

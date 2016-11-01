@@ -5,6 +5,6 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
     internal interface ITextChangedEventHandler
     {
-        void Execute(string eventKey, RView view, Shape changedShape);
+        void Execute(string eventKey, RationallyView view, Shape changedShape);
     }
 }

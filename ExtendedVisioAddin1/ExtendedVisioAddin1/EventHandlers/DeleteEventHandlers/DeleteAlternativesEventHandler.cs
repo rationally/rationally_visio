@@ -10,7 +10,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public void Execute(string eventKey, RModel model, Shape changedShape)
+        public void Execute(string eventKey, RationallyModel model, Shape changedShape)
         {
             Globals.RationallyAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
             Log.Debug("Handler of delete alternatives entered.");

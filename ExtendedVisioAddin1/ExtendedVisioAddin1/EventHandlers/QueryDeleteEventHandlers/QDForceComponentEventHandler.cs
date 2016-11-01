@@ -7,7 +7,7 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
     internal class QDForceComponentEventHandler : IQueryDeleteEventHandler
     {
-        public void Execute(string eventKey, RView view, Shape changedShape)
+        public void Execute(string eventKey, RationallyView view, Shape changedShape)
         {
             ForcesContainer forcesContainer = (ForcesContainer)view.Children.First(c => c is ForcesContainer);
             foreach (ForceContainer forceContainer in forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList()) //find all candidate containers

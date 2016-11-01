@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Forces
 {
-    internal sealed class ForceConcernComponent : RComponent
+    internal sealed class ForceConcernComponent : RationallyComponent
     {
         private static readonly Regex ForceConcernRegex = new Regex(@"ForceConcern(\.\d+)?$");
         public const string DefaultConcern = "<<concern>>";

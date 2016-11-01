@@ -8,11 +8,11 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class MoveUpForceHandler : IMarkerEventHandler
     {
-        public void Execute(RModel model, Shape changedShape, string identifier)
+        public void Execute(RationallyModel model, Shape changedShape, string identifier)
         {
             ForcesContainer forcesContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
 
-            RComponent currentComponent = new RComponent(changedShape.ContainingPage) {RShape = changedShape};
+            RationallyComponent currentComponent = new RationallyComponent(changedShape.ContainingPage) {RShape = changedShape};
             int currentForceIndex = currentComponent.ForceIndex;
             int currentChildIndex = currentForceIndex + 1;
 
@@ -32,7 +32,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             toSwapWith.Children.ForEach(c => c.ForceIndex = currentForceIndex);
             toSwapWith.ForceIndex = currentForceIndex;
 
-            RComponent temp = forcesContainer.Children[currentChildIndex];
+            RationallyComponent temp = forcesContainer.Children[currentChildIndex];
             forcesContainer.Children[currentChildIndex] = forcesContainer.Children[currentChildIndex - 1];
             forcesContainer.Children[currentChildIndex - 1] = temp;
 

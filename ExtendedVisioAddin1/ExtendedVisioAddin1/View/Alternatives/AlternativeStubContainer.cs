@@ -2,7 +2,7 @@
 
 namespace Rationally.Visio.View.Alternatives
 {
-    internal sealed class AlternativeStubContainer : RComponent
+    internal sealed class AlternativeStubContainer : RationallyComponent
     {
         public override int AlternativeIndex
         {

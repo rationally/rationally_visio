@@ -6,7 +6,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
     internal class AlternativeStateTextChangedEventHandler : ITextChangedEventHandler
     {
-        public void Execute(string eventKey, RView view, Shape changedShape)
+        public void Execute(string eventKey, RationallyView view, Shape changedShape)
         {
             AlternativeStateComponent alternativeState = (AlternativeStateComponent)view.GetComponentByShape(changedShape);
             int index = alternativeState.AlternativeIndex;

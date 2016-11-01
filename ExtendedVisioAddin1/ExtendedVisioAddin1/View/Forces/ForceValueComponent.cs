@@ -5,7 +5,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Forces
 {
-    internal sealed class ForceValueComponent : RComponent
+    internal sealed class ForceValueComponent : RationallyComponent
     {
         private static readonly Regex ForceValueRegex = new Regex(@"ForceValue(\.\d+)?$");
         

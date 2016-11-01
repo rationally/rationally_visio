@@ -8,7 +8,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class AddAlternativeEventHandler : IMarkerEventHandler
     {
-        public void Execute(RModel model, Shape s, string context)
+        public void Execute(RationallyModel model, Shape s, string context)
         {
             if (model.Alternatives.Count >= 3) //The view does not handling more than 3 alternatives well, by default.
             {

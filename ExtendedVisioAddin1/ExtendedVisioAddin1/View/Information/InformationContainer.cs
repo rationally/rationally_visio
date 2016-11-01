@@ -28,7 +28,7 @@ namespace Rationally.Visio.View.Information
         public InformationContainer(Page page, Shape s) : base(page, false)
         {
             RShape = s;
-            RModel model = Globals.RationallyAddIn.Model;
+            RationallyModel model = Globals.RationallyAddIn.Model;
             if (s.ContainerProperties.GetMemberShapes((int) VisContainerFlags.visContainerFlagsExcludeNested).Length == 0 && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 InitContent(page, model.Author, model.DateString, model.Version);

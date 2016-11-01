@@ -2,7 +2,7 @@
 
 namespace Rationally.Visio.View.Documents
 {
-    internal sealed class RelatedDocumentStubContainer : RComponent
+    internal sealed class RelatedDocumentStubContainer : RationallyComponent
     {
 
         public override int DocumentIndex

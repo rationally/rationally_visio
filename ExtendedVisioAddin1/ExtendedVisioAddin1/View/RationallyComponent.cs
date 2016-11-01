@@ -10,7 +10,7 @@ namespace Rationally.Visio.View
     /// <summary>
     /// Represents a container object in Rationally. Name is a shorthand for Rationally Container.
     /// </summary>
-    public class RComponent
+    public class RationallyComponent
     {
         public double X { get; set; }
         public double Y { get; set; }
@@ -35,7 +35,7 @@ namespace Rationally.Visio.View
 
         public bool Deleted { get; set; }
 
-        public RComponent(Page page)
+        public RationallyComponent(Page page)
         {
             Page = page;
             Deleted = false;
@@ -380,7 +380,7 @@ namespace Rationally.Visio.View
             {
                 Array ident = RShape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsDefault);
                 List<Shape> shapes = new List<int>((int[])ident).Select(i => RShape.ContainingPage.Shapes.ItemFromID[i]).ToList();
-                foreach (RComponent asComponent in shapes.Select(s => new RComponent(RShape.ContainingPage) { RShape = s }))
+                foreach (RationallyComponent asComponent in shapes.Select(s => new RationallyComponent(RShape.ContainingPage) { RShape = s }))
                 {
                     asComponent.CenterX += deltaX;
                     asComponent.CenterY += deltaY;
@@ -420,7 +420,7 @@ namespace Rationally.Visio.View
         /// </summary>
         /// <param name="s">Shape to match RShape against.</param>
         /// <returns>the component, or null.</returns>
-        public virtual RComponent GetComponentByShape(Shape s)
+        public virtual RationallyComponent GetComponentByShape(Shape s)
         {
             return RShape.Equals(s) ? this : null;
         }

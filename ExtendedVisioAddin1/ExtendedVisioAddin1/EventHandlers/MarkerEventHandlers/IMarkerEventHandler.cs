@@ -5,7 +5,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal interface IMarkerEventHandler
     {
-        void Execute(RModel model, Shape changedShape, string identifier);
+        void Execute(RationallyModel model, Shape changedShape, string identifier);
 
     }
 }

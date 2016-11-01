@@ -13,7 +13,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
         private const string DeleteUndoScope = "Delete alternative";
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public void Execute(string eventKey, RModel model, Shape changedShape)
+        public void Execute(string eventKey, RationallyModel model, Shape changedShape)
         {
             Log.Debug("Entered delete alternative event handler.");
             //store the rationally type of the last shape, which is responsible for ending the undo scope
@@ -25,7 +25,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
             }
 
             //trace alternative container in view tree
-            RComponent alternativeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
+            RationallyComponent alternativeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
 
             AlternativeContainer delete = alternativeComponent as AlternativeContainer;
             if (delete != null)

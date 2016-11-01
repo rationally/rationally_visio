@@ -10,7 +10,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
     internal class EditRelatedFileHandler : IMarkerEventHandler
     {
 
-        public void Execute(RModel model, Shape changedShape, string context)
+        public void Execute(RationallyModel model, Shape changedShape, string context)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -19,7 +19,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                RComponent comp = new RComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = changedShape };
+                RationallyComponent comp = new RationallyComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = changedShape };
                 int index = comp.DocumentIndex;
 
                 //container of all related documents:

@@ -6,7 +6,7 @@ namespace Rationally.Visio.WindowsFormPopups
 {
     public partial class AddAlternativeWithWarning : Form
     {
-        public AddAlternativeWithWarning(RModel model)
+        public AddAlternativeWithWarning(RationallyModel model)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;

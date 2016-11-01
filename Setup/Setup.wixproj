@@ -30,6 +30,7 @@
     <Content Include="log4net.dll" />
     <Content Include="logo_vertical.bmp" />
     <Content Include="Newtonsoft.Json.dll" />
+    <Content Include="Rationally Shapes.vssx" />
     <Content Include="RationallyHidden.vssx" />
   </ItemGroup>
   <ItemGroup>
@@ -52,7 +53,6 @@
   <ItemGroup>
     <Content Include="build\VisioWixExtension.dll" />
     <Content Include="build\VisioWixExtension.xsd" />
-    <Content Include="DecisionsStencil.vssx" />
     <Content Include="link.jpg" />
     <Content Include="Rationally Template.vstx" />
   </ItemGroup>

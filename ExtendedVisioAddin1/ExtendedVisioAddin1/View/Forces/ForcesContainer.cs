@@ -7,7 +7,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Forces
 {
-    internal class ForcesContainer : RContainer
+    internal class ForcesContainer : RationallyContainer
     {
         private static readonly Regex ForcesRegex = new Regex(@"Evaluation(\.\d+)?$");
 
@@ -48,9 +48,9 @@ namespace Rationally.Visio.View.Forces
                 }
                 else if (Children.Any(c => c is ForceTotalsRow))
                 {
-                    RComponent toMove = Children.First(c => c is ForceTotalsRow);
+                    RationallyComponent toMove = Children.First(c => c is ForceTotalsRow);
                     int toMoveIndex = Children.IndexOf(toMove);
-                    RComponent toSwapWith = Children.Last();
+                    RationallyComponent toSwapWith = Children.Last();
                     Children[Children.Count - 1] = toMove;
                     Children[toMoveIndex] = toSwapWith;
                 }
@@ -71,7 +71,7 @@ namespace Rationally.Visio.View.Forces
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             //make s into an rcomponent for access to wrapper
-            RComponent shapeComponent = new RComponent(Page) {RShape = s};
+            RationallyComponent shapeComponent = new RationallyComponent(Page) {RShape = s};
 
             if (ForceContainer.IsForceContainer(s.Name))
             {

@@ -4,7 +4,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Alternatives
 {
-    internal sealed class AlternativeStateComponent : RComponent, IAlternativeComponent
+    internal sealed class AlternativeStateComponent : RationallyComponent, IAlternativeComponent
     {
         private static readonly Regex StateRegex = new Regex(@"AlternativeState(\.\d+)?$");
         public AlternativeStateComponent(Page page, Shape alternativeComponent) : base(page)
@@ -89,7 +89,7 @@ namespace Rationally.Visio.View.Alternatives
         {
             AddAction("changeState", "", "\"Change state\"", false);
 
-            RModel model = Globals.RationallyAddIn.Model;
+            RationallyModel model = Globals.RationallyAddIn.Model;
             for (int i = 0; i < model.AlternativeStates.Count; i++)
             {
                 string stateName = "State_" + i;

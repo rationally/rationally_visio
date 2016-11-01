@@ -7,7 +7,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Documents
 {
-    internal class RelatedDocumentsContainer : RContainer
+    internal class RelatedDocumentsContainer : RationallyContainer
     {
         private static readonly Regex RelatedRegex = new Regex(@"Related Documents(\.\d+)?$");
         
@@ -29,7 +29,7 @@ namespace Rationally.Visio.View.Documents
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             //make s into an rcomponent for access to wrapper
-            RComponent shapeComponent = new RComponent(Page) {RShape = s};
+            RationallyComponent shapeComponent = new RationallyComponent(Page) {RShape = s};
 
             if (RelatedDocumentContainer.IsRelatedDocumentContainer(s.Name))
             {

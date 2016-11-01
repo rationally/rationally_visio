@@ -246,10 +246,10 @@
     <Compile Include="View\ILayoutManager.cs" />
     <Compile Include="View\Information\InformationContainer.cs" />
     <Compile Include="View\InlineLayout.cs" />
-    <Compile Include="View\RComponent.cs" />
-    <Compile Include="View\RContainer.cs" />
+    <Compile Include="View\RationallyComponent.cs" />
+    <Compile Include="View\RationallyContainer.cs" />
     <Compile Include="View\Documents\RelatedDocumentsContainer.cs" />
-    <Compile Include="View\RView.cs" />
+    <Compile Include="View\RationallyView.cs" />
     <Compile Include="View\SizingPolicy.cs" />
     <Compile Include="View\VerticalStretchLayout.cs" />
     <Compile Include="WindowsFormPopups\WizardComponents\FlowLayoutAlternative.cs">
@@ -276,7 +276,7 @@
     <Compile Include="EventHandlers\MarkerEventHandlers\MarkerDeleteAlternativeEventHandler.cs" />
     <Compile Include="EventHandlers\RepaintHandler.cs" />
     <Compile Include="Model\Alternative.cs" />
-    <Compile Include="Model\RModel.cs" />
+    <Compile Include="Model\RationallyModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WindowsFormPopups\SheetSetUpFormPopUp.cs">
       <SubType>Form</SubType>

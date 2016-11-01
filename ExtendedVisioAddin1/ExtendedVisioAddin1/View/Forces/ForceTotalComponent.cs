@@ -6,7 +6,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Forces
 {
-    internal sealed class ForceTotalComponent : RComponent
+    internal sealed class ForceTotalComponent : RationallyComponent
     {
         private static readonly Regex ForceTotalComponentRegex = new Regex(@"ForceTotalComponent(\.\d+)?$");
         

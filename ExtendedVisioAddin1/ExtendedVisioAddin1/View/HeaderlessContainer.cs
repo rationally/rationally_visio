@@ -2,7 +2,7 @@
 
 namespace Rationally.Visio.View
 {
-    internal class HeaderlessContainer : RContainer
+    internal class HeaderlessContainer : RationallyContainer
     {
         public HeaderlessContainer(Page page) : base(page)
         {

@@ -9,11 +9,11 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class MoveDownAlternativeHandler : IMarkerEventHandler
     {
-        public void Execute(RModel model, Shape changedShape, string identifier)
+        public void Execute(RationallyModel model, Shape changedShape, string identifier)
         {
             AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.RationallyAddIn.View.Children.First(c => c is AlternativesContainer);
 
-            RComponent toChangeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
+            RationallyComponent toChangeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
             int currentIndex = toChangeComponent.AlternativeIndex;
             
             AlternativeContainer toChange = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU[CellConstants.AlternativeIndex].ResultIU == currentIndex);
@@ -48,7 +48,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(fc => fc.Children.Where(fcc => fcc is ForceValueComponent && ((ForceValueComponent) fcc).AlternativeIdentifier == "temp").Cast<ForceValueComponent>().ToList().ForEach(fvc => fvc.AlternativeIdentifier = oldIndex));
             }
             //swap the elements in the view tree
-            RComponent temp = alternativesContainer.Children[currentIndex];
+            RationallyComponent temp = alternativesContainer.Children[currentIndex];
             alternativesContainer.Children[currentIndex] = alternativesContainer.Children[currentIndex + 1];
             alternativesContainer.Children[currentIndex + 1] = temp;
 

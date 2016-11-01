@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Documents
 {
-    internal sealed class RelatedUrlComponent : RComponent
+    internal sealed class RelatedUrlComponent : RationallyComponent
     {
         private static readonly Regex RelatedRegex = new Regex(@"RelatedUrl(\.\d+)?$");
         public RelatedUrlComponent(Page page, Shape urlShape) : base(page)

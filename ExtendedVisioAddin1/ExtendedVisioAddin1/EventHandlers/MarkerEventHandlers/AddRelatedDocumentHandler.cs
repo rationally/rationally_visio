@@ -7,7 +7,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
     internal class AddRelatedDocumentHandler : IMarkerEventHandler
     {
 
-        public void Execute(RModel model, Shape changedShape, string identifier)
+        public void Execute(RationallyModel model, Shape changedShape, string identifier)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {

@@ -7,7 +7,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
     internal class ForceTextChangedEventHandler : ITextChangedEventHandler
     {
-        public void Execute(string eventKey, RView view, Shape changedShape)
+        public void Execute(string eventKey, RationallyView view, Shape changedShape)
         {
             ForcesContainer forcesContainer = (ForcesContainer)view.Children.First(c => c is ForcesContainer);
 

@@ -41,7 +41,7 @@ namespace Rationally.Visio.View.Forces
                     }
                     else if (shape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                     {
-                        RComponent toAdd = new RComponent(page) { RShape = shape };
+                        RationallyComponent toAdd = new RationallyComponent(page) { RShape = shape };
                         Children.Add(toAdd);
                     }
                 }
@@ -57,7 +57,7 @@ namespace Rationally.Visio.View.Forces
             Master rectMaster = basicDocument.Masters["Rectangle"];
 
 
-            RComponent concernLabel = new RComponent(page)
+            RationallyComponent concernLabel = new RationallyComponent(page)
             {
                 RShape = page.Drop(rectMaster, 0, 0),
                 Text = "Concern",
@@ -72,7 +72,7 @@ namespace Rationally.Visio.View.Forces
             concernLabel.AddUserRow("rationallyType");
             Children.Add(concernLabel);
 
-            RComponent descLabel = new RComponent(page)
+            RationallyComponent descLabel = new RationallyComponent(page)
             {
                 RShape = page.Drop(rectMaster, 0, 0),
                 Text = "Description",

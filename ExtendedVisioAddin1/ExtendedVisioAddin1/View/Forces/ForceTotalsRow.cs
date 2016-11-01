@@ -45,7 +45,7 @@ namespace Rationally.Visio.View.Forces
                     }
                     else if (shape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                     {
-                        RComponent toAdd = new RComponent(page)
+                        RationallyComponent toAdd = new RationallyComponent(page)
                         {
                             RShape = shape
                         };
@@ -62,7 +62,7 @@ namespace Rationally.Visio.View.Forces
             Master rectMaster = basicDocument.Masters["Rectangle"];
 
             //dummy element for concern
-            RComponent concernDummy = new RComponent(page)
+            RationallyComponent concernDummy = new RationallyComponent(page)
             {
                 RShape = page.Drop(rectMaster, 0, 0),
                 LinePattern = 0,
@@ -80,7 +80,7 @@ namespace Rationally.Visio.View.Forces
             concernDummy.ToggleBoldFont(true);
             Children.Add(concernDummy);
 
-            RComponent descDummy = new RComponent(page)
+            RationallyComponent descDummy = new RationallyComponent(page)
             {
                 RShape = page.Drop(rectMaster, 0, 0),
                 LinePattern = 0,

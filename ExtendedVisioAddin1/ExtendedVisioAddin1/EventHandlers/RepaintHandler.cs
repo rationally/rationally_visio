@@ -13,7 +13,7 @@ namespace Rationally.Visio.EventHandlers
             }
         }
 
-        public static void Repaint(RComponent component)
+        public static void Repaint(RationallyComponent component)
         {
             if (component != null)
             {

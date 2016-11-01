@@ -2,7 +2,7 @@
 
 namespace Rationally.Visio.View.Forces
 {
-    internal sealed class ForceStubContainer : RComponent
+    internal sealed class ForceStubContainer : RationallyComponent
     {
         public override int ForceIndex
         {

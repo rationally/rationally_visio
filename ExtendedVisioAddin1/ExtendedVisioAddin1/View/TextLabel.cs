@@ -8,7 +8,7 @@ using Font = System.Drawing.Font;
 
 namespace Rationally.Visio.View
 {
-    public class TextLabel : RComponent
+    public class TextLabel : RationallyComponent
     {
         private short size = 12;
         private int lineCount = 1;

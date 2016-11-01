@@ -88,6 +88,10 @@
             <visio:PublishTemplate MenuPath="Rationally\Rationally Template" />
         </File>
     </Component>
+      <Component>
+        <File Name="log4net.dll">
+        </File>
+      </Component>
 
 
     </ComponentGroup>

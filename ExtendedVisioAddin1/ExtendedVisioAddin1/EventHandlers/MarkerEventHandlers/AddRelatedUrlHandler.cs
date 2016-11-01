@@ -7,7 +7,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class AddRelatedUrlHandler : IMarkerEventHandler
     {
-        public void Execute(RModel model, Shape changedShape, string context)
+        public void Execute(RationallyModel model, Shape changedShape, string context)
         {
             UrlSelecter selectUrlDialog = new UrlSelecter();
             if (selectUrlDialog.ShowDialog() == DialogResult.OK)

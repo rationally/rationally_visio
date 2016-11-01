@@ -8,11 +8,11 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class MoveUpDocumentHandler : IMarkerEventHandler
     {
-        public void Execute(RModel model, Shape changedShape, string identifier)
+        public void Execute(RationallyModel model, Shape changedShape, string identifier)
         {
             RelatedDocumentsContainer docsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
 
-            RComponent currentComponent = new RComponent(changedShape.ContainingPage) {RShape = changedShape};
+            RationallyComponent currentComponent = new RationallyComponent(changedShape.ContainingPage) {RShape = changedShape};
             int currentIndex = currentComponent.DocumentIndex;
 
             //swap the forces in the model
@@ -29,7 +29,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             //same, for the other component
             toSwapWith.SetDocumentIdentifier(currentIndex);
 
-            RComponent temp = docsContainer.Children[currentIndex];
+            RationallyComponent temp = docsContainer.Children[currentIndex];
             docsContainer.Children[currentIndex] = docsContainer.Children[currentIndex - 1];
             docsContainer.Children[currentIndex - 1] = temp;
 

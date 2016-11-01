@@ -11,11 +11,11 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public void Execute(string eventKey, RModel model, Shape changedShape)
+        public void Execute(string eventKey, RationallyModel model, Shape changedShape)
         {
             Log.Debug("Entered DeleteForceEventHandler.");
             //trace force row in view tree
-            RComponent forceComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
+            RationallyComponent forceComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
 
             if (forceComponent is ForceContainer)
             {

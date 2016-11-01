@@ -11,11 +11,11 @@ using Rationally.Visio.View.Information;
 namespace Rationally.Visio.View
 {
     /// <summary>
-    /// View for the Rationally application. Name is a shorthand for Rationally View.
+    /// View for the Rationally application.
     /// </summary>
-    public class RView : RContainer
+    public class RationallyView : RationallyContainer
     {
-        public RView(Page page) : base(page)
+        public RationallyView(Page page) : base(page)
         {
 
         }
@@ -157,7 +157,7 @@ namespace Rationally.Visio.View
             }
         }
 
-        public override RComponent GetComponentByShape(Shape s)
+        public override RationallyComponent GetComponentByShape(Shape s)
         {
             return Children.FirstOrDefault(c => c.GetComponentByShape(s) != null)?.GetComponentByShape(s);
         }

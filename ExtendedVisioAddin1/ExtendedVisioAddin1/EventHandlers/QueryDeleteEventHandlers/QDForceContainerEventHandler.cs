@@ -6,9 +6,9 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
     internal class QDForceContainerEventHandler : IQueryDeleteEventHandler
     {
-        public void Execute(string rationallyType, RView view, Shape changedShape)
+        public void Execute(string rationallyType, RationallyView view, Shape changedShape)
         {
-            RComponent comp = view.Children.Find(x => x is ForcesContainer);
+            RationallyComponent comp = view.Children.Find(x => x is ForcesContainer);
             if (comp is ForcesContainer)
             {
                 comp.MsvSdContainerLocked = false;

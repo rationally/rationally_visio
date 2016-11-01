@@ -7,9 +7,9 @@ using Rationally.Visio.View.Forces;
 namespace Rationally.Visio.Model
 {
     /// <summary>
-    /// Model for the Rationally application. Name is a shorthand for Rationally Model.
+    /// Model for the Rationally application.
     /// </summary>
-    public class RModel //Shorthand for Rationally Model
+    public class RationallyModel 
     {
         public List<Alternative> Alternatives { get; set; }
         public List<RelatedDocument> Documents { get; set; }
@@ -20,7 +20,7 @@ namespace Rationally.Visio.Model
         public string Version { get; set; }
         public List<Force> Forces { get; set; }
 
-        public RModel()
+        public RationallyModel()
         {
             Alternatives = new List<Alternative>();
             Documents = new List<RelatedDocument>();

@@ -28,8 +28,8 @@ namespace Rationally.Visio
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public RModel Model { get; set; }
-        public RView View { get; set; }
+        public RationallyModel Model { get; set; }
+        public RationallyView View { get; set; }
 
         //Variables responsible for undo-scope handling
         public int StartedUndoState;
@@ -50,8 +50,8 @@ namespace Rationally.Visio
             //init for logger
             log4net.Config.XmlConfigurator.Configure();
             Log.Info("Rationally started!");
-            Model = new RModel();
-            View = new RView(Application.ActivePage);
+            Model = new RationallyModel();
+            View = new RationallyView(Application.ActivePage);
             rebuildTree = false;
             Application.MarkerEvent += Application_MarkerEvent;
             Application.TemplatePaths = Constants.FolderPath;
@@ -301,7 +301,7 @@ namespace Rationally.Visio
             else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals("User.forceIndex")) 
             {
                 Log.Debug("Forceindex cell changed of forcecontainer. shape:" + changedShape.Name);
-                RComponent forcesComponent = View.Children.FirstOrDefault(x => x is ForcesContainer);
+                RationallyComponent forcesComponent = View.Children.FirstOrDefault(x => x is ForcesContainer);
                 if (forcesComponent != null)
                 {
                     rebuildTree = true; //Wait with the rebuild till the undo is done
@@ -310,7 +310,7 @@ namespace Rationally.Visio
             else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.AlternativeIndex))
             {
                 Log.Debug("Alternative index cell changed of alternativecontainer. shape:" + changedShape.Name);
-                RComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
+                RationallyComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
                 if (alternativesComponent != null)
                 {
                     rebuildTree = true; //Wait with the rebuild till the undo is done
@@ -319,7 +319,7 @@ namespace Rationally.Visio
             else if (Application.IsUndoingOrRedoing && RelatedDocumentContainer.IsRelatedDocumentContainer(changedShape.Name) && cell.LocalName.Equals("User.documentIndex"))
             {
                 Log.Debug("Document index cell changed of documentcontainer. shape:" + changedShape.Name);
-                RComponent docComponent = View.Children.FirstOrDefault(x => x is RelatedDocumentsContainer);
+                RationallyComponent docComponent = View.Children.FirstOrDefault(x => x is RelatedDocumentsContainer);
                 if (docComponent != null)
                 {
                     rebuildTree = true; //Wait with the rebuild till the undo is done
@@ -400,7 +400,7 @@ namespace Rationally.Visio
                     string rationallyType = s.CellsU[CellConstants.RationallyType].ResultStr["Value"];
 
                     //mark the deleted shape as 'deleted' in the view tree
-                    RComponent deleted = View.GetComponentByShape(s);
+                    RationallyComponent deleted = View.GetComponentByShape(s);
                     if (deleted != null)
                     {
                         deleted.Deleted = true;

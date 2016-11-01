@@ -6,9 +6,9 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
     internal class QDRelatedDocumentContainerEventHandler : IQueryDeleteEventHandler
     {
-        public void Execute(string eventKey, RView view, Shape changedShape)
+        public void Execute(string eventKey, RationallyView view, Shape changedShape)
         {
-            RComponent comp = view.Children.Find(x => x is RelatedDocumentsContainer);
+            RationallyComponent comp = view.Children.Find(x => x is RelatedDocumentsContainer);
             if (comp is RelatedDocumentsContainer)
             {
                 comp.MsvSdContainerLocked = false; //Child shapes can now be removed.

@@ -8,7 +8,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class AddForceHandler : IMarkerEventHandler
     {
-        public void Execute(RModel model, Shape changedShape, string identifier)
+        public void Execute(RationallyModel model, Shape changedShape, string identifier)
         {
             ForcesContainer forcesContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
             if (forcesContainer.Children.Count == 0)
@@ -25,9 +25,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 }
                 else if (forcesContainer.Children.Any(c => c is ForceTotalsRow))
                 {
-                    RComponent toMove = forcesContainer.Children.First(c => c is ForceTotalsRow);
+                    RationallyComponent toMove = forcesContainer.Children.First(c => c is ForceTotalsRow);
                     int toMoveIndex = forcesContainer.Children.IndexOf(toMove);
-                    RComponent toSwapWith = forcesContainer.Children.Last();
+                    RationallyComponent toSwapWith = forcesContainer.Children.Last();
                     forcesContainer.Children[forcesContainer.Children.Count - 1] = toMove;
                     forcesContainer.Children[toMoveIndex] = toSwapWith;
                 }

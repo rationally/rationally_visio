@@ -1,4 +1,6 @@
 ﻿using System.Windows.Forms;
+using Rationally.Visio.EventHandlers.ClickEventHandlers;
+using Rationally.Visio.Model;
 
 namespace Rationally.Visio.WindowsFormPopups.WizardComponents
 {
@@ -12,10 +14,12 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
         public Label AlternativeStateLabel;
         public ComboBox AlternativeStateDropdown;
 
+        public Alternative Alternative { get; set; }
         public FlowLayoutAlternative(int alternativeIndex)
         {
+            
             AlternativeIndex = alternativeIndex;
-
+            
             // 
             // flowLayoutPanelAlternative1
             // 
@@ -30,9 +34,35 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             TextBoxAlternativeTitle = new TextBox();
             AlternativeStateLabel = new Label();
             AlternativeStateDropdown = new ComboBox {DropDownStyle = ComboBoxStyle.DropDownList, FormattingEnabled = true};
-
+            //this.Acti += alternative_activated;
             SuspendLayout();
             Init();
+        }
+
+        public void UpdateData()
+        {
+            //connect to a model resource, if one is present for this row
+            if (Globals.RationallyAddIn.Model.Alternatives.Count >= AlternativeIndex)
+            {
+                Alternative = Globals.RationallyAddIn.Model.Alternatives[AlternativeIndex - 1];//map to c-indexing
+            }
+            TextBoxAlternativeTitle.Text = Alternative != null ? Alternative.Title : "";
+            if (Alternative != null)
+            {
+                AlternativeStateDropdown.SelectedIndex = Globals.RationallyAddIn.Model.AlternativeStates.IndexOf(Alternative.Status);
+            }
+            else
+            {
+                AlternativeStateDropdown.SelectedIndex = 0;
+            }
+        }
+
+        public void UpdateModel()
+        {
+            if (Alternative != null)
+            {
+                UpdateAlternativeHandler.Execute(Alternative, TextBoxAlternativeTitle.Text, AlternativeStateDropdown.SelectedText);
+            }
         }
 
         private void Init()
@@ -70,6 +100,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             TextBoxAlternativeTitle.Name = "textBoxAlternativeTitle";
             TextBoxAlternativeTitle.Size = new System.Drawing.Size(300, 27);
             TextBoxAlternativeTitle.TabIndex = 2;
+            
             // 
             // alternativeStateLabel
             // 
@@ -91,6 +122,7 @@ namespace Rationally.Visio.WindowsFormPopups.WizardComponents
             AlternativeStateDropdown.Name = "alternativeStateDropdown";
             AlternativeStateDropdown.Size = new System.Drawing.Size(200, 27);
             AlternativeStateDropdown.TabIndex = 4;
+
 
             ResumeLayout(false);
             PerformLayout();

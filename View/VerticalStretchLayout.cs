@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Rationally.Visio.RationallyConstants;
+
 // ReSharper disable ArrangeRedundantParentheses
 
 namespace Rationally.Visio.View
@@ -18,67 +20,57 @@ namespace Rationally.Visio.View
         /// <param name="x">top left x-coordinate to start drawing the component.</param>
         /// <param name="y">top left y-coordinate to start drawing the component.</param>
         /// <param name="components">Queue of components to draw.</param>
-        public void Draw(double x, double y, Queue<RationallyComponent> components )
+        public void Draw(double x, double y, Queue<RationallyComponent> components)
         {
-            //base case
-            if (components.Count == 0)
+            while (components.Count > 0)
             {
+                RationallyComponent toDraw = components.Dequeue();
+                double totalWidthToDraw = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight;
+                double totalHeightToDraw = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;
 
-                ShrinkContainer(y); //y points below the last added component
-                return;
-            }
+                //allow container to stretch horizontally and/or vertically if the content component overflows in those directions
+                PrepareContainerExpansion(x, y, totalWidthToDraw, totalHeightToDraw);
 
-            RationallyComponent toDraw = components.Dequeue();
-            double widthToDraw = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight;
-            double heightToDraw = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;
+                //this layout stacks components vertically and stretches them horizontally to the width of the container
+                StretchComponentIfNeeded(toDraw, toManage.Width);
 
-            //allow container to stretch horizontally and/or vertically if the content component overflows in those directions
-            PrepareContainerExpansion(x,y,widthToDraw,heightToDraw);
+                //calculate position to draw this component
+                double drawX = x + (toDraw.Width/2.0) + toDraw.MarginLeft;
+                double drawY = y - (toDraw.Height/2.0) - toDraw.MarginTop;
+                double deltaX = drawX - toDraw.CenterX;
+                double deltaY = drawY - toDraw.CenterY;
 
-            //this layout stacks components vertically and stretches them horizontally to the width of the container
-            StretchComponentIfNeeded(toDraw,toManage.Width);
-
-            //calculate position to draw this component
-            double drawX = x + (toDraw.Width/2.0) + toDraw.MarginLeft;
-            double drawY = y - (toDraw.Height/2.0) - toDraw.MarginTop;
-            double deltaX = drawX - toDraw.CenterX;
-            double deltaY = drawY - toDraw.CenterY;
-            
-            if (toDraw is RationallyContainer)
-            {
-                foreach (RationallyComponent c in ((RationallyContainer)toDraw).Children)
+                if (toDraw is RationallyContainer)
                 {
-                    if (c.RShape.ContainerProperties != null)
+                    foreach (RationallyComponent c in ((RationallyContainer) toDraw).Children)
                     {
-                        //moving children will disband the composite pattern between the shapes => remember children and later rebuild the pattern
-                        c.StoreChildren();
-                        c.MoveChildren(deltaX, deltaY);
-                        
-                        
-                    }
-                    c.CenterX += deltaX;
-                    c.CenterY += deltaY;
+                        if (c.RShape.ContainerProperties != null)
+                        {
+                            //moving children will disband the composite pattern between the shapes => remember children and later rebuild the pattern
+                            c.StoreChildren();
+                            c.MoveChildren(deltaX, deltaY);
+                        }
+                        c.CenterX += deltaX;
+                        c.CenterY += deltaY;
 
-                    if (c.RShape.ContainerProperties != null)
-                    {
-                        c.RestoreChildren();
+                        if (c.RShape.ContainerProperties != null)
+                        {
+                            c.RestoreChildren();
+                        }
                     }
                 }
+                else
+                {
+                    toDraw.MoveChildren(deltaX, deltaY);
+                }
+                toDraw.CenterX = drawX;
+                toDraw.CenterY = drawY;
+
+                //update x and y for the next component
+                //x remains the same
+                y = y - (toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom);
             }
-            else
-            {
-                toDraw.MoveChildren(deltaX, deltaY);
-            }
-            toDraw.CenterX = drawX;
-            toDraw.CenterY = drawY;
-
-            //update x and y for the next component
-            //x remains the same
-            y = y - (toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom);
-
-            //recursive case
-            Draw(x,y,components);
-
+            ShrinkContainer(y); //y points below the last added component
         }
 
         public void Repaint()
@@ -114,14 +106,14 @@ namespace Rationally.Visio.View
 
             if (overflowInX && expandXIfNeeded)
             {
-                toManage.Width = x + xIncrease - topLeftX + 0.001;
+                toManage.Width = x + xIncrease - topLeftX + Constants.Epsilon;
                 toManage.CenterX = topLeftX + (toManage.Width / 2.0);
 
             }
 
             if (overflowInY && expandYIfNeeded)
             {
-                toManage.Height = topLeftY - (y - yIncrease) + 0.001;
+                toManage.Height = topLeftY - (y - yIncrease) + Constants.Epsilon;
                 toManage.CenterY = topLeftY - (toManage.Height / 2.0);
             }
         }
@@ -131,12 +123,12 @@ namespace Rationally.Visio.View
         /// </summary>
         /// <param name="component"></param>
         /// <param name="containerWidth"></param>
-        private void StretchComponentIfNeeded(RationallyComponent component, double containerWidth)
+        private static void StretchComponentIfNeeded(RationallyComponent component, double containerWidth)
         {
             double marginIncludedWidth = component.MarginLeft + component.Width + component.MarginRight;
             if (marginIncludedWidth < containerWidth)
             {
-                component.Width = containerWidth - (component.MarginLeft + component.MarginRight)-0.001;
+                component.Width = containerWidth - (component.MarginLeft + component.MarginRight) - Constants.Epsilon;
             }
         }
 
@@ -150,7 +142,7 @@ namespace Rationally.Visio.View
 
             if (underflowInY && shrinkYIfNeeded)
             {
-                toManage.Height = topLeftY - contentYEnd + 0.001;
+                toManage.Height = topLeftY - contentYEnd + Constants.Epsilon;
                 toManage.CenterY = topLeftY - (toManage.Height / 2.0);
             }
         }

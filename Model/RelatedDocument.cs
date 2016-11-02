@@ -5,7 +5,7 @@
         public string Path { get; set; }
         public string Name { get; set; }
 
-        public bool IsFile { get; set; } //else url
+        public bool IsFile { get;} //else url
 
         public RelatedDocument(string path, string name, bool isFile)
         {

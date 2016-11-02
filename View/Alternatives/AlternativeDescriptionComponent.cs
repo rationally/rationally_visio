@@ -15,7 +15,7 @@ namespace Rationally.Visio.View.Alternatives
             MarginTop = 0.05;
         }
 
-        public AlternativeDescriptionComponent(Page page, int alternativeIndex, string description) : base(page)
+        public AlternativeDescriptionComponent(Page page, int alternativeIndex) : base(page)
         {
             Width = 5.15;
             Height = 2.5;
@@ -27,8 +27,6 @@ namespace Rationally.Visio.View.Alternatives
             AlternativeIndex = alternativeIndex;
 
             Name = "AlternativeDescription";
-
-            Text = description;
 
             AddAction("addAlternative", "QUEUEMARKEREVENT(\"add\")", "\"Add alternative\"", false);
             AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this alternative\"", false);
@@ -44,7 +42,7 @@ namespace Rationally.Visio.View.Alternatives
             return DescriptionRegex.IsMatch(name);
         }
 
-        public void InitStyle()
+        private void InitStyle()
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {

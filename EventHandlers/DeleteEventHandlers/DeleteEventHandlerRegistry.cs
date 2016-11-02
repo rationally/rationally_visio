@@ -8,31 +8,31 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
     internal class DeleteEventHandlerRegistry
     {
         private static DeleteEventHandlerRegistry eventHandlerRegistry;
-        public Dictionary<string, List<IDeleteEventHandler>> Registry;
+        private readonly Dictionary<string, List<IDeleteEventHandler>> registry;
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private DeleteEventHandlerRegistry()
         {
-            Registry = new Dictionary<string, List<IDeleteEventHandler>>();
+            registry = new Dictionary<string, List<IDeleteEventHandler>>();
         }
 
         public static DeleteEventHandlerRegistry Instance => eventHandlerRegistry ?? (eventHandlerRegistry = new DeleteEventHandlerRegistry());
 
         public void Register(string eventKey, IDeleteEventHandler eventHandler)
         {
-            if (!eventHandlerRegistry.Registry.ContainsKey(eventKey))
+            if (!eventHandlerRegistry.registry.ContainsKey(eventKey))
             {
-                eventHandlerRegistry.Registry[eventKey] = new List<IDeleteEventHandler>();
+                eventHandlerRegistry.registry[eventKey] = new List<IDeleteEventHandler>();
             }
-            eventHandlerRegistry.Registry[eventKey].Add(eventHandler);
+            eventHandlerRegistry.registry[eventKey].Add(eventHandler);
         }
 
         public void HandleEvent(string eventKey, RationallyModel model, Shape changedShape)
         {
             
-            if (Registry.ContainsKey(eventKey))
+            if (registry.ContainsKey(eventKey))
             {
-                Registry[eventKey].ForEach(eh => eh.Execute(eventKey, model, changedShape));
+                registry[eventKey].ForEach(eh => eh.Execute(eventKey, model, changedShape));
             }
             else
             {

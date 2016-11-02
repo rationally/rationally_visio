@@ -20,12 +20,14 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             AlternativeContainer toChange = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU[CellConstants.AlternativeIndex].ResultIU == currentIndex);
             //locate the alternative that we are going to swap with
             AlternativeContainer other = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU[CellConstants.AlternativeIndex].ResultIU == currentIndex + 1);
-
-            string higherIndex = (char) (65 + currentIndex + 1) + ":";
-            string oldIndex = (char) (65 + currentIndex) + ":";
+            
             //swap the items in the model
-            model.Alternatives[currentIndex].IdentifierString = higherIndex;
-            model.Alternatives[currentIndex + 1].IdentifierString = oldIndex;
+            model.Alternatives[currentIndex].GenerateIdentifier(currentIndex + 1);
+            model.Alternatives[currentIndex + 1].GenerateIdentifier(currentIndex);
+
+            string higherIndex = model.Alternatives[currentIndex].IdentifierString;
+            string oldIndex = model.Alternatives[currentIndex + 1].IdentifierString;
+
             Alternative one = model.Alternatives[currentIndex];
             model.Alternatives[currentIndex] = model.Alternatives[currentIndex + 1];
             model.Alternatives[currentIndex + 1] = one;

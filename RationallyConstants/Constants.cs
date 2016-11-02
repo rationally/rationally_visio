@@ -7,6 +7,7 @@ namespace Rationally.Visio.RationallyConstants
         public const string TemplateName = "Rationally Template";
         public const string RationallySite = "https://rationally.github.io/";
         public const int CellExists = -1;
+        public const double Epsilon = 0.001;
 
 #if DEBUG
         public static readonly string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\My Shapes\"; //<---- test path

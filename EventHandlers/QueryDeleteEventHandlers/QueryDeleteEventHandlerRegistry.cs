@@ -19,11 +19,11 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 
         public static void Register(string eventKey, IQueryDeleteEventHandler eventHandler)
         {
-            if (!eventHandlerRegistry.registry.ContainsKey(eventKey))
+            if (!Instance.registry.ContainsKey(eventKey))
             {
-                eventHandlerRegistry.registry[eventKey] = new List<IQueryDeleteEventHandler>();
+                Instance.registry[eventKey] = new List<IQueryDeleteEventHandler>();
             }
-            eventHandlerRegistry.registry[eventKey].Add(eventHandler);
+            Instance.registry[eventKey].Add(eventHandler);
         }
 
         public void HandleEvent(string eventKey, RationallyView view, Shape changedShape)

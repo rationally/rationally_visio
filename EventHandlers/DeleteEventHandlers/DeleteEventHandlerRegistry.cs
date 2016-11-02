@@ -20,11 +20,11 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 
         public static void Register(string eventKey, IDeleteEventHandler eventHandler)
         {
-            if (!eventHandlerRegistry.registry.ContainsKey(eventKey))
+            if (!Instance.registry.ContainsKey(eventKey))
             {
-                eventHandlerRegistry.registry[eventKey] = new List<IDeleteEventHandler>();
+                Instance.registry[eventKey] = new List<IDeleteEventHandler>();
             }
-            eventHandlerRegistry.registry[eventKey].Add(eventHandler);
+            Instance.registry[eventKey].Add(eventHandler);
         }
 
         public void HandleEvent(string eventKey, RationallyModel model, Shape changedShape)

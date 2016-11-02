@@ -19,11 +19,11 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 
         public static void Register(string eventKey, ITextChangedEventHandler eventHandler)
         {
-            if (!eventHandlerRegistry.registry.ContainsKey(eventKey))
+            if (!Instance.registry.ContainsKey(eventKey))
             {
-                eventHandlerRegistry.registry[eventKey] = new List<ITextChangedEventHandler>();
+                Instance.registry[eventKey] = new List<ITextChangedEventHandler>();
             }
-            eventHandlerRegistry.registry[eventKey].Add(eventHandler);
+            Instance.registry[eventKey].Add(eventHandler);
         }
 
         public void HandleEvent(string eventKey, RationallyView view, Shape changedShape)

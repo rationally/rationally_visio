@@ -19,11 +19,11 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 
         public static void Register(string eventKey, IMarkerEventHandler eventHandler)
         {
-            if (!eventHandlerRegistry.registry.ContainsKey(eventKey))
+            if (!Instance.registry.ContainsKey(eventKey))
             {
-                eventHandlerRegistry.registry[eventKey] = new List<IMarkerEventHandler>();
+                Instance.registry[eventKey] = new List<IMarkerEventHandler>();
             }
-            eventHandlerRegistry.registry[eventKey].Add(eventHandler);
+            Instance.registry[eventKey].Add(eventHandler);
         }
 
         public void HandleEvent(string eventKey, RationallyModel model, Shape changedShape, string identifier)

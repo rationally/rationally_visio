@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
 using Rationally.Visio.Model;
 
@@ -55,6 +56,15 @@ namespace Rationally.Visio.Forms.WizardComponents
             if (Alternative != null)
             {
                 UpdateAlternativeHandler.Execute(Alternative, TextBoxAlternativeTitle.Text, AlternativeStateDropdown.SelectedText);
+            }
+            else
+            {
+                if (!String.IsNullOrEmpty(TextBoxAlternativeTitle.Text))
+                {
+                    Globals.RationallyAddIn.Model.Alternatives.Add(new Alternative(TextBoxAlternativeTitle.Text,
+                        AlternativeStateDropdown.SelectedText,
+                        "", (char) (64 + AlternativeIndex) + ":", Alternative.HighestUniqueIdentifier == -1 ? 0 : Alternative.HighestUniqueIdentifier));
+                }
             }
         }
 

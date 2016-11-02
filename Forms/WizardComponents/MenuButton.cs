@@ -15,8 +15,11 @@ namespace Rationally.Visio.Forms.WizardComponents
             
             normalFont = new Font("calibri", 12, FontStyle.Regular);
             boldFont = new Font("calibri", 12, FontStyle.Bold);
-            BackColor = Color.FromArgb(1, 235, 235, 235);
+            //BackColor = Color.FromArgb(1, 235, 235, 235);
+            BackColor = Color.FromArgb(1, 194, 207, 242);
             //FlatAppearance.MouseOverForeColor = 
+            FlatStyle = FlatStyle.Flat;
+            UseVisualStyleBackColor = false;
             MouseEnter += button1_MouseEnter;
             MouseLeave += button1_MouseLeave;
             Click += button1_Click;
@@ -48,15 +51,16 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         public void Highlight()
         {
+            //Font = boldFont;
             BackColor = Color.FromArgb(1, 194, 207, 242);
-            Font = boldFont;
+            
             Refresh();
         }
 
         public void Lowlight()
         {
             BackColor = Color.FromArgb(1, 235, 235, 235);
-            Font = normalFont;
+            //Font = normalFont;
         }
     }
 }

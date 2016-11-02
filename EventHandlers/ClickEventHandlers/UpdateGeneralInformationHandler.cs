@@ -5,7 +5,7 @@ using Rationally.Visio.View.Information;
 
 namespace Rationally.Visio.EventHandlers.ClickEventHandlers
 {
-    internal class UpdateGeneralInformationHandler
+    internal static class UpdateGeneralInformationHandler
     {
         public static void Execute(string author, string decisionName, string date, bool documentCreation)
         {

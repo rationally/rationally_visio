@@ -15,9 +15,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 AddAlternativeWithWarning alternative = new AddAlternativeWithWarning(model);
                 if (alternative.ShowDialog() == DialogResult.OK)
                 {
-                    string identifier = (char)(65 + model.Alternatives.Count) + ":";
                     int timelessId = Alternative.HighestUniqueIdentifier == -1 ? 0 : (Alternative.HighestUniqueIdentifier + 1);
-                    Alternative newAlternative = new Alternative(alternative.alternativeName.Text, alternative.alternativeStatus.SelectedItem.ToString(), "Enter a description here.", identifier, timelessId);
+                    Alternative newAlternative = new Alternative(alternative.alternativeName.Text, alternative.alternativeStatus.SelectedItem.ToString(), timelessId);
+                    newAlternative.GenerateIdentifier(model.Alternatives.Count);
                     model.Alternatives.Add(newAlternative);
                     Globals.RationallyAddIn.View.AddAlternative(newAlternative);
                 }
@@ -28,9 +28,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 AddAlternative alternative = new AddAlternative(model);
                 if (alternative.ShowDialog() == DialogResult.OK)
                 {
-                    string identifier = (char)(65 + model.Alternatives.Count) + ":";
                     int timelessId = Alternative.HighestUniqueIdentifier == -1 ? 0 : (Alternative.HighestUniqueIdentifier + 1);
-                    Alternative newAlternative = new Alternative(alternative.alternativeName.Text, alternative.alternativeStatus.SelectedItem.ToString(), "Enter a description here.", identifier, timelessId);
+                    Alternative newAlternative = new Alternative(alternative.alternativeName.Text, alternative.alternativeStatus.SelectedItem.ToString(), timelessId);
+                    newAlternative.GenerateIdentifier(model.Alternatives.Count);
                     model.Alternatives.Add(newAlternative);
                     Globals.RationallyAddIn.View.AddAlternative(newAlternative);
                 }

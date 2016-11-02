@@ -4,7 +4,7 @@ using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.EventHandlers.ClickEventHandlers
 {
-    internal class UpdateAlternativeHandler
+    internal static class UpdateAlternativeHandler
     {
         public static void Execute(Alternative alternativeToUpdate, string newTitle, string newState)
         {

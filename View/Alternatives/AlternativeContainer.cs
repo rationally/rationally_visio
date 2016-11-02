@@ -11,7 +11,7 @@ namespace Rationally.Visio.View.Alternatives
         public AlternativeContainer(Page page, Shape alternative) : base(page, false)
         {
             RShape = alternative;
-            string title = null, state = null, desc = null;
+            string title = null, state = null;
             foreach (int shapeIdentifier in alternative.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested))
             {
                 Shape alternativeComponent = page.Shapes.ItemFromID[shapeIdentifier];
@@ -35,25 +35,27 @@ namespace Rationally.Visio.View.Alternatives
                 {
                     AlternativeDescriptionComponent comp = new AlternativeDescriptionComponent(page, alternativeComponent);
                     Children.Add(comp);
-                    desc = comp.Text;
                 }
             }
-            if (title != null && state != null && desc != null)
+            if (title != null && state != null)
             {
                 if (AlternativeIndex <= Globals.RationallyAddIn.Model.Alternatives.Count)
                 {
+                    Alternative newAlternative = new Alternative(title, state, UniqueIdentifier);
+                    newAlternative.GenerateIdentifier(AlternativeIndex);
+                    Globals.RationallyAddIn.Model.Alternatives.Insert(AlternativeIndex, newAlternative);
                     int index = AlternativeIndex;
-                    string identifier = (char)(65 + index) + ":";
-                    Globals.RationallyAddIn.Model.Alternatives.Insert(AlternativeIndex, new Alternative(title, state, desc, identifier, UniqueIdentifier));
-                    foreach (Alternative alt in Globals.RationallyAddIn.Model.Alternatives.Skip(index + 1).ToList())
+                    foreach (Alternative alt in Globals.RationallyAddIn.Model.Alternatives.Skip(index + 1).ToList()) //Skip up till and including the new Alternative
                     {
-                        alt.IdentifierString = (char) (65 + ++index) + ":";
+                        alt.GenerateIdentifier(++index);
                     }
                 }
                 else
                 {
-                    string identifier = (char)(65 + Globals.RationallyAddIn.Model.Alternatives.Count) + ":";
-                    Globals.RationallyAddIn.Model.Alternatives.Add(new Alternative(title, state, desc, identifier, UniqueIdentifier));
+                    Alternative newAlternative = new Alternative(title, state, UniqueIdentifier);
+                    newAlternative.GenerateIdentifier(Globals.RationallyAddIn.Model.Alternatives.Count);
+                    Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
+
                 }
             }
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
@@ -76,7 +78,7 @@ namespace Rationally.Visio.View.Alternatives
             AlternativeTitleComponent titleComponent = new AlternativeTitleComponent(page, alternativeIndex, alternative.Title);
 
             //4) description area
-            AlternativeDescriptionComponent descComponent = new AlternativeDescriptionComponent(page, alternativeIndex, alternative.Description);
+            AlternativeDescriptionComponent descComponent = new AlternativeDescriptionComponent(page, alternativeIndex);
             
             Children.Add(identifierComponent);
             Children.Add(titleComponent);

@@ -62,15 +62,13 @@ namespace Rationally.Visio.Forms.WizardComponents
             }
             else
             {
-                if (!String.IsNullOrEmpty(TextBoxAlternativeTitle.Text))
+                if (!string.IsNullOrEmpty(TextBoxAlternativeTitle.Text))
                 {
-                    Alternative alternative = new Alternative(TextBoxAlternativeTitle.Text,
-                        AlternativeStateDropdown.SelectedText,
-                        "", (char) (64 + AlternativeIndex) + ":", Alternative.HighestUniqueIdentifier == -1 ? 0 : Alternative.HighestUniqueIdentifier);
+                    Alternative newAlternative = new Alternative(TextBoxAlternativeTitle.Text, AlternativeStateDropdown.SelectedText, Alternative.HighestUniqueIdentifier == -1 ? 0 : Alternative.HighestUniqueIdentifier);
+                    newAlternative.GenerateIdentifier(AlternativeIndex);
                     Globals.RationallyAddIn.View.Page = Globals.RationallyAddIn.Application.ActivePage;
                     Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
-                    Globals.RationallyAddIn.View.AddAlternative(alternative);
-                    RepaintHandler.Repaint(Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is AlternativesContainer));
+                    Globals.RationallyAddIn.View.AddAlternative(newAlternative);
                 }
             }
         }

@@ -59,11 +59,11 @@ namespace Rationally.Visio.Forms.WizardComponents
             }
             else
             {
-                if (!String.IsNullOrEmpty(TextBoxAlternativeTitle.Text))
+                if (!string.IsNullOrEmpty(TextBoxAlternativeTitle.Text))
                 {
-                    Globals.RationallyAddIn.Model.Alternatives.Add(new Alternative(TextBoxAlternativeTitle.Text,
-                        AlternativeStateDropdown.SelectedText,
-                        "", (char) (64 + AlternativeIndex) + ":", Alternative.HighestUniqueIdentifier == -1 ? 0 : Alternative.HighestUniqueIdentifier));
+                    Alternative newAlternative = new Alternative(TextBoxAlternativeTitle.Text, AlternativeStateDropdown.SelectedText, Alternative.HighestUniqueIdentifier == -1 ? 0 : Alternative.HighestUniqueIdentifier);
+                    newAlternative.GenerateIdentifier(AlternativeIndex);
+                    Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
                 }
             }
         }

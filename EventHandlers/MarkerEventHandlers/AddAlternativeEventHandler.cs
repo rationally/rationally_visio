@@ -17,7 +17,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 AddAlternativeWithWarning alternativePopUp = new AddAlternativeWithWarning(model);
                 if (alternativePopUp.ShowDialog() == DialogResult.OK)
                 {
-                    Alternative newAlternative = new Alternative(alternative.alternativeName.Text, alternative.alternativeStatus.SelectedItem.ToString());
+                    Alternative newAlternative = new Alternative(alternativePopUp.alternativeName.Text, alternativePopUp.alternativeStatus.SelectedItem.ToString());
                     newAlternative.GenerateIdentifier(model.Alternatives.Count);
                     model.Alternatives.Add(newAlternative);
                     Globals.RationallyAddIn.View.AddAlternative(newAlternative);
@@ -29,7 +29,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 AddAlternative alternativePopUp = new AddAlternative(model);
                 if (alternativePopUp.ShowDialog() == DialogResult.OK)
                 {
-                    Alternative newAlternative = new Alternative(alternative.alternativeName.Text, alternative.alternativeStatus.SelectedItem.ToString());
+                    Alternative newAlternative = new Alternative(alternativePopUp.alternativeName.Text, alternativePopUp.alternativeStatus.SelectedItem.ToString());
                     newAlternative.GenerateIdentifier(model.Alternatives.Count);
                     model.Alternatives.Add(newAlternative);
                     Globals.RationallyAddIn.View.AddAlternative(newAlternative);

@@ -138,6 +138,11 @@ namespace Rationally.Visio.View.Alternatives
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //undo's should not edit the shape again, visio handles that for us
             {
                 UpdateReorderFunctions();
+                if (Globals.RationallyAddIn.Model.Alternatives.Count > AlternativeIndex)
+                {
+                    Alternative alternative = Globals.RationallyAddIn.Model.Alternatives[AlternativeIndex];
+                    SetStateMenu(alternative.Status);
+                }
             }
             base.Repaint();
         }

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
+using Rationally.Visio.EventHandlers;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
 using Rationally.Visio.Model;
+using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
@@ -63,7 +66,12 @@ namespace Rationally.Visio.Forms.WizardComponents
                 {
                     Alternative newAlternative = new Alternative(TextBoxAlternativeTitle.Text, AlternativeStateDropdown.SelectedText);
                     newAlternative.GenerateIdentifier(AlternativeIndex);
+                    Globals.RationallyAddIn.View.Page = Globals.RationallyAddIn.Application.ActivePage;
+                    Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
                     Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
+                    
+                    
+                    Globals.RationallyAddIn.View.AddAlternative(newAlternative);
                 }
             }
         }

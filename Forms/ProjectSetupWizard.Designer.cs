@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
 using Rationally.Visio.Forms.WizardComponents;
@@ -198,32 +199,33 @@ namespace Rationally.Visio.Forms
             // 
             // buttonShowAlternatives
             // 
-            this.buttonShowAlternatives.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
+            //this.buttonShowAlternatives.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.buttonShowAlternatives.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonShowAlternatives.FlatAppearance.BorderSize = 0;
-            this.buttonShowAlternatives.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.buttonShowAlternatives.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonShowAlternatives.Location = new System.Drawing.Point(3, 43);
             this.buttonShowAlternatives.Name = "buttonShowAlternatives";
             this.buttonShowAlternatives.Size = new System.Drawing.Size(232, 34);
             this.buttonShowAlternatives.TabIndex = 6;
             this.buttonShowAlternatives.Text = "Alternatives";
             this.buttonShowAlternatives.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonShowAlternatives.UseVisualStyleBackColor = false;
+            //this.buttonShowAlternatives.UseVisualStyleBackColor = false;
             this.buttonShowAlternatives.Click += new System.EventHandler(this.buttonShowAlternatives_Click);
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
+           // this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
+            //this.button1.BackColor = Color.Aqua;
             this.button1.Dock = System.Windows.Forms.DockStyle.Top;
             this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(3, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(232, 34);
             this.button1.TabIndex = 5;
             this.button1.Text = "General Information";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.UseVisualStyleBackColor = false;
+            //this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tableLayoutMainContentGeneral

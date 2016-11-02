@@ -68,6 +68,9 @@ namespace Rationally.Visio.Forms.WizardComponents
                     newAlternative.GenerateIdentifier(AlternativeIndex);
                     Globals.RationallyAddIn.View.Page = Globals.RationallyAddIn.Application.ActivePage;
                     Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
+                    Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
+                    
+                    
                     Globals.RationallyAddIn.View.AddAlternative(newAlternative);
                 }
             }

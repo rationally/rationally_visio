@@ -37,31 +37,6 @@ namespace Rationally.Visio.View
 
             RepaintHandler.Repaint(relatedDocumentsContainer);
         }
-
-        /// <summary>
-        /// Deletes an alternative container from the view.
-        /// </summary>
-        /// <param name="index">identifier of the alternative.</param>
-        /// <param name="deleteShape">Shape was already deleted</param>
-        public void DeleteAlternative(int index, bool deleteShape)
-        {
-            AlternativesContainer alternativesContainer = (AlternativesContainer)Children.FirstOrDefault(c => c is AlternativesContainer); //May have been deleted by the user
-            if (alternativesContainer == null)
-            {
-                RepaintHandler.Repaint();
-                return;
-            }
-            AlternativeContainer alternative = (AlternativeContainer)alternativesContainer.Children.FirstOrDefault(x => x.AlternativeIndex == index && x is AlternativeContainer); //Return null if no container or no alternative with index
-            if (alternative != null)
-            {
-                alternativesContainer.Children.Remove(alternative);
-                if (deleteShape)
-                {
-                    alternative.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal); //deletes the alternative, and it's child components. This should not be done when the shape is already gone, such as when the user has deleted it himself.
-                }
-                RepaintHandler.Repaint();
-            }
-        }
         
         public override bool ExistsInTree(Shape s)
         {

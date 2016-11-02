@@ -67,7 +67,7 @@ namespace Rationally.Visio.View.Information
 
         }
 
-        public void InitStyle()
+        private void InitStyle()
         {
             Width = 8;
             Height = 0.4;
@@ -76,7 +76,7 @@ namespace Rationally.Visio.View.Information
             UsedSizingPolicy = SizingPolicy.FixedSize;
         }
 
-        public void InitContent(Page page, string author, string date, string version)
+        private void InitContent(Page page, string author, string date, string version)
         {
             TextLabel authorLabel = new TextLabel(page, "Author: ")
             {

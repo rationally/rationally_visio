@@ -4,7 +4,7 @@ namespace Rationally.Visio.View
 {
     internal class HeaderlessContainer : RationallyContainer
     {
-        public HeaderlessContainer(Page page) : base(page)
+        protected HeaderlessContainer(Page page) : base(page)
         {
 
             Application application = Globals.RationallyAddIn.Application;
@@ -17,7 +17,7 @@ namespace Rationally.Visio.View
             containerDocument.Close();
         }
 
-        public HeaderlessContainer(Page page, bool makeShape) : base(page)
+        protected HeaderlessContainer(Page page, bool makeShape) : base(page)
         {
             //Can't overload unless using different parameters.
         }

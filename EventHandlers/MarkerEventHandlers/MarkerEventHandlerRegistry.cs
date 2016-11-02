@@ -8,29 +8,29 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
     internal class MarkerEventHandlerRegistry
     {
         private static MarkerEventHandlerRegistry eventHandlerRegistry;
-        public Dictionary<string, List<IMarkerEventHandler>> Registry; 
+        private readonly Dictionary<string, List<IMarkerEventHandler>> registry; 
 
         private MarkerEventHandlerRegistry()
         {
-            Registry = new Dictionary<string, List<IMarkerEventHandler>>();
+            registry = new Dictionary<string, List<IMarkerEventHandler>>();
         }
 
         public static MarkerEventHandlerRegistry Instance => eventHandlerRegistry ?? (eventHandlerRegistry = new MarkerEventHandlerRegistry());
 
-        public void Register(string eventKey, IMarkerEventHandler eventHandler)
+        public static void Register(string eventKey, IMarkerEventHandler eventHandler)
         {
-            if (!eventHandlerRegistry.Registry.ContainsKey(eventKey))
+            if (!eventHandlerRegistry.registry.ContainsKey(eventKey))
             {
-                eventHandlerRegistry.Registry[eventKey] = new List<IMarkerEventHandler>();
+                eventHandlerRegistry.registry[eventKey] = new List<IMarkerEventHandler>();
             }
-            eventHandlerRegistry.Registry[eventKey].Add(eventHandler);
+            eventHandlerRegistry.registry[eventKey].Add(eventHandler);
         }
 
         public void HandleEvent(string eventKey, RationallyModel model, Shape changedShape, string identifier)
         {
-            if (Registry.ContainsKey(eventKey) && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+            if (registry.ContainsKey(eventKey) && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                Registry[eventKey].ForEach(eh => eh.Execute(model, changedShape, identifier));
+                registry[eventKey].ForEach(eh => eh.Execute(model, changedShape, identifier));
             }
             else
             {

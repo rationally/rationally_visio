@@ -10,7 +10,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public void Execute(string eventKey, RationallyModel model, Shape changedShape)
+        public void Execute(RationallyModel model, Shape changedShape)
         {
             Log.Debug("Entered DeletedRelatedUrlUrlEventHandler.");
             RelatedDocumentsContainer relatedDocumentsContainer = Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer;

@@ -11,7 +11,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public void Execute(string eventKey, RationallyModel model, Shape changedShape)
+        public void Execute(RationallyModel model, Shape changedShape)
         {
             Log.Debug("Entered DeleteForceEventHandler.");
             //trace force row in view tree

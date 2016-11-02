@@ -17,7 +17,7 @@ namespace Rationally.Visio.View
         private double contentTextWidth;
         private static readonly Regex TextLabelRegex = new Regex(@"TextLabel(\.\d+)?$");
         private const double PixelsPerInch = 85;
-        public SizingPolicy UsedSizingPolicy { get; set; }
+        protected SizingPolicy UsedSizingPolicy { get; set; }
 
         public TextLabel(Page page, Shape shape) : base(page)
         {
@@ -57,7 +57,7 @@ namespace Rationally.Visio.View
             UsedSizingPolicy = p;
         }
 
-        public void SetFontSize(short fontSize)
+        protected void SetFontSize(short fontSize)
         {
             size = fontSize;
             FontSize = fontSize;

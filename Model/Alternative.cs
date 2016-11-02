@@ -8,7 +8,7 @@
 
         public string Title { get; set; }
 
-        public string IdentifierString { get; set; }
+        public string IdentifierString { get; private set; }
 
         public int UniqueIdentifier { get;} //Id that exists independent of the order of the elements. Allows for the identifying of alternatives
         

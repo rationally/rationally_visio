@@ -11,14 +11,14 @@ namespace Rationally.Visio.Model
     /// </summary>
     public class RationallyModel 
     {
-        public List<Alternative> Alternatives { get; set; }
-        public List<RelatedDocument> Documents { get; set; }
-        public List<string> AlternativeStates { get; set; }
+        public List<Alternative> Alternatives { get; }
+        public List<RelatedDocument> Documents { get; }
+        public List<string> AlternativeStates { get; }
         public string Author { get; set; }
         public string DecisionName { get; set; }
         public string DateString { get; set; }
         public string Version { get; set; }
-        public List<Force> Forces { get; set; }
+        public List<Force> Forces { get; }
 
         public RationallyModel()
         {

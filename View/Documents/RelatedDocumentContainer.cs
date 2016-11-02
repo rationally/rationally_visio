@@ -105,7 +105,7 @@ namespace Rationally.Visio.View.Documents
             InitStyle();
         }
 
-        public void InitStyle()
+        private void InitStyle()
         {
             
             LinePattern = 16; //borderless

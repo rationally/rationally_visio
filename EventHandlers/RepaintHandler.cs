@@ -2,7 +2,7 @@
 
 namespace Rationally.Visio.EventHandlers
 {
-    internal class RepaintHandler
+    internal static class RepaintHandler
     {
         public static void Repaint()
         {

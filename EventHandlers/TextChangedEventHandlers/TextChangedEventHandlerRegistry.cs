@@ -8,30 +8,30 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
     internal class TextChangedEventHandlerRegistry
     {
         private static TextChangedEventHandlerRegistry eventHandlerRegistry;
-        public Dictionary<string, List<ITextChangedEventHandler>> Registry;
+        private readonly Dictionary<string, List<ITextChangedEventHandler>> registry;
 
         private TextChangedEventHandlerRegistry()
         {
-            Registry = new Dictionary<string, List<ITextChangedEventHandler>>();
+            registry = new Dictionary<string, List<ITextChangedEventHandler>>();
         }
 
         public static TextChangedEventHandlerRegistry Instance => eventHandlerRegistry ?? (eventHandlerRegistry = new TextChangedEventHandlerRegistry());
 
-        public void Register(string eventKey, ITextChangedEventHandler eventHandler)
+        public static void Register(string eventKey, ITextChangedEventHandler eventHandler)
         {
-            if (!eventHandlerRegistry.Registry.ContainsKey(eventKey))
+            if (!eventHandlerRegistry.registry.ContainsKey(eventKey))
             {
-                eventHandlerRegistry.Registry[eventKey] = new List<ITextChangedEventHandler>();
+                eventHandlerRegistry.registry[eventKey] = new List<ITextChangedEventHandler>();
             }
-            eventHandlerRegistry.Registry[eventKey].Add(eventHandler);
+            eventHandlerRegistry.registry[eventKey].Add(eventHandler);
         }
 
         public void HandleEvent(string eventKey, RationallyView view, Shape changedShape)
         {
 
-            if (Registry.ContainsKey(eventKey))
+            if (registry.ContainsKey(eventKey))
             {
-                Registry[eventKey].ForEach(eh => eh.Execute(eventKey, view, changedShape));
+                registry[eventKey].ForEach(eh => eh.Execute(view, changedShape));
             }
             else
             {

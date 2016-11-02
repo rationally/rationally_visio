@@ -18,7 +18,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 
         public static DeleteEventHandlerRegistry Instance => eventHandlerRegistry ?? (eventHandlerRegistry = new DeleteEventHandlerRegistry());
 
-        public void Register(string eventKey, IDeleteEventHandler eventHandler)
+        public static void Register(string eventKey, IDeleteEventHandler eventHandler)
         {
             if (!eventHandlerRegistry.registry.ContainsKey(eventKey))
             {
@@ -32,7 +32,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
             
             if (registry.ContainsKey(eventKey))
             {
-                registry[eventKey].ForEach(eh => eh.Execute(eventKey, model, changedShape));
+                registry[eventKey].ForEach(eh => eh.Execute(model, changedShape));
             }
             else
             {

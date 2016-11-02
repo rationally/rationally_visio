@@ -101,19 +101,6 @@ namespace Rationally.Visio.View.Alternatives
             InitStyle();
         }
 
-        public AlternativeContainer(Page page, int alternativeIndex) : base(page)
-        {
-            Name = "Alternative";
-            AddUserRow("rationallyType");
-            RationallyType = "alternative";
-            AddUserRow("alternativeIndex");
-            AlternativeIndex = alternativeIndex;
-
-            //Events
-            AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete alternative\"", false);
-            InitStyle();
-        }
-
         private void InitStyle()
         {
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
@@ -174,7 +161,7 @@ namespace Rationally.Visio.View.Alternatives
             return AlternativeRegex.IsMatch(name);
         }
 
-        public void UpdateReorderFunctions()
+        private void UpdateReorderFunctions()
         {
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);

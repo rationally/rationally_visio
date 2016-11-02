@@ -54,7 +54,7 @@ namespace Rationally.Visio.View.Alternatives
             MarginTop = 0.05;
         }
 
-        public void UpdateReorderFunctions()
+        private void UpdateReorderFunctions()
         {
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);

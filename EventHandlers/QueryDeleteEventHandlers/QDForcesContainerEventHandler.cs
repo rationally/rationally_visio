@@ -5,7 +5,7 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
     internal class QDForcesContainerEventHandler : IQueryDeleteEventHandler
     {
-        public void Execute(string eventKey, RationallyView view, Shape forcesContainer)
+        public void Execute(RationallyView view, Shape forcesContainer)
         {
             Globals.RationallyAddIn.View.GetComponentByShape(forcesContainer).RemoveDeleteLock(true);
         }

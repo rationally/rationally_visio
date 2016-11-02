@@ -6,15 +6,11 @@ namespace Rationally.Visio.Forms.WizardComponents
 {
     internal class MenuButton : Button
     {
-        private readonly Font normalFont;
-        private readonly Font boldFont;
         private readonly MenuPanel containingMenu;
         public MenuButton(MenuPanel containingMenu)
         {
             this.containingMenu = containingMenu;
             
-            normalFont = new Font("calibri", 12, FontStyle.Regular);
-            boldFont = new Font("calibri", 12, FontStyle.Bold);
             //BackColor = Color.FromArgb(1, 235, 235, 235);
             BackColor = Color.FromArgb(1, 194, 207, 242);
             //FlatAppearance.MouseOverForeColor = 
@@ -25,6 +21,12 @@ namespace Rationally.Visio.Forms.WizardComponents
             Click += button1_Click;
 
             this.containingMenu.Buttons.Add(this);
+        }
+
+        public sealed override Color BackColor
+        {
+            get { return base.BackColor; }
+            set { base.BackColor = value; }
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -1,6 +1,6 @@
 ﻿namespace Rationally.Visio.RationallyConstants
 {
-    internal class CellConstants
+    internal static class CellConstants
     {
         public const string RationallyType = "User.rationallyType";
         public const string Stub = "User.isStub";

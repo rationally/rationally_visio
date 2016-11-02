@@ -10,7 +10,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public void Execute(string eventKey, RationallyModel model, Shape changedShape)
+        public void Execute(RationallyModel model, Shape changedShape)
         {
             Log.Debug("Deleting information component.");
             InformationContainer cont = Globals.RationallyAddIn.View.Children.FirstOrDefault(obj => obj.RationallyType == "information") as InformationContainer;

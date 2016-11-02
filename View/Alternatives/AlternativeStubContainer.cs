@@ -6,8 +6,7 @@ namespace Rationally.Visio.View.Alternatives
     {
         public override int AlternativeIndex
         {
-            get;
-            set;
+            get; protected set;
         }
 
         public AlternativeStubContainer(Page page,int alternativeIndex) : base(page)

@@ -6,7 +6,7 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
     internal class QDRelatedDocumentContainerEventHandler : IQueryDeleteEventHandler
     {
-        public void Execute(string eventKey, RationallyView view, Shape changedShape)
+        public void Execute(RationallyView view, Shape changedShape)
         {
             RationallyComponent comp = view.Children.Find(x => x is RelatedDocumentsContainer);
             if (comp is RelatedDocumentsContainer)

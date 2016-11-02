@@ -65,7 +65,7 @@ namespace Rationally.Visio.Forms.WizardComponents
                 if (!string.IsNullOrEmpty(TextBoxAlternativeTitle.Text))
                 {
                     Alternative newAlternative = new Alternative(TextBoxAlternativeTitle.Text, AlternativeStateDropdown.SelectedItem.ToString());
-                    newAlternative.GenerateIdentifier(AlternativeIndex);
+                    newAlternative.GenerateIdentifier(AlternativeIndex-1);
                     Globals.RationallyAddIn.View.Page = Globals.RationallyAddIn.Application.ActivePage;
                     Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
                     Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);

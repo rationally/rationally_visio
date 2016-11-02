@@ -128,6 +128,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventHandlers\TextChangedEventHandlers\AlternativeTitleTextChangedEventHandler.cs" />
     <Compile Include="RationallyConstants\CellConstants.cs" />
     <Compile Include="RationallyConstants\Constants.cs" />
     <Compile Include="EventHandlers\ClickEventHandlers\UpdateAlternativeHandler.cs" />

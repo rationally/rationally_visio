@@ -217,6 +217,7 @@ namespace Rationally.Visio
         {
             TextChangedEventHandlerRegistry.Register("forceValue", new ForceTextChangedEventHandler());
             TextChangedEventHandlerRegistry.Register("alternativeState", new AlternativeStateTextChangedEventHandler());
+            TextChangedEventHandlerRegistry.Register("alternativeTitle", new AlternativeTitleTextChangedEventHandler());
             TextChangedEventHandlerRegistry.Register("informationAuthor", new InformationAuthorTextChangedHandler());
             TextChangedEventHandlerRegistry.Register("informationDate", new InformationDateTextChangedHandler());
             TextChangedEventHandlerRegistry.Register("decisionName", new DecisionNameTextChangedHandler());

@@ -54,14 +54,14 @@ namespace Rationally.Visio.Forms.WizardComponents
         {
             if (Alternative != null)
             {
-                UpdateAlternativeHandler.Execute(Alternative, textBoxAlternativeTitle.Text, alternativeStateDropdown.SelectedText);
+                UpdateAlternativeHandler.Execute(AlternativeIndex-1, TextBoxAlternativeTitle.Text, AlternativeStateDropdown.SelectedItem.ToString());
             }
             else
             {
                 if (!string.IsNullOrEmpty(textBoxAlternativeTitle.Text))
                 {
-                    Alternative newAlternative = new Alternative(textBoxAlternativeTitle.Text, alternativeStateDropdown.SelectedText);
-                    newAlternative.GenerateIdentifier(alternativeIndex);
+                    Alternative newAlternative = new Alternative(TextBoxAlternativeTitle.Text, AlternativeStateDropdown.SelectedItem.ToString());
+                    newAlternative.GenerateIdentifier(AlternativeIndex);
                     Globals.RationallyAddIn.View.Page = Globals.RationallyAddIn.Application.ActivePage;
                     Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
                     Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);

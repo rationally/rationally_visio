@@ -182,6 +182,11 @@ namespace Rationally.Visio.View.Alternatives
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio takes care of this
             {
                 UpdateReorderFunctions();
+                if (Globals.RationallyAddIn.Model.Alternatives.Count > AlternativeIndex)
+                {
+                    Alternative alternative = Globals.RationallyAddIn.Model.Alternatives[AlternativeIndex];
+                    this.Text = alternative.Title;
+                }
             }
             if (Children.Count == 4)
             {

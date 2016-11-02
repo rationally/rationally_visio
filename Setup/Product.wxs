@@ -71,7 +71,7 @@
     <ComponentGroup Id="VisioFiles" Directory="APPLICATIONFOLDER">
       
     <Component>
-        <File Name="DecisionsStencil.vssx">
+        <File Name="Rationally Shapes.vssx">
             <visio:PublishStencil MenuPath="Rationally\DecisionsStencil" />
         </File>
     </Component>

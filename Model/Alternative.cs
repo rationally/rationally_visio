@@ -26,5 +26,11 @@
                 HighestUniqueIdentifier = uniqueIdentifier;
             }
         }
+
+        public void GenerateIdentifier(int identNumber)
+        {
+            char identChar = (char)(65 + identNumber); //convert to corresponding letter
+            IdentifierString = identChar + ":";
+        }
     }
 }

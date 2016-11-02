@@ -61,7 +61,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             {
                 if (!string.IsNullOrEmpty(TextBoxAlternativeTitle.Text))
                 {
-                    Alternative newAlternative = new Alternative(TextBoxAlternativeTitle.Text, AlternativeStateDropdown.SelectedText, Alternative.HighestUniqueIdentifier == -1 ? 0 : Alternative.HighestUniqueIdentifier);
+                    Alternative newAlternative = new Alternative(TextBoxAlternativeTitle.Text, AlternativeStateDropdown.SelectedText);
                     newAlternative.GenerateIdentifier(AlternativeIndex);
                     Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
                 }

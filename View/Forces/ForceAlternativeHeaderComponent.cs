@@ -16,7 +16,7 @@ namespace Rationally.Visio.View.Forces
             RShape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
 
-            AddUserRow("alternativeTimelessId");
+            AddUserRow("alternativeUniqueId");
             AlternativeUniqueIdentifier = -2;//for debugging, to distinguish from default highest of -1
 
             AddUserRow("alternativeIdentifier");

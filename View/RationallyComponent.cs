@@ -77,14 +77,14 @@ namespace Rationally.Visio.View
 
         public int UniqueIdentifier
         {
-            get { return (int)RShape.CellsU["User.timelessId"].ResultIU; }
-            set { RShape.CellsU["User.timelessId.Value"].ResultIU = value; }
+            get { return (int)RShape.CellsU["User.uniqueId"].ResultIU; }
+            set { RShape.CellsU["User.uniqueId.Value"].ResultIU = value; }
         }
 
         public int AlternativeUniqueIdentifier
         {
-            get { return (int)RShape.CellsU["User.alternativeTimelessId"].ResultIU; }
-            set { RShape.CellsU["User.alternativeTimelessId.Value"].ResultIU = value; }
+            get { return (int)RShape.CellsU["User.alternativeUniqueId"].ResultIU; }
+            set { RShape.CellsU["User.alternativeUniqueId.Value"].ResultIU = value; }
         }
 
         public string AlternativeIdentifier

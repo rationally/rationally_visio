@@ -2,7 +2,7 @@
 {
     public class Alternative
     {
-        public static int HighestUniqueIdentifier = -1;
+        private static int highestUniqueIdentifier = -1;
 
         public string Status { get; set; }
 
@@ -11,15 +11,21 @@
         public string IdentifierString { get; set; }
 
         public int UniqueIdentifier { get;} //Id that exists independent of the order of the elements. Allows for the identifying of alternatives
-
+        
+        public Alternative(string title, string status)
+        {
+            Title = title;
+            Status = status;
+            UniqueIdentifier = ++highestUniqueIdentifier;
+        }
         public Alternative(string title, string status, int uniqueIdentifier)
         {
             Title = title;
             Status = status;
             UniqueIdentifier = uniqueIdentifier;
-            if (uniqueIdentifier > HighestUniqueIdentifier)
+            if (uniqueIdentifier > highestUniqueIdentifier)
             {
-                HighestUniqueIdentifier = uniqueIdentifier;
+                highestUniqueIdentifier = uniqueIdentifier;
             }
         }
 

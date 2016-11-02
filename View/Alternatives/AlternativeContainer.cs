@@ -90,7 +90,7 @@ namespace Rationally.Visio.View.Alternatives
             RationallyType = "alternative";
             AddUserRow("alternativeIndex");
             AlternativeIndex = alternativeIndex;
-            AddUserRow("timelessId");
+            AddUserRow("uniqueId");
             UniqueIdentifier = alternative.UniqueIdentifier;
 
             //locks

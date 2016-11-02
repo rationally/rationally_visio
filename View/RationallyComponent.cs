@@ -25,7 +25,7 @@ namespace Rationally.Visio.View
             MarginLeft = m;
             MarginRight = m;
         }
-        public Page Page { protected get; set; }
+        public Page Page { get; set; }
 
 
         public Shape RShape { get; set; }

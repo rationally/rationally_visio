@@ -5,9 +5,9 @@ namespace Rationally.Visio.Forms.WizardComponents
 {
     public class TableLayoutMainContentAlternatives : TableLayoutPanel
     {
-        public FlowLayoutAlternative FlowLayoutPanelAlternative1 = new FlowLayoutAlternative(1);
-        public FlowLayoutAlternative FlowLayoutPanelAlternative2 = new FlowLayoutAlternative(2);
-        public FlowLayoutAlternative FlowLayoutPanelAlternative3 = new FlowLayoutAlternative(3);
+        public readonly FlowLayoutAlternative FlowLayoutPanelAlternative1 = new FlowLayoutAlternative(1);
+        public readonly FlowLayoutAlternative FlowLayoutPanelAlternative2 = new FlowLayoutAlternative(2);
+        public readonly FlowLayoutAlternative FlowLayoutPanelAlternative3 = new FlowLayoutAlternative(3);
 
         public TableLayoutMainContentAlternatives()
         {
@@ -17,7 +17,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             Init();
         }
 
-        public void Init()
+        private void Init()
         {
             //
             // alternatives information panel

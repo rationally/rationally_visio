@@ -48,7 +48,7 @@ namespace Rationally.Visio.View.Alternatives
             return IdentRegex.IsMatch(name);
         }
 
-        public void UpdateReorderFunctions()
+        private void UpdateReorderFunctions()
         {
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);

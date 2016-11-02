@@ -6,7 +6,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 {
     internal class MenuPanel : TableLayoutPanel
     {
-        public List<MenuButton> Buttons;
+        public readonly List<MenuButton> Buttons;
 
         private MenuButton highlightedButton;
         public MenuButton HighLightedButton

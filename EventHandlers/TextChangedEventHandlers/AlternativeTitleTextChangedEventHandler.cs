@@ -10,10 +10,9 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
     class AlternativeTitleTextChangedEventHandler : ITextChangedEventHandler
     {
-        public void Execute(string eventKey, RationallyView view, Shape changedShape)
+        public void Execute(RationallyView view, Shape changedShape)
         {
-            RationallyComponent alternativeTitleComponent = new RationallyComponent(view.Page);
-            alternativeTitleComponent.RShape = changedShape;
+            RationallyComponent alternativeTitleComponent = new RationallyComponent(view.Page) {RShape = changedShape};
             Alternative alternativeToUpdate = Globals.RationallyAddIn.Model.Alternatives[alternativeTitleComponent.AlternativeIndex];
             alternativeToUpdate.Title = alternativeTitleComponent.Text;
         }

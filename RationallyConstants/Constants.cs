@@ -2,7 +2,7 @@
 
 namespace Rationally.Visio.RationallyConstants
 {
-    internal class Constants
+    internal static class Constants
     {
         public const string TemplateName = "Rationally Template";
         public const string RationallySite = "https://rationally.github.io/";

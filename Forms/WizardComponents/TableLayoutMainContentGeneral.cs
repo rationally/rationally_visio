@@ -5,38 +5,38 @@ namespace Rationally.Visio.Forms.WizardComponents
 {
     public class TableLayoutMainContentGeneral : TableLayoutPanel
     {
-        public FlowLayoutPanel FlowLayoutGeneralAuthor;
-        public FlowLayoutPanel FlowLayoutGeneralTopic;
-        public Label AuthorLabel;
-        public TextBox TextAuthor;
-        public Label TopicLabel;
-        public TextBox TextDecisionTopic;
-        public FlowLayoutPanel FlowLayoutGeneralDate;
-        public Label DateLabel;
-        public DateTimePicker DateTimePickerCreationDate;
+        private readonly FlowLayoutPanel flowLayoutGeneralAuthor;
+        private readonly FlowLayoutPanel flowLayoutGeneralTopic;
+        private readonly FlowLayoutPanel flowLayoutGeneralDate;
+        private readonly Label authorLabel;
+        private readonly Label topicLabel;
+        private readonly Label dateLabel;
+        public readonly DateTimePicker DateTimePickerCreationDate;
+        public readonly TextBox TextDecisionTopic;
+        public readonly TextBox TextAuthor;
 
         public TableLayoutMainContentGeneral()
         {
-            FlowLayoutGeneralTopic = new FlowLayoutPanel();
-            TopicLabel = new Label();
+            flowLayoutGeneralTopic = new FlowLayoutPanel();
+            topicLabel = new Label();
             TextDecisionTopic = new TextBox();
 
-            FlowLayoutGeneralAuthor = new FlowLayoutPanel();
-            AuthorLabel = new Label();
+            flowLayoutGeneralAuthor = new FlowLayoutPanel();
+            authorLabel = new Label();
             TextAuthor = new TextBox();
 
-            FlowLayoutGeneralDate = new FlowLayoutPanel();
-            DateLabel = new Label();
+            flowLayoutGeneralDate = new FlowLayoutPanel();
+            dateLabel = new Label();
             DateTimePickerCreationDate = new DateTimePicker();
 
             SuspendLayout();
-            FlowLayoutGeneralTopic.SuspendLayout();
-            FlowLayoutGeneralAuthor.SuspendLayout();
-            FlowLayoutGeneralDate.SuspendLayout();
+            flowLayoutGeneralTopic.SuspendLayout();
+            flowLayoutGeneralAuthor.SuspendLayout();
+            flowLayoutGeneralDate.SuspendLayout();
             Init();
         }
 
-        public void Init()
+        private void Init()
         {
             //
             // general information panel
@@ -44,9 +44,9 @@ namespace Rationally.Visio.Forms.WizardComponents
             BackColor = System.Drawing.SystemColors.Control;
             ColumnCount = 1;
             ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            Controls.Add(FlowLayoutGeneralTopic, 0, 0);
-            Controls.Add(FlowLayoutGeneralAuthor, 0, 1);
-            Controls.Add(FlowLayoutGeneralDate, 0, 2);
+            Controls.Add(flowLayoutGeneralTopic, 0, 0);
+            Controls.Add(flowLayoutGeneralAuthor, 0, 1);
+            Controls.Add(flowLayoutGeneralDate, 0, 2);
             Dock = DockStyle.Fill;
             Location = new System.Drawing.Point(4, 4);
             Margin = new Padding(4);
@@ -61,28 +61,28 @@ namespace Rationally.Visio.Forms.WizardComponents
             // 
             // flowLayoutGeneralAuthor
             // 
-            FlowLayoutGeneralAuthor.Controls.Add(AuthorLabel);
-            FlowLayoutGeneralAuthor.Controls.Add(TextAuthor);
-            FlowLayoutGeneralAuthor.Dock = DockStyle.Fill;
-            FlowLayoutGeneralAuthor.Location = new System.Drawing.Point(4, 52);
-            FlowLayoutGeneralAuthor.Margin = new Padding(4);
-            FlowLayoutGeneralAuthor.Name = "flowLayoutGeneralAuthor";
-            FlowLayoutGeneralAuthor.Size = new System.Drawing.Size(752, 40);
-            FlowLayoutGeneralAuthor.TabIndex = 22;
+            flowLayoutGeneralAuthor.Controls.Add(authorLabel);
+            flowLayoutGeneralAuthor.Controls.Add(TextAuthor);
+            flowLayoutGeneralAuthor.Dock = DockStyle.Fill;
+            flowLayoutGeneralAuthor.Location = new System.Drawing.Point(4, 52);
+            flowLayoutGeneralAuthor.Margin = new Padding(4);
+            flowLayoutGeneralAuthor.Name = "flowLayoutGeneralAuthor";
+            flowLayoutGeneralAuthor.Size = new System.Drawing.Size(752, 40);
+            flowLayoutGeneralAuthor.TabIndex = 22;
             // 
             // label2
             // 
-            AuthorLabel.AutoSize = true;
-            AuthorLabel.Dock = DockStyle.Left;
-            AuthorLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            AuthorLabel.Location = new System.Drawing.Point(5, 6);
-            AuthorLabel.Margin = new Padding(5, 6, 5, 6);
-            AuthorLabel.MinimumSize = new System.Drawing.Size(100, 27);
-            AuthorLabel.Name = "label2";
-            AuthorLabel.Size = new System.Drawing.Size(100, 27);
-            AuthorLabel.TabIndex = 15;
-            AuthorLabel.Text = "Author";
-            AuthorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            authorLabel.AutoSize = true;
+            authorLabel.Dock = DockStyle.Left;
+            authorLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            authorLabel.Location = new System.Drawing.Point(5, 6);
+            authorLabel.Margin = new Padding(5, 6, 5, 6);
+            authorLabel.MinimumSize = new System.Drawing.Size(100, 27);
+            authorLabel.Name = "label2";
+            authorLabel.Size = new System.Drawing.Size(100, 27);
+            authorLabel.TabIndex = 15;
+            authorLabel.Text = "Author";
+            authorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textAuthor
             // 
@@ -95,28 +95,28 @@ namespace Rationally.Visio.Forms.WizardComponents
             // 
             // flowLayoutGeneralTopic
             // 
-            FlowLayoutGeneralTopic.Controls.Add(TopicLabel);
-            FlowLayoutGeneralTopic.Controls.Add(TextDecisionTopic);
-            FlowLayoutGeneralTopic.Dock = DockStyle.Fill;
-            FlowLayoutGeneralTopic.Location = new System.Drawing.Point(4, 4);
-            FlowLayoutGeneralTopic.Margin = new Padding(4);
-            FlowLayoutGeneralTopic.Name = "flowLayoutGeneralTopic";
-            FlowLayoutGeneralTopic.Size = new System.Drawing.Size(752, 40);
-            FlowLayoutGeneralTopic.TabIndex = 21;
+            flowLayoutGeneralTopic.Controls.Add(topicLabel);
+            flowLayoutGeneralTopic.Controls.Add(TextDecisionTopic);
+            flowLayoutGeneralTopic.Dock = DockStyle.Fill;
+            flowLayoutGeneralTopic.Location = new System.Drawing.Point(4, 4);
+            flowLayoutGeneralTopic.Margin = new Padding(4);
+            flowLayoutGeneralTopic.Name = "flowLayoutGeneralTopic";
+            flowLayoutGeneralTopic.Size = new System.Drawing.Size(752, 40);
+            flowLayoutGeneralTopic.TabIndex = 21;
             // 
             // label1
             // 
-            TopicLabel.AutoSize = true;
-            TopicLabel.Dock = DockStyle.Left;
-            TopicLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            TopicLabel.Location = new System.Drawing.Point(5, 6);
-            TopicLabel.Margin = new Padding(5, 6, 5, 6);
-            TopicLabel.MinimumSize = new System.Drawing.Size(100, 27);
-            TopicLabel.Name = "label1";
-            TopicLabel.Size = new System.Drawing.Size(100, 27);
-            TopicLabel.TabIndex = 16;
-            TopicLabel.Text = "Topic";
-            TopicLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            topicLabel.AutoSize = true;
+            topicLabel.Dock = DockStyle.Left;
+            topicLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            topicLabel.Location = new System.Drawing.Point(5, 6);
+            topicLabel.Margin = new Padding(5, 6, 5, 6);
+            topicLabel.MinimumSize = new System.Drawing.Size(100, 27);
+            topicLabel.Name = "label1";
+            topicLabel.Size = new System.Drawing.Size(100, 27);
+            topicLabel.TabIndex = 16;
+            topicLabel.Text = "Topic";
+            topicLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textDecisionTopic
             // 
@@ -129,27 +129,27 @@ namespace Rationally.Visio.Forms.WizardComponents
             // 
             // flowLayoutGeneralDate
             // 
-            FlowLayoutGeneralDate.Controls.Add(DateLabel);
-            FlowLayoutGeneralDate.Controls.Add(DateTimePickerCreationDate);
-            FlowLayoutGeneralDate.Dock = DockStyle.Fill;
-            FlowLayoutGeneralDate.Location = new System.Drawing.Point(3, 99);
-            FlowLayoutGeneralDate.Name = "flowLayoutGeneralDate";
-            FlowLayoutGeneralDate.Size = new System.Drawing.Size(754, 42);
-            FlowLayoutGeneralDate.TabIndex = 23;
+            flowLayoutGeneralDate.Controls.Add(dateLabel);
+            flowLayoutGeneralDate.Controls.Add(DateTimePickerCreationDate);
+            flowLayoutGeneralDate.Dock = DockStyle.Fill;
+            flowLayoutGeneralDate.Location = new System.Drawing.Point(3, 99);
+            flowLayoutGeneralDate.Name = "flowLayoutGeneralDate";
+            flowLayoutGeneralDate.Size = new System.Drawing.Size(754, 42);
+            flowLayoutGeneralDate.TabIndex = 23;
             // 
             // label3
             // 
-            DateLabel.AutoSize = true;
-            DateLabel.Dock = DockStyle.Left;
-            DateLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            DateLabel.Location = new System.Drawing.Point(5, 6);
-            DateLabel.Margin = new Padding(5, 6, 5, 6);
-            DateLabel.MinimumSize = new System.Drawing.Size(100, 27);
-            DateLabel.Name = "label3";
-            DateLabel.Size = new System.Drawing.Size(100, 27);
-            DateLabel.TabIndex = 17;
-            DateLabel.Text = "Date";
-            DateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            dateLabel.AutoSize = true;
+            dateLabel.Dock = DockStyle.Left;
+            dateLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            dateLabel.Location = new System.Drawing.Point(5, 6);
+            dateLabel.Margin = new Padding(5, 6, 5, 6);
+            dateLabel.MinimumSize = new System.Drawing.Size(100, 27);
+            dateLabel.Name = "label3";
+            dateLabel.Size = new System.Drawing.Size(100, 27);
+            dateLabel.TabIndex = 17;
+            dateLabel.Text = "Date";
+            dateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // dateTimePickerCreationDate
             // 
@@ -159,12 +159,12 @@ namespace Rationally.Visio.Forms.WizardComponents
             DateTimePickerCreationDate.Size = new System.Drawing.Size(600, 27);
             DateTimePickerCreationDate.TabIndex = 3;
 
-            FlowLayoutGeneralAuthor.ResumeLayout(false);
-            FlowLayoutGeneralAuthor.PerformLayout();
-            FlowLayoutGeneralTopic.ResumeLayout(false);
-            FlowLayoutGeneralTopic.PerformLayout();
-            FlowLayoutGeneralDate.ResumeLayout(false);
-            FlowLayoutGeneralDate.PerformLayout();
+            flowLayoutGeneralAuthor.ResumeLayout(false);
+            flowLayoutGeneralAuthor.PerformLayout();
+            flowLayoutGeneralTopic.ResumeLayout(false);
+            flowLayoutGeneralTopic.PerformLayout();
+            flowLayoutGeneralDate.ResumeLayout(false);
+            flowLayoutGeneralDate.PerformLayout();
             
         }
     }

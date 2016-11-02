@@ -20,7 +20,7 @@ namespace Rationally.Visio.View
         /// <param name="x">top left x-coordinate to start drawing the component.</param>
         /// <param name="y">top left y-coordinate to start drawing the component.</param>
         /// <param name="components">Queue of components to draw.</param>
-        public void Draw(double x, double y, Queue<RationallyComponent> components)
+        private void Draw(double x, double y, Queue<RationallyComponent> components)
         {
             while (components.Count > 0)
             {

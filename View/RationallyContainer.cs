@@ -10,10 +10,11 @@ namespace Rationally.Visio.View
      /// </summary>
     public class RationallyContainer : RationallyComponent
     {
-        public List<RationallyComponent> Children { get; set; }
-        public ILayoutManager LayoutManager { get; set; }
-        public SizingPolicy UsedSizingPolicy { get; set; }
-        public RationallyContainer(Page page) : base(page)
+        public List<RationallyComponent> Children { get; protected set; }
+        protected ILayoutManager LayoutManager { private get; set; }
+        public SizingPolicy UsedSizingPolicy { get; protected set; }
+
+        protected RationallyContainer(Page page) : base(page)
         {
             Children = new List<RationallyComponent>();
             LayoutManager = new InlineLayout(this);
@@ -85,9 +86,8 @@ namespace Rationally.Visio.View
             }
         }
 
-        public double ContainerPadding
+        protected double ContainerPadding
         {
-            get { return RShape.CellsU["User.MsvSDContainerMargin"].ResultIU; }
             set { RShape.CellsU["User.MsvSDContainerMargin"].ResultIU = value; }
         }
 
@@ -103,7 +103,7 @@ namespace Rationally.Visio.View
             return RShape.Equals(s) ? this : Children.FirstOrDefault(c => c.GetComponentByShape(s) != null)?.GetComponentByShape(s);
         }
 
-        public virtual bool DeleteFromTree(Shape s)
+        public bool DeleteFromTree(Shape s)
         {
             foreach (RationallyComponent c in Children)
             {
@@ -117,29 +117,14 @@ namespace Rationally.Visio.View
                     }
                     return true;
                 }
-                else if (c is RationallyContainer)
-                {
-                    RationallyContainer container = c as RationallyContainer;
-                    if (container.DeleteFromTree(s)) return true;
-                }
-            }
-            return false;
-        }
-
-        public virtual bool DeleteFromTree(RationallyComponent toDelete)
-        {
-            foreach (RationallyComponent c in Children)
-            {
-                if (c.Equals(toDelete))
-                {
-                    Children.Remove(c);
-                    return true;
-                }
 
                 if (c is RationallyContainer)
                 {
                     RationallyContainer container = c as RationallyContainer;
-                    if (container.DeleteFromTree(c)) return true;
+                    if (container.DeleteFromTree(s))
+                    {
+                        return true;
+                    }
                 }
             }
             return false;

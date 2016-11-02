@@ -26,7 +26,7 @@ namespace Rationally.Visio.View.Documents
             InitStyle();
         }
 
-        public void InitStyle()
+        private void InitStyle()
         {
             Width = 3.3;
             Height = 0.6;

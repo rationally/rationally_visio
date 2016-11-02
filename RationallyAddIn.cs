@@ -19,6 +19,7 @@ using log4net;
 using Newtonsoft.Json.Linq;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.Forms;
+// ReSharper disable ClassNeverInstantiated.Global
 
 //Main class for the visio add in. Everything is managed from here.
 //Developed by Ruben Scheedler and Ronald Kruizinga for the University of Groningen
@@ -30,7 +31,7 @@ namespace Rationally.Visio
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public RationallyModel Model { get; set; }
-        public RationallyView View { get; set; }
+        public RationallyView View { get; private set; }
 
         //Variables responsible for undo-scope handling
         public int StartedUndoState;
@@ -43,8 +44,8 @@ namespace Rationally.Visio
         public bool NewVersionAvailable;
 
         //Version numbers
-        public readonly Version AddInLocalVersion = new Version("0.1.0");
-        public Version AddInOnlineVersion;
+        private readonly Version addInLocalVersion = new Version("0.1.0");
+        private Version addInOnlineVersion;
 
         private void RationallyAddIn_Startup(object sender, EventArgs e)
         {
@@ -82,149 +83,144 @@ namespace Rationally.Visio
         
         private static void RegisterDeleteEventHandlers()
         {
-            DeleteEventHandlerRegistry registry = DeleteEventHandlerRegistry.Instance;
-            registry.Register("alternative", new DeleteAlternativeEventHandler());
-            registry.Register("alternatives", new DeleteAlternativesEventHandler());
+            DeleteEventHandlerRegistry.Register("alternative", new DeleteAlternativeEventHandler());
+            DeleteEventHandlerRegistry.Register("alternatives", new DeleteAlternativesEventHandler());
 
-            registry.Register("relatedUrlUrl", new DeletedRelatedUrlUrlEventHandler());
-            registry.Register("relatedDocumentContainer", new DeleteRelatedDocumentEventHandler());
-            registry.Register("relatedDocuments", new DeleteRelatedDocumentsEventHandler());
+            DeleteEventHandlerRegistry.Register("relatedUrlUrl", new DeletedRelatedUrlUrlEventHandler());
+            DeleteEventHandlerRegistry.Register("relatedDocumentContainer", new DeleteRelatedDocumentEventHandler());
+            DeleteEventHandlerRegistry.Register("relatedDocuments", new DeleteRelatedDocumentsEventHandler());
 
-            registry.Register("forces", new DeleteForcesEventHandler());
-            registry.Register("forceContainer", new DeleteForceEventHandler());
+            DeleteEventHandlerRegistry.Register("forces", new DeleteForcesEventHandler());
+            DeleteEventHandlerRegistry.Register("forceContainer", new DeleteForceEventHandler());
 
-            registry.Register("decisionName", new DeleteTitleEventHandler());
+            DeleteEventHandlerRegistry.Register("decisionName", new DeleteTitleEventHandler());
 
-            registry.Register("informationBox", new DeleteInformationBoxEventHandler());
-            registry.Register("informationAuthor", new DeleteInformationComponentEventHandler());
-            registry.Register("informationDate", new DeleteInformationComponentEventHandler());
-            registry.Register("informationVersion", new DeleteInformationComponentEventHandler());
-            registry.Register("informationAuthorLabel", new DeleteInformationComponentEventHandler());
-            registry.Register("informationDateLabel", new DeleteInformationComponentEventHandler());
-            registry.Register("informationVersionLabel", new DeleteInformationComponentEventHandler());
+            DeleteEventHandlerRegistry.Register("informationBox", new DeleteInformationBoxEventHandler());
+            DeleteEventHandlerRegistry.Register("informationAuthor", new DeleteInformationComponentEventHandler());
+            DeleteEventHandlerRegistry.Register("informationDate", new DeleteInformationComponentEventHandler());
+            DeleteEventHandlerRegistry.Register("informationVersion", new DeleteInformationComponentEventHandler());
+            DeleteEventHandlerRegistry.Register("informationAuthorLabel", new DeleteInformationComponentEventHandler());
+            DeleteEventHandlerRegistry.Register("informationDateLabel", new DeleteInformationComponentEventHandler());
+            DeleteEventHandlerRegistry.Register("informationVersionLabel", new DeleteInformationComponentEventHandler());
         }
 
         private static void RegisterQueryDeleteEventHandlers()
         {
-            QueryDeleteEventHandlerRegistry registry = QueryDeleteEventHandlerRegistry.Instance;
+            QueryDeleteEventHandlerRegistry.Register("forceConcern",new QDForceComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("forceDescription", new QDForceComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("forceValue", new QDForceComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("forceContainer", new QDForceContainerEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("forces", new QDForcesContainerEventHandler());
 
-            registry.Register("forceConcern",new QDForceComponentEventHandler());
-            registry.Register("forceDescription", new QDForceComponentEventHandler());
-            registry.Register("forceValue", new QDForceComponentEventHandler());
-            registry.Register("forceContainer", new QDForceContainerEventHandler());
-            registry.Register("forces", new QDForcesContainerEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("alternativeState", new QDAlternativeComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("alternativeIdentifier", new QDAlternativeComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("alternativeTitle", new QDAlternativeComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("alternativeDescription", new QDAlternativeComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("alternative", new QDAlternativeContainerEventHander());
 
-            registry.Register("alternativeState", new QDAlternativeComponentEventHandler());
-            registry.Register("alternativeIdentifier", new QDAlternativeComponentEventHandler());
-            registry.Register("alternativeTitle", new QDAlternativeComponentEventHandler());
-            registry.Register("alternativeDescription", new QDAlternativeComponentEventHandler());
-            registry.Register("alternative", new QDAlternativeContainerEventHander());
-
-            registry.Register("relatedUrl", new QDRelatedDocumentComponentEventHandler());
-            registry.Register("relatedFile", new QDRelatedDocumentComponentEventHandler());
-            registry.Register("relatedDocumentTitle", new QDRelatedDocumentComponentEventHandler());
-            registry.Register("relatedDocumentContainer", new QDRelatedDocumentContainerEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("relatedUrl", new QDRelatedDocumentComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("relatedFile", new QDRelatedDocumentComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("relatedDocumentTitle", new QDRelatedDocumentComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("relatedDocumentContainer", new QDRelatedDocumentContainerEventHandler());
         }
 
         private static void RegisterMarkerEventHandlers()
         {
-            MarkerEventHandlerRegistry registry = MarkerEventHandlerRegistry.Instance;
-            registry.Register("alternatives.add", new AddAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register("alternatives.add", new AddAlternativeEventHandler());
 
-            registry.Register("relatedDocuments.addRelatedFile", new AddRelatedDocumentHandler());
-            registry.Register("relatedUrlUrl.addRelatedFile", new AddRelatedDocumentHandler());
-            registry.Register("relatedUrl.addRelatedFile", new AddRelatedDocumentHandler());
-            registry.Register("relatedFile.addRelatedFile", new AddRelatedDocumentHandler());
-            registry.Register("relatedDocumentTitle.addRelatedFile", new AddRelatedDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedDocuments.addRelatedFile", new AddRelatedDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedUrlUrl.addRelatedFile", new AddRelatedDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedUrl.addRelatedFile", new AddRelatedDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedFile.addRelatedFile", new AddRelatedDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedDocumentTitle.addRelatedFile", new AddRelatedDocumentHandler());
 
-            registry.Register("relatedDocuments.addRelatedUrl", new AddRelatedUrlHandler());
-            registry.Register("relatedUrlUrl.addRelatedUrl", new AddRelatedUrlHandler());
-            registry.Register("relatedUrl.addRelatedUrl", new AddRelatedUrlHandler());
-            registry.Register("relatedFile.addRelatedUrl", new AddRelatedUrlHandler());
-            registry.Register("relatedDocumentTitle.addRelatedUrl", new AddRelatedUrlHandler());
+            MarkerEventHandlerRegistry.Register("relatedDocuments.addRelatedUrl", new AddRelatedUrlHandler());
+            MarkerEventHandlerRegistry.Register("relatedUrlUrl.addRelatedUrl", new AddRelatedUrlHandler());
+            MarkerEventHandlerRegistry.Register("relatedUrl.addRelatedUrl", new AddRelatedUrlHandler());
+            MarkerEventHandlerRegistry.Register("relatedFile.addRelatedUrl", new AddRelatedUrlHandler());
+            MarkerEventHandlerRegistry.Register("relatedDocumentTitle.addRelatedUrl", new AddRelatedUrlHandler());
 
-            registry.Register("relatedDocumentContainer.moveUp", new MoveUpDocumentHandler());
-            registry.Register("relatedUrlUrl.moveUp", new MoveUpDocumentHandler());
-            registry.Register("relatedUrl.moveUp", new MoveUpDocumentHandler());
-            registry.Register("relatedFile.moveUp", new MoveUpDocumentHandler());
-            registry.Register("relatedDocumentTitle.moveUp", new MoveUpDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedDocumentContainer.moveUp", new MoveUpDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedUrlUrl.moveUp", new MoveUpDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedUrl.moveUp", new MoveUpDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedFile.moveUp", new MoveUpDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedDocumentTitle.moveUp", new MoveUpDocumentHandler());
 
-            registry.Register("relatedDocumentContainer.moveDown", new MoveDownDocumentHandler());
-            registry.Register("relatedUrlUrl.moveDown", new MoveDownDocumentHandler());
-            registry.Register("relatedUrl.moveDown", new MoveDownDocumentHandler());
-            registry.Register("relatedFile.moveDown", new MoveDownDocumentHandler());
-            registry.Register("relatedDocumentTitle.moveDown", new MoveDownDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedDocumentContainer.moveDown", new MoveDownDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedUrlUrl.moveDown", new MoveDownDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedUrl.moveDown", new MoveDownDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedFile.moveDown", new MoveDownDocumentHandler());
+            MarkerEventHandlerRegistry.Register("relatedDocumentTitle.moveDown", new MoveDownDocumentHandler());
 
-            registry.Register("relatedDocumentContainer.delete", new MarkerDeleteRelatedDocumentEventHandler());
-            registry.Register("relatedUrlUrl.delete", new MarkerDeleteRelatedDocumentEventHandler());
-            registry.Register("relatedUrl.delete", new MarkerDeleteRelatedDocumentEventHandler());
-            registry.Register("relatedFile.delete", new MarkerDeleteRelatedDocumentEventHandler());
-            registry.Register("relatedDocumentTitle.delete", new MarkerDeleteRelatedDocumentEventHandler());
+            MarkerEventHandlerRegistry.Register("relatedDocumentContainer.delete", new MarkerDeleteRelatedDocumentEventHandler());
+            MarkerEventHandlerRegistry.Register("relatedUrlUrl.delete", new MarkerDeleteRelatedDocumentEventHandler());
+            MarkerEventHandlerRegistry.Register("relatedUrl.delete", new MarkerDeleteRelatedDocumentEventHandler());
+            MarkerEventHandlerRegistry.Register("relatedFile.delete", new MarkerDeleteRelatedDocumentEventHandler());
+            MarkerEventHandlerRegistry.Register("relatedDocumentTitle.delete", new MarkerDeleteRelatedDocumentEventHandler());
 
-            registry.Register("alternative.add", new AddAlternativeEventHandler());
-            registry.Register("alternativeState.add", new AddAlternativeEventHandler());
-            registry.Register("alternativeIdentifier.add", new AddAlternativeEventHandler());
-            registry.Register("alternativeTitle.add", new AddAlternativeEventHandler());
-            registry.Register("alternativeDescription.add", new AddAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register("alternative.add", new AddAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register("alternativeState.add", new AddAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register("alternativeIdentifier.add", new AddAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register("alternativeTitle.add", new AddAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register("alternativeDescription.add", new AddAlternativeEventHandler());
 
-            registry.Register("alternative.delete", new MarkerDeleteAlternativeEventHandler());
-            registry.Register("alternativeState.delete", new MarkerDeleteAlternativeEventHandler());
-            registry.Register("alternativeIdentifier.delete", new MarkerDeleteAlternativeEventHandler());
-            registry.Register("alternativeTitle.delete", new MarkerDeleteAlternativeEventHandler());
-            registry.Register("alternativeDescription.delete", new MarkerDeleteAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register("alternative.delete", new MarkerDeleteAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register("alternativeState.delete", new MarkerDeleteAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register("alternativeIdentifier.delete", new MarkerDeleteAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register("alternativeTitle.delete", new MarkerDeleteAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register("alternativeDescription.delete", new MarkerDeleteAlternativeEventHandler());
             
 
-            registry.Register("alternativeState.change", new EditAlternativeStateEventHandler());
-            registry.Register("relatedFile.edit", new EditRelatedFileHandler());
+            MarkerEventHandlerRegistry.Register("alternativeState.change", new EditAlternativeStateEventHandler());
+            MarkerEventHandlerRegistry.Register("relatedFile.edit", new EditRelatedFileHandler());
 
-            registry.Register("alternative.moveUp", new MoveUpAlternativeHandler());
-            registry.Register("alternativeState.moveUp", new MoveUpAlternativeHandler());
-            registry.Register("alternativeIdentifier.moveUp", new MoveUpAlternativeHandler());
-            registry.Register("alternativeTitle.moveUp", new MoveUpAlternativeHandler());
-            registry.Register("alternativeDescription.moveUp", new MoveUpAlternativeHandler());
+            MarkerEventHandlerRegistry.Register("alternative.moveUp", new MoveUpAlternativeHandler());
+            MarkerEventHandlerRegistry.Register("alternativeState.moveUp", new MoveUpAlternativeHandler());
+            MarkerEventHandlerRegistry.Register("alternativeIdentifier.moveUp", new MoveUpAlternativeHandler());
+            MarkerEventHandlerRegistry.Register("alternativeTitle.moveUp", new MoveUpAlternativeHandler());
+            MarkerEventHandlerRegistry.Register("alternativeDescription.moveUp", new MoveUpAlternativeHandler());
 
-            registry.Register("alternative.moveDown", new MoveDownAlternativeHandler());
-            registry.Register("alternativeState.moveDown", new MoveDownAlternativeHandler());
-            registry.Register("alternativeIdentifier.moveDown", new MoveDownAlternativeHandler());
-            registry.Register("alternativeTitle.moveDown", new MoveDownAlternativeHandler());
-            registry.Register("alternativeDescription.moveDown", new MoveDownAlternativeHandler());
+            MarkerEventHandlerRegistry.Register("alternative.moveDown", new MoveDownAlternativeHandler());
+            MarkerEventHandlerRegistry.Register("alternativeState.moveDown", new MoveDownAlternativeHandler());
+            MarkerEventHandlerRegistry.Register("alternativeIdentifier.moveDown", new MoveDownAlternativeHandler());
+            MarkerEventHandlerRegistry.Register("alternativeTitle.moveDown", new MoveDownAlternativeHandler());
+            MarkerEventHandlerRegistry.Register("alternativeDescription.moveDown", new MoveDownAlternativeHandler());
 
-            registry.Register("forces.add", new AddForceHandler());
-            registry.Register("forceContainer.add", new AddForceHandler());
-            registry.Register("forceConcern.add", new AddForceHandler());
-            registry.Register("forceValue.add", new AddForceHandler());
-            registry.Register("forceDescription.add", new AddForceHandler());
+            MarkerEventHandlerRegistry.Register("forces.add", new AddForceHandler());
+            MarkerEventHandlerRegistry.Register("forceContainer.add", new AddForceHandler());
+            MarkerEventHandlerRegistry.Register("forceConcern.add", new AddForceHandler());
+            MarkerEventHandlerRegistry.Register("forceValue.add", new AddForceHandler());
+            MarkerEventHandlerRegistry.Register("forceDescription.add", new AddForceHandler());
 
-            registry.Register("forceContainer.delete", new StartDeleteForceEventHandler());
-            registry.Register("forceConcern.delete", new StartDeleteForceEventHandler());
-            registry.Register("forceValue.delete", new StartDeleteForceEventHandler());
-            registry.Register("forceDescription.delete", new StartDeleteForceEventHandler());
+            MarkerEventHandlerRegistry.Register("forceContainer.delete", new StartDeleteForceEventHandler());
+            MarkerEventHandlerRegistry.Register("forceConcern.delete", new StartDeleteForceEventHandler());
+            MarkerEventHandlerRegistry.Register("forceValue.delete", new StartDeleteForceEventHandler());
+            MarkerEventHandlerRegistry.Register("forceDescription.delete", new StartDeleteForceEventHandler());
 
-            registry.Register("forceContainer.moveUp", new MoveUpForceHandler());
-            registry.Register("forceConcern.moveUp", new MoveUpForceHandler());
-            registry.Register("forceValue.moveUp", new MoveUpForceHandler());
-            registry.Register("forceDescription.moveUp", new MoveUpForceHandler());
+            MarkerEventHandlerRegistry.Register("forceContainer.moveUp", new MoveUpForceHandler());
+            MarkerEventHandlerRegistry.Register("forceConcern.moveUp", new MoveUpForceHandler());
+            MarkerEventHandlerRegistry.Register("forceValue.moveUp", new MoveUpForceHandler());
+            MarkerEventHandlerRegistry.Register("forceDescription.moveUp", new MoveUpForceHandler());
 
-            registry.Register("forceContainer.moveDown", new MoveDownForceHandler());
-            registry.Register("forceConcern.moveDown", new MoveDownForceHandler());
-            registry.Register("forceValue.moveDown", new MoveDownForceHandler());
-            registry.Register("forceDescription.moveDown", new MoveDownForceHandler());
+            MarkerEventHandlerRegistry.Register("forceContainer.moveDown", new MoveDownForceHandler());
+            MarkerEventHandlerRegistry.Register("forceConcern.moveDown", new MoveDownForceHandler());
+            MarkerEventHandlerRegistry.Register("forceValue.moveDown", new MoveDownForceHandler());
+            MarkerEventHandlerRegistry.Register("forceDescription.moveDown", new MoveDownForceHandler());
 
-            registry.Register("informationAuthor.openWizard", new OpenWizardEventHandler());
-            registry.Register("informationDate.openWizard", new OpenWizardEventHandler());
-            registry.Register("informationVersion.openWizard", new OpenWizardEventHandler());
-            registry.Register("decisionName.openWizard", new OpenWizardEventHandler());
+            MarkerEventHandlerRegistry.Register("informationAuthor.openWizard", new OpenWizardEventHandler());
+            MarkerEventHandlerRegistry.Register("informationDate.openWizard", new OpenWizardEventHandler());
+            MarkerEventHandlerRegistry.Register("informationVersion.openWizard", new OpenWizardEventHandler());
+            MarkerEventHandlerRegistry.Register("decisionName.openWizard", new OpenWizardEventHandler());
         }
 
         private static void RegisterTextChangedEventHandlers()
         {
-            TextChangedEventHandlerRegistry registry = TextChangedEventHandlerRegistry.Instance;
-            registry.Register("forceValue", new ForceTextChangedEventHandler());
-            registry.Register("alternativeState", new AlternativeStateTextChangedEventHandler());
-            registry.Register("alternativeTitle", new AlternativeTitleTextChangedEventHandler());
-            registry.Register("informationAuthor", new InformationAuthorTextChangedHandler());
-            registry.Register("informationDate", new InformationDateTextChangedHandler());
-            registry.Register("decisionName", new DecisionNameTextChangedHandler());
+            TextChangedEventHandlerRegistry.Register("forceValue", new ForceTextChangedEventHandler());
+            TextChangedEventHandlerRegistry.Register("alternativeState", new AlternativeStateTextChangedEventHandler());
+            TextChangedEventHandlerRegistry.Register("alternativeTitle", new AlternativeTitleTextChangedEventHandler());
+            TextChangedEventHandlerRegistry.Register("informationAuthor", new InformationAuthorTextChangedHandler());
+            TextChangedEventHandlerRegistry.Register("informationDate", new InformationDateTextChangedHandler());
+            TextChangedEventHandlerRegistry.Register("decisionName", new DecisionNameTextChangedHandler());
         }
 
         //Fired when any text is changed
@@ -439,8 +435,8 @@ namespace Rationally.Visio
                 {
                     string result = webClient.DownloadString("https://api.github.com/repos/rationally/rationally_visio/releases/latest");
                     JObject json = JObject.Parse(result);
-                    AddInOnlineVersion = new Version(json["tag_name"].ToString());
-                    return AddInOnlineVersion > AddInLocalVersion;
+                    addInOnlineVersion = new Version(json["tag_name"].ToString());
+                    return addInOnlineVersion > addInLocalVersion;
                 }
                 catch (WebException)
                 {
@@ -467,7 +463,7 @@ namespace Rationally.Visio
         {
             if (Application.ActiveDocument.Template.Contains(Constants.TemplateName) && showRationallyUpdatePopup)
             {
-                UpdateAvailable upd = new UpdateAvailable(AddInLocalVersion, AddInOnlineVersion);
+                UpdateAvailable upd = new UpdateAvailable(addInLocalVersion, addInOnlineVersion);
                 upd.Show();
                 showRationallyUpdatePopup = false;
             }

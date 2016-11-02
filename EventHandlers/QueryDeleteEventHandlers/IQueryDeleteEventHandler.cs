@@ -5,6 +5,6 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
     internal interface IQueryDeleteEventHandler
     {
-        void Execute(string eventKey, RationallyView view, Shape changedShape);
+        void Execute(RationallyView view, Shape changedShape);
     }
 }

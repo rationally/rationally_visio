@@ -58,7 +58,7 @@ namespace Rationally.Visio.View.Alternatives
             }
         }
 
-        public AlternativeStateComponent(Page page) : base(page)
+        private AlternativeStateComponent(Page page) : base(page)
         {
             string docPath = Constants.FolderPath + "RationallyHidden.vssx";
             Document rationallyDocument = Globals.RationallyAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
@@ -117,7 +117,7 @@ namespace Rationally.Visio.View.Alternatives
             return StateRegex.IsMatch(name);
         }
 
-        public void UpdateReorderFunctions()
+        private void UpdateReorderFunctions()
         {
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);

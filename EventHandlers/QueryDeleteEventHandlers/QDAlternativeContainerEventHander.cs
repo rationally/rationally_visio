@@ -6,7 +6,7 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
     internal class QDAlternativeContainerEventHander : IQueryDeleteEventHandler
     {
-        public void Execute(string eventKey, RationallyView view, Shape changedShape)
+        public void Execute(RationallyView view, Shape changedShape)
         {
             RationallyComponent comp = view.Children.Find(x => x is AlternativesContainer);
             if (comp is AlternativesContainer)

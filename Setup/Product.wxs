@@ -84,8 +84,8 @@
         </File>
       </Component>
     <Component>
-        <File Name="Rationally Template.vstx">
-            <visio:PublishTemplate MenuPath="Rationally\Rationally Template" />
+        <File Name="Decision View.vstx">
+            <visio:PublishTemplate MenuPath="Rationally\Decision View" />
         </File>
     </Component>
       <Component>

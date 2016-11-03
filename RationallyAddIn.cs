@@ -56,7 +56,7 @@ namespace Rationally.Visio
             View = new RationallyView(Application.ActivePage);
             rebuildTree = false;
             Application.MarkerEvent += Application_MarkerEvent;
-            Application.TemplatePaths = Constants.FolderPath;
+            Application.TemplatePaths = Constants.MyShapesFolder;
             Application.DocumentCreated += DelegateCreateDocumentEvent;
             Application.DocumentOpened += Application_DocumentOpenendEvent;
             Application.ShapeAdded += Application_ShapeAddedEvent;

@@ -2,23 +2,24 @@
 using System.Windows.Forms;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
+using Rationally.Visio.Forms.WizardComponents;
 
 namespace Rationally.Visio.Forms
 {
     public partial class ProjectSetupWizard : Form
     {
-        private static ProjectSetupWizard instance;
-        private static bool documentCreation;
+        private static ProjectSetupWizard _instance;
+        private static bool _documentCreation;
 
         public static ProjectSetupWizard Instance
         {
             get
             {
-                if (instance == null || instance.IsDisposed)
+                if (_instance == null || _instance.IsDisposed)
                 {
-                    instance = new ProjectSetupWizard();
+                    _instance = new ProjectSetupWizard();
                 }
-                return instance;
+                return _instance;
             }
         }
 
@@ -30,20 +31,32 @@ namespace Rationally.Visio.Forms
                 WindowState = FormWindowState.Normal;
             }
             BringToFront();
-            documentCreation = onDocumentCreation;
+            _documentCreation = onDocumentCreation;
             tableLayoutMainContentGeneral.TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
             tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
             tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.DateString;
             TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative1.UpdateData();
             TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative2.UpdateData();
             TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative3.UpdateData();
-            CreateButton.Text = documentCreation ? "Create Decision" : "Update Decision";
+            if (_documentCreation)
+            {
+                CreateButton.Text = Messages.Wizard_CreateButton_CreateView;
+                Text = Messages.Wizard_Label_CreateView;
+            }
+            else
+            {
+                CreateButton.Text = Messages.Wizard_CreateButton_UpdateView;
+                Text = Messages.Wizard_Label_UpdateView;
+            }
+           
             ShowDialog();
         }
 
         private ProjectSetupWizard()
         {
             InitializeComponent();
+            tableLayoutMainContentGeneral = new TableLayoutMainContentGeneral();
+            TableLayoutMainContentAlternatives = new TableLayoutMainContentAlternatives();
             if (!Globals.RationallyAddIn.NewVersionAvailable)
             {
                 UpdateLink.Hide();
@@ -78,7 +91,7 @@ namespace Rationally.Visio.Forms
             }
             UpdateGeneralInformationHandler.Execute(tableLayoutMainContentGeneral.TextAuthor.Text,
                                                 tableLayoutMainContentGeneral.TextDecisionTopic.Text,
-                                                tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text, documentCreation);
+                                                tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text, _documentCreation);
 
             TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative1.UpdateModel();
             TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative2.UpdateModel();

@@ -20,14 +20,19 @@ namespace Rationally.Visio
             }
             else
             {
-                MessageBox.Show("You can only open this wizard while working in rationally document.",
-                            "Action Not Available",
+                MessageBox.Show(Messages.Warning_WizardOnlyOnRationallyTemplates_Description,
+                            Messages.Warning_WizardOnlyOnRationallyTemplates_Label,
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information,
                             MessageBoxDefaultButton.Button1,
                             MessageBoxOptions.RightAlign,
                             false);
             }
+        }
+
+        private void wizardButton_Click_1(object sender, RibbonControlEventArgs e)
+        {
+
         }
     }
 }

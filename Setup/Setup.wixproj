@@ -25,13 +25,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="banner.bmp" />
+    <Content Include="Decision View %28with Preview Page%29.vstx" />
+    <Content Include="Decision View.vstx" />
     <Content Include="icon.ico" />
     <Content Include="License.rtf" />
     <Content Include="log4net.dll" />
     <Content Include="logo_vertical.bmp" />
     <Content Include="Newtonsoft.Json.dll" />
     <Content Include="Rationally Shapes.vssx" />
-    <Content Include="Rationally Template.vstx" />
     <Content Include="RationallyHidden.vssx" />
   </ItemGroup>
   <ItemGroup>

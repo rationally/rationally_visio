@@ -22,6 +22,10 @@ namespace Rationally.Visio.Model
 
         public RationallyModel()
         {
+            Author = "";
+            DecisionName = "";
+            DateString = "";
+            Version = "";
             Alternatives = new List<Alternative>();
             Documents = new List<RelatedDocument>();
             Forces = new List<Force>();

@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Alternatives
 {
@@ -70,6 +71,11 @@ namespace Rationally.Visio.View.Alternatives
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 UpdateReorderFunctions();
+                if (Globals.RationallyAddIn.Model.Alternatives.Count > AlternativeIndex)
+                {
+                    Alternative alternative = Globals.RationallyAddIn.Model.Alternatives[AlternativeIndex];
+                    this.Text = alternative.Title;
+                }
             }
             base.Repaint();
         }

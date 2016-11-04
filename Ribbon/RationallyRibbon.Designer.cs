@@ -35,18 +35,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RationallyRibbon));
-            this.tab1 = this.Factory.CreateRibbonTab();
+            this.rationally_tab = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.wizardButton = this.Factory.CreateRibbonButton();
-            this.tab1.SuspendLayout();
+            this.rationally_tab.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tab1
+            // rationally_tab
             // 
-            this.tab1.Groups.Add(this.group1);
-            this.tab1.Label = "Rationally";
-            this.tab1.Name = "tab1";
+            this.rationally_tab.Groups.Add(this.group1);
+            this.rationally_tab.Label = "rationally";
+            this.rationally_tab.Name = "rationally_tab";
             // 
             // group1
             // 
@@ -58,18 +58,19 @@
             // 
             this.wizardButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.wizardButton.Image = ((System.Drawing.Image)(resources.GetObject("wizardButton.Image")));
-            this.wizardButton.Label = "Open Wizard";
+            this.wizardButton.Label = "Configure View";
             this.wizardButton.Name = "wizardButton";
             this.wizardButton.ShowImage = true;
+            this.wizardButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.wizardButton_Click_1);
             // 
             // RationallyRibbon
             // 
             this.Name = "RationallyRibbon";
             this.RibbonType = "Microsoft.Visio.Drawing";
-            this.Tabs.Add(this.tab1);
+            this.Tabs.Add(this.rationally_tab);
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.RationallyRibbon_Load);
-            this.tab1.ResumeLayout(false);
-            this.tab1.PerformLayout();
+            this.rationally_tab.ResumeLayout(false);
+            this.rationally_tab.PerformLayout();
             this.group1.ResumeLayout(false);
             this.group1.PerformLayout();
             this.ResumeLayout(false);
@@ -78,7 +79,7 @@
 
         #endregion
 
-        internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonTab rationally_tab;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton wizardButton;
     }

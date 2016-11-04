@@ -78,7 +78,9 @@ namespace Rationally.Visio.View.Forces
             };
             concernDummy.LinePattern = 1;
             concernDummy.AddUserRow("rationallyType");
+            concernDummy.RationallyType = "concernDummy";
             concernDummy.ToggleBoldFont(true);
+            concernDummy.LockDelete = true;
             Children.Add(concernDummy);
 
             RationallyComponent descDummy = new RationallyComponent(page)
@@ -95,6 +97,8 @@ namespace Rationally.Visio.View.Forces
             };
             descDummy.LinePattern = 1;
             descDummy.AddUserRow("rationallyType");
+            descDummy.RationallyType = "descDummy";
+            descDummy.LockDelete = true;
             Children.Add(descDummy);
 
             basicDocument.Close();
@@ -166,14 +170,18 @@ namespace Rationally.Visio.View.Forces
             Children.RemoveAll(c => c is ForceTotalComponent);
             Children.AddRange(alreadyThere);
 
-            //remove the shapes of the deleted components; undo redo do this automatically
-            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+            if (!Deleted) //no need to change the shape if it exists no more
             {
-                MsvSdContainerLocked = false;
-                toRemove.ForEach(c => c.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal));
-                MsvSdContainerLocked = true;
+                //remove the shapes of the deleted components; undo redo do this automatically
+                if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+                {
+                    MsvSdContainerLocked = false;
+                    toRemove.ForEach(c => c.RShape.DeleteEx((short) VisDeleteFlags.visDeleteNormal));
+                    MsvSdContainerLocked = true;
+                }
+
+                base.Repaint();
             }
-            base.Repaint();
         }
     }
 }

@@ -294,6 +294,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="C:\Users\R. Kruizinga\Documents\My Shapes\Decision View.vstx">
+      <Link>Resources\Decision View.vstx</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Rationally.Visio.Model.Alternative.datasource" />
     <None Include="Properties\DataSources\Rationally.Visio.Model.RModel.datasource" />

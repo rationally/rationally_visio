@@ -77,10 +77,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>rationally_visio_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>key.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>576D50BD6B3A635889784F264F95DA0E0EAED452</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>CA2AC96A4CF1AD9B1309A6ED10854DA252D7C9D0</ManifestCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -129,6 +129,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventHandlers\TextChangedEventHandlers\AlternativeTitleTextChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateAlternativesHandler.cs" />
+    <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateGeneralInformationHandler.cs" />
     <Compile Include="Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

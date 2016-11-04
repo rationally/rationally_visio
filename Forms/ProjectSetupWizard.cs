@@ -3,13 +3,14 @@ using System.Windows.Forms;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
 using Rationally.Visio.EventHandlers.WizardPageHandlers;
+using Rationally.Visio.Forms.WizardComponents;
 
 namespace Rationally.Visio.Forms
 {
     public partial class ProjectSetupWizard : Form
     {
-        private static ProjectSetupWizard instance;
-        public static bool documentCreation;
+        private static ProjectSetupWizard _instance;
+        public static bool DocumentCreation;
 
         public static ProjectSetupWizard Instance
         {
@@ -31,11 +32,12 @@ namespace Rationally.Visio.Forms
                 WindowState = FormWindowState.Normal;
             }
             BringToFront();
-            _documentCreation = onDocumentCreation;
+            DocumentCreation = onDocumentCreation;
             tableLayoutMainContentGeneral.TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
             tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
             tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.DateString;
-            if (_documentCreation)
+            TableLayoutMainContentAlternatives.AlternativeRows.ForEach(a => a.UpdateData());
+            if (DocumentCreation)
             {
                 CreateButton.Text = Messages.Wizard_CreateButton_CreateView;
                 Text = Messages.Wizard_Label_CreateView;
@@ -45,8 +47,6 @@ namespace Rationally.Visio.Forms
                 CreateButton.Text = Messages.Wizard_CreateButton_UpdateView;
                 Text = Messages.Wizard_Label_UpdateView;
             }
-            TableLayoutMainContentAlternatives.AlternativeRows.ForEach(a => a.UpdateData());
-            CreateButton.Text = documentCreation ? "Create Decision" : "Update Decision";
             ShowDialog();
         }
 
@@ -75,7 +75,7 @@ namespace Rationally.Visio.Forms
             WizardUpdateGeneralInformationHandler.Execute(this);
             //handle changes in the "Alternatives" page
             WizardUpdateAlternativesHandler.Execute(this);
-            
+
 
             //all changes have been made, close the scope and the wizard
             Globals.RationallyAddIn.Application.EndUndoScope(wizardScopeId, true);

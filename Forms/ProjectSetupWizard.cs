@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
+using Rationally.Visio.EventHandlers.WizardPageHandlers;
 using Rationally.Visio.Forms.WizardComponents;
 
 namespace Rationally.Visio.Forms
@@ -9,7 +10,7 @@ namespace Rationally.Visio.Forms
     public partial class ProjectSetupWizard : Form
     {
         private static ProjectSetupWizard _instance;
-        private static bool _documentCreation;
+        public static bool DocumentCreation;
 
         public static ProjectSetupWizard Instance
         {
@@ -31,14 +32,12 @@ namespace Rationally.Visio.Forms
                 WindowState = FormWindowState.Normal;
             }
             BringToFront();
-            _documentCreation = onDocumentCreation;
+            DocumentCreation = onDocumentCreation;
             tableLayoutMainContentGeneral.TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
             tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
             tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.DateString;
-            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative1.UpdateData();
-            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative2.UpdateData();
-            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative3.UpdateData();
-            if (_documentCreation)
+            TableLayoutMainContentAlternatives.AlternativeRows.ForEach(a => a.UpdateData());
+            if (DocumentCreation)
             {
                 CreateButton.Text = Messages.Wizard_CreateButton_CreateView;
                 Text = Messages.Wizard_Label_CreateView;
@@ -48,7 +47,6 @@ namespace Rationally.Visio.Forms
                 CreateButton.Text = Messages.Wizard_CreateButton_UpdateView;
                 Text = Messages.Wizard_Label_UpdateView;
             }
-           
             ShowDialog();
         }
 
@@ -69,33 +67,18 @@ namespace Rationally.Visio.Forms
 
         private void submit_Click(object sender, System.EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextDecisionTopic.Text))
-            {
-#if DEBUG
-                tableLayoutMainContentGeneral.TextDecisionTopic.Text = "Title";
-#else
-                MessageBox.Show("Enter a decision topic.", "Decision topic missing");
-                DialogResult = DialogResult.None;
-                return;
-#endif
-            }
-            if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextAuthor.Text))
-            {
-#if DEBUG
-                tableLayoutMainContentGeneral.TextAuthor.Text = "Author";
-#else
-                MessageBox.Show("Enter the author's name.", "Author's name missing");
-                DialogResult = DialogResult.None;
-                return;
-#endif
-            }
-            UpdateGeneralInformationHandler.Execute(tableLayoutMainContentGeneral.TextAuthor.Text,
-                                                tableLayoutMainContentGeneral.TextDecisionTopic.Text,
-                                                tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text, _documentCreation);
+            //wrap all changes that will be triggered by wizard changes in one undo scope
+            int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");
 
-            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative1.UpdateModel();
-            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative2.UpdateModel();
-            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative3.UpdateModel();
+
+            //handle changes in the "General Information" page
+            WizardUpdateGeneralInformationHandler.Execute(this);
+            //handle changes in the "Alternatives" page
+            WizardUpdateAlternativesHandler.Execute(this);
+
+
+            //all changes have been made, close the scope and the wizard
+            Globals.RationallyAddIn.Application.EndUndoScope(wizardScopeId, true);
             Close();
         }
 

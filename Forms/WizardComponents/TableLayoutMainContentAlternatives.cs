@@ -16,6 +16,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             for (int i = 0; i < RationallyConstants.Constants.SupportedAmountOfAlternatives;i++) 
             {
                 FlowLayoutAlternative alternativeRow = new FlowLayoutAlternative(i+1);
+                AlternativeRows.Add(alternativeRow);
                 RowStyles.Add(new RowStyle(SizeType.Percent, 10F));//TODO what if rowCount > 9
                 Controls.Add(alternativeRow,0,i);
             }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -32,7 +29,7 @@ namespace Rationally.Visio
 {
     public partial class RationallyAddIn
     {
-        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public RationallyModel Model { get; set; }
         public RationallyView View { get; private set; }
@@ -53,7 +50,6 @@ namespace Rationally.Visio
 
         private void RationallyAddIn_Startup(object sender, EventArgs e)
         {
-            var x = 
             //init for logger
             log4net.Config.XmlConfigurator.Configure();
             Log.Info("Rationally started!");

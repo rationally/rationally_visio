@@ -15,11 +15,11 @@ namespace Rationally.Visio.Forms
         {
             get
             {
-                if (instance == null || instance.IsDisposed)
+                if (_instance == null || _instance.IsDisposed)
                 {
-                    instance = new ProjectSetupWizard();
+                    _instance = new ProjectSetupWizard();
                 }
-                return instance;
+                return _instance;
             }
         }
 
@@ -31,10 +31,20 @@ namespace Rationally.Visio.Forms
                 WindowState = FormWindowState.Normal;
             }
             BringToFront();
-            documentCreation = onDocumentCreation;
+            _documentCreation = onDocumentCreation;
             tableLayoutMainContentGeneral.TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
             tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
             tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.DateString;
+            if (_documentCreation)
+            {
+                CreateButton.Text = Messages.Wizard_CreateButton_CreateView;
+                Text = Messages.Wizard_Label_CreateView;
+            }
+            else
+            {
+                CreateButton.Text = Messages.Wizard_CreateButton_UpdateView;
+                Text = Messages.Wizard_Label_UpdateView;
+            }
             TableLayoutMainContentAlternatives.AlternativeRows.ForEach(a => a.UpdateData());
             CreateButton.Text = documentCreation ? "Create Decision" : "Update Decision";
             ShowDialog();
@@ -43,6 +53,8 @@ namespace Rationally.Visio.Forms
         private ProjectSetupWizard()
         {
             InitializeComponent();
+            tableLayoutMainContentGeneral = new TableLayoutMainContentGeneral();
+            TableLayoutMainContentAlternatives = new TableLayoutMainContentAlternatives();
             if (!Globals.RationallyAddIn.NewVersionAvailable)
             {
                 UpdateLink.Hide();

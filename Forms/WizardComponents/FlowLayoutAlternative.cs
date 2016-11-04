@@ -29,6 +29,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             Name = "flowLayoutPanelAlternative"+this.alternativeIndex;
             Size = new System.Drawing.Size(754, 42);
             TabIndex = 0;
+
             alternativeIndexLabel = new Label();
             alternativeTitleLabel = new Label();
             textBoxAlternativeTitle = new TextBox();

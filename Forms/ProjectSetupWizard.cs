@@ -2,13 +2,14 @@
 using System.Windows.Forms;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
+using Rationally.Visio.EventHandlers.WizardPageHandlers;
 
 namespace Rationally.Visio.Forms
 {
     public partial class ProjectSetupWizard : Form
     {
         private static ProjectSetupWizard instance;
-        private static bool documentCreation;
+        public static bool documentCreation;
 
         public static ProjectSetupWizard Instance
         {
@@ -34,9 +35,7 @@ namespace Rationally.Visio.Forms
             tableLayoutMainContentGeneral.TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
             tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
             tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.DateString;
-            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative1.UpdateData();
-            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative2.UpdateData();
-            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative3.UpdateData();
+            TableLayoutMainContentAlternatives.AlternativeRows.ForEach(a => a.UpdateData());
             CreateButton.Text = documentCreation ? "Create Decision" : "Update Decision";
             ShowDialog();
         }
@@ -56,33 +55,18 @@ namespace Rationally.Visio.Forms
 
         private void submit_Click(object sender, System.EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextDecisionTopic.Text))
-            {
-#if DEBUG
-                tableLayoutMainContentGeneral.TextDecisionTopic.Text = "Title";
-#else
-                MessageBox.Show("Enter a decision topic.", "Decision topic missing");
-                DialogResult = DialogResult.None;
-                return;
-#endif
-            }
-            if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextAuthor.Text))
-            {
-#if DEBUG
-                tableLayoutMainContentGeneral.TextAuthor.Text = "Author";
-#else
-                MessageBox.Show("Enter the author's name.", "Author's name missing");
-                DialogResult = DialogResult.None;
-                return;
-#endif
-            }
-            UpdateGeneralInformationHandler.Execute(tableLayoutMainContentGeneral.TextAuthor.Text,
-                                                tableLayoutMainContentGeneral.TextDecisionTopic.Text,
-                                                tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text, documentCreation);
+            //wrap all changes that will be triggered by wizard changes in one undo scope
+            int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");
 
-            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative1.UpdateModel();
-            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative2.UpdateModel();
-            TableLayoutMainContentAlternatives.FlowLayoutPanelAlternative3.UpdateModel();
+
+            //handle changes in the "General Information" page
+            WizardUpdateGeneralInformationHandler.Execute(this);
+            //handle changes in the "Alternatives" page
+            WizardUpdateAlternativesHandler.Execute(this);
+            
+
+            //all changes have been made, close the scope and the wizard
+            Globals.RationallyAddIn.Application.EndUndoScope(wizardScopeId, true);
             Close();
         }
 

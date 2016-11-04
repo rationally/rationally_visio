@@ -71,6 +71,8 @@ namespace Rationally.Visio.View.Forces
             };
             concernLabel.ToggleBoldFont(true);
             concernLabel.AddUserRow("rationallyType");
+            concernLabel.RationallyType = "concernLabel";
+            concernLabel.LockDelete = true;
             Children.Add(concernLabel);
 
             RationallyComponent descLabel = new RationallyComponent(page)
@@ -86,6 +88,8 @@ namespace Rationally.Visio.View.Forces
             };
             descLabel.ToggleBoldFont(true);
             descLabel.AddUserRow("rationallyType");
+            descLabel.LockDelete = true;
+            descLabel.RationallyType = "descLabel";
             Children.Add(descLabel);
 
             basicDocument.Close();

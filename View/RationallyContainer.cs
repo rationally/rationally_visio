@@ -33,7 +33,7 @@ namespace Rationally.Visio.View
         {
             bool oldLock = MsvSdContainerLocked;
             MsvSdContainerLocked = false;
-            foreach (RationallyComponent c in Children)
+            foreach (RationallyComponent c in Children.Where(x => !x.Deleted))
             {
                 bool lockContainer = false;
                 if (c is RationallyContainer)
@@ -51,7 +51,7 @@ namespace Rationally.Visio.View
             }
             MsvSdContainerLocked = oldLock;
             
-            Children.ForEach(c => c.PlaceChildren());
+            Children.Where(x => !x.Deleted).ToList().ForEach(c => c.PlaceChildren());
         }
 
         public override void RemoveChildren()

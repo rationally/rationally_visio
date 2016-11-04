@@ -294,9 +294,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="C:\Users\R. Kruizinga\Documents\My Shapes\Decision View.vstx">
-      <Link>Resources\Decision View.vstx</Link>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Rationally.Visio.Model.Alternative.datasource" />
     <None Include="Properties\DataSources\Rationally.Visio.Model.RModel.datasource" />
@@ -345,9 +342,18 @@
   <ItemGroup>
     <None Include="rationally_visio\rationally_visio_1_TemporaryKey.pfx" />
     <None Include="rationally_visio_1_TemporaryKey.pfx" />
+    <None Include="Resources\Decision View.vstx" />
     <None Include="Resources\icon.png" />
+    <None Include="Resources\Rationally Shapes.vssx" />
+    <None Include="Resources\RationallyHidden.vssx" />
     <None Include="Resources\rationallyIcon.bmp" />
     <None Include="Ribbon\wizard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\banner.bmp" />
+    <Content Include="Resources\IconPopUp.bmp" />
+    <Content Include="Resources\link.jpg" />
+    <Content Include="Resources\logo_vertical.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

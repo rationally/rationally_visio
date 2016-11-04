@@ -18,7 +18,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
 
             UpdateGeneralInformationInModel(wizard.tableLayoutMainContentGeneral.TextAuthor.Text,
                                                 wizard.tableLayoutMainContentGeneral.TextDecisionTopic.Text,
-                                                wizard.tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text, ProjectSetupWizard.DocumentCreation);
+                                                wizard.tableLayoutMainContentGeneral.DateTimePickerCreationDate.Value.ToLongDateString(), ProjectSetupWizard.DocumentCreation);
 
         }
 

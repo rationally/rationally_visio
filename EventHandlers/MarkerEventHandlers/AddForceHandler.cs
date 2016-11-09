@@ -8,8 +8,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class AddForceHandler : IMarkerEventHandler
     {
-        public void Execute(RationallyModel model, Shape changedShape, string identifier)
+        public void Execute(Shape changedShape, string identifier)
         {
+            RationallyModel model = Globals.RationallyAddIn.Model;
             ForcesContainer forcesContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
             if (forcesContainer.Children.Count == 0)
             {

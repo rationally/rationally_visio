@@ -9,8 +9,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class MarkerDeleteRelatedDocumentEventHandler : IMarkerEventHandler
     {
-        public void Execute(RationallyModel model, Shape s, string identifier)
+        public void Execute(Shape s, string identifier)
         {
+            RationallyModel model = Globals.RationallyAddIn.Model;
             RationallyComponent component = new RationallyComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = s };
 
             int index = component.DocumentIndex;

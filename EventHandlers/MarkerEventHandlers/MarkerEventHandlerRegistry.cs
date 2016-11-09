@@ -26,11 +26,11 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             Instance.registry[eventKey].Add(eventHandler);
         }
 
-        public void HandleEvent(string eventKey, RationallyModel model, Shape changedShape, string identifier)
+        public void HandleEvent(string eventKey, Shape changedShape, string identifier)
         {
             if (registry.ContainsKey(eventKey) && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                registry[eventKey].ForEach(eh => eh.Execute(model, changedShape, identifier));
+                registry[eventKey].ForEach(eh => eh.Execute(changedShape, identifier));
             }
             else
             {

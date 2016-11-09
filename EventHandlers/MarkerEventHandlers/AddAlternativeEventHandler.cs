@@ -10,8 +10,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class AddAlternativeEventHandler : IMarkerEventHandler
     {
-        public void Execute(RationallyModel model, Shape s, string context)
+        public void Execute(Shape s, string context)
         {
+            RationallyModel model = Globals.RationallyAddIn.Model;
             if (model.Alternatives.Count >= Constants.SupportedAmountOfAlternatives) //The view does not handling more than 3 alternatives well, by default.
             {
                 AddAlternativeWithWarning alternativePopUp = new AddAlternativeWithWarning(model);

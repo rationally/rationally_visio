@@ -10,8 +10,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class MoveUpAlternativeHandler : IMarkerEventHandler
     {
-        public void Execute(RationallyModel model, Shape changedShape, string identifier)
+        public void Execute(Shape changedShape, string identifier)
         {
+            RationallyModel model = Globals.RationallyAddIn.Model;
             //locate the alternative(component) to move
             RationallyComponent toChangeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
             int currentIndex = toChangeComponent.AlternativeIndex;

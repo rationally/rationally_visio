@@ -273,7 +273,7 @@ namespace Rationally.Visio
                             context = context.Split('.')[0];
                         }
                         Log.Debug("Marker event being handled for: " + s.Name);
-                        MarkerEventHandlerRegistry.Instance.HandleEvent(s.CellsU[CellConstants.RationallyType].ResultStr["Value"] + "." + context, Model, s, identifier);
+                        MarkerEventHandlerRegistry.Instance.HandleEvent(s.CellsU[CellConstants.RationallyType].ResultStr["Value"] + "." + context, s, identifier);
                     }
                 }
             }

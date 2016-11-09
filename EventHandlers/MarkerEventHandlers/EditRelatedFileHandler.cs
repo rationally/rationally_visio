@@ -10,8 +10,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
     internal class EditRelatedFileHandler : IMarkerEventHandler
     {
 
-        public void Execute(RationallyModel model, Shape changedShape, string context)
+        public void Execute(Shape changedShape, string context)
         {
+            RationallyModel model = Globals.RationallyAddIn.Model;
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 CheckFileExists = true,

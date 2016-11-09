@@ -9,9 +9,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
     //simulates a manual delete on the force container
     internal class StartDeleteForceEventHandler : IMarkerEventHandler
     {
-        public void Execute(RationallyModel model, Shape changedShape, string identifier)
+        public void Execute(Shape changedShape, string identifier)
         {
-
+            RationallyModel model = Globals.RationallyAddIn.Model;
             //get the corresponding view tree component
             RationallyComponent forceComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
             //get his parent, or himself, if changedShape is the container already

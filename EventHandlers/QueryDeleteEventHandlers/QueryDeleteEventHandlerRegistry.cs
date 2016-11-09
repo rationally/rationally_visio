@@ -7,27 +7,28 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
     internal class QueryDeleteEventHandlerRegistry
     {
-        private static QueryDeleteEventHandlerRegistry eventHandlerRegistry;
-        private readonly Dictionary<string, List<IQueryDeleteEventHandler>> registry; 
-
-        private QueryDeleteEventHandlerRegistry()
-        {
-            registry = new Dictionary<string, List<IQueryDeleteEventHandler>>();
-        }
-
-        public static QueryDeleteEventHandlerRegistry Instance => eventHandlerRegistry ?? (eventHandlerRegistry = new QueryDeleteEventHandlerRegistry());
-
+        private static Dictionary<string, List<IQueryDeleteEventHandler>> registry; 
         public static void Register(string eventKey, IQueryDeleteEventHandler eventHandler)
         {
-            if (!Instance.registry.ContainsKey(eventKey))
+            if (registry == null)
             {
-                Instance.registry[eventKey] = new List<IQueryDeleteEventHandler>();
+                registry = new Dictionary<string, List<IQueryDeleteEventHandler>>();
             }
-            Instance.registry[eventKey].Add(eventHandler);
+
+            if (!registry.ContainsKey(eventKey))
+            {
+                registry[eventKey] = new List<IQueryDeleteEventHandler>();
+            }
+            registry[eventKey].Add(eventHandler);
         }
 
-        public void HandleEvent(string eventKey, RationallyView view, Shape changedShape)
+        public static void HandleEvent(string eventKey, RationallyView view, Shape changedShape)
         {
+            if (registry == null)
+            {
+                registry = new Dictionary<string, List<IQueryDeleteEventHandler>>();
+            }
+
             if (registry.ContainsKey(eventKey))
             {
                 registry[eventKey].ForEach(eh => eh.Execute(view, changedShape));

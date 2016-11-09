@@ -232,7 +232,7 @@ namespace Rationally.Visio
             {
                 Log.Debug("TextChanged: shapeName: " + shape.Name);
                 string rationallyType = shape.CellsU[CellConstants.RationallyType].ResultStr["Value"];
-                TextChangedEventHandlerRegistry.Instance.HandleEvent(rationallyType, View, shape);
+                TextChangedEventHandlerRegistry.HandleEvent(rationallyType, View, shape);
             }
         }
 
@@ -274,7 +274,7 @@ namespace Rationally.Visio
                             context = context.Split('.')[0];
                         }
                         Log.Debug("Marker event being handled for: " + s.Name);
-                        MarkerEventHandlerRegistry.Instance.HandleEvent(s.CellsU[CellConstants.RationallyType].ResultStr["Value"] + "." + context, Model, s, identifier);
+                        MarkerEventHandlerRegistry.HandleEvent(s.CellsU[CellConstants.RationallyType].ResultStr["Value"] + "." + context, s, identifier);
                     }
                 }
             }
@@ -379,7 +379,7 @@ namespace Rationally.Visio
                 {
                     string rationallyType = s.CellsU[CellConstants.RationallyType].ResultStr["Value"];
 
-                    QueryDeleteEventHandlerRegistry.Instance.HandleEvent(rationallyType, View, s);
+                    QueryDeleteEventHandlerRegistry.HandleEvent(rationallyType, View, s);
                 }
             }
             return false;
@@ -415,7 +415,7 @@ namespace Rationally.Visio
                     {
                         deleted.Deleted = true;
                     }
-                    DeleteEventHandlerRegistry.Instance.HandleEvent(rationallyType, Model, s);
+                    DeleteEventHandlerRegistry.HandleEvent(rationallyType, Model, s);
                 }
                 else
                 {
@@ -467,7 +467,7 @@ namespace Rationally.Visio
         {
             if (d.Template.Contains(Constants.TemplateName))
             {
-                new DocumentCreatedEventHandler(d);
+                DocumentCreatedEventHandler.Execute(d);
             }
         }
 

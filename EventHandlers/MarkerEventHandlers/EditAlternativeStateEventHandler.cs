@@ -7,8 +7,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class EditAlternativeStateEventHandler : IMarkerEventHandler
     {
-        public void Execute(RationallyModel model, Shape s, string newState)
+        public void Execute(Shape s, string newState)
         {
+            RationallyModel model = Globals.RationallyAddIn.Model;
             RationallyComponent c = new RationallyComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = s };
 
             int index = c.AlternativeIndex;

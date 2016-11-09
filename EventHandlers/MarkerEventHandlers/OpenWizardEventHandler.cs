@@ -6,8 +6,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class OpenWizardEventHandler : IMarkerEventHandler
     {
-        public void Execute(RationallyModel model, Shape changedShape, string identifier)
+        public void Execute(Shape changedShape, string identifier)
         {
+            RationallyModel model = Globals.RationallyAddIn.Model;
             ProjectSetupWizard.Instance.ShowDialog(false);   
         }
     }

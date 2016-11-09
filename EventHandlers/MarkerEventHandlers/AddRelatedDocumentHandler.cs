@@ -1,14 +1,17 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.View.Documents;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class AddRelatedDocumentHandler : IMarkerEventHandler
     {
 
-        public void Execute(RationallyModel model, Shape changedShape, string identifier)
+        public void Execute(Shape changedShape, string identifier)
         {
+            RationallyModel model = Globals.RationallyAddIn.Model;
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 CheckFileExists = true,
@@ -19,7 +22,8 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 //AddToModel
                 RelatedDocument document = new RelatedDocument(openFileDialog.FileName, openFileDialog.FileName, true);
                 model.Documents.Add(document);
-                Globals.RationallyAddIn.View.AddRelatedDocument(document);
+
+                (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer)?.AddRelatedDocument(document);
             }
             openFileDialog.Dispose();
         }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.EventHandlers;
+using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Alternatives
 {
@@ -89,6 +91,12 @@ namespace Rationally.Visio.View.Alternatives
             {
                 Globals.RationallyAddIn.Model.Alternatives.RemoveAt(index);
             }
+        }
+
+        public void AddAlternative(Alternative alternative)
+        {
+            Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Alternatives.Count - 1, alternative));
+            RepaintHandler.Repaint();
         }
 
     }

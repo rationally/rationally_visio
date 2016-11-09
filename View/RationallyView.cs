@@ -20,23 +20,9 @@ namespace Rationally.Visio.View
 
         }
 
-        public void AddAlternative(Alternative alternative)
-        {
-            AlternativesContainer container = (AlternativesContainer) Globals.RationallyAddIn.View.Children.First(ch => ch is AlternativesContainer);
-            container.Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Alternatives.Count - 1, alternative));
-            RepaintHandler.Repaint();
-        }
 
-        public void AddRelatedDocument(RelatedDocument document)
-        {
-            //container of all related documents:
-            RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
-            //create a container that wraps the new document
-            RelatedDocumentContainer relatedDocumentContainer = new RelatedDocumentContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Documents.Count - 1, document);
-            relatedDocumentsContainer.Children.Add(relatedDocumentContainer);
 
-            RepaintHandler.Repaint(relatedDocumentsContainer);
-        }
+        
         
         public override bool ExistsInTree(Shape s)
         {

@@ -7,30 +7,32 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class MarkerEventHandlerRegistry
     {
-        private static MarkerEventHandlerRegistry eventHandlerRegistry;
-        private readonly Dictionary<string, List<IMarkerEventHandler>> registry; 
 
-        private MarkerEventHandlerRegistry()
-        {
-            registry = new Dictionary<string, List<IMarkerEventHandler>>();
-        }
-
-        public static MarkerEventHandlerRegistry Instance => eventHandlerRegistry ?? (eventHandlerRegistry = new MarkerEventHandlerRegistry());
-
+        private static Dictionary<string, List<IMarkerEventHandler>> registry; 
         public static void Register(string eventKey, IMarkerEventHandler eventHandler)
         {
-            if (!Instance.registry.ContainsKey(eventKey))
+            if (registry == null)
             {
-                Instance.registry[eventKey] = new List<IMarkerEventHandler>();
+                registry = new Dictionary<string, List<IMarkerEventHandler>>();
             }
-            Instance.registry[eventKey].Add(eventHandler);
+
+            if (!registry.ContainsKey(eventKey))
+            {
+                registry[eventKey] = new List<IMarkerEventHandler>();
+            }
+            registry[eventKey].Add(eventHandler);
         }
 
-        public void HandleEvent(string eventKey, RationallyModel model, Shape changedShape, string identifier)
+        public static void HandleEvent(string eventKey, Shape changedShape, string identifier)
         {
+            if (registry == null)
+            {
+                registry = new Dictionary<string, List<IMarkerEventHandler>>();
+            }
+
             if (registry.ContainsKey(eventKey) && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                registry[eventKey].ForEach(eh => eh.Execute(model, changedShape, identifier));
+                registry[eventKey].ForEach(eh => eh.Execute(changedShape, identifier));
             }
             else
             {

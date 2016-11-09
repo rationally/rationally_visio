@@ -1,6 +1,8 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
 using Rationally.Visio.Model;
+using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
@@ -45,7 +47,11 @@ namespace Rationally.Visio.Forms.WizardComponents
             //connect to a model resource, if one is present for this row
             if (Globals.RationallyAddIn.Model.Alternatives.Count >= alternativeIndex)
             {
-                Alternative = Globals.RationallyAddIn.Model.Alternatives[alternativeIndex - 1];//map to c-indexing
+                Alternative = Globals.RationallyAddIn.Model.Alternatives[alternativeIndex - 1]; //map to c-indexing
+            }
+            else
+            {
+                Alternative = null;//ensures that the fields will be emptied. Is required when an alternative is deleted, but the object here is still present.
             }
             textBoxAlternativeTitle.Text = Alternative != null ? Alternative.Title : "";
             alternativeStateDropdown.SelectedIndex = Alternative != null ? Globals.RationallyAddIn.Model.AlternativeStates.IndexOf(Alternative.Status) : 0;
@@ -62,13 +68,12 @@ namespace Rationally.Visio.Forms.WizardComponents
                 if (!string.IsNullOrEmpty(textBoxAlternativeTitle.Text))
                 {
                     Alternative newAlternative = new Alternative(textBoxAlternativeTitle.Text, alternativeStateDropdown.SelectedItem.ToString());
-                    newAlternative.GenerateIdentifier(alternativeIndex-1);
+                    newAlternative.GenerateIdentifier(Globals.RationallyAddIn.Model.Alternatives.Count);
                     Globals.RationallyAddIn.View.Page = Globals.RationallyAddIn.Application.ActivePage;
                     Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
                     Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
                     
-                    
-                    Globals.RationallyAddIn.View.AddAlternative(newAlternative);
+                    (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is AlternativesContainer) as AlternativesContainer)?.AddAlternative(newAlternative);
                 }
             }
         }

@@ -9,9 +9,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class MarkerDeleteAlternativeEventHandler : IMarkerEventHandler
     {
-        public void Execute(RationallyModel model, Shape s, string context)
+        public void Execute(Shape s, string context)
         {
-
+            RationallyModel model = Globals.RationallyAddIn.Model;
             RationallyComponent component = new RationallyComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = s };
 
             int index = component.AlternativeIndex;

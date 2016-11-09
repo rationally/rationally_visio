@@ -58,6 +58,7 @@
             // 
             this.wizardButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.wizardButton.Image = ((System.Drawing.Image)(resources.GetObject("wizardButton.Image")));
+            
             this.wizardButton.Label = "Configure View";
             this.wizardButton.Name = "wizardButton";
             this.wizardButton.ShowImage = true;

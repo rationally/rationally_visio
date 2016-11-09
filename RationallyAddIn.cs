@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Windows.Forms;
 using Rationally.Visio.EventHandlers;
 using Rationally.Visio.EventHandlers.DeleteEventHandlers;
 using Rationally.Visio.EventHandlers.MarkerEventHandlers;
@@ -353,12 +354,22 @@ namespace Rationally.Visio
         {
             List<Shape> toBeDeleted = e.Cast<Shape>().ToList();
             Log.Debug("before shape deleted event for " + e.Count + " shapes.");
+            if(toBeDeleted.Any(s => s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "forceHeaderRow" || s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "forceTotalsRow"))
+            {
+                if (toBeDeleted.All(s => s.CellsU[CellConstants.RationallyType].ResultStr["Value"] != "forces"))
+                {
+                    MessageBox.Show("Deletion of the header or totals row is not allowed.", "Delete forbidden", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return true;
+                }
+            }
+
             //store the rationally type of the last shape, which is responsible for ending the undo scope
             if (string.IsNullOrEmpty(LastDelete) && StartedUndoState == 0)
             {
                 LastDelete = toBeDeleted.Last().Name;
                 Globals.RationallyAddIn.StartedUndoState = Globals.RationallyAddIn.Application.BeginUndoScope("Delete shape");
             }
+            
             //all shapes in the selection are already bound to be deleted. Mark them, so other pieces of code don't also try to delete them, if they are in the tree.
             toBeDeleted.Where(s => View.ExistsInTree(s)).ToList().ForEach(tbd => View.GetComponentByShape(tbd).Deleted = true);
             foreach (Shape s in e)

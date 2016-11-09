@@ -194,7 +194,7 @@
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\IQueryDeleteEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDForceComponentEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDForceContainerEventHandler.cs" />
-    <Compile Include="EventHandlers\MarkerEventHandlers\StartDeleteForceEventHandler.cs" />
+    <Compile Include="EventHandlers\QueryDeleteEventHandlers\StartDeleteForceEventHandler.cs" />
     <Compile Include="Forms\AddAlternativeWithWarning.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -80,7 +80,6 @@ namespace Rationally.Visio.View.Forces
             concernDummy.AddUserRow("rationallyType");
             concernDummy.RationallyType = "concernDummy";
             concernDummy.ToggleBoldFont(true);
-            concernDummy.LockDelete = true;
             Children.Add(concernDummy);
 
             RationallyComponent descDummy = new RationallyComponent(page)
@@ -98,7 +97,6 @@ namespace Rationally.Visio.View.Forces
             descDummy.LinePattern = 1;
             descDummy.AddUserRow("rationallyType");
             descDummy.RationallyType = "descDummy";
-            descDummy.LockDelete = true;
             Children.Add(descDummy);
 
             basicDocument.Close();

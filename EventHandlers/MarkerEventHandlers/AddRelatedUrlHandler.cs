@@ -1,7 +1,9 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Forms;
+using Rationally.Visio.View.Documents;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
@@ -15,7 +17,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             {
                 RelatedDocument document = new RelatedDocument(selectUrlDialog.urlTextBox.Text, selectUrlDialog.nameTextbox.Text, false);
                 model.Documents.Add(document);
-                Globals.RationallyAddIn.View.AddRelatedDocument(document);
+                (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer)?.AddRelatedDocument(document);
             }
             selectUrlDialog.Dispose();
         }

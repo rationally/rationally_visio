@@ -1,6 +1,8 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
 using Rationally.Visio.Model;
+using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
@@ -71,8 +73,7 @@ namespace Rationally.Visio.Forms.WizardComponents
                     Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
                     Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
                     
-                    
-                    Globals.RationallyAddIn.View.AddAlternative(newAlternative);
+                    (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is AlternativesContainer) as AlternativesContainer)?.AddAlternative(newAlternative);
                 }
             }
         }

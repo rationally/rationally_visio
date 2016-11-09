@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.EventHandlers;
+using Rationally.Visio.Model;
+
 // ReSharper disable ArrangeRedundantParentheses
 
 namespace Rationally.Visio.View.Documents
@@ -65,7 +68,15 @@ namespace Rationally.Visio.View.Documents
                 }
             }
         }
-        
+
+        public void AddRelatedDocument(RelatedDocument document)
+        {
+            //create a container that wraps the new document
+            Children.Add(new RelatedDocumentContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Documents.Count - 1, document));
+
+            RepaintHandler.Repaint(this);
+        }
+
         public static bool IsRelatedDocumentsContainer(string name)
         {
             return RelatedRegex.IsMatch(name);

@@ -1,6 +1,8 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.View.Documents;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
@@ -20,7 +22,8 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 //AddToModel
                 RelatedDocument document = new RelatedDocument(openFileDialog.FileName, openFileDialog.FileName, true);
                 model.Documents.Add(document);
-                Globals.RationallyAddIn.View.AddRelatedDocument(document);
+
+                (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer)?.AddRelatedDocument(document);
             }
             openFileDialog.Dispose();
         }

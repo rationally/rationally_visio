@@ -11,7 +11,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         private readonly Label authorLabel;
         private readonly Label topicLabel;
         private readonly Label dateLabel;
-        public DateTimePicker DateTimePickerCreationDate;
+        public readonly DateTimePicker DateTimePickerCreationDate;
         public readonly TextBox TextDecisionTopic;
         public readonly TextBox TextAuthor;
 

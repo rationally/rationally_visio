@@ -7,7 +7,7 @@ namespace Rationally.Visio.Forms.WizardComponents
     public class TableLayoutMainContentAlternatives : TableLayoutPanel
     {
 
-        public List<FlowLayoutAlternative> AlternativeRows = new List<FlowLayoutAlternative>();
+        public readonly List<FlowLayoutAlternative> AlternativeRows = new List<FlowLayoutAlternative>();
 
         public TableLayoutMainContentAlternatives()
         {

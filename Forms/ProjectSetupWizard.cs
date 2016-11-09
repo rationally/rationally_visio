@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows.Forms;
 using Rationally.Visio.RationallyConstants;
-using Rationally.Visio.EventHandlers.ClickEventHandlers;
 using Rationally.Visio.EventHandlers.WizardPageHandlers;
 using Rationally.Visio.Forms.WizardComponents;
 
@@ -9,18 +8,18 @@ namespace Rationally.Visio.Forms
 {
     public partial class ProjectSetupWizard : Form
     {
-        private static ProjectSetupWizard _instance;
+        private static ProjectSetupWizard instance;
         public static bool DocumentCreation;
 
         public static ProjectSetupWizard Instance
         {
             get
             {
-                if (_instance == null || _instance.IsDisposed)
+                if (instance == null || instance.IsDisposed)
                 {
-                    _instance = new ProjectSetupWizard();
+                    instance = new ProjectSetupWizard();
                 }
-                return _instance;
+                return instance;
             }
         }
 

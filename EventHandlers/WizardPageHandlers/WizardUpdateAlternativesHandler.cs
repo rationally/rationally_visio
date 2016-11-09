@@ -1,7 +1,4 @@
-﻿
-
-using Rationally.Visio.Forms;
-using Rationally.Visio.Forms.WizardComponents;
+﻿using Rationally.Visio.Forms;
 
 namespace Rationally.Visio.EventHandlers.WizardPageHandlers
 {

@@ -74,7 +74,7 @@ namespace Rationally.Visio.View.Alternatives
                 if (Globals.RationallyAddIn.Model.Alternatives.Count > AlternativeIndex)
                 {
                     Alternative alternative = Globals.RationallyAddIn.Model.Alternatives[AlternativeIndex];
-                    this.Text = alternative.Title;
+                    Text = alternative.Title;
                 }
             }
             base.Repaint();

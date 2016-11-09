@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Office.Interop.Visio;
+﻿using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
 
 namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
-    class AlternativeTitleTextChangedEventHandler : ITextChangedEventHandler
+    internal class AlternativeTitleTextChangedEventHandler : ITextChangedEventHandler
     {
         public void Execute(RationallyView view, Shape changedShape)
         {

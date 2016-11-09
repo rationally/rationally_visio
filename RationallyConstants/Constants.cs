@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using Rationally.Visio.Properties;
 
 namespace Rationally.Visio.RationallyConstants
 {

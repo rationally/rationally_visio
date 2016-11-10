@@ -33,7 +33,7 @@ namespace Rationally.Visio.View
 
             
 
-            contentTextWidth = GetWidthOfString(labelText)/ PixelsPerInch;
+            contentTextWidth = GetWidthOfString(labelText);// PixelsPerInch;
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
             RShape = page.Drop(rectMaster, 0,0);
@@ -68,7 +68,7 @@ namespace Rationally.Visio.View
         {
             Bitmap objBitmap = new Bitmap(1000, 200);
             Graphics objGraphics = Graphics.FromImage(objBitmap);
-
+            objGraphics.PageUnit = GraphicsUnit.Inch;
             SizeF stringSize = objGraphics.MeasureString(str, new Font("Calibri", size));
 
             objBitmap.Dispose();
@@ -81,7 +81,7 @@ namespace Rationally.Visio.View
             string text = RShape.Text.Replace("\n","");
             characterHeight = 1.0 / 72.0 * (double)size;
             
-            contentTextWidth = GetWidthOfString(text) / PixelsPerInch;
+            contentTextWidth = GetWidthOfString(text) + 8*RationallyConstants.Constants.WidthOfOnePoint;// / PixelsPerInch;
             characterWidth = contentTextWidth/text.Length;
             //sizing
             if (contentTextWidth > Width)

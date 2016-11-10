@@ -22,6 +22,7 @@ namespace Rationally.Visio.View
         {
             SetMargin(0.01);
             MarginLeft = 0.02;
+            SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Rationally.Visio
         {
             if (Globals.RationallyAddIn.Application.ActiveDocument.Template.Contains(Constants.TemplateName))
             {
-                ProjectSetupWizard.Instance.ShowDialog(false, WizardFieldTypes.Author);
+                ProjectSetupWizard.Instance.ShowDialog(false, WizardFieldTypes.Title);
             }
             else
             {

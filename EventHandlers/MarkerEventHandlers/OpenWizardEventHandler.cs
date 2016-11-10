@@ -9,7 +9,18 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
     {
         public void Execute(Shape changedShape, string identifier)
         {
-            ProjectSetupWizard.Instance.ShowDialog(false, WizardFieldTypes.Title);   
+            switch (changedShape.Name)
+            {
+                case "DecisionName":
+                    ProjectSetupWizard.Instance.ShowDialog(false, WizardFieldTypes.Title);
+                    break;
+                case "InformationAuthor":
+                    ProjectSetupWizard.Instance.ShowDialog(false, WizardFieldTypes.Author);
+                    break;
+                case "InformationDate":
+                    ProjectSetupWizard.Instance.ShowDialog(false, WizardFieldTypes.Date);
+                    break;
+            }
         }
     }
 }

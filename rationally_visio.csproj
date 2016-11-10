@@ -253,6 +253,7 @@
     <Compile Include="View\ILayoutManager.cs" />
     <Compile Include="View\Information\InformationContainer.cs" />
     <Compile Include="View\InlineLayout.cs" />
+    <Compile Include="View\PaddedTextLabel.cs" />
     <Compile Include="View\RationallyComponent.cs" />
     <Compile Include="View\RationallyContainer.cs" />
     <Compile Include="View\Documents\RelatedDocumentsContainer.cs" />

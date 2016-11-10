@@ -10,6 +10,7 @@ namespace Rationally.Visio.View.Information
         public VersionLabel(Page page, Shape shape) : base(page, shape)
         {
             RShape = shape;
+            InitStyle();
         }
 
         public VersionLabel(Page page, string labelText) : base(page, labelText)
@@ -17,6 +18,7 @@ namespace Rationally.Visio.View.Information
             RationallyType = "informationVersion";
 
             Name = "InformationVersion";
+            InitStyle();
         }
 
         public override void Repaint()
@@ -28,6 +30,10 @@ namespace Rationally.Visio.View.Information
             base.Repaint();
         }
 
+        public void InitStyle()
+        {
+            SetMargin(0.01);
+        }
         public static bool IsVersionLabel(string name)
         {
             return VersionRegex.IsMatch(name);

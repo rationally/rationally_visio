@@ -10,6 +10,7 @@ namespace Rationally.Visio.View.Information
         public AuthorLabel(Page page, Shape shape) : base(page, shape)
         {
             RShape = shape;
+            InitStyle();
         }
 
         public AuthorLabel(Page page, string labelText) : base(page, labelText)
@@ -17,6 +18,12 @@ namespace Rationally.Visio.View.Information
             RationallyType = "informationAuthor";
 
             Name = "InformationAuthor";
+            InitStyle();
+        }
+
+        private void InitStyle()
+        {
+            SetMargin(0.01);
         }
 
         public override void Repaint()

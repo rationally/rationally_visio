@@ -18,7 +18,7 @@ namespace Rationally.Visio.View
         public double MarginLeft { get; set; }
         public double MarginRight { get; protected set; }
 
-        protected void SetMargin(double m)
+        public void SetMargin(double m)
         {
             MarginTop = m;
             MarginBottom = m;

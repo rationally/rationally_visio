@@ -43,7 +43,7 @@ namespace Rationally.Visio.View.Information
                 {
                     if (TextLabel.IsTextLabel(shape.Name))
                     {
-                        Children.Add(new TextLabel(page, shape));
+                        Children.Add(new PaddedTextLabel(page, shape));
                     }
                     else if (AuthorLabel.IsAuthorLabel(shape.Name))
                     {
@@ -73,29 +73,33 @@ namespace Rationally.Visio.View.Information
             Height = 0.4;
             CenterX = 12.30;
             CenterY = 22.45;
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+            {
+                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                ContainerPadding = 0;
+            }
             UsedSizingPolicy = SizingPolicy.FixedSize;
         }
 
         private void InitContent(Page page, string author, string date, string version)
         {
-            TextLabel authorLabel = new TextLabel(page, "Author: ")
+            PaddedTextLabel authorLabel = new PaddedTextLabel(page, "Author: ")
             {
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
                 Height = 0.38,
-                MarginTop = 0.02,
-                MarginLeft = 0.02,
                 Order = 0
             };
             authorLabel.ToggleBoldFont(true);
             authorLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
             authorLabel.RationallyType = "informationAuthorLabel";
+            //authorLabel.MarginTop = 0.1;
+
             AuthorLabel authorLabelContent = new AuthorLabel(page, author)
             {
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
                 Height = 0.38,
-                MarginTop = 0.02,
                 HAlign = Constants.LeftAlignment,
                 Order = 1,
                 LockTextEdit = true,
@@ -103,11 +107,10 @@ namespace Rationally.Visio.View.Information
             };
             authorLabelContent.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
 
-            TextLabel dateLabel = new TextLabel(page, "Date: ")
+
+            PaddedTextLabel dateLabel = new PaddedTextLabel(page, "Date: ")
             {
                 Height = 0.38,
-                MarginTop = 0.02,
-                MarginLeft = 0.02,
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
                 Order = 2
@@ -115,10 +118,11 @@ namespace Rationally.Visio.View.Information
             dateLabel.ToggleBoldFont(true);
             dateLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
             dateLabel.RationallyType = "informationDateLabel";
+            //dateLabel.SetMargin(0.02);
+
             DateLabel dateLabelContent = new DateLabel(page, date)
             {
                 Height = 0.38,
-                MarginTop = 0.02,
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
                 HAlign = Constants.LeftAlignment,
@@ -128,11 +132,9 @@ namespace Rationally.Visio.View.Information
             };
             dateLabelContent.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
 
-            TextLabel versionLabel = new TextLabel(page, "Version: ")
+            PaddedTextLabel versionLabel = new PaddedTextLabel(page, "Version: ")
             {
                 Height = 0.38,
-                MarginTop = 0.02,
-                MarginLeft = 0.02,
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
                 Order = 4
@@ -140,10 +142,11 @@ namespace Rationally.Visio.View.Information
             versionLabel.ToggleBoldFont(true);
             versionLabel.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
             versionLabel.RationallyType = "informationVersionLabel";
+            //versionLabel.SetMargin(0.1);
+
             VersionLabel versionLabelContent = new VersionLabel(page, version)
             {
                 Height = 0.38,
-                MarginTop = 0.02,
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
                 HAlign = Constants.LeftAlignment,
@@ -178,7 +181,7 @@ namespace Rationally.Visio.View.Information
             }
             else if (TextLabel.IsTextLabel(s.Name) && (rationallyType == "informationVersionLabel" || rationallyType == "informationDateLabel" || rationallyType == "informationAuthorLabel"))
             {
-                Children.Add(new TextLabel(Page,s));
+                Children.Add(new PaddedTextLabel(Page,s));
             }
         }
 

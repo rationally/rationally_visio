@@ -128,6 +128,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\WizardFieldTypes.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\AlternativeTitleTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateAlternativesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateGeneralInformationHandler.cs" />
@@ -311,6 +312,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <EmbeddedResource Include="Forms\ProjectSetupWizard.aa.resx">
+      <DependentUpon>ProjectSetupWizard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>

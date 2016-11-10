@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using Microsoft.Office.Tools.Ribbon;
+using Rationally.Visio.Enums;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.Forms;
 
@@ -16,7 +17,7 @@ namespace Rationally.Visio
         {
             if (Globals.RationallyAddIn.Application.ActiveDocument.Template.Contains(Constants.TemplateName))
             {
-                ProjectSetupWizard.Instance.ShowDialog(false);
+                ProjectSetupWizard.Instance.ShowDialog(false, WizardFieldTypes.Author);
             }
             else
             {

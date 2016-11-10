@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
+using Rationally.Visio.Enums;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.EventHandlers.WizardPageHandlers;
 using Rationally.Visio.Forms.WizardComponents;
@@ -9,6 +11,7 @@ namespace Rationally.Visio.Forms
     public partial class ProjectSetupWizard : Form
     {
         private static ProjectSetupWizard instance;
+        private WizardFieldTypes selectedFieldType;
         public static bool DocumentCreation;
 
         public static ProjectSetupWizard Instance
@@ -23,7 +26,7 @@ namespace Rationally.Visio.Forms
             }
         }
 
-        public void ShowDialog(bool onDocumentCreation)
+        public void ShowDialog(bool onDocumentCreation, WizardFieldTypes type)
         {
 
             if (WindowState == FormWindowState.Minimized)
@@ -46,6 +49,7 @@ namespace Rationally.Visio.Forms
                 CreateButton.Text = Messages.Wizard_CreateButton_UpdateView;
                 Text = Messages.Wizard_Label_UpdateView;
             }
+            selectedFieldType = type;
             ShowDialog();
         }
 
@@ -62,7 +66,7 @@ namespace Rationally.Visio.Forms
             StartPosition = FormStartPosition.CenterScreen;
             AcceptButton = CreateButton;
         }
-
+        
 
         private void submit_Click(object sender, System.EventArgs e)
         {
@@ -92,6 +96,7 @@ namespace Rationally.Visio.Forms
             tableLayoutRightColumn.Controls.Clear();
             tableLayoutRightColumn.Controls.Add(TableLayoutMainContentAlternatives);
             tableLayoutRightColumn.Controls.Add(flowLayoutBottomButtons);
+            tableLayoutRightColumn.Refresh();
             flowLayoutBottomButtons.Refresh();
         }
 
@@ -101,6 +106,25 @@ namespace Rationally.Visio.Forms
             tableLayoutRightColumn.Controls.Add(tableLayoutMainContentGeneral);
             tableLayoutRightColumn.Controls.Add(flowLayoutBottomButtons);
             flowLayoutBottomButtons.Refresh();
+        }
+
+        private void ProjectSetupWizard_Activated(object sender, EventArgs e)
+        {
+            button1.PerformClick();
+            switch (selectedFieldType)
+            {
+                case WizardFieldTypes.Title:
+                    tableLayoutMainContentGeneral.TextDecisionTopic.Focus();
+                    break;
+                case WizardFieldTypes.Author:
+                    tableLayoutMainContentGeneral.TextAuthor.Select();
+                    break;
+                case WizardFieldTypes.Date:
+                    tableLayoutMainContentGeneral.DateTimePickerCreationDate.Focus();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(selectedFieldType), selectedFieldType, "You actually managed to set a wrong enum value. Well done.");
+            }
         }
     }
 }

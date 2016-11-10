@@ -24,6 +24,7 @@ namespace Rationally.Visio.View.Information
         private void InitStyle()
         {
             SetMargin(0.01);
+            SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
         }
 
         public override void Repaint()

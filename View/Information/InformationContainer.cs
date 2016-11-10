@@ -105,7 +105,7 @@ namespace Rationally.Visio.View.Information
                 LockTextEdit = true,
                 EventDblClick = "QUEUEMARKEREVENT(\"openWizard\")"
             };
-            authorLabelContent.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
+            //authorLabelContent.
 
 
             PaddedTextLabel dateLabel = new PaddedTextLabel(page, "Date: ")

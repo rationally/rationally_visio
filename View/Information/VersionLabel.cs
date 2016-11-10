@@ -33,6 +33,7 @@ namespace Rationally.Visio.View.Information
         public void InitStyle()
         {
             SetMargin(0.01);
+            SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
         }
         public static bool IsVersionLabel(string name)
         {

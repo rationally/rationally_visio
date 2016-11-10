@@ -9,6 +9,7 @@ namespace Rationally.Visio.RationallyConstants
         public const string RationallySite = "https://rationally.github.io/";
         public const int CellExists = -1;
         public const double Epsilon = 0.001;
+        public const double WidthOfOnePoint = 0.013888888888889;
         //
 #if DEBUG
         public static readonly string MyShapesFolder = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Resources"));//<---- test path

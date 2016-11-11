@@ -96,35 +96,39 @@ namespace Rationally.Visio.Forms
             tableLayoutRightColumn.Controls.Clear();
             tableLayoutRightColumn.Controls.Add(TableLayoutMainContentAlternatives);
             tableLayoutRightColumn.Controls.Add(flowLayoutBottomButtons);
-            tableLayoutRightColumn.Refresh();
             flowLayoutBottomButtons.Refresh();
         }
 
         private void button1_Click(object sender, System.EventArgs e)
         {
-            tableLayoutRightColumn.Controls.Clear();
-            tableLayoutRightColumn.Controls.Add(tableLayoutMainContentGeneral);
-            tableLayoutRightColumn.Controls.Add(flowLayoutBottomButtons);
-            flowLayoutBottomButtons.Refresh();
+            SetGeneralPanel();
         }
 
         private void ProjectSetupWizard_Activated(object sender, EventArgs e)
         {
-            button1.PerformClick();
+            SetGeneralPanel();
             switch (selectedFieldType)
             {
                 case WizardFieldTypes.Title:
-                    tableLayoutMainContentGeneral.TextDecisionTopic.Focus();
+                    tableLayoutMainContentGeneral.TextDecisionTopic.Select();
                     break;
                 case WizardFieldTypes.Author:
                     tableLayoutMainContentGeneral.TextAuthor.Select();
                     break;
                 case WizardFieldTypes.Date:
-                    tableLayoutMainContentGeneral.DateTimePickerCreationDate.Focus();
+                    tableLayoutMainContentGeneral.DateTimePickerCreationDate.Select();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(selectedFieldType), selectedFieldType, "You actually managed to set a wrong enum value. Well done.");
             }
+        }
+
+        private void SetGeneralPanel()
+        {
+            tableLayoutRightColumn.Controls.Clear();
+            tableLayoutRightColumn.Controls.Add(tableLayoutMainContentGeneral);
+            tableLayoutRightColumn.Controls.Add(flowLayoutBottomButtons);
+            flowLayoutBottomButtons.Refresh();
         }
     }
 }

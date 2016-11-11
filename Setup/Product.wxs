@@ -26,7 +26,7 @@
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
     
     <!-- allow major upgrades -->
-    <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="no" DowngradeErrorMessage="A newer version of Rationally is already installed." Schedule="afterInstallFinalize"></MajorUpgrade>
+    <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="no" DowngradeErrorMessage="A newer version of rationally is already installed." Schedule="afterInstallFinalize"></MajorUpgrade>
     
     <!-- allow fast installation -->
     <Property Id="MSIFASTINSTALL" Value="7" />

@@ -8,6 +8,7 @@ namespace Rationally.Visio.Forms.WizardComponents
     {
         private MenuButton button1;
         private MenuButton buttonShowAlternatives;
+        private MenuButton buttonShowForces;
 
         public readonly List<MenuButton> Buttons;
 
@@ -35,8 +36,8 @@ namespace Rationally.Visio.Forms.WizardComponents
         {
             this.buttonShowAlternatives = new MenuButton(this);
             this.button1 = new MenuButton(this);
+            this.buttonShowForces = new MenuButton(this);
 
-            
             // 
             // buttonShowAlternatives
             // 
@@ -55,12 +56,19 @@ namespace Rationally.Visio.Forms.WizardComponents
             button1.Text = "General Information";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-
-
+            //
+            // button forces
+            //
+            this.buttonShowForces.FlatAppearance.BorderSize = 0;
+            this.buttonShowForces.Name = "buttonShowForces";
+            buttonShowForces.Text = "Forces";
+            this.buttonShowForces.UseVisualStyleBackColor = false;
+            this.buttonShowForces.Click += new System.EventHandler(this.buttonShowForces_Click);
             //self
-            Controls.Add(this.buttonShowAlternatives, 0, 1);
+            
             Controls.Add(this.button1, 0, 0);
-
+            Controls.Add(this.buttonShowAlternatives, 0, 1);
+            Controls.Add(this.buttonShowForces, 0, 2);
 
             HighLightedButton = this.button1;
         }
@@ -83,6 +91,14 @@ namespace Rationally.Visio.Forms.WizardComponents
         private void button1_Click(object sender, System.EventArgs e)
         {
             ProjectSetupWizard.Instance.SetGeneralPanel();
+        }
+
+        private void buttonShowForces_Click(object sender, System.EventArgs e)
+        {
+            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
+            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentForces);
+            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.flowLayoutBottomButtons);
+            ProjectSetupWizard.Instance.flowLayoutBottomButtons.Refresh();
         }
     }
 }

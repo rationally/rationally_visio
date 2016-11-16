@@ -40,6 +40,7 @@ namespace Rationally.Visio.Forms
             tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
             tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.DateString;
             TableLayoutMainContentAlternatives.AlternativeRows.ForEach(a => a.UpdateData());
+            TableLayoutMainContentForces.InitColumns();
             if (DocumentCreation)
             {
                 CreateButton.Text = Messages.Wizard_CreateButton_CreateView;

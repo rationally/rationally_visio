@@ -132,10 +132,19 @@
     <Compile Include="EventHandlers\TextChangedEventHandlers\AlternativeTitleTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateAlternativesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateGeneralInformationHandler.cs" />
+    <Compile Include="Forms\ForcesTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ForcesTest.Designer.cs">
+      <DependentUpon>ForcesTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\WizardComponents\AntiAliasedButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\WizardComponents\AntiAliasedLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\WizardComponents\TableLayoutMainContentForces.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Messages.Designer.cs">
@@ -320,6 +329,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <EmbeddedResource Include="Forms\ForcesTest.resx">
+      <DependentUpon>ForcesTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProjectSetupWizard.aa.resx">
       <DependentUpon>ProjectSetupWizard.cs</DependentUpon>
     </EmbeddedResource>

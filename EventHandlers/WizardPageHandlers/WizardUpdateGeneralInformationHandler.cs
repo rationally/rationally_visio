@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows.Forms;
 using Rationally.Visio.Forms;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
@@ -27,7 +28,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
                 wizard.tableLayoutMainContentGeneral.TextDecisionTopic.Text = "Title";
 #else
                 MessageBox.Show("Enter a decision topic.", "Decision topic missing");
-                DialogResult = DialogResult.None;
+                //DialogResult = DialogResult.None;
                 return;
 #endif
             }
@@ -37,7 +38,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
                 wizard.tableLayoutMainContentGeneral.TextAuthor.Text = "Author";
 #else
                 MessageBox.Show("Enter the author's name.", "Author's name missing");
-                DialogResult = DialogResult.None;
+                //DialogResult = DialogResult.None;
                 return;
 #endif
             }

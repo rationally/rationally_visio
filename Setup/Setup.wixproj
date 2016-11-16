@@ -25,7 +25,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="banner.bmp" />
-    <Content Include="Decision View %28with Preview Page%29.vstx" />
     <Content Include="Decision View.vstx" />
     <Content Include="icon.ico" />
     <Content Include="License.rtf" />

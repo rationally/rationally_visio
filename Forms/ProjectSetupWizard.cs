@@ -160,7 +160,11 @@ namespace Rationally.Visio.Forms
         private bool ValidateAlternatives()
         {
             bool validFields = TableLayoutMainContentAlternatives.AlternativeRows.TrueForAll(x => x.Alternative == null || !string.IsNullOrWhiteSpace(x.TextBoxAlternativeTitle.Text));
-            return true;
+            if (!validFields)
+            {
+                MessageBox.Show("Enter a name for every existing alternative.", "Alternative name missing");
+            }
+            return validFields;
         }
     }
 }

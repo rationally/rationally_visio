@@ -358,7 +358,7 @@ namespace Rationally.Visio
             {
                 if (toBeDeleted.All(s => s.CellsU[CellConstants.RationallyType].ResultStr["Value"] != "forces"))
                 {
-                    MessageBox.Show("Deletion of the header or totals row is not allowed.", "Delete forbidden", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Deleting the header or totals row is not allowed.", "Delete forbidden", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return true;
                 }
             }

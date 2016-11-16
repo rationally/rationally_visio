@@ -10,38 +10,13 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
     {
         public static void Execute(ProjectSetupWizard wizard)
         {
-            //performs validation, or enters 
-            ValidateIfNotDebugging(wizard);
 
-            UpdateGeneralInformationInModel(wizard.tableLayoutMainContentGeneral.TextAuthor.Text,
-                                                wizard.tableLayoutMainContentGeneral.TextDecisionTopic.Text,
-                                                wizard.tableLayoutMainContentGeneral.DateTimePickerCreationDate.Value.ToLongDateString(), ProjectSetupWizard.DocumentCreation);
-
+                UpdateGeneralInformationInModel(wizard.tableLayoutMainContentGeneral.TextAuthor.Text,
+                    wizard.tableLayoutMainContentGeneral.TextDecisionTopic.Text,
+                    wizard.tableLayoutMainContentGeneral.DateTimePickerCreationDate.Value.ToLongDateString(), ProjectSetupWizard.DocumentCreation);
         }
 
-        private static void ValidateIfNotDebugging(ProjectSetupWizard wizard)
-        {
-            if (string.IsNullOrWhiteSpace(wizard.tableLayoutMainContentGeneral.TextDecisionTopic.Text))
-            {
-#if DEBUG
-                wizard.tableLayoutMainContentGeneral.TextDecisionTopic.Text = "Title";
-#else
-                MessageBox.Show("Enter a decision topic.", "Decision topic missing");
-                DialogResult = DialogResult.None;
-                return;
-#endif
-            }
-            if (string.IsNullOrWhiteSpace(wizard.tableLayoutMainContentGeneral.TextAuthor.Text))
-            {
-#if DEBUG
-                wizard.tableLayoutMainContentGeneral.TextAuthor.Text = "Author";
-#else
-                MessageBox.Show("Enter the author's name.", "Author's name missing");
-                DialogResult = DialogResult.None;
-                return;
-#endif
-            }
-        }
+        
 
 
         private static void UpdateGeneralInformationInModel(string author, string decisionName, string date, bool documentCreation)

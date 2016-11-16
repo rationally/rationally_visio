@@ -70,19 +70,22 @@ namespace Rationally.Visio.Forms
 
         private void submit_Click(object sender, System.EventArgs e)
         {
-            //wrap all changes that will be triggered by wizard changes in one undo scope
-            int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");
+            if (ValidateIfNotDebugging())
+            {
+                //wrap all changes that will be triggered by wizard changes in one undo scope
+                int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");
 
 
-            //handle changes in the "General Information" page
-            WizardUpdateGeneralInformationHandler.Execute(this);
-            //handle changes in the "Alternatives" page
-            WizardUpdateAlternativesHandler.Execute(this);
+                //handle changes in the "General Information" page
+                WizardUpdateGeneralInformationHandler.Execute(this);
+                //handle changes in the "Alternatives" page
+                WizardUpdateAlternativesHandler.Execute(this);
 
 
-            //all changes have been made, close the scope and the wizard
-            Globals.RationallyAddIn.Application.EndUndoScope(wizardScopeId, true);
-            Close();
+                //all changes have been made, close the scope and the wizard
+                Globals.RationallyAddIn.Application.EndUndoScope(wizardScopeId, true);
+                Close();
+            }
         }
 
         private void UpdateLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -129,6 +132,29 @@ namespace Rationally.Visio.Forms
             tableLayoutRightColumn.Controls.Add(tableLayoutMainContentGeneral);
             tableLayoutRightColumn.Controls.Add(flowLayoutBottomButtons);
             flowLayoutBottomButtons.Refresh();
+        }
+
+        private bool ValidateIfNotDebugging()
+        {
+            if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextDecisionTopic.Text))
+            {
+#if DEBUG
+                tableLayoutMainContentGeneral.TextDecisionTopic.Text = "Title";
+#else
+                MessageBox.Show("Enter a decision topic.", "Decision topic missing");
+                return false;
+#endif
+            }
+            if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextAuthor.Text))
+            {
+#if DEBUG
+                tableLayoutMainContentGeneral.TextAuthor.Text = "Author";
+#else
+                MessageBox.Show("Enter the author's name.", "Author's name missing");
+                return false;
+#endif
+            }
+            return true;
         }
     }
 }

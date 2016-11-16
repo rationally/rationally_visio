@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows.Forms;
 using Rationally.Visio.Forms;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;

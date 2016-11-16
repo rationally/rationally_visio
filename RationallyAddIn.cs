@@ -46,7 +46,7 @@ namespace Rationally.Visio
         public bool NewVersionAvailable;
 
         //Version numbers
-        private readonly Version addInLocalVersion = new Version("0.1.0");
+        private readonly Version addInLocalVersion = new Version("0.1.1");
         private Version addInOnlineVersion;
 
         private void RationallyAddIn_Startup(object sender, EventArgs e)

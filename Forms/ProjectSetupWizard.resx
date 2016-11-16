@@ -2706,13 +2706,19 @@
         AAAAAIAx9bSn/T9d1QEdYASuMQAAAABJRU5ErkJggg==
 </value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>8, 3</value>
+  </data>
+  <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 3, 3, 3</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 44</value>
+    <value>224, 44</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
@@ -2737,14 +2743,17 @@
   <data name="labelBottomLeftText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="labelBottomLeftText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelBottomLeftText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 56</value>
+    <value>6, 53</value>
   </data>
   <data name="labelBottomLeftText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 3, 3, 0</value>
   </data>
   <data name="labelBottomLeftText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 170</value>
+    <value>235, 125</value>
   </data>
   <data name="labelBottomLeftText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2767,8 +2776,11 @@
   <data name="UpdateLink.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="UpdateLink.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="UpdateLink.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 226</value>
+    <value>3, 178</value>
   </data>
   <data name="UpdateLink.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 19</value>
@@ -2795,13 +2807,16 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutLeftLogo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 288</value>
+    <value>0, 348</value>
+  </data>
+  <data name="tableLayoutLeftLogo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutLeftLogo.RowCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="tableLayoutLeftLogo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 249</value>
+    <value>244, 200</value>
   </data>
   <data name="tableLayoutLeftLogo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2819,88 +2834,28 @@
     <value>0</value>
   </data>
   <data name="tableLayoutLeftLogo.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelBottomLeftText" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="UpdateLink" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,23.61603,Percent,76.38397,Absolute,22" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelBottomLeftText" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="UpdateLink" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,50,Percent,100,Absolute,22" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutLeftMenu.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="buttonShowAlternatives.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="buttonShowAlternatives.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="buttonShowAlternatives.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 43</value>
-  </data>
-  <data name="buttonShowAlternatives.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 34</value>
-  </data>
-  <data name="buttonShowAlternatives.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="buttonShowAlternatives.Text" xml:space="preserve">
-    <value>Alternatives</value>
-  </data>
-  <data name="buttonShowAlternatives.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;buttonShowAlternatives.Name" xml:space="preserve">
-    <value>buttonShowAlternatives</value>
-  </data>
-  <data name="&gt;&gt;buttonShowAlternatives.Type" xml:space="preserve">
-    <value>Rationally.Visio.Forms.WizardComponents.MenuButton, rationally-visio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;buttonShowAlternatives.Parent" xml:space="preserve">
-    <value>tableLayoutLeftMenu</value>
-  </data>
-  <data name="&gt;&gt;buttonShowAlternatives.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="button1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="button1.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 34</value>
-  </data>
-  <data name="button1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="button1.Text" xml:space="preserve">
-    <value>General Information</value>
-  </data>
-  <data name="button1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
-    <value>button1</value>
-  </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
-    <value>Rationally.Visio.Forms.WizardComponents.MenuButton, rationally-visio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
-    <value>tableLayoutLeftMenu</value>
-  </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutLeftMenu.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="tableLayoutLeftMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutLeftMenu.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutLeftMenu.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 150</value>
   </data>
   <data name="tableLayoutLeftMenu.RowCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="tableLayoutLeftMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 279</value>
+    <value>244, 348</value>
   </data>
   <data name="tableLayoutLeftMenu.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
@@ -2924,16 +2879,16 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutLeftColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
+    <value>0, 0</value>
   </data>
   <data name="tableLayoutLeftColumn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutLeftColumn.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutLeftColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 540</value>
+    <value>244, 548</value>
   </data>
   <data name="tableLayoutLeftColumn.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2951,7 +2906,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutLeftColumn.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutLeftLogo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutLeftMenu" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50" /&gt;&lt;Rows Styles="Percent,50,Absolute,255" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutLeftLogo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutLeftMenu" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,100,Absolute,200" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutRightColumn.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2972,7 +2927,7 @@
     <value>4</value>
   </data>
   <data name="tableLayoutMainContentGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>760, 482</value>
+    <value>768, 482</value>
   </data>
   <data name="tableLayoutMainContentGeneral.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2992,8 +2947,11 @@
   <data name="tableLayoutMainContentGeneral.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="flowLayoutGeneralTopic" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutGeneralAuthor" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutGeneralDate" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Percent,100,Percent,100,Percent,100,Percent,100,Percent,100,Percent,100" /&gt;&lt;Rows Styles="Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
+  <data name="CreateButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="CreateButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>557, 3</value>
+    <value>565, 3</value>
   </data>
   <data name="CreateButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 34</value>
@@ -3008,7 +2966,7 @@
     <value>CreateButton</value>
   </data>
   <data name="&gt;&gt;CreateButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>Rationally.Visio.Forms.WizardComponents.AntiAliasedButton, rationally-visio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;CreateButton.Parent" xml:space="preserve">
     <value>flowLayoutBottomButtons</value>
@@ -3029,7 +2987,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="flowLayoutBottomButtons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>760, 42</value>
+    <value>768, 42</value>
   </data>
   <data name="flowLayoutBottomButtons.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3050,7 +3008,7 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutRightColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 4</value>
+    <value>248, 4</value>
   </data>
   <data name="tableLayoutRightColumn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -3059,7 +3017,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutRightColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>768, 540</value>
+    <value>776, 540</value>
   </data>
   <data name="tableLayoutRightColumn.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3110,7 +3068,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutForEverything.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutLeftColumn" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutRightColumn" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,24.5283,Percent,75.4717" /&gt;&lt;Rows Styles="Percent,100,Absolute,548" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutLeftColumn" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutRightColumn" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,244,Percent,100" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -9296,8 +9254,14 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAMADAAA=
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>16, 400</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Rationally - Prepare Decision View</value>

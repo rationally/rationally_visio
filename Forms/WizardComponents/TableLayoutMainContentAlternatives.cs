@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Rationally.Visio.Forms.WizardComponents
@@ -31,7 +32,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             //
             // alternatives information panel
             //
-            BackColor = System.Drawing.SystemColors.Control;
+            BackColor = Color.WhiteSmoke;
             ColumnCount = 1;
             ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
 

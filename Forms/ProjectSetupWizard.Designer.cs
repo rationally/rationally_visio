@@ -41,24 +41,18 @@ namespace Rationally.Visio.Forms
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelBottomLeftText = new System.Windows.Forms.Label();
             this.UpdateLink = new System.Windows.Forms.LinkLabel();
-            this.tableLayoutLeftMenu = new Rationally.Visio.Forms.WizardComponents.MenuPanel();
             this.tableLayoutRightColumn = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutMainContentGeneral = new Rationally.Visio.Forms.WizardComponents.TableLayoutMainContentGeneral();
             this.flowLayoutBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
-            this.CreateButton = new System.Windows.Forms.Button();
+            this.tableLayoutLeftMenu = new Rationally.Visio.Forms.WizardComponents.MenuPanel();
+            this.tableLayoutMainContentGeneral = new Rationally.Visio.Forms.WizardComponents.TableLayoutMainContentGeneral();
+            this.CreateButton = new Rationally.Visio.Forms.WizardComponents.AntiAliasedButton();
             this.tableLayoutForEverything.SuspendLayout();
             this.tableLayoutLeftColumn.SuspendLayout();
             this.tableLayoutLeftLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tableLayoutLeftMenu.SuspendLayout();
             this.tableLayoutRightColumn.SuspendLayout();
             this.flowLayoutBottomButtons.SuspendLayout();
             this.SuspendLayout();
-
-            /*USERCODE*/
-            this.buttonShowAlternatives = new MenuButton(this.tableLayoutLeftMenu);
-            this.button1 = new MenuButton(this.tableLayoutLeftMenu);
-            /*END USERCODE*/
             // 
             // tableLayoutForEverything
             // 
@@ -101,32 +95,6 @@ namespace Rationally.Visio.Forms
             this.UpdateLink.TabStop = true;
             this.UpdateLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.UpdateLink_LinkClicked);
             // 
-            // tableLayoutLeftMenu
-            // 
-            resources.ApplyResources(this.tableLayoutLeftMenu, "tableLayoutLeftMenu");
-            this.tableLayoutLeftMenu.Controls.Add(this.buttonShowAlternatives, 0, 1);
-            this.tableLayoutLeftMenu.Controls.Add(this.button1, 0, 0);
-            this.tableLayoutLeftMenu.HighLightedButton = this.button1;
-            this.tableLayoutLeftMenu.Name = "tableLayoutLeftMenu";
-            // 
-            // buttonShowAlternatives
-            // 
-            this.buttonShowAlternatives.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
-            resources.ApplyResources(this.buttonShowAlternatives, "buttonShowAlternatives");
-            this.buttonShowAlternatives.FlatAppearance.BorderSize = 0;
-            this.buttonShowAlternatives.Name = "buttonShowAlternatives";
-            this.buttonShowAlternatives.UseVisualStyleBackColor = false;
-            this.buttonShowAlternatives.Click += new System.EventHandler(this.buttonShowAlternatives_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))), ((int)(((byte)(242)))));
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // tableLayoutRightColumn
             // 
             this.tableLayoutRightColumn.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -135,18 +103,23 @@ namespace Rationally.Visio.Forms
             this.tableLayoutRightColumn.Controls.Add(this.flowLayoutBottomButtons, 0, 1);
             this.tableLayoutRightColumn.Name = "tableLayoutRightColumn";
             // 
-            // tableLayoutMainContentGeneral
-            // 
-            this.tableLayoutMainContentGeneral.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tableLayoutMainContentGeneral, "tableLayoutMainContentGeneral");
-            this.tableLayoutMainContentGeneral.Name = "tableLayoutMainContentGeneral";
-            // 
             // flowLayoutBottomButtons
             // 
             this.flowLayoutBottomButtons.BackColor = System.Drawing.Color.WhiteSmoke;
             this.flowLayoutBottomButtons.Controls.Add(this.CreateButton);
             resources.ApplyResources(this.flowLayoutBottomButtons, "flowLayoutBottomButtons");
             this.flowLayoutBottomButtons.Name = "flowLayoutBottomButtons";
+            // 
+            // tableLayoutLeftMenu
+            // 
+            resources.ApplyResources(this.tableLayoutLeftMenu, "tableLayoutLeftMenu");
+            this.tableLayoutLeftMenu.Name = "tableLayoutLeftMenu";
+            // 
+            // tableLayoutMainContentGeneral
+            // 
+            this.tableLayoutMainContentGeneral.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tableLayoutMainContentGeneral, "tableLayoutMainContentGeneral");
+            this.tableLayoutMainContentGeneral.Name = "tableLayoutMainContentGeneral";
             // 
             // CreateButton
             // 
@@ -168,7 +141,6 @@ namespace Rationally.Visio.Forms
             this.tableLayoutLeftLogo.ResumeLayout(false);
             this.tableLayoutLeftLogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tableLayoutLeftMenu.ResumeLayout(false);
             this.tableLayoutRightColumn.ResumeLayout(false);
             this.flowLayoutBottomButtons.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -181,10 +153,10 @@ namespace Rationally.Visio.Forms
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutForEverything;
         private System.Windows.Forms.TableLayoutPanel tableLayoutLeftColumn;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutRightColumn;
+        public System.Windows.Forms.TableLayoutPanel tableLayoutRightColumn;
         public TableLayoutMainContentGeneral tableLayoutMainContentGeneral;//here
         public TableLayoutMainContentAlternatives TableLayoutMainContentAlternatives = new TableLayoutMainContentAlternatives();
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutBottomButtons;
+        public System.Windows.Forms.FlowLayoutPanel flowLayoutBottomButtons;
         
         
        
@@ -193,10 +165,8 @@ namespace Rationally.Visio.Forms
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label labelBottomLeftText;
         private MenuPanel tableLayoutLeftMenu;
-        private MenuButton button1;
-        private System.Windows.Forms.Button CreateButton;
-        private System.Windows.Forms.LinkLabel UpdateLink;
-        private MenuButton buttonShowAlternatives;
+        private AntiAliasedButton CreateButton;
+        private System.Windows.Forms.LinkLabel UpdateLink;    
         
     }
 }

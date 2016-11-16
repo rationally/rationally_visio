@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing.Text;
 using System.Windows.Forms;
 using Rationally.Visio.Enums;
 using Rationally.Visio.RationallyConstants;
@@ -91,18 +92,7 @@ namespace Rationally.Visio.Forms
             Process.Start(sInfo);
         }
 
-        private void buttonShowAlternatives_Click(object sender, System.EventArgs e)
-        {
-            tableLayoutRightColumn.Controls.Clear();
-            tableLayoutRightColumn.Controls.Add(TableLayoutMainContentAlternatives);
-            tableLayoutRightColumn.Controls.Add(flowLayoutBottomButtons);
-            flowLayoutBottomButtons.Refresh();
-        }
 
-        private void button1_Click(object sender, System.EventArgs e)
-        {
-            SetGeneralPanel();
-        }
 
         private void ProjectSetupWizard_Activated(object sender, EventArgs e)
         {
@@ -123,12 +113,18 @@ namespace Rationally.Visio.Forms
             }
         }
 
-        private void SetGeneralPanel()
+        public void SetGeneralPanel()
         {
             tableLayoutRightColumn.Controls.Clear();
             tableLayoutRightColumn.Controls.Add(tableLayoutMainContentGeneral);
             tableLayoutRightColumn.Controls.Add(flowLayoutBottomButtons);
             flowLayoutBottomButtons.Refresh();
+        }
+
+        protected override void OnPaint(PaintEventArgs pevent)
+        {
+            pevent.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+            base.OnPaint(pevent);
         }
     }
 }

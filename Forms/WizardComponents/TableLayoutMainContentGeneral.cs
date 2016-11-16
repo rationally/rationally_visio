@@ -1,4 +1,5 @@
 ﻿
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Rationally.Visio.Forms.WizardComponents
@@ -8,9 +9,9 @@ namespace Rationally.Visio.Forms.WizardComponents
         private readonly FlowLayoutPanel flowLayoutGeneralAuthor;
         private readonly FlowLayoutPanel flowLayoutGeneralTopic;
         private readonly FlowLayoutPanel flowLayoutGeneralDate;
-        private readonly Label authorLabel;
-        private readonly Label topicLabel;
-        private readonly Label dateLabel;
+        private readonly AntiAliasedLabel authorLabel;
+        private readonly AntiAliasedLabel topicLabel;
+        private readonly AntiAliasedLabel dateLabel;
         public readonly DateTimePicker DateTimePickerCreationDate;
         public readonly TextBox TextDecisionTopic;
         public readonly TextBox TextAuthor;
@@ -18,15 +19,15 @@ namespace Rationally.Visio.Forms.WizardComponents
         public TableLayoutMainContentGeneral()
         {
             flowLayoutGeneralTopic = new FlowLayoutPanel();
-            topicLabel = new Label();
+            topicLabel = new AntiAliasedLabel();
             TextDecisionTopic = new TextBox();
 
             flowLayoutGeneralAuthor = new FlowLayoutPanel();
-            authorLabel = new Label();
+            authorLabel = new AntiAliasedLabel();
             TextAuthor = new TextBox();
 
             flowLayoutGeneralDate = new FlowLayoutPanel();
-            dateLabel = new Label();
+            dateLabel = new AntiAliasedLabel();
             DateTimePickerCreationDate = new DateTimePicker();
 
             SuspendLayout();
@@ -41,7 +42,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             //
             // general information panel
             //
-            BackColor = System.Drawing.SystemColors.Control;
+            BackColor = Color.WhiteSmoke;
             ColumnCount = 1;
             ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             Controls.Add(flowLayoutGeneralTopic, 0, 0);

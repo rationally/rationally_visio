@@ -1,24 +1,30 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Windows.Forms;
+using Rationally.Visio.RationallyConstants;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
-    internal class MenuButton : Button
+    public sealed class MenuButton : AntiAliasedButton
     {
         private readonly MenuPanel containingMenu;
+        private readonly WizardConstants wizardConstants;
         public MenuButton(MenuPanel containingMenu)
         {
             this.containingMenu = containingMenu;
-            
-            //BackColor = Color.FromArgb(1, 235, 235, 235);
-            BackColor = Color.FromArgb(1, 194, 207, 242);
+            this.Width = 244;
+            this.Height = 40;
+            this.TextAlign = ContentAlignment.MiddleLeft;
+            BackColor = Color.FromArgb(235, 235, 235);
             //FlatAppearance.MouseOverForeColor = 
             FlatStyle = FlatStyle.Flat;
             UseVisualStyleBackColor = false;
             MouseEnter += button1_MouseEnter;
             MouseLeave += button1_MouseLeave;
             Click += button1_Click;
+            Margin = new Padding(0);
+            wizardConstants = new WizardConstants();
 
             this.containingMenu.Buttons.Add(this);
         }
@@ -53,16 +59,16 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         public void Highlight()
         {
-            //Font = boldFont;
-            BackColor = Color.FromArgb(1, 194, 207, 242);
-            
+            Font = wizardConstants.HighlightedFont;
+            BackColor = Color.FromArgb(194, 207, 242);
             Refresh();
         }
 
         public void Lowlight()
         {
-            BackColor = Color.FromArgb(1, 235, 235, 235);
-            //Font = normalFont;
+            BackColor = Color.FromArgb(235, 235, 235);
+            Font = wizardConstants.NormalFont;
         }
+
     }
 }

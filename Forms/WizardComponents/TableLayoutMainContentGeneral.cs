@@ -9,12 +9,15 @@ namespace Rationally.Visio.Forms.WizardComponents
         private readonly FlowLayoutPanel flowLayoutGeneralAuthor;
         private readonly FlowLayoutPanel flowLayoutGeneralTopic;
         private readonly FlowLayoutPanel flowLayoutGeneralDate;
+        private readonly FlowLayoutPanel flowLayoutGeneralVersion;
         private readonly AntiAliasedLabel authorLabel;
         private readonly AntiAliasedLabel topicLabel;
         private readonly AntiAliasedLabel dateLabel;
+        private readonly AntiAliasedLabel versionLabel;
         public readonly DateTimePicker DateTimePickerCreationDate;
         public readonly TextBox TextDecisionTopic;
         public readonly TextBox TextAuthor;
+        public readonly TextBox TextVersion;
 
         public TableLayoutMainContentGeneral()
         {
@@ -30,10 +33,15 @@ namespace Rationally.Visio.Forms.WizardComponents
             dateLabel = new AntiAliasedLabel();
             DateTimePickerCreationDate = new DateTimePicker();
 
+            flowLayoutGeneralVersion = new FlowLayoutPanel();
+            versionLabel = new AntiAliasedLabel();
+            TextVersion = new TextBox();
+
             SuspendLayout();
             flowLayoutGeneralTopic.SuspendLayout();
             flowLayoutGeneralAuthor.SuspendLayout();
             flowLayoutGeneralDate.SuspendLayout();
+            flowLayoutGeneralVersion.SuspendLayout();
             Init();
         }
 
@@ -48,6 +56,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             Controls.Add(flowLayoutGeneralTopic, 0, 0);
             Controls.Add(flowLayoutGeneralAuthor, 0, 1);
             Controls.Add(flowLayoutGeneralDate, 0, 2);
+            Controls.Add(flowLayoutGeneralVersion, 0, 3);
             Dock = DockStyle.Fill;
             Location = new System.Drawing.Point(4, 4);
             Margin = new Padding(4);
@@ -160,13 +169,50 @@ namespace Rationally.Visio.Forms.WizardComponents
             DateTimePickerCreationDate.Size = new System.Drawing.Size(600, 27);
             DateTimePickerCreationDate.TabIndex = 3;
 
+            // 
+            // flowLayoutGeneralVersion
+            // 
+            flowLayoutGeneralVersion.Controls.Add(versionLabel);
+            flowLayoutGeneralVersion.Controls.Add(TextVersion);
+            flowLayoutGeneralVersion.Dock = DockStyle.Fill;
+            flowLayoutGeneralVersion.Location = new System.Drawing.Point(4, 149);
+            flowLayoutGeneralVersion.Margin = new Padding(4);
+            flowLayoutGeneralVersion.Name = "flowLayoutGeneralVersion";
+            flowLayoutGeneralVersion.Size = new System.Drawing.Size(752, 40);
+            flowLayoutGeneralVersion.TabIndex = 25;
+            // 
+            // versionlabel
+            // 
+            versionLabel.AutoSize = true;
+            versionLabel.Dock = DockStyle.Left;
+            versionLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            versionLabel.Location = new System.Drawing.Point(5, 6);
+            versionLabel.Margin = new Padding(5, 6, 5, 6);
+            versionLabel.MinimumSize = new System.Drawing.Size(100, 27);
+            versionLabel.Name = "versionLabel";
+            versionLabel.Size = new System.Drawing.Size(100, 27);
+            versionLabel.TabIndex = 16;
+            versionLabel.Text = "Version";
+            versionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textversion
+            // 
+            TextVersion.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            TextVersion.Location = new System.Drawing.Point(215, 6);
+            TextVersion.Margin = new Padding(5, 6, 5, 6);
+            TextVersion.Name = "textDecisionVersion";
+            TextVersion.Size = new System.Drawing.Size(600, 27);
+            TextVersion.TabIndex = 2;
+
+
             flowLayoutGeneralAuthor.ResumeLayout(false);
             flowLayoutGeneralAuthor.PerformLayout();
             flowLayoutGeneralTopic.ResumeLayout(false);
             flowLayoutGeneralTopic.PerformLayout();
             flowLayoutGeneralDate.ResumeLayout(false);
             flowLayoutGeneralDate.PerformLayout();
-            
+            flowLayoutGeneralVersion.ResumeLayout(false);
+            flowLayoutGeneralVersion.PerformLayout();
         }
     }
 }

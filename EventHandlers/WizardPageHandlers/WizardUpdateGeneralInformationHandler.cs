@@ -10,16 +10,16 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
     {
         public static void Execute(ProjectSetupWizard wizard)
         {
-
                 UpdateGeneralInformationInModel(wizard.tableLayoutMainContentGeneral.TextAuthor.Text,
                     wizard.tableLayoutMainContentGeneral.TextDecisionTopic.Text,
-                    wizard.tableLayoutMainContentGeneral.DateTimePickerCreationDate.Value.ToLongDateString(), ProjectSetupWizard.DocumentCreation);
+                    wizard.tableLayoutMainContentGeneral.DateTimePickerCreationDate.Value.ToLongDateString(),
+                    wizard.tableLayoutMainContentGeneral.TextVersion.Text, ProjectSetupWizard.DocumentCreation);
         }
 
         
 
 
-        private static void UpdateGeneralInformationInModel(string author, string decisionName, string date, bool documentCreation)
+        private static void UpdateGeneralInformationInModel(string author, string decisionName, string date, string version, bool documentCreation)
         {
             RationallyModel model = Globals.RationallyAddIn.Model;
 
@@ -27,10 +27,9 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
             model.Author = author;
             model.DecisionName = decisionName;
             model.DateString = date;
-            model.Version = "0.0.1";//TODO this should not be here
+            model.Version = version;
 
-
-            //int scopeId = Globals.RationallyAddIn.Application.BeginUndoScope("wizardUpdate");
+            
             if (documentCreation)
             {
                 //draw the header
@@ -57,7 +56,6 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
                     RepaintHandler.Repaint(titleLabel);
                 }
             }
-            //Globals.RationallyAddIn.Application.EndUndoScope(scopeId, true);
         }
     }
 }

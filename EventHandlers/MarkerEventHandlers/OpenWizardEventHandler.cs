@@ -20,6 +20,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 case "InformationDate":
                     ProjectSetupWizard.Instance.ShowDialog(false, WizardFieldTypes.Date);
                     break;
+                case "InformationVersion":
+                    ProjectSetupWizard.Instance.ShowDialog(false, WizardFieldTypes.Version);
+                    break;
             }
         }
     }

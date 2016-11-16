@@ -39,6 +39,7 @@ namespace Rationally.Visio.Forms
             tableLayoutMainContentGeneral.TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
             tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
             tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.DateString;
+            tableLayoutMainContentGeneral.TextVersion.Text = Globals.RationallyAddIn.Model.Version;
             TableLayoutMainContentAlternatives.AlternativeRows.ForEach(a => a.UpdateData());
             if (DocumentCreation)
             {
@@ -111,6 +112,9 @@ namespace Rationally.Visio.Forms
                 case WizardFieldTypes.Date:
                     tableLayoutMainContentGeneral.DateTimePickerCreationDate.Select();
                     break;
+                case WizardFieldTypes.Version:
+                    tableLayoutMainContentGeneral.TextVersion.Select();
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(selectedFieldType), selectedFieldType, "You actually managed to set a wrong enum value. Well done.");
             }
@@ -144,12 +148,21 @@ namespace Rationally.Visio.Forms
                 return false;
 #endif
             }
+            if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextVersion.Text))
+            {
+#if DEBUG
+                tableLayoutMainContentGeneral.TextVersion.Text = "1.0.0";
+#else
+                MessageBox.Show("Enter the version number.", "Version number missing");
+                return false;
+#endif
+            }
             return true;
         }
 
         private bool ValidateAlternatives()
         {
-            bool validFields = TableLayoutMainContentAlternatives.AlternativeRows.TrueForAll(x => x.Alternative == null || !string.IsNullOrWhiteSpace(x.TextBoxAlternativeTitle.Text));
+            bool validFields = TableLayoutMainContentAlternatives.AlternativeRows.TrueForAll(row => row.Alternative == null || !string.IsNullOrWhiteSpace(row.TextBoxAlternativeTitle.Text));
             if (!validFields)
             {
                 MessageBox.Show("Enter a name for every existing alternative.", "Alternative name missing");

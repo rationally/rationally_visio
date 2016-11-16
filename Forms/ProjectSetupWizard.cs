@@ -60,17 +60,17 @@ namespace Rationally.Visio.Forms
             TableLayoutMainContentAlternatives = new TableLayoutMainContentAlternatives();
             if (!Globals.RationallyAddIn.NewVersionAvailable)
             {
-                UpdateLink.Hide();
+                UpdateLink.Text = "Current version: " + Globals.RationallyAddIn.AddInLocalVersion;
             }
 
             StartPosition = FormStartPosition.CenterScreen;
             AcceptButton = CreateButton;
         }
-        
+
 
         private void submit_Click(object sender, System.EventArgs e)
         {
-            if (ValidateIfNotDebugging())
+            if (ValidateGeneralIfNotDebugging() && ValidateAlternatives())
             {
                 //wrap all changes that will be triggered by wizard changes in one undo scope
                 int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");
@@ -134,7 +134,7 @@ namespace Rationally.Visio.Forms
             flowLayoutBottomButtons.Refresh();
         }
 
-        private bool ValidateIfNotDebugging()
+        private bool ValidateGeneralIfNotDebugging()
         {
             if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextDecisionTopic.Text))
             {
@@ -154,6 +154,12 @@ namespace Rationally.Visio.Forms
                 return false;
 #endif
             }
+            return true;
+        }
+
+        private bool ValidateAlternatives()
+        {
+            bool validFields = TableLayoutMainContentAlternatives.AlternativeRows.TrueForAll(x => x.Alternative == null || !string.IsNullOrWhiteSpace(x.TextBoxAlternativeTitle.Text));
             return true;
         }
     }

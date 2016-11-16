@@ -12,11 +12,11 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private readonly Label alternativeIndexLabel;
         private readonly Label alternativeTitleLabel;
-        private readonly TextBox textBoxAlternativeTitle;
+        internal readonly TextBox TextBoxAlternativeTitle;
         private readonly Label alternativeStateLabel;
         private readonly ComboBox alternativeStateDropdown;
 
-        private Alternative Alternative { get; set; }
+        public Alternative Alternative { get; private set; }
         public FlowLayoutAlternative(int alternativeIndex)
         {
             
@@ -34,7 +34,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
             alternativeIndexLabel = new Label();
             alternativeTitleLabel = new Label();
-            textBoxAlternativeTitle = new TextBox();
+            TextBoxAlternativeTitle = new TextBox();
             alternativeStateLabel = new Label();
             alternativeStateDropdown = new ComboBox {DropDownStyle = ComboBoxStyle.DropDownList, FormattingEnabled = true};
             //this.Acti += alternative_activated;
@@ -53,7 +53,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             {
                 Alternative = null;//ensures that the fields will be emptied. Is required when an alternative is deleted, but the object here is still present.
             }
-            textBoxAlternativeTitle.Text = Alternative != null ? Alternative.Title : "";
+            TextBoxAlternativeTitle.Text = Alternative != null ? Alternative.Title : "";
             alternativeStateDropdown.SelectedIndex = Alternative != null ? Globals.RationallyAddIn.Model.AlternativeStates.IndexOf(Alternative.Status) : 0;
         }
 
@@ -61,13 +61,13 @@ namespace Rationally.Visio.Forms.WizardComponents
         {
             if (Alternative != null)
             {
-                UpdateAlternativeHandler.Execute(alternativeIndex-1, textBoxAlternativeTitle.Text, alternativeStateDropdown.SelectedItem.ToString());
+                UpdateAlternativeHandler.Execute(alternativeIndex-1, TextBoxAlternativeTitle.Text, alternativeStateDropdown.SelectedItem.ToString());
             }
             else
             {
-                if (!string.IsNullOrEmpty(textBoxAlternativeTitle.Text))
+                if (!string.IsNullOrEmpty(TextBoxAlternativeTitle.Text))
                 {
-                    Alternative newAlternative = new Alternative(textBoxAlternativeTitle.Text, alternativeStateDropdown.SelectedItem.ToString());
+                    Alternative newAlternative = new Alternative(TextBoxAlternativeTitle.Text, alternativeStateDropdown.SelectedItem.ToString());
                     newAlternative.GenerateIdentifier(Globals.RationallyAddIn.Model.Alternatives.Count);
                     Globals.RationallyAddIn.View.Page = Globals.RationallyAddIn.Application.ActivePage;
                     Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
@@ -82,7 +82,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         {
             Controls.Add(alternativeIndexLabel);
             Controls.Add(alternativeTitleLabel);
-            Controls.Add(textBoxAlternativeTitle);
+            Controls.Add(TextBoxAlternativeTitle);
             Controls.Add(alternativeStateLabel);
             Controls.Add(alternativeStateDropdown);
             // 
@@ -108,11 +108,11 @@ namespace Rationally.Visio.Forms.WizardComponents
             // 
             // textBoxAlternativeTitle
             // 
-            textBoxAlternativeTitle.Location = new System.Drawing.Point(61, 6);
-            textBoxAlternativeTitle.Margin = new Padding(3, 6, 3, 3);
-            textBoxAlternativeTitle.Name = "textBoxAlternativeTitle";
-            textBoxAlternativeTitle.Size = new System.Drawing.Size(300, 27);
-            textBoxAlternativeTitle.TabIndex = 2;
+            TextBoxAlternativeTitle.Location = new System.Drawing.Point(61, 6);
+            TextBoxAlternativeTitle.Margin = new Padding(3, 6, 3, 3);
+            TextBoxAlternativeTitle.Name = "textBoxAlternativeTitle";
+            TextBoxAlternativeTitle.Size = new System.Drawing.Size(300, 27);
+            TextBoxAlternativeTitle.TabIndex = 2;
             
             // 
             // alternativeStateLabel

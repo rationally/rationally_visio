@@ -10,10 +10,10 @@ namespace Rationally.Visio.Forms.WizardComponents
     {
         private readonly int alternativeIndex;
 
-        private readonly Label alternativeIndexLabel;
-        private readonly Label alternativeTitleLabel;
+        private readonly AntiAliasedLabel alternativeIndexLabel;
+        private readonly AntiAliasedLabel alternativeTitleLabel;
         internal readonly TextBox TextBoxAlternativeTitle;
-        private readonly Label alternativeStateLabel;
+        private readonly AntiAliasedLabel alternativeStateLabel;
         private readonly ComboBox alternativeStateDropdown;
 
         public Alternative Alternative { get; private set; }
@@ -32,10 +32,10 @@ namespace Rationally.Visio.Forms.WizardComponents
             Size = new System.Drawing.Size(754, 42);
             TabIndex = 0;
 
-            alternativeIndexLabel = new Label();
-            alternativeTitleLabel = new Label();
+            alternativeIndexLabel = new AntiAliasedLabel();
+            alternativeTitleLabel = new AntiAliasedLabel();
             TextBoxAlternativeTitle = new TextBox();
-            alternativeStateLabel = new Label();
+            alternativeStateLabel = new AntiAliasedLabel();
             alternativeStateDropdown = new ComboBox {DropDownStyle = ComboBoxStyle.DropDownList, FormattingEnabled = true};
             //this.Acti += alternative_activated;
             SuspendLayout();

@@ -46,7 +46,7 @@ namespace Rationally.Visio
         public bool NewVersionAvailable;
 
         //Version numbers
-        private readonly Version addInLocalVersion = new Version("0.1.1");
+        internal readonly Version AddInLocalVersion = new Version("0.1.1");
         private Version addInOnlineVersion;
 
         private void RationallyAddIn_Startup(object sender, EventArgs e)
@@ -358,7 +358,7 @@ namespace Rationally.Visio
             {
                 if (toBeDeleted.All(s => s.CellsU[CellConstants.RationallyType].ResultStr["Value"] != "forces"))
                 {
-                    MessageBox.Show("Deletion of the header or totals row is not allowed.", "Delete forbidden", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Deleting the header or totals row is not allowed.", "Delete forbidden", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return true;
                 }
             }
@@ -448,7 +448,7 @@ namespace Rationally.Visio
                     string result = webClient.DownloadString("https://api.github.com/repos/rationally/rationally_visio/releases/latest");
                     JObject json = JObject.Parse(result);
                     addInOnlineVersion = new Version(json["tag_name"].ToString());
-                    return addInOnlineVersion > addInLocalVersion;
+                    return addInOnlineVersion > AddInLocalVersion;
                 }
                 catch (WebException)
                 {
@@ -475,7 +475,7 @@ namespace Rationally.Visio
         {
             if (Application.ActiveDocument.Template.Contains(Constants.TemplateName) && showRationallyUpdatePopup)
             {
-                UpdateAvailable upd = new UpdateAvailable(addInLocalVersion, addInOnlineVersion);
+                UpdateAvailable upd = new UpdateAvailable(AddInLocalVersion, addInOnlineVersion);
                 upd.Show();
                 showRationallyUpdatePopup = false;
             }

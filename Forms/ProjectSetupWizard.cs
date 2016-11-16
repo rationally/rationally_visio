@@ -61,29 +61,32 @@ namespace Rationally.Visio.Forms
             TableLayoutMainContentAlternatives = new TableLayoutMainContentAlternatives();
             if (!Globals.RationallyAddIn.NewVersionAvailable)
             {
-                UpdateLink.Hide();
+                UpdateLink.Text = "Current version: " + Globals.RationallyAddIn.AddInLocalVersion;
             }
 
             StartPosition = FormStartPosition.CenterScreen;
             AcceptButton = CreateButton;
         }
-        
+
 
         private void submit_Click(object sender, System.EventArgs e)
         {
-            //wrap all changes that will be triggered by wizard changes in one undo scope
-            int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");
+            if (ValidateGeneralIfNotDebugging() && ValidateAlternatives())
+            {
+                //wrap all changes that will be triggered by wizard changes in one undo scope
+                int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");
 
 
-            //handle changes in the "General Information" page
-            WizardUpdateGeneralInformationHandler.Execute(this);
-            //handle changes in the "Alternatives" page
-            WizardUpdateAlternativesHandler.Execute(this);
+                //handle changes in the "General Information" page
+                WizardUpdateGeneralInformationHandler.Execute(this);
+                //handle changes in the "Alternatives" page
+                WizardUpdateAlternativesHandler.Execute(this);
 
 
-            //all changes have been made, close the scope and the wizard
-            Globals.RationallyAddIn.Application.EndUndoScope(wizardScopeId, true);
-            Close();
+                //all changes have been made, close the scope and the wizard
+                Globals.RationallyAddIn.Application.EndUndoScope(wizardScopeId, true);
+                Close();
+            }
         }
 
         private void UpdateLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -121,10 +124,37 @@ namespace Rationally.Visio.Forms
             flowLayoutBottomButtons.Refresh();
         }
 
-        protected override void OnPaint(PaintEventArgs pevent)
+        private bool ValidateGeneralIfNotDebugging()
         {
-            pevent.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-            base.OnPaint(pevent);
+            if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextDecisionTopic.Text))
+            {
+#if DEBUG
+                tableLayoutMainContentGeneral.TextDecisionTopic.Text = "Title";
+#else
+                MessageBox.Show("Enter a decision topic.", "Decision topic missing");
+                return false;
+#endif
+            }
+            if (string.IsNullOrWhiteSpace(tableLayoutMainContentGeneral.TextAuthor.Text))
+            {
+#if DEBUG
+                tableLayoutMainContentGeneral.TextAuthor.Text = "Author";
+#else
+                MessageBox.Show("Enter the author's name.", "Author's name missing");
+                return false;
+#endif
+            }
+            return true;
+        }
+
+        private bool ValidateAlternatives()
+        {
+            bool validFields = TableLayoutMainContentAlternatives.AlternativeRows.TrueForAll(x => x.Alternative == null || !string.IsNullOrWhiteSpace(x.TextBoxAlternativeTitle.Text));
+            if (!validFields)
+            {
+                MessageBox.Show("Enter a name for every existing alternative.", "Alternative name missing");
+            }
+            return validFields;
         }
     }
 }

@@ -332,9 +332,6 @@
     <EmbeddedResource Include="Forms\ForcesTest.resx">
       <DependentUpon>ForcesTest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProjectSetupWizard.aa.resx">
-      <DependentUpon>ProjectSetupWizard.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>

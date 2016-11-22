@@ -77,10 +77,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>rationally_visio_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>rationally_visio\rationally_visio_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>496238F54ACC1D629808660FB0417AA35E692AE0</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>561F5F347454B139C12F50E8ADF65B7CBBDD3805</ManifestCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -315,6 +315,7 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Rationally.Visio.Model.Alternative.datasource" />
     <None Include="Properties\DataSources\Rationally.Visio.Model.RModel.datasource" />
+    <None Include="key.pfx" />
     <None Include="RationallyAddIn.Designer.xml">
       <DependentUpon>RationallyAddIn.cs</DependentUpon>
     </None>
@@ -361,7 +362,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="rationally_visio\rationally_visio_1_TemporaryKey.pfx" />
-    <None Include="rationally_visio_TemporaryKey.pfx" />
+    <None Include="rationally_visio_1_TemporaryKey.pfx" />
     <None Include="Resources\Decision View.vstx" />
     <None Include="Resources\icon.png" />
     <None Include="Resources\Rationally Shapes.vssx" />

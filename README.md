@@ -1,4 +1,7 @@
+![Build Status](https://ci.appveyor.com/api/projects/status/github/rationally/rationally_visio?branch=master&svg=true)
+
 # rationally_visio
-Due to the lack of deployment functionality, stencils and template should be placed in the path defined at the top of the ThisAddIn class. 
-By Default, this is the My Shapes folder of Visio.
-A key needs to be set before running. This can be done in the project settings. 
+
+## A decision documentation add-in for Microsoft Visio.
+
+The project homepage can be found at [https://rationally.github.io](https://rationally.github.io)

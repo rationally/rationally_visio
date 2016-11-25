@@ -30,6 +30,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
             AlternativeContainer delete = alternativeComponent as AlternativeContainer;
             if (delete != null)
             {
+                model.Forces.ForEach(force => force.ForceValueDictionary.Remove(delete.UniqueIdentifier));
                 AlternativeContainer containerToDelete = delete;
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {

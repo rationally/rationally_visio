@@ -8,7 +8,10 @@ namespace Rationally.Visio.View.Alternatives
         private static readonly Regex IdentRegex = new Regex(@"AlternativeIdent(\.\d+)?$");
         public AlternativeIdentifierComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {
-            InitStyle();
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+            {
+                InitStyle();
+            }
         }
 
         public AlternativeIdentifierComponent(Page page, int alternativeIndex, string text) : base(page, text)

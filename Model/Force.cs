@@ -22,5 +22,12 @@ namespace Rationally.Visio.Model
             Description = description;
             ForceValueDictionary = new Dictionary<int, string>();
         }
+
+        public Force(string concern, string description, Dictionary<int, string> forceValues )
+        {
+            Concern = concern;
+            Description = description;
+            ForceValueDictionary = forceValues;
+        }
     }
 }

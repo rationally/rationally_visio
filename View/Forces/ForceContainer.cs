@@ -45,6 +45,7 @@ namespace Rationally.Visio.View.Forces
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             string concern = null;
             string description = null;
+            Dictionary<int, string> forceValuesDictionary = new Dictionary<int, string>();
             if (Children.Count == 0)
             {
                 foreach (Shape shape in shapes)
@@ -62,19 +63,22 @@ namespace Rationally.Visio.View.Forces
                     }
                     else if (ForceValueComponent.IsForceValue(shape.Name))
                     {
-                        Children.Add(new ForceValueComponent(page, shape));
+                        ForceValueComponent comp = new ForceValueComponent(page, shape);
+                        Children.Add(comp);
+                        forceValuesDictionary.Add(comp.AlternativeUniqueIdentifier, comp.Text);
                     }
                 }
 
                 if (concern != null && description != null)
                 {
+                    Force correspondingForce = new Force(concern, description, forceValuesDictionary);
                     if (ForceIndex <= Globals.RationallyAddIn.Model.Forces.Count)
                     {
-                        Globals.RationallyAddIn.Model.Forces.Insert(ForceIndex, new Force(concern, description));
+                        Globals.RationallyAddIn.Model.Forces.Insert(ForceIndex, correspondingForce);
                     }
                     else
                     {
-                        Globals.RationallyAddIn.Model.Forces.Add(new Force(concern, description));
+                        Globals.RationallyAddIn.Model.Forces.Add(correspondingForce);
                     }
                 }
             }

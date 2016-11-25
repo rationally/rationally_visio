@@ -43,6 +43,7 @@ namespace Rationally.Visio.View.Forces
             RShape = forceContainer;
             Array ident = forceContainer.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
+            Force correspondingForce = null;
             string concern = null;
             string description = null;
             if (Children.Count == 0)
@@ -68,13 +69,14 @@ namespace Rationally.Visio.View.Forces
 
                 if (concern != null && description != null)
                 {
+                    correspondingForce = new Force(concern, description);
                     if (ForceIndex <= Globals.RationallyAddIn.Model.Forces.Count)
                     {
-                        Globals.RationallyAddIn.Model.Forces.Insert(ForceIndex, new Force(concern, description));
+                        Globals.RationallyAddIn.Model.Forces.Insert(ForceIndex, correspondingForce);
                     }
                     else
                     {
-                        Globals.RationallyAddIn.Model.Forces.Add(new Force(concern, description));
+                        Globals.RationallyAddIn.Model.Forces.Add(correspondingForce);
                     }
                 }
             }

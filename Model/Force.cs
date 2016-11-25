@@ -1,14 +1,26 @@
-﻿namespace Rationally.Visio.Model
+﻿using System.Collections.Generic;
+using Rationally.Visio.View.Forces;
+
+namespace Rationally.Visio.Model
 {
     public class Force
     {
         public string Concern { get; set; }
         public string Description { get; set; }
 
+        public Dictionary<int, string> ForceValueDictionary { get; } //key is the unique identifier for a alternative
+
+        public Force()
+        {
+            Concern = ForceConcernComponent.DefaultConcern;
+            Description = ForceDescriptionComponent.DefaultDescription;
+            ForceValueDictionary = new Dictionary<int, string>();
+        }
         public Force(string concern, string description)
         {
             Concern = concern;
             Description = description;
+            ForceValueDictionary = new Dictionary<int, string>();
         }
     }
 }

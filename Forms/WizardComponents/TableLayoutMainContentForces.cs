@@ -74,7 +74,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             // ColumnDescription
             // 
             this.ColumnDescription.HeaderText = "Description";
-            this.ColumnDescription.Name = "ColumnDescription";
+            this.ColumnDescription.Name = "ColumnDescription"; 
 
             this.forcesDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnConcern,

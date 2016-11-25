@@ -1,0 +1,11 @@
+version: 1.0.{build}
+environment:
+  $certpwd: rationally
+nuget:
+  project_feed: true
+before_build:
+- nuget restore rationally_visio.sln
+- ps: "$mypwd = ConvertTo-SecureString -String \"rationally\" -Force –AsPlainText\nImport-PfxCertificate –FilePath C:\\projects\\rationally-visio\\rationally_visio_TemporaryKey.pfx cert:\\currentuser\\my -Password $mypwd"
+build:
+  project: rationally_visio.sln
+  verbosity: minimal

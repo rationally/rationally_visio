@@ -5,7 +5,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
-    internal class ForceTextChangedEventHandler : ITextChangedEventHandler
+    internal class ForceValueTextChangedEventHandler : ITextChangedEventHandler
     {
         public void Execute(RationallyView view, Shape changedShape)
         {

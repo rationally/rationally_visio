@@ -130,6 +130,8 @@
   <ItemGroup>
     <Compile Include="Enums\WizardFieldTypes.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\AlternativeTitleTextChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\ForceDescriptionTextChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\ForceConcernTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateAlternativesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateGeneralInformationHandler.cs" />
     <Compile Include="Forms\ForcesTest.cs">
@@ -219,7 +221,7 @@
       <DependentUpon>AddAlternativeWithWarning.cs</DependentUpon>
     </Compile>
     <Compile Include="EventHandlers\TextChangedEventHandlers\AlternativeStateTextChangedEventHandler.cs" />
-    <Compile Include="EventHandlers\TextChangedEventHandlers\ForceTextChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\ForceValueTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\ITextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\TextChangedEventHandlerRegistry.cs" />
     <Compile Include="Forms\ProjectSetupWizard.cs">

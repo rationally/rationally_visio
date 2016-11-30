@@ -31,7 +31,14 @@ namespace Rationally.Visio.View.Forces
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
             AlternativeUniqueIdentifier = alternativeUniqueIdentifier;
-            Globals.RationallyAddIn.Model.Forces.ForEach(force => force.ForceValueDictionary.Add(alternativeUniqueIdentifier, "0"));
+            Globals.RationallyAddIn.Model.Forces.ForEach(force =>
+            {
+                if (!force.ForceValueDictionary.ContainsKey(alternativeUniqueIdentifier))
+                {
+                    force.ForceValueDictionary.Add(alternativeUniqueIdentifier, "0");
+                }
+            });
+
             InitStyle();
         }
 

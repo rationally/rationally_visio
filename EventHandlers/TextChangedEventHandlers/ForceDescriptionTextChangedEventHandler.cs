@@ -9,7 +9,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
     {
         public void Execute(RationallyView view, Shape changedShape)
         {
-            ForceConcernComponent forceDescription = (ForceConcernComponent)view.GetComponentByShape(changedShape);
+            ForceDescriptionComponent forceDescription = (ForceDescriptionComponent)view.GetComponentByShape(changedShape);
             Globals.RationallyAddIn.Model.Forces[forceDescription.ForceIndex].Description = forceDescription.Text;
         }
     }

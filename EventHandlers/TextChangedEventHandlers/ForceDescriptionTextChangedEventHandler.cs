@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Rationally.Visio.View;
+﻿using Rationally.Visio.View;
 using Rationally.Visio.View.Forces;
 using Microsoft.Office.Interop.Visio;
 

@@ -1,17 +1,17 @@
 ﻿using System.Linq;
+using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.EventHandlers.MarkerEventHandlers;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Forces;
-using Microsoft.Office.Interop.Visio;
 
-namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
+namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
     //simulates a manual delete on the force container
     internal class StartDeleteForceEventHandler : IMarkerEventHandler
     {
         public void Execute(Shape changedShape, string identifier)
         {
-            RationallyModel model = Globals.RationallyAddIn.Model;
             //get the corresponding view tree component
             RationallyComponent forceComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
             //get his parent, or himself, if changedShape is the container already

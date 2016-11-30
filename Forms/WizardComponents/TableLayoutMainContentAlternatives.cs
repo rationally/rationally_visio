@@ -37,11 +37,11 @@ namespace Rationally.Visio.Forms.WizardComponents
             ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
 
             Dock = DockStyle.Fill;
-            Location = new System.Drawing.Point(4, 4);
+            Location = new Point(4, 4);
             Margin = new Padding(4);
             Name = "tableLayoutMainContentAlternatives";
             
-            Size = new System.Drawing.Size(760, 482);
+            Size = new Size(760, 482);
             TabIndex = 0;
 
         }

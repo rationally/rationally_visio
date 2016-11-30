@@ -5,14 +5,9 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
-    internal class TextChangedEventHandlerRegistry
+    internal static class TextChangedEventHandlerRegistry
     {
         private static Dictionary<string, List<ITextChangedEventHandler>> registry;
-
-        private TextChangedEventHandlerRegistry()
-        {
-            registry = new Dictionary<string, List<ITextChangedEventHandler>>();
-        }
 
         public static void Register(string eventKey, ITextChangedEventHandler eventHandler)
         {

@@ -45,14 +45,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         public void UpdateData()
         {
             //connect to a model resource, if one is present for this row
-            if (Globals.RationallyAddIn.Model.Alternatives.Count >= alternativeIndex)
-            {
-                Alternative = Globals.RationallyAddIn.Model.Alternatives[alternativeIndex - 1]; //map to c-indexing
-            }
-            else
-            {
-                Alternative = null;//ensures that the fields will be emptied. Is required when an alternative is deleted, but the object here is still present.
-            }
+            Alternative = Globals.RationallyAddIn.Model.Alternatives.Count >= alternativeIndex ? Globals.RationallyAddIn.Model.Alternatives[alternativeIndex - 1] : null;
             TextBoxAlternativeTitle.Text = Alternative != null ? Alternative.Title : "";
             alternativeStateDropdown.SelectedIndex = Alternative != null ? Globals.RationallyAddIn.Model.AlternativeStates.IndexOf(Alternative.Status) : 0;
         }

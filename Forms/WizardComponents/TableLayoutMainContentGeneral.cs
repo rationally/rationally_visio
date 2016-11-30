@@ -58,7 +58,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             Controls.Add(flowLayoutGeneralDate, 0, 2);
             Controls.Add(flowLayoutGeneralVersion, 0, 3);
             Dock = DockStyle.Fill;
-            Location = new System.Drawing.Point(4, 4);
+            Location = new Point(4, 4);
             Margin = new Padding(4);
             Name = "tableLayoutMainContentGeneral";
             RowCount = 4;
@@ -66,7 +66,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             RowStyles.Add(new RowStyle(SizeType.Percent, 70F));
-            Size = new System.Drawing.Size(760, 482);
+            Size = new Size(760, 482);
             TabIndex = 20;
             // 
             // flowLayoutGeneralAuthor
@@ -74,33 +74,33 @@ namespace Rationally.Visio.Forms.WizardComponents
             flowLayoutGeneralAuthor.Controls.Add(authorLabel);
             flowLayoutGeneralAuthor.Controls.Add(TextAuthor);
             flowLayoutGeneralAuthor.Dock = DockStyle.Fill;
-            flowLayoutGeneralAuthor.Location = new System.Drawing.Point(4, 52);
+            flowLayoutGeneralAuthor.Location = new Point(4, 52);
             flowLayoutGeneralAuthor.Margin = new Padding(4);
             flowLayoutGeneralAuthor.Name = "flowLayoutGeneralAuthor";
-            flowLayoutGeneralAuthor.Size = new System.Drawing.Size(752, 40);
+            flowLayoutGeneralAuthor.Size = new Size(752, 40);
             flowLayoutGeneralAuthor.TabIndex = 22;
             // 
             // label2
             // 
             authorLabel.AutoSize = true;
             authorLabel.Dock = DockStyle.Left;
-            authorLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            authorLabel.Location = new System.Drawing.Point(5, 6);
+            authorLabel.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            authorLabel.Location = new Point(5, 6);
             authorLabel.Margin = new Padding(5, 6, 5, 6);
-            authorLabel.MinimumSize = new System.Drawing.Size(100, 27);
+            authorLabel.MinimumSize = new Size(100, 27);
             authorLabel.Name = "label2";
-            authorLabel.Size = new System.Drawing.Size(100, 27);
+            authorLabel.Size = new Size(100, 27);
             authorLabel.TabIndex = 15;
             authorLabel.Text = "Author";
-            authorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            authorLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // textAuthor
             // 
-            TextAuthor.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            TextAuthor.Location = new System.Drawing.Point(215, 6);
+            TextAuthor.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TextAuthor.Location = new Point(215, 6);
             TextAuthor.Margin = new Padding(5, 6, 5, 6);
             TextAuthor.Name = "textAuthor";
-            TextAuthor.Size = new System.Drawing.Size(600, 27);
+            TextAuthor.Size = new Size(600, 27);
             TextAuthor.TabIndex = 3;
             // 
             // flowLayoutGeneralTopic
@@ -108,33 +108,33 @@ namespace Rationally.Visio.Forms.WizardComponents
             flowLayoutGeneralTopic.Controls.Add(topicLabel);
             flowLayoutGeneralTopic.Controls.Add(TextDecisionTopic);
             flowLayoutGeneralTopic.Dock = DockStyle.Fill;
-            flowLayoutGeneralTopic.Location = new System.Drawing.Point(4, 4);
+            flowLayoutGeneralTopic.Location = new Point(4, 4);
             flowLayoutGeneralTopic.Margin = new Padding(4);
             flowLayoutGeneralTopic.Name = "flowLayoutGeneralTopic";
-            flowLayoutGeneralTopic.Size = new System.Drawing.Size(752, 40);
+            flowLayoutGeneralTopic.Size = new Size(752, 40);
             flowLayoutGeneralTopic.TabIndex = 21;
             // 
             // label1
             // 
             topicLabel.AutoSize = true;
             topicLabel.Dock = DockStyle.Left;
-            topicLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            topicLabel.Location = new System.Drawing.Point(5, 6);
+            topicLabel.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            topicLabel.Location = new Point(5, 6);
             topicLabel.Margin = new Padding(5, 6, 5, 6);
-            topicLabel.MinimumSize = new System.Drawing.Size(100, 27);
+            topicLabel.MinimumSize = new Size(100, 27);
             topicLabel.Name = "label1";
-            topicLabel.Size = new System.Drawing.Size(100, 27);
+            topicLabel.Size = new Size(100, 27);
             topicLabel.TabIndex = 16;
             topicLabel.Text = "Topic";
-            topicLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            topicLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // textDecisionTopic
             // 
-            TextDecisionTopic.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            TextDecisionTopic.Location = new System.Drawing.Point(215, 6);
+            TextDecisionTopic.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TextDecisionTopic.Location = new Point(215, 6);
             TextDecisionTopic.Margin = new Padding(5, 6, 5, 6);
             TextDecisionTopic.Name = "textDecisionTopic";
-            TextDecisionTopic.Size = new System.Drawing.Size(600, 27);
+            TextDecisionTopic.Size = new Size(600, 27);
             TextDecisionTopic.TabIndex = 2;
             // 
             // flowLayoutGeneralDate
@@ -142,31 +142,31 @@ namespace Rationally.Visio.Forms.WizardComponents
             flowLayoutGeneralDate.Controls.Add(dateLabel);
             flowLayoutGeneralDate.Controls.Add(DateTimePickerCreationDate);
             flowLayoutGeneralDate.Dock = DockStyle.Fill;
-            flowLayoutGeneralDate.Location = new System.Drawing.Point(3, 99);
+            flowLayoutGeneralDate.Location = new Point(3, 99);
             flowLayoutGeneralDate.Name = "flowLayoutGeneralDate";
-            flowLayoutGeneralDate.Size = new System.Drawing.Size(754, 42);
+            flowLayoutGeneralDate.Size = new Size(754, 42);
             flowLayoutGeneralDate.TabIndex = 23;
             // 
             // label3
             // 
             dateLabel.AutoSize = true;
             dateLabel.Dock = DockStyle.Left;
-            dateLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            dateLabel.Location = new System.Drawing.Point(5, 6);
+            dateLabel.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dateLabel.Location = new Point(5, 6);
             dateLabel.Margin = new Padding(5, 6, 5, 6);
-            dateLabel.MinimumSize = new System.Drawing.Size(100, 27);
+            dateLabel.MinimumSize = new Size(100, 27);
             dateLabel.Name = "label3";
-            dateLabel.Size = new System.Drawing.Size(100, 27);
+            dateLabel.Size = new Size(100, 27);
             dateLabel.TabIndex = 17;
             dateLabel.Text = "Date";
-            dateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            dateLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // dateTimePickerCreationDate
             // 
-            DateTimePickerCreationDate.Location = new System.Drawing.Point(216, 6);
+            DateTimePickerCreationDate.Location = new Point(216, 6);
             DateTimePickerCreationDate.Margin = new Padding(6, 6, 5, 6);
             DateTimePickerCreationDate.Name = "dateTimePickerCreationDate";
-            DateTimePickerCreationDate.Size = new System.Drawing.Size(600, 27);
+            DateTimePickerCreationDate.Size = new Size(600, 27);
             DateTimePickerCreationDate.TabIndex = 3;
 
             // 
@@ -175,33 +175,33 @@ namespace Rationally.Visio.Forms.WizardComponents
             flowLayoutGeneralVersion.Controls.Add(versionLabel);
             flowLayoutGeneralVersion.Controls.Add(TextVersion);
             flowLayoutGeneralVersion.Dock = DockStyle.Fill;
-            flowLayoutGeneralVersion.Location = new System.Drawing.Point(4, 149);
+            flowLayoutGeneralVersion.Location = new Point(4, 149);
             flowLayoutGeneralVersion.Margin = new Padding(4);
             flowLayoutGeneralVersion.Name = "flowLayoutGeneralVersion";
-            flowLayoutGeneralVersion.Size = new System.Drawing.Size(752, 40);
+            flowLayoutGeneralVersion.Size = new Size(752, 40);
             flowLayoutGeneralVersion.TabIndex = 25;
             // 
             // versionlabel
             // 
             versionLabel.AutoSize = true;
             versionLabel.Dock = DockStyle.Left;
-            versionLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            versionLabel.Location = new System.Drawing.Point(5, 6);
+            versionLabel.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            versionLabel.Location = new Point(5, 6);
             versionLabel.Margin = new Padding(5, 6, 5, 6);
-            versionLabel.MinimumSize = new System.Drawing.Size(100, 27);
+            versionLabel.MinimumSize = new Size(100, 27);
             versionLabel.Name = "versionLabel";
-            versionLabel.Size = new System.Drawing.Size(100, 27);
+            versionLabel.Size = new Size(100, 27);
             versionLabel.TabIndex = 16;
             versionLabel.Text = "Version";
-            versionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            versionLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // textversion
             // 
-            TextVersion.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            TextVersion.Location = new System.Drawing.Point(215, 6);
+            TextVersion.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TextVersion.Location = new Point(215, 6);
             TextVersion.Margin = new Padding(5, 6, 5, 6);
             TextVersion.Name = "textDecisionVersion";
-            TextVersion.Size = new System.Drawing.Size(600, 27);
+            TextVersion.Size = new Size(600, 27);
             TextVersion.TabIndex = 2;
 
 

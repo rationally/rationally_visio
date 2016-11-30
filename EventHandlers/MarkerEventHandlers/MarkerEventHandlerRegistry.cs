@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
-    internal class MarkerEventHandlerRegistry
+    internal static class MarkerEventHandlerRegistry
     {
 
         private static Dictionary<string, List<IMarkerEventHandler>> registry; 

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Forms;
 using Rationally.Visio.Model;
 using Rationally.Visio.View.Forces;
@@ -11,7 +8,7 @@ using static System.String;
 
 namespace Rationally.Visio.EventHandlers.WizardPageHandlers
 {
-    class WizardUpdateForcesHandler
+    internal static class WizardUpdateForcesHandler
     {
         public static void Execute(ProjectSetupWizard wizard)
         {

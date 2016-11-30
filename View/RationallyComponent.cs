@@ -13,12 +13,12 @@ namespace Rationally.Visio.View
     /// </summary>
     public class RationallyComponent
     {
-        public double MarginTop { get; set; }
+        public double MarginTop { get; protected set; }
         public double MarginBottom { get; protected set; }
-        public double MarginLeft { get; set; }
+        public double MarginLeft { get; protected set; }
         public double MarginRight { get; protected set; }
 
-        public void SetMargin(double m)
+        protected void SetMargin(double m)
         {
             MarginTop = m;
             MarginBottom = m;

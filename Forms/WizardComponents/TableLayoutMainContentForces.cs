@@ -55,14 +55,18 @@ namespace Rationally.Visio.Forms.WizardComponents
             this.ForcesDataGrid.TabIndex = 0;
             ForcesDataGrid.BorderStyle = BorderStyle.None;
             ForcesDataGrid.BackgroundColor = Color.WhiteSmoke;//Color.FromArgb(214, 227, 255);
-            ForcesDataGrid.RowsDefaultCellStyle.BackColor = Color.FromArgb(194, 207, 242);
+            ForcesDataGrid.RowsDefaultCellStyle.BackColor = Color.FromArgb(200, 200, 200);
             ForcesDataGrid.AdvancedCellBorderStyle.All = DataGridViewAdvancedCellBorderStyle.Single;
-            ForcesDataGrid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(199, 212, 247);
+            ForcesDataGrid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(180, 180, 180);
 
+            ForcesDataGrid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(97, 192, 167);
+            ForcesDataGrid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            ForcesDataGrid.ColumnHeadersDefaultCellStyle.Font = (new WizardConstants()).HighlightedFont;
             ForcesDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised;
-            ForcesDataGrid.GridColor = Color.Gray;
 
-            ForcesDataGrid.EnableHeadersVisualStyles = true;
+            ForcesDataGrid.GridColor = Color.Gray;
+            ForcesDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(194, 207, 242);
+            ForcesDataGrid.EnableHeadersVisualStyles = false;
             InitColumns();
             this.Controls.Add(ForcesDataGrid);
         }

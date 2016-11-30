@@ -73,7 +73,7 @@ namespace Rationally.Visio.Forms
 
         private void submit_Click(object sender, System.EventArgs e)
         {
-            if (ValidateGeneralIfNotDebugging() && ValidateAlternatives())
+            if (ValidateGeneralIfNotDebugging() && ValidateAlternatives() && TableLayoutMainContentForces.IsValid())
             {
                 //wrap all changes that will be triggered by wizard changes in one undo scope
                 int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");
@@ -83,6 +83,8 @@ namespace Rationally.Visio.Forms
                 WizardUpdateGeneralInformationHandler.Execute(this);
                 //handle changes in the "Alternatives" page
                 WizardUpdateAlternativesHandler.Execute(this);
+                //handle changes in the "Forces" page
+                WizardUpdateForcesHandler.Execute(this);
 
 
                 //all changes have been made, close the scope and the wizard
@@ -170,5 +172,6 @@ namespace Rationally.Visio.Forms
             }
             return validFields;
         }
+
     }
 }

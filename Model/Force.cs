@@ -8,7 +8,7 @@ namespace Rationally.Visio.Model
         public string Concern { get; set; }
         public string Description { get; set; }
 
-        public Dictionary<int, string> ForceValueDictionary { get; } //key is the unique identifier for a alternative
+        public Dictionary<int, string> ForceValueDictionary { get; set; } //key is the unique identifier for a alternative
 
         public Force() : this(ForceConcernComponent.DefaultConcern, ForceDescriptionComponent.DefaultDescription) { }
 

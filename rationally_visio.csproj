@@ -131,6 +131,7 @@
     <Compile Include="Enums\WizardFieldTypes.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\AlternativeTitleTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateAlternativesHandler.cs" />
+    <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateForcesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateGeneralInformationHandler.cs" />
     <Compile Include="Forms\ForcesTest.cs">
       <SubType>Form</SubType>

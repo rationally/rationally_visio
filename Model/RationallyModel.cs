@@ -18,7 +18,7 @@ namespace Rationally.Visio.Model
         public string DecisionName { get; set; }
         public string DateString { get; set; }
         public string Version { get; set; }
-        public List<Force> Forces { get; }
+        public List<Force> Forces { get; set; }
 
         public RationallyModel()
         {

@@ -6,14 +6,10 @@ using System.Text;
 
 namespace Rationally.Visio.RationallyConstants
 {
-    class WizardConstants
+    internal static class WizardConstants
     {
-        public Font NormalFont;
-        public Font HighlightedFont;
-        public WizardConstants()
-        {
-            NormalFont = new Font("Calibri", 12);
-            HighlightedFont = new Font("Calibri", 12, FontStyle.Bold);
-        }
+        public static readonly Font NormalFont = new Font("Calibri", 12);
+        public static readonly Font HighlightedFont = new Font("Calibri", 12, FontStyle.Bold);
+
     }
 }

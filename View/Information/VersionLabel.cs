@@ -30,7 +30,7 @@ namespace Rationally.Visio.View.Information
             base.Repaint();
         }
 
-        public void InitStyle()
+        private void InitStyle()
         {
             SetMargin(0.01);
             SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);

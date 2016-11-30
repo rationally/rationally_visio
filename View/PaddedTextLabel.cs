@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Office.Interop.Visio;
+﻿using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View
 {
-    class PaddedTextLabel : TextLabel
+    internal class PaddedTextLabel : TextLabel
     {
         public PaddedTextLabel(Page page, Shape shape) : base(page, shape)
         {
@@ -18,7 +14,7 @@ namespace Rationally.Visio.View
             InitStyle();
         }
 
-        public void InitStyle()
+        private void InitStyle()
         {
             SetMargin(0.01);
             MarginLeft = 0.02;

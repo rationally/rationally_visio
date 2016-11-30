@@ -34,43 +34,43 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void Init()
         {
-            this.buttonShowAlternatives = new MenuButton(this);
-            this.button1 = new MenuButton(this);
-            this.buttonShowForces = new MenuButton(this);
+            buttonShowAlternatives = new MenuButton(this);
+            button1 = new MenuButton(this);
+            buttonShowForces = new MenuButton(this);
 
             // 
             // buttonShowAlternatives
             // 
             //this.buttonShowAlternatives.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
-            this.buttonShowAlternatives.FlatAppearance.BorderSize = 0;
-            this.buttonShowAlternatives.Name = "buttonShowAlternatives";
-            this.buttonShowAlternatives.UseVisualStyleBackColor = false;
+            buttonShowAlternatives.FlatAppearance.BorderSize = 0;
+            buttonShowAlternatives.Name = "buttonShowAlternatives";
+            buttonShowAlternatives.UseVisualStyleBackColor = false;
             buttonShowAlternatives.Text = "Alternatives";
-            this.buttonShowAlternatives.Click += new System.EventHandler(this.buttonShowAlternatives_Click);
+            buttonShowAlternatives.Click += buttonShowAlternatives_Click;
             // 
             // button1
             // 
             //this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))), ((int)(((byte)(242)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.Name = "button1";
+            button1.FlatAppearance.BorderSize = 0;
+            button1.Name = "button1";
             button1.Text = "General Information";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             //
             // button forces
             //
-            this.buttonShowForces.FlatAppearance.BorderSize = 0;
-            this.buttonShowForces.Name = "buttonShowForces";
+            buttonShowForces.FlatAppearance.BorderSize = 0;
+            buttonShowForces.Name = "buttonShowForces";
             buttonShowForces.Text = "Forces";
-            this.buttonShowForces.UseVisualStyleBackColor = false;
-            this.buttonShowForces.Click += new System.EventHandler(this.buttonShowForces_Click);
+            buttonShowForces.UseVisualStyleBackColor = false;
+            buttonShowForces.Click += buttonShowForces_Click;
             //self
             
-            Controls.Add(this.button1, 0, 0);
-            Controls.Add(this.buttonShowAlternatives, 0, 1);
-            Controls.Add(this.buttonShowForces, 0, 2);
+            Controls.Add(button1, 0, 0);
+            Controls.Add(buttonShowAlternatives, 0, 1);
+            Controls.Add(buttonShowForces, 0, 2);
 
-            HighLightedButton = this.button1;
+            HighLightedButton = button1;
         }
 
         private void UpdateButtons()

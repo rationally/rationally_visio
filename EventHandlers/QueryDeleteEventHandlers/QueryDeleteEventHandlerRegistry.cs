@@ -5,7 +5,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
-    internal class QueryDeleteEventHandlerRegistry
+    internal static class QueryDeleteEventHandlerRegistry
     {
         private static Dictionary<string, List<IQueryDeleteEventHandler>> registry; 
         public static void Register(string eventKey, IQueryDeleteEventHandler eventHandler)

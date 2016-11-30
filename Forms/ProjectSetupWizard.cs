@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing.Text;
 using System.Windows.Forms;
 using Rationally.Visio.Enums;
 using Rationally.Visio.RationallyConstants;
@@ -71,7 +70,7 @@ namespace Rationally.Visio.Forms
         }
 
 
-        private void submit_Click(object sender, System.EventArgs e)
+        private void submit_Click(object sender, EventArgs e)
         {
             if (ValidateGeneralIfNotDebugging() && ValidateAlternatives() && TableLayoutMainContentForces.IsValid())
             {

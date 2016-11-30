@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
-using Rationally.Visio.EventHandlers;
-using Rationally.Visio.Model;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Documents;
 using Rationally.Visio.View.Forces;

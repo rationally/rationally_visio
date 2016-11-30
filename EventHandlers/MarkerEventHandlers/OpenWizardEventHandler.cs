@@ -1,6 +1,5 @@
 ﻿using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Enums;
-using Rationally.Visio.Model;
 using Rationally.Visio.Forms;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers

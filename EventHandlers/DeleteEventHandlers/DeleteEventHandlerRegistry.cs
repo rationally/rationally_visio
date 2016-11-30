@@ -5,7 +5,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
-    internal class DeleteEventHandlerRegistry
+    internal static class DeleteEventHandlerRegistry
     {
         private static  Dictionary<string, List<IDeleteEventHandler>> registry;
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

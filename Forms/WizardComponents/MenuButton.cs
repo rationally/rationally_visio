@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Text;
 using System.Windows.Forms;
 using Rationally.Visio.RationallyConstants;
 
@@ -12,9 +11,9 @@ namespace Rationally.Visio.Forms.WizardComponents
         public MenuButton(MenuPanel containingMenu)
         {
             this.containingMenu = containingMenu;
-            this.Width = 244;
-            this.Height = 40;
-            this.TextAlign = ContentAlignment.MiddleLeft;
+            Width = 244;
+            Height = 40;
+            TextAlign = ContentAlignment.MiddleLeft;
             BackColor = Color.FromArgb(235, 235, 235);
             //FlatAppearance.MouseOverForeColor = 
             FlatStyle = FlatStyle.Flat;
@@ -25,12 +24,6 @@ namespace Rationally.Visio.Forms.WizardComponents
             Margin = new Padding(0);
 
             this.containingMenu.Buttons.Add(this);
-        }
-
-        public sealed override Color BackColor
-        {
-            get { return base.BackColor; }
-            set { base.BackColor = value; }
         }
 
         private void button1_Click(object sender, EventArgs e)

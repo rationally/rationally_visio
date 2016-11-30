@@ -1,5 +1,4 @@
-﻿using Rationally.Visio.Model;
-using Microsoft.Office.Interop.Visio;
+﻿using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {

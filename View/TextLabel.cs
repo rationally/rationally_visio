@@ -16,17 +16,16 @@ namespace Rationally.Visio.View
         private double characterWidth;
         private double contentTextWidth;
         private static readonly Regex TextLabelRegex = new Regex(@"TextLabel(\.\d+)?$");
-        private const double PixelsPerInch = 85;
         protected SizingPolicy UsedSizingPolicy { get; set; }
 
-        public TextLabel(Page page, Shape shape) : base(page)
+        protected TextLabel(Page page, Shape shape) : base(page)
         {
             RShape = shape;
 
             size = Convert.ToInt16(shape.Cells["Char.Size"].Formula.Split(' ')[0]);
         }
 
-        public TextLabel(Page page, string labelText) : base(page)
+        protected TextLabel(Page page, string labelText) : base(page)
         {
             string text = labelText;
             characterHeight = 1.0/72.0*(double) size;

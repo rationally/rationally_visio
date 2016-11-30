@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Rationally.Visio.View;
+﻿using Rationally.Visio.View;
 using Rationally.Visio.View.Forces;
 using Microsoft.Office.Interop.Visio;
 
@@ -12,6 +11,10 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
             ForceConcernComponent forceConcern = (ForceConcernComponent)view.GetComponentByShape(changedShape);
             if (forceConcern != null)
             {
+                if (forceConcern.Text == string.Empty)
+                {
+                    forceConcern.Text = ForceConcernComponent.DefaultConcern;
+                }
                 Globals.RationallyAddIn.Model.Forces[forceConcern.ForceIndex].Concern = forceConcern.Text;
             }
         }

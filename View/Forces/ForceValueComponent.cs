@@ -90,6 +90,11 @@ namespace Rationally.Visio.View.Forces
                 UpdateAlternativeLabels();
                 UpdateReorderFunctions();
 
+                if (Text != Globals.RationallyAddIn.Model.Forces[ForceIndex].ForceValueDictionary[AlternativeUniqueIdentifier])
+                {
+                    Text = Globals.RationallyAddIn.Model.Forces[ForceIndex].ForceValueDictionary[AlternativeUniqueIdentifier];
+                }
+
                 string toParse = Text.StartsWith("+") ? Text.Substring(1) : Text;
                 int value;
                 int.TryParse(toParse, out value);

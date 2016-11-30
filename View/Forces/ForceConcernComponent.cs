@@ -70,6 +70,10 @@ namespace Rationally.Visio.View.Forces
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio does this for us
             {
                 UpdateReorderFunctions();
+                if (Text != Globals.RationallyAddIn.Model.Forces[ForceIndex].Concern)
+                {
+                    Text = Globals.RationallyAddIn.Model.Forces[ForceIndex].Concern;
+                }
             }
             base.Repaint();
         }

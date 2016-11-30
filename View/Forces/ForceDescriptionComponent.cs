@@ -68,6 +68,10 @@ namespace Rationally.Visio.View.Forces
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 UpdateReorderFunctions();
+                if (Text != Globals.RationallyAddIn.Model.Forces[ForceIndex].Description)
+                {
+                    Text = Globals.RationallyAddIn.Model.Forces[ForceIndex].Description;
+                }
             }
             base.Repaint();
         }

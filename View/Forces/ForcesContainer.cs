@@ -117,6 +117,14 @@ namespace Rationally.Visio.View.Forces
                     {
                         Children.Add(new ForceContainer(Page, i, true));
                     }
+                    if (Children.Any(c => c is ForceTotalsRow))
+                    {
+                        RationallyComponent toMove = Children.First(c => c is ForceTotalsRow);
+                        int toMoveIndex = Children.IndexOf(toMove);
+                        RationallyComponent toSwapWith = Children.Last();
+                        Children[Children.Count - 1] = toMove;
+                        Children[toMoveIndex] = toSwapWith;
+                    }
                 }
             }
             base.Repaint();

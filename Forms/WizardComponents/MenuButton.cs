@@ -9,7 +9,6 @@ namespace Rationally.Visio.Forms.WizardComponents
     public sealed class MenuButton : AntiAliasedButton
     {
         private readonly MenuPanel containingMenu;
-        private readonly WizardConstants wizardConstants;
         public MenuButton(MenuPanel containingMenu)
         {
             this.containingMenu = containingMenu;
@@ -24,7 +23,6 @@ namespace Rationally.Visio.Forms.WizardComponents
             MouseLeave += button1_MouseLeave;
             Click += button1_Click;
             Margin = new Padding(0);
-            wizardConstants = new WizardConstants();
 
             this.containingMenu.Buttons.Add(this);
         }
@@ -59,7 +57,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         public void Highlight()
         {
-            Font = wizardConstants.HighlightedFont;
+            Font = WizardConstants.HighlightedFont;
             BackColor = Color.FromArgb(194, 207, 242);
             Refresh();
         }
@@ -67,7 +65,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         public void Lowlight()
         {
             BackColor = Color.FromArgb(235, 235, 235);
-            Font = wizardConstants.NormalFont;
+            Font = WizardConstants.NormalFont;
         }
 
     }

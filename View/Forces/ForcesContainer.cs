@@ -107,5 +107,19 @@ namespace Rationally.Visio.View.Forces
                 }
             }
         }
+        public override void Repaint()
+        {
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+            {
+                if (Children.Count != 0 && Children.Count - 2 < Globals.RationallyAddIn.Model.Forces.Count)
+                {
+                    for (int i = Children.Count - 2; i < Globals.RationallyAddIn.Model.Forces.Count; i++)
+                    {
+                        Children.Add(new ForceContainer(Page, i, true));
+                    }
+                }
+            }
+            base.Repaint();
+        }
     }
 }

@@ -147,6 +147,12 @@
     <Compile Include="Forms\WizardComponents\AntiAliasedLabel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\WizardComponents\FlowLayoutDocument.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\WizardComponents\TableLayoutMainContentDocuments.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\WizardComponents\TableLayoutMainContentForces.cs">
       <SubType>Component</SubType>
     </Compile>

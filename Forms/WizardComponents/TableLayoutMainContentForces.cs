@@ -61,7 +61,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
             ForcesDataGrid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(97, 192, 167);
             ForcesDataGrid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            ForcesDataGrid.ColumnHeadersDefaultCellStyle.Font = (new WizardConstants()).HighlightedFont;
+            ForcesDataGrid.ColumnHeadersDefaultCellStyle.Font = WizardConstants.HighlightedFont;
             ForcesDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised;
 
             ForcesDataGrid.GridColor = Color.Gray;

@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.EventHandlers.MarkerEventHandlers;
-using Rationally.Visio.Model;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Forces;
 

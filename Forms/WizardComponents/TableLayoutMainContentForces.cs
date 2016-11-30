@@ -48,22 +48,21 @@ namespace Rationally.Visio.Forms.WizardComponents
                 TabIndex = 0,
                 BorderStyle = BorderStyle.None,
                 BackgroundColor = Color.WhiteSmoke,
-                RowsDefaultCellStyle = {BackColor = Color.FromArgb(230, 230, 230)}
+                RowsDefaultCellStyle = {BackColor = Color.FromArgb(230, 230, 230)},
+                GridColor = Color.Gray,
+                EnableHeadersVisualStyles = false,
+                ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised,
             };
 
 
-            //Color.FromArgb(214, 227, 255);
             ForcesDataGrid.AdvancedCellBorderStyle.All = DataGridViewAdvancedCellBorderStyle.Single;
             ForcesDataGrid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(210, 210, 210);
             
-            ForcesDataGrid.GridColor = Color.Gray;
             ForcesDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(194, 207, 242);
-            ForcesDataGrid.EnableHeadersVisualStyles = false;
 
             ForcesDataGrid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(97, 192, 167);
             ForcesDataGrid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             ForcesDataGrid.ColumnHeadersDefaultCellStyle.Font = WizardConstants.HighlightedFont;
-            ForcesDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised;
             InitColumns();
             Controls.Add(ForcesDataGrid);
         }

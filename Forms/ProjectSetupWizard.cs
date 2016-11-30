@@ -78,13 +78,15 @@ namespace Rationally.Visio.Forms
                 //wrap all changes that will be triggered by wizard changes in one undo scope
                 int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");
 
-
+                Globals.RationallyAddIn.View.Page = Globals.RationallyAddIn.Application.ActivePage;
+                Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
                 //handle changes in the "General Information" page
                 WizardUpdateGeneralInformationHandler.Execute(this);
-                //handle changes in the "Alternatives" page
-                WizardUpdateAlternativesHandler.Execute(this);
                 //handle changes in the "Forces" page
                 WizardUpdateForcesHandler.Execute(this);
+                //handle changes in the "Alternatives" page
+                WizardUpdateAlternativesHandler.Execute(this);
+                
 
 
                 //all changes have been made, close the scope and the wizard

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
-    class TableLayoutMainContentDocuments : TableLayoutPanel
+    internal class TableLayoutMainContentDocuments : TableLayoutPanel
     {
         private List<FlowLayoutDocument> documents;
         public TableLayoutMainContentDocuments()
@@ -23,7 +20,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             Controls.Add(documents[0],0,0);
             Dock = DockStyle.Fill;
-            Location = new System.Drawing.Point(4, 4);
+            Location = new Point(4, 4);
             Margin = new Padding(4);
             Name = "tableLayoutMainContentDocuments";
             RowCount = 1;

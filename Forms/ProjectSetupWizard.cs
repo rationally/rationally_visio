@@ -41,7 +41,7 @@ namespace Rationally.Visio.Forms
             tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.DateString;
             tableLayoutMainContentGeneral.TextVersion.Text = Globals.RationallyAddIn.Model.Version;
             TableLayoutMainContentAlternatives.AlternativeRows.ForEach(a => a.UpdateData());
-            TableLayoutMainContentForces.InitColumns();
+            TableLayoutMainContentForces.InitData();
             if (DocumentCreation)
             {
                 CreateButton.Text = Messages.Wizard_CreateButton_CreateView;

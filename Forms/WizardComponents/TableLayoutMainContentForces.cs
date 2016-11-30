@@ -92,9 +92,28 @@ namespace Rationally.Visio.Forms.WizardComponents
             }
         }
 
-        private void InitData()
+        public void InitData()
         {
+            //update column count to match current amount of alternatives
+            InitColumns();
+            //clear current rows
+            this.forcesDataGrid.Rows.Clear();
+            //create a row for each force in the view, matching the forces table from the view
+            foreach (Force force in Globals.RationallyAddIn.Model.Forces)
+            {
+                DataGridViewRow newRow = (DataGridViewRow)forcesDataGrid.RowTemplate.Clone();
+                newRow.Cells.Add(new DataGridViewTextBoxCell() {Value = force.Concern});
+                newRow.Cells.Add(new DataGridViewTextBoxCell() { Value = force.Description });
+                //newRow.Cells[0].Value = force.Concern;
+                //newRow.Cells[1].Value = force.Description;
+                int i = 2;
+                foreach (Alternative alternative in Globals.RationallyAddIn.Model.Alternatives)
+                {
+                    newRow.Cells.Add(new DataGridViewTextBoxCell() {Value = force.ForceValueDictionary[alternative.UniqueIdentifier]});
+                }
+                    //newRow.Cells[i++].Value = force.ForceValueDictionary[alternative.UniqueIdentifier];
 
+            }
         }
     }
 }

@@ -37,7 +37,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // ButtonShowGeneral
             // 
             this.button1.Location = new System.Drawing.Point(12, 51);
             this.button1.Name = "Btn_Down";

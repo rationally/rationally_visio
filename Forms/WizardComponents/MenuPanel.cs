@@ -6,7 +6,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 {
     public class MenuPanel : TableLayoutPanel
     {
-        private MenuButton button1;
+        public readonly MenuButton ButtonShowGeneral;
         private MenuButton buttonShowAlternatives;
         private MenuButton buttonShowForces;
 
@@ -28,16 +28,15 @@ namespace Rationally.Visio.Forms.WizardComponents
         {
             
             Buttons = new List<MenuButton>();
+            buttonShowAlternatives = new MenuButton(this);
+            ButtonShowGeneral = new MenuButton(this);
+            buttonShowForces = new MenuButton(this);
             Init();
 
         }
 
         private void Init()
         {
-            buttonShowAlternatives = new MenuButton(this);
-            button1 = new MenuButton(this);
-            buttonShowForces = new MenuButton(this);
-
             // 
             // buttonShowAlternatives
             // 
@@ -48,14 +47,14 @@ namespace Rationally.Visio.Forms.WizardComponents
             buttonShowAlternatives.Text = "Alternatives";
             buttonShowAlternatives.Click += buttonShowAlternatives_Click;
             // 
-            // button1
+            // ButtonShowGeneral
             // 
-            //this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))), ((int)(((byte)(242)))));
-            button1.FlatAppearance.BorderSize = 0;
-            button1.Name = "button1";
-            button1.Text = "General Information";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            //this.ButtonShowGeneral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))), ((int)(((byte)(242)))));
+            ButtonShowGeneral.FlatAppearance.BorderSize = 0;
+            ButtonShowGeneral.Name = "ButtonShowGeneral";
+            ButtonShowGeneral.Text = "General Information";
+            ButtonShowGeneral.UseVisualStyleBackColor = false;
+            ButtonShowGeneral.Click += ButtonShowGeneralClick;
             //
             // button forces
             //
@@ -66,11 +65,11 @@ namespace Rationally.Visio.Forms.WizardComponents
             buttonShowForces.Click += buttonShowForces_Click;
             //self
             
-            Controls.Add(button1, 0, 0);
+            Controls.Add(ButtonShowGeneral, 0, 0);
             Controls.Add(buttonShowAlternatives, 0, 1);
             Controls.Add(buttonShowForces, 0, 2);
 
-            HighLightedButton = button1;
+            HighLightedButton = ButtonShowGeneral;
         }
 
         private void UpdateButtons()
@@ -88,7 +87,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             ProjectSetupWizard.Instance.flowLayoutBottomButtons.Refresh();
         }
 
-        private void button1_Click(object sender, System.EventArgs e)
+        private void ButtonShowGeneralClick(object sender, System.EventArgs e)
         {
             ProjectSetupWizard.Instance.SetGeneralPanel();
         }

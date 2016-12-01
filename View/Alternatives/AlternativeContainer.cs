@@ -98,6 +98,8 @@ namespace Rationally.Visio.View.Alternatives
 
             //Events
             AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete alternative\"", false);
+
+            LinePattern = 16;
             InitStyle();
         }
 
@@ -110,7 +112,6 @@ namespace Rationally.Visio.View.Alternatives
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
-            LinePattern = 16;
         }
 
         public void SetAlternativeIdentifier(int alternativeIndex)

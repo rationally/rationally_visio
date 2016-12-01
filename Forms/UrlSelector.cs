@@ -18,12 +18,14 @@ namespace Rationally.Visio.Forms
                 MessageBox.Show("Enter an url.", "Url missing");
                 DialogResult = DialogResult.None;
                 return;
-            }else if (!IsValidUrl(urlTextBox.Text))
+            }
+            if (!IsValidUrl(urlTextBox.Text))
             {
                 MessageBox.Show("Enter a proper url, including the protocol to use.", "Url invalid");
                 DialogResult = DialogResult.None;
                 return;
-            }else if (string.IsNullOrWhiteSpace(nameTextbox.Text))
+            }
+            if (string.IsNullOrWhiteSpace(nameTextbox.Text))
             {
                 MessageBox.Show("Enter a name.", "Name missing");
                 DialogResult = DialogResult.None;
@@ -33,9 +35,6 @@ namespace Rationally.Visio.Forms
             DialogResult = DialogResult.OK;
         }
 
-        private static bool IsValidUrl(string url)
-        {
-            return Uri.IsWellFormedUriString(url, UriKind.Absolute);
-        }
+        private static bool IsValidUrl(string url) => Uri.IsWellFormedUriString(url, UriKind.Absolute);
     }
 }

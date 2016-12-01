@@ -131,11 +131,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             return forceGridIsValid;
         }
 
-        private bool ValidateRow(DataGridViewRow row)
-        {
-            //the whole row must be empty, or a force concern must be entered
-            return (row.Cells.Cast<DataGridViewTextBoxCell>().All(cell => IsNullOrEmpty(cell.Value?.ToString())))
-                   || (!IsNullOrEmpty(row.Cells[0].Value?.ToString()));
-        }
+        private bool ValidateRow(DataGridViewRow row) => row.Cells.Cast<DataGridViewTextBoxCell>().All(cell => IsNullOrEmpty(cell.Value?.ToString()))
+                                                         || !IsNullOrEmpty(row.Cells[0].Value?.ToString());
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
-    class FlowLayoutDocument : FlowLayoutPanel
+    internal class FlowLayoutDocument : FlowLayoutPanel
     {
     }
 }

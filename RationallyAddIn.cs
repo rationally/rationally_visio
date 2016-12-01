@@ -230,7 +230,7 @@ namespace Rationally.Visio
         //Fired when any text is changed
         private void Application_TextChangedEvent(Shape shape)
         { 
-            if (shape.Document.Template.Contains(Constants.TemplateName) && shape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+            if (shape.Document.Template.Contains(Constants.TemplateName) && (shape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists))
             {
                 Log.Debug("TextChanged: shapeName: " + shape.Name);
                 string rationallyType = shape.CellsU[CellConstants.RationallyType].ResultStr["Value"];
@@ -241,7 +241,7 @@ namespace Rationally.Visio
         //Fired when the user clicks on the main window from a different window.
         private void Application_WindowActivatedEvent(Window w)
         {
-            if (w.Type == (short)VisWinTypes.visDrawing && w.Document.Template.Contains(Constants.TemplateName)) //VisDrawing is the main sheet
+            if ((w.Type == (short)VisWinTypes.visDrawing) && w.Document.Template.Contains(Constants.TemplateName)) //VisDrawing is the main sheet
             {
                 Log.Debug("Window activated event handler enter");
                 View.Page = Application.ActivePage;
@@ -285,7 +285,7 @@ namespace Rationally.Visio
         private void Application_CellChangedEvent(Cell cell)
         {
             Shape changedShape = cell.Shape;
-            if (changedShape == null || !changedShape.Document.Template.Contains(Constants.TemplateName) || changedShape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] != Constants.CellExists) //No need to continue when the shape is not part of our model.
+            if ((changedShape == null) || !changedShape.Document.Template.Contains(Constants.TemplateName) || (changedShape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] != Constants.CellExists)) //No need to continue when the shape is not part of our model.
             {
                 return;
             }
@@ -346,7 +346,7 @@ namespace Rationally.Visio
 
         private void Application_ShapeAddedEvent(Shape s)
         {
-            if (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists && !View.ExistsInTree(s))
+            if ((s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists) && !View.ExistsInTree(s))
             {
                 View.AddToTree(s, true);
             }
@@ -356,7 +356,7 @@ namespace Rationally.Visio
         {
             List<Shape> toBeDeleted = e.Cast<Shape>().ToList();
             Log.Debug("before shape deleted event for " + e.Count + " shapes.");
-            if(toBeDeleted.Any(s => s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "forceHeaderRow" || s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "forceTotalsRow"))
+            if(toBeDeleted.Any(s => (s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "forceHeaderRow") || (s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "forceTotalsRow")))
             {
                 if (toBeDeleted.All(s => s.CellsU[CellConstants.RationallyType].ResultStr["Value"] != "forces"))
                 {
@@ -366,7 +366,7 @@ namespace Rationally.Visio
             }
 
             //store the rationally type of the last shape, which is responsible for ending the undo scope
-            if (string.IsNullOrEmpty(LastDelete) && StartedUndoState == 0)
+            if (string.IsNullOrEmpty(LastDelete) && (StartedUndoState == 0))
             {
                 LastDelete = toBeDeleted.Last().Name;
                 Globals.RationallyAddIn.StartedUndoState = Globals.RationallyAddIn.Application.BeginUndoScope("Delete shape");
@@ -426,7 +426,7 @@ namespace Rationally.Visio
                         RebuildTree(s.ContainingPage.Document);
                     }
                 }
-                if (StartedUndoState != 0 && s.Name == LastDelete)
+                if ((StartedUndoState != 0) && (s.Name == LastDelete))
                 {
                     Log.Debug("ending undo scope");
                    Application.EndUndoScope(StartedUndoState, true);
@@ -460,11 +460,8 @@ namespace Rationally.Visio
         }
 
         //Designer method. Called when application is started.
-        private void InternalStartup()
-        {
-            Startup += RationallyAddIn_Startup;
-        }
-        
+        private void InternalStartup() => Startup += RationallyAddIn_Startup;
+
         private static void DelegateCreateDocumentEvent(IVDocument d)
         {
             if (d.Template.Contains(Constants.TemplateName))

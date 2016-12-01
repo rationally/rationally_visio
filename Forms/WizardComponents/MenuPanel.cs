@@ -7,8 +7,8 @@ namespace Rationally.Visio.Forms.WizardComponents
     public class MenuPanel : TableLayoutPanel
     {
         public readonly MenuButton ButtonShowGeneral;
-        private MenuButton buttonShowAlternatives;
-        private MenuButton buttonShowForces;
+        private readonly MenuButton buttonShowAlternatives;
+        private readonly MenuButton buttonShowForces;
 
         public readonly List<MenuButton> Buttons;
 
@@ -87,10 +87,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             ProjectSetupWizard.Instance.flowLayoutBottomButtons.Refresh();
         }
 
-        private void ButtonShowGeneralClick(object sender, System.EventArgs e)
-        {
-            ProjectSetupWizard.Instance.SetGeneralPanel();
-        }
+        private void ButtonShowGeneralClick(object sender, System.EventArgs e) => ProjectSetupWizard.Instance.SetGeneralPanel();
 
         private void buttonShowForces_Click(object sender, System.EventArgs e)
         {

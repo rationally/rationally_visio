@@ -6,7 +6,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 {
     internal class TableLayoutMainContentDocuments : TableLayoutPanel
     {
-        private List<FlowLayoutDocument> documents;
+        private readonly List<FlowLayoutDocument> documents;
         public TableLayoutMainContentDocuments()
         {
             documents = new List<FlowLayoutDocument>() { new FlowLayoutDocument() };

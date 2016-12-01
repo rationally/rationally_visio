@@ -18,7 +18,7 @@ namespace Rationally.Visio.Forms
         {
             get
             {
-                if (instance == null || instance.IsDisposed)
+                if (instance?.IsDisposed != true)
                 {
                     instance = new ProjectSetupWizard();
                 }
@@ -167,7 +167,7 @@ namespace Rationally.Visio.Forms
 
         private bool ValidateAlternatives()
         {
-            bool validFields = TableLayoutMainContentAlternatives.AlternativeRows.TrueForAll(row => row.Alternative == null || !string.IsNullOrWhiteSpace(row.TextBoxAlternativeTitle.Text));
+            bool validFields = TableLayoutMainContentAlternatives.AlternativeRows.TrueForAll(row => (row.Alternative == null) || !string.IsNullOrWhiteSpace(row.TextBoxAlternativeTitle.Text));
             if (!validFields)
             {
                 MessageBox.Show("Enter a name for every existing alternative.", "Alternative name missing");

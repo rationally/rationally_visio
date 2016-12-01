@@ -133,6 +133,7 @@
     <Compile Include="EventHandlers\TextChangedEventHandlers\ForceDescriptionTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\ForceConcernTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateAlternativesHandler.cs" />
+    <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateDocumentsHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateForcesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateGeneralInformationHandler.cs" />
     <Compile Include="Forms\WizardComponents\AntiAliasedButton.cs">

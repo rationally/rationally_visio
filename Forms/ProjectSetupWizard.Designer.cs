@@ -157,6 +157,7 @@ namespace Rationally.Visio.Forms
         public TableLayoutMainContentGeneral tableLayoutMainContentGeneral;//here
         public TableLayoutMainContentAlternatives TableLayoutMainContentAlternatives = new TableLayoutMainContentAlternatives();
         public TableLayoutMainContentForces TableLayoutMainContentForces = new TableLayoutMainContentForces();
+        public TableLayoutMainContentDocuments TableLayoutMainContentDocuments = new TableLayoutMainContentDocuments();
         public System.Windows.Forms.FlowLayoutPanel flowLayoutBottomButtons;
         
         

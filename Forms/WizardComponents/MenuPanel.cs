@@ -9,6 +9,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         private MenuButton button1;
         private MenuButton buttonShowAlternatives;
         private MenuButton buttonShowForces;
+        private MenuButton buttonShowRelatedDocuments;
 
         public readonly List<MenuButton> Buttons;
 
@@ -37,7 +38,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             buttonShowAlternatives = new MenuButton(this);
             button1 = new MenuButton(this);
             buttonShowForces = new MenuButton(this);
-
+            buttonShowRelatedDocuments = new MenuButton(this);
             // 
             // buttonShowAlternatives
             // 
@@ -64,12 +65,20 @@ namespace Rationally.Visio.Forms.WizardComponents
             buttonShowForces.Text = "Forces";
             buttonShowForces.UseVisualStyleBackColor = false;
             buttonShowForces.Click += buttonShowForces_Click;
+            //
+            // button forces
+            //
+            buttonShowRelatedDocuments.FlatAppearance.BorderSize = 0;
+            buttonShowRelatedDocuments.Name = "buttonShowRelatedDocuments";
+            buttonShowRelatedDocuments.Text = "Related Documents";
+            buttonShowRelatedDocuments.UseVisualStyleBackColor = false;
+            buttonShowRelatedDocuments.Click += buttonShowDocuments_Click;
             //self
-            
+
             Controls.Add(button1, 0, 0);
             Controls.Add(buttonShowAlternatives, 0, 1);
             Controls.Add(buttonShowForces, 0, 2);
-
+            Controls.Add(buttonShowRelatedDocuments,0,3);
             HighLightedButton = button1;
         }
 
@@ -97,6 +106,14 @@ namespace Rationally.Visio.Forms.WizardComponents
         {
             ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
             ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentForces);
+            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.flowLayoutBottomButtons);
+            ProjectSetupWizard.Instance.flowLayoutBottomButtons.Refresh();
+        }
+
+        private void buttonShowDocuments_Click(object sender, System.EventArgs e)
+        {
+            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
+            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentDocuments);
             ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.flowLayoutBottomButtons);
             ProjectSetupWizard.Instance.flowLayoutBottomButtons.Refresh();
         }

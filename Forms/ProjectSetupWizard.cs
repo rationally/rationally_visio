@@ -72,7 +72,7 @@ namespace Rationally.Visio.Forms
 
         private void submit_Click(object sender, EventArgs e)
         {
-            if (ValidateGeneralIfNotDebugging() && ValidateAlternatives() && TableLayoutMainContentForces.IsValid())
+            if (ValidateGeneralIfNotDebugging() && ValidateAlternatives() && TableLayoutMainContentForces.IsValid() && TableLayoutMainContentDocuments.IsValid())
             {
                 //wrap all changes that will be triggered by wizard changes in one undo scope
                 int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");

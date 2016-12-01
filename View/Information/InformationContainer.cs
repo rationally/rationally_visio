@@ -16,7 +16,7 @@ namespace Rationally.Visio.View.Information
 
         public InformationContainer(Page page, string author, string date, string version) : base(page)
         {
-            InitStyle();
+           
 
             
 
@@ -25,6 +25,7 @@ namespace Rationally.Visio.View.Information
             RShape.Name = "Information";
 
             InitContent(page, author, date, version);
+            InitStyle();
         }
 
         public InformationContainer(Page page, Shape s) : base(page, false)
@@ -78,6 +79,7 @@ namespace Rationally.Visio.View.Information
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
+            MsvSdContainerLocked = true;
             UsedSizingPolicy = SizingPolicy.FixedSize;
         }
 

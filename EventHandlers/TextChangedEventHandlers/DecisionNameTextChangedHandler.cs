@@ -7,7 +7,10 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
     {
         public void Execute(RationallyView view, Shape changedShape)
         {
-            Globals.RationallyAddIn.Model.DecisionName = changedShape.Text;
+            if (changedShape.Text != string.Empty)
+            {
+                Globals.RationallyAddIn.Model.DecisionName = changedShape.Text;
+            }
         }
     }
 }

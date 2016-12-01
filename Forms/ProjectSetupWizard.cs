@@ -126,6 +126,7 @@ namespace Rationally.Visio.Forms
 
         public void SetGeneralPanel()
         {
+            tableLayoutLeftMenu.HighLightedButton = tableLayoutLeftMenu.ButtonShowGeneral;
             tableLayoutRightColumn.Controls.Clear();
             tableLayoutRightColumn.Controls.Add(tableLayoutMainContentGeneral);
             tableLayoutRightColumn.Controls.Add(flowLayoutBottomButtons);

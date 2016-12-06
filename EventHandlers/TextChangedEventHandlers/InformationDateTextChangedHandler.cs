@@ -5,9 +5,6 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
     internal class InformationDateTextChangedHandler : ITextChangedEventHandler
     {
-        public void Execute(RationallyView view, Shape changedShape)
-        {
-            Globals.RationallyAddIn.Model.DateString = changedShape.Text;
-        }
+        public void Execute(RationallyView view, Shape changedShape) => Globals.RationallyAddIn.Model.DateString = changedShape.Text;
     }
 }

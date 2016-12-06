@@ -37,12 +37,12 @@ namespace Rationally.Visio.View.Forces
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 //insert header, if it is absent
-                if (Children.Count == 0 || !Children.Any(c => c is ForceHeaderRow))
+                if ((Children.Count == 0) || !Children.Any(c => c is ForceHeaderRow))
                 {
                     Children.Insert(0, new ForceHeaderRow(Page));
                 }
                 //insert footer, if it is absent
-                if (Children.Count == 0 || !Children.Any(c => c is ForceTotalsRow))
+                if ((Children.Count == 0) || !Children.Any(c => c is ForceTotalsRow))
                 {
                     Children.Add(new ForceTotalsRow(Page));
                 }
@@ -63,10 +63,7 @@ namespace Rationally.Visio.View.Forces
             LayoutManager = new VerticalStretchLayout(this);
         }
         
-        public static bool IsForcesContainer(string name)
-        {
-            return ForcesRegex.IsMatch(name);
-        }
+        public static bool IsForcesContainer(string name) => ForcesRegex.IsMatch(name);
 
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
@@ -111,7 +108,7 @@ namespace Rationally.Visio.View.Forces
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                if (Children.Count != 0 && Children.Count - 2 < Globals.RationallyAddIn.Model.Forces.Count)
+                if ((Children.Count != 0) && ((Children.Count - 2) < Globals.RationallyAddIn.Model.Forces.Count))
                 {
                     for (int i = Children.Count - 2; i < Globals.RationallyAddIn.Model.Forces.Count; i++)
                     {

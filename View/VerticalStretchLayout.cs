@@ -106,14 +106,14 @@ namespace Rationally.Visio.View
 
             if (overflowInX && expandXIfNeeded)
             {
-                toManage.Width = x + xIncrease - topLeftX + Constants.Epsilon;
+                toManage.Width = ((x + xIncrease) - topLeftX) + Constants.Epsilon;
                 toManage.CenterX = topLeftX + (toManage.Width / 2.0);
 
             }
 
             if (overflowInY && expandYIfNeeded)
             {
-                toManage.Height = topLeftY - (y - yIncrease) + Constants.Epsilon;
+                toManage.Height = (topLeftY - (y - yIncrease)) + Constants.Epsilon;
                 toManage.CenterY = topLeftY - (toManage.Height / 2.0);
             }
         }
@@ -142,7 +142,7 @@ namespace Rationally.Visio.View
 
             if (underflowInY && shrinkYIfNeeded)
             {
-                toManage.Height = topLeftY - contentYEnd + Constants.Epsilon;
+                toManage.Height = (topLeftY - contentYEnd) + Constants.Epsilon;
                 toManage.CenterY = topLeftY - (toManage.Height / 2.0);
             }
         }

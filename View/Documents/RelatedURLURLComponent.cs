@@ -33,10 +33,7 @@ namespace Rationally.Visio.View.Documents
             SetUsedSizingPolicy(UsedSizingPolicy &= ~SizingPolicy.ExpandXIfNeeded);//we want to remove this one from the policy: AND with everything else on true
         }
 
-        public static bool IsRelatedUrlUrlComponent(string name)
-        {
-            return UrlUrlRegex.IsMatch(name);
-        }
+        public static bool IsRelatedUrlUrlComponent(string name) => UrlUrlRegex.IsMatch(name);
 
         private void UpdateReorderFunctions()
         {

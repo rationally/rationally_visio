@@ -43,10 +43,7 @@ namespace Rationally.Visio.View.Forces
             FontColor = "RGB(89,131,168)";
         }
 
-        public static bool IsForceDescription(string name)
-        {
-            return ForceDescriptionRegex.IsMatch(name);
-        }
+        public static bool IsForceDescription(string name) => ForceDescriptionRegex.IsMatch(name);
 
         private void UpdateReorderFunctions()
         {

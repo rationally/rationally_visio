@@ -285,6 +285,7 @@ namespace Rationally.Visio
         private void Application_CellChangedEvent(Cell cell)
         {
             Shape changedShape = cell.Shape;
+            // ReSharper disable once MergeSequentialChecksWhenPossible
             if ((changedShape == null) || !changedShape.Document.Template.Contains(Constants.TemplateName) || (changedShape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] != Constants.CellExists)) //No need to continue when the shape is not part of our model.
             {
                 return;

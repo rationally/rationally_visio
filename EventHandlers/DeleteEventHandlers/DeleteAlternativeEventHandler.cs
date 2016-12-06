@@ -17,7 +17,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
         {
             Log.Debug("Entered delete alternative event handler.");
             //store the rationally type of the last shape, which is responsible for ending the undo scope
-            if (string.IsNullOrEmpty(Globals.RationallyAddIn.LastDelete) && Globals.RationallyAddIn.StartedUndoState == 0 && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+            if (string.IsNullOrEmpty(Globals.RationallyAddIn.LastDelete) && (Globals.RationallyAddIn.StartedUndoState == 0) && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 Log.Debug("Starting undo scope.");
                 Globals.RationallyAddIn.LastDelete = changedShape.Name;

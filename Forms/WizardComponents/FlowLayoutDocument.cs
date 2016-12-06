@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Rationally.Visio.Model;
-using Rationally.Visio.View.Documents;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
-    public class FlowLayoutDocument : FlowLayoutPanel
+    public sealed class FlowLayoutDocument : FlowLayoutPanel
     {
         private readonly int documentIndex;
 
-        internal readonly AntiAliasedLabel FileNameLabel;
+        private readonly AntiAliasedLabel fileNameLabel;
         internal readonly TextBox FileName;
         private readonly AntiAliasedLabel filePathLabel;
         internal readonly TextBox FilePath;
@@ -28,12 +24,12 @@ namespace Rationally.Visio.Forms.WizardComponents
 
             Dock = DockStyle.Fill;
             //this.Anchor = AnchorStyles.Left;
-            Location = new System.Drawing.Point(3, 3);
+            Location = new Point(3, 3);
             Name = "flowLayoutPanelDocument" + this.documentIndex;
-            Size = new System.Drawing.Size(714, 84);
+            Size = new Size(714, 84);
             TabIndex = 0;
 
-            FileNameLabel = new AntiAliasedLabel();
+            fileNameLabel = new AntiAliasedLabel();
             FileName = new TextBox();
             filePathLabel = new AntiAliasedLabel();
             FilePath = new TextBox();
@@ -45,7 +41,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void Init()
         {
-            Controls.Add(FileNameLabel);
+            Controls.Add(fileNameLabel);
             Controls.Add(FileName);
             Controls.Add(filePathLabel);
             Controls.Add(FilePath);
@@ -54,45 +50,45 @@ namespace Rationally.Visio.Forms.WizardComponents
             //
             // fileNameLabel
             //
-            FileNameLabel.AutoSize = true;
-            FileNameLabel.Location = new System.Drawing.Point(3, 9);
-            FileNameLabel.Margin = new Padding(3, 10, 3, 0);
-            FileNameLabel.Name = "fileNameLabel";
-            FileNameLabel.Size = new System.Drawing.Size(100, 19);
-            FileNameLabel.TabIndex = 0;
-            FileNameLabel.Text = "Name:";
+            fileNameLabel.AutoSize = true;
+            fileNameLabel.Location = new Point(3, 9);
+            fileNameLabel.Margin = new Padding(3, 10, 3, 0);
+            fileNameLabel.Name = "fileNameLabel";
+            fileNameLabel.Size = new Size(100, 19);
+            fileNameLabel.TabIndex = 0;
+            fileNameLabel.Text = "Name:";
             //
             // fileName
             //
-            FileName.Location = new System.Drawing.Point(110, 7);
+            FileName.Location = new Point(110, 7);
             FileName.Margin = new Padding(3, 6, 400, 3);
             FilePath.Name = "fileName";
-            FileName.Size = new System.Drawing.Size(300, 27);
+            FileName.Size = new Size(300, 27);
             FileName.TabIndex = 1;
             //
             // filepathlabel
             //
             filePathLabel.AutoSize = true;
-            filePathLabel.Location = new System.Drawing.Point(3, 59);
+            filePathLabel.Location = new Point(3, 59);
             filePathLabel.Margin = new Padding(3, 10, 3, 0);
             filePathLabel.Name = "filePathLabel";
-            filePathLabel.Size = new System.Drawing.Size(100, 19);
+            filePathLabel.Size = new Size(100, 19);
             filePathLabel.TabIndex = 2;
             filePathLabel.Text = "Path:";
             //
             // filepath
             //
-            FilePath.Location = new System.Drawing.Point(110, 57);
+            FilePath.Location = new Point(110, 57);
             FilePath.Margin = new Padding(3, 6, 3, 3);
             FilePath.Name = "filepath";
-            FilePath.Size = new System.Drawing.Size(300, 27);
+            FilePath.Size = new Size(300, 27);
             FilePath.TabIndex = 3;
             //
             // choosefilebutton
             //
             chooseFileButton.Name = "ChooseFileButton";
             chooseFileButton.UseVisualStyleBackColor = true;
-            chooseFileButton.Click += new System.EventHandler(this.ChooseFileButton_Click);
+            chooseFileButton.Click += ChooseFileButton_Click;
             chooseFileButton.TabIndex = 4;
             chooseFileButton.Location = new Point(480, 56);
             chooseFileButton.Size = new Size(100, 30);
@@ -103,7 +99,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             //
             deleteDocumentButton.Name = "DeleteDocumentButton";
             deleteDocumentButton.UseVisualStyleBackColor = true;
-            deleteDocumentButton.Click += new System.EventHandler(this.RemoveFile);
+            deleteDocumentButton.Click += RemoveFile;
             deleteDocumentButton.TabIndex = 5;
             deleteDocumentButton.Location = new Point(580, 56);
             deleteDocumentButton.Size = new Size(150, 30);

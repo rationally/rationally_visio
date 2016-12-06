@@ -28,7 +28,7 @@ namespace Rationally.Visio.View
         protected TextLabel(Page page, string labelText) : base(page)
         {
             string text = labelText;
-            characterHeight = 1.0/72.0*(double) size;
+            characterHeight = (1.0/72.0)*(double) size;
 
             
 
@@ -78,9 +78,9 @@ namespace Rationally.Visio.View
         public override void Repaint()
         {
             string text = RShape.Text.Replace("\n","");
-            characterHeight = 1.0 / 72.0 * (double)size;
+            characterHeight = (1.0 / 72.0) * (double)size;
             
-            contentTextWidth = GetWidthOfString(text) + 8*RationallyConstants.Constants.WidthOfOnePoint;// / PixelsPerInch;
+            contentTextWidth = GetWidthOfString(text) + (8*RationallyConstants.Constants.WidthOfOnePoint);// / PixelsPerInch;
             characterWidth = contentTextWidth/text.Length;
             //sizing
             if (contentTextWidth > Width)
@@ -92,7 +92,7 @@ namespace Rationally.Visio.View
                 
                 int lineLength = (int)(Width/characterWidth);
                 string newContent = "";
-                if (!((UsedSizingPolicy & SizingPolicy.ExpandXIfNeeded) > 0) && text.Length > lineLength)
+                if (!((UsedSizingPolicy & SizingPolicy.ExpandXIfNeeded) > 0) && (text.Length > lineLength))
                 {
                     lineCount = 1;
                     for (int i = 0; i < (text.Length - lineLength); i += lineLength)
@@ -101,8 +101,8 @@ namespace Rationally.Visio.View
                         lineCount++;
                     }
                     //add the last piece of the string
-                    newContent += text.Substring(text.Length/lineLength*lineLength);//integer devision
-                    if (RShape.Characters.Text != newContent && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+                    newContent += text.Substring((text.Length/lineLength)*lineLength);//integer devision
+                    if ((RShape.Characters.Text != newContent) && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                     {
                         bool oldLock = LockTextEdit;
                         LockTextEdit = false;
@@ -110,18 +110,18 @@ namespace Rationally.Visio.View
                         LockTextEdit = oldLock;
                     }
                 }
-                if ((Height < characterHeight * (double)lineCount) && (UsedSizingPolicy & SizingPolicy.ExpandYIfNeeded) > 0)
+                if ((Height < (characterHeight * (double)lineCount)) && ((UsedSizingPolicy & SizingPolicy.ExpandYIfNeeded) > 0))
                 {
                     Height = characterHeight * (double)lineCount;
                 }
             }
 
-            if (contentTextWidth < Width && (UsedSizingPolicy & SizingPolicy.ShrinkXIfNeeded) > 0)
+            if ((contentTextWidth < Width) && ((UsedSizingPolicy & SizingPolicy.ShrinkXIfNeeded) > 0))
             {
                 Width = contentTextWidth;
             }
 
-            if (Height > characterHeight * (double)lineCount && (UsedSizingPolicy & SizingPolicy.ShrinkYIfNeeded) > 0)
+            if ((Height > (characterHeight * (double)lineCount)) && ((UsedSizingPolicy & SizingPolicy.ShrinkYIfNeeded) > 0))
             {
                 Height = characterHeight * (double)lineCount;
             }

@@ -69,7 +69,7 @@ namespace Rationally.Visio.View.Forces
                     }
                 }
 
-                if (concern != null && description != null)
+                if ((concern != null) && (description != null))
                 {
                     Force correspondingForce = new Force(concern, description, forceValuesDictionary);
                     if (ForceIndex <= Globals.RationallyAddIn.Model.Forces.Count)
@@ -128,9 +128,9 @@ namespace Rationally.Visio.View.Forces
             {
 
                 //locate the header cell for the current alternative, if it exsists
-                ForceValueComponent altValue = (ForceValueComponent)Children.FirstOrDefault(c => c is ForceValueComponent && !c.Deleted && ((ForceValueComponent)c).AlternativeUniqueIdentifier == alt.UniqueIdentifier);
+                ForceValueComponent altValue = (ForceValueComponent)Children.FirstOrDefault(c => c is ForceValueComponent && !c.Deleted && (((ForceValueComponent)c).AlternativeUniqueIdentifier == alt.UniqueIdentifier));
                 //if a deleted shape is present, there is no possiblity that we are adding an alternative. Furthermore, the deleted shape still represents an alternative, for each thus no second cell should be added!
-                if (altValue == null && Children.All(c => !c.Deleted))
+                if ((altValue == null) && Children.All(c => !c.Deleted))
                 {
                     alreadyThere.Add(new ForceValueComponent(Page, alt.UniqueIdentifier, alt.IdentifierString, ForceIndex));
                 }
@@ -196,10 +196,6 @@ namespace Rationally.Visio.View.Forces
             InitStyle();
         }
 
-        public static bool IsForceContainer(string name)
-        {
-            return ForceContaineRegex.IsMatch(name);
-        }
-
+        public static bool IsForceContainer(string name) => ForceContaineRegex.IsMatch(name);
     }
 }

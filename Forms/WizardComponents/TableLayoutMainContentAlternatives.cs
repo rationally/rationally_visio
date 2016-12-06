@@ -22,7 +22,7 @@ namespace Rationally.Visio.Forms.WizardComponents
                 Controls.Add(alternativeRow,0,i);
             }
 
-            RowStyles.Add(new RowStyle(SizeType.Percent, 100- RationallyConstants.Constants.SupportedAmountOfAlternatives * 10));
+            RowStyles.Add(new RowStyle(SizeType.Percent, 100- (RationallyConstants.Constants.SupportedAmountOfAlternatives * 10)));
 
             Init();
         }

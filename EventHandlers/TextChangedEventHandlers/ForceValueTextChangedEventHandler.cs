@@ -15,7 +15,10 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
             Globals.RationallyAddIn.Model.Forces[forceValue.ForceIndex].ForceValueDictionary[forceValue.AlternativeUniqueIdentifier] = forceValue.Text;
             RepaintHandler.Repaint(forceValue); //repaint the force value, for coloring
             ForceTotalsRow forceTotalsRow = forcesContainer.Children.First(c => c is ForceTotalsRow) as ForceTotalsRow;
-            if (forceTotalsRow != null) RepaintHandler.Repaint(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).FirstOrDefault(c => c.AlternativeUniqueIdentifier == forceValue.AlternativeUniqueIdentifier));
+            if (forceTotalsRow != null)
+            {
+                RepaintHandler.Repaint(forceTotalsRow.Children.Where(c => c is ForceTotalComponent).FirstOrDefault(c => c.AlternativeUniqueIdentifier == forceValue.AlternativeUniqueIdentifier));
+            }
         }
     }
 }

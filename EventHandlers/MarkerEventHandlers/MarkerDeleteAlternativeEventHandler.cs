@@ -30,7 +30,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                     //trace alternatives container
                     AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.RationallyAddIn.View.Children.First(c => c is AlternativesContainer);
                     //trace the correct alternative container
-                    AlternativeContainer alternativeContainer = (AlternativeContainer) alternativesContainer.Children.First(c => c is AlternativeContainer && component.AlternativeIndex == c.AlternativeIndex);
+                    AlternativeContainer alternativeContainer = (AlternativeContainer) alternativesContainer.Children.First(c => c is AlternativeContainer && (component.AlternativeIndex == c.AlternativeIndex));
                     
                     shapeToPass = alternativeContainer.RShape;
                 }

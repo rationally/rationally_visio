@@ -8,15 +8,10 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
 {
     internal static class WizardUpdateGeneralInformationHandler
     {
-        public static void Execute(ProjectSetupWizard wizard)
-        {
-                UpdateGeneralInformationInModel(wizard.tableLayoutMainContentGeneral.TextAuthor.Text,
-                    wizard.tableLayoutMainContentGeneral.TextDecisionTopic.Text,
-                    wizard.tableLayoutMainContentGeneral.DateTimePickerCreationDate.Value.ToLongDateString(),
-                    wizard.tableLayoutMainContentGeneral.TextVersion.Text, ProjectSetupWizard.DocumentCreation);
-        }
-
-        
+        public static void Execute(ProjectSetupWizard wizard) => UpdateGeneralInformationInModel(wizard.tableLayoutMainContentGeneral.TextAuthor.Text,
+            wizard.tableLayoutMainContentGeneral.TextDecisionTopic.Text,
+            wizard.tableLayoutMainContentGeneral.DateTimePickerCreationDate.Value.ToLongDateString(),
+            wizard.tableLayoutMainContentGeneral.TextVersion.Text, ProjectSetupWizard.DocumentCreation);
 
 
         private static void UpdateGeneralInformationInModel(string author, string decisionName, string date, string version, bool documentCreation)

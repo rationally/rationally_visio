@@ -90,13 +90,8 @@ namespace Rationally.Visio.Forms.WizardComponents
 
             //examine the model to see how many alternatives are present on the view, and generate as many columns for the user to fill in force values
             List<Alternative> alternatives = Globals.RationallyAddIn.Model.Alternatives;
-            foreach (Alternative alternative in alternatives)
+            foreach (DataGridViewTextBoxColumn alternativeColumn in alternatives.Select(alternative => new DataGridViewTextBoxColumn{ HeaderText = alternative.IdentifierString, Name = "ColumnAlternative" + alternative.UniqueIdentifier}))
             {
-                DataGridViewTextBoxColumn alternativeColumn = new DataGridViewTextBoxColumn
-                {
-                    HeaderText = alternative.IdentifierString,
-                    Name = "ColumnAlternative" + alternative.UniqueIdentifier
-                };
                 ForcesDataGrid.Columns.Add(alternativeColumn);
             }
         }

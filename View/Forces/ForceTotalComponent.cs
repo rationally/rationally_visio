@@ -53,10 +53,7 @@ namespace Rationally.Visio.View.Forces
             RShape = shape;
         }
 
-        public static bool IsForceTotalComponent(string name)
-        {
-            return ForceTotalComponentRegex.IsMatch(name);
-        }
+        public static bool IsForceTotalComponent(string name) => ForceTotalComponentRegex.IsMatch(name);
 
         private void UpdateAlternativeLabels()
         {

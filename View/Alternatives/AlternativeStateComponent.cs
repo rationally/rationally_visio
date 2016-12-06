@@ -75,10 +75,7 @@ namespace Rationally.Visio.View.Alternatives
             MarginTop = 0.1;
         }
 
-        public void SetAlternativeIdentifier(int alternativeIndex)
-        {
-            AlternativeIndex = alternativeIndex;
-        }
+        public void SetAlternativeIdentifier(int alternativeIndex) => AlternativeIndex = alternativeIndex;
 
         public void SetAlternativeState(string newState)
         {
@@ -112,10 +109,7 @@ namespace Rationally.Visio.View.Alternatives
                 }
             }
         }
-        public static bool IsAlternativeState(string name)
-        {
-            return StateRegex.IsMatch(name);
-        }
+        public static bool IsAlternativeState(string name) => StateRegex.IsMatch(name);
 
         private void UpdateReorderFunctions()
         {

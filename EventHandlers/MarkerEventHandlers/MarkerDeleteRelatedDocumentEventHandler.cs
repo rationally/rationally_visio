@@ -30,7 +30,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                     //trace documents container
                     RelatedDocumentsContainer documentsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
                     //trace the correct document container
-                    RelatedDocumentContainer documentContainer = (RelatedDocumentContainer)documentsContainer.Children.First(c => c is RelatedDocumentContainer && component.DocumentIndex == c.DocumentIndex);
+                    RelatedDocumentContainer documentContainer = (RelatedDocumentContainer)documentsContainer.Children.First(c => c is RelatedDocumentContainer && (component.DocumentIndex == c.DocumentIndex));
 
                     shapeToPass = documentContainer.RShape;
                 }

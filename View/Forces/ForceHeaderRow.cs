@@ -133,9 +133,9 @@ namespace Rationally.Visio.View.Forces
             foreach (Alternative alt in alternatives)
             {
                 //locate the header cell for the current alternative, if it exsists
-                ForceAlternativeHeaderComponent altHeader = (ForceAlternativeHeaderComponent)Children.FirstOrDefault(c => c is ForceAlternativeHeaderComponent && !c.Deleted && ((ForceAlternativeHeaderComponent) c).AlternativeUniqueIdentifier == alt.UniqueIdentifier);
+                ForceAlternativeHeaderComponent altHeader = (ForceAlternativeHeaderComponent)Children.FirstOrDefault(c => c is ForceAlternativeHeaderComponent && !c.Deleted && (((ForceAlternativeHeaderComponent) c).AlternativeUniqueIdentifier == alt.UniqueIdentifier));
                 //if a deleted shape is present, there is no possiblity that we are adding an alternative. Furthermore, the deleted shape still represents an alternative, for each thus no second cell should be added!
-                if (altHeader == null && Children.All(c => !c.Deleted)) 
+                if ((altHeader == null) && Children.All(c => !c.Deleted)) 
                 {
                     alreadyThere.Add(new ForceAlternativeHeaderComponent(Page, alt.IdentifierString, alt.UniqueIdentifier));
                 }
@@ -163,9 +163,6 @@ namespace Rationally.Visio.View.Forces
             base.Repaint();
         }
 
-        public static bool IsForceHeaderRow(string name)
-        {
-            return ForceHeaderRowRegex.IsMatch(name);
-        }
+        public static bool IsForceHeaderRow(string name) => ForceHeaderRowRegex.IsMatch(name);
     }
 }

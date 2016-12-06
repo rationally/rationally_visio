@@ -40,9 +40,6 @@ namespace Rationally.Visio.View.Information
             base.Repaint();
         }
 
-        public static bool IsTitleLabel(string name)
-        {
-            return NameRegex.IsMatch(name);
-        }
+        public static bool IsTitleLabel(string name) => NameRegex.IsMatch(name);
     }
 }

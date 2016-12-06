@@ -50,7 +50,7 @@ namespace Rationally.Visio.View.Documents
 
             }
             
-            if (name != null && path != null)
+            if ((name != null) && (path != null))
             {
                 if (DocumentIndex <= Globals.RationallyAddIn.Model.Documents.Count)
                 {
@@ -151,10 +151,7 @@ namespace Rationally.Visio.View.Documents
             }
         }
 
-        public static bool IsRelatedDocumentContainer(string name)
-        {
-            return RelatedRegex.IsMatch(name);
-        }
+        public static bool IsRelatedDocumentContainer(string name) => RelatedRegex.IsMatch(name);
 
         public void SetDocumentIdentifier(int documentIndex)
         {

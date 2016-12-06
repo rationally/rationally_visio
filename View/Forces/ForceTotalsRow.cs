@@ -114,17 +114,14 @@ namespace Rationally.Visio.View.Forces
             LayoutManager = new InlineLayout(this);
         }
 
-        public static bool IsForceTotalsRow(string name)
-        {
-            return ForceTotalsRowRegex.IsMatch(name);
-        }
+        public static bool IsForceTotalsRow(string name) => ForceTotalsRowRegex.IsMatch(name);
 
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             if (ForceTotalComponent.IsForceTotalComponent(s.Name))
             {
                 ForceTotalComponent com = new ForceTotalComponent(Page, s);
-                if (2 + com.AlternativeIndex > Children.Count)
+                if ((2 + com.AlternativeIndex) > Children.Count)
                 {
                     Children.Add(com);
                 }
@@ -147,9 +144,9 @@ namespace Rationally.Visio.View.Forces
             foreach (Alternative alt in alternatives)
             {
                 //locate the header cell for the current alternative, if it exsists
-                ForceTotalComponent altTotal = (ForceTotalComponent)Children.FirstOrDefault(c => c is ForceTotalComponent && !c.Deleted && ((ForceTotalComponent)c).AlternativeUniqueIdentifier == alt.UniqueIdentifier);
+                ForceTotalComponent altTotal = (ForceTotalComponent)Children.FirstOrDefault(c => c is ForceTotalComponent && !c.Deleted && (((ForceTotalComponent)c).AlternativeUniqueIdentifier == alt.UniqueIdentifier));
                 //if a deleted shape is present, there is no possiblity that we are adding an alternative. Furthermore, the deleted shape still represents an alternative, for each thus no second cell should be added!
-                if (altTotal == null && Children.All(c => !c.Deleted))
+                if ((altTotal == null) && Children.All(c => !c.Deleted))
                 {
                     alreadyThere.Add(new ForceTotalComponent(Page, alternatives.IndexOf(alt), alt.IdentifierString, alt.UniqueIdentifier));
                 }

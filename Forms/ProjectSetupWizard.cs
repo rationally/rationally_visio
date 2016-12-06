@@ -18,7 +18,7 @@ namespace Rationally.Visio.Forms
         {
             get
             {
-                if (instance?.IsDisposed != true)
+                if (instance?.IsDisposed ?? true)
                 {
                     instance = new ProjectSetupWizard();
                 }

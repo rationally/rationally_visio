@@ -251,7 +251,7 @@ namespace Rationally.Visio
         
         private void NoEventsPendingEventHandler(Application app) //Executed after all other events. Ensures we are never insides an undo scope
         {
-            if (app?.ActiveDocument?.Template.Contains(Constants.TemplateName) == true && !app.IsUndoingOrRedoing && rebuildTree)
+            if ((app?.ActiveDocument?.Template.Contains(Constants.TemplateName) ?? false) && !app.IsUndoingOrRedoing && rebuildTree)
             {
                 Log.Debug("No events pending event handler entered. Rebuilding tree...");
                 RebuildTree(app.ActiveDocument);

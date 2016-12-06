@@ -38,6 +38,7 @@
             this.rationally_tab = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.wizardButton = this.Factory.CreateRibbonButton();
+            this.settingsButton = this.Factory.CreateRibbonButton();
             this.rationally_tab.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -58,15 +59,26 @@
             // 
             this.wizardButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.wizardButton.Image = ((System.Drawing.Image)(resources.GetObject("wizardButton.Image")));
-            
             this.wizardButton.Label = "Configure View";
             this.wizardButton.Name = "wizardButton";
             this.wizardButton.ShowImage = true;
             this.wizardButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.wizardButton_Click_1);
             // 
+            // settingsButton
+            // 
+            this.settingsButton.Image = global::Rationally.Visio.Properties.Resources.wizard;
+            this.settingsButton.Label = "rationally Settings";
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.ShowImage = true;
+            this.settingsButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.settingsButton_Click);
+            // 
             // RationallyRibbon
             // 
             this.Name = "RationallyRibbon";
+            // 
+            // RationallyRibbon.OfficeMenu
+            // 
+            this.OfficeMenu.Items.Add(this.settingsButton);
             this.RibbonType = "Microsoft.Visio.Drawing";
             this.Tabs.Add(this.rationally_tab);
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.RationallyRibbon_Load);
@@ -83,6 +95,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonTab rationally_tab;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton wizardButton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton settingsButton;
     }
 
     partial class ThisRibbonCollection

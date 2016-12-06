@@ -251,7 +251,7 @@ namespace Rationally.Visio
         
         private void NoEventsPendingEventHandler(Application app) //Executed after all other events. Ensures we are never insides an undo scope
         {
-            if (!app.IsUndoingOrRedoing && rebuildTree)
+            if (app?.ActiveDocument?.Template.Contains(Constants.TemplateName) == true && !app.IsUndoingOrRedoing && rebuildTree)
             {
                 Log.Debug("No events pending event handler entered. Rebuilding tree...");
                 RebuildTree(app.ActiveDocument);
@@ -346,7 +346,7 @@ namespace Rationally.Visio
 
         private void Application_ShapeAddedEvent(Shape s)
         {
-            if ((s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists) && !View.ExistsInTree(s))
+            if (s.Document.Template.Contains(Constants.TemplateName) && (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists) && !View.ExistsInTree(s))
             {
                 View.AddToTree(s, true);
             }
@@ -355,6 +355,10 @@ namespace Rationally.Visio
         private bool Application_QueryCancelSelectionDelete(Selection e) //Fired before a shape is deleted. Shape still exists here
         {
             List<Shape> toBeDeleted = e.Cast<Shape>().ToList();
+            if (!e.Document.Template.Contains(Constants.TemplateName))
+            {
+                return false;
+            }
             Log.Debug("before shape deleted event for " + e.Count + " shapes.");
             if(toBeDeleted.Any(s => (s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "forceHeaderRow") || (s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "forceTotalsRow")))
             {
@@ -388,9 +392,9 @@ namespace Rationally.Visio
         }
         private void Application_BeforePageDeleteEvent(Page p)
         {
-            Log.Debug("page delete event handler entered");
             if (p.Document.Template.Contains(Constants.TemplateName))
             {
+                Log.Debug("page delete event handler entered");
                 foreach (Shape shape in p.Shapes)
                 {
                     View.DeleteFromTree(shape);
@@ -400,9 +404,10 @@ namespace Rationally.Visio
 
         private void Application_DeleteShapeEvent(Shape s) //Fired when a shape is deleted. Shape now no longer exists
         {
-            Log.Debug("shape deleted event for: " + s.Name);
+            
             if (s.Document.Template.Contains(Constants.TemplateName))
             {
+                Log.Debug("shape deleted event for: " + s.Name);
                 if (s.CellExistsU[CellConstants.Stub, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                 {
                     return;

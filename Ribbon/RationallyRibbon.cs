@@ -35,5 +35,10 @@ namespace Rationally.Visio
         {
 
         }
+
+        private void settingsButton_Click(object sender, RibbonControlEventArgs e)
+        {
+
+        }
     }
 }

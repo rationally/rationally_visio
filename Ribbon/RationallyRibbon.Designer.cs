@@ -37,8 +37,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RationallyRibbon));
             this.rationally_tab = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.wizardButton = this.Factory.CreateRibbonButton();
             this.settingsButton = this.Factory.CreateRibbonButton();
+            this.wizardButton = this.Factory.CreateRibbonButton();
             this.rationally_tab.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -55,6 +55,15 @@
             this.group1.Label = "Actions";
             this.group1.Name = "group1";
             // 
+            // settingsButton
+            // 
+            this.settingsButton.Enabled = false;
+            this.settingsButton.Image = global::Rationally.Visio.Properties.Resources.wizard;
+            this.settingsButton.Label = "rationally Settings";
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.ShowImage = true;
+            this.settingsButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.settingsButton_Click);
+            // 
             // wizardButton
             // 
             this.wizardButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -63,14 +72,6 @@
             this.wizardButton.Name = "wizardButton";
             this.wizardButton.ShowImage = true;
             this.wizardButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.wizardButton_Click_1);
-            // 
-            // settingsButton
-            // 
-            this.settingsButton.Image = global::Rationally.Visio.Properties.Resources.wizard;
-            this.settingsButton.Label = "rationally Settings";
-            this.settingsButton.Name = "settingsButton";
-            this.settingsButton.ShowImage = true;
-            this.settingsButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.settingsButton_Click);
             // 
             // RationallyRibbon
             // 

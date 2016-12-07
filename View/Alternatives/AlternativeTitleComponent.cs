@@ -40,14 +40,9 @@ namespace Rationally.Visio.View.Alternatives
             
         }
 
-        public void SetAlternativeIdentifier(int alternativeIndex)
-        {
-            AlternativeIndex = alternativeIndex;
-        }
-        public static bool IsAlternativeTitle(string name)
-        {
-            return TitleRegex.IsMatch(name);
-        }
+        public void SetAlternativeIdentifier(int alternativeIndex) => AlternativeIndex = alternativeIndex;
+
+        public static bool IsAlternativeTitle(string name) => TitleRegex.IsMatch(name);
 
         private void UpdateReorderFunctions()
         {

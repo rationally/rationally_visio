@@ -35,10 +35,7 @@ namespace Rationally.Visio.View.Documents
             SetUsedSizingPolicy(SizingPolicy.FixedSize);
         }
 
-        internal static bool IsRelatedDocumentTitleContainer(string name)
-        {
-            return RelatedRegex.IsMatch(name);
-        }
+        internal static bool IsRelatedDocumentTitleContainer(string name) => RelatedRegex.IsMatch(name);
 
         private void UpdateReorderFunctions()
         {

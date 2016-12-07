@@ -15,12 +15,12 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             if (forcesContainer.Children.Count == 0)
             {
                 //insert header, if it is absent
-                if (forcesContainer.Children.Count == 0 || !forcesContainer.Children.Any(c => c is ForceHeaderRow))
+                if ((forcesContainer.Children.Count == 0) || !forcesContainer.Children.Any(c => c is ForceHeaderRow))
                 {
                     forcesContainer.Children.Insert(0, new ForceHeaderRow(Globals.RationallyAddIn.Application.ActivePage));
                 }
                 //insert footer, if it is absent
-                if (forcesContainer.Children.Count == 0 || !forcesContainer.Children.Any(c => c is ForceTotalsRow))
+                if ((forcesContainer.Children.Count == 0) || !forcesContainer.Children.Any(c => c is ForceTotalsRow))
                 {
                     forcesContainer.Children.Add(new ForceTotalsRow(Globals.RationallyAddIn.Application.ActivePage));
                 }

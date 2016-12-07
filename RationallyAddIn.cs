@@ -251,7 +251,7 @@ namespace Rationally.Visio
         
         private void NoEventsPendingEventHandler(Application app) //Executed after all other events. Ensures we are never insides an undo scope
         {
-            if (app?.ActiveDocument?.Template.Contains(Constants.TemplateName) == true && !app.IsUndoingOrRedoing && rebuildTree)
+            if ((app?.ActiveDocument?.Template.Contains(Constants.TemplateName) ?? false) && !app.IsUndoingOrRedoing && rebuildTree)
             {
                 Log.Debug("No events pending event handler entered. Rebuilding tree...");
                 RebuildTree(app.ActiveDocument);
@@ -285,6 +285,7 @@ namespace Rationally.Visio
         private void Application_CellChangedEvent(Cell cell)
         {
             Shape changedShape = cell.Shape;
+            // ReSharper disable once MergeSequentialChecksWhenPossible
             if ((changedShape == null) || !changedShape.Document.Template.Contains(Constants.TemplateName) || (changedShape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] != Constants.CellExists)) //No need to continue when the shape is not part of our model.
             {
                 return;

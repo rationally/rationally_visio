@@ -51,10 +51,7 @@ namespace Rationally.Visio.View.Forces
             RShape = shape;
         }
 
-        public static bool IsForceAlternativeHeaderComponent(string name)
-        {
-            return ForceAlternativeHeaderComponentRegex.IsMatch(name);
-        }
+        public static bool IsForceAlternativeHeaderComponent(string name) => ForceAlternativeHeaderComponentRegex.IsMatch(name);
 
         private void UpdateAlternativeLabels()
         {

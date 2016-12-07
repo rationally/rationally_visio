@@ -26,10 +26,7 @@ namespace Rationally.Visio.View.Alternatives
             InitStyle();
         }
 
-        private void InitStyle()
-        {
-            UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
-        }
+        private void InitStyle() => UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded;
 
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
@@ -76,10 +73,7 @@ namespace Rationally.Visio.View.Alternatives
             }
         }
 
-        public static bool IsAlternativesContainer(string name)
-        {
-            return AlternativesRegex.IsMatch(name);
-        }
+        public static bool IsAlternativesContainer(string name) => AlternativesRegex.IsMatch(name);
 
         public void RemoveAlternativesFromModel()
         {

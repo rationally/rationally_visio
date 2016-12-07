@@ -32,7 +32,7 @@ namespace Rationally.Visio.View
                 double toDrawHeight = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom; //expected height in y
 
                 PrepareContainerExpansion(x, y, toDrawWidth, 0); //if the container streches to support the drawing, the container height does not need to change
-                if (toManage.CenterX + (toManage.Width/2.0) < x + toDrawWidth) //the new component does not fit next to the last component on the same line in the container
+                if ((toManage.CenterX + (toManage.Width/2.0)) < (x + toDrawWidth)) //the new component does not fit next to the last component on the same line in the container
                 {
                     x = toManage.CenterX - (toManage.Width/2.0); //go to a new line
                     y -= currentLineHeight; //the new line of components should not overlap with the one above
@@ -67,7 +67,7 @@ namespace Rationally.Visio.View
             }
 
             //the container might still be not high enough, if the initial height is very small and expandX is true
-            if ((toManage.UsedSizingPolicy & SizingPolicy.ExpandYIfNeeded) > 0 && currentLineHeight > toManage.Height)
+            if (((toManage.UsedSizingPolicy & SizingPolicy.ExpandYIfNeeded) > 0) && (currentLineHeight > toManage.Height))
             {
                 double topLeftY = toManage.CenterY + (toManage.Height / 2.0);
                 toManage.Height = currentLineHeight;
@@ -100,14 +100,14 @@ namespace Rationally.Visio.View
 
             if (overflowInX && expandXIfNeeded)
             {
-                toManage.Width = (x + xIncrease) - topLeftX + Constants.Epsilon;
+                toManage.Width = ((x + xIncrease) - topLeftX) + Constants.Epsilon;
                 toManage.CenterX = topLeftX + (toManage.Width / 2.0);
 
             }
 
             if (overflowInY && expandYIfNeeded)
             {
-                toManage.Height = topLeftY - (y - yIncrease) + Constants.Epsilon;
+                toManage.Height = (topLeftY - (y - yIncrease)) + Constants.Epsilon;
                 toManage.CenterY = topLeftY - (toManage.Height / 2.0);
             }
         }
@@ -125,13 +125,13 @@ namespace Rationally.Visio.View
             
             if (underflowInX && shrinkXIfNeeded)
             {
-                toManage.Width = contentXEnd - topLeftX + Constants.Epsilon;
+                toManage.Width = (contentXEnd - topLeftX) + Constants.Epsilon;
                 toManage.CenterX = topLeftX + (toManage.Width / 2.0);
             }
 
             if (underflowInY && shrinkYIfNeeded)
             {
-                toManage.Height = topLeftY - contentYEnd + Constants.Epsilon;
+                toManage.Height = (topLeftY - contentYEnd) + Constants.Epsilon;
                 toManage.CenterY = topLeftY - (toManage.Height / 2.0);
             }
         }

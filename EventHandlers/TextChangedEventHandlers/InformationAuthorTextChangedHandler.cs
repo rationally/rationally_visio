@@ -5,9 +5,6 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
     internal class InformationAuthorTextChangedHandler : ITextChangedEventHandler
     {
-        public void Execute(RationallyView view, Shape changedShape)
-        {
-            Globals.RationallyAddIn.Model.Author = changedShape.Text;
-        }
+        public void Execute(RationallyView view, Shape changedShape) => Globals.RationallyAddIn.Model.Author = changedShape.Text;
     }
 }

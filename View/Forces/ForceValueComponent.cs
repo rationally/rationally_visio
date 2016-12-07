@@ -56,10 +56,7 @@ namespace Rationally.Visio.View.Forces
             RShape = shape;
         }
 
-        public static bool IsForceValue(string name)
-        {
-            return ForceValueRegex.IsMatch(name);
-        }
+        public static bool IsForceValue(string name) => ForceValueRegex.IsMatch(name);
 
         private void UpdateReorderFunctions()
         {

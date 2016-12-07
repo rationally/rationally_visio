@@ -37,7 +37,7 @@ namespace Rationally.Visio.View.Alternatives
                     Children.Add(comp);
                 }
             }
-            if (title != null && state != null)
+            if ((title != null) && (state != null))
             {
                 if (AlternativeIndex <= Globals.RationallyAddIn.Model.Alternatives.Count)
                 {
@@ -157,10 +157,7 @@ namespace Rationally.Visio.View.Alternatives
             }
         }
 
-        public static bool IsAlternativeContainer(string name)
-        {
-            return AlternativeRegex.IsMatch(name);
-        }
+        public static bool IsAlternativeContainer(string name) => AlternativeRegex.IsMatch(name);
 
         private void UpdateReorderFunctions()
         {

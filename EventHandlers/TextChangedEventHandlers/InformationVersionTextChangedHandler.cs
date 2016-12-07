@@ -5,9 +5,6 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
     internal class InformationVersionTextChangedHandler : ITextChangedEventHandler
     {
-        public void Execute(RationallyView view, Shape changedShape)
-        {
-            Globals.RationallyAddIn.Model.Version = changedShape.Text;
-        }
+        public void Execute(RationallyView view, Shape changedShape) => Globals.RationallyAddIn.Model.Version = changedShape.Text;
     }
 }

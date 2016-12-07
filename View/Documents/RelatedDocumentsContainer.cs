@@ -77,9 +77,6 @@ namespace Rationally.Visio.View.Documents
             RepaintHandler.Repaint(this);
         }
 
-        public static bool IsRelatedDocumentsContainer(string name)
-        {
-            return RelatedRegex.IsMatch(name);
-        }
+        public static bool IsRelatedDocumentsContainer(string name) => RelatedRegex.IsMatch(name);
     }
 }

@@ -26,10 +26,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             this.containingMenu.Buttons.Add(this);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            containingMenu.HighLightedButton = this;
-        }
+        private void button1_Click(object sender, EventArgs e) => containingMenu.HighLightedButton = this;
 
 
         private void button1_MouseEnter(object sender, EventArgs e)

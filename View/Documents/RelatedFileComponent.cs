@@ -36,10 +36,7 @@ namespace Rationally.Visio.View.Documents
             SetMargin(0.1);
         }
 
-        internal static bool IsRelatedFileComponent(string name)
-        {
-            return RelatedRegex.IsMatch(name);
-        }
+        internal static bool IsRelatedFileComponent(string name) => RelatedRegex.IsMatch(name);
 
         private void UpdateReorderFunctions()
         {

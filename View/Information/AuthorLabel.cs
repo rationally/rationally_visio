@@ -36,9 +36,6 @@ namespace Rationally.Visio.View.Information
             base.Repaint();
         }
 
-        public static bool IsAuthorLabel(string name)
-        {
-            return AuthorRegex.IsMatch(name);
-        }
+        public static bool IsAuthorLabel(string name) => AuthorRegex.IsMatch(name);
     }
 }

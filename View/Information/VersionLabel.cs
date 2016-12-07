@@ -35,9 +35,6 @@ namespace Rationally.Visio.View.Information
             SetMargin(0.01);
             SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
         }
-        public static bool IsVersionLabel(string name)
-        {
-            return VersionRegex.IsMatch(name);
-        }
+        public static bool IsVersionLabel(string name) => VersionRegex.IsMatch(name);
     }
 }

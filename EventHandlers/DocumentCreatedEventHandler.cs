@@ -9,10 +9,7 @@ namespace Rationally.Visio.EventHandlers
     internal static class DocumentCreatedEventHandler
     {
 
-        private static void ShowSetupWizard()
-        {
-            ProjectSetupWizard.Instance.ShowDialog(true, WizardFieldTypes.Title);
-        }
+        private static void ShowSetupWizard() => ProjectSetupWizard.Instance.ShowDialog(true, WizardFieldTypes.Title);
 
         public static void Execute(IVDocument document)
         {

@@ -10,8 +10,8 @@ namespace Rationally.Visio.Forms.WizardComponents
 {
     public class TableLayoutMainContentDocuments : TableLayoutPanel
     {
-        public List<FlowLayoutDocument> Documents;
-        private AntiAliasedButton addDocumentButton;
+        public readonly List<FlowLayoutDocument> Documents;
+        private readonly AntiAliasedButton addDocumentButton;
 
         public TableLayoutMainContentDocuments()
         {
@@ -28,7 +28,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             Controls.Add(Documents[0],0,0);
             Dock = DockStyle.Fill;
-            Location = new System.Drawing.Point(4, 4);
+            Location = new Point(4, 4);
             Size = new Size(760, 482);
             Margin = new Padding(4);
             Name = "tableLayoutMainContentDocuments";
@@ -42,7 +42,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             //
             addDocumentButton.Name = "AddDocumentButton";
             addDocumentButton.UseVisualStyleBackColor = true;
-            addDocumentButton.Click += new System.EventHandler(this.AddDocumentButton_Click);
+            addDocumentButton.Click += AddDocumentButton_Click;
             addDocumentButton.Text = "Add File";
             addDocumentButton.Size = new Size(200,30);
             addDocumentButton.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
@@ -67,10 +67,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             RowStyles.Add(new RowStyle(SizeType.AutoSize));//add a style for the add file button
         }
 
-        private void AddDocumentButton_Click(object sender, EventArgs e)
-        {
-            AddFile();
-        }
+        private void AddDocumentButton_Click(object sender, EventArgs e) => AddFile();
 
         private void AddFile()
         {

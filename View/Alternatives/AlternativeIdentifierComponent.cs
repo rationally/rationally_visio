@@ -46,10 +46,7 @@ namespace Rationally.Visio.View.Alternatives
                 Text = (char) (65 + alternativeIndex) + ":";
             }
         }
-        public static bool IsAlternativeIdentifier(string name)
-        {
-            return IdentRegex.IsMatch(name);
-        }
+        public static bool IsAlternativeIdentifier(string name) => IdentRegex.IsMatch(name);
 
         private void UpdateReorderFunctions()
         {

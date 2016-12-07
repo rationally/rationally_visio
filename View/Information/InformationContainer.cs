@@ -32,7 +32,7 @@ namespace Rationally.Visio.View.Information
         {
             RShape = s;
             RationallyModel model = Globals.RationallyAddIn.Model;
-            if (s.ContainerProperties.GetMemberShapes((int) VisContainerFlags.visContainerFlagsExcludeNested).Length == 0 && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+            if ((s.ContainerProperties.GetMemberShapes((int) VisContainerFlags.visContainerFlagsExcludeNested).Length == 0) && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 InitContent(page, model.Author, model.DateString, model.Version);
             }
@@ -181,7 +181,7 @@ namespace Rationally.Visio.View.Information
             {
                 Children.Add(new VersionLabel(Page, s));
             }
-            else if (TextLabel.IsTextLabel(s.Name) && (rationallyType == "informationVersionLabel" || rationallyType == "informationDateLabel" || rationallyType == "informationAuthorLabel"))
+            else if (TextLabel.IsTextLabel(s.Name) && ((rationallyType == "informationVersionLabel") || (rationallyType == "informationDateLabel") || (rationallyType == "informationAuthorLabel")))
             {
                 Children.Add(new PaddedTextLabel(Page,s));
             }
@@ -194,9 +194,6 @@ namespace Rationally.Visio.View.Information
             base.Repaint();
         }
 
-        public static bool IsInformationContainer(string name)
-        {
-            return InformationContainerRegex.IsMatch(name);
-        }
+        public static bool IsInformationContainer(string name) => InformationContainerRegex.IsMatch(name);
     }
 }

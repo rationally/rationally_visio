@@ -32,15 +32,9 @@ namespace Rationally.Visio.View.Alternatives
             AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this alternative\"", false);
         }
 
-        public void SetAlternativeIdentifier(int alternativeIndex)
-        {
-            AlternativeIndex = alternativeIndex;
-        }
+        public void SetAlternativeIdentifier(int alternativeIndex) => AlternativeIndex = alternativeIndex;
 
-        public static bool IsAlternativeDescription(string name)
-        {
-            return DescriptionRegex.IsMatch(name);
-        }
+        public static bool IsAlternativeDescription(string name) => DescriptionRegex.IsMatch(name);
 
         private void InitStyle()
         {

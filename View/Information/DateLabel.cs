@@ -37,9 +37,6 @@ namespace Rationally.Visio.View.Information
         }
 
 
-        public static bool IsDateLabel(string name)
-        {
-            return DateRegex.IsMatch(name);
-        }
+        public static bool IsDateLabel(string name) => DateRegex.IsMatch(name);
     }
 }

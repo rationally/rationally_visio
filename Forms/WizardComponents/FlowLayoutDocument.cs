@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Rationally.Visio.Model;
+using Rationally.Visio.View.Documents;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {

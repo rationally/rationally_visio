@@ -51,10 +51,7 @@ namespace Rationally.Visio.View
             ShadowPattern = 0;
         }
 
-        public void SetUsedSizingPolicy(SizingPolicy p)
-        {
-            UsedSizingPolicy = p;
-        }
+        public void SetUsedSizingPolicy(SizingPolicy p) => UsedSizingPolicy = p;
 
         protected void SetFontSize(short fontSize)
         {
@@ -132,9 +129,6 @@ namespace Rationally.Visio.View
             }
         }
         
-        public static bool IsTextLabel(string name)
-        {
-            return TextLabelRegex.IsMatch(name);
-        }
+        public static bool IsTextLabel(string name) => TextLabelRegex.IsMatch(name);
     }
 }

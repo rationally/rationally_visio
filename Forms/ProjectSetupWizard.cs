@@ -41,6 +41,9 @@ namespace Rationally.Visio.Forms
             tableLayoutMainContentGeneral.TextVersion.Text = Globals.RationallyAddIn.Model.Version;
             TableLayoutMainContentAlternatives.AlternativeRows.ForEach(a => a.UpdateData());
             TableLayoutMainContentForces.InitData();
+
+            TableLayoutMainContentDocuments.UpdateByModel();//create rows according to model
+            TableLayoutMainContentDocuments.Documents.ForEach(d => d.UpdateData());
             if (DocumentCreation)
             {
                 CreateButton.Text = Messages.Wizard_CreateButton_CreateView;
@@ -85,7 +88,8 @@ namespace Rationally.Visio.Forms
                 WizardUpdateForcesHandler.Execute(this);
                 //handle changes in the "Alternatives" page
                 WizardUpdateAlternativesHandler.Execute(this);
-                
+                //handle changes in the "Related Documents" page
+                WizardUpdateDocumentsHandler.Execute(this);
 
 
                 //all changes have been made, close the scope and the wizard

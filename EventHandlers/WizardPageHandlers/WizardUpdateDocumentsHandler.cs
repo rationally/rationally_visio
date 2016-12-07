@@ -12,6 +12,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
         public static void Execute(ProjectSetupWizard wizard)
         {
             List<FlowLayoutDocument> filledInPanels = wizard.TableLayoutMainContentDocuments.Documents.Where(doc => !String.IsNullOrEmpty(doc.FilePath.Text)).ToList();
+            filledInPanels.ForEach(filledInPanel => filledInPanel.UpdateModel());
         }
     }
 }

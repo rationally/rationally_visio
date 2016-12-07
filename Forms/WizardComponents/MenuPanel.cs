@@ -78,7 +78,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             Controls.Add(ButtonShowGeneral, 0, 0);
             Controls.Add(buttonShowAlternatives, 0, 1);
             Controls.Add(buttonShowForces, 0, 2);
-            Controls.Add(buttonShowRelatedDocuments, 0, 3);
+            //Controls.Add(buttonShowRelatedDocuments, 0, 3);
             HighLightedButton = ButtonShowGeneral;
         }
 

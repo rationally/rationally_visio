@@ -133,5 +133,46 @@ namespace Rationally.Visio.Forms.WizardComponents
             ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.UpdateRows();
         }
 
+        public void UpdateModel()
+        {
+            if (documentIndex > -1)
+            {
+                RelatedDocument toUpdate = Globals.RationallyAddIn.Model.Documents[documentIndex];
+
+                if (FilePath.ReadOnly == toUpdate.IsFile) //either both are files, or both are links
+                {
+                    toUpdate.Name = FileName.Text;
+                    toUpdate.Path = FilePath.Text;
+                    //update link component or file component
+                    return;
+                }
+
+                Globals.RationallyAddIn.Model.Documents.RemoveAt(documentIndex); //remove old, create a new
+
+            }
+
+            //create a new document (optionally at the correct index)
+            RelatedDocument newDocument = new RelatedDocument(FilePath.Text,FileName.Text,FilePath.ReadOnly);
+            (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer)?.AddRelatedDocument(newDocument);
+            //move document to the right index
+            if (documentIndex > -1)
+            {
+                //RelatedDocument toSwap = Globals.RationallyAddIn.Model.Documents.Last();
+                RelatedDocument toSwap = Globals.RationallyAddIn.Model.Documents[documentIndex];
+                Globals.RationallyAddIn.Model.Documents[documentIndex] = Globals.RationallyAddIn.Model.Documents.Last();
+                Globals.RationallyAddIn.Model.Documents.Add(toSwap);
+
+            }
+        }
+
+        public void UpdateData()
+        {
+            if (Document != null)
+            {
+                FileName.Text = Document.Name;
+                FilePath.Text = Document.Path;//what if empty //TODO should reference file link object instead of path shape
+                FilePath.ReadOnly = Document.IsFile;
+            }
+        }
     }
 }

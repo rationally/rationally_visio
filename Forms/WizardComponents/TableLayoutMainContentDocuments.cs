@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Rationally.Visio.Model;
 using static System.String;
 
 namespace Rationally.Visio.Forms.WizardComponents
@@ -14,7 +15,8 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         public TableLayoutMainContentDocuments()
         {
-            Documents = new List<FlowLayoutDocument>() { new FlowLayoutDocument(0) };
+            Documents = new List<FlowLayoutDocument>() { new FlowLayoutDocument(-1) };//TODO for existing documents with related documents in them => make items
+
             addDocumentButton = new AntiAliasedButton();
             Init();
         }
@@ -72,7 +74,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void AddFile()
         {
-            Documents.Add(new FlowLayoutDocument(Globals.RationallyAddIn.Model.Documents.Count));
+            Documents.Add(new FlowLayoutDocument(0));
             UpdateRows();
         }
 
@@ -84,6 +86,17 @@ namespace Rationally.Visio.Forms.WizardComponents
                 MessageBox.Show("For some named source(s), no file or link was choosen/entered");
             }
             return isValid;
+        }
+
+        public void UpdateByModel()
+        {
+            RationallyModel model = Globals.RationallyAddIn.Model;
+            Documents.Clear();
+            for (int i = 0; i < model.Documents.Count; i++)
+            {
+                Documents.Add(new FlowLayoutDocument(i) {Document = model.Documents[i]});
+            }
+            UpdateRows();
         }
     }
 }

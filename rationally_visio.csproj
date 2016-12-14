@@ -138,6 +138,12 @@
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateDocumentsHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateForcesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateGeneralInformationHandler.cs" />
+    <Compile Include="Forms\PleaseWait.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PleaseWait.Designer.cs">
+      <DependentUpon>PleaseWait.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\WizardComponents\AntiAliasedButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -334,6 +340,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <EmbeddedResource Include="Forms\PleaseWait.resx">
+      <DependentUpon>PleaseWait.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>

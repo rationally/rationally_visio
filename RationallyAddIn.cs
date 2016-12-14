@@ -226,6 +226,8 @@ namespace Rationally.Visio
             TextChangedEventHandlerRegistry.Register("informationDate", new InformationDateTextChangedHandler());
             TextChangedEventHandlerRegistry.Register("informationVersion", new InformationVersionTextChangedHandler());
             TextChangedEventHandlerRegistry.Register("decisionName", new DecisionNameTextChangedHandler());
+            TextChangedEventHandlerRegistry.Register("relatedDocumentTitle", new RelatedDocumentTitleTextChangedEventHandler());
+            TextChangedEventHandlerRegistry.Register("relatedUrlUrl", new RelatedUrlUrlTextChangedHandler());
         }
 
         //Fired when any text is changed

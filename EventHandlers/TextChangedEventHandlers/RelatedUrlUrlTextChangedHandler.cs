@@ -9,16 +9,19 @@ using Rationally.Visio.View.Documents;
 
 namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
-    class RelatedUrlUrlTextChangedHandler : ITextChangedEventHandler
+    public class RelatedUrlUrlTextChangedHandler : ITextChangedEventHandler
     {
         public void Execute(RationallyView view, Shape changedShape)
         {
-            //find shape in view tree
-            RelatedURLURLComponent urlUrl = (RelatedURLURLComponent)Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
-            //locate connected model object
-            RelatedDocument document = Globals.RationallyAddIn.Model.Documents[urlUrl.DocumentIndex];
-            //update the url value
-            document.Path = urlUrl.Text;
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+            {
+                //find shape in view tree
+                RelatedURLURLComponent urlUrl = (RelatedURLURLComponent) Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
+                //locate connected model object
+                RelatedDocument document = Globals.RationallyAddIn.Model.Documents[urlUrl.DocumentIndex];
+                //update the url value
+                document.Path = urlUrl.Text;
+            }
         }
     }
 }

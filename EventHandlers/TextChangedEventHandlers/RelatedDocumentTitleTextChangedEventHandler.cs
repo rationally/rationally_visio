@@ -13,12 +13,15 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
     {
         public void Execute(RationallyView view, Shape changedShape)
         {
-            //find shape in view tree
-            RelatedDocumentTitleComponent relatedDocumentTitle = (RelatedDocumentTitleComponent)Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
-            //locate connected model object
-            RelatedDocument document = Globals.RationallyAddIn.Model.Documents[relatedDocumentTitle.DocumentIndex];
-            //update the document name
-            document.Name = relatedDocumentTitle.Text;
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+            {
+                //find shape in view tree
+                RelatedDocumentTitleComponent relatedDocumentTitle = (RelatedDocumentTitleComponent) Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
+                //locate connected model object
+                RelatedDocument document = Globals.RationallyAddIn.Model.Documents[relatedDocumentTitle.DocumentIndex];
+                //update the document name
+                document.Name = relatedDocumentTitle.Text;
+            }
         }
     }
 }

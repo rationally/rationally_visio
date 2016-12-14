@@ -117,10 +117,13 @@ namespace Rationally.Visio.View.Forces
                     if (Children.Any(c => c is ForceTotalsRow))
                     {
                         RationallyComponent toMove = Children.First(c => c is ForceTotalsRow);
-                        int toMoveIndex = Children.IndexOf(toMove);
-                        RationallyComponent toSwapWith = Children.Last();
-                        Children[Children.Count - 1] = toMove;
-                        Children[toMoveIndex] = toSwapWith;
+                        while (toMove != Children.Last())
+                        {
+                            int toMoveIndex = Children.IndexOf(toMove);
+                            RationallyComponent toSwapWith = Children[toMoveIndex+1];
+                            Children[toMoveIndex + 1] = toMove;
+                            Children[toMoveIndex] = toSwapWith;
+                        }
                     }
                 }
             }

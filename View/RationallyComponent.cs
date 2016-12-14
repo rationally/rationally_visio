@@ -95,6 +95,12 @@ namespace Rationally.Visio.View
             set { RShape.CellsU["User.documentIndex.Value"].ResultIU = value; }
         }
 
+        public string FilePath
+        {
+            get { return RShape.CellsU["User.filePath"].ResultStr["Value"]; }
+            set { RShape.Cells["User.filePath.Value"].Formula = "\"" + value + "\""; }
+        }
+
         public double Width
         {
             get { return RShape.CellsU["Width"].ResultIU; }

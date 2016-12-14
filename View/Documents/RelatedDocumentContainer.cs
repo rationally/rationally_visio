@@ -29,8 +29,9 @@ namespace Rationally.Visio.View.Documents
             Shape fileShape = shapes.FirstOrDefault(shape => RelatedFileComponent.IsRelatedFileComponent(shape.Name));
             if (fileShape != null)
             {
-                Children.Add(new RelatedFileComponent(page, fileShape));
-                path = fileShape.Text;
+                RelatedFileComponent relatedFileComponent = new RelatedFileComponent(page, fileShape);
+                Children.Add(relatedFileComponent);
+                path = relatedFileComponent.FilePath;
                 file = true;
             }
             else
@@ -39,13 +40,14 @@ namespace Rationally.Visio.View.Documents
                 if (urlShape != null)
                 {
                     Children.Add(new RelatedUrlComponent(page, urlShape));
-                    path = urlShape.Text;
+                    
                 }
 
                 Shape urlUrlShape = shapes.FirstOrDefault(shape => RelatedURLURLComponent.IsRelatedUrlUrlComponent(shape.Name));
                 if (urlUrlShape != null)
                 {
                     Children.Add(new RelatedURLURLComponent(page, urlUrlShape));
+                    path = urlUrlShape.Text;
                 }
 
             }
@@ -70,7 +72,7 @@ namespace Rationally.Visio.View.Documents
         public RelatedDocumentContainer(Page page, int index, RelatedDocument document) : base(page)
         {
             //1) make a title component for the source and add it to the container
-            RelatedDocumentTitleComponent relatedDocumentTitleComponent = new RelatedDocumentTitleComponent(page, index, document.Name + ":");
+            RelatedDocumentTitleComponent relatedDocumentTitleComponent = new RelatedDocumentTitleComponent(page, index, document.Name);
             Children.Add(relatedDocumentTitleComponent);
             if (document.IsFile)
             {

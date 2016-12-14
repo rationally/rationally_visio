@@ -15,7 +15,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         public TableLayoutMainContentDocuments()
         {
-            Documents = new List<FlowLayoutDocument>() { new FlowLayoutDocument(-1) };//TODO for existing documents with related documents in them => make items
+            Documents = new List<FlowLayoutDocument>();
 
             addDocumentButton = new AntiAliasedButton();
             Init();
@@ -26,7 +26,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             BackColor = Color.WhiteSmoke;
             ColumnCount = 1;
             ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            Controls.Add(Documents[0],0,0);
+            //Controls.Add(Documents[0],0,0);
             Dock = DockStyle.Fill;
             Location = new Point(4, 4);
             Size = new Size(760, 482);
@@ -71,19 +71,34 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void AddFile()
         {
-            Documents.Add(new FlowLayoutDocument(0));
+            Documents.Add(new FlowLayoutDocument(Documents.Count));
             UpdateRows();
         }
 
         public bool IsValid()
         {
-            bool isValid = Documents.Select(document => IsNullOrEmpty(document.FileName.Text) || !IsNullOrEmpty(document.FilePath.Text)).Aggregate(true,(doc1,doc2) => doc1 && doc2);
-            if (!isValid)
+            //check if all named rows have at least something in the path field
+            if (!Documents.All(doc => !IsNullOrEmpty(doc.FilePath.Text) || IsNullOrEmpty(doc.FileName.Text)))
             {
                 MessageBox.Show("For some named source(s), no file or link was choosen/entered");
+                return false;
             }
-            return isValid;
+
+            //select the documents to validate
+            List<FlowLayoutDocument> toValidate = Documents.Where(doc => !IsNullOrEmpty(doc.FilePath.Text)).ToList();
+
+            //because names are always valid and files not be malformatted, we only validate links
+            List<FlowLayoutDocument> links = toValidate.Where(doc => !doc.FilePath.ReadOnly).ToList();
+
+            if (!links.All(link => IsValidUrl(link.FilePath.Text)))
+            {
+                MessageBox.Show("One or more of the entered links are not valid hyperlinks.");
+                return false;
+            }
+            return true;
         }
+
+        private static bool IsValidUrl(string url) => Uri.IsWellFormedUriString(url, UriKind.Absolute);
 
         public void UpdateByModel()
         {

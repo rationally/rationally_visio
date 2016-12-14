@@ -9,7 +9,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 {
     public sealed class FlowLayoutDocument : FlowLayoutPanel
     {
-        private readonly int documentIndex;
+        public readonly int DocumentIndex;
 
         private readonly AntiAliasedLabel fileNameLabel;
         internal readonly TextBox FileName;
@@ -22,12 +22,12 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         public FlowLayoutDocument(int documentIndex)
         {
-            this.documentIndex = documentIndex;
+            this.DocumentIndex = documentIndex;
 
             Dock = DockStyle.Fill;
             //this.Anchor = AnchorStyles.Left;
             Location = new Point(3, 3);
-            Name = "flowLayoutPanelDocument" + this.documentIndex;
+            Name = "flowLayoutPanelDocument" + this.DocumentIndex;
             Size = new Size(714, 84);
             TabIndex = 0;
 
@@ -127,40 +127,38 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void RemoveFile(object sender, EventArgs e)
         {
-            ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.Documents.RemoveAt(documentIndex);
+            ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.Documents.RemoveAt(DocumentIndex);
             ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.UpdateRows();
         }
 
         public void UpdateModel()
         {
-            if (documentIndex > -1)
+            if (Document != null)
             {
-                RelatedDocument toUpdate = Globals.RationallyAddIn.Model.Documents[documentIndex];
-
-                if (FilePath.ReadOnly == toUpdate.IsFile) //either both are files, or both are links
+                if (FilePath.ReadOnly == Document.IsFile) //either both are files, or both are links
                 {
-                    toUpdate.Name = FileName.Text;
-                    toUpdate.Path = FilePath.Text;
-                    //update link component or file component
+                    Document.Name = FileName.Text;
+                    Document.Path = FilePath.Text;
                     return;
                 }
-
-                Globals.RationallyAddIn.Model.Documents.RemoveAt(documentIndex); //remove old, create a new
+                //else
+                Globals.RationallyAddIn.Model.Documents.RemoveAt(DocumentIndex); //remove old (which is wrong type), create a new
 
             }
 
             //create a new document (optionally at the correct index)
             RelatedDocument newDocument = new RelatedDocument(FilePath.Text,FileName.Text,FilePath.ReadOnly);
+            Globals.RationallyAddIn.Model.Documents.Insert(DocumentIndex,newDocument);
             (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer)?.AddRelatedDocument(newDocument);
             //move document to the right index
-            if (documentIndex > -1)
+            /*if (documentIndex > -1)
             {
                 //RelatedDocument toSwap = Globals.RationallyAddIn.Model.Documents.Last();
                 RelatedDocument toSwap = Globals.RationallyAddIn.Model.Documents[documentIndex];
                 Globals.RationallyAddIn.Model.Documents[documentIndex] = Globals.RationallyAddIn.Model.Documents.Last();
                 Globals.RationallyAddIn.Model.Documents.Add(toSwap);
 
-            }
+            }*/
         }
 
         public void UpdateData()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows.Forms;
 using Rationally.Visio.Enums;
 using Rationally.Visio.RationallyConstants;
@@ -75,10 +76,15 @@ namespace Rationally.Visio.Forms
 
         private void submit_Click(object sender, EventArgs e)
         {
+            PleaseWait testpop = new PleaseWait();
+            
             if (ValidateGeneralIfNotDebugging() && ValidateAlternatives() && TableLayoutMainContentForces.IsValid() && TableLayoutMainContentDocuments.IsValid())
             {
+                testpop.Show();
                 //wrap all changes that will be triggered by wizard changes in one undo scope
                 int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");
+
+                
 
                 Globals.RationallyAddIn.View.Page = Globals.RationallyAddIn.Application.ActivePage;
                 Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
@@ -90,12 +96,13 @@ namespace Rationally.Visio.Forms
                 WizardUpdateAlternativesHandler.Execute(this);
                 //handle changes in the "Related Documents" page
                 WizardUpdateDocumentsHandler.Execute(this);
-
+                
 
                 //all changes have been made, close the scope and the wizard
                 Globals.RationallyAddIn.Application.EndUndoScope(wizardScopeId, true);
                 Close();
             }
+            testpop.Close();
         }
 
         private void UpdateLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

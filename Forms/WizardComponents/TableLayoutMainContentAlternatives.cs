@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
-    public class TableLayoutMainContentAlternatives : TableLayoutPanel
+    public class TableLayoutMainContentAlternatives : TableLayoutPanel, IWizardPanel
     {
 
         public readonly List<FlowLayoutAlternative> AlternativeRows = new List<FlowLayoutAlternative>();
@@ -44,6 +44,11 @@ namespace Rationally.Visio.Forms.WizardComponents
             Size = new Size(760, 482);
             TabIndex = 0;
 
+        }
+
+        public void UpdateModel()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

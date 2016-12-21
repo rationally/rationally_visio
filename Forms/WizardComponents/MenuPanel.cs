@@ -10,6 +10,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         private readonly MenuButton buttonShowAlternatives;
         private readonly MenuButton buttonShowForces;
         private readonly MenuButton buttonShowRelatedDocuments;
+        private readonly MenuButton buttonShowStakeholders;
 
         public readonly List<MenuButton> Buttons;
 
@@ -33,6 +34,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             ButtonShowGeneral = new MenuButton(this);
             buttonShowForces = new MenuButton(this);
             buttonShowRelatedDocuments = new MenuButton(this);
+            buttonShowStakeholders = new MenuButton(this);
             Init();
 
         }
@@ -73,12 +75,21 @@ namespace Rationally.Visio.Forms.WizardComponents
             buttonShowRelatedDocuments.Text = "Related Documents";
             buttonShowRelatedDocuments.UseVisualStyleBackColor = false;
             buttonShowRelatedDocuments.Click += buttonShowDocuments_Click;
+            //
+            // button stakeholders
+            //
+            buttonShowStakeholders.FlatAppearance.BorderSize = 0;
+            buttonShowStakeholders.Name = "buttonShowStakeholders";
+            buttonShowStakeholders.Text = "Stakeholders";
+            buttonShowStakeholders.UseVisualStyleBackColor = false;
+            buttonShowStakeholders.Click += buttonShowStakeholders_Click;
             //self
-            
+
             Controls.Add(ButtonShowGeneral, 0, 0);
             Controls.Add(buttonShowAlternatives, 0, 1);
             Controls.Add(buttonShowForces, 0, 2);
             Controls.Add(buttonShowRelatedDocuments, 0, 3);
+            Controls.Add(buttonShowStakeholders, 0, 4);
             HighLightedButton = ButtonShowGeneral;
         }
 
@@ -111,6 +122,14 @@ namespace Rationally.Visio.Forms.WizardComponents
         {
             ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
             ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentDocuments);
+            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.flowLayoutBottomButtons);
+            ProjectSetupWizard.Instance.flowLayoutBottomButtons.Refresh();
+        }
+
+        private void buttonShowStakeholders_Click(object sender, System.EventArgs e)
+        {
+            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
+            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders);
             ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.flowLayoutBottomButtons);
             ProjectSetupWizard.Instance.flowLayoutBottomButtons.Refresh();
         }

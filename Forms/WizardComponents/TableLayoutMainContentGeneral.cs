@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
-    public class TableLayoutMainContentGeneral : TableLayoutPanel
+    public class TableLayoutMainContentGeneral : TableLayoutPanel, IWizardPanel
     {
         private readonly FlowLayoutPanel flowLayoutGeneralAuthor;
         private readonly FlowLayoutPanel flowLayoutGeneralTopic;
@@ -213,6 +213,11 @@ namespace Rationally.Visio.Forms.WizardComponents
             flowLayoutGeneralDate.PerformLayout();
             flowLayoutGeneralVersion.ResumeLayout(false);
             flowLayoutGeneralVersion.PerformLayout();
+        }
+
+        public void UpdateModel()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

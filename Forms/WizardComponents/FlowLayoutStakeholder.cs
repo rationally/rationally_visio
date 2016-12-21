@@ -1,18 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using Rationally.Visio.Model;
+
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
     public class FlowLayoutStakeholder : FlowLayoutPanel
     {
         public readonly int StakeholderIndex;
+
         private readonly AntiAliasedLabel stakeholderNameLabel;
         internal readonly TextBox StakeholderName;
         private readonly AntiAliasedButton deleteStakeholderButton;
+
+        public Stakeholder Stakeholder;
 
         public FlowLayoutStakeholder(int stakeholderIndex)
         {
@@ -72,6 +74,29 @@ namespace Rationally.Visio.Forms.WizardComponents
         {
             ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders.Stakeholders.RemoveAt(StakeholderIndex);
             ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders.UpdateRows();
+        }
+
+        public void UpdateModel()
+        {
+            //if this row represents an existing stakeholder in the model, update it.
+            if (Stakeholder != null)
+            {
+                Stakeholder.Name = StakeholderName.Text;
+            }
+            else
+            {
+                Stakeholder newStakeholder = new Stakeholder(StakeholderName.Text);
+                Globals.RationallyAddIn.Model.Stakeholders.Insert(StakeholderIndex, newStakeholder);
+                //TODO add stakeholder to StakeholdersContainer
+            }
+        }
+
+        public void UpdateData()
+        {
+            if (Stakeholder != null)
+            {
+                StakeholderName.Text = Stakeholder.Name;
+            }
         }
     }
 }

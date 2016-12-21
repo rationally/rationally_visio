@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using Rationally.Visio.Model;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
@@ -35,7 +34,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             VerticalScroll.Visible = false;
             AutoScroll = true;
             //
-            // addDocumentButton
+            // addStakeholderButton
             //
             addStakeholderButton.Name = "AddStakeholderButton";
             addStakeholderButton.UseVisualStyleBackColor = true;
@@ -69,6 +68,19 @@ namespace Rationally.Visio.Forms.WizardComponents
         private void AddStakeholder()
         {
             Stakeholders.Add(new FlowLayoutStakeholder(Stakeholders.Count));
+            UpdateRows();
+        }
+
+        public bool IsValid() => true;
+
+        public void UpdateData()
+        {
+            RationallyModel model = Globals.RationallyAddIn.Model;
+            Stakeholders.Clear();
+            for (int i = 0; i < model.Stakeholders.Count; i++)
+            {
+                Stakeholders.Add(new FlowLayoutStakeholder(i) { Stakeholder = model.Stakeholders[i] });
+            }
             UpdateRows();
         }
 

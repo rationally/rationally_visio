@@ -171,6 +171,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Stakeholder.cs" />
     <Compile Include="RationallyConstants\CellConstants.cs" />
     <Compile Include="RationallyConstants\Constants.cs" />
     <Compile Include="EventHandlers\ClickEventHandlers\UpdateAlternativeHandler.cs" />

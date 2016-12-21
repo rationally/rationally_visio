@@ -13,6 +13,8 @@ namespace Rationally.Visio.Model
     {
         public List<Alternative> Alternatives { get; }
         public List<RelatedDocument> Documents { get; }
+
+        public List<Stakeholder> Stakeholders { get; } 
         public List<string> AlternativeStates { get; }
         public string Author { get; set; }
         public string DecisionName { get; set; }
@@ -29,6 +31,7 @@ namespace Rationally.Visio.Model
             Alternatives = new List<Alternative>();
             Documents = new List<RelatedDocument>();
             Forces = new List<Force>();
+            Stakeholders = new List<Stakeholder>();
             AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"}; //Currently hardcoded, could be user setting in future product.
         }
 
@@ -62,6 +65,13 @@ namespace Rationally.Visio.Model
             int i = 0;
             ForcesContainer forcesContaineresContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
             forcesContaineresContainer.Children.Where(c => c is ForceContainer).ToList().ForEach(c => ((ForceContainer)c).SetForceIdentifier(i++));
+        }
+
+        public void RegenerateStakeholderIdentifiers()
+        {
+            int i = 0;
+            //ForcesContainer forcesContaineresContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
+            //forcesContaineresContainer.Children.Where(c => c is ForceContainer).ToList().ForEach(c => ((ForceContainer)c).SetForceIdentifier(i++));
         }
     }
 }

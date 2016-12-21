@@ -8,7 +8,7 @@ using static System.String;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
-    public class TableLayoutMainContentDocuments : TableLayoutPanel
+    public class TableLayoutMainContentDocuments : TableLayoutPanel, IWizardPanel
     {
         public readonly List<FlowLayoutDocument> Documents;
         private readonly AntiAliasedButton addDocumentButton;
@@ -109,6 +109,11 @@ namespace Rationally.Visio.Forms.WizardComponents
                 Documents.Add(new FlowLayoutDocument(i) {Document = model.Documents[i]});
             }
             UpdateRows();
+        }
+
+        public void UpdateModel()
+        {
+            throw new NotImplementedException();
         }
     }
 }

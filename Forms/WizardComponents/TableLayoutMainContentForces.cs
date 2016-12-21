@@ -8,7 +8,7 @@ using static System.String;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
-    public class TableLayoutMainContentForces : TableLayoutPanel
+    public class TableLayoutMainContentForces : TableLayoutPanel, IWizardPanel
     {
         public DataGridView ForcesDataGrid;
         public DataGridViewTextBoxColumn ColumnDescription { get; set; }
@@ -128,5 +128,10 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private bool ValidateRow(DataGridViewRow row) => row.Cells.Cast<DataGridViewTextBoxCell>().All(cell => IsNullOrEmpty(cell.Value?.ToString()))
                                                          || !IsNullOrEmpty(row.Cells[0].Value?.ToString());
+
+        public void UpdateModel()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

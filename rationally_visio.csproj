@@ -153,10 +153,17 @@
     <Compile Include="Forms\WizardComponents\FlowLayoutDocument.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\WizardComponents\FlowLayoutStakeholder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\WizardComponents\IWizardPanel.cs" />
     <Compile Include="Forms\WizardComponents\TableLayoutMainContentDocuments.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\WizardComponents\TableLayoutMainContentForces.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\WizardComponents\TableLayoutMainContentStakeholders.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Messages.Designer.cs">
@@ -164,6 +171,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Stakeholder.cs" />
     <Compile Include="RationallyConstants\CellConstants.cs" />
     <Compile Include="RationallyConstants\Constants.cs" />
     <Compile Include="EventHandlers\ClickEventHandlers\UpdateAlternativeHandler.cs" />

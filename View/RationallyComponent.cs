@@ -95,6 +95,12 @@ namespace Rationally.Visio.View
             set { RShape.CellsU["User.documentIndex.Value"].ResultIU = value; }
         }
 
+        public virtual int StakeholderIndex
+        {
+            get { return (int)RShape.CellsU["User.StakeholderIndex"].ResultIU; }
+            protected set { RShape.CellsU["User.StakeholderIndex.Value"].ResultIU = value; }
+        }
+
         public string FilePath
         {
             get { return RShape.CellsU["User.filePath"].ResultStr["Value"]; }

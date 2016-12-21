@@ -367,21 +367,31 @@ namespace Rationally.Visio
         {
             if (s.Document.Template.Contains(Constants.TemplateName) && (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists) && !View.ExistsInTree(s))
             {
-                if (s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "alternativeAddStub")
+                switch (s.CellsU[CellConstants.RationallyType].ResultStr["Value"])
                 {
-                    if (!Application.IsUndoingOrRedoing)
-                    {
-                        int scopeId = Application.BeginUndoScope("Add alternative");
-                        s.Delete();
-                        AlternativesContainer alternativesContainer = Globals.RationallyAddIn.View.Children.FirstOrDefault(ch => ch is AlternativesContainer) as AlternativesContainer;
-                        alternativesContainer?.AddAlternative("title", Model.AlternativeStates.FirstOrDefault());
+                    case "alternativeAddStub":
+                        if (!Application.IsUndoingOrRedoing)
+                        {
+                            int scopeId = Application.BeginUndoScope("Add alternative");
+                            s.Delete();
+                            AlternativesContainer alternativesContainer = Globals.RationallyAddIn.View.Children.FirstOrDefault(ch => ch is AlternativesContainer) as AlternativesContainer;
+                            alternativesContainer?.AddAlternative("title", Model.AlternativeStates.FirstOrDefault());
                         
-                        Application.EndUndoScope(scopeId, true);
-                    }
-                }
-                else
-                {
-                    View.AddToTree(s, true);
+                            Application.EndUndoScope(scopeId, true);
+                        }
+                        break;
+                    case "forceAddStub":
+                        if (!Application.IsUndoingOrRedoing)
+                        {
+                            int scopeId = Application.BeginUndoScope("Add force");
+                            s.Delete();
+                            MarkerEventHandlerRegistry.HandleEvent("forces.add", null, null);
+                            Application.EndUndoScope(scopeId, true);
+                        }
+                        break;
+                    default:
+                        View.AddToTree(s, true);
+                        break;
                 }
             }
         }

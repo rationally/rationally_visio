@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.EventHandlers;
+using Rationally.Visio.Forms;
 using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Stakeholders
@@ -88,10 +89,16 @@ namespace Rationally.Visio.View.Stakeholders
             }
         }
 
-        public void AddStakeholder(Stakeholder stakeholder)
+        public void AddStakeholder(string name)
         {
+            PleaseWait pleaseWait = new PleaseWait();
+            pleaseWait.Show();
+            pleaseWait.Refresh();
+            Stakeholder stakeholder = new Stakeholder(name);
+            Globals.RationallyAddIn.Model.Stakeholders.Add(stakeholder);
             Children.Add(new StakeholderContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Stakeholders.Count - 1, stakeholder));//assumes stakeholder is already in the model
             RepaintHandler.Repaint();
+            pleaseWait.Hide();
         }
     }
 }

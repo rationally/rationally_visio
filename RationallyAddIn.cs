@@ -106,6 +106,9 @@ namespace Rationally.Visio
             DeleteEventHandlerRegistry.Register("informationAuthorLabel", new DeleteInformationComponentEventHandler());
             DeleteEventHandlerRegistry.Register("informationDateLabel", new DeleteInformationComponentEventHandler());
             DeleteEventHandlerRegistry.Register("informationVersionLabel", new DeleteInformationComponentEventHandler());
+
+            DeleteEventHandlerRegistry.Register("stakeholder", new DeleteStakeholderEventHandler());
+            //DeleteEventHandlerRegistry.Register("stakeholders", new DeleteStakeholderEventHandler());//TODO
         }
 
         private static void RegisterQueryDeleteEventHandlers()
@@ -126,6 +129,9 @@ namespace Rationally.Visio
             QueryDeleteEventHandlerRegistry.Register("relatedFile", new QDRelatedDocumentComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("relatedDocumentTitle", new QDRelatedDocumentComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("relatedDocumentContainer", new QDRelatedDocumentContainerEventHandler());
+
+            QueryDeleteEventHandlerRegistry.Register("stakeholderName", new QDStakeholderComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("stakeholder", new QDStakeholderContainerEventHandler());
         }
 
         private static void RegisterMarkerEventHandlers()
@@ -215,6 +221,13 @@ namespace Rationally.Visio
             MarkerEventHandlerRegistry.Register("informationDate.openWizard", new OpenWizardEventHandler());
             MarkerEventHandlerRegistry.Register("informationVersion.openWizard", new OpenWizardEventHandler());
             MarkerEventHandlerRegistry.Register("decisionName.openWizard", new OpenWizardEventHandler());
+
+            MarkerEventHandlerRegistry.Register("stakeholders.add", new AddStakeholderEventHandler());
+            MarkerEventHandlerRegistry.Register("stakeholder.add", new AddStakeholderEventHandler());
+            MarkerEventHandlerRegistry.Register("stakeholderName.add", new AddStakeholderEventHandler());
+
+            MarkerEventHandlerRegistry.Register("stakeholder.delete", new StartDeleteStakeholderEventHandler());
+            MarkerEventHandlerRegistry.Register("stakeholderName.delete", new StartDeleteStakeholderEventHandler());
         }
 
         private static void RegisterTextChangedEventHandlers()

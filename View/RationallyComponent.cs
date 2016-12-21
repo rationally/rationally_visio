@@ -98,7 +98,7 @@ namespace Rationally.Visio.View
         public virtual int StakeholderIndex
         {
             get { return (int)RShape.CellsU["User.StakeholderIndex"].ResultIU; }
-            protected set { RShape.CellsU["User.StakeholderIndex.Value"].ResultIU = value; }
+            set { RShape.CellsU["User.StakeholderIndex.Value"].ResultIU = value; }
         }
 
         public string FilePath

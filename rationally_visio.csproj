@@ -129,6 +129,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\WizardFieldTypes.cs" />
+    <Compile Include="EventHandlers\DeleteEventHandlers\DeleteStakeholderEventHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\AddStakeholderEventHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MoveDownStakeholderHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\StartDeleteStakeholderEventHandler.cs" />
+    <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDStakeholderComponentEventHandler.cs" />
+    <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDStakeholderContainerEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\AlternativeTitleTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\ForceDescriptionTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\ForceConcernTextChangedEventHandler.cs" />

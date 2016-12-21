@@ -10,7 +10,7 @@ namespace Rationally.Visio.View.Stakeholders
     {
         public override int StakeholderIndex
         {
-            get; protected set;
+            get; set;
         }
 
         public StakeholderStubContainer(Page page, int stakeholderIndex) : base(page)

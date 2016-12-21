@@ -360,14 +360,9 @@ namespace Rationally.Visio
                     {
                         int scopeId = Application.BeginUndoScope("Add alternative");
                         s.Delete();
-                        AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.RationallyAddIn.View.Children.FirstOrDefault(ch => ch is AlternativesContainer);
-                        if (alternativesContainer != null)
-                        {
-                            Alternative newAlternative = new Alternative("title", Model.AlternativeStates.FirstOrDefault());
-                            newAlternative.GenerateIdentifier(Model.Alternatives.Count);
-                            Model.Alternatives.Add(newAlternative);
-                            alternativesContainer.AddAlternative(newAlternative);
-                        }
+                        AlternativesContainer alternativesContainer = Globals.RationallyAddIn.View.Children.FirstOrDefault(ch => ch is AlternativesContainer) as AlternativesContainer;
+                        alternativesContainer?.AddAlternative("title", Model.AlternativeStates.FirstOrDefault());
+                        
                         Application.EndUndoScope(scopeId, true);
                     }
                 }

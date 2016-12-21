@@ -10,7 +10,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
         {
             switch (changedShape.Name)
             {
-                case "DecisionName":
+                case "Topic":
                     ProjectSetupWizard.Instance.ShowDialog(false, WizardFieldTypes.Title);
                     break;
                 case "InformationAuthor":

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.EventHandlers;
+using Rationally.Visio.Forms;
 using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Alternatives
@@ -87,10 +88,17 @@ namespace Rationally.Visio.View.Alternatives
             }
         }
 
-        public void AddAlternative(Alternative alternative)
+        public void AddAlternative(string title, string state)
         {
-            Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Alternatives.Count - 1, alternative));
+            PleaseWait pleaseWait = new PleaseWait();
+            pleaseWait.Show();
+            pleaseWait.Refresh();
+            Alternative newAlternative = new Alternative(title, state);
+            newAlternative.GenerateIdentifier(Globals.RationallyAddIn.Model.Alternatives.Count);
+            Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
+            Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Alternatives.Count - 1, newAlternative));
             RepaintHandler.Repaint();
+            pleaseWait.Hide();
         }
 
     }

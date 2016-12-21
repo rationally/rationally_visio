@@ -5,7 +5,7 @@ namespace Rationally.Visio.View.Information
 {
     public class TitleLabel : TextLabel
     {
-        private static readonly Regex NameRegex = new Regex(@"DecisionName(\.\d+)?$");
+        private static readonly Regex NameRegex = new Regex(@"Topic(\.\d+)?$");
         public TitleLabel(Page page, Shape shape) : base(page, shape)
         {
             RShape = shape;
@@ -15,7 +15,7 @@ namespace Rationally.Visio.View.Information
         {
             RationallyType = "decisionName";
 
-            Name = "DecisionName";
+            Name = "Topic";
             EventDblClick = "QUEUEMARKEREVENT(\"openWizard\")";
             InitStyle();
         }

@@ -62,16 +62,21 @@ namespace Rationally.Visio.View.Stakeholders
             MsvSdContainerLocked = true;
 
             //Events
+            AddAction("addStakeholder", "QUEUEMARKEREVENT(\"add\")", "\"Add stakeholder\"", false);
             AddAction("deleteStakeholder", "QUEUEMARKEREVENT(\"delete\")", "\"Delete stakeholder\"", false);
 
-            LinePattern = 16;
+            Width = 5.26;
+
+            LinePattern = 0;
             InitStyle();
         }
 
         private void InitStyle()
         {
-            UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
+            UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
             MarginTop = StakeholderIndex == 0 ? 0.3 : 0.0;
+            MarginLeft = 0.01;
+            MarginRight = 0.01;
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
@@ -89,6 +94,13 @@ namespace Rationally.Visio.View.Stakeholders
                     Children.Add(com);
                 }
             }
+        }
+
+        public void SetStakeholderIndex(int index)
+        {
+            StakeholderIndex = index;
+            Children.ForEach(c => c.StakeholderIndex = index);
+            InitStyle();
         }
 
         public static bool IsStakeholderContainer(string name) => StakeholderRegex.IsMatch(name);

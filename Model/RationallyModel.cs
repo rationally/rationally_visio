@@ -3,6 +3,7 @@ using System.Linq;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Documents;
 using Rationally.Visio.View.Forces;
+using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.Model
 {
@@ -70,8 +71,8 @@ namespace Rationally.Visio.Model
         public void RegenerateStakeholderIdentifiers()
         {
             int i = 0;
-            //ForcesContainer forcesContaineresContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
-            //forcesContaineresContainer.Children.Where(c => c is ForceContainer).ToList().ForEach(c => ((ForceContainer)c).SetForceIdentifier(i++));
+            StakeholdersContainer stakeholdersContainer = (StakeholdersContainer)Globals.RationallyAddIn.View.Children.First(c => c is StakeholdersContainer);
+            stakeholdersContainer.Children.Where(c => c is StakeholderContainer).ToList().ForEach(c => ((StakeholderContainer)c).SetStakeholderIndex(i++));
         }
     }
 }

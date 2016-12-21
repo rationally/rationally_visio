@@ -33,10 +33,10 @@ namespace Rationally.Visio.View.Stakeholders
         private void InitStyle()
         {
             HAlign = 0;//Enum is wrong, align left
-            MarginLeft = 0.05;
+            MarginLeft = 1;
             MarginRight = 0;
             MarginBottom = 0;
-            MarginTop = 0.1;
+            MarginTop = 0.01;
             UsedSizingPolicy = SizingPolicy.FixedSize;
         }
 

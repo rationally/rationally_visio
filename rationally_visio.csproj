@@ -299,6 +299,7 @@
     <Compile Include="View\Stakeholders\StakeholderContainer.cs" />
     <Compile Include="View\Stakeholders\StakeholderNameComponent.cs" />
     <Compile Include="View\Stakeholders\StakeholdersContainer.cs" />
+    <Compile Include="View\Stakeholders\StakeholderStubContainer.cs" />
     <Compile Include="View\VerticalStretchLayout.cs" />
     <Compile Include="Forms\WizardComponents\FlowLayoutAlternative.cs">
       <SubType>Component</SubType>

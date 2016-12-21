@@ -60,11 +60,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             {
                 if (!string.IsNullOrEmpty(TextBoxAlternativeTitle.Text))
                 {
-                    Alternative newAlternative = new Alternative(TextBoxAlternativeTitle.Text, alternativeStateDropdown.SelectedItem.ToString());
-                    newAlternative.GenerateIdentifier(Globals.RationallyAddIn.Model.Alternatives.Count);
-                    Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
-                    
-                    (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is AlternativesContainer) as AlternativesContainer)?.AddAlternative(newAlternative);
+                    (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is AlternativesContainer) as AlternativesContainer)?.AddAlternative(TextBoxAlternativeTitle.Text, alternativeStateDropdown.SelectedItem.ToString());
                 }
             }
         }

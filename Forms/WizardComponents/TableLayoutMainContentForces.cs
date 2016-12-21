@@ -82,7 +82,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             // 
             // ColumnDescription
             // 
-            ColumnDescription.HeaderText = "Description";
+            ColumnDescription.HeaderText = "Force";
             ColumnDescription.Name = "ColumnDescription"; 
 
             ForcesDataGrid.Columns.AddRange(ColumnConcern, ColumnDescription);

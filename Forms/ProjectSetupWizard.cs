@@ -14,6 +14,7 @@ namespace Rationally.Visio.Forms
         private static ProjectSetupWizard instance;
         private WizardFieldTypes selectedFieldType;
         public static bool DocumentCreation;
+        PleaseWait testpop = new PleaseWait();
 
         public static ProjectSetupWizard Instance
         {
@@ -76,11 +77,13 @@ namespace Rationally.Visio.Forms
 
         private void submit_Click(object sender, EventArgs e)
         {
-            PleaseWait testpop = new PleaseWait();
+            
             
             if (ValidateGeneralIfNotDebugging() && ValidateAlternatives() && TableLayoutMainContentForces.IsValid() && TableLayoutMainContentDocuments.IsValid())
             {
                 testpop.Show();
+                testpop.Refresh();
+                //testpop.Show();
                 //wrap all changes that will be triggered by wizard changes in one undo scope
                 int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");
 
@@ -101,16 +104,15 @@ namespace Rationally.Visio.Forms
                 //all changes have been made, close the scope and the wizard
                 Globals.RationallyAddIn.Application.EndUndoScope(wizardScopeId, true);
                 Close();
+                testpop.Hide();
             }
-            testpop.Close();
         }
-
+        
         private void UpdateLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             ProcessStartInfo sInfo = new ProcessStartInfo(Constants.RationallySite);
             Process.Start(sInfo);
         }
-
 
 
         private void ProjectSetupWizard_Activated(object sender, EventArgs e)

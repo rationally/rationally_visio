@@ -82,7 +82,9 @@ namespace Rationally.Visio
             showRationallyUpdatePopup = NewVersionAvailable = CheckRationallyVersion();
             
         }
+
         
+
         private static void RegisterDeleteEventHandlers()
         {
             DeleteEventHandlerRegistry.Register("alternative", new DeleteAlternativeEventHandler());
@@ -347,12 +349,32 @@ namespace Rationally.Visio
                 }
             }
         }
-
+        
         private void Application_ShapeAddedEvent(Shape s)
         {
             if (s.Document.Template.Contains(Constants.TemplateName) && (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists) && !View.ExistsInTree(s))
             {
-                View.AddToTree(s, true);
+                if (s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "alternativeAddStub")
+                {
+                    if (!Application.IsUndoingOrRedoing)
+                    {
+                        int scopeId = Application.BeginUndoScope("Add alternative");
+                        s.Delete();
+                        AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.RationallyAddIn.View.Children.FirstOrDefault(ch => ch is AlternativesContainer);
+                        if (alternativesContainer != null)
+                        {
+                            Alternative newAlternative = new Alternative("title", Model.AlternativeStates.FirstOrDefault());
+                            newAlternative.GenerateIdentifier(Model.Alternatives.Count);
+                            Model.Alternatives.Add(newAlternative);
+                            alternativesContainer.AddAlternative(newAlternative);
+                        }
+                        Application.EndUndoScope(scopeId, true);
+                    }
+                }
+                else
+                {
+                    View.AddToTree(s, true);
+                }
             }
         }
 
@@ -364,7 +386,8 @@ namespace Rationally.Visio
                 return false;
             }
             Log.Debug("before shape deleted event for " + e.Count + " shapes.");
-            if(toBeDeleted.Any(s => (s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "forceHeaderRow") || (s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "forceTotalsRow")))
+            if(toBeDeleted.Any(s => ((s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists) 
+                                     && (s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "forceHeaderRow")) || (s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "forceTotalsRow")))
             {
                 if (toBeDeleted.All(s => s.CellsU[CellConstants.RationallyType].ResultStr["Value"] != "forces"))
                 {

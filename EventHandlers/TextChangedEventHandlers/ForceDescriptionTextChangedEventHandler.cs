@@ -11,6 +11,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
             ForceDescriptionComponent forceDescription = (ForceDescriptionComponent)view.GetComponentByShape(changedShape);
             if (forceDescription != null)
             {
+
                 Globals.RationallyAddIn.Model.Forces[forceDescription.ForceIndex].Description = forceDescription.Text;
             }
         }

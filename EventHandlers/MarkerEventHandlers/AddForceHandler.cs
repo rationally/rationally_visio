@@ -33,7 +33,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                     forcesContainer.Children[toMoveIndex] = toSwapWith;
                 }
             }
-            forcesContainer.Children.Insert(forcesContainer.Children.Count-1,new ForceContainer(changedShape.ContainingPage, forcesContainer.Children.Count-2, true));
+            forcesContainer.Children.Insert(forcesContainer.Children.Count-1,new ForceContainer(Globals.RationallyAddIn.Application.ActivePage, forcesContainer.Children.Count-2, true));
             //update the model as well
             model.Forces.Add(new Force());
             RepaintHandler.Repaint(forcesContainer);

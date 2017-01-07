@@ -228,6 +228,11 @@ namespace Rationally.Visio
 
             MarkerEventHandlerRegistry.Register("stakeholder.delete", new StartDeleteStakeholderEventHandler());
             MarkerEventHandlerRegistry.Register("stakeholderName.delete", new StartDeleteStakeholderEventHandler());
+
+            MarkerEventHandlerRegistry.Register("stakeholder.moveUp", new MoveUpStakeholderHandler());
+            MarkerEventHandlerRegistry.Register("stakeholderName.moveUp", new MoveUpStakeholderHandler());
+            MarkerEventHandlerRegistry.Register("stakeholder.moveDown", new MoveDownStakeholderHandler());
+            MarkerEventHandlerRegistry.Register("stakeholderName.moveDown", new MoveDownStakeholderHandler());
         }
 
         private static void RegisterTextChangedEventHandlers()

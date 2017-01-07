@@ -33,7 +33,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 
             if (registry.ContainsKey(eventKey) && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                registry[eventKey].ForEach(eh => eh.Execute(changedShape, identifier));
+                
+                    registry[eventKey].ForEach(eh => eh.Execute(changedShape, identifier));
+                
             }
             else
             {

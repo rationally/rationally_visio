@@ -85,7 +85,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             }
             else
             {
-                Stakeholder newStakeholder = new Stakeholder(StakeholderName.Text);
+                Stakeholder newStakeholder = new Stakeholder(StakeholderName.Text,"TODO");
                 Globals.RationallyAddIn.Model.Stakeholders.Insert(StakeholderIndex, newStakeholder);
                 //TODO add stakeholder to StakeholdersContainer
             }

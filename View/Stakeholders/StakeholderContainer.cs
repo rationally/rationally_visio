@@ -15,6 +15,7 @@ namespace Rationally.Visio.View.Stakeholders
         {
             RShape = stakeholder;
             string name = null;
+            string role = null;
             foreach (int shapeIdentifier in stakeholder.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested))
             {
                 Shape stakeholderComponent = page.Shapes.ItemFromID[shapeIdentifier];
@@ -23,12 +24,17 @@ namespace Rationally.Visio.View.Stakeholders
                     StakeholderNameComponent comp = new StakeholderNameComponent(page, stakeholderComponent);
                     Children.Add(comp);
                     name = comp.Text;
+                } else if (StakeholderRoleComponent.IsStakeholderRole(stakeholderComponent.Name))
+                {
+                    StakeholderRoleComponent comp = new StakeholderRoleComponent(page, stakeholderComponent);
+                    Children.Add(comp);
+                    role = comp.Text;
                 }
             }
 
-            if (name != null)
+            if ((name != null) && (role != null))
             {
-                Stakeholder newStakeholder = new Stakeholder(name);
+                Stakeholder newStakeholder = new Stakeholder(name,role);
 
                 if (StakeholderIndex <= Globals.RationallyAddIn.Model.Stakeholders.Count)
                 {
@@ -52,8 +58,10 @@ namespace Rationally.Visio.View.Stakeholders
         {
 
             StakeholderNameComponent nameComponent = new StakeholderNameComponent(page, stakeholderIndex, stakeholder.Name);
+            StakeholderRoleComponent roleComponent = new StakeholderRoleComponent(page, stakeholderIndex, stakeholder.Role);
 
             Children.Add(nameComponent);
+            Children.Add(roleComponent);
 
             Name = "Stakeholder";
             AddUserRow("rationallyType");
@@ -80,6 +88,7 @@ namespace Rationally.Visio.View.Stakeholders
             MarginTop = StakeholderIndex == 0 ? 0.3 : 0.0;
             MarginLeft = 0.01;
             MarginRight = 0.01;
+            MarginBottom = 0.1;
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
@@ -92,6 +101,14 @@ namespace Rationally.Visio.View.Stakeholders
             if (StakeholderNameComponent.IsStakeholderName(s.Name))
             {
                 StakeholderNameComponent com = new StakeholderNameComponent(Page, s);
+                if (com.StakeholderIndex == StakeholderIndex)
+                {
+                    Children.Add(com);
+                }
+            }
+            else if (StakeholderRoleComponent.IsStakeholderRole(s.Name))
+            {
+                StakeholderRoleComponent com = new StakeholderRoleComponent(Page, s);
                 if (com.StakeholderIndex == StakeholderIndex)
                 {
                     Children.Add(com);

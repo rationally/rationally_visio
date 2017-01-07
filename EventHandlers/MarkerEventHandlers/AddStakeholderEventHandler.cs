@@ -20,7 +20,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
         public void Execute(Shape changedShape, string identifier)
         {
             StakeholdersContainer stakeholdersContainer = (StakeholdersContainer)Globals.RationallyAddIn.View.Children.First(ch => ch is StakeholdersContainer);
-            stakeholdersContainer?.AddStakeholder("Jake Stake");  
+            stakeholdersContainer?.AddStakeholder("<<name>>","<<role>>");  
         }
     }
 }

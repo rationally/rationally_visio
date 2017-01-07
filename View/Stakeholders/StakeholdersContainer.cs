@@ -62,7 +62,7 @@ namespace Rationally.Visio.View.Stakeholders
             }
             else
             {
-                bool isStakeholderChild = StakeholderNameComponent.IsStakeholderName(s.Name);
+                bool isStakeholderChild = StakeholderNameComponent.IsStakeholderName(s.Name) || StakeholderRoleComponent.IsStakeholderRole(s.Name);
 
                 if (isStakeholderChild && Children.All(c => c.StakeholderIndex != shapeComponent.StakeholderIndex)) //if parent not exists
                 {
@@ -91,12 +91,12 @@ namespace Rationally.Visio.View.Stakeholders
             }
         }
 
-        public void AddStakeholder(string name)
+        public void AddStakeholder(string name,string role)
         {
             PleaseWait pleaseWait = new PleaseWait();
             pleaseWait.Show();
             pleaseWait.Refresh();
-            Stakeholder stakeholder = new Stakeholder(name);
+            Stakeholder stakeholder = new Stakeholder(name,role);
             Globals.RationallyAddIn.Model.Stakeholders.Add(stakeholder);
             Children.Add(new StakeholderContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Stakeholders.Count - 1, stakeholder));//assumes stakeholder is already in the model
             RepaintHandler.Repaint();

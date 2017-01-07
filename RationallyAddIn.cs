@@ -111,7 +111,7 @@ namespace Rationally.Visio
             DeleteEventHandlerRegistry.Register("informationVersionLabel", new DeleteInformationComponentEventHandler());
 
             DeleteEventHandlerRegistry.Register("stakeholder", new DeleteStakeholderEventHandler());
-            DeleteEventHandlerRegistry.Register("stakeholders", new DeleteStakeholdersEventHandler());
+            DeleteEventHandlerRegistry.Register("stakeholders", new DeleteStakeholdersEventHandler());  
         }
 
         private static void RegisterQueryDeleteEventHandlers()
@@ -133,6 +133,7 @@ namespace Rationally.Visio
             QueryDeleteEventHandlerRegistry.Register("relatedDocumentTitle", new QDRelatedDocumentComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("relatedDocumentContainer", new QDRelatedDocumentContainerEventHandler());
 
+            QueryDeleteEventHandlerRegistry.Register("stakeholderRole", new QDStakeholderComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("stakeholderName", new QDStakeholderComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("stakeholder", new QDStakeholderContainerEventHandler());
         }
@@ -228,12 +229,16 @@ namespace Rationally.Visio
             MarkerEventHandlerRegistry.Register("stakeholders.add", new AddStakeholderEventHandler());
             MarkerEventHandlerRegistry.Register("stakeholder.add", new AddStakeholderEventHandler());
             MarkerEventHandlerRegistry.Register("stakeholderName.add", new AddStakeholderEventHandler());
+            MarkerEventHandlerRegistry.Register("stakeholderRole.add", new AddStakeholderEventHandler());
 
             MarkerEventHandlerRegistry.Register("stakeholder.delete", new StartDeleteStakeholderEventHandler());
             MarkerEventHandlerRegistry.Register("stakeholderName.delete", new StartDeleteStakeholderEventHandler());
+            MarkerEventHandlerRegistry.Register("stakeholderRole.delete", new StartDeleteStakeholderEventHandler());
 
             MarkerEventHandlerRegistry.Register("stakeholder.moveUp", new MoveUpStakeholderHandler());
             MarkerEventHandlerRegistry.Register("stakeholderName.moveUp", new MoveUpStakeholderHandler());
+            MarkerEventHandlerRegistry.Register("stakeholderRole.moveUp", new MoveUpStakeholderHandler());
+            MarkerEventHandlerRegistry.Register("stakeholderRole.moveDown", new MoveDownStakeholderHandler());
             MarkerEventHandlerRegistry.Register("stakeholder.moveDown", new MoveDownStakeholderHandler());
             MarkerEventHandlerRegistry.Register("stakeholderName.moveDown", new MoveDownStakeholderHandler());
         }
@@ -252,6 +257,7 @@ namespace Rationally.Visio
             TextChangedEventHandlerRegistry.Register("relatedDocumentTitle", new RelatedDocumentTitleTextChangedEventHandler());
             TextChangedEventHandlerRegistry.Register("relatedUrlUrl", new RelatedUrlUrlTextChangedHandler());
             TextChangedEventHandlerRegistry.Register("stakeholderName",new StakeholderNameTextChangedEventHandler());
+            TextChangedEventHandlerRegistry.Register("stakeholderRole", new StakeholderRoleTextChangedEventHandler());
         }
 
         //Fired when any text is changed

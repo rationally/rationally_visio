@@ -1,5 +1,8 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 using log4net;
 using Microsoft.Office.Interop.Visio;
@@ -7,23 +10,23 @@ using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Stakeholders
 {
-    public class StakeholderNameComponent : TextLabel
+    class StakeholderRoleComponent : TextLabel
     {
-        private static readonly Regex NameRegex = new Regex(@"StakeholderName(\.\d+)?$");
+        private static readonly Regex RoleRegex = new Regex(@"StakeholderRole(\.\d+)?$");
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public StakeholderNameComponent(Page page, Shape shape) : base(page, shape)
+        public StakeholderRoleComponent(Page page, Shape shape) : base(page, shape)
         {
             RShape = shape;
             InitStyle();
         }
 
-        public StakeholderNameComponent(Page page, int stakeholderIndex, string labelText) : base(page, labelText)
+        public StakeholderRoleComponent(Page page, int stakeholderIndex, string labelText) : base(page, labelText)
         {
-            RationallyType = "stakeholderName";
+            RationallyType = "stakeholderRole";
             AddUserRow("stakeholderIndex");
             StakeholderIndex = stakeholderIndex;
 
-            Name = "StakeholderName";
+            Name = "StakeholderRole";
 
             AddAction("addStakeholder", "QUEUEMARKEREVENT(\"add\")", "\"Add stakeholder\"", false);
             AddAction("deleteStakeholder", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this stakeholder\"", false);
@@ -35,7 +38,7 @@ namespace Rationally.Visio.View.Stakeholders
         private void InitStyle()
         {
             HAlign = 0;//Enum is wrong, align left
-            MarginLeft = 1;
+            MarginLeft = 0.1;
             MarginRight = 0;
             MarginBottom = 0;
             MarginTop = 0.01;
@@ -67,12 +70,12 @@ namespace Rationally.Visio.View.Stakeholders
                 if (Globals.RationallyAddIn.Model.Stakeholders.Count > StakeholderIndex)
                 {
                     Stakeholder stakeholder = Globals.RationallyAddIn.Model.Stakeholders[StakeholderIndex];
-                    Text = stakeholder.Name;
+                    Text = stakeholder.Role;
                 }
             }
             base.Repaint();
         }
 
-        public static bool IsStakeholderName(string name) => NameRegex.IsMatch(name);
+        public static bool IsStakeholderRole(string name) => RoleRegex.IsMatch(name);
     }
 }

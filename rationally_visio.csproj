@@ -143,6 +143,7 @@
     <Compile Include="EventHandlers\TextChangedEventHandlers\RelatedDocumentTitleTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\RelatedUrlUrlTextChangedHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\StakeholderNameTextChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\StakeholderRoleTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateAlternativesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateDocumentsHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateForcesHandler.cs" />
@@ -307,6 +308,7 @@
     <Compile Include="View\SizingPolicy.cs" />
     <Compile Include="View\Stakeholders\StakeholderContainer.cs" />
     <Compile Include="View\Stakeholders\StakeholderNameComponent.cs" />
+    <Compile Include="View\Stakeholders\StakeholderRoleComponent.cs" />
     <Compile Include="View\Stakeholders\StakeholdersContainer.cs" />
     <Compile Include="View\Stakeholders\StakeholderStubContainer.cs" />
     <Compile Include="View\VerticalStretchLayout.cs" />

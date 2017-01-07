@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Documents
@@ -6,6 +8,7 @@ namespace Rationally.Visio.View.Documents
     internal sealed class RelatedURLURLComponent : TextLabel
     {
         private static readonly Regex UrlUrlRegex = new Regex(@"RelatedUrlUrl(\.\d+)?$");
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public RelatedURLURLComponent(Page page, Shape shape) : base(page, shape)
         {

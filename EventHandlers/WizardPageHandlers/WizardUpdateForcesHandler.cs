@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 using Rationally.Visio.Forms;
 using Rationally.Visio.Model;
 using Rationally.Visio.View.Forces;
@@ -10,6 +12,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
 {
     internal static class WizardUpdateForcesHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public static void Execute(ProjectSetupWizard wizard)
         {
             //clear the forces part of the model

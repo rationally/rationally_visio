@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.EventHandlers;
 using Rationally.Visio.Forms;
@@ -13,7 +15,7 @@ namespace Rationally.Visio.View.Stakeholders
     class StakeholdersContainer : RationallyContainer
     {
         private static readonly Regex StakeholdersRegex = new Regex(@"Stakeholders(\.\d+)?$");
-
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public StakeholdersContainer(Page page, Shape stakeholderContainer) : base(page)
         {
             RShape = stakeholderContainer;

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
@@ -11,6 +13,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
     internal class RelatedDocumentTitleTextChangedEventHandler : ITextChangedEventHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(RationallyView view, Shape changedShape)
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)

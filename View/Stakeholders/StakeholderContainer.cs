@@ -1,5 +1,7 @@
 ﻿
+using System.Reflection;
 using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
 
@@ -8,6 +10,7 @@ namespace Rationally.Visio.View.Stakeholders
     internal sealed class StakeholderContainer : HeaderlessContainer
     {
         private static readonly Regex StakeholderRegex = new Regex(@"Stakeholder(\.\d+)?$");
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public StakeholderContainer(Page page, Shape stakeholder) : base(page, false)
         {
             RShape = stakeholder;

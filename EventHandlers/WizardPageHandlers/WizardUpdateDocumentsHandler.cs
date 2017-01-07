@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using log4net;
 using Rationally.Visio.Forms;
 using Rationally.Visio.Forms.WizardComponents;
 using Rationally.Visio.Model;
@@ -10,6 +12,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
 {
     internal class WizardUpdateDocumentsHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public static void Execute(ProjectSetupWizard wizard)
         {
             //validation is done here, so just pick the filled in rows

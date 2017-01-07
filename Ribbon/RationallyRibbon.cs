@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System.Reflection;
+using System.Windows.Forms;
+using log4net;
 using Microsoft.Office.Tools.Ribbon;
 using Rationally.Visio.Enums;
 using Rationally.Visio.RationallyConstants;
@@ -8,6 +10,7 @@ namespace Rationally.Visio
 {
     public partial class RationallyRibbon
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private void RationallyRibbon_Load(object sender, RibbonUIEventArgs e) => wizardButton.Click += wizardButton_Click;
 
         private static void wizardButton_Click(object sender, RibbonControlEventArgs e)

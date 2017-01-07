@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 using Rationally.Visio.RationallyConstants;
 
 namespace Rationally.Visio.Forms.WizardComponents
@@ -8,6 +10,7 @@ namespace Rationally.Visio.Forms.WizardComponents
     public sealed class MenuButton : AntiAliasedButton
     {
         private readonly MenuPanel containingMenu;
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public MenuButton(MenuPanel containingMenu)
         {
             this.containingMenu = containingMenu;

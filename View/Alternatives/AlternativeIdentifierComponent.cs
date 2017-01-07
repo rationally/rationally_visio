@@ -1,10 +1,13 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Alternatives
 {
     internal sealed class AlternativeIdentifierComponent : TextLabel, IAlternativeComponent
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex IdentRegex = new Regex(@"AlternativeIdent(\.\d+)?$");
         public AlternativeIdentifierComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {

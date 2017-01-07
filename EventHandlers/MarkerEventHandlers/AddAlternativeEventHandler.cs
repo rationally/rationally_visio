@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Forms;
@@ -12,6 +14,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class AddAlternativeEventHandler : IMarkerEventHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(Shape s, string context)
         {
             RationallyModel model = Globals.RationallyAddIn.Model;

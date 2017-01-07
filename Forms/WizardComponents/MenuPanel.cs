@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
     public class MenuPanel : TableLayoutPanel
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public readonly MenuButton ButtonShowGeneral;
         private readonly MenuButton buttonShowAlternatives;
         private readonly MenuButton buttonShowForces;

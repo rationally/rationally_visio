@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 
 namespace Rationally.Visio.Forms
 {
     public partial class UrlSelecter : Form
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public UrlSelecter()
         {
             InitializeComponent();

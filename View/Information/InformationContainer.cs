@@ -4,6 +4,8 @@ using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using log4net;
 using Rationally.Visio.RationallyConstants;
 
 // ReSharper disable ArrangeRedundantParentheses
@@ -12,6 +14,7 @@ namespace Rationally.Visio.View.Information
 {
     internal class InformationContainer : HeaderlessContainer
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex InformationContainerRegex = new Regex(@"Information(\.\d+)?$");
 
         public InformationContainer(Page page, string author, string date, string version) : base(page)

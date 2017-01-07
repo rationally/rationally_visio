@@ -1,7 +1,11 @@
-﻿namespace Rationally.Visio.Model
+﻿using System.Reflection;
+using log4net;
+
+namespace Rationally.Visio.Model
 {
     public class Alternative
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static int highestUniqueIdentifier = -1;
 
         public string Status { get; set; }

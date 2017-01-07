@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+using log4net;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.RationallyConstants;
@@ -7,6 +9,7 @@ namespace Rationally.Visio.View.Alternatives
 {
     internal sealed class AlternativeStateComponent : RationallyComponent, IAlternativeComponent
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex StateRegex = new Regex(@"AlternativeState(\.\d+)?$");
         public AlternativeStateComponent(Page page, Shape alternativeComponent) : base(page)
         {

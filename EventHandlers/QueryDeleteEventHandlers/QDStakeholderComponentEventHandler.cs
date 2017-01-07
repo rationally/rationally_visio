@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Stakeholders;
@@ -10,6 +12,7 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
     internal class QDStakeholderComponentEventHandler : IQueryDeleteEventHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(RationallyView view, Shape changedShape)
         {
             StakeholdersContainer cont = (StakeholdersContainer)view.Children.First(x => x is StakeholdersContainer);

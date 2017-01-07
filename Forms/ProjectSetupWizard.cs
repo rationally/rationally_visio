@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using log4net;
 using Rationally.Visio.Enums;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.EventHandlers.WizardPageHandlers;
@@ -11,6 +13,7 @@ namespace Rationally.Visio.Forms
 {
     public partial class ProjectSetupWizard : Form
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static ProjectSetupWizard instance;
         private WizardFieldTypes selectedFieldType;
         public static bool DocumentCreation;

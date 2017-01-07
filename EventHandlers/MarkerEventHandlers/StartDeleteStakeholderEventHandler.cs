@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
@@ -10,8 +12,9 @@ using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
-    class StartDeleteStakeholderEventHandler : IMarkerEventHandler
+    internal class StartDeleteStakeholderEventHandler : IMarkerEventHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(Shape s, string identifier)
         {
             RationallyModel model = Globals.RationallyAddIn.Model;

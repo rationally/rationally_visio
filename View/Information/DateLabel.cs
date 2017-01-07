@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Information
@@ -6,7 +8,7 @@ namespace Rationally.Visio.View.Information
     internal class DateLabel : TextLabel
     {
         private static readonly Regex DateRegex = new Regex(@"InformationDate(\.\d+)?$");
-
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public DateLabel(Page page, Shape shape) : base(page, shape)
         {
             RShape = shape;

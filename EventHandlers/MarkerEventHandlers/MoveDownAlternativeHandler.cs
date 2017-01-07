@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Reflection;
+using log4net;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Alternatives;
@@ -10,6 +12,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class MoveDownAlternativeHandler : IMarkerEventHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(Shape changedShape, string identifier)
         {
             RationallyModel model = Globals.RationallyAddIn.Model;

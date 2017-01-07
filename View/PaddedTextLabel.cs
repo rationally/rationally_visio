@@ -1,9 +1,12 @@
-﻿using Microsoft.Office.Interop.Visio;
+﻿using System.Reflection;
+using log4net;
+using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View
 {
     internal class PaddedTextLabel : TextLabel
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public PaddedTextLabel(Page page, Shape shape) : base(page, shape)
         {
             InitStyle();

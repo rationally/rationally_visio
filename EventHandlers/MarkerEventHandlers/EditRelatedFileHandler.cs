@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Documents;
@@ -9,7 +11,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class EditRelatedFileHandler : IMarkerEventHandler
     {
-
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(Shape changedShape, string context)
         {
             RationallyModel model = Globals.RationallyAddIn.Model;

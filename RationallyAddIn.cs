@@ -21,6 +21,7 @@ using log4net;
 using Newtonsoft.Json.Linq;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.Forms;
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 // ReSharper disable ClassNeverInstantiated.Global
 
 //Main class for the visio add in. Everything is managed from here.

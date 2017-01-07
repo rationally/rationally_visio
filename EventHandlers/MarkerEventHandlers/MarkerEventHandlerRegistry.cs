@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal static class MarkerEventHandlerRegistry
     {
-
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static Dictionary<string, List<IMarkerEventHandler>> registry; 
         public static void Register(string eventKey, IMarkerEventHandler eventHandler)
         {

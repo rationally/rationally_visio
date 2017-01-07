@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 using Rationally.Visio.Model;
 
 namespace Rationally.Visio.Forms
 {
     public partial class AddAlternativeWithWarning : Form
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public AddAlternativeWithWarning(RationallyModel model)
         {
             InitializeComponent();

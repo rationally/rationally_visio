@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.EventHandlers;
 using Rationally.Visio.Model;
@@ -12,6 +14,7 @@ namespace Rationally.Visio.View.Documents
 {
     internal class RelatedDocumentsContainer : RationallyContainer
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex RelatedRegex = new Regex(@"Related Documents(\.\d+)?$");
         
         public RelatedDocumentsContainer(Page page, Shape relatedDocumentsContainer) : base(page)

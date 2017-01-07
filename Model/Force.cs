@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
+using log4net;
 using Rationally.Visio.View.Forces;
 
 namespace Rationally.Visio.Model
 {
     public class Force
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public string Concern { get; set; }
         public string Description { get; set; }
 

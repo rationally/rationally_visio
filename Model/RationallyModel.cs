@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using log4net;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Documents;
 using Rationally.Visio.View.Forces;
@@ -12,6 +14,7 @@ namespace Rationally.Visio.Model
     /// </summary>
     public class RationallyModel 
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public List<Alternative> Alternatives { get; }
         public List<RelatedDocument> Documents { get; }
 

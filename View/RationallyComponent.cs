@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.RationallyConstants;
 
@@ -13,6 +15,7 @@ namespace Rationally.Visio.View
     /// </summary>
     public class RationallyComponent
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public double MarginTop { get; protected set; }
         public double MarginBottom { get; protected set; }
         public double MarginLeft { get; protected set; }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.EventHandlers;
 using Rationally.Visio.Forms;
@@ -11,6 +13,7 @@ namespace Rationally.Visio.View.Alternatives
 {
     public class AlternativesContainer : RationallyContainer
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex AlternativesRegex = new Regex(@"Alternatives(\.\d+)?$");
         
         public AlternativesContainer(Page page, Shape alternativesContainer) : base(page)

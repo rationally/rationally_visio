@@ -1,5 +1,7 @@
 ﻿
+using System.Reflection;
 using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
 
@@ -8,7 +10,7 @@ namespace Rationally.Visio.View.Stakeholders
     public class StakeholderNameComponent : TextLabel
     {
         private static readonly Regex NameRegex = new Regex(@"StakeholderName(\.\d+)?$");
-
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public StakeholderNameComponent(Page page, Shape shape) : base(page, shape)
         {
             RShape = shape;

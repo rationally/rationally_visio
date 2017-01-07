@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Documents;
 using Rationally.Visio.View.Forces;
@@ -15,6 +17,7 @@ namespace Rationally.Visio.View
     /// </summary>
     public class RationallyView : RationallyContainer
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public RationallyView(Page page) : base(page)
         {
 
@@ -24,10 +27,7 @@ namespace Rationally.Visio.View
 
         
         
-        public override bool ExistsInTree(Shape s)
-        {
-            return Children.Exists(x => x.ExistsInTree(s));
-        }
+        public override bool ExistsInTree(Shape s) => Children.Exists(x => x.ExistsInTree(s));
 
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {

@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Stakeholders
 {
-    class StakeholderStubContainer : RationallyComponent
+    internal class StakeholderStubContainer : RationallyComponent
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public override int StakeholderIndex
         {
             get; set;
@@ -18,9 +21,6 @@ namespace Rationally.Visio.View.Stakeholders
             StakeholderIndex = stakeholderIndex;
         }
 
-        public override bool ExistsInTree(Shape s)
-        {
-            return false;
-        }
+        public override bool ExistsInTree(Shape s) => false;
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using log4net;
 using Rationally.Visio.View;
 using Microsoft.Office.Interop.Visio;
 
@@ -7,6 +9,7 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {
     internal static class QueryDeleteEventHandlerRegistry
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static Dictionary<string, List<IQueryDeleteEventHandler>> registry; 
         public static void Register(string eventKey, IQueryDeleteEventHandler eventHandler)
         {

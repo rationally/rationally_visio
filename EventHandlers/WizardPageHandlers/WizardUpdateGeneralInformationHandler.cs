@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Reflection;
+using log4net;
 using Rationally.Visio.Forms;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
@@ -8,6 +10,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
 {
     internal static class WizardUpdateGeneralInformationHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public static void Execute(ProjectSetupWizard wizard) => UpdateGeneralInformationInModel(wizard.tableLayoutMainContentGeneral.TextAuthor.Text,
             wizard.tableLayoutMainContentGeneral.TextDecisionTopic.Text,
             wizard.tableLayoutMainContentGeneral.DateTimePickerCreationDate.Value.ToLongDateString(),

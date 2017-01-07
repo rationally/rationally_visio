@@ -1,10 +1,13 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Documents
 {
     internal sealed class RelatedFileComponent : RationallyComponent
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex RelatedRegex = new Regex(@"RelatedFile(\.\d+)?$");
         public RelatedFileComponent(Page page, Shape fileShape) : base(page)
         {

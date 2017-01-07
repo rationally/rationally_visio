@@ -21,6 +21,8 @@ using log4net;
 using Newtonsoft.Json.Linq;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.Forms;
+using Rationally.Visio.View.Stakeholders;
+
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 // ReSharper disable ClassNeverInstantiated.Global
 
@@ -109,7 +111,7 @@ namespace Rationally.Visio
             DeleteEventHandlerRegistry.Register("informationVersionLabel", new DeleteInformationComponentEventHandler());
 
             DeleteEventHandlerRegistry.Register("stakeholder", new DeleteStakeholderEventHandler());
-            //DeleteEventHandlerRegistry.Register("stakeholders", new DeleteStakeholderEventHandler());//TODO
+            DeleteEventHandlerRegistry.Register("stakeholders", new DeleteStakeholdersEventHandler());
         }
 
         private static void RegisterQueryDeleteEventHandlers()
@@ -249,6 +251,7 @@ namespace Rationally.Visio
             TextChangedEventHandlerRegistry.Register("decisionName", new DecisionNameTextChangedHandler());
             TextChangedEventHandlerRegistry.Register("relatedDocumentTitle", new RelatedDocumentTitleTextChangedEventHandler());
             TextChangedEventHandlerRegistry.Register("relatedUrlUrl", new RelatedUrlUrlTextChangedHandler());
+            TextChangedEventHandlerRegistry.Register("stakeholderName",new StakeholderNameTextChangedEventHandler());
         }
 
         //Fired when any text is changed
@@ -348,6 +351,15 @@ namespace Rationally.Visio
                 Log.Debug("Document index cell changed of documentcontainer. shape:" + changedShape.Name);
                 RationallyComponent docComponent = View.Children.FirstOrDefault(x => x is RelatedDocumentsContainer);
                 if (docComponent != null)
+                {
+                    rebuildTree = true; //Wait with the rebuild till the undo is done
+                }
+            }
+            else if (Application.IsUndoingOrRedoing && StakeholderContainer.IsStakeholderContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.StakeholderIndex))
+            {
+                Log.Debug("Stakeholder index cell changed of stakeholdercontainer. shape:" + changedShape.Name);
+                RationallyComponent stakeholderComponent = View.Children.FirstOrDefault(x => x is StakeholdersContainer);
+                if (stakeholderComponent != null)
                 {
                     rebuildTree = true; //Wait with the rebuild till the undo is done
                 }

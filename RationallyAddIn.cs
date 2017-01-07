@@ -429,6 +429,8 @@ namespace Rationally.Visio
                 Model.Alternatives.Clear();
                 Model.Documents.Clear();
                 Model.Forces.Clear();
+                Model.Stakeholders.Clear();
+
                 foreach (Page page in d.Pages)
                 {
                     foreach (Shape shape in page.Shapes)

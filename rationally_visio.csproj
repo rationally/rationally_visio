@@ -130,6 +130,7 @@
   <ItemGroup>
     <Compile Include="Enums\WizardFieldTypes.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteStakeholderEventHandler.cs" />
+    <Compile Include="EventHandlers\DeleteEventHandlers\DeleteStakeholdersEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\AddStakeholderEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveDownStakeholderHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveUpStakeholderHandler.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="EventHandlers\TextChangedEventHandlers\ForceConcernTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\RelatedDocumentTitleTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\RelatedUrlUrlTextChangedHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\StakeholderNameTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateAlternativesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateDocumentsHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateForcesHandler.cs" />

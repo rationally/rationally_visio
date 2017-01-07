@@ -21,6 +21,8 @@ using log4net;
 using Newtonsoft.Json.Linq;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.Forms;
+using Rationally.Visio.View.Stakeholders;
+
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 // ReSharper disable ClassNeverInstantiated.Global
 
@@ -109,7 +111,7 @@ namespace Rationally.Visio
             DeleteEventHandlerRegistry.Register("informationVersionLabel", new DeleteInformationComponentEventHandler());
 
             DeleteEventHandlerRegistry.Register("stakeholder", new DeleteStakeholderEventHandler());
-            //DeleteEventHandlerRegistry.Register("stakeholders", new DeleteStakeholderEventHandler());//TODO
+            DeleteEventHandlerRegistry.Register("stakeholders", new DeleteStakeholdersEventHandler());
         }
 
         private static void RegisterQueryDeleteEventHandlers()
@@ -248,6 +250,7 @@ namespace Rationally.Visio
             TextChangedEventHandlerRegistry.Register("decisionName", new DecisionNameTextChangedHandler());
             TextChangedEventHandlerRegistry.Register("relatedDocumentTitle", new RelatedDocumentTitleTextChangedEventHandler());
             TextChangedEventHandlerRegistry.Register("relatedUrlUrl", new RelatedUrlUrlTextChangedHandler());
+            TextChangedEventHandlerRegistry.Register("stakeholderName",new StakeholderNameTextChangedEventHandler());
         }
 
         //Fired when any text is changed
@@ -349,7 +352,7 @@ namespace Rationally.Visio
         {
             Shape changedShape = cell.Shape;
             // ReSharper disable once MergeSequentialChecksWhenPossible
-            if ((changedShape == null) || !changedShape.Document.Template.Contains(Constants.TemplateName) || (changedShape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] != Constants.CellExists)) //No need to continue when the shape is not part of our model.
+            if ((changedShape == null) || !changedShape.Document.Template.Contains(Constants.TemplateName) || (changedShape.CellExistsU[CellConstants.RationallyType, (short) VisExistsFlags.visExistsAnywhere] != Constants.CellExists)) //No need to continue when the shape is not part of our model.
             {
                 return;
             }
@@ -359,11 +362,11 @@ namespace Rationally.Visio
                 {
                     Log.Debug("Cell changed of hyperlink shape:" + changedShape.Name);
                     //find the container that holds all Related Documents
-                    RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)View.Children.First(c => c is RelatedDocumentsContainer);
+                    RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer) View.Children.First(c => c is RelatedDocumentsContainer);
                     //find the related document holding the changed shape (one of his children has RShape equal to changedShape)
                     RelatedDocumentContainer relatedDocumentContainer = relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().First(dc => dc.Children.Where(c => c.RShape.Equals(changedShape)).ToList().Count > 0);
                     //update the text of the URL display component to the new url
-                    RelatedURLURLComponent relatedURLURLComponent = (RelatedURLURLComponent)relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent);
+                    RelatedURLURLComponent relatedURLURLComponent = (RelatedURLURLComponent) relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent);
                     relatedURLURLComponent.Text = changedShape.Hyperlink.Address;
                 }
                 else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals("User.forceIndex"))
@@ -389,6 +392,15 @@ namespace Rationally.Visio
                     Log.Debug("Document index cell changed of documentcontainer. shape:" + changedShape.Name);
                     RationallyComponent docComponent = View.Children.FirstOrDefault(x => x is RelatedDocumentsContainer);
                     if (docComponent != null)
+                    {
+                        rebuildTree = true; //Wait with the rebuild till the undo is done
+                    }
+                }
+                else if (Application.IsUndoingOrRedoing && StakeholderContainer.IsStakeholderContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.StakeholderIndex))
+                {
+                    Log.Debug("Stakeholder index cell changed of stakeholdercontainer. shape:" + changedShape.Name);
+                    RationallyComponent stakeholderComponent = View.Children.FirstOrDefault(x => x is StakeholdersContainer);
+                    if (stakeholderComponent != null)
                     {
                         rebuildTree = true; //Wait with the rebuild till the undo is done
                     }

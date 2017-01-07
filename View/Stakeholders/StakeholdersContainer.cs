@@ -99,7 +99,7 @@ namespace Rationally.Visio.View.Stakeholders
             Stakeholder stakeholder = new Stakeholder(name,role);
             Globals.RationallyAddIn.Model.Stakeholders.Add(stakeholder);
             Children.Add(new StakeholderContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Stakeholders.Count - 1, stakeholder));//assumes stakeholder is already in the model
-            RepaintHandler.Repaint();
+            RepaintHandler.Repaint(this);
             pleaseWait.Hide();
         }
     }

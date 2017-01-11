@@ -476,6 +476,35 @@ namespace Rationally.Visio
                                 Application.EndUndoScope(scopeId, true);
                             }
                             break;
+                        case "relatedDocumentAddStub":
+                            if (!Application.IsUndoingOrRedoing)
+                            {
+                                int scopeId = Application.BeginUndoScope("Add related file");
+                                s.Delete();
+                                MarkerEventHandlerRegistry.HandleEvent("relatedDocuments.addRelatedFile", null, null);
+                                Application.EndUndoScope(scopeId, true);
+                            }
+                            break;
+                        case "relatedUrlAddStub":
+                            if (!Application.IsUndoingOrRedoing)
+                            {
+                                int scopeId = Application.BeginUndoScope("Add related url");
+                                s.Delete();
+                                MarkerEventHandlerRegistry.HandleEvent("relatedDocuments.addRelatedUrl", null, null);
+                                Application.EndUndoScope(scopeId, true);
+                            }
+                            break;
+                        case "stakeholderAddStub":
+                            if (!Application.IsUndoingOrRedoing)
+                            {
+                                int scopeId = Application.BeginUndoScope("Add stakeholder");
+                                s.Delete();
+                                StakeholdersContainer stakeholdersContainer = Globals.RationallyAddIn.View.Children.FirstOrDefault(ch => ch is StakeholdersContainer) as StakeholdersContainer;
+                                stakeholdersContainer?.AddStakeholder("<<name>>", "<<role>>");
+
+                                Application.EndUndoScope(scopeId, true);
+                            }
+                            break;
                         default:
                             View.AddToTree(s, true);
                             break;

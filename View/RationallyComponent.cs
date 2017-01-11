@@ -16,7 +16,8 @@ namespace Rationally.Visio.View
     public class RationallyComponent
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public double MarginTop { get; protected set; }
+        public double MarginTop { get;
+            protected set; }
         public double MarginBottom { get; protected set; }
         public double MarginLeft { get; protected set; }
         public double MarginRight { get; protected set; }

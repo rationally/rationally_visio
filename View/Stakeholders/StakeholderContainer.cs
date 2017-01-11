@@ -75,6 +75,11 @@ namespace Rationally.Visio.View.Stakeholders
 
             LinePattern = 0;
             InitStyle();
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+            {
+                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                ContainerPadding = 0;
+            }
         }
 
         private void InitStyle()
@@ -84,11 +89,7 @@ namespace Rationally.Visio.View.Stakeholders
             MarginLeft = 0.01;
             MarginRight = 0.01;
             MarginBottom = 0.1;
-            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
-            {
-                RShape.ContainerProperties.ResizeAsNeeded = 0;
-                ContainerPadding = 0;
-            }
+            
         }
 
         public override void AddToTree(Shape s, bool allowAddInChildren)

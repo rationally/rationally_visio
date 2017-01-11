@@ -71,7 +71,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void AddFile()
         {
-            Documents.Add(new FlowLayoutDocument(Documents.Count));
+            Documents.Add(new FlowLayoutDocument(Documents.Count > 0 ? Documents.Last().DocumentIndex + 1 : 0));
             UpdateRows();
         }
 
@@ -106,7 +106,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             Documents.Clear();
             for (int i = 0; i < model.Documents.Count; i++)
             {
-                Documents.Add(new FlowLayoutDocument(i) {Document = model.Documents[i]});
+                Documents.Add(new FlowLayoutDocument(i));
             }
             UpdateRows();
         }

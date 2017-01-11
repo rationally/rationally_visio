@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Rationally.Visio.Model;
 
@@ -67,7 +68,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void AddStakeholder()
         {
-            Stakeholders.Add(new FlowLayoutStakeholder(Stakeholders.Count));
+            Stakeholders.Add(new FlowLayoutStakeholder(Stakeholders.Count > 0 ? Stakeholders.Last().StakeholderIndex+1 : 0));
             UpdateRows();
         }
 

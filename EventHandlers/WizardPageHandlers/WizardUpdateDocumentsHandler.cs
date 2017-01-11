@@ -22,7 +22,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
             //user might have deleted rows => delete them from the model
             List<RelatedDocument> modelDocuments = Globals.RationallyAddIn.Model.Documents;
             //locate documents in the model for which no element in the wizard exists (anymore)
-            List<int> scheduledForDeletion = modelDocuments.Where((t, i) => wizard.TableLayoutMainContentDocuments.Documents.FirstOrDefault(doc => doc.DocumentIndex == i) == null).Select((modelDocument, i) => i).ToList();
+            List<int> scheduledForDeletion = modelDocuments.Where((t, i) => wizard.TableLayoutMainContentDocuments.Documents.FirstOrDefault(doc => doc.DocumentIndex == i) == null).Select(modelDocument => modelDocuments.IndexOf(modelDocument)).ToList();
 
             RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
 

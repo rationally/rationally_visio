@@ -9,7 +9,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 {
     public sealed class FlowLayoutDocument : FlowLayoutPanel
     {
-        public readonly int DocumentIndex;
+        public int DocumentIndex { get; private set; }
 
         private readonly AntiAliasedLabel fileNameLabel;
         internal readonly TextBox FileName;
@@ -18,7 +18,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         private readonly AntiAliasedButton chooseFileButton;
         private readonly AntiAliasedButton deleteDocumentButton;
 
-        public RelatedDocument Document;
+        public RelatedDocument Document => Globals.RationallyAddIn.Model.Documents.Count > DocumentIndex ? Globals.RationallyAddIn.Model.Documents[DocumentIndex] : null;
 
         public FlowLayoutDocument(int documentIndex)
         {
@@ -127,7 +127,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void RemoveFile(object sender, EventArgs e)
         {
-            ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.Documents.RemoveAt(DocumentIndex);
+            ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.Documents.Remove(this);
             ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.UpdateRows();
         }
 
@@ -148,8 +148,9 @@ namespace Rationally.Visio.Forms.WizardComponents
 
             //create a new document (optionally at the correct index)
             RelatedDocument newDocument = new RelatedDocument(FilePath.Text,FileName.Text,FilePath.ReadOnly);
-            Globals.RationallyAddIn.Model.Documents.Insert(DocumentIndex,newDocument);
-            (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer)?.AddRelatedDocument(newDocument);
+            DocumentIndex = Math.Min(DocumentIndex, Globals.RationallyAddIn.Model.Documents.Count);
+            Globals.RationallyAddIn.Model.Documents.Insert(DocumentIndex, newDocument);
+            (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer)?.InsertRelatedDocument(newDocument,DocumentIndex);
             //move document to the right index
             /*if (documentIndex > -1)
             {

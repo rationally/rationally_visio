@@ -10,7 +10,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 {
     public class FlowLayoutStakeholder : FlowLayoutPanel
     {
-        public readonly int StakeholderIndex;
+        public int StakeholderIndex { get; private set; }
 
         private readonly AntiAliasedLabel stakeholderNameLabel;
         internal readonly TextBox StakeholderName;
@@ -99,7 +99,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void RemoveStakeholder(object sender, EventArgs e)
         {
-            ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders.Stakeholders.RemoveAt(StakeholderIndex);
+            ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders.Stakeholders.Remove(this);
             ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders.UpdateRows();
         }
 
@@ -113,6 +113,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             }
             else
             {
+                StakeholderIndex = Math.Min(StakeholderIndex, Globals.RationallyAddIn.Model.Documents.Count);
                 (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is StakeholdersContainer) as StakeholdersContainer)?.AddStakeholder(StakeholderName.Text, stakeholderRole.Text);
             }
         }

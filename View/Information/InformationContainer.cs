@@ -195,7 +195,6 @@ namespace Rationally.Visio.View.Information
         public override void Repaint()
         {
             Children = Children.OrderBy(c => c.Order).ToList();
-
             base.Repaint();
         }
 

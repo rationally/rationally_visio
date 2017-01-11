@@ -25,7 +25,7 @@ namespace Rationally.Visio.View.Information
 
         public override void Repaint()
         {
-            if (Text != Globals.RationallyAddIn.Model.Version)
+            if (Text != Globals.RationallyAddIn.Model.Version && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 Text = Globals.RationallyAddIn.Model.Version;
             }

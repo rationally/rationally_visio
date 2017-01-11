@@ -25,7 +25,7 @@ namespace Rationally.Visio.View.Information
 
         public override void Repaint()
         {
-            if (Text != Globals.RationallyAddIn.Model.DateString)
+            if (Text != Globals.RationallyAddIn.Model.DateString && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 Text = Globals.RationallyAddIn.Model.DateString;
             }

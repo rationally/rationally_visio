@@ -79,7 +79,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             Stakeholders.Clear();
             for (int i = 0; i < model.Stakeholders.Count; i++)
             {
-                Stakeholders.Add(new FlowLayoutStakeholder(i) { Stakeholder = model.Stakeholders[i] });
+                Stakeholders.Add(new FlowLayoutStakeholder(i));
             }
             UpdateRows();
         }

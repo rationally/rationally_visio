@@ -43,15 +43,10 @@ namespace Rationally.Visio.View.Stakeholders
                 else
                 {
                     Globals.RationallyAddIn.Model.Stakeholders.Add(newStakeholder);
-                    //TODO regenerate StakeholderIndex
                 }
             }
 
-            
-
-            UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
-            MarginTop = StakeholderIndex == 0 ? 0.3 : 0.0;
-
+            InitStyle();
         }
 
         public StakeholderContainer(Page page, int stakeholderIndex, Stakeholder stakeholder) : base(page)

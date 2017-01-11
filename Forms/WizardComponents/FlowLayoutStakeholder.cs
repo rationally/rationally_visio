@@ -2,7 +2,9 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Rationally.Visio.Model;
-
+using System.Linq;
+using Rationally.Visio.View.Documents;
+using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
@@ -14,7 +16,10 @@ namespace Rationally.Visio.Forms.WizardComponents
         internal readonly TextBox StakeholderName;
         private readonly AntiAliasedButton deleteStakeholderButton;
 
-        public Stakeholder Stakeholder;
+        public Stakeholder Stakeholder => Globals.RationallyAddIn.Model.Stakeholders.Count > StakeholderIndex ? Globals.RationallyAddIn.Model.Stakeholders[StakeholderIndex] : null;
+
+        private AntiAliasedLabel stakeholderRoleLabel;
+        private TextBox stakeholderRole;
 
         public FlowLayoutStakeholder(int stakeholderIndex)
         {
@@ -29,6 +34,8 @@ namespace Rationally.Visio.Forms.WizardComponents
 
             stakeholderNameLabel = new AntiAliasedLabel();
             StakeholderName = new TextBox();
+            stakeholderRoleLabel = new AntiAliasedLabel();
+            stakeholderRole = new TextBox();
             deleteStakeholderButton = new AntiAliasedButton();
             SuspendLayout();
             Init();
@@ -38,6 +45,8 @@ namespace Rationally.Visio.Forms.WizardComponents
         {
             Controls.Add(stakeholderNameLabel);
             Controls.Add(StakeholderName);
+            Controls.Add(stakeholderRoleLabel);
+            Controls.Add(stakeholderRole);
             Controls.Add(deleteStakeholderButton);
             //
             // fileNameLabel
@@ -57,6 +66,24 @@ namespace Rationally.Visio.Forms.WizardComponents
             StakeholderName.Name = "stakeholderName";
             StakeholderName.Size = new Size(300, 27);
             StakeholderName.TabIndex = 1;
+            //
+            // filepathlabel
+            //
+            stakeholderRoleLabel.AutoSize = true;
+            stakeholderRoleLabel.Location = new Point(3, 59);
+            stakeholderRoleLabel.Margin = new Padding(3, 10, 3, 0);
+            stakeholderRoleLabel.Name = "stakeholderRoleLabel";
+            stakeholderRoleLabel.Size = new Size(100, 19);
+            stakeholderRoleLabel.TabIndex = 2;
+            stakeholderRoleLabel.Text = "Role:";
+            //
+            // stakeholderRole
+            //
+            stakeholderRole.Location = new Point(110, 57);
+            stakeholderRole.Margin = new Padding(3, 6, 3, 3);
+            stakeholderRole.Name = "stakeholderRole";
+            stakeholderRole.Size = new Size(300, 27);
+            stakeholderRole.TabIndex = 3;
             //
             // deleteStakeholderButton
             //
@@ -82,12 +109,11 @@ namespace Rationally.Visio.Forms.WizardComponents
             if (Stakeholder != null)
             {
                 Stakeholder.Name = StakeholderName.Text;
+                Stakeholder.Role = stakeholderRole.Text;
             }
             else
             {
-                Stakeholder newStakeholder = new Stakeholder(StakeholderName.Text,"TODO");
-                Globals.RationallyAddIn.Model.Stakeholders.Insert(StakeholderIndex, newStakeholder);
-                //TODO add stakeholder to StakeholdersContainer
+                (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is StakeholdersContainer) as StakeholdersContainer)?.AddStakeholder(StakeholderName.Text, stakeholderRole.Text);
             }
         }
 
@@ -96,6 +122,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             if (Stakeholder != null)
             {
                 StakeholderName.Text = Stakeholder.Name;
+                stakeholderRole.Text = Stakeholder.Role;
             }
         }
     }

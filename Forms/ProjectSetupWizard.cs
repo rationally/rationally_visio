@@ -49,6 +49,9 @@ namespace Rationally.Visio.Forms
 
             TableLayoutMainContentDocuments.UpdateByModel();//create rows according to model
             TableLayoutMainContentDocuments.Documents.ForEach(d => d.UpdateData());
+
+            TableLayoutMainContentStakeholders.UpdateData();
+            TableLayoutMainContentStakeholders.Stakeholders.ForEach(d => d.UpdateData());
             if (DocumentCreation)
             {
                 CreateButton.Text = Messages.Wizard_CreateButton_CreateView;
@@ -102,7 +105,8 @@ namespace Rationally.Visio.Forms
                 WizardUpdateAlternativesHandler.Execute(this);
                 //handle changes in the "Related Documents" page
                 WizardUpdateDocumentsHandler.Execute(this);
-                
+                //handle changes in the "Stakeholders" page
+                WizardUpdateStakeholdersHandler.Execute(this);
 
                 //all changes have been made, close the scope and the wizard
                 Globals.RationallyAddIn.Application.EndUndoScope(wizardScopeId, true);

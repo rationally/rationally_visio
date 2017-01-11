@@ -148,6 +148,7 @@
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateDocumentsHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateForcesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateGeneralInformationHandler.cs" />
+    <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateStakeholdersHandler.cs" />
     <Compile Include="Forms\PleaseWait.cs">
       <SubType>Form</SubType>
     </Compile>

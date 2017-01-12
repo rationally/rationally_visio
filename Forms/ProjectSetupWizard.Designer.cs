@@ -44,14 +44,14 @@ namespace Rationally.Visio.Forms
             this.tableLayoutLeftMenu = new Rationally.Visio.Forms.WizardComponents.MenuPanel();
             this.tableLayoutRightColumn = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutMainContentGeneral = new Rationally.Visio.Forms.WizardComponents.TableLayoutMainContentGeneral();
-            this.flowLayoutBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
+            this.FlowLayoutBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.CreateButton = new Rationally.Visio.Forms.WizardComponents.AntiAliasedButton();
             this.tableLayoutForEverything.SuspendLayout();
             this.tableLayoutLeftColumn.SuspendLayout();
             this.tableLayoutLeftLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutRightColumn.SuspendLayout();
-            this.flowLayoutBottomButtons.SuspendLayout();
+            this.FlowLayoutBottomButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutForEverything
@@ -105,7 +105,7 @@ namespace Rationally.Visio.Forms
             this.tableLayoutRightColumn.BackColor = System.Drawing.Color.WhiteSmoke;
             resources.ApplyResources(this.tableLayoutRightColumn, "tableLayoutRightColumn");
             this.tableLayoutRightColumn.Controls.Add(this.tableLayoutMainContentGeneral, 0, 0);
-            this.tableLayoutRightColumn.Controls.Add(this.flowLayoutBottomButtons, 0, 1);
+            this.tableLayoutRightColumn.Controls.Add(this.FlowLayoutBottomButtons, 0, 1);
             this.tableLayoutRightColumn.Name = "tableLayoutRightColumn";
             // 
             // tableLayoutMainContentGeneral
@@ -116,10 +116,10 @@ namespace Rationally.Visio.Forms
             // 
             // flowLayoutBottomButtons
             // 
-            this.flowLayoutBottomButtons.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.flowLayoutBottomButtons.Controls.Add(this.CreateButton);
-            resources.ApplyResources(this.flowLayoutBottomButtons, "flowLayoutBottomButtons");
-            this.flowLayoutBottomButtons.Name = "flowLayoutBottomButtons";
+            this.FlowLayoutBottomButtons.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.FlowLayoutBottomButtons.Controls.Add(this.CreateButton);
+            resources.ApplyResources(this.FlowLayoutBottomButtons, "FlowLayoutBottomButtons");
+            this.FlowLayoutBottomButtons.Name = "FlowLayoutBottomButtons";
             // 
             // CreateButton
             // 
@@ -142,7 +142,7 @@ namespace Rationally.Visio.Forms
             this.tableLayoutLeftLogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutRightColumn.ResumeLayout(false);
-            this.flowLayoutBottomButtons.ResumeLayout(false);
+            this.FlowLayoutBottomButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -159,7 +159,7 @@ namespace Rationally.Visio.Forms
         public TableLayoutMainContentForces TableLayoutMainContentForces = new TableLayoutMainContentForces();
         public TableLayoutMainContentDocuments TableLayoutMainContentDocuments = new TableLayoutMainContentDocuments();
         public TableLayoutMainContentStakeholders TableLayoutMainContentStakeholders = new TableLayoutMainContentStakeholders();
-        public System.Windows.Forms.FlowLayoutPanel flowLayoutBottomButtons;
+        public System.Windows.Forms.FlowLayoutPanel FlowLayoutBottomButtons;
         
         
        
@@ -168,7 +168,7 @@ namespace Rationally.Visio.Forms
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label labelBottomLeftText;
         private MenuPanel tableLayoutLeftMenu;
-        private AntiAliasedButton CreateButton;
+        public AntiAliasedButton CreateButton;
         private System.Windows.Forms.LinkLabel UpdateLink;    
         
     }

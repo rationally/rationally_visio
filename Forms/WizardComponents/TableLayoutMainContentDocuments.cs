@@ -11,13 +11,13 @@ namespace Rationally.Visio.Forms.WizardComponents
     public class TableLayoutMainContentDocuments : TableLayoutPanel, IWizardPanel
     {
         public readonly List<FlowLayoutDocument> Documents;
-        private readonly AntiAliasedButton addDocumentButton;
+        public readonly AntiAliasedButton AddDocumentButton;
 
         public TableLayoutMainContentDocuments()
         {
             Documents = new List<FlowLayoutDocument>();
 
-            addDocumentButton = new AntiAliasedButton();
+            AddDocumentButton = new AntiAliasedButton();
             Init();
         }
 
@@ -35,12 +35,13 @@ namespace Rationally.Visio.Forms.WizardComponents
             //
             // addDocumentButton
             //
-            addDocumentButton.Name = "AddDocumentButton";
-            addDocumentButton.UseVisualStyleBackColor = true;
-            addDocumentButton.Click += AddDocumentButton_Click;
-            addDocumentButton.Text = "Add File";
-            addDocumentButton.Size = new Size(200,30);
-            addDocumentButton.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
+            AddDocumentButton.Name = "AddDocumentButton";
+            AddDocumentButton.UseVisualStyleBackColor = true;
+            AddDocumentButton.Click += AddDocumentButton_Click;
+            AddDocumentButton.Text = "Add File";
+            AddDocumentButton.Size = new Size(200,34);
+            AddDocumentButton.Margin = new Padding(0,0,360,0);
+            AddDocumentButton.Anchor = AnchorStyles.Left | AnchorStyles.Top;
             
 
             UpdateRows();
@@ -60,15 +61,13 @@ namespace Rationally.Visio.Forms.WizardComponents
             Controls.Clear();
             RowStyles.Clear();
 
-            RowCount = Documents.Count + 1;//+ row with "add file" button
+            RowCount = Documents.Count;
 
             for (int i = 0; i < Documents.Count; i++)
             {
                 Controls.Add(Documents[i],0,i);//add control to view
                 RowStyles.Add(new RowStyle(SizeType.Absolute, 100));//style the just added row
             }
-            Controls.Add(addDocumentButton, 0, RowCount-1);//c-indexed
-            RowStyles.Add(new RowStyle(SizeType.AutoSize));//add a style for the add file button
             InitScrollBar();
         }
 

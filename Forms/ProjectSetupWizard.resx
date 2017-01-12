@@ -2969,39 +2969,39 @@
     <value>Rationally.Visio.Forms.WizardComponents.AntiAliasedButton, rationally-visio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;CreateButton.Parent" xml:space="preserve">
-    <value>flowLayoutBottomButtons</value>
+    <value>FlowLayoutBottomButtons</value>
   </data>
   <data name="&gt;&gt;CreateButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="flowLayoutBottomButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="FlowLayoutBottomButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="flowLayoutBottomButtons.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
+  <data name="FlowLayoutBottomButtons.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
     <value>RightToLeft</value>
   </data>
-  <data name="flowLayoutBottomButtons.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="FlowLayoutBottomButtons.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 494</value>
   </data>
-  <data name="flowLayoutBottomButtons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="FlowLayoutBottomButtons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="flowLayoutBottomButtons.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="FlowLayoutBottomButtons.Size" type="System.Drawing.Size, System.Drawing">
     <value>768, 42</value>
   </data>
-  <data name="flowLayoutBottomButtons.TabIndex" type="System.Int32, mscorlib">
+  <data name="FlowLayoutBottomButtons.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutBottomButtons.Name" xml:space="preserve">
-    <value>flowLayoutBottomButtons</value>
+  <data name="&gt;&gt;FlowLayoutBottomButtons.Name" xml:space="preserve">
+    <value>FlowLayoutBottomButtons</value>
   </data>
-  <data name="&gt;&gt;flowLayoutBottomButtons.Type" xml:space="preserve">
+  <data name="&gt;&gt;FlowLayoutBottomButtons.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutBottomButtons.Parent" xml:space="preserve">
+  <data name="&gt;&gt;FlowLayoutBottomButtons.Parent" xml:space="preserve">
     <value>tableLayoutRightColumn</value>
   </data>
-  <data name="&gt;&gt;flowLayoutBottomButtons.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;FlowLayoutBottomButtons.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutRightColumn.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">

@@ -39,7 +39,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
             }
             else
             {
-                Console.WriteLine("NOTICE: textchanged event requested on key with to registered handlers: " + eventKey);
+                Log.Info("NOTICE: textchanged event requested on key with to registered handlers: " + eventKey);
             }
         }
     }

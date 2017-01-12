@@ -39,7 +39,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             }
             else
             {
-                Console.WriteLine("NOTICE: marker event requested on key with to registered handlers: " + eventKey);
+                Log.Info("NOTICE: marker event requested on key with to registered handlers: " + eventKey);
             }
         }
     }

@@ -51,9 +51,22 @@ namespace Rationally.Visio.View
         public string Name
         {
             get { return RShape.Name; }
-            set { RShape.Name = value; }
+            set { RShape.Name = value;
+                RShape.NameU = value;
+            }
         }
 
+        public string NameU
+        {
+            get { return RShape.NameU; }
+            set { RShape.NameU = value; }
+        }
+
+        /*public string NameID
+        {
+            get { return RShape.NameID; }
+            set { RShape.NameID = value; }
+        }*/
 
         //type related
 

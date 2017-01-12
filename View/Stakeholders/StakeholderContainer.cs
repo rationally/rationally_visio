@@ -59,6 +59,7 @@ namespace Rationally.Visio.View.Stakeholders
             Children.Add(roleComponent);
 
             Name = "Stakeholder";
+            //NameU = "Stakeholder";
             AddUserRow("rationallyType");
             RationallyType = "stakeholder";
             AddUserRow("stakeholderIndex");

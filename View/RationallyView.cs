@@ -92,7 +92,7 @@ namespace Rationally.Visio.View
                 {
                     InformationContainer informationContainer = new InformationContainer(Page, s);
                     Children.Add(informationContainer);
-                    RepaintHandler.Repaint(informationContainer);
+                    //RepaintHandler.Repaint(informationContainer);
                 }
             }
             else if (TitleLabel.IsTitleLabel(s.Name))

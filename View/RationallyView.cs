@@ -108,7 +108,6 @@ namespace Rationally.Visio.View
                 {
                     TitleLabel titleLabel = new TitleLabel(Page, s);
                     Children.Add(titleLabel);
-                    titleLabel.Repaint();
                 }
             }
             else if (StakeholdersContainer.IsStakeholdersContainer(s.Name))

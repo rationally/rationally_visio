@@ -113,7 +113,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             }
             else
             {
-                StakeholderIndex = Math.Min(StakeholderIndex, Globals.RationallyAddIn.Model.Documents.Count);
+                StakeholderIndex = Math.Min(StakeholderIndex, Globals.RationallyAddIn.Model.Stakeholders.Count);
                 (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is StakeholdersContainer) as StakeholdersContainer)?.AddStakeholder(StakeholderName.Text, stakeholderRole.Text);
             }
         }

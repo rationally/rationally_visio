@@ -85,7 +85,7 @@ namespace Rationally.Visio.Forms
         {
             
             
-            if (ValidateGeneralIfNotDebugging() && ValidateAlternatives() && TableLayoutMainContentForces.IsValid() && TableLayoutMainContentDocuments.IsValid())
+            if (ValidateGeneralIfNotDebugging() && ValidateAlternatives() && TableLayoutMainContentForces.IsValid() && TableLayoutMainContentDocuments.IsValid() && TableLayoutMainContentStakeholders.IsValid())
             {
                 pleaseWait.Show();
                 pleaseWait.Refresh();

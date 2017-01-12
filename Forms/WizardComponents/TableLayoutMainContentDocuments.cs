@@ -85,7 +85,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             //check if all named rows have at least something in the path field
             if (!Documents.All(doc => !IsNullOrEmpty(doc.FilePath.Text) || IsNullOrEmpty(doc.FileName.Text)))
             {
-                MessageBox.Show("For some named source(s), no file or link was choosen/entered");
+                MessageBox.Show("For some named documents, no file or link was choosen/entered");
                 return false;
             }
 

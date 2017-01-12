@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Rationally.Visio.Model;
+using static System.String;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
@@ -77,7 +78,16 @@ namespace Rationally.Visio.Forms.WizardComponents
             UpdateRows();
         }
 
-        public bool IsValid() => true;
+        public bool IsValid()
+        {
+            //check if all rows have an entry
+            if (Stakeholders.Any(sh => IsNullOrEmpty(sh.StakeholderName.Text) && IsNullOrEmpty(sh.StakeholderRole.Text)))
+            {
+                MessageBox.Show("For all stakeholders, enter at least a name or a role.");
+                return false;
+            }
+            return true;
+        }
 
         public void UpdateData()
         {

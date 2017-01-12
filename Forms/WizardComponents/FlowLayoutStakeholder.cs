@@ -19,7 +19,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         public Stakeholder Stakeholder => Globals.RationallyAddIn.Model.Stakeholders.Count > StakeholderIndex ? Globals.RationallyAddIn.Model.Stakeholders[StakeholderIndex] : null;
 
         private AntiAliasedLabel stakeholderRoleLabel;
-        private TextBox stakeholderRole;
+        internal readonly TextBox StakeholderRole;
 
         public FlowLayoutStakeholder(int stakeholderIndex)
         {
@@ -35,7 +35,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             stakeholderNameLabel = new AntiAliasedLabel();
             StakeholderName = new TextBox();
             stakeholderRoleLabel = new AntiAliasedLabel();
-            stakeholderRole = new TextBox();
+            StakeholderRole = new TextBox();
             deleteStakeholderButton = new AntiAliasedButton();
             SuspendLayout();
             Init();
@@ -46,7 +46,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             Controls.Add(stakeholderNameLabel);
             Controls.Add(StakeholderName);
             Controls.Add(stakeholderRoleLabel);
-            Controls.Add(stakeholderRole);
+            Controls.Add(StakeholderRole);
             Controls.Add(deleteStakeholderButton);
             //
             // fileNameLabel
@@ -79,11 +79,11 @@ namespace Rationally.Visio.Forms.WizardComponents
             //
             // stakeholderRole
             //
-            stakeholderRole.Location = new Point(110, 57);
-            stakeholderRole.Margin = new Padding(3, 6, 3, 3);
-            stakeholderRole.Name = "stakeholderRole";
-            stakeholderRole.Size = new Size(300, 27);
-            stakeholderRole.TabIndex = 3;
+            StakeholderRole.Location = new Point(110, 57);
+            StakeholderRole.Margin = new Padding(3, 6, 3, 3);
+            StakeholderRole.Name = "stakeholderRole";
+            StakeholderRole.Size = new Size(300, 27);
+            StakeholderRole.TabIndex = 3;
             //
             // deleteStakeholderButton
             //
@@ -109,12 +109,12 @@ namespace Rationally.Visio.Forms.WizardComponents
             if (Stakeholder != null)
             {
                 Stakeholder.Name = StakeholderName.Text;
-                Stakeholder.Role = stakeholderRole.Text;
+                Stakeholder.Role = StakeholderRole.Text;
             }
             else
             {
                 StakeholderIndex = Math.Min(StakeholderIndex, Globals.RationallyAddIn.Model.Stakeholders.Count);
-                (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is StakeholdersContainer) as StakeholdersContainer)?.AddStakeholder(StakeholderName.Text, stakeholderRole.Text);
+                (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is StakeholdersContainer) as StakeholdersContainer)?.AddStakeholder(StakeholderName.Text, StakeholderRole.Text);
             }
         }
 
@@ -123,7 +123,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             if (Stakeholder != null)
             {
                 StakeholderName.Text = Stakeholder.Name;
-                stakeholderRole.Text = Stakeholder.Role;
+                StakeholderRole.Text = Stakeholder.Role;
             }
         }
     }

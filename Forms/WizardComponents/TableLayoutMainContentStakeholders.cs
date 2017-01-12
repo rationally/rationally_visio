@@ -10,12 +10,12 @@ namespace Rationally.Visio.Forms.WizardComponents
     public class TableLayoutMainContentStakeholders : TableLayoutPanel, IWizardPanel
     {
         public readonly List<FlowLayoutStakeholder> Stakeholders;
-        private readonly AntiAliasedButton addStakeholderButton;
+        public readonly AntiAliasedButton AddStakeholderButton;
 
         public TableLayoutMainContentStakeholders()
         {
             Stakeholders = new List<FlowLayoutStakeholder>();
-            addStakeholderButton = new AntiAliasedButton();
+            AddStakeholderButton = new AntiAliasedButton();
             Init();
         }
 
@@ -37,12 +37,13 @@ namespace Rationally.Visio.Forms.WizardComponents
             //
             // addStakeholderButton
             //
-            addStakeholderButton.Name = "AddStakeholderButton";
-            addStakeholderButton.UseVisualStyleBackColor = true;
-            addStakeholderButton.Click += AddStakeholderButton_Click;
-            addStakeholderButton.Text = "Add Stakeholder";
-            addStakeholderButton.Size = new Size(200, 30);
-            addStakeholderButton.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
+            AddStakeholderButton.Name = "AddStakeholderButton";
+            AddStakeholderButton.UseVisualStyleBackColor = true;
+            AddStakeholderButton.Click += AddStakeholderButton_Click;
+            AddStakeholderButton.Text = "Add Stakeholder";
+            AddStakeholderButton.Size = new Size(200, 34);
+            AddStakeholderButton.Margin = new Padding(0, 0, 360, 0);
+            AddStakeholderButton.Anchor = AnchorStyles.Left | AnchorStyles.Top;
 
 
             UpdateRows();
@@ -53,15 +54,13 @@ namespace Rationally.Visio.Forms.WizardComponents
             Controls.Clear();
             RowStyles.Clear();
 
-            RowCount = Stakeholders.Count + 1;//+ row with "add stakeholders" button
+            RowCount = Stakeholders.Count;
 
             for (int i = 0; i < Stakeholders.Count; i++)
             {
                 Controls.Add(Stakeholders[i], 0, i);//add control to view
                 RowStyles.Add(new RowStyle(SizeType.Absolute, 100));//style the just added row
             }
-            Controls.Add(addStakeholderButton, 0, RowCount - 1);//c-indexed
-            RowStyles.Add(new RowStyle(SizeType.AutoSize));//add a style for the add file button
         }
 
         private void AddStakeholderButton_Click(object sender, EventArgs e) => AddStakeholder();

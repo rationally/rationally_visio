@@ -149,8 +149,11 @@ namespace Rationally.Visio.Forms
             tableLayoutLeftMenu.HighLightedButton = tableLayoutLeftMenu.ButtonShowGeneral;
             tableLayoutRightColumn.Controls.Clear();
             tableLayoutRightColumn.Controls.Add(tableLayoutMainContentGeneral);
-            tableLayoutRightColumn.Controls.Add(flowLayoutBottomButtons);
-            flowLayoutBottomButtons.Refresh();
+            tableLayoutRightColumn.Controls.Add(FlowLayoutBottomButtons);
+            //define bottom buttons
+            FlowLayoutBottomButtons.Controls.Clear();
+            FlowLayoutBottomButtons.Controls.Add(CreateButton);
+            FlowLayoutBottomButtons.Refresh();
         }
 
         private bool ValidateGeneralIfNotDebugging()

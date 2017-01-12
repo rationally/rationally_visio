@@ -42,11 +42,12 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 //update view tree
                 relatedDocumentsContainer.Children.Remove(containerToDelete);
 
-                model.RegenerateDocumentIdentifiers();
+                
                 Log.Debug("Regenerated identifiers of document list in model.");
 
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
+                    model.RegenerateDocumentIdentifiers();
                     relatedDocumentsContainer.MsvSdContainerLocked = true;
                 }
                 

@@ -116,7 +116,7 @@ namespace Rationally.Visio.View.Documents
             LinePattern = 16; //borderless
             MarginTop = DocumentIndex == 0 ? 0.3 : 0.0;
             MarginBottom = 0;
-            
+
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
         }
 

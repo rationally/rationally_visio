@@ -33,18 +33,20 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
                 //update model
                 int docIndex = containerToDelete.DocumentIndex;
-                if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+                /*if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
-                    Log.Debug("Document being removed from model list...");
-                    model.Documents.RemoveAt(docIndex);
-                }
+                    
+                }*/
+                Log.Debug("Document being removed from model list...");
+                model.Documents.RemoveAt(docIndex);
                 //update view tree
                 relatedDocumentsContainer.Children.Remove(containerToDelete);
 
+                model.RegenerateDocumentIdentifiers();
+                Log.Debug("Regenerated identifiers of document list in model.");
+
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
-                    model.RegenerateDocumentIdentifiers();
-                    Log.Debug("Regenerated identifiers of document list in model.");
                     relatedDocumentsContainer.MsvSdContainerLocked = true;
                 }
                 

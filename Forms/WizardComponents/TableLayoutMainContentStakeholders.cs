@@ -29,11 +29,6 @@ namespace Rationally.Visio.Forms.WizardComponents
             Size = new Size(760, 482);
             Margin = new Padding(4);
             Name = "tableLayoutMainContentStakeholders";
-            //the following lines are a weird hack to enable vertical scrolling without enabling horizontal scrolling:
-            HorizontalScroll.Maximum = 0;
-            AutoScroll = false;
-            VerticalScroll.Visible = false;
-            AutoScroll = true;
             //
             // addStakeholderButton
             //
@@ -49,6 +44,15 @@ namespace Rationally.Visio.Forms.WizardComponents
             UpdateRows();
         }
 
+        private void InitScrollBar()
+        {
+            //the following lines are a weird hack to enable vertical scrolling without enabling horizontal scrolling:
+            HorizontalScroll.Maximum = 0;
+            AutoScroll = false;
+            VerticalScroll.Visible = false;
+            AutoScroll = true;
+        }
+
         public void UpdateRows()
         {
             Controls.Clear();
@@ -61,6 +65,7 @@ namespace Rationally.Visio.Forms.WizardComponents
                 Controls.Add(Stakeholders[i], 0, i);//add control to view
                 RowStyles.Add(new RowStyle(SizeType.Absolute, 100));//style the just added row
             }
+            InitScrollBar();
         }
 
         private void AddStakeholderButton_Click(object sender, EventArgs e) => AddStakeholder();

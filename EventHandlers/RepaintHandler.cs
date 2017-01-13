@@ -20,6 +20,7 @@ namespace Rationally.Visio.EventHandlers
         {
             if (component != null)
             {
+                Log.Debug("Repaint on:" + component.Name);
                 component.Repaint();
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Shapes may not be updated during an undo or redo, so don't place the children ourselves
                 {

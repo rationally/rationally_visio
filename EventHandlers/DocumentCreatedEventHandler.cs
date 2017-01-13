@@ -19,6 +19,7 @@ namespace Rationally.Visio.EventHandlers
             {
                 Globals.RationallyAddIn.Model = new RationallyModel();
                 ShowSetupWizard();
+                Log.Debug("Showed setup wizard.");
             }
         }
     }

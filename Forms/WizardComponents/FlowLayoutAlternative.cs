@@ -1,5 +1,8 @@
 ﻿using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
+using Microsoft.VisualBasic.Logging;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
 using Rationally.Visio.Model;
 using Rationally.Visio.View.Alternatives;
@@ -8,6 +11,8 @@ namespace Rationally.Visio.Forms.WizardComponents
 {
     public sealed class FlowLayoutAlternative : FlowLayoutPanel
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly int alternativeIndex;
 
         private readonly AntiAliasedLabel alternativeIndexLabel;
@@ -52,6 +57,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         public void UpdateModel()
         {
+            Log.Debug("HasAlternative:" + (Alternative != null) + "|View has alternativescontainer:" + (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is AlternativesContainer) != null));
             if (Alternative != null)
             {
                 UpdateAlternativeHandler.Execute(alternativeIndex-1, TextBoxAlternativeTitle.Text, alternativeStateDropdown.SelectedItem.ToString());

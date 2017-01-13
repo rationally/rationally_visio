@@ -18,6 +18,7 @@ using Microsoft.Office.Interop.Visio;
 using Application = Microsoft.Office.Interop.Visio.Application;
 using Shape = Microsoft.Office.Interop.Visio.Shape;
 using log4net;
+using log4net.Util;
 using Newtonsoft.Json.Linq;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.Forms;
@@ -128,6 +129,7 @@ namespace Rationally.Visio
             QueryDeleteEventHandlerRegistry.Register("alternativeDescription", new QDAlternativeComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("alternative", new QDAlternativeContainerEventHander());
 
+            QueryDeleteEventHandlerRegistry.Register("relatedUrlUrl", new QDRelatedDocumentComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("relatedUrl", new QDRelatedDocumentComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("relatedFile", new QDRelatedDocumentComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("relatedDocumentTitle", new QDRelatedDocumentComponentEventHandler());
@@ -423,8 +425,10 @@ namespace Rationally.Visio
 
         public void RebuildTree(IVDocument d) //Completely rebuild the model
         {
+            Log.Debug("entered rebuild tree");
             try
             {
+                Log.Debug("State before reset: ViewChildren: " + View.Children.Count + ", Model.Aternatives:" + Model.Alternatives.Count + ", Model.Documents:" + Model.Documents.Count + ", Model.Forces:" + Model.Forces.Count + ", Model.Stakeholders:" + Model.Stakeholders.Count);
                 View.Children.Clear();
                 Model.Alternatives.Clear();
                 Model.Documents.Clear();
@@ -450,6 +454,7 @@ namespace Rationally.Visio
 
         private void Application_ShapeAddedEvent(Shape s)
         {
+            Log.Debug("Shape added with name: " + s.Name);
             if (s.Document.Template.Contains(Constants.TemplateName) && (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists) && !View.ExistsInTree(s))
             {
                 try
@@ -673,6 +678,7 @@ namespace Rationally.Visio
             {
                 try
                 {
+                    Log.Debug("Rationally template detected => firing document created handler.");
                     DocumentCreatedEventHandler.Execute(d);
                 }
                 catch (Exception ex)
@@ -687,13 +693,16 @@ namespace Rationally.Visio
 
         private void Application_DocumentOpenendEvent(IVDocument d)
         {
+            Log.Debug("DocumentOpenedEvent detected.");
             if (Application.ActiveDocument.Template.Contains(Constants.TemplateName) && showRationallyUpdatePopup)
             {
+                Log.Debug("Rationally template and update required detected.");
                 try
                 {
                     UpdateAvailable upd = new UpdateAvailable(AddInLocalVersion, addInOnlineVersion);
                     upd.Show();
                     showRationallyUpdatePopup = false;
+                    Log.Debug("Shown update popup successfully.");
                 }
                 catch (Exception ex)
                 {

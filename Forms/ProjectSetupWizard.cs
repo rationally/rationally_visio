@@ -33,7 +33,7 @@ namespace Rationally.Visio.Forms
 
         public void ShowDialog(bool onDocumentCreation, WizardFieldTypes type)
         {
-
+            Log.Debug("Entered showDialog.");
             if (WindowState == FormWindowState.Minimized)
             {
                 WindowState = FormWindowState.Normal;
@@ -44,14 +44,16 @@ namespace Rationally.Visio.Forms
             tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
             tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.DateString;
             tableLayoutMainContentGeneral.TextVersion.Text = Globals.RationallyAddIn.Model.Version;
+            Log.Debug("Read all general information from the model and wrote it to the wizard.");
             TableLayoutMainContentAlternatives.AlternativeRows.ForEach(a => a.UpdateData());
             TableLayoutMainContentForces.InitData();
-
+            Log.Debug("Initialized alternatives wizard page.");
             TableLayoutMainContentDocuments.UpdateByModel();//create rows according to model
             TableLayoutMainContentDocuments.Documents.ForEach(d => d.UpdateData());
-
+            Log.Debug("Initialized documents wizard page.");
             TableLayoutMainContentStakeholders.UpdateData();
             TableLayoutMainContentStakeholders.Stakeholders.ForEach(d => d.UpdateData());
+            Log.Debug("Initialized stakeholders wizard page.");
             if (DocumentCreation)
             {
                 CreateButton.Text = Messages.Wizard_CreateButton_CreateView;
@@ -77,6 +79,7 @@ namespace Rationally.Visio.Forms
             }
 
             StartPosition = FormStartPosition.CenterScreen;
+            Log.Debug("Setting AcceptButton as CreateButton with text:" + CreateButton.Text);
             AcceptButton = CreateButton;
         }
 
@@ -87,6 +90,7 @@ namespace Rationally.Visio.Forms
             
             if (ValidateGeneralIfNotDebugging() && ValidateAlternatives() && TableLayoutMainContentForces.IsValid() && TableLayoutMainContentDocuments.IsValid() && TableLayoutMainContentStakeholders.IsValid())
             {
+                Log.Debug("Everyting is valid.");
                 pleaseWait.Show();
                 pleaseWait.Refresh();
                 //pleaseWait.Show();
@@ -94,23 +98,29 @@ namespace Rationally.Visio.Forms
                 int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");
 
                 
-
+                Log.Debug("Setting view page and rebuilding tree.");
                 Globals.RationallyAddIn.View.Page = Globals.RationallyAddIn.Application.ActivePage;
                 Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
                 //handle changes in the "General Information" page
                 WizardUpdateGeneralInformationHandler.Execute(this);
+                Log.Debug("General information updated.");
                 //handle changes in the "Forces" page
                 WizardUpdateForcesHandler.Execute(this);
+                Log.Debug("Forces updated.");
                 //handle changes in the "Alternatives" page
                 WizardUpdateAlternativesHandler.Execute(this);
+                Log.Debug("Alternatives updated.");
                 //handle changes in the "Related Documents" page
                 WizardUpdateDocumentsHandler.Execute(this);
+                Log.Debug("Documents updated.");
                 //handle changes in the "Stakeholders" page
                 WizardUpdateStakeholdersHandler.Execute(this);
+                Log.Debug("Stakeholders updated.");
 
                 //all changes have been made, close the scope and the wizard
                 Globals.RationallyAddIn.Application.EndUndoScope(wizardScopeId, true);
                 Close();
+                Log.Debug("Closed wizard");
                 pleaseWait.Hide();
             }
         }

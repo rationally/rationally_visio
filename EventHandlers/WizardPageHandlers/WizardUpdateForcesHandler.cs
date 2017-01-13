@@ -19,8 +19,9 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
             Globals.RationallyAddIn.Model.Forces.Clear();
             //select filled in force rows
             List<DataGridViewRow> forceRows = wizard.TableLayoutMainContentForces.ForcesDataGrid.Rows.Cast<DataGridViewRow>().Where(row => !IsNullOrEmpty(row.Cells[0].Value?.ToString())).ToList();
-
+            Log.Debug("Found " + forceRows.Count + " filled in force rows.");
             Globals.RationallyAddIn.Model.Forces = forceRows.Select(ConstructForce).ToList();
+            Log.Debug("Stored forces in model.");
             RepaintHandler.Repaint(Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is ForcesContainer));
         }
 

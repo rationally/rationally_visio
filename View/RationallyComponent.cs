@@ -200,6 +200,18 @@ namespace Rationally.Visio.View
             set { RShape.CellsU["LockTextEdit"].ResultIU = (value ? 1 : 0); }
         }
 
+        public bool LockWidth
+        {
+            protected get { return RShape.CellsU["LockWidth"].ResultIU > 0; }
+            set { RShape.CellsU["LockWidth"].ResultIU = (value ? 1 : 0); }
+        }
+
+        public bool LockHeight
+        {
+            protected get { return RShape.CellsU["LockHeight"].ResultIU > 0; }
+            set { RShape.CellsU["LockHeight"].ResultIU = (value ? 1 : 0); }
+        }
+
         public bool MsvSdContainerLocked
         {
             get { return RShape.CellsU["User.msvSDContainerLocked"].ResultStr["Value"] == "TRUE"; }

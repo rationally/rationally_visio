@@ -32,7 +32,7 @@ namespace Rationally.Visio.View.Documents
             AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "\"Add file\"", false);
             AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "\"Add url\"", false);
             AddAction("deleteRelatedDocument", "QUEUEMARKEREVENT(\"delete\")", "\"Delete document\"", false);
-
+            
             InitStyle();
         }
 
@@ -40,6 +40,8 @@ namespace Rationally.Visio.View.Documents
         {
             Width = 0.6;
             Height = 0.6;
+            LockWidth = true;
+            LockHeight = true;
             SetMargin(0.1);
         }
 

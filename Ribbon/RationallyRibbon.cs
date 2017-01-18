@@ -40,5 +40,10 @@ namespace Rationally.Visio
         {
             ProjectSetupWizard.Instance.ShowDialog(false, WizardFieldTypes.Title);
         }
+
+        private void alternativeStatesOptionsButton_Click(object sender, RibbonControlEventArgs e)
+        {
+
+        }
     }
 }

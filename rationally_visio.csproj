@@ -149,6 +149,15 @@
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateForcesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateGeneralInformationHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateStakeholdersHandler.cs" />
+    <Compile Include="Forms\AlternativeStateConfiguration\TableLayoutAlternativeStates.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\AlternativeStateConfiguration\AlternativeStatesConfigurator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AlternativeStateConfiguration\AlternativeStatesConfigurator.Designer.cs">
+      <DependentUpon>AlternativeStatesConfigurator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PleaseWait.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -364,6 +373,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <EmbeddedResource Include="Forms\AlternativeStateConfiguration\AlternativeStatesConfigurator.resx">
+      <DependentUpon>AlternativeStatesConfigurator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\PleaseWait.resx">
       <DependentUpon>PleaseWait.cs</DependentUpon>
     </EmbeddedResource>

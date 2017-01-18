@@ -149,6 +149,9 @@
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateForcesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateGeneralInformationHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateStakeholdersHandler.cs" />
+    <Compile Include="Forms\AlternativeStateConfiguration\FlowLayoutAlternativeState.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\AlternativeStateConfiguration\TableLayoutAlternativeStates.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -191,6 +194,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Model\AlternativeState.cs" />
     <Compile Include="Model\Stakeholder.cs" />
     <Compile Include="RationallyConstants\CellConstants.cs" />
     <Compile Include="RationallyConstants\Constants.cs" />

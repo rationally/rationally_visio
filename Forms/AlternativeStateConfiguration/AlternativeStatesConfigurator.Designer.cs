@@ -30,18 +30,19 @@
         {
             this.tableLayoutAllContent = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutStateList = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutActionButtons = new System.Windows.Forms.TableLayoutPanel();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.tableLayoutMainContent = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutStateActionButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.addStateButton = new System.Windows.Forms.Button();
             this.tableLayoutStateContent = new Rationally.Visio.Forms.AlternativeStateConfiguration.TableLayoutAlternativeStates();
+            this.tableLayoutActionButtons = new System.Windows.Forms.TableLayoutPanel();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutAllContent.SuspendLayout();
             this.tableLayoutStateList.SuspendLayout();
-            this.tableLayoutActionButtons.SuspendLayout();
             this.tableLayoutMainContent.SuspendLayout();
             this.flowLayoutStateActionButtons.SuspendLayout();
+            this.tableLayoutActionButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutAllContent
@@ -71,40 +72,6 @@
             this.tableLayoutStateList.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutStateList.Size = new System.Drawing.Size(495, 338);
             this.tableLayoutStateList.TabIndex = 0;
-            // 
-            // tableLayoutActionButtons
-            // 
-            this.tableLayoutActionButtons.ColumnCount = 2;
-            this.tableLayoutActionButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutActionButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutActionButtons.Controls.Add(this.saveButton, 0, 0);
-            this.tableLayoutActionButtons.Controls.Add(this.cancelButton, 0, 0);
-            this.tableLayoutActionButtons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutActionButtons.Location = new System.Drawing.Point(3, 347);
-            this.tableLayoutActionButtons.Name = "tableLayoutActionButtons";
-            this.tableLayoutActionButtons.RowCount = 1;
-            this.tableLayoutActionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutActionButtons.Size = new System.Drawing.Size(495, 34);
-            this.tableLayoutActionButtons.TabIndex = 1;
-            // 
-            // saveButton
-            // 
-            this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.saveButton.Location = new System.Drawing.Point(369, 3);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(123, 28);
-            this.saveButton.TabIndex = 4;
-            this.saveButton.Text = "Save";
-            this.saveButton.UseVisualStyleBackColor = true;
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Location = new System.Drawing.Point(3, 3);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(123, 28);
-            this.cancelButton.TabIndex = 5;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
             // 
             // tableLayoutMainContent
             // 
@@ -143,7 +110,63 @@
             this.addStateButton.TabIndex = 5;
             this.addStateButton.Text = "Add State";
             this.addStateButton.UseVisualStyleBackColor = true;
-            
+            this.addStateButton.Click += new System.EventHandler(this.addStateButton_Click);
+            // 
+            // tableLayoutStateContent
+            // 
+            this.tableLayoutStateContent.ColumnCount = 1;
+            this.tableLayoutStateContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutStateContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutStateContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutStateContent.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutStateContent.Name = "tableLayoutStateContent";
+            this.tableLayoutStateContent.RowCount = 1;
+            this.tableLayoutStateContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 272F));
+            this.tableLayoutStateContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 272F));
+            this.tableLayoutStateContent.Size = new System.Drawing.Size(489, 272);
+            this.tableLayoutStateContent.TabIndex = 1;
+            // 
+            // tableLayoutActionButtons
+            // 
+            this.tableLayoutActionButtons.ColumnCount = 2;
+            this.tableLayoutActionButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutActionButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutActionButtons.Controls.Add(this.saveButton, 0, 0);
+            this.tableLayoutActionButtons.Controls.Add(this.cancelButton, 0, 0);
+            this.tableLayoutActionButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutActionButtons.Location = new System.Drawing.Point(3, 347);
+            this.tableLayoutActionButtons.Name = "tableLayoutActionButtons";
+            this.tableLayoutActionButtons.RowCount = 1;
+            this.tableLayoutActionButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutActionButtons.Size = new System.Drawing.Size(495, 34);
+            this.tableLayoutActionButtons.TabIndex = 1;
+            // 
+            // saveButton
+            // 
+            this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveButton.Location = new System.Drawing.Point(369, 3);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(123, 28);
+            this.saveButton.TabIndex = 4;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(3, 3);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(123, 28);
+            this.cancelButton.TabIndex = 5;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 100);
+            this.flowLayoutPanel1.TabIndex = 0;
             // 
             // AlternativeStatesConfigurator
             // 
@@ -155,9 +178,9 @@
             this.Text = "Configure Alternative States";
             this.tableLayoutAllContent.ResumeLayout(false);
             this.tableLayoutStateList.ResumeLayout(false);
-            this.tableLayoutActionButtons.ResumeLayout(false);
             this.tableLayoutMainContent.ResumeLayout(false);
             this.flowLayoutStateActionButtons.ResumeLayout(false);
+            this.tableLayoutActionButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -173,5 +196,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutStateActionButtons;
         private System.Windows.Forms.Button addStateButton;
         private Rationally.Visio.Forms.AlternativeStateConfiguration.TableLayoutAlternativeStates tableLayoutStateContent;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        
     }
 }

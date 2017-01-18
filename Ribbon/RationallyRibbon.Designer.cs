@@ -81,7 +81,6 @@
             this.wizardButton.Label = "Configure View";
             this.wizardButton.Name = "wizardButton";
             this.wizardButton.ShowImage = true;
-            this.wizardButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.wizardButton_Click_1);
             // 
             // alternativeStatesOptionsButton
             // 

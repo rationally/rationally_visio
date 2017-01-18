@@ -41,10 +41,10 @@ namespace Rationally.Visio.Forms
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelBottomLeftText = new System.Windows.Forms.Label();
             this.UpdateLink = new System.Windows.Forms.LinkLabel();
-            this.tableLayoutLeftMenu = new Rationally.Visio.Forms.WizardComponents.MenuPanel();
             this.tableLayoutRightColumn = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutMainContentGeneral = new Rationally.Visio.Forms.WizardComponents.TableLayoutMainContentGeneral();
             this.FlowLayoutBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
+            this.tableLayoutLeftMenu = new Rationally.Visio.Forms.WizardComponents.MenuPanel();
+            this.tableLayoutMainContentGeneral = new Rationally.Visio.Forms.WizardComponents.TableLayoutMainContentGeneral();
             this.CreateButton = new Rationally.Visio.Forms.WizardComponents.AntiAliasedButton();
             this.tableLayoutForEverything.SuspendLayout();
             this.tableLayoutLeftColumn.SuspendLayout();
@@ -95,11 +95,6 @@ namespace Rationally.Visio.Forms
             this.UpdateLink.TabStop = true;
             this.UpdateLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.UpdateLink_LinkClicked);
             // 
-            // tableLayoutLeftMenu
-            // 
-            resources.ApplyResources(this.tableLayoutLeftMenu, "tableLayoutLeftMenu");
-            this.tableLayoutLeftMenu.Name = "tableLayoutLeftMenu";
-            // 
             // tableLayoutRightColumn
             // 
             this.tableLayoutRightColumn.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -108,18 +103,23 @@ namespace Rationally.Visio.Forms
             this.tableLayoutRightColumn.Controls.Add(this.FlowLayoutBottomButtons, 0, 1);
             this.tableLayoutRightColumn.Name = "tableLayoutRightColumn";
             // 
-            // tableLayoutMainContentGeneral
-            // 
-            this.tableLayoutMainContentGeneral.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.tableLayoutMainContentGeneral, "tableLayoutMainContentGeneral");
-            this.tableLayoutMainContentGeneral.Name = "tableLayoutMainContentGeneral";
-            // 
-            // flowLayoutBottomButtons
+            // FlowLayoutBottomButtons
             // 
             this.FlowLayoutBottomButtons.BackColor = System.Drawing.Color.WhiteSmoke;
             this.FlowLayoutBottomButtons.Controls.Add(this.CreateButton);
             resources.ApplyResources(this.FlowLayoutBottomButtons, "FlowLayoutBottomButtons");
             this.FlowLayoutBottomButtons.Name = "FlowLayoutBottomButtons";
+            // 
+            // tableLayoutLeftMenu
+            // 
+            resources.ApplyResources(this.tableLayoutLeftMenu, "tableLayoutLeftMenu");
+            this.tableLayoutLeftMenu.Name = "tableLayoutLeftMenu";
+            // 
+            // tableLayoutMainContentGeneral
+            // 
+            this.tableLayoutMainContentGeneral.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.tableLayoutMainContentGeneral, "tableLayoutMainContentGeneral");
+            this.tableLayoutMainContentGeneral.Name = "tableLayoutMainContentGeneral";
             // 
             // CreateButton
             // 

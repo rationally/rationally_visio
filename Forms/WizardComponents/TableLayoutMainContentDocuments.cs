@@ -52,7 +52,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             //the following lines are a weird hack to enable vertical scrolling without enabling horizontal scrolling:
             HorizontalScroll.Maximum = 0;
             AutoScroll = false;
-            VerticalScroll.Visible = false;
+            //VerticalScroll.Visible = false;
             AutoScroll = true;
         }
 
@@ -62,13 +62,13 @@ namespace Rationally.Visio.Forms.WizardComponents
             RowStyles.Clear();
 
             RowCount = Documents.Count;
+            InitScrollBar();
 
             for (int i = 0; i < Documents.Count; i++)
             {
                 Controls.Add(Documents[i],0,i);//add control to view
-                RowStyles.Add(new RowStyle(SizeType.Absolute, 100));//style the just added row
+                RowStyles.Add(new RowStyle(SizeType.Absolute, 95));//style the just added row
             }
-            InitScrollBar();
         }
 
         private void AddDocumentButton_Click(object sender, EventArgs e) => AddFile();

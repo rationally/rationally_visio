@@ -61,12 +61,12 @@ namespace Rationally.Visio.Forms.WizardComponents
 
             RowCount = Stakeholders.Count;
 
+            InitScrollBar();
             for (int i = 0; i < Stakeholders.Count; i++)
             {
                 Controls.Add(Stakeholders[i], 0, i);//add control to view
-                RowStyles.Add(new RowStyle(SizeType.Absolute, 100));//style the just added row
+                RowStyles.Add(new RowStyle(SizeType.Absolute, 95));//style the just added row
             }
-            InitScrollBar();
         }
 
         private void AddStakeholderButton_Click(object sender, EventArgs e) => AddStakeholder();

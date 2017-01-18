@@ -31,14 +31,15 @@ namespace Rationally.Visio
             }
         }
 
-        private void wizardButton_Click_1(object sender, RibbonControlEventArgs e)
-        {
-
-        }
-
         private void settingsButton_Click(object sender, RibbonControlEventArgs e)
         {
             ProjectSetupWizard.Instance.ShowDialog(false, WizardFieldTypes.Title);
+        }
+
+        private void alternativeStatesOptionsButton_Click(object sender, RibbonControlEventArgs e)
+        {
+            AlternativeStatesConfigurator configurator = new AlternativeStatesConfigurator();
+            configurator.ShowDialog();
         }
     }
 }

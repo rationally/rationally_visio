@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.RationallyConstants;
 
@@ -13,7 +15,9 @@ namespace Rationally.Visio.View
     /// </summary>
     public class RationallyComponent
     {
-        public double MarginTop { get; protected set; }
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        public double MarginTop { get;
+            protected set; }
         public double MarginBottom { get; protected set; }
         public double MarginLeft { get; protected set; }
         public double MarginRight { get; protected set; }
@@ -47,9 +51,22 @@ namespace Rationally.Visio.View
         public string Name
         {
             get { return RShape.Name; }
-            set { RShape.Name = value; }
+            set { RShape.Name = value;
+                RShape.NameU = value;
+            }
         }
 
+        public string NameU
+        {
+            get { return RShape.NameU; }
+            set { RShape.NameU = value; }
+        }
+
+        /*public string NameID
+        {
+            get { return RShape.NameID; }
+            set { RShape.NameID = value; }
+        }*/
 
         //type related
 
@@ -93,6 +110,12 @@ namespace Rationally.Visio.View
         {
             get { return (int)RShape.CellsU["User.documentIndex"].ResultIU; }
             set { RShape.CellsU["User.documentIndex.Value"].ResultIU = value; }
+        }
+
+        public virtual int StakeholderIndex
+        {
+            get { return (int)RShape.CellsU["User.StakeholderIndex"].ResultIU; }
+            set { RShape.CellsU["User.StakeholderIndex.Value"].ResultIU = value; }
         }
 
         public string FilePath
@@ -175,6 +198,18 @@ namespace Rationally.Visio.View
         {
             protected get { return RShape.CellsU["LockTextEdit"].ResultIU > 0; }
             set { RShape.CellsU["LockTextEdit"].ResultIU = (value ? 1 : 0); }
+        }
+
+        public bool LockWidth
+        {
+            protected get { return RShape.CellsU["LockWidth"].ResultIU > 0; }
+            set { RShape.CellsU["LockWidth"].ResultIU = (value ? 1 : 0); }
+        }
+
+        public bool LockHeight
+        {
+            protected get { return RShape.CellsU["LockHeight"].ResultIU > 0; }
+            set { RShape.CellsU["LockHeight"].ResultIU = (value ? 1 : 0); }
         }
 
         public bool MsvSdContainerLocked

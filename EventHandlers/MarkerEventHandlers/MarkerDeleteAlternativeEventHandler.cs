@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Alternatives;
@@ -9,6 +11,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class MarkerDeleteAlternativeEventHandler : IMarkerEventHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(Shape s, string context)
         {
             RationallyModel model = Globals.RationallyAddIn.Model;

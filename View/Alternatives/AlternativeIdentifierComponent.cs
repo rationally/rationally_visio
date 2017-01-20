@@ -1,17 +1,18 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Alternatives
 {
     internal sealed class AlternativeIdentifierComponent : TextLabel, IAlternativeComponent
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex IdentRegex = new Regex(@"AlternativeIdent(\.\d+)?$");
         public AlternativeIdentifierComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {
-            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
-            {
+            
                 InitStyle();
-            }
         }
 
         public AlternativeIdentifierComponent(Page page, int alternativeIndex, string text) : base(page, text)
@@ -24,6 +25,8 @@ namespace Rationally.Visio.View.Alternatives
 
             AddAction("addAlternative", "QUEUEMARKEREVENT(\"add\")", "\"Add alternative\"", false);
             AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this alternative\"", false);
+            Height = 0.2;
+            Width = 0.3;
             InitStyle();
         }
 
@@ -34,8 +37,6 @@ namespace Rationally.Visio.View.Alternatives
             MarginBottom = 0;
             MarginTop = 0.1;
             UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded;
-            Height = 0.2;
-            Width = 0.3;
         }
 
         public void SetAlternativeIdentifier(int alternativeIndex)

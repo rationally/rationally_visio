@@ -37,7 +37,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
             }
             else
             {
-                Log.Warn("NOTICE: delete event requested on key with to registered handlers: " + eventKey);
+                Log.Info("NOTICE: delete event requested on key with to registered handlers: " + eventKey);
             }
         }
     }

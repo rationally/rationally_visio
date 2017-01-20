@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using log4net;
 using Rationally.Visio.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
 
@@ -10,6 +12,7 @@ namespace Rationally.Visio.View
      /// </summary>
     public class RationallyContainer : RationallyComponent
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public List<RationallyComponent> Children { get; protected set; }
         protected ILayoutManager LayoutManager { private get; set; }
         public SizingPolicy UsedSizingPolicy { get; protected set; }

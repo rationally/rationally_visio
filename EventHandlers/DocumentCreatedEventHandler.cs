@@ -1,4 +1,6 @@
-﻿using Microsoft.Office.Interop.Visio;
+﻿using System.Reflection;
+using log4net;
+using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Enums;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.Model;
@@ -8,7 +10,7 @@ namespace Rationally.Visio.EventHandlers
 {
     internal static class DocumentCreatedEventHandler
     {
-
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static void ShowSetupWizard() => ProjectSetupWizard.Instance.ShowDialog(true, WizardFieldTypes.Title);
 
         public static void Execute(IVDocument document)
@@ -17,6 +19,7 @@ namespace Rationally.Visio.EventHandlers
             {
                 Globals.RationallyAddIn.Model = new RationallyModel();
                 ShowSetupWizard();
+                Log.Debug("Showed setup wizard.");
             }
         }
     }

@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Forms;
@@ -12,6 +15,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class AddAlternativeEventHandler : IMarkerEventHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(Shape s, string context)
         {
             RationallyModel model = Globals.RationallyAddIn.Model;
@@ -21,11 +25,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 AddAlternativeWithWarning alternativePopUp = new AddAlternativeWithWarning(model);
                 if (alternativePopUp.ShowDialog() == DialogResult.OK)
                 {
-                    Alternative newAlternative = new Alternative(alternativePopUp.alternativeName.Text, alternativePopUp.alternativeStatus.SelectedItem.ToString());
-                    newAlternative.GenerateIdentifier(model.Alternatives.Count);
-                    model.Alternatives.Add(newAlternative);
-
-                    alternativesContainer?.AddAlternative(newAlternative);
+                    alternativesContainer?.AddAlternative(alternativePopUp.alternativeName.Text, alternativePopUp.alternativeStatus.SelectedItem.ToString());
                 }
                 alternativePopUp.Dispose();
             }
@@ -34,10 +34,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 AddAlternative alternativePopUp = new AddAlternative(model);
                 if (alternativePopUp.ShowDialog() == DialogResult.OK)
                 {
-                    Alternative newAlternative = new Alternative(alternativePopUp.alternativeName.Text, alternativePopUp.alternativeStatus.SelectedItem.ToString());
-                    newAlternative.GenerateIdentifier(model.Alternatives.Count);
-                    model.Alternatives.Add(newAlternative);
-                    alternativesContainer?.AddAlternative(newAlternative);
+                    alternativesContainer?.AddAlternative(alternativePopUp.alternativeName.Text, alternativePopUp.alternativeStatus.SelectedItem.ToString());
                 }
                 alternativePopUp.Dispose();
             }

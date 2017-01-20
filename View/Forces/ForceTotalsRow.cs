@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using log4net;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.RationallyConstants;
@@ -12,6 +14,7 @@ namespace Rationally.Visio.View.Forces
     internal class ForceTotalsRow : HeaderlessContainer
     {
         private static readonly Regex ForceTotalsRowRegex = new Regex(@"ForceTotalsRow(\.\d+)?$");
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public ForceTotalsRow(Page page) : base(page)
         {

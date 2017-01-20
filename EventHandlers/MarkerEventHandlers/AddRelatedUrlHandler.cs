@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Forms;
@@ -9,6 +11,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class AddRelatedUrlHandler : IMarkerEventHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(Shape changedShape, string context)
         {
             RationallyModel model = Globals.RationallyAddIn.Model;

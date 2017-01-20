@@ -1,10 +1,13 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Documents
 {
     internal sealed class RelatedFileComponent : RationallyComponent
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex RelatedRegex = new Regex(@"RelatedFile(\.\d+)?$");
         public RelatedFileComponent(Page page, Shape fileShape) : base(page)
         {
@@ -29,7 +32,7 @@ namespace Rationally.Visio.View.Documents
             AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "\"Add file\"", false);
             AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "\"Add url\"", false);
             AddAction("deleteRelatedDocument", "QUEUEMARKEREVENT(\"delete\")", "\"Delete document\"", false);
-
+            
             InitStyle();
         }
 
@@ -37,6 +40,8 @@ namespace Rationally.Visio.View.Documents
         {
             Width = 0.6;
             Height = 0.6;
+            LockWidth = true;
+            LockHeight = true;
             SetMargin(0.1);
         }
 

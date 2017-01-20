@@ -1,10 +1,13 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Alternatives
 {
     internal sealed class AlternativeDescriptionComponent : HeaderlessContainer, IAlternativeComponent
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex DescriptionRegex = new Regex(@"AlternativeDescription(\.\d+)?$");
         public AlternativeDescriptionComponent(Page page, Shape alternativeComponent) : base(page, false)
         {

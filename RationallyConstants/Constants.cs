@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace Rationally.Visio.RationallyConstants
 {
@@ -18,6 +19,10 @@ namespace Rationally.Visio.RationallyConstants
 #endif
         public const int LeftAlignment = 0; //Visio's own enum is wrong
         public const int SupportedAmountOfAlternatives = 3;
+
+        public const string DefaultStateName = "state";
+        public static readonly Color DefaultStateColor = Color.BlueViolet;
+        public static readonly string StateResourceFile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Rationally/alternativeStates.resx";
     }
 
 }

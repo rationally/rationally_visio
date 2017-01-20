@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using log4net;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 
@@ -7,6 +9,7 @@ namespace Rationally.Visio.View.Forces
 {
     internal class ForceAlternativeHeaderComponent : RationallyComponent
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex ForceAlternativeHeaderComponentRegex = new Regex(@"ForceAlternativeHeaderComponent(\.\d+)?$");
         
         private ForceAlternativeHeaderComponent(Page page) : base(page) 

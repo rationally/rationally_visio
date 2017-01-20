@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal static class MarkerEventHandlerRegistry
     {
-
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static Dictionary<string, List<IMarkerEventHandler>> registry; 
         public static void Register(string eventKey, IMarkerEventHandler eventHandler)
         {
@@ -31,11 +33,13 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 
             if (registry.ContainsKey(eventKey) && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                registry[eventKey].ForEach(eh => eh.Execute(changedShape, identifier));
+                
+                    registry[eventKey].ForEach(eh => eh.Execute(changedShape, identifier));
+                
             }
             else
             {
-                Console.WriteLine("NOTICE: marker event requested on key with to registered handlers: " + eventKey);
+                Log.Info("NOTICE: marker event requested on key with to registered handlers: " + eventKey);
             }
         }
     }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.EventHandlers;
 using Rationally.Visio.Model;
@@ -12,6 +14,7 @@ namespace Rationally.Visio.View.Documents
 {
     internal class RelatedDocumentsContainer : RationallyContainer
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex RelatedRegex = new Regex(@"Related Documents(\.\d+)?$");
         
         public RelatedDocumentsContainer(Page page, Shape relatedDocumentsContainer) : base(page)
@@ -69,10 +72,27 @@ namespace Rationally.Visio.View.Documents
             }
         }
 
+        /// <summary>
+        /// Adds a related document to the sheet.
+        /// </summary>
+        /// <param name="document"></param>
         public void AddRelatedDocument(RelatedDocument document)
         {
             //create a container that wraps the new document
             Children.Add(new RelatedDocumentContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Documents.Count - 1, document));
+
+            RepaintHandler.Repaint(this);
+        }
+
+        /// <summary>
+        /// Adds a related document to the sheet, with a specified document index
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="documentIndex"></param>
+        public void InsertRelatedDocument(RelatedDocument document, int documentIndex)
+        {
+            //create a container that wraps the new document
+            Children.Insert(Math.Min(documentIndex, Globals.RationallyAddIn.Model.Documents.Count - 1),new RelatedDocumentContainer(Globals.RationallyAddIn.Application.ActivePage, documentIndex, document));
 
             RepaintHandler.Repaint(this);
         }

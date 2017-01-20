@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using log4net;
 using Rationally.Visio.View;
 using Microsoft.Office.Interop.Visio;
 
@@ -8,6 +10,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
     internal static class TextChangedEventHandlerRegistry
     {
         private static Dictionary<string, List<ITextChangedEventHandler>> registry;
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public static void Register(string eventKey, ITextChangedEventHandler eventHandler)
         {
@@ -36,7 +39,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
             }
             else
             {
-                Console.WriteLine("NOTICE: textchanged event requested on key with to registered handlers: " + eventKey);
+                Log.Info("NOTICE: textchanged event requested on key with to registered handlers: " + eventKey);
             }
         }
     }

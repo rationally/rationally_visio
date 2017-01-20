@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Forces
@@ -7,7 +9,7 @@ namespace Rationally.Visio.View.Forces
     {
         private static readonly Regex ForceDescriptionRegex = new Regex(@"ForceDescription(\.\d+)?$");
         public const string DefaultDescription = "<<Force>>";
-
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public ForceDescriptionComponent(Page page, int forceIndex) : base(page)
         {
             

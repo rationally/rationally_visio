@@ -1,11 +1,14 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Information
 {
     public class TitleLabel : TextLabel
     {
-        private static readonly Regex NameRegex = new Regex(@"DecisionName(\.\d+)?$");
+        private static readonly Regex NameRegex = new Regex(@"Topic(\.\d+)?$");
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public TitleLabel(Page page, Shape shape) : base(page, shape)
         {
             RShape = shape;
@@ -15,7 +18,7 @@ namespace Rationally.Visio.View.Information
         {
             RationallyType = "decisionName";
 
-            Name = "DecisionName";
+            Name = "Topic";
             EventDblClick = "QUEUEMARKEREVENT(\"openWizard\")";
             InitStyle();
         }

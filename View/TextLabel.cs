@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 using Font = System.Drawing.Font;
 // ReSharper disable RedundantCast
@@ -10,6 +12,7 @@ namespace Rationally.Visio.View
 {
     public class TextLabel : RationallyComponent
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private short size = 12;
         private int lineCount = 1;
         private double characterHeight; //height of one character in inches

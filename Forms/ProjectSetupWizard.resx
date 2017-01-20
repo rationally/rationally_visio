@@ -2849,7 +2849,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutLeftMenu.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 150</value>
+    <value>0, 250</value>
   </data>
   <data name="tableLayoutLeftMenu.RowCount" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2873,7 +2873,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutLeftMenu.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="buttonShowAlternatives" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ButtonShowGeneral" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,40,Absolute,40,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="ButtonShowGeneral" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonShowAlternatives" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonShowForces" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonShowRelatedDocuments" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonShowStakeholders" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,40,Absolute,40,Absolute,40,Absolute,40,Absolute,40" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutLeftColumn.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -2945,7 +2945,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutMainContentGeneral.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="flowLayoutGeneralTopic" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutGeneralAuthor" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutGeneralDate" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Percent,100,Percent,100,Percent,100,Percent,100,Percent,100,Percent,100" /&gt;&lt;Rows Styles="Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="flowLayoutGeneralTopic" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutGeneralAuthor" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutGeneralDate" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutGeneralVersion" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Percent,100,Percent,100,Percent,100,Percent,100,Percent,100,Percent,100" /&gt;&lt;Rows Styles="Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70,Percent,10,Percent,10,Percent,10,Percent,70" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="CreateButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2969,39 +2969,39 @@
     <value>Rationally.Visio.Forms.WizardComponents.AntiAliasedButton, rationally-visio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;CreateButton.Parent" xml:space="preserve">
-    <value>flowLayoutBottomButtons</value>
+    <value>FlowLayoutBottomButtons</value>
   </data>
   <data name="&gt;&gt;CreateButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="flowLayoutBottomButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="FlowLayoutBottomButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="flowLayoutBottomButtons.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
+  <data name="FlowLayoutBottomButtons.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
     <value>RightToLeft</value>
   </data>
-  <data name="flowLayoutBottomButtons.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="FlowLayoutBottomButtons.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 494</value>
   </data>
-  <data name="flowLayoutBottomButtons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="FlowLayoutBottomButtons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="flowLayoutBottomButtons.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="FlowLayoutBottomButtons.Size" type="System.Drawing.Size, System.Drawing">
     <value>768, 42</value>
   </data>
-  <data name="flowLayoutBottomButtons.TabIndex" type="System.Int32, mscorlib">
+  <data name="FlowLayoutBottomButtons.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutBottomButtons.Name" xml:space="preserve">
-    <value>flowLayoutBottomButtons</value>
+  <data name="&gt;&gt;FlowLayoutBottomButtons.Name" xml:space="preserve">
+    <value>FlowLayoutBottomButtons</value>
   </data>
-  <data name="&gt;&gt;flowLayoutBottomButtons.Type" xml:space="preserve">
+  <data name="&gt;&gt;FlowLayoutBottomButtons.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutBottomButtons.Parent" xml:space="preserve">
+  <data name="&gt;&gt;FlowLayoutBottomButtons.Parent" xml:space="preserve">
     <value>tableLayoutRightColumn</value>
   </data>
-  <data name="&gt;&gt;flowLayoutBottomButtons.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;FlowLayoutBottomButtons.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutRightColumn.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -3035,7 +3035,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutRightColumn.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutMainContentGeneral" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutBottomButtons" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,100,Absolute,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutMainContentGeneral" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="FlowLayoutBottomButtons" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,100,Absolute,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutForEverything.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -9254,11 +9254,14 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAMADAAA=
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>16, 400</value>
+    <value>1044, 440</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Rationally - Prepare Decision View</value>

@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Reflection;
+using log4net;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Forces;
@@ -8,6 +10,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
     internal class AddForceHandler : IMarkerEventHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(Shape changedShape, string identifier)
         {
             RationallyModel model = Globals.RationallyAddIn.Model;
@@ -33,7 +36,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                     forcesContainer.Children[toMoveIndex] = toSwapWith;
                 }
             }
-            forcesContainer.Children.Insert(forcesContainer.Children.Count-1,new ForceContainer(changedShape.ContainingPage, forcesContainer.Children.Count-2, true));
+            forcesContainer.Children.Insert(forcesContainer.Children.Count-1,new ForceContainer(Globals.RationallyAddIn.Application.ActivePage, forcesContainer.Children.Count-2, true));
             //update the model as well
             model.Forces.Add(new Force());
             RepaintHandler.Repaint(forcesContainer);

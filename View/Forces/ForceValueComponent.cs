@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using log4net;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 
@@ -8,7 +10,8 @@ namespace Rationally.Visio.View.Forces
     internal sealed class ForceValueComponent : RationallyComponent
     {
         private static readonly Regex ForceValueRegex = new Regex(@"ForceValue(\.\d+)?$");
-        
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public ForceValueComponent(Page page, int alternativeUniqueIdentifier, string altId, int forceIndex) : base(page)
         {
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);

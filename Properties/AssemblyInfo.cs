@@ -13,5 +13,6 @@
 [assembly: AssemblyCopyright("Christian Manteuffel")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+[assembly: log4net.Config.XmlConfigurator]
 
 [assembly: AssemblyVersion("1.0.0.0")]

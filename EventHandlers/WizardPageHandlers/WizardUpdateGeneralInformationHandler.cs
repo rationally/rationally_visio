@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Reflection;
+using log4net;
 using Rationally.Visio.Forms;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
@@ -8,6 +10,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
 {
     internal static class WizardUpdateGeneralInformationHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public static void Execute(ProjectSetupWizard wizard) => UpdateGeneralInformationInModel(wizard.tableLayoutMainContentGeneral.TextAuthor.Text,
             wizard.tableLayoutMainContentGeneral.TextDecisionTopic.Text,
             wizard.tableLayoutMainContentGeneral.DateTimePickerCreationDate.Value.ToLongDateString(),
@@ -23,7 +26,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
             model.DecisionName = decisionName;
             model.DateString = date;
             model.Version = version;
-
+            Log.Debug("Wrote data to model: (" + author + "," + decisionName + "," + date + "," + version + ")");
             
             if (documentCreation)
             {
@@ -31,14 +34,16 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
                 TitleLabel header = new TitleLabel(Globals.RationallyAddIn.Application.ActivePage, model.DecisionName);
                 Globals.RationallyAddIn.View.Children.Add(header);
                 RepaintHandler.Repaint(header);
-
+                Log.Debug("Added title component to the sheet.");
                 //draw the information container
                 InformationContainer informationContainer = new InformationContainer(Globals.RationallyAddIn.Application.ActivePage, model.Author, model.DateString, model.Version);
                 Globals.RationallyAddIn.View.Children.Add(informationContainer);
                 RepaintHandler.Repaint(informationContainer);
+                Log.Debug("Added information container to the sheet.");
             }
             else
             {
+                Log.Debug("not the first time wizard opened, only repaint existing components.");
                 RationallyView view = Globals.RationallyAddIn.View;
                 if (view.Children.Any(x => x is InformationContainer))
                 {

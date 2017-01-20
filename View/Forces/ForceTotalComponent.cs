@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using log4net;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 
@@ -9,7 +11,7 @@ namespace Rationally.Visio.View.Forces
     internal sealed class ForceTotalComponent : RationallyComponent
     {
         private static readonly Regex ForceTotalComponentRegex = new Regex(@"ForceTotalComponent(\.\d+)?$");
-        
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private ForceTotalComponent(Page page) : base(page)
         {
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);

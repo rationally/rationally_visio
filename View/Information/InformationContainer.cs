@@ -4,6 +4,8 @@ using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using log4net;
 using Rationally.Visio.RationallyConstants;
 
 // ReSharper disable ArrangeRedundantParentheses
@@ -12,13 +14,14 @@ namespace Rationally.Visio.View.Information
 {
     internal class InformationContainer : HeaderlessContainer
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex InformationContainerRegex = new Regex(@"Information(\.\d+)?$");
 
         public InformationContainer(Page page, string author, string date, string version) : base(page)
         {
-           
 
-            
+
+
 
             AddUserRow("rationallyType");
             RationallyType = "informationBox";
@@ -32,7 +35,7 @@ namespace Rationally.Visio.View.Information
         {
             RShape = s;
             RationallyModel model = Globals.RationallyAddIn.Model;
-            if ((s.ContainerProperties.GetMemberShapes((int) VisContainerFlags.visContainerFlagsExcludeNested).Length == 0) && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+            if ((s.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested).Length == 0) && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 InitContent(page, model.Author, model.DateString, model.Version);
             }
@@ -44,7 +47,9 @@ namespace Rationally.Visio.View.Information
                 {
                     if (TextLabel.IsTextLabel(shape.Name))
                     {
+
                         Children.Add(new PaddedTextLabel(page, shape));
+
                     }
                     else if (AuthorLabel.IsAuthorLabel(shape.Name))
                     {
@@ -183,14 +188,13 @@ namespace Rationally.Visio.View.Information
             }
             else if (TextLabel.IsTextLabel(s.Name) && ((rationallyType == "informationVersionLabel") || (rationallyType == "informationDateLabel") || (rationallyType == "informationAuthorLabel")))
             {
-                Children.Add(new PaddedTextLabel(Page,s));
+                Children.Add(new PaddedTextLabel(Page, s));
             }
         }
 
         public override void Repaint()
         {
             Children = Children.OrderBy(c => c.Order).ToList();
-
             base.Repaint();
         }
 

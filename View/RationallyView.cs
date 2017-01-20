@@ -1,11 +1,14 @@
 ﻿using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Documents;
 using Rationally.Visio.View.Forces;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.EventHandlers;
 using Rationally.Visio.View.Information;
+using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.View
 {
@@ -14,6 +17,7 @@ namespace Rationally.Visio.View
     /// </summary>
     public class RationallyView : RationallyContainer
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public RationallyView(Page page) : base(page)
         {
 
@@ -23,10 +27,7 @@ namespace Rationally.Visio.View
 
         
         
-        public override bool ExistsInTree(Shape s)
-        {
-            return Children.Exists(x => x.ExistsInTree(s));
-        }
+        public override bool ExistsInTree(Shape s) => Children.Exists(x => x.ExistsInTree(s));
 
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
@@ -91,7 +92,6 @@ namespace Rationally.Visio.View
                 {
                     InformationContainer informationContainer = new InformationContainer(Page, s);
                     Children.Add(informationContainer);
-                    RepaintHandler.Repaint(informationContainer);
                 }
             }
             else if (TitleLabel.IsTitleLabel(s.Name))
@@ -108,10 +108,25 @@ namespace Rationally.Visio.View
                 {
                     TitleLabel titleLabel = new TitleLabel(Page, s);
                     Children.Add(titleLabel);
-                    titleLabel.Repaint();
                 }
             }
-            else if(allowAddOfSubpart)
+            else if (StakeholdersContainer.IsStakeholdersContainer(s.Name))
+            {
+                if (Children.Exists(x => StakeholdersContainer.IsStakeholdersContainer(x.Name)))
+                {
+                    if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+                    {
+                        MessageBox.Show("Only one instance of the stakeholders container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        s.DeleteEx((short) VisDeleteFlags.visDeleteNormal);
+                    }
+                }
+                else
+                {
+                    StakeholdersContainer stakeholdersContainer = new StakeholdersContainer(Page, s);
+                    Children.Add(stakeholdersContainer);
+                }
+            }
+            else if (allowAddOfSubpart)
             {
                 Children.ForEach(r => r.AddToTree(s, true));
             }

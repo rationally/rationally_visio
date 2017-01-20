@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using log4net;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 // ReSharper disable ArrangeRedundantParentheses
@@ -10,6 +12,7 @@ namespace Rationally.Visio.View.Documents
 {
     internal sealed class RelatedDocumentContainer : HeaderlessContainer
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex RelatedRegex = new Regex(@"Related Document(\.\d+)?$");
 
         public RelatedDocumentContainer(Page page, Shape containerShape) : base(page, false)
@@ -113,7 +116,7 @@ namespace Rationally.Visio.View.Documents
             LinePattern = 16; //borderless
             MarginTop = DocumentIndex == 0 ? 0.3 : 0.0;
             MarginBottom = 0;
-            
+
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
         }
 

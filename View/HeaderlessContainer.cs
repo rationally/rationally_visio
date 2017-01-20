@@ -1,9 +1,12 @@
-﻿using Microsoft.Office.Interop.Visio;
+﻿using System.Reflection;
+using log4net;
+using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View
 {
     internal class HeaderlessContainer : RationallyContainer
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         protected HeaderlessContainer(Page page) : base(page)
         {
 

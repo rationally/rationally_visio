@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+using log4net;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Documents
@@ -6,7 +8,7 @@ namespace Rationally.Visio.View.Documents
     internal sealed class RelatedDocumentTitleComponent : TextLabel
     {
         private static readonly Regex RelatedRegex = new Regex(@"Related Document Title(\.\d+)?$");
-
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public RelatedDocumentTitleComponent(Page page, Shape shape) : base(page, shape)
         {
             RShape = shape;

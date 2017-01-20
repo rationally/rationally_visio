@@ -7,9 +7,9 @@ using Rationally.Visio.View.Documents;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
-    public sealed class FlowLayoutDocument : FlowLayoutPanel
+    public sealed class FlowLayoutDocument : GroupBox
     {
-        public readonly int DocumentIndex;
+        public int DocumentIndex { get; private set; }
 
         private readonly AntiAliasedLabel fileNameLabel;
         internal readonly TextBox FileName;
@@ -18,13 +18,13 @@ namespace Rationally.Visio.Forms.WizardComponents
         private readonly AntiAliasedButton chooseFileButton;
         private readonly AntiAliasedButton deleteDocumentButton;
 
-        public RelatedDocument Document;
+        public RelatedDocument Document => Globals.RationallyAddIn.Model.Documents.Count > DocumentIndex ? Globals.RationallyAddIn.Model.Documents[DocumentIndex] : null;
 
         public FlowLayoutDocument(int documentIndex)
         {
             this.DocumentIndex = documentIndex;
 
-            Dock = DockStyle.Fill;
+            Dock = DockStyle.Top;
             //this.Anchor = AnchorStyles.Left;
             Location = new Point(3, 3);
             Name = "flowLayoutPanelDocument" + this.DocumentIndex;
@@ -53,7 +53,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             // fileNameLabel
             //
             fileNameLabel.AutoSize = true;
-            fileNameLabel.Location = new Point(3, 9);
+            fileNameLabel.Location = new Point(8, 17);
             fileNameLabel.Margin = new Padding(3, 10, 3, 0);
             fileNameLabel.Name = "fileNameLabel";
             fileNameLabel.Size = new Size(100, 19);
@@ -62,16 +62,16 @@ namespace Rationally.Visio.Forms.WizardComponents
             //
             // fileName
             //
-            FileName.Location = new Point(110, 7);
+            FileName.Location = new Point(110, 15);
             FileName.Margin = new Padding(3, 6, 400, 3);
             FilePath.Name = "fileName";
-            FileName.Size = new Size(300, 27);
+            FileName.Size = new Size(350, 27);
             FileName.TabIndex = 1;
             //
             // filepathlabel
             //
             filePathLabel.AutoSize = true;
-            filePathLabel.Location = new Point(3, 59);
+            filePathLabel.Location = new Point(8,52);
             filePathLabel.Margin = new Padding(3, 10, 3, 0);
             filePathLabel.Name = "filePathLabel";
             filePathLabel.Size = new Size(100, 19);
@@ -80,10 +80,10 @@ namespace Rationally.Visio.Forms.WizardComponents
             //
             // filepath
             //
-            FilePath.Location = new Point(110, 57);
+            FilePath.Location = new Point(110, 50);
             FilePath.Margin = new Padding(3, 6, 3, 3);
             FilePath.Name = "filepath";
-            FilePath.Size = new Size(300, 27);
+            FilePath.Size = new Size(350, 27);
             FilePath.TabIndex = 3;
             //
             // choosefilebutton
@@ -92,8 +92,8 @@ namespace Rationally.Visio.Forms.WizardComponents
             chooseFileButton.UseVisualStyleBackColor = true;
             chooseFileButton.Click += ChooseFileButton_Click;
             chooseFileButton.TabIndex = 4;
-            chooseFileButton.Location = new Point(480, 56);
-            chooseFileButton.Size = new Size(100, 30);
+            chooseFileButton.Location = new Point(500, 50);
+            chooseFileButton.Size = new Size(100, 27);
             chooseFileButton.Margin = new Padding(3, 0, 3, 3);
             chooseFileButton.Text = "Choose file";
             //
@@ -103,8 +103,8 @@ namespace Rationally.Visio.Forms.WizardComponents
             deleteDocumentButton.UseVisualStyleBackColor = true;
             deleteDocumentButton.Click += RemoveFile;
             deleteDocumentButton.TabIndex = 5;
-            deleteDocumentButton.Location = new Point(580, 56);
-            deleteDocumentButton.Size = new Size(150, 30);
+            deleteDocumentButton.Location = new Point(600, 50);
+            deleteDocumentButton.Size = new Size(140, 27);
             deleteDocumentButton.Margin = new Padding(3, 0, 3, 3);
             deleteDocumentButton.Text = "Remove this file";
         }
@@ -127,7 +127,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void RemoveFile(object sender, EventArgs e)
         {
-            ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.Documents.RemoveAt(DocumentIndex);
+            ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.Documents.Remove(this);
             ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.UpdateRows();
         }
 
@@ -148,8 +148,9 @@ namespace Rationally.Visio.Forms.WizardComponents
 
             //create a new document (optionally at the correct index)
             RelatedDocument newDocument = new RelatedDocument(FilePath.Text,FileName.Text,FilePath.ReadOnly);
-            Globals.RationallyAddIn.Model.Documents.Insert(DocumentIndex,newDocument);
-            (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer)?.AddRelatedDocument(newDocument);
+            DocumentIndex = Math.Min(DocumentIndex, Globals.RationallyAddIn.Model.Documents.Count);
+            Globals.RationallyAddIn.Model.Documents.Insert(DocumentIndex, newDocument);
+            (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer)?.InsertRelatedDocument(newDocument,DocumentIndex);
             //move document to the right index
             /*if (documentIndex > -1)
             {

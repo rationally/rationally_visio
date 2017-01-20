@@ -37,15 +37,19 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RationallyRibbon));
             this.rationally_tab = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
+            this.group2 = this.Factory.CreateRibbonGroup();
             this.settingsButton = this.Factory.CreateRibbonButton();
             this.wizardButton = this.Factory.CreateRibbonButton();
+            this.alternativeStatesOptionsButton = this.Factory.CreateRibbonButton();
             this.rationally_tab.SuspendLayout();
             this.group1.SuspendLayout();
+            this.group2.SuspendLayout();
             this.SuspendLayout();
             // 
             // rationally_tab
             // 
             this.rationally_tab.Groups.Add(this.group1);
+            this.rationally_tab.Groups.Add(this.group2);
             this.rationally_tab.Label = "rationally";
             this.rationally_tab.Name = "rationally_tab";
             // 
@@ -54,6 +58,12 @@
             this.group1.Items.Add(this.wizardButton);
             this.group1.Label = "Actions";
             this.group1.Name = "group1";
+            // 
+            // group2
+            // 
+            this.group2.Items.Add(this.alternativeStatesOptionsButton);
+            this.group2.Label = "Options";
+            this.group2.Name = "group2";
             // 
             // settingsButton
             // 
@@ -71,7 +81,14 @@
             this.wizardButton.Label = "Configure View";
             this.wizardButton.Name = "wizardButton";
             this.wizardButton.ShowImage = true;
-            this.wizardButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.wizardButton_Click_1);
+            // 
+            // alternativeStatesOptionsButton
+            // 
+            this.alternativeStatesOptionsButton.Label = "Alternative States";
+            this.alternativeStatesOptionsButton.Name = "alternativeStatesOptionsButton";
+            this.alternativeStatesOptionsButton.OfficeImageId = "ViewBackToColorView";
+            this.alternativeStatesOptionsButton.ShowImage = true;
+            this.alternativeStatesOptionsButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.alternativeStatesOptionsButton_Click);
             // 
             // RationallyRibbon
             // 
@@ -87,6 +104,8 @@
             this.rationally_tab.PerformLayout();
             this.group1.ResumeLayout(false);
             this.group1.PerformLayout();
+            this.group2.ResumeLayout(false);
+            this.group2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -97,6 +116,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton wizardButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton settingsButton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton alternativeStatesOptionsButton;
     }
 
     partial class ThisRibbonCollection

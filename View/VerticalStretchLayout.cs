@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
+using log4net;
 using Rationally.Visio.RationallyConstants;
 
 // ReSharper disable ArrangeRedundantParentheses
@@ -8,6 +10,7 @@ namespace Rationally.Visio.View
     internal class VerticalStretchLayout : ILayoutManager
     {
         private readonly RationallyContainer toManage;
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public VerticalStretchLayout(RationallyContainer toManage)
         {

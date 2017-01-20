@@ -129,15 +129,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\WizardFieldTypes.cs" />
+    <Compile Include="EventHandlers\DeleteEventHandlers\DeleteStakeholderEventHandler.cs" />
+    <Compile Include="EventHandlers\DeleteEventHandlers\DeleteStakeholdersEventHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\AddStakeholderEventHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MoveDownStakeholderHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MoveUpStakeholderHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\StartDeleteStakeholderEventHandler.cs" />
+    <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDStakeholderComponentEventHandler.cs" />
+    <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDStakeholderContainerEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\AlternativeTitleTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\ForceDescriptionTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\ForceConcernTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\RelatedDocumentTitleTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\RelatedUrlUrlTextChangedHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\StakeholderNameTextChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\StakeholderRoleTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateAlternativesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateDocumentsHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateForcesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateGeneralInformationHandler.cs" />
+    <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateStakeholdersHandler.cs" />
+    <Compile Include="Forms\AlternativeStateConfiguration\FlowLayoutAlternativeState.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\AlternativeStateConfiguration\TableLayoutAlternativeStates.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\AlternativeStateConfiguration\AlternativeStatesConfigurator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AlternativeStateConfiguration\AlternativeStatesConfigurator.Designer.cs">
+      <DependentUpon>AlternativeStatesConfigurator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PleaseWait.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +194,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Model\AlternativeState.cs" />
+    <Compile Include="Model\Stakeholder.cs" />
     <Compile Include="RationallyConstants\CellConstants.cs" />
     <Compile Include="RationallyConstants\Constants.cs" />
     <Compile Include="EventHandlers\ClickEventHandlers\UpdateAlternativeHandler.cs" />
@@ -295,6 +320,11 @@
     <Compile Include="View\Documents\RelatedDocumentsContainer.cs" />
     <Compile Include="View\RationallyView.cs" />
     <Compile Include="View\SizingPolicy.cs" />
+    <Compile Include="View\Stakeholders\StakeholderContainer.cs" />
+    <Compile Include="View\Stakeholders\StakeholderNameComponent.cs" />
+    <Compile Include="View\Stakeholders\StakeholderRoleComponent.cs" />
+    <Compile Include="View\Stakeholders\StakeholdersContainer.cs" />
+    <Compile Include="View\Stakeholders\StakeholderStubContainer.cs" />
     <Compile Include="View\VerticalStretchLayout.cs" />
     <Compile Include="Forms\WizardComponents\FlowLayoutAlternative.cs">
       <SubType>Component</SubType>
@@ -330,6 +360,7 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Rationally.Visio.Model.Alternative.datasource" />
@@ -347,6 +378,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <EmbeddedResource Include="Forms\AlternativeStateConfiguration\AlternativeStatesConfigurator.resx">
+      <DependentUpon>AlternativeStatesConfigurator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\PleaseWait.resx">
       <DependentUpon>PleaseWait.cs</DependentUpon>
     </EmbeddedResource>
@@ -395,6 +429,7 @@
     <Content Include="Resources\link.jpg" />
     <Content Include="Resources\logo_vertical.bmp" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

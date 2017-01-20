@@ -10,7 +10,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         public readonly List<FlowLayoutAlternative> AlternativeRows = new List<FlowLayoutAlternative>();
 
-        public TableLayoutMainContentAlternatives()
+        public TableLayoutMainContentAlternatives() 
         {
             RowCount = RationallyConstants.Constants.SupportedAmountOfAlternatives+1;
             

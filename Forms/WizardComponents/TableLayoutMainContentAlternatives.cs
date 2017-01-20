@@ -13,7 +13,18 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         public TableLayoutMainContentAlternatives() 
         {
+            RowCount = RationallyConstants.Constants.SupportedAmountOfAlternatives + 1;
+
+                        for (int i = 0; i < RationallyConstants.Constants.SupportedAmountOfAlternatives; i++)
+                            {
+                FlowLayoutAlternative alternativeRow = new FlowLayoutAlternative(i + 1);
+                AlternativeRows.Add(alternativeRow);
+                RowStyles.Add(new RowStyle(SizeType.Percent, 10F));//TODO what if rowCount > 9
+                Controls.Add(alternativeRow, 0, i);
+                           }
             
+            RowStyles.Add(new RowStyle(SizeType.Percent, 100 - (RationallyConstants.Constants.SupportedAmountOfAlternatives * 10)));
+
 
             Init();
         }
@@ -34,7 +45,6 @@ namespace Rationally.Visio.Forms.WizardComponents
             
             Size = new Size(760, 482);
             TabIndex = 0;
-            UpdateRows();
         }
 
         private void UpdateRows()

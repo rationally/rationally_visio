@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using log4net;
 using Microsoft.VisualBasic.Logging;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
+using Rationally.Visio.Logger;
 using Rationally.Visio.Model;
 using Rationally.Visio.View.Alternatives;
 
@@ -57,7 +58,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         public void UpdateModel()
         {
-            Log.Debug("HasAlternative:" + (Alternative != null) + "|View has alternativescontainer:" + (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is AlternativesContainer) != null));
+            TempFileLogger.Log("HasAlternative:" + (Alternative != null) + "|View has alternativescontainer:" + (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is AlternativesContainer) != null));
             if (Alternative != null)
             {
                 UpdateAlternativeHandler.Execute(alternativeIndex-1, TextBoxAlternativeTitle.Text, alternativeStateDropdown.SelectedItem.ToString());

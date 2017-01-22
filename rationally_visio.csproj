@@ -189,6 +189,7 @@
     <Compile Include="Forms\WizardComponents\TableLayoutMainContentStakeholders.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Logger\TempFileLogger.cs" />
     <Compile Include="Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

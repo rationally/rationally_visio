@@ -3,6 +3,7 @@ using log4net;
 using Rationally.Visio.Model;
 using Rationally.Visio.View.Documents;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Logger;
 
 namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
@@ -12,11 +13,11 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 
         public void Execute(RationallyModel model, Shape changedShape)
         {
-            Log.Debug("Entered DeleteRelatedDocumentsEventHandler.");
+            TempFileLogger.Log("Entered DeleteRelatedDocumentsEventHandler.");
             Globals.RationallyAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
             if (!Globals.RationallyAddIn.View.Children.Any(x => x is RelatedDocumentsContainer))
             {
-                Log.Debug("Deleting documents in document list in model.");
+                TempFileLogger.Log("Deleting documents in document list in model.");
                 model.Documents.Clear();
                 RepaintHandler.Repaint();
             }

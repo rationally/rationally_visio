@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using log4net;
+using Rationally.Visio.Logger;
 using Rationally.Visio.View;
 
 namespace Rationally.Visio.EventHandlers
@@ -20,7 +21,7 @@ namespace Rationally.Visio.EventHandlers
         {
             if (component != null)
             {
-                Log.Debug("Repaint on:" + component.Name);
+                TempFileLogger.Log("Repaint on:" + component.Name);
                 component.Repaint();
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Shapes may not be updated during an undo or redo, so don't place the children ourselves
                 {

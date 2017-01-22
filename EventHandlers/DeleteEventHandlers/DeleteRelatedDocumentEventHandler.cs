@@ -4,6 +4,7 @@ using Rationally.Visio.Model;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Documents;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Logger;
 
 namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
@@ -13,7 +14,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 
         public void Execute(RationallyModel model, Shape changedShape)
         {
-            Log.Debug("Entered DeleteRelatedDocumentEventHandler.");
+            TempFileLogger.Log("Entered DeleteRelatedDocumentEventHandler.");
             //trace documents container in view tree
             RationallyComponent documentComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
 
@@ -22,7 +23,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 RelatedDocumentContainer containerToDelete = (RelatedDocumentContainer)documentComponent;
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
-                    Log.Debug("Deleting child shapes of related document...");
+                    TempFileLogger.Log("Deleting child shapes of related document...");
                     containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
                     {
                         c.Deleted = true;
@@ -37,13 +38,13 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 {
                     
                 }*/
-                Log.Debug("Document being removed from model list...");
+                TempFileLogger.Log("Document being removed from model list...");
                 model.Documents.RemoveAt(docIndex);
                 //update view tree
                 relatedDocumentsContainer.Children.Remove(containerToDelete);
 
                 
-                Log.Debug("Regenerated identifiers of document list in model.");
+                TempFileLogger.Log("Regenerated identifiers of document list in model.");
 
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {

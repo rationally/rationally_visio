@@ -4,6 +4,7 @@ using Rationally.Visio.Model;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Forces;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Logger;
 
 namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
@@ -13,7 +14,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 
         public void Execute(RationallyModel model, Shape changedShape)
         {
-            Log.Debug("Entered DeleteForceEventHandler.");
+            TempFileLogger.Log("Entered DeleteForceEventHandler.");
             //trace force row in view tree
             RationallyComponent forceComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
 
@@ -22,7 +23,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 ForceContainer containerToDelete = (ForceContainer)forceComponent;
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
-                    Log.Debug("Deleting all child components of the force container...");
+                    TempFileLogger.Log("Deleting all child components of the force container...");
                     containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
                     {
                         c.Deleted = true;
@@ -36,14 +37,14 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     model.Forces.RemoveAt(forceIndex);
-                    Log.Debug("Deleting force from model list of forces.");
+                    TempFileLogger.Log("Deleting force from model list of forces.");
                 }
                 //update view tree
                 forcesContainer.Children.Remove(containerToDelete);
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     model.RegenerateForceIdentifiers();
-                    Log.Debug("Regenerated force identifiers in model.");
+                    TempFileLogger.Log("Regenerated force identifiers in model.");
                     forcesContainer.MsvSdContainerLocked = true;
                 }
 

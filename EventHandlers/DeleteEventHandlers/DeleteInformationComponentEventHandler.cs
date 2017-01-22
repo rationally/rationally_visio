@@ -2,6 +2,7 @@
 using log4net;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Logger;
 using Rationally.Visio.View.Information;
 
 namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
@@ -12,7 +13,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 
         public void Execute(RationallyModel model, Shape changedShape)
         {
-            Log.Debug("Deleting information component.");
+            TempFileLogger.Log("Deleting information component.");
             InformationContainer cont = Globals.RationallyAddIn.View.Children.FirstOrDefault(obj => obj.RationallyType == "information") as InformationContainer;
             cont?.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
         }

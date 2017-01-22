@@ -5,6 +5,7 @@ using Rationally.Visio.Enums;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.Model;
 using Rationally.Visio.Forms;
+using Rationally.Visio.Logger;
 
 namespace Rationally.Visio.EventHandlers
 {
@@ -19,7 +20,7 @@ namespace Rationally.Visio.EventHandlers
             {
                 Globals.RationallyAddIn.Model = new RationallyModel();
                 ShowSetupWizard();
-                Log.Debug("Showed setup wizard.");
+                TempFileLogger.Log("Showed setup wizard.");
             }
         }
     }

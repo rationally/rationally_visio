@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using log4net;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Logger;
 using Rationally.Visio.Model;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Stakeholders;
@@ -18,11 +19,11 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
         public void Execute(RationallyModel model, Shape changedShape)
         {
             Globals.RationallyAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
-            Log.Debug("Handler of delete stakeholders entered.");
+            TempFileLogger.Log("Handler of delete stakeholders entered.");
             if (!Globals.RationallyAddIn.View.Children.Any(x => x is StakeholdersContainer))
             {
                 model.Stakeholders.Clear();
-                Log.Debug("model stakeholders list emptied.");
+                TempFileLogger.Log("model stakeholders list emptied.");
                 RepaintHandler.Repaint();
             }
         }

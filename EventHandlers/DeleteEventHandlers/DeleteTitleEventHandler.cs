@@ -1,7 +1,6 @@
 ﻿using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
 using log4net;
-using Rationally.Visio.Logger;
 
 namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
@@ -11,7 +10,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 
         public void Execute(RationallyModel model, Shape changedShape)
         {
-            TempFileLogger.Log("Deleting title label.");
+            Log.Debug("Deleting title label.");
             Globals.RationallyAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
         }
     }

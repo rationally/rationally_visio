@@ -8,7 +8,6 @@ using Rationally.Visio.Enums;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.EventHandlers.WizardPageHandlers;
 using Rationally.Visio.Forms.WizardComponents;
-using Rationally.Visio.Logger;
 
 namespace Rationally.Visio.Forms
 {
@@ -34,7 +33,7 @@ namespace Rationally.Visio.Forms
 
         public void ShowDialog(bool onDocumentCreation, WizardFieldTypes type)
         {
-            TempFileLogger.Log("Entered showDialog.");
+            Log.Debug("Entered showDialog.");
             if (WindowState == FormWindowState.Minimized)
             {
                 WindowState = FormWindowState.Normal;
@@ -45,16 +44,16 @@ namespace Rationally.Visio.Forms
             tableLayoutMainContentGeneral.TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
             tableLayoutMainContentGeneral.DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.DateString;
             tableLayoutMainContentGeneral.TextVersion.Text = Globals.RationallyAddIn.Model.Version;
-            TempFileLogger.Log("Read all general information from the model and wrote it to the wizard.");
+            Log.Debug("Read all general information from the model and wrote it to the wizard.");
             TableLayoutMainContentAlternatives.AlternativeRows.ForEach(a => a.UpdateData());
             TableLayoutMainContentForces.InitData();
-            TempFileLogger.Log("Initialized alternatives wizard page.");
+            Log.Debug("Initialized alternatives wizard page.");
             TableLayoutMainContentDocuments.UpdateByModel();//create rows according to model
             TableLayoutMainContentDocuments.Documents.ForEach(d => d.UpdateData());
-            TempFileLogger.Log("Initialized documents wizard page.");
+            Log.Debug("Initialized documents wizard page.");
             TableLayoutMainContentStakeholders.UpdateData();
             TableLayoutMainContentStakeholders.Stakeholders.ForEach(d => d.UpdateData());
-            TempFileLogger.Log("Initialized stakeholders wizard page.");
+            Log.Debug("Initialized stakeholders wizard page.");
             if (DocumentCreation)
             {
                 CreateButton.Text = Messages.Wizard_CreateButton_CreateView;
@@ -80,18 +79,18 @@ namespace Rationally.Visio.Forms
             }
 
             StartPosition = FormStartPosition.CenterScreen;
-            TempFileLogger.Log("Setting AcceptButton as CreateButton with text:" + CreateButton.Text);
+            Log.Debug("Setting AcceptButton as CreateButton with text:" + CreateButton.Text);
             AcceptButton = CreateButton;
         }
 
 
         private void submit_Click(object sender, EventArgs e)
         {
-            TempFileLogger.Log("Test message for temp logger.");
+            
             
             if (ValidateGeneralIfNotDebugging() && ValidateAlternatives() && TableLayoutMainContentForces.IsValid() && TableLayoutMainContentDocuments.IsValid() && TableLayoutMainContentStakeholders.IsValid())
             {
-                TempFileLogger.Log("Everyting is valid.");
+                Log.Debug("Everyting is valid.");
                 pleaseWait.Show();
                 pleaseWait.Refresh();
                 //pleaseWait.Show();
@@ -99,29 +98,29 @@ namespace Rationally.Visio.Forms
                 int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");
 
                 
-                TempFileLogger.Log("Setting view page and rebuilding tree.");
+                Log.Debug("Setting view page and rebuilding tree.");
                 Globals.RationallyAddIn.View.Page = Globals.RationallyAddIn.Application.ActivePage;
                 Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
                 //handle changes in the "General Information" page
                 WizardUpdateGeneralInformationHandler.Execute(this);
-                TempFileLogger.Log("General information updated.");
+                Log.Debug("General information updated.");
                 //handle changes in the "Forces" page
                 WizardUpdateForcesHandler.Execute(this);
-                TempFileLogger.Log("Forces updated.");
+                Log.Debug("Forces updated.");
                 //handle changes in the "Alternatives" page
                 WizardUpdateAlternativesHandler.Execute(this);
-                TempFileLogger.Log("Alternatives updated.");
+                Log.Debug("Alternatives updated.");
                 //handle changes in the "Related Documents" page
                 WizardUpdateDocumentsHandler.Execute(this);
-                TempFileLogger.Log("Documents updated.");
+                Log.Debug("Documents updated.");
                 //handle changes in the "Stakeholders" page
                 WizardUpdateStakeholdersHandler.Execute(this);
-                TempFileLogger.Log("Stakeholders updated.");
+                Log.Debug("Stakeholders updated.");
 
                 //all changes have been made, close the scope and the wizard
                 Globals.RationallyAddIn.Application.EndUndoScope(wizardScopeId, true);
                 Close();
-                TempFileLogger.Log("Closed wizard");
+                Log.Debug("Closed wizard");
                 pleaseWait.Hide();
             }
         }

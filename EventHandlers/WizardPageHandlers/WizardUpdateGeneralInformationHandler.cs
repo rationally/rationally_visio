@@ -2,7 +2,6 @@
 using System.Reflection;
 using log4net;
 using Rationally.Visio.Forms;
-using Rationally.Visio.Logger;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Information;
@@ -27,7 +26,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
             model.DecisionName = decisionName;
             model.DateString = date;
             model.Version = version;
-            TempFileLogger.Log("Wrote data to model: (" + author + "," + decisionName + "," + date + "," + version + ")");
+            Log.Debug("Wrote data to model: (" + author + "," + decisionName + "," + date + "," + version + ")");
             
             if (documentCreation)
             {
@@ -35,16 +34,16 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
                 TitleLabel header = new TitleLabel(Globals.RationallyAddIn.Application.ActivePage, model.DecisionName);
                 Globals.RationallyAddIn.View.Children.Add(header);
                 RepaintHandler.Repaint(header);
-                TempFileLogger.Log("Added title component to the sheet.");
+                Log.Debug("Added title component to the sheet.");
                 //draw the information container
                 InformationContainer informationContainer = new InformationContainer(Globals.RationallyAddIn.Application.ActivePage, model.Author, model.DateString, model.Version);
                 Globals.RationallyAddIn.View.Children.Add(informationContainer);
                 RepaintHandler.Repaint(informationContainer);
-                TempFileLogger.Log("Added information container to the sheet.");
+                Log.Debug("Added information container to the sheet.");
             }
             else
             {
-                TempFileLogger.Log("not the first time wizard opened, only repaint existing components.");
+                Log.Debug("not the first time wizard opened, only repaint existing components.");
                 RationallyView view = Globals.RationallyAddIn.View;
                 if (view.Children.Any(x => x is InformationContainer))
                 {

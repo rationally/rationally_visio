@@ -5,7 +5,6 @@ using System.Text;
 using log4net;
 using Rationally.Visio.Forms;
 using Rationally.Visio.Forms.WizardComponents;
-using Rationally.Visio.Logger;
 using Rationally.Visio.Model;
 using Rationally.Visio.View.Stakeholders;
 using static System.String;
@@ -20,16 +19,16 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
             //validation is done here, so just pick the filled in rows
             List<FlowLayoutStakeholder> filledInPanels = wizard.TableLayoutMainContentStakeholders.Stakeholders;
             filledInPanels.ForEach(filledInPanel => filledInPanel.UpdateModel());
-            TempFileLogger.Log("filled in panels:" + filledInPanels.Count);
+            Log.Debug("filled in panels:" + filledInPanels.Count);
             //user might have deleted rows => delete them from the model
             List<Stakeholder> modelStakeholders = Globals.RationallyAddIn.Model.Stakeholders;
-            TempFileLogger.Log("model stakeholders count:" + modelStakeholders.Count);
+            Log.Debug("model stakeholders count:" + modelStakeholders.Count);
 
             //locate stakeholders in the model for which no element in the wizard exists (anymore)
             List<int> scheduledForDeletion = modelStakeholders.Where((s, i) => wizard.TableLayoutMainContentStakeholders.Stakeholders.FirstOrDefault(stakeholder => stakeholder.StakeholderIndex == i) == null).Select(modelStakeholder => modelStakeholders.IndexOf(modelStakeholder)).ToList();
-            TempFileLogger.Log("scheduled for deletion:" + scheduledForDeletion.Count);
+            Log.Debug("scheduled for deletion:" + scheduledForDeletion.Count);
             StakeholdersContainer stakeholdersContainer = (StakeholdersContainer)Globals.RationallyAddIn.View.Children.First(c => c is StakeholdersContainer);
-            TempFileLogger.Log("container present:" + (stakeholdersContainer != null));
+            Log.Debug("container present:" + (stakeholdersContainer != null));
             //delete these elements from the view, which will automatically remove them from the model
             scheduledForDeletion.ForEach(stakeholderIndex => stakeholdersContainer.Children.Cast<StakeholderContainer>().First(con => con.StakeholderIndex == stakeholderIndex).RShape.Delete());
 

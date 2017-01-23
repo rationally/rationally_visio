@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Windows.Forms;
 using log4net;
 using Rationally.Visio.Forms;
-using Rationally.Visio.Logger;
 using Rationally.Visio.Model;
 using Rationally.Visio.View.Forces;
 using static System.String;
@@ -20,9 +19,9 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
             Globals.RationallyAddIn.Model.Forces.Clear();
             //select filled in force rows
             List<DataGridViewRow> forceRows = wizard.TableLayoutMainContentForces.ForcesDataGrid.Rows.Cast<DataGridViewRow>().Where(row => !IsNullOrEmpty(row.Cells[0].Value?.ToString())).ToList();
-            TempFileLogger.Log("Found " + forceRows.Count + " filled in force rows.");
+            Log.Debug("Found " + forceRows.Count + " filled in force rows.");
             Globals.RationallyAddIn.Model.Forces = forceRows.Select(ConstructForce).ToList();
-            TempFileLogger.Log("Stored forces in model.");
+            Log.Debug("Stored forces in model.");
             RepaintHandler.Repaint(Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is ForcesContainer));
         }
 

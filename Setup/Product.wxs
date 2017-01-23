@@ -9,7 +9,7 @@
   <?define UpgradeCode = "{e2f08687-0d72-4dbc-b410-7b2b20b33fd1}" ?>
 
   <Product Id="*" Name="rationally" Language="1033" Version="$(var.Version)" Manufacturer="University of Groningen" UpgradeCode="$(var.UpgradeCode)">
-    <Package InstallerVersion="200" Compressed="yes" />
+    <Package InstallerVersion="200" Compressed="yes" InstallPrivileges="elevated" />
 
     
       
@@ -39,8 +39,11 @@
     <Feature Id="ProductFeature" Title="Setup" Level="1">
       <ComponentGroupRef Id="AddinFiles"/>
       <ComponentGroupRef Id="VisioFiles"/>
+    <ComponentRef Id="RegistryEntries" />
     </Feature>
 
+    <Property Id="MsiLogging" Value="v" />
+    
     <!-- UI settings -->
     <UI>
       
@@ -127,6 +130,20 @@
       </Component>
       
     </ComponentGroup>
-    
+    <!-- store registries in user specific area -->
+     <DirectoryRef Id="TARGETDIR">
+       <Component Id="RegistryEntries" Guid="*">
+           <RegistryKey Root="HKCU"
+                        Key="Software\Microsoft\Visio\Addins\rationally_visio.vsto"
+                 Action="createAndRemoveOnUninstall">
+               <RegistryValue Type="string" Name="Manifest" Value="file:///C:\\Program Files (x86)\\rationally-visio\\rationally-visio.vsto|vstolocal"/>
+               <RegistryValue Type="string" Name="FriendlyName" Value="rationally_visio"/>
+               <RegistryValue Type="string" Name="Description" Value="rationally-visio"/>
+             <RegistryValue Type="integer" Name="CommandLineSafe" Value="1"/>
+             <RegistryValue Type="integer" Name="LoadBehavior" Value="3"/>
+               <RegistryValue Type="string" Value="Default Value"/>
+           </RegistryKey>
+       </Component>
+   </DirectoryRef>
   </Fragment>
 </Wix>

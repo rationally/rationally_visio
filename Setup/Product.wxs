@@ -99,7 +99,10 @@
         <File Name="Newtonsoft.Json.dll">
         </File>
       </Component>
-
+      <Component>
+        <File Name="rationally-visio.dll.config">
+        </File>
+      </Component>
     </ComponentGroup>
     <!-- Addin files to be included in setup -->
     

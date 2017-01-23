@@ -24,6 +24,7 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="rationally-visio.dll.config" />
     <Content Include="banner.bmp" />
     <Content Include="Decision View.vstx" />
     <Content Include="icon.ico" />

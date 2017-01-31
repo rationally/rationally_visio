@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
+using Rationally.Visio.EventHandlers.WizardPageHandlers;
 using Rationally.Visio.Model;
 using static System.String;
 
@@ -10,6 +13,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 {
     public class TableLayoutMainContentStakeholders : TableLayoutPanel, IWizardPanel
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public readonly List<FlowLayoutStakeholder> Stakeholders;
         public readonly AntiAliasedButton AddStakeholderButton;
 
@@ -77,6 +81,19 @@ namespace Rationally.Visio.Forms.WizardComponents
             UpdateRows();
         }
 
+        public void InitData()
+        {
+            RationallyModel model = Globals.RationallyAddIn.Model;
+            Stakeholders.Clear();
+            for (int i = 0; i < model.Stakeholders.Count; i++)
+            {
+                Stakeholders.Add(new FlowLayoutStakeholder(i));
+            }
+            UpdateRows();
+            Stakeholders.ForEach(d => d.UpdateData());
+            Log.Debug("Initialized stakeholders wizard page.");
+        }
+
         public bool IsValid()
         {
             //check if all rows have an entry
@@ -87,21 +104,12 @@ namespace Rationally.Visio.Forms.WizardComponents
             }
             return true;
         }
-
-        public void UpdateData()
-        {
-            RationallyModel model = Globals.RationallyAddIn.Model;
-            Stakeholders.Clear();
-            for (int i = 0; i < model.Stakeholders.Count; i++)
-            {
-                Stakeholders.Add(new FlowLayoutStakeholder(i));
-            }
-            UpdateRows();
-        }
-
+        
         public void UpdateModel()
         {
-            throw new NotImplementedException(); 
+            //handle changes in the "Stakeholders" page
+            WizardUpdateStakeholdersHandler.Execute(ProjectSetupWizard.Instance);
+            Log.Debug("Stakeholders updated.");
         }
     }
 }

@@ -15,14 +15,17 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public static void Execute(ProjectSetupWizard wizard)
         {
-            //clear the forces part of the model
-            Globals.RationallyAddIn.Model.Forces.Clear();
+            PleaseWait pleaseWait = new PleaseWait();
+            pleaseWait.Show();
+            pleaseWait.Refresh();
+            Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
             //select filled in force rows
             List<DataGridViewRow> forceRows = wizard.TableLayoutMainContentForces.ForcesDataGrid.Rows.Cast<DataGridViewRow>().Where(row => !IsNullOrEmpty(row.Cells[0].Value?.ToString())).ToList();
             Log.Debug("Found " + forceRows.Count + " filled in force rows.");
             Globals.RationallyAddIn.Model.Forces = forceRows.Select(ConstructForce).ToList();
             Log.Debug("Stored forces in model.");
             RepaintHandler.Repaint(Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is ForcesContainer));
+            pleaseWait.Close();
         }
 
         private static Force ConstructForce(DataGridViewRow row)

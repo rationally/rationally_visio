@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
+using Microsoft.VisualBasic.Logging;
+using Rationally.Visio.EventHandlers.WizardPageHandlers;
 using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
 using static System.String;
@@ -10,6 +14,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 {
     public class TableLayoutMainContentForces : TableLayoutPanel, IWizardPanel
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public DataGridView ForcesDataGrid;
         public DataGridViewTextBoxColumn ColumnDescription { get; set; }
 
@@ -20,7 +25,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             Init();
         }
 
-        private void Init()
+        public void Init()
         {
             BackColor = Color.WhiteSmoke;
             ColumnCount = 1;
@@ -114,6 +119,7 @@ namespace Rationally.Visio.Forms.WizardComponents
                 }
                 ForcesDataGrid.Rows.Add(newRow);
             }
+            Log.Debug($"Initialised forces table with {Globals.RationallyAddIn.Model.Alternatives.Count} alternatives.");
         }
 
         public bool IsValid()
@@ -131,7 +137,9 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         public void UpdateModel()
         {
-            throw new System.NotImplementedException();
+            //handle changes in the "Forces" page
+            WizardUpdateForcesHandler.Execute(ProjectSetupWizard.Instance);
+            Log.Debug("Forces updated.");
         }
     }
 }

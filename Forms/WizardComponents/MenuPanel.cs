@@ -29,9 +29,9 @@ namespace Rationally.Visio.Forms.WizardComponents
         }
 
 
-        public MenuPanel() 
+        public MenuPanel()
         {
-            
+
             Buttons = new List<MenuButton>();
             buttonShowAlternatives = new MenuButton(this);
             ButtonShowGeneral = new MenuButton(this);
@@ -104,55 +104,84 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void buttonShowAlternatives_Click(object sender, System.EventArgs e)
         {
+            if (((MenuButton)sender).HandleEvent)
+            {
+                ProjectSetupWizard.Instance.CurrentPanel = ProjectSetupWizard.Instance.TableLayoutMainContentAlternatives;
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentAlternatives);
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.FlowLayoutBottomButtons);
+                //define bottom buttons
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Clear();
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.CreateButton);
 
-            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
-            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentAlternatives);
-            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.FlowLayoutBottomButtons);
-            //define bottom buttons
-            ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Clear();
-            ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.CreateButton);
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Refresh();
 
-            ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Refresh();
+                ProjectSetupWizard.Instance.TableLayoutMainContentAlternatives.InitData();
+            }
         }
 
-        private void ButtonShowGeneralClick(object sender, System.EventArgs e) => ProjectSetupWizard.Instance.SetGeneralPanel();
+        private void ButtonShowGeneralClick(object sender, System.EventArgs e)
+        {
+            if (((MenuButton)sender).HandleEvent)
+            {
+                ProjectSetupWizard.Instance.SetGeneralPanel();
+            }
+        }
 
         private void buttonShowForces_Click(object sender, System.EventArgs e)
         {
-            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
-            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentForces);
-            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.FlowLayoutBottomButtons);
-            //define bottom buttons
-            ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Clear();
-            ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.CreateButton);
+            if (((MenuButton)sender).HandleEvent)
+            {
+                ProjectSetupWizard.Instance.CurrentPanel = ProjectSetupWizard.Instance.TableLayoutMainContentForces;
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentForces);
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.FlowLayoutBottomButtons);
+                //define bottom buttons
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Clear();
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.CreateButton);
 
-            ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Refresh();
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Refresh();
+
+                ProjectSetupWizard.Instance.TableLayoutMainContentForces.InitData();
+            }
         }
 
         private void buttonShowDocuments_Click(object sender, System.EventArgs e)
         {
-            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
-            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentDocuments);
-            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.FlowLayoutBottomButtons);
-            //define bottom buttons
-            ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Clear();
-            ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.CreateButton);
-            ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.AddDocumentButton);
-            
-            ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Refresh();
+            if (((MenuButton)sender).HandleEvent)
+            {
+                ProjectSetupWizard.Instance.CurrentPanel = ProjectSetupWizard.Instance.TableLayoutMainContentDocuments;
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentDocuments);
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.FlowLayoutBottomButtons);
+                //define bottom buttons
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Clear();
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.CreateButton);
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.AddDocumentButton);
+
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Refresh();
+
+                ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.InitData();
+            }
         }
 
         private void buttonShowStakeholders_Click(object sender, System.EventArgs e)
         {
-            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
-            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders);
-            ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.FlowLayoutBottomButtons);
-            //define bottom buttons
-            ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Clear();
-            ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.CreateButton);
-            ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders.AddStakeholderButton);
+            if (((MenuButton)sender).HandleEvent)
+            {
+                ProjectSetupWizard.Instance.CurrentPanel = ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders;
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders);
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.FlowLayoutBottomButtons);
+                //define bottom buttons
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Clear();
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.CreateButton);
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders.AddStakeholderButton);
 
-            ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Refresh();
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Refresh();
+
+                ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders.InitData();
+            }
         }
     }
 }

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
+using Rationally.Visio.EventHandlers.WizardPageHandlers;
 using Rationally.Visio.Model;
 using static System.String;
 
@@ -10,6 +13,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 {
     public class TableLayoutMainContentDocuments : TableLayoutPanel, IWizardPanel
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public readonly List<FlowLayoutDocument> Documents;
         public readonly AntiAliasedButton AddDocumentButton;
 
@@ -79,6 +83,19 @@ namespace Rationally.Visio.Forms.WizardComponents
             UpdateRows();
         }
 
+        public void InitData()
+        {
+            RationallyModel model = Globals.RationallyAddIn.Model;
+            Documents.Clear();
+            for (int i = 0; i < model.Documents.Count; i++)
+            {
+                Documents.Add(new FlowLayoutDocument(i));
+            }
+            UpdateRows();
+            Documents.ForEach(d => d.UpdateData());
+            Log.Debug("Initialized documents wizard page.");
+        }
+
         public bool IsValid()
         {
             //check if all named rows have at least something in the path field
@@ -103,21 +120,12 @@ namespace Rationally.Visio.Forms.WizardComponents
         }
 
         private static bool IsValidUrl(string url) => Uri.IsWellFormedUriString(url, UriKind.Absolute);
-
-        public void UpdateByModel()
-        {
-            RationallyModel model = Globals.RationallyAddIn.Model;
-            Documents.Clear();
-            for (int i = 0; i < model.Documents.Count; i++)
-            {
-                Documents.Add(new FlowLayoutDocument(i));
-            }
-            UpdateRows();
-        }
-
+        
         public void UpdateModel()
         {
-            throw new NotImplementedException();
+            //handle changes in the "Related Documents" page
+            WizardUpdateDocumentsHandler.Execute(ProjectSetupWizard.Instance);
+            Log.Debug("Documents updated.");
         }
     }
 }

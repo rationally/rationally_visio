@@ -16,6 +16,10 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public static void Execute(ProjectSetupWizard wizard)
         {
+            PleaseWait pleaseWait = new PleaseWait();
+            pleaseWait.Show();
+            pleaseWait.Refresh();
+            Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
             //validation is done here, so just pick the filled in rows
             List<FlowLayoutStakeholder> filledInPanels = wizard.TableLayoutMainContentStakeholders.Stakeholders;
             filledInPanels.ForEach(filledInPanel => filledInPanel.UpdateModel());
@@ -34,6 +38,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
 
             //repaint the view according to the new model
             RepaintHandler.Repaint(stakeholdersContainer);
+            pleaseWait.Close();
         }
     }
 }

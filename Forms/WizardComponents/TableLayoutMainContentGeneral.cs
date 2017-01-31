@@ -1,11 +1,16 @@
 ﻿
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
+using Microsoft.VisualBasic.Logging;
+using Rationally.Visio.EventHandlers.WizardPageHandlers;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
     public class TableLayoutMainContentGeneral : TableLayoutPanel, IWizardPanel
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly FlowLayoutPanel flowLayoutGeneralAuthor;
         private readonly FlowLayoutPanel flowLayoutGeneralTopic;
         private readonly FlowLayoutPanel flowLayoutGeneralDate;
@@ -215,9 +220,54 @@ namespace Rationally.Visio.Forms.WizardComponents
             flowLayoutGeneralVersion.PerformLayout();
         }
 
+        public void InitData()
+        {
+            TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
+            TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
+            DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.DateString;
+            TextVersion.Text = Globals.RationallyAddIn.Model.Version;
+            Log.Debug("Read all general information from the model and wrote it to the wizard.");
+        }
+
+        public bool IsValid() => ValidateGeneralIfNotDebugging();
+
+        private bool ValidateGeneralIfNotDebugging()
+        {
+            if (string.IsNullOrWhiteSpace(ProjectSetupWizard.Instance.tableLayoutMainContentGeneral.TextDecisionTopic.Text))
+            {
+#if DEBUG
+                ProjectSetupWizard.Instance.tableLayoutMainContentGeneral.TextDecisionTopic.Text = "Title";
+#else
+                MessageBox.Show("Enter a decision topic.", "Decision topic missing");
+                return false;
+#endif
+            }
+            if (string.IsNullOrWhiteSpace(ProjectSetupWizard.Instance.tableLayoutMainContentGeneral.TextAuthor.Text))
+            {
+#if DEBUG
+                ProjectSetupWizard.Instance.tableLayoutMainContentGeneral.TextAuthor.Text = "Author";
+#else
+                MessageBox.Show("Enter the author's name.", "Author's name missing");
+                return false;
+#endif
+            }
+            if (string.IsNullOrWhiteSpace(ProjectSetupWizard.Instance.tableLayoutMainContentGeneral.TextVersion.Text))
+            {
+#if DEBUG
+                ProjectSetupWizard.Instance.tableLayoutMainContentGeneral.TextVersion.Text = "1.0.0";
+#else
+                MessageBox.Show("Enter the version number.", "Version number missing");
+                return false;
+#endif
+            }
+            return true;
+        }
+
         public void UpdateModel()
         {
-            throw new System.NotImplementedException();
+            //handle changes in the "General Information" page
+            WizardUpdateGeneralInformationHandler.Execute(ProjectSetupWizard.Instance);
+            Log.Debug("General information updated.");
         }
     }
 }

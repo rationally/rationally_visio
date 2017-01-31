@@ -11,6 +11,7 @@ namespace Rationally.Visio.Forms.WizardComponents
     {
         private readonly MenuPanel containingMenu;
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        public bool HandleEvent = true;
         public MenuButton(MenuPanel containingMenu)
         {
             this.containingMenu = containingMenu;
@@ -29,7 +30,19 @@ namespace Rationally.Visio.Forms.WizardComponents
             this.containingMenu.Buttons.Add(this);
         }
 
-        private void button1_Click(object sender, EventArgs e) => containingMenu.HighLightedButton = this;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!ProjectSetupWizard.Instance.CurrentPanel.IsValid()) //CurrentPanel.IsValid();
+            {
+                HandleEvent = false;
+            }
+            else
+            {
+                HandleEvent = true;
+                ProjectSetupWizard.Instance.CurrentPanel.UpdateModel();
+                containingMenu.HighLightedButton = this;
+            }
+        }
 
 
         private void button1_MouseEnter(object sender, EventArgs e)

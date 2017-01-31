@@ -14,11 +14,15 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
         public static void Execute(ProjectSetupWizard wizard) => UpdateGeneralInformationInModel(wizard.tableLayoutMainContentGeneral.TextAuthor.Text,
             wizard.tableLayoutMainContentGeneral.TextDecisionTopic.Text,
             wizard.tableLayoutMainContentGeneral.DateTimePickerCreationDate.Value.ToLongDateString(),
-            wizard.tableLayoutMainContentGeneral.TextVersion.Text, ProjectSetupWizard.DocumentCreation);
+            wizard.tableLayoutMainContentGeneral.TextVersion.Text);
 
 
-        private static void UpdateGeneralInformationInModel(string author, string decisionName, string date, string version, bool documentCreation)
+        private static void UpdateGeneralInformationInModel(string author, string decisionName, string date, string version)
         {
+            PleaseWait pleaseWait = new PleaseWait();
+            pleaseWait.Show();
+            pleaseWait.Refresh();
+            Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
             RationallyModel model = Globals.RationallyAddIn.Model;
 
             // Read the contents of setupDialog's TextBox.
@@ -28,7 +32,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
             model.Version = version;
             Log.Debug("Wrote data to model: (" + author + "," + decisionName + "," + date + "," + version + ")");
             
-            if (documentCreation)
+            if (ProjectSetupWizard.DocumentCreation)
             {
                 //draw the header
                 TitleLabel header = new TitleLabel(Globals.RationallyAddIn.Application.ActivePage, model.DecisionName);
@@ -40,10 +44,11 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
                 Globals.RationallyAddIn.View.Children.Add(informationContainer);
                 RepaintHandler.Repaint(informationContainer);
                 Log.Debug("Added information container to the sheet.");
+                ProjectSetupWizard.DocumentCreation = false;
             }
             else
             {
-                Log.Debug("not the first time wizard opened, only repaint existing components.");
+                Log.Debug("not the first time general info gets repainted, only repaint existing components.");
                 RationallyView view = Globals.RationallyAddIn.View;
                 if (view.Children.Any(x => x is InformationContainer))
                 {
@@ -56,6 +61,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
                     RepaintHandler.Repaint(titleLabel);
                 }
             }
+            pleaseWait.Close();
         }
     }
 }

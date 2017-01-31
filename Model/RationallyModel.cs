@@ -1,7 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using log4net;
+using Rationally.Visio.Forms;
+using Rationally.Visio.Forms.AlternativeStateConfiguration;
+using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Documents;
 using Rationally.Visio.View.Forces;
@@ -19,7 +26,7 @@ namespace Rationally.Visio.Model
         public List<RelatedDocument> Documents { get; }
 
         public List<Stakeholder> Stakeholders { get; } 
-        public List<string> AlternativeStates { get; }
+        public Dictionary<string, Color> AlternativeStateColors { get; set; }
         public string Author { get; set; }
         public string DecisionName { get; set; }
         public string DateString { get; set; }
@@ -36,7 +43,10 @@ namespace Rationally.Visio.Model
             Documents = new List<RelatedDocument>();
             Forces = new List<Force>();
             Stakeholders = new List<Stakeholder>();
-            AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"}; //Currently hardcoded, could be user setting in future product.
+
+            ResetAlternativeStateColors();
+            AlternativeStateColorsFromFile.ToList().Select(rawState => (AlternativeState)rawState.Value).ToList().ForEach(stateColor => AlternativeStateColors.Add(stateColor.State,stateColor.Color));
+            //AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"}; //Currently hardcoded, could be user setting in future product.
         }
 
         public void RegenerateAlternativeIdentifiers()
@@ -76,6 +86,34 @@ namespace Rationally.Visio.Model
             int i = 0;
             StakeholdersContainer stakeholdersContainer = (StakeholdersContainer)Globals.RationallyAddIn.View.Children.First(c => c is StakeholdersContainer);
             stakeholdersContainer.Children.Where(c => c is StakeholderContainer).ToList().ForEach(c => ((StakeholderContainer)c).SetStakeholderIndex(i++));
+        }
+
+        /// <summary>
+        /// Reduces the current list of alternative states (and their color) to only the "No State" element.
+        /// </summary>
+        public void ResetAlternativeStateColors()
+        {
+            AlternativeStateColors = new Dictionary<string, Color>();
+            //add the default state
+            AlternativeStateColors.Add("No State", Color.DimGray);
+        }
+
+        public IEnumerable<DictionaryEntry> AlternativeStateColorsFromFile
+        {
+            get
+            {
+                if (File.Exists(Constants.StateResourceFile))
+                {
+                    using (ResXResourceReader resxReader = new ResXResourceReader(Constants.StateResourceFile))
+                    {
+                        //FOR EACH KV pair that represents an alternative state + color DO:
+                        foreach (DictionaryEntry entry in resxReader.Cast<DictionaryEntry>().Where(entry => ((string)entry.Key).StartsWith("alternativeState")))
+                        {
+                            yield return entry;
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Rationally.Visio.Forms
+﻿using System.Drawing;
+
+namespace Rationally.Visio.Forms
 {
     partial class AlternativeStatesConfigurator
     {
@@ -110,7 +112,8 @@
             this.addStateButton.TabIndex = 5;
             this.addStateButton.Text = "Add State";
             this.addStateButton.UseVisualStyleBackColor = true;
-            this.addStateButton.Click += new System.EventHandler(this.addStateButton_Click);
+            this.addStateButton.Click += addStateButton_Click;
+
             // 
             // tableLayoutStateContent
             // 
@@ -160,6 +163,7 @@
             this.cancelButton.TabIndex = 5;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_click);
             // 
             // flowLayoutPanel1
             // 

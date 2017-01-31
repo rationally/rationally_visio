@@ -1,9 +1,12 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using log4net;
 using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.RationallyConstants;
+using Color = System.Drawing.Color;
 
 namespace Rationally.Visio.View.Alternatives
 {
@@ -38,27 +41,8 @@ namespace Rationally.Visio.View.Alternatives
 
         public void UpdateBackgroundByState(string state)
         {
-            switch (state.ToLower())  //Currently hardcoded, could be made user setting in the future
-            {
-                case "accepted":
-                    RShape.CellsU["FillForegnd"].Formula = "RGB(0,175,0)";
-                    break;
-                case "rejected":
-                    RShape.CellsU["FillForegnd"].Formula = "RGB(153,12,0)";
-                    break;
-                case "proposed":
-                    RShape.CellsU["FillForegnd"].Formula = "RGB(96,182,215)";
-                    break;
-                case "challenged":
-                    RShape.CellsU["FillForegnd"].Formula = "RGB(255,173,21)";
-                    break;
-                case "discarded":
-                    RShape.CellsU["FillForegnd"].Formula = "RGB(155,155,155)";
-                    break;
-                default:
-                    RShape.CellsU["FillForegnd"].Formula = "RGB(255,255,255)";
-                    break;
-            }
+            Color color = Globals.RationallyAddIn.Model.AlternativeStateColors[state];
+            RShape.CellsU["FillForegnd"].Formula = $"RGB({color.R},{color.G},{color.B})";
         }
 
         private AlternativeStateComponent(Page page) : base(page)
@@ -91,24 +75,25 @@ namespace Rationally.Visio.View.Alternatives
             AddAction("changeState", "", "\"Change state\"", false);
 
             RationallyModel model = Globals.RationallyAddIn.Model;
-            for (int i = 0; i < model.AlternativeStates.Count; i++)
+            List<string> alternativeStates = model.AlternativeStateColors.Keys.ToList();
+            for (int i = 0; i < model.AlternativeStateColors.Keys.Count; i++)
             {
                 string stateName = "State_" + i;
-                if (model.AlternativeStates[i] == currentState)
+                if (alternativeStates[i] == currentState)
                 { 
                     if (RShape.CellExistsU["Actions." + stateName + ".Action", (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                     {
                         RShape.DeleteRow((short)VisSectionIndices.visSectionAction, RShape.CellsRowIndex["Actions." + stateName + ".Action"]);
                     }
                     RShape.AddNamedRow((short)VisSectionIndices.visSectionAction, stateName, (short)VisRowTags.visTagDefault);
-                    RShape.CellsU["Actions." + stateName + ".Action"].Formula = "QUEUEMARKEREVENT(\"change." + model.AlternativeStates[i] + "\")";
+                    RShape.CellsU["Actions." + stateName + ".Action"].Formula = "QUEUEMARKEREVENT(\"change." + alternativeStates[i] + "\")";
                     RShape.CellsU["Actions." + stateName + ".Menu"].Formula = "\"" + currentState + "\"";
                     RShape.CellsU["Actions." + stateName + ".Disabled"].Formula = true.ToString().ToUpper(); //Current state can't be selected again
                     RShape.CellsU["Actions." + stateName + ".FlyoutChild"].Formula = true.ToString().ToUpper();
                 }
                 else
                 {
-                    AddAction(stateName, "QUEUEMARKEREVENT(\"change." + model.AlternativeStates[i] + "\")", "\"" + model.AlternativeStates[i] + "\"", true);
+                    AddAction(stateName, "QUEUEMARKEREVENT(\"change." + alternativeStates[i] + "\")", "\"" + alternativeStates[i] + "\"", true);
                 }
             }
         }

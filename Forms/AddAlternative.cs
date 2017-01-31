@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
@@ -13,7 +14,7 @@ namespace Rationally.Visio.Forms
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
-            alternativeStatus.Items.AddRange(model.AlternativeStates.ToArray());
+            alternativeStatus.Items.AddRange(model.AlternativeStateColors.Keys.ToArray());
             alternativeStatus.SelectedIndex = 0;
         }
 

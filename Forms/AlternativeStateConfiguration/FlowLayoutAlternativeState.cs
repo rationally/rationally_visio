@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Rationally.Visio.Model;
+using Rationally.Visio.RationallyConstants;
 
 namespace Rationally.Visio.Forms.AlternativeStateConfiguration
 {
@@ -15,21 +16,22 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
         private System.Windows.Forms.Button buttonPickStateColor;
         private System.Windows.Forms.Button removesStateButton;
 
-        public string State { get; set; }
+        public string OldState { get; set; }
+        public string NewState => StateTextBox.Text;
         public Color Color { get; set; }
         public int Index { get; set; }
 
-        public FlowLayoutAlternativeState(string state, Color color, int index)
+        public FlowLayoutAlternativeState(int index)
         {
-            State = state;
-            Color = color;
+            OldState = null;
+            Color = Constants.DefaultStateColor;
             Index = index;
             Init();
         }
 
         public FlowLayoutAlternativeState(AlternativeState state, int index)
         {
-            State = state.State;
+            OldState = state.State;
             Color = state.Color;
             Index = index;
             Init();
@@ -53,6 +55,7 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
             Location = new System.Drawing.Point(3, 3);
             Name = "flowLayoutPanel1";
             Size = new System.Drawing.Size(483, 40);
+            Margin = new Padding(0,0,0,5);
             TabIndex = 0;
             // 
             // labelStateTitle
@@ -73,7 +76,7 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
             this.StateTextBox.Name = "textBox1";
             this.StateTextBox.Size = new System.Drawing.Size(194, 20);
             this.StateTextBox.TabIndex = 1;
-            this.StateTextBox.Text = State;
+            this.StateTextBox.Text = OldState ?? Constants.DefaultStateName;
             // 
             // textBoxStateColor
             // 
@@ -89,8 +92,8 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
             // 
             // removesStateButton
             // 
-            this.removesStateButton.Location = new System.Drawing.Point(405, 10);
-            this.removesStateButton.Margin = new System.Windows.Forms.Padding(68, 10, 3, 3);
+            this.removesStateButton.Location = new System.Drawing.Point(475, 10);
+            this.removesStateButton.Margin = new System.Windows.Forms.Padding(38, 10, 3, 3);
             this.removesStateButton.Name = "removesStateButton";
             this.removesStateButton.Size = new System.Drawing.Size(75, 20);
             this.removesStateButton.TabIndex = 3;

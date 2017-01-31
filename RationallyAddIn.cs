@@ -467,7 +467,7 @@ namespace Rationally.Visio
                                 int scopeId = Application.BeginUndoScope("Add alternative");
                                 s.Delete();
                                 AlternativesContainer alternativesContainer = Globals.RationallyAddIn.View.Children.FirstOrDefault(ch => ch is AlternativesContainer) as AlternativesContainer;
-                                alternativesContainer?.AddAlternative("Title", Model.AlternativeStates.FirstOrDefault());
+                                alternativesContainer?.AddAlternative("Title", Model.AlternativeStateColors.Keys.FirstOrDefault());
 
                                 Application.EndUndoScope(scopeId, true);
                             }

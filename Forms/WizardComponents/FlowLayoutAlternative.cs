@@ -52,7 +52,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             //connect to a model resource, if one is present for this row
             Alternative = Globals.RationallyAddIn.Model.Alternatives.Count >= alternativeIndex ? Globals.RationallyAddIn.Model.Alternatives[alternativeIndex - 1] : null;
             TextBoxAlternativeTitle.Text = Alternative != null ? Alternative.Title : "";
-            alternativeStateDropdown.SelectedIndex = Alternative != null ? Globals.RationallyAddIn.Model.AlternativeStates.IndexOf(Alternative.Status) : 0;
+            alternativeStateDropdown.SelectedIndex = Alternative != null ? Globals.RationallyAddIn.Model.AlternativeStateColors.Keys.ToList().IndexOf(Alternative.Status) : 0;
         }
 
         public void UpdateModel()
@@ -121,7 +121,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             // alternativeStateDropdown
             // 
             alternativeStateDropdown.FormattingEnabled = true;
-            alternativeStateDropdown.Items.AddRange(Globals.RationallyAddIn.Model.AlternativeStates.ToArray());
+            alternativeStateDropdown.Items.AddRange(Globals.RationallyAddIn.Model.AlternativeStateColors.Keys.ToArray());
             alternativeStateDropdown.SelectedIndex = 0;
             alternativeStateDropdown.Location = new System.Drawing.Point(466, 6);
             alternativeStateDropdown.Margin = new Padding(3, 6, 3, 3);

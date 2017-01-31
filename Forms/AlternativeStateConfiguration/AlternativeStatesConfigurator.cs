@@ -12,7 +12,20 @@ namespace Rationally.Visio.Forms
 {
     public partial class AlternativeStatesConfigurator : Form
     {
-        public AlternativeStatesConfigurator()
+        private static AlternativeStatesConfigurator instance;
+        public static AlternativeStatesConfigurator Instance
+        {
+            get
+            {
+                if (instance?.IsDisposed ?? true)
+                {
+                    instance = new AlternativeStatesConfigurator();
+                }
+                return instance;
+            }
+        }
+
+        private AlternativeStatesConfigurator()
         {
             InitializeComponent();
         }
@@ -22,6 +35,12 @@ namespace Rationally.Visio.Forms
         private void saveButton_Click(object sender, EventArgs e)
         {
             tableLayoutStateContent.Save();
+            
+        }
+
+        private void CancelButton_click(object sender, EventArgs e)
+        {
+            Dispose();
         }
     }
 }

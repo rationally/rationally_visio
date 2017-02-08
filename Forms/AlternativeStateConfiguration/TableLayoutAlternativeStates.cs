@@ -122,7 +122,14 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
                 using (ResXResourceWriter resx = new ResXResourceWriter(File.Create(Constants.StateResourceFile)))
                 {
                     resx.AddResource("Root", "");
+                    int i = 0;
+                    foreach (KeyValuePair<string, Color> kvp in Globals.RationallyAddIn.Model.DefaultStates)
+                    {
+                        resx.AddResource("alternativeState" + i, new AlternativeState { Color = kvp.Value, State = kvp.Key });
+                        i++;
+                    }
                 }
+                
             }
 
             StateRows = new List<FlowLayoutAlternativeState>();

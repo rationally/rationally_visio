@@ -27,6 +27,9 @@ namespace Rationally.Visio.Model
 
         public List<Stakeholder> Stakeholders { get; } 
         public Dictionary<string, Color> AlternativeStateColors { get; set; }
+
+        public Dictionary<string, Color> DefaultStates { get; } = new Dictionary<string, Color> { {"Accepted", Color.FromArgb(0, 175, 0) }, { "Rejected", Color.FromArgb(153, 12, 0) }, {"Proposed", Color.FromArgb(96, 182, 215) }, {"Challenged", Color.FromArgb(255, 173, 21) },{ "Discarded", Color.FromArgb(155, 155, 155) } };
+
         public string Author { get; set; }
         public string DecisionName { get; set; }
         public string DateString { get; set; }
@@ -107,10 +110,24 @@ namespace Rationally.Visio.Model
                     using (ResXResourceReader resxReader = new ResXResourceReader(Constants.StateResourceFile))
                     {
                         //FOR EACH KV pair that represents an alternative state + color DO:
-                        foreach (DictionaryEntry entry in resxReader.Cast<DictionaryEntry>().Where(entry => ((string)entry.Key).StartsWith("alternativeState")))
+                        foreach (DictionaryEntry entry in resxReader.Cast<DictionaryEntry>().Where(entry => ((string) entry.Key).StartsWith("alternativeState")))
                         {
                             yield return entry;
                         }
+                    }
+                }
+                else
+                {
+                    int i = 0;
+                    foreach (KeyValuePair<string, Color> kvp in DefaultStates)
+                    {
+                        AlternativeState state = new AlternativeState
+                        {
+                            Color = kvp.Value,
+                            State = kvp.Key
+                        };
+                        yield return new DictionaryEntry("alternativeState" + i, state);
+                        i++;
                     }
                 }
             }

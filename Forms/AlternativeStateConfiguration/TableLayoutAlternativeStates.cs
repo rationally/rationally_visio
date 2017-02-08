@@ -28,13 +28,13 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
             // tableLayoutStateContent
             // 
             ColumnCount = 1;
-            ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            Dock = System.Windows.Forms.DockStyle.Fill;
-            Location = new System.Drawing.Point(3, 3);
+            ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            Dock = DockStyle.Fill;
+            Location = new Point(3, 3);
             Name = "tableLayoutStateContent";
             RowCount = 1;
-            RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            Size = new System.Drawing.Size(489, 272);
+            RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            Size = new Size(489, 272);
             TabIndex = 1;
 
             UpdateRows();
@@ -105,8 +105,6 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
                     .Select(alt => ((AlternativeContainer) alt).Children.First(c => c is AlternativeStateComponent))
                     .Cast<AlternativeStateComponent>();
                 toUpdate?.ToList().ForEach(stateComp => stateComp.Repaint());
-
-                Dispose();
             }
             else
             {

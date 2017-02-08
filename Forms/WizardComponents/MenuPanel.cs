@@ -104,7 +104,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void buttonShowAlternatives_Click(object sender, System.EventArgs e)
         {
-            if (((MenuButton)sender).HandleEvent)
+            if ((sender as MenuButton)?.HandleEvent ?? false)
             {
                 ProjectSetupWizard.Instance.CurrentPanel = ProjectSetupWizard.Instance.TableLayoutMainContentAlternatives;
                 ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
@@ -122,7 +122,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void ButtonShowGeneralClick(object sender, System.EventArgs e)
         {
-            if (((MenuButton)sender).HandleEvent)
+            if ((sender as MenuButton)?.HandleEvent ?? false)
             {
                 ProjectSetupWizard.Instance.SetGeneralPanel();
             }
@@ -130,7 +130,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void buttonShowForces_Click(object sender, System.EventArgs e)
         {
-            if (((MenuButton)sender).HandleEvent)
+            if ((sender as MenuButton)?.HandleEvent ?? false)
             {
                 ProjectSetupWizard.Instance.CurrentPanel = ProjectSetupWizard.Instance.TableLayoutMainContentForces;
                 ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
@@ -148,7 +148,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void buttonShowDocuments_Click(object sender, System.EventArgs e)
         {
-            if (((MenuButton)sender).HandleEvent)
+            if ((sender as MenuButton)?.HandleEvent ?? false)
             {
                 ProjectSetupWizard.Instance.CurrentPanel = ProjectSetupWizard.Instance.TableLayoutMainContentDocuments;
                 ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
@@ -167,7 +167,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         private void buttonShowStakeholders_Click(object sender, System.EventArgs e)
         {
-            if (((MenuButton)sender).HandleEvent)
+            if ((sender as MenuButton)?.HandleEvent ?? false)
             {
                 ProjectSetupWizard.Instance.CurrentPanel = ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders;
                 ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();

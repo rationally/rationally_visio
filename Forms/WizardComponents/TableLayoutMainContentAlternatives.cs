@@ -15,20 +15,9 @@ namespace Rationally.Visio.Forms.WizardComponents
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public readonly List<FlowLayoutAlternative> AlternativeRows = new List<FlowLayoutAlternative>();
 
-        public TableLayoutMainContentAlternatives() 
+        public TableLayoutMainContentAlternatives()
         {
-
-            RowCount = RationallyConstants.Constants.SupportedAmountOfAlternatives + 1;
-
-            for (int i = 0; i < RationallyConstants.Constants.SupportedAmountOfAlternatives; i++)
-            {
-                FlowLayoutAlternative alternativeRow = new FlowLayoutAlternative(i + 1);
-                AlternativeRows.Add(alternativeRow);
-                RowStyles.Add(new RowStyle(SizeType.Percent, 10F));//TODO what if rowCount > 9
-                Controls.Add(alternativeRow, 0, i);
-            }
-
-            RowStyles.Add(new RowStyle(SizeType.Percent, 100 - (RationallyConstants.Constants.SupportedAmountOfAlternatives * 10)));
+            
 
 
             Init();
@@ -50,10 +39,32 @@ namespace Rationally.Visio.Forms.WizardComponents
             
             Size = new Size(760, 482);
             TabIndex = 0;
+
+            UpdateRows();
+        }
+
+        public void UpdateRows()
+        {
+            Controls.Clear();
+            RowStyles.Clear();
+
+            int numberOfRows = Math.Max(RationallyConstants.Constants.SupportedAmountOfAlternatives, Globals.RationallyAddIn.Model.Alternatives.Count);
+            RowCount = numberOfRows + 1;
+
+            for (int i = 0; i < numberOfRows; i++)
+            {
+                FlowLayoutAlternative alternativeRow = new FlowLayoutAlternative(i + 1);
+                AlternativeRows.Add(alternativeRow);
+                RowStyles.Add(new RowStyle(SizeType.Percent, 10F));//TODO what if rowCount > 9
+                Controls.Add(alternativeRow, 0, i);
+            }
+
+            RowStyles.Add(new RowStyle(SizeType.Percent, 100 - (numberOfRows * 10)));
         }
 
         public void InitData()
         {
+            UpdateRows();
             AlternativeRows.ForEach(a => a.UpdateData());
 
             Log.Debug("Initialized alternatives wizard page.");

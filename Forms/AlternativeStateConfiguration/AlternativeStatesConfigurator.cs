@@ -35,12 +35,9 @@ namespace Rationally.Visio.Forms
         private void saveButton_Click(object sender, EventArgs e)
         {
             tableLayoutStateContent.Save();
-            
+            Close();
         }
 
-        private void CancelButton_click(object sender, EventArgs e)
-        {
-            Dispose();
-        }
+        private void CancelButton_click(object sender, EventArgs e) => Close();
     }
 }

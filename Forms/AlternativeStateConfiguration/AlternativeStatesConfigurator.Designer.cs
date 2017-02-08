@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+using Rationally.Visio.Forms.AlternativeStateConfiguration;
 
 namespace Rationally.Visio.Forms
 {
@@ -7,7 +9,7 @@ namespace Rationally.Visio.Forms
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -191,16 +193,16 @@ namespace Rationally.Visio.Forms
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutAllContent;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutStateList;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutActionButtons;
-        private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutMainContent;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutStateActionButtons;
-        private System.Windows.Forms.Button addStateButton;
-        private Rationally.Visio.Forms.AlternativeStateConfiguration.TableLayoutAlternativeStates tableLayoutStateContent;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private TableLayoutPanel tableLayoutAllContent;
+        private TableLayoutPanel tableLayoutStateList;
+        private TableLayoutPanel tableLayoutActionButtons;
+        private Button saveButton;
+        private Button cancelButton;
+        private TableLayoutPanel tableLayoutMainContent;
+        private FlowLayoutPanel flowLayoutStateActionButtons;
+        private Button addStateButton;
+        private TableLayoutAlternativeStates tableLayoutStateContent;
+        private FlowLayoutPanel flowLayoutPanel1;
         
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
@@ -11,14 +8,14 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
 {
     class FlowLayoutAlternativeState : FlowLayoutPanel
     {
-        private System.Windows.Forms.Label labelStateTitle;
-        public System.Windows.Forms.TextBox StateTextBox;
-        private System.Windows.Forms.Button buttonPickStateColor;
-        private System.Windows.Forms.Button removesStateButton;
+        private Label labelStateTitle;
+        public TextBox StateTextBox;
+        private Button buttonPickStateColor;
+        private Button removesStateButton;
 
-        public string OldState { get; set; }
+        public string OldState { get;  }
         public string NewState => StateTextBox.Text;
-        public Color Color { get; set; }
+        public Color Color { get; private set; }
         public int Index { get; set; }
 
         public FlowLayoutAlternativeState(int index)
@@ -39,67 +36,67 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
 
         private void Init()
         {
-            this.labelStateTitle = new System.Windows.Forms.Label();
-            this.StateTextBox = new System.Windows.Forms.TextBox();
-            this.buttonPickStateColor = new System.Windows.Forms.Button();
-            this.removesStateButton = new System.Windows.Forms.Button();
+            labelStateTitle = new Label();
+            StateTextBox = new TextBox();
+            buttonPickStateColor = new Button();
+            removesStateButton = new Button();
 
             // 
             // flowLayoutPanel1
             // 
-            Controls.Add(this.labelStateTitle);
-            Controls.Add(this.StateTextBox);
-            Controls.Add(this.buttonPickStateColor);
-            Controls.Add(this.removesStateButton);
-            Dock = System.Windows.Forms.DockStyle.Top;
-            Location = new System.Drawing.Point(3, 3);
+            Controls.Add(labelStateTitle);
+            Controls.Add(StateTextBox);
+            Controls.Add(buttonPickStateColor);
+            Controls.Add(removesStateButton);
+            Dock = DockStyle.Top;
+            Location = new Point(3, 3);
             Name = "flowLayoutPanel1";
-            Size = new System.Drawing.Size(483, 40);
+            Size = new Size(483, 40);
             Margin = new Padding(0,0,0,5);
             TabIndex = 0;
             // 
             // labelStateTitle
             // 
-            this.labelStateTitle.AllowDrop = true;
-            this.labelStateTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelStateTitle.Location = new System.Drawing.Point(3, 14);
-            this.labelStateTitle.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
-            this.labelStateTitle.Name = "labelStateTitle";
-            this.labelStateTitle.Size = new System.Drawing.Size(35, 14);
-            this.labelStateTitle.TabIndex = 0;
-            this.labelStateTitle.Text = "State:";
+            labelStateTitle.AllowDrop = true;
+            labelStateTitle.Anchor = AnchorStyles.Left;
+            labelStateTitle.Location = new Point(3, 14);
+            labelStateTitle.Margin = new Padding(3, 10, 3, 0);
+            labelStateTitle.Name = "labelStateTitle";
+            labelStateTitle.Size = new Size(35, 14);
+            labelStateTitle.TabIndex = 0;
+            labelStateTitle.Text = "State:";
             // 
             // textBox1
             // 
-            this.StateTextBox.Location = new System.Drawing.Point(44, 10);
-            this.StateTextBox.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.StateTextBox.Name = "textBox1";
-            this.StateTextBox.Size = new System.Drawing.Size(194, 20);
-            this.StateTextBox.TabIndex = 1;
-            this.StateTextBox.Text = OldState ?? Constants.DefaultStateName;
+            StateTextBox.Location = new Point(44, 10);
+            StateTextBox.Margin = new Padding(3, 10, 3, 3);
+            StateTextBox.Name = "textBox1";
+            StateTextBox.Size = new Size(194, 20);
+            StateTextBox.TabIndex = 1;
+            StateTextBox.Text = OldState ?? Constants.DefaultStateName;
             // 
             // textBoxStateColor
             // 
-            this.buttonPickStateColor.BackColor = Color;
-            this.buttonPickStateColor.Location = new System.Drawing.Point(244, 10);
-            this.buttonPickStateColor.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.buttonPickStateColor.Name = "buttonStateColor";
-            this.buttonPickStateColor.Size = new System.Drawing.Size(90, 20);
-            this.buttonPickStateColor.TabIndex = 2;
-            this.buttonPickStateColor.Text = "Pick Color";
-            this.buttonPickStateColor.Click += ButtonPickStateColorClick;
+            buttonPickStateColor.BackColor = Color;
+            buttonPickStateColor.Location = new Point(244, 10);
+            buttonPickStateColor.Margin = new Padding(3, 10, 3, 3);
+            buttonPickStateColor.Name = "buttonStateColor";
+            buttonPickStateColor.Size = new Size(90, 20);
+            buttonPickStateColor.TabIndex = 2;
+            buttonPickStateColor.Text = "Pick Color";
+            buttonPickStateColor.Click += ButtonPickStateColorClick;
             
             // 
             // removesStateButton
             // 
-            this.removesStateButton.Location = new System.Drawing.Point(475, 10);
-            this.removesStateButton.Margin = new System.Windows.Forms.Padding(38, 10, 3, 3);
-            this.removesStateButton.Name = "removesStateButton";
-            this.removesStateButton.Size = new System.Drawing.Size(75, 20);
-            this.removesStateButton.TabIndex = 3;
-            this.removesStateButton.Text = "Remove";
-            this.removesStateButton.UseVisualStyleBackColor = true;
-            this.removesStateButton.Click += RemovesStateButton_Click;
+            removesStateButton.Location = new Point(475, 10);
+            removesStateButton.Margin = new Padding(38, 10, 3, 3);
+            removesStateButton.Name = "removesStateButton";
+            removesStateButton.Size = new Size(75, 20);
+            removesStateButton.TabIndex = 3;
+            removesStateButton.Text = "Remove";
+            removesStateButton.UseVisualStyleBackColor = true;
+            removesStateButton.Click += RemovesStateButton_Click;
         }
 
         private void RemovesStateButton_Click(object sender, EventArgs e)

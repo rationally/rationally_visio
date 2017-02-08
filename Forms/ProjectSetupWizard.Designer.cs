@@ -1,7 +1,5 @@
-﻿using System;
-using System.Drawing;
+﻿using System.ComponentModel;
 using System.Windows.Forms;
-using Rationally.Visio.EventHandlers.ClickEventHandlers;
 using Rationally.Visio.Forms.WizardComponents;
 
 namespace Rationally.Visio.Forms
@@ -11,7 +9,7 @@ namespace Rationally.Visio.Forms
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -151,25 +149,25 @@ namespace Rationally.Visio.Forms
         #endregion
 
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutForEverything;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutLeftColumn;
-        public System.Windows.Forms.TableLayoutPanel tableLayoutRightColumn;
+        private TableLayoutPanel tableLayoutForEverything;
+        private TableLayoutPanel tableLayoutLeftColumn;
+        public TableLayoutPanel tableLayoutRightColumn;
         public TableLayoutMainContentGeneral tableLayoutMainContentGeneral;//here
         public TableLayoutMainContentAlternatives TableLayoutMainContentAlternatives = new TableLayoutMainContentAlternatives();
         public TableLayoutMainContentForces TableLayoutMainContentForces = new TableLayoutMainContentForces();
         public TableLayoutMainContentDocuments TableLayoutMainContentDocuments = new TableLayoutMainContentDocuments();
         public TableLayoutMainContentStakeholders TableLayoutMainContentStakeholders = new TableLayoutMainContentStakeholders();
-        public System.Windows.Forms.FlowLayoutPanel FlowLayoutBottomButtons;
+        public FlowLayoutPanel FlowLayoutBottomButtons;
         
         
        
         
-        private System.Windows.Forms.TableLayoutPanel tableLayoutLeftLogo;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label labelBottomLeftText;
+        private TableLayoutPanel tableLayoutLeftLogo;
+        private PictureBox pictureBox1;
+        private Label labelBottomLeftText;
         private MenuPanel tableLayoutLeftMenu;
         public AntiAliasedButton CreateButton;
-        private System.Windows.Forms.LinkLabel UpdateLink;    
+        private LinkLabel UpdateLink;    
         
     }
 }

@@ -164,10 +164,7 @@ namespace Rationally.Visio.View
             }
         }
 
-        public void AddUserRow(string fieldName)
-        {
-            RShape.AddNamedRow((short)VisSectionIndices.visSectionUser, fieldName, (short)VisRowTags.visTagDefault);
-        }
+        public void AddUserRow(string fieldName) => RShape.AddNamedRow((short)VisSectionIndices.visSectionUser, fieldName, (short)VisRowTags.visTagDefault);
 
         //content related
         public string Text
@@ -275,10 +272,7 @@ namespace Rationally.Visio.View
         /// Updates shapesheet of the stored IVShape. Character.Style holds information about the font style (bold, italic...) in a bitwise manner.
         /// </summary>
         /// <param name="bold">Whether the font should be bold or not.</param>
-        public void ToggleBoldFont(bool bold)
-        {
-            RShape.Characters.CharProps[(short)VisCellIndices.visCharacterStyle] = (short)(RShape.Characters.CharPropsRow[(short)VisCellIndices.visCharacterStyle] | (short)(bold ? 17 : 0));
-        }
+        public void ToggleBoldFont(bool bold) => RShape.Characters.CharProps[(short)VisCellIndices.visCharacterStyle] = (short)(RShape.Characters.CharPropsRow[(short)VisCellIndices.visCharacterStyle] | (short)(bold ? 17 : 0));
 
         //methods
 
@@ -324,15 +318,9 @@ namespace Rationally.Visio.View
         /// <summary>
         /// Takes all the shapes in BackUpShapes and adds them to this container.
         /// </summary>
-        public void RestoreChildren()
-        {
-            backUpShapes.ForEach(s => RShape.ContainerProperties.AddMember(s, VisMemberAddOptions.visMemberAddDoNotExpand));
-        }
+        public void RestoreChildren() => backUpShapes.ForEach(s => RShape.ContainerProperties.AddMember(s, VisMemberAddOptions.visMemberAddDoNotExpand));
 
-        public virtual bool ExistsInTree(Shape s)
-        {
-            return RShape.Equals(s);
-        }
+        public virtual bool ExistsInTree(Shape s) => RShape.Equals(s);
 
         public virtual void AddToTree(Shape s, bool allowAddOfSubpart)
         {
@@ -344,14 +332,8 @@ namespace Rationally.Visio.View
         /// </summary>
         /// <param name="s">Shape to match RShape against.</param>
         /// <returns>the component, or null.</returns>
-        public virtual RationallyComponent GetComponentByShape(Shape s)
-        {
-            return RShape.Equals(s) ? this : null;
-        }
+        public virtual RationallyComponent GetComponentByShape(Shape s) => RShape.Equals(s) ? this : null;
 
-        public virtual void RemoveDeleteLock(bool recursive)
-        {
-            LockDelete = false;
-        }
+        public virtual void RemoveDeleteLock(bool recursive) => LockDelete = false;
     }
 }

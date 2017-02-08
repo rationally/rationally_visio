@@ -18,9 +18,6 @@ namespace Rationally.Visio.View.Documents
             DocumentIndex = documentIndex;
         }
 
-        public override bool ExistsInTree(Shape s)
-        {
-            return false;
-        }
+        public override bool ExistsInTree(Shape s) => false;
     }
 }

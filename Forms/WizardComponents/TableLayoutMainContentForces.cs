@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
-using Microsoft.VisualBasic.Logging;
 using Rationally.Visio.EventHandlers.WizardPageHandlers;
 using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
@@ -56,7 +55,7 @@ namespace Rationally.Visio.Forms.WizardComponents
                 RowsDefaultCellStyle = {BackColor = Color.FromArgb(230, 230, 230)},
                 GridColor = Color.Gray,
                 EnableHeadersVisualStyles = false,
-                ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised,
+                ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised
             };
 
 
@@ -111,11 +110,11 @@ namespace Rationally.Visio.Forms.WizardComponents
             foreach (Force force in Globals.RationallyAddIn.Model.Forces)
             {
                 DataGridViewRow newRow = (DataGridViewRow)ForcesDataGrid.RowTemplate.Clone();
-                newRow.Cells.Add(new DataGridViewTextBoxCell() {Value = force.Concern});
-                newRow.Cells.Add(new DataGridViewTextBoxCell() { Value = force.Description });
+                newRow.Cells.Add(new DataGridViewTextBoxCell {Value = force.Concern});
+                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = force.Description });
                 foreach (Alternative alternative in Globals.RationallyAddIn.Model.Alternatives)
                 {
-                    newRow.Cells.Add(new DataGridViewTextBoxCell() {Value = force.ForceValueDictionary[alternative.UniqueIdentifier]});
+                    newRow.Cells.Add(new DataGridViewTextBoxCell {Value = force.ForceValueDictionary[alternative.UniqueIdentifier]});
                 }
                 ForcesDataGrid.Rows.Add(newRow);
             }

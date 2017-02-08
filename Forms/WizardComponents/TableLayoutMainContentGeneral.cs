@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
-using Microsoft.VisualBasic.Logging;
 using Rationally.Visio.EventHandlers.WizardPageHandlers;
 
 namespace Rationally.Visio.Forms.WizardComponents

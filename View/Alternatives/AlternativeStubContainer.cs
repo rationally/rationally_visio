@@ -17,9 +17,6 @@ namespace Rationally.Visio.View.Alternatives
             AlternativeIndex = alternativeIndex;
         }
 
-        public override bool ExistsInTree(Shape s)
-        {
-            return false;
-        }
+        public override bool ExistsInTree(Shape s) => false;
     }
 }

@@ -18,9 +18,6 @@ namespace Rationally.Visio.View.Forces
             ForceIndex = forceIndex;
         }
 
-        public override bool ExistsInTree(Shape s)
-        {
-            return false;
-        }
+        public override bool ExistsInTree(Shape s) => false;
     }
 }

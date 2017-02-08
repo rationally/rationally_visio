@@ -1,13 +1,14 @@
-﻿using log4net;
-using Rationally.Visio.Model;
+﻿using System.Reflection;
+using log4net;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Model;
 
 namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
     internal class DeleteInformationBoxEventHandler : IDeleteEventHandler
     {
 
-        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public void Execute(RationallyModel model, Shape changedShape)
         {

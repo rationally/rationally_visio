@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using log4net;
-using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Model;
 
 namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
     internal static class DeleteEventHandlerRegistry
     {
         private static  Dictionary<string, List<IDeleteEventHandler>> registry;
-        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public static void Register(string eventKey, IDeleteEventHandler eventHandler)
         {

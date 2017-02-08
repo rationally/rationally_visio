@@ -4,25 +4,24 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Windows.Forms;
+using log4net;
+using log4net.Config;
+using Microsoft.Office.Interop.Visio;
+using Newtonsoft.Json.Linq;
 using Rationally.Visio.EventHandlers;
 using Rationally.Visio.EventHandlers.DeleteEventHandlers;
 using Rationally.Visio.EventHandlers.MarkerEventHandlers;
 using Rationally.Visio.EventHandlers.QueryDeleteEventHandlers;
 using Rationally.Visio.EventHandlers.TextChangedEventHandlers;
+using Rationally.Visio.Forms;
 using Rationally.Visio.Model;
+using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Documents;
 using Rationally.Visio.View.Forces;
-using Microsoft.Office.Interop.Visio;
-using Application = Microsoft.Office.Interop.Visio.Application;
-using Shape = Microsoft.Office.Interop.Visio.Shape;
-using log4net;
-using log4net.Util;
-using Newtonsoft.Json.Linq;
-using Rationally.Visio.RationallyConstants;
-using Rationally.Visio.Forms;
 using Rationally.Visio.View.Stakeholders;
+using Application = Microsoft.Office.Interop.Visio.Application;
 
 //[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 // ReSharper disable ClassNeverInstantiated.Global
@@ -56,7 +55,7 @@ namespace Rationally.Visio
         private void RationallyAddIn_Startup(object sender, EventArgs e)
         {
             //init for logger
-            log4net.Config.XmlConfigurator.Configure();
+            XmlConfigurator.Configure();
             Log.Info("Rationally started!");
             Model = new RationallyModel();
             View = new RationallyView(Application.ActivePage);

@@ -3,8 +3,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using log4net;
-using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
 using Color = System.Drawing.Color;
 

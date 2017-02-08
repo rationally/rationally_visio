@@ -2,8 +2,8 @@
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
-using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Model;
 using Rationally.Visio.View.Documents;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers

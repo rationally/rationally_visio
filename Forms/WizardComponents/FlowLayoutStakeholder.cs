@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Rationally.Visio.Model;
-using System.Linq;
-using Rationally.Visio.View.Documents;
 using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.Forms.WizardComponents
@@ -28,7 +27,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             Dock = DockStyle.Top;
             //this.Anchor = AnchorStyles.Left;
             Location = new Point(3, 3);
-            Name = "flowLayoutPanelStakeholder" + this.StakeholderIndex;
+            Name = "flowLayoutPanelStakeholder" + StakeholderIndex;
             Size = new Size(714, 84);
             TabIndex = 0;
 

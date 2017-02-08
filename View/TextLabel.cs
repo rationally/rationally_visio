@@ -4,7 +4,9 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using log4net;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.RationallyConstants;
 using Font = System.Drawing.Font;
+
 // ReSharper disable RedundantCast
 // ReSharper disable ArrangeRedundantParentheses
 
@@ -80,7 +82,7 @@ namespace Rationally.Visio.View
             string text = RShape.Text.Replace("\n","");
             characterHeight = (1.0 / 72.0) * (double)size;
             
-            contentTextWidth = GetWidthOfString(text) + (8*RationallyConstants.Constants.WidthOfOnePoint);// / PixelsPerInch;
+            contentTextWidth = GetWidthOfString(text) + (8*Constants.WidthOfOnePoint);// / PixelsPerInch;
             characterWidth = contentTextWidth/text.Length;
             //sizing
             if (contentTextWidth > Width)

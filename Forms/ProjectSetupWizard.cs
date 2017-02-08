@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-using System.Threading;
 using System.Windows.Forms;
 using log4net;
-using Microsoft.Office.Core;
 using Rationally.Visio.Enums;
-using Rationally.Visio.RationallyConstants;
-using Rationally.Visio.EventHandlers.WizardPageHandlers;
 using Rationally.Visio.Forms.WizardComponents;
+using Rationally.Visio.RationallyConstants;
 
 namespace Rationally.Visio.Forms
 {
@@ -74,7 +71,7 @@ namespace Rationally.Visio.Forms
                 TableLayoutMainContentAlternatives,
                 TableLayoutMainContentForces,
                 TableLayoutMainContentDocuments,
-                TableLayoutMainContentStakeholders,
+                TableLayoutMainContentStakeholders
             };
             StartPosition = FormStartPosition.CenterScreen;
             Log.Debug("Setting AcceptButton as CreateButton with text:" + CreateButton.Text);

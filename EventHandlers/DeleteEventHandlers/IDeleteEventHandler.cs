@@ -1,5 +1,5 @@
-﻿using Rationally.Visio.Model;
-using Microsoft.Office.Interop.Visio;
+﻿using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Model;
 
 namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {

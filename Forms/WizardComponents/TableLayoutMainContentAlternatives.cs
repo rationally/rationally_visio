@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using log4net;
 using Rationally.Visio.EventHandlers.WizardPageHandlers;
+using Rationally.Visio.RationallyConstants;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
@@ -48,7 +49,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             Controls.Clear();
             RowStyles.Clear();
 
-            int numberOfRows = Math.Max(RationallyConstants.Constants.SupportedAmountOfAlternatives, Globals.RationallyAddIn.Model.Alternatives.Count);
+            int numberOfRows = Math.Max(Constants.SupportedAmountOfAlternatives, Globals.RationallyAddIn.Model.Alternatives.Count);
             RowCount = numberOfRows + 1;
 
             for (int i = 0; i < numberOfRows; i++)

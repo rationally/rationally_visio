@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using log4net;
-using Rationally.Visio.View;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.View;
 using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers

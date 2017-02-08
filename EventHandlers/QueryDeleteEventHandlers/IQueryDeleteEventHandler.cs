@@ -1,5 +1,5 @@
-﻿using Rationally.Visio.View;
-using Microsoft.Office.Interop.Visio;
+﻿using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.View;
 
 namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {

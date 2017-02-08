@@ -1,9 +1,10 @@
 ﻿using System.Linq;
+using System.Reflection;
 using log4net;
+using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Alternatives;
-using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
@@ -11,7 +12,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
     internal class DeleteAlternativeEventHandler : IDeleteEventHandler
     {
         private const string DeleteUndoScope = "Delete alternative";
-        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public void Execute(RationallyModel model, Shape changedShape)
         {

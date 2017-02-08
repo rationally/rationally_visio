@@ -2,11 +2,10 @@
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
+using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Documents;
 using Rationally.Visio.View.Forces;
-using Microsoft.Office.Interop.Visio;
-using Rationally.Visio.EventHandlers;
 using Rationally.Visio.View.Information;
 using Rationally.Visio.View.Stakeholders;
 
@@ -132,9 +131,6 @@ namespace Rationally.Visio.View
             }
         }
 
-        public override RationallyComponent GetComponentByShape(Shape s)
-        {
-            return Children.FirstOrDefault(c => c.GetComponentByShape(s) != null)?.GetComponentByShape(s);
-        }
+        public override RationallyComponent GetComponentByShape(Shape s) => Children.FirstOrDefault(c => c.GetComponentByShape(s) != null)?.GetComponentByShape(s);
     }
 }

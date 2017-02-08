@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -102,7 +103,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             highlightedButton.Highlight();
         }
 
-        private void buttonShowAlternatives_Click(object sender, System.EventArgs e)
+        private void buttonShowAlternatives_Click(object sender, EventArgs e)
         {
             if ((sender as MenuButton)?.HandleEvent ?? false)
             {
@@ -120,7 +121,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             }
         }
 
-        private void ButtonShowGeneralClick(object sender, System.EventArgs e)
+        private void ButtonShowGeneralClick(object sender, EventArgs e)
         {
             if ((sender as MenuButton)?.HandleEvent ?? false)
             {
@@ -128,7 +129,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             }
         }
 
-        private void buttonShowForces_Click(object sender, System.EventArgs e)
+        private void buttonShowForces_Click(object sender, EventArgs e)
         {
             if ((sender as MenuButton)?.HandleEvent ?? false)
             {
@@ -146,7 +147,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             }
         }
 
-        private void buttonShowDocuments_Click(object sender, System.EventArgs e)
+        private void buttonShowDocuments_Click(object sender, EventArgs e)
         {
             if ((sender as MenuButton)?.HandleEvent ?? false)
             {
@@ -165,7 +166,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             }
         }
 
-        private void buttonShowStakeholders_Click(object sender, System.EventArgs e)
+        private void buttonShowStakeholders_Click(object sender, EventArgs e)
         {
             if ((sender as MenuButton)?.HandleEvent ?? false)
             {

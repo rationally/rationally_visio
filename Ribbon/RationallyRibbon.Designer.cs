@@ -1,11 +1,14 @@
-﻿namespace Rationally.Visio
+﻿using System.ComponentModel;
+using Microsoft.Office.Tools.Ribbon;
+
+namespace Rationally.Visio
 {
-    partial class RationallyRibbon : Microsoft.Office.Tools.Ribbon.RibbonBase
+    partial class RationallyRibbon : RibbonBase
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         public RationallyRibbon()
             : base(Globals.Factory.GetRibbonFactory())
@@ -112,12 +115,12 @@
 
         #endregion
 
-        internal Microsoft.Office.Tools.Ribbon.RibbonTab rationally_tab;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton wizardButton;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton settingsButton;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton alternativeStatesOptionsButton;
+        internal RibbonTab rationally_tab;
+        internal RibbonGroup group1;
+        internal RibbonButton wizardButton;
+        internal RibbonButton settingsButton;
+        internal RibbonGroup group2;
+        internal RibbonButton alternativeStatesOptionsButton;
     }
 
     partial class ThisRibbonCollection

@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using log4net;
+using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Forces;
-using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 {

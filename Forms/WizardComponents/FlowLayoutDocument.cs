@@ -22,12 +22,12 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         public FlowLayoutDocument(int documentIndex)
         {
-            this.DocumentIndex = documentIndex;
+            DocumentIndex = documentIndex;
 
             Dock = DockStyle.Top;
             //this.Anchor = AnchorStyles.Left;
             Location = new Point(3, 3);
-            Name = "flowLayoutPanelDocument" + this.DocumentIndex;
+            Name = "flowLayoutPanelDocument" + DocumentIndex;
             Size = new Size(714, 84);
             TabIndex = 0;
 

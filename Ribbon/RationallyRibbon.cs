@@ -3,8 +3,8 @@ using System.Windows.Forms;
 using log4net;
 using Microsoft.Office.Tools.Ribbon;
 using Rationally.Visio.Enums;
-using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.Forms;
+using Rationally.Visio.RationallyConstants;
 
 namespace Rationally.Visio
 {

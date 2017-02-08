@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using log4net;
 using Rationally.Visio.Forms;
 using Rationally.Visio.Forms.WizardComponents;
 using Rationally.Visio.Model;
 using Rationally.Visio.View.Stakeholders;
-using static System.String;
 
 namespace Rationally.Visio.EventHandlers.WizardPageHandlers
 {

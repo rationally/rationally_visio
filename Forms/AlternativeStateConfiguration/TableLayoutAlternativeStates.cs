@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Resources;
-using System.Text;
 using System.Windows.Forms;
 using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;

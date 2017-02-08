@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
-using Microsoft.VisualBasic.Logging;
 using Rationally.Visio.EventHandlers.ClickEventHandlers;
 using Rationally.Visio.Model;
 using Rationally.Visio.View.Alternatives;
@@ -32,9 +32,9 @@ namespace Rationally.Visio.Forms.WizardComponents
             // 
             
             Dock = DockStyle.Fill;
-            Location = new System.Drawing.Point(3, 3);
+            Location = new Point(3, 3);
             Name = "flowLayoutPanelAlternative"+this.alternativeIndex;
-            Size = new System.Drawing.Size(754, 42);
+            Size = new Size(754, 42);
             TabIndex = 0;
 
             alternativeIndexLabel = new AntiAliasedLabel();
@@ -82,39 +82,39 @@ namespace Rationally.Visio.Forms.WizardComponents
             // alternativeTitleLabel
             // 
             alternativeIndexLabel.AutoSize = true;
-            alternativeIndexLabel.Location = new System.Drawing.Point(3, 10);
+            alternativeIndexLabel.Location = new Point(3, 10);
             alternativeIndexLabel.Margin = new Padding(3, 10, 3, 0);
             alternativeIndexLabel.Name = "alternativeIndexLabel";
-            alternativeIndexLabel.Size = new System.Drawing.Size(10, 19);
+            alternativeIndexLabel.Size = new Size(10, 19);
             alternativeIndexLabel.TabIndex = 0;
             alternativeIndexLabel.Text = alternativeIndex+":";
             // 
             // alternativeTitleLabel
             // 
             alternativeTitleLabel.AutoSize = true;
-            alternativeTitleLabel.Location = new System.Drawing.Point(13, 10);
+            alternativeTitleLabel.Location = new Point(13, 10);
             alternativeTitleLabel.Margin = new Padding(3, 10, 3, 0);
             alternativeTitleLabel.Name = "alternativeTitleLabel";
-            alternativeTitleLabel.Size = new System.Drawing.Size(42, 19);
+            alternativeTitleLabel.Size = new Size(42, 19);
             alternativeTitleLabel.TabIndex = 1;
             alternativeTitleLabel.Text = "Title:";
             // 
             // textBoxAlternativeTitle
             // 
-            TextBoxAlternativeTitle.Location = new System.Drawing.Point(61, 6);
+            TextBoxAlternativeTitle.Location = new Point(61, 6);
             TextBoxAlternativeTitle.Margin = new Padding(3, 6, 3, 3);
             TextBoxAlternativeTitle.Name = "textBoxAlternativeTitle";
-            TextBoxAlternativeTitle.Size = new System.Drawing.Size(300, 27);
+            TextBoxAlternativeTitle.Size = new Size(300, 27);
             TextBoxAlternativeTitle.TabIndex = 2;
             
             // 
             // alternativeStateLabel
             // 
             alternativeStateLabel.AutoSize = true;
-            alternativeStateLabel.Location = new System.Drawing.Point(414, 10);
+            alternativeStateLabel.Location = new Point(414, 10);
             alternativeStateLabel.Margin = new Padding(50, 10, 3, 0);
             alternativeStateLabel.Name = "alternativeStateLabel";
-            alternativeStateLabel.Size = new System.Drawing.Size(46, 19);
+            alternativeStateLabel.Size = new Size(46, 19);
             alternativeStateLabel.TabIndex = 3;
             alternativeStateLabel.Text = "State:";
             // 
@@ -123,10 +123,10 @@ namespace Rationally.Visio.Forms.WizardComponents
             alternativeStateDropdown.FormattingEnabled = true;
             alternativeStateDropdown.Items.AddRange(Globals.RationallyAddIn.Model.AlternativeStateColors.Keys.ToArray());
             alternativeStateDropdown.SelectedIndex = 0;
-            alternativeStateDropdown.Location = new System.Drawing.Point(466, 6);
+            alternativeStateDropdown.Location = new Point(466, 6);
             alternativeStateDropdown.Margin = new Padding(3, 6, 3, 3);
             alternativeStateDropdown.Name = "alternativeStateDropdown";
-            alternativeStateDropdown.Size = new System.Drawing.Size(200, 27);
+            alternativeStateDropdown.Size = new Size(200, 27);
             alternativeStateDropdown.TabIndex = 4;
 
 

@@ -191,13 +191,13 @@ namespace Rationally.Visio
         {
         }
 
-        private static Rationally.Visio.RationallyAddIn rationallyAddIn;
+        private static RationallyAddIn rationallyAddIn;
 
         private static Factory _factory;
 
         private static ThisRibbonCollection _ThisRibbonCollection;
 
-        internal static Rationally.Visio.RationallyAddIn RationallyAddIn
+        internal static RationallyAddIn RationallyAddIn
         {
             get
             {

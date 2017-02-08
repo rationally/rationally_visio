@@ -6,8 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Resources;
 using log4net;
-using Rationally.Visio.Forms;
-using Rationally.Visio.Forms.AlternativeStateConfiguration;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Documents;
@@ -94,12 +92,7 @@ namespace Rationally.Visio.Model
         /// <summary>
         /// Reduces the current list of alternative states (and their color) to only the "No State" element.
         /// </summary>
-        public void ResetAlternativeStateColors()
-        {
-            AlternativeStateColors = new Dictionary<string, Color>();
-            //add the default state
-            AlternativeStateColors.Add("No State", Color.DimGray);
-        }
+        public void ResetAlternativeStateColors() => AlternativeStateColors = new Dictionary<string, Color> {{"No State", Color.DimGray}};
 
         public IEnumerable<DictionaryEntry> AlternativeStateColorsFromFile
         {
@@ -119,13 +112,12 @@ namespace Rationally.Visio.Model
                 else
                 {
                     int i = 0;
-                    foreach (KeyValuePair<string, Color> kvp in DefaultStates)
+                    foreach (AlternativeState state in DefaultStates.Select(kvp => new AlternativeState
                     {
-                        AlternativeState state = new AlternativeState
-                        {
-                            Color = kvp.Value,
-                            State = kvp.Key
-                        };
+                        Color = kvp.Value,
+                        State = kvp.Key
+                    }))
+                    {
                         yield return new DictionaryEntry("alternativeState" + i, state);
                         i++;
                     }

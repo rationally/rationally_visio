@@ -1,11 +1,14 @@
-﻿namespace Rationally.Visio.Forms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Rationally.Visio.Forms
 {
     partial class UpdateAvailable
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -123,12 +126,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label CurrVer;
-        private System.Windows.Forms.Label NewVer;
-        private System.Windows.Forms.Button button2;
+        private Button button1;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label CurrVer;
+        private Label NewVer;
+        private Button button2;
     }
 }

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using log4net;
-using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
 
 namespace Rationally.Visio.View.Forces
@@ -69,7 +69,7 @@ namespace Rationally.Visio.View.Forces
                 Height = 0.33,
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
-                LineColor = "RGB(89,131,168)",
+                LineColor = "RGB(89,131,168)"
             };
             concernLabel.ToggleBoldFont(true);
             concernLabel.AddUserRow("rationallyType");
@@ -85,7 +85,7 @@ namespace Rationally.Visio.View.Forces
                 Height = 0.33,
                 BackgroundColor = "RGB(255,255,255)",
                 FontColor = "RGB(89,131,168)",
-                LineColor = "RGB(89,131,168)",
+                LineColor = "RGB(89,131,168)"
             };
             descLabel.ToggleBoldFont(true);
             descLabel.AddUserRow("rationallyType");

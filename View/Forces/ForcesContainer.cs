@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using log4net;
 using Microsoft.Office.Interop.Visio;
+
 // ReSharper disable ArrangeRedundantParentheses
 
 namespace Rationally.Visio.View.Forces

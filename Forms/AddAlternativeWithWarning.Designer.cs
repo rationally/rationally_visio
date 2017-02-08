@@ -1,11 +1,14 @@
-﻿namespace Rationally.Visio.Forms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Rationally.Visio.Forms
 {
     partial class AddAlternativeWithWarning
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -111,11 +114,11 @@
 
         #endregion
 
-        public System.Windows.Forms.Label WarningText;
-        private System.Windows.Forms.Button createAlternative;
-        internal System.Windows.Forms.ComboBox alternativeStatus;
-        private System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.TextBox alternativeName;
-        private System.Windows.Forms.Label label1;
+        public Label WarningText;
+        private Button createAlternative;
+        internal ComboBox alternativeStatus;
+        private Label label2;
+        internal TextBox alternativeName;
+        private Label label1;
     }
 }

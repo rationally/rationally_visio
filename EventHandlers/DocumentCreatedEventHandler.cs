@@ -2,9 +2,9 @@
 using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Enums;
-using Rationally.Visio.RationallyConstants;
-using Rationally.Visio.Model;
 using Rationally.Visio.Forms;
+using Rationally.Visio.Model;
+using Rationally.Visio.RationallyConstants;
 
 namespace Rationally.Visio.EventHandlers
 {

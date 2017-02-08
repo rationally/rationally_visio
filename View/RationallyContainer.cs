@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Reflection;
 using log4net;
-using Rationally.Visio.View.Alternatives;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.View
 {
@@ -94,17 +94,10 @@ namespace Rationally.Visio.View
             set { RShape.CellsU["User.MsvSDContainerMargin"].ResultIU = value; }
         }
 
-        public override bool ExistsInTree(Shape s)
-        {
-            return RShape.Equals(s) || Children.Exists(x => x.ExistsInTree(s));
-        }
+        public override bool ExistsInTree(Shape s) => RShape.Equals(s) || Children.Exists(x => x.ExistsInTree(s));
 
-        
-        public override RationallyComponent GetComponentByShape(Shape s)
-        {
-            //1) check if current comp is the wanted one, else check it for all the children, then return it if it exists
-            return RShape.Equals(s) ? this : Children.FirstOrDefault(c => c.GetComponentByShape(s) != null)?.GetComponentByShape(s);
-        }
+
+        public override RationallyComponent GetComponentByShape(Shape s) => RShape.Equals(s) ? this : Children.FirstOrDefault(c => c.GetComponentByShape(s) != null)?.GetComponentByShape(s);
 
         public bool DeleteFromTree(Shape s)
         {

@@ -4,8 +4,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using log4net;
-using Rationally.Visio.Model;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Model;
+
 // ReSharper disable ArrangeRedundantParentheses
 
 namespace Rationally.Visio.View.Documents

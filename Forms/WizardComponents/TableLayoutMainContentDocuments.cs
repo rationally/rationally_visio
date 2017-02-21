@@ -85,7 +85,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         public void InitData()
         {
-            RationallyModel model = Globals.RationallyAddIn.Model;
+            RationallyModel model = ProjectSetupWizard.Instance.ModelCopy;
             Documents.Clear();
             for (int i = 0; i < model.Documents.Count; i++)
             {

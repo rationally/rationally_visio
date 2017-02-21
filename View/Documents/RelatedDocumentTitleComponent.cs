@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using log4net;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Documents
 {
@@ -57,8 +58,17 @@ namespace Rationally.Visio.View.Documents
 
         public override void Repaint()
         {
+
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
             {
+                if (Globals.RationallyAddIn.Model.Documents.Count > DocumentIndex)
+                {
+                    RelatedDocument doc = Globals.RationallyAddIn.Model.Documents[DocumentIndex];
+                    if (Text != doc.Name)
+                    {
+                        Text = doc.Name;
+                    }
+                }
                 UpdateReorderFunctions();
             }
             base.Repaint();

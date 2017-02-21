@@ -20,13 +20,13 @@ namespace Rationally.Visio.View.Forces
             basicDocument.Close();
 
             AddUserRow("alternativeUniqueId");
-            AlternativeUniqueIdentifier = -2;
+            ForceAlternativeUniqueIdentifier = -2;
 
             AddUserRow("alternativeIndex");
             AlternativeIndex = -2;
 
             AddUserRow("alternativeIdentifier");
-            AlternativeIdentifier = "";
+            AlternativeIdentifierString = "";
 
             AddUserRow("rationallyType");
             RationallyType = "forceTotalComponent";
@@ -45,8 +45,8 @@ namespace Rationally.Visio.View.Forces
 
         public ForceTotalComponent(Page page, int altIndex, string altId, int id) : this(page)
         {
-            AlternativeUniqueIdentifier = id;
-            AlternativeIdentifier = altId;
+            ForceAlternativeUniqueIdentifier = id;
+            AlternativeIdentifierString = altId;
             AlternativeIndex = altIndex;
         }
 
@@ -60,9 +60,9 @@ namespace Rationally.Visio.View.Forces
         private void UpdateAlternativeLabels()
         {
             //locate alternative from model
-            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.UniqueIdentifier == AlternativeUniqueIdentifier);
+            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.UniqueIdentifier == ForceAlternativeUniqueIdentifier);
             
-            AlternativeIdentifier = alternative.IdentifierString;
+            AlternativeIdentifierString = alternative.IdentifierString;
             AlternativeIndex = Globals.RationallyAddIn.Model.Alternatives.IndexOf(alternative);
         }
 
@@ -77,7 +77,7 @@ namespace Rationally.Visio.View.Forces
 
                 ForcesContainer forcesContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
                 //for each forcecontainer, look up the forcevalue related to this' total and store it in totalCandidates
-                forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(c => c.Children.Where(d => d is ForceValueComponent).ToList().Cast<ForceValueComponent>().Where(fv => fv.AlternativeUniqueIdentifier == AlternativeUniqueIdentifier).ToList().ForEach(childForTotal => totalCandidates.Add(childForTotal)));
+                forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(c => c.Children.Where(d => d is ForceValueComponent).ToList().Cast<ForceValueComponent>().Where(fv => fv.ForceAlternativeUniqueIdentifier == ForceAlternativeUniqueIdentifier).ToList().ForEach(childForTotal => totalCandidates.Add(childForTotal)));
 
                 foreach (ForceValueComponent fv in totalCandidates)
                 {

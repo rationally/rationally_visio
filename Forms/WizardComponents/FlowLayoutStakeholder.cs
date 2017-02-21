@@ -15,7 +15,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         internal readonly TextBox StakeholderName;
         private readonly AntiAliasedButton deleteStakeholderButton;
 
-        public Stakeholder Stakeholder => Globals.RationallyAddIn.Model.Stakeholders.Count > StakeholderIndex ? Globals.RationallyAddIn.Model.Stakeholders[StakeholderIndex] : null;
+        public Stakeholder Stakeholder => ProjectSetupWizard.Instance.ModelCopy.Stakeholders.Count > StakeholderIndex ? ProjectSetupWizard.Instance.ModelCopy.Stakeholders[StakeholderIndex] : null;
 
         private readonly AntiAliasedLabel stakeholderRoleLabel;
         internal readonly TextBox StakeholderRole;
@@ -112,7 +112,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             }
             else
             {
-                StakeholderIndex = Math.Min(StakeholderIndex, Globals.RationallyAddIn.Model.Stakeholders.Count);
+                StakeholderIndex = Math.Min(StakeholderIndex, ProjectSetupWizard.Instance.ModelCopy.Stakeholders.Count);
                 (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is StakeholdersContainer) as StakeholdersContainer)?.AddStakeholder(StakeholderName.Text, StakeholderRole.Text);
             }
         }

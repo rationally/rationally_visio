@@ -47,9 +47,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             //set all force value cells with id "lowerIndex" to "temp"
             //set all force value cells with id "oldIndex" to "lowerIndex"
             //set all force value cells with id "temp" to "oldIndex"
-            forcesContainer?.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(fc => fc.Children.Where(fcc => fcc is ForceValueComponent && (((ForceValueComponent) fcc).AlternativeIdentifier == lowerIndex)).Cast<ForceValueComponent>().ToList().ForEach(fvc => fvc.AlternativeIdentifier = "temp"));
-            forcesContainer?.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(fc => fc.Children.Where(fcc => fcc is ForceValueComponent && (((ForceValueComponent) fcc).AlternativeIdentifier == oldIndex)).Cast<ForceValueComponent>().ToList().ForEach(fvc => fvc.AlternativeIdentifier = lowerIndex));
-            forcesContainer?.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(fc => fc.Children.Where(fcc => fcc is ForceValueComponent && (((ForceValueComponent) fcc).AlternativeIdentifier == "temp")).Cast<ForceValueComponent>().ToList().ForEach(fvc => fvc.AlternativeIdentifier = oldIndex));
+            forcesContainer?.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(fc => fc.Children.Where(fcc => fcc is ForceValueComponent && (((ForceValueComponent) fcc).AlternativeIdentifierString == lowerIndex)).Cast<ForceValueComponent>().ToList().ForEach(fvc => fvc.AlternativeIdentifierString = "temp"));
+            forcesContainer?.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(fc => fc.Children.Where(fcc => fcc is ForceValueComponent && (((ForceValueComponent) fcc).AlternativeIdentifierString == oldIndex)).Cast<ForceValueComponent>().ToList().ForEach(fvc => fvc.AlternativeIdentifierString = lowerIndex));
+            forcesContainer?.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(fc => fc.Children.Where(fcc => fcc is ForceValueComponent && (((ForceValueComponent) fcc).AlternativeIdentifierString == "temp")).Cast<ForceValueComponent>().ToList().ForEach(fvc => fvc.AlternativeIdentifierString = oldIndex));
             //swap the elements
             RationallyComponent temp = alternativesContainer.Children[currentIndex];
             alternativesContainer.Children[currentIndex] = alternativesContainer.Children[currentIndex - 1];

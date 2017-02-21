@@ -12,7 +12,7 @@ namespace Rationally.Visio.View.Forces
         private static readonly Regex ForceValueRegex = new Regex(@"ForceValue(\.\d+)?$");
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public ForceValueComponent(Page page, int alternativeUniqueIdentifier, string altId, int forceIndex) : base(page)
+        public ForceValueComponent(Page page, int forceAlternativeUniqueIdentifier, string altId, int forceIndex) : base(page)
         {
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
@@ -29,16 +29,16 @@ namespace Rationally.Visio.View.Forces
             Name = "ForceValue";
 
             AddUserRow("alternativeIdentifier");
-            AlternativeIdentifier = altId;
+            AlternativeIdentifierString = altId;
 
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
-            AlternativeUniqueIdentifier = alternativeUniqueIdentifier;
+            ForceAlternativeUniqueIdentifier = forceAlternativeUniqueIdentifier;
             Globals.RationallyAddIn.Model.Forces.ForEach(force =>
             {
-                if (!force.ForceValueDictionary.ContainsKey(alternativeUniqueIdentifier))
+                if (!force.ForceValueDictionary.ContainsKey(forceAlternativeUniqueIdentifier))
                 {
-                    force.ForceValueDictionary.Add(alternativeUniqueIdentifier, "0");
+                    force.ForceValueDictionary.Add(forceAlternativeUniqueIdentifier, "0");
                 }
             });
 
@@ -49,7 +49,6 @@ namespace Rationally.Visio.View.Forces
         {
             Width = 1.0 / 2.54;
             Height = 0.33;
-            Text = "0";
             ToggleBoldFont(true);
             LineColor = "RGB(89,131,168)";
         }
@@ -79,8 +78,8 @@ namespace Rationally.Visio.View.Forces
         private void UpdateAlternativeLabels()
         {
             //locate alternative from model
-            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.UniqueIdentifier == AlternativeUniqueIdentifier);
-            AlternativeIdentifier = alternative.IdentifierString;
+            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.UniqueIdentifier == ForceAlternativeUniqueIdentifier);
+            AlternativeIdentifierString = alternative.IdentifierString;
         }
 
         public override void Repaint()
@@ -90,9 +89,9 @@ namespace Rationally.Visio.View.Forces
                 UpdateAlternativeLabels();
                 UpdateReorderFunctions();
 
-                if (Text != Globals.RationallyAddIn.Model.Forces[ForceIndex].ForceValueDictionary[AlternativeUniqueIdentifier])
+                if (Text != Globals.RationallyAddIn.Model.Forces[ForceIndex].ForceValueDictionary[ForceAlternativeUniqueIdentifier])
                 {
-                    Text = Globals.RationallyAddIn.Model.Forces[ForceIndex].ForceValueDictionary[AlternativeUniqueIdentifier];
+                    Text = Globals.RationallyAddIn.Model.Forces[ForceIndex].ForceValueDictionary[ForceAlternativeUniqueIdentifier];
                 }
 
                 string toParse = Text.StartsWith("+") ? Text.Substring(1) : Text;

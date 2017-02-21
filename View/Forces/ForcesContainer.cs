@@ -60,7 +60,7 @@ namespace Rationally.Visio.View.Forces
             }
 
             //fix the order of the force containers, using ForceIndex
-            Children = Children.OrderBy(c => (c is ForceHeaderRow ? -1 : (c is ForceTotalsRow ? Children.Count : c.ForceIndex))).ToList();
+            Children = Children.OrderBy(c => (c is ForceHeaderRow ? -1 : (c is ForceTotalsRow ? Children.Count : c.Index))).ToList();
             
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
             LayoutManager = new VerticalStretchLayout(this);
@@ -75,18 +75,18 @@ namespace Rationally.Visio.View.Forces
 
             if (ForceContainer.IsForceContainer(s.Name))
             {
-                if (Children.Where(c => c is ForceContainer || c is ForceStubContainer).All(c => c.ForceIndex != shapeComponent.ForceIndex)) //there is no forcecontainer stub with this index
+                if (Children.Where(c => c is ForceContainer || c is ForceStubContainer).All(c => c.Index != shapeComponent.Index)) //there is no forcecontainer stub with this index
                 {
                     ForceContainer con = new ForceContainer(Page, s);
-                    Children.Insert(con.ForceIndex + 1, con); //after header
+                    Children.Insert(con.Index + 1, con); //after header
                 }
                 else
                 {
                     //remove stub, insert s as the shape of the stub wrapper
-                    ForceStubContainer stub = (ForceStubContainer)Children.Where(c => c is ForceStubContainer).First(c => c.ForceIndex == shapeComponent.ForceIndex);
+                    ForceStubContainer stub = (ForceStubContainer)Children.Where(c => c is ForceStubContainer).First(c => c.Index == shapeComponent.Index);
                     Children.Remove(stub);
                     ForceContainer con = new ForceContainer(Page, s);
-                    Children.Insert(con.ForceIndex + 1, con); //after header
+                    Children.Insert(con.Index + 1, con); //after header
 
                 }
             }
@@ -94,10 +94,10 @@ namespace Rationally.Visio.View.Forces
             {
                 bool isForceChild = ForceConcernComponent.IsForceConcern(s.Name) || ForceDescriptionComponent.IsForceDescription(s.Name) || ForceValueComponent.IsForceValue(s.Name);
 
-                if (isForceChild && Children.Where(c => c is ForceContainer || c is ForceStubContainer).All(c => c.ForceIndex != shapeComponent.ForceIndex)) //if parent not exists
+                if (isForceChild && Children.Where(c => c is ForceContainer || c is ForceStubContainer).All(c => c.Index != shapeComponent.Index)) //if parent not exists
                 {
-                    ForceStubContainer stub = new ForceStubContainer(Page, shapeComponent.ForceIndex);
-                    Children.Insert(shapeComponent.ForceIndex + 1, stub); //after header
+                    ForceStubContainer stub = new ForceStubContainer(Page, shapeComponent.Index);
+                    Children.Insert(shapeComponent.Index + 1, stub); //after header
                     Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
                 }
                 else

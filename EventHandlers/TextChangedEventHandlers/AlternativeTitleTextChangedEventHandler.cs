@@ -13,9 +13,9 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
         {
             RationallyComponent alternativeTitleComponent = new RationallyComponent(view.Page) {RShape = changedShape};
 
-            if (Globals.RationallyAddIn.Model.Alternatives.Count <= alternativeTitleComponent.AlternativeIndex) { return;}
+            if (Globals.RationallyAddIn.Model.Alternatives.Count <= alternativeTitleComponent.Index) { return;}
 
-            Alternative alternativeToUpdate = Globals.RationallyAddIn.Model.Alternatives[alternativeTitleComponent.AlternativeIndex];
+            Alternative alternativeToUpdate = Globals.RationallyAddIn.Model.Alternatives[alternativeTitleComponent.Index];
             alternativeToUpdate.Title = alternativeTitleComponent.Text;
         }
     }

@@ -17,7 +17,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
                 //find shape in view tree
                 RelatedURLURLComponent urlUrl = (RelatedURLURLComponent) Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
                 //locate connected model object
-                RelatedDocument document = Globals.RationallyAddIn.Model.Documents[urlUrl.DocumentIndex];
+                RelatedDocument document = Globals.RationallyAddIn.Model.Documents[urlUrl.Index];
                 //update the url value
                 document.Path = urlUrl.Text;
             }

@@ -20,8 +20,8 @@ namespace Rationally.Visio.View.Documents
         {
             RationallyType = "relatedDocumentTitle";
             Name = "Related Document Title";
-            AddUserRow("documentIndex");
-            DocumentIndex = index;
+            AddUserRow("index");
+            Index = index;
 
             AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "\"Add file\"", false);
             AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "\"Add url\"", false);
@@ -45,12 +45,12 @@ namespace Rationally.Visio.View.Documents
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
 
-            if (DocumentIndex == 0)
+            if (Index == 0)
             {
                 DeleteAction("moveUp");
             }
 
-            if (DocumentIndex == Globals.RationallyAddIn.Model.Documents.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.Documents.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -61,9 +61,9 @@ namespace Rationally.Visio.View.Documents
 
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
             {
-                if (Globals.RationallyAddIn.Model.Documents.Count > DocumentIndex)
+                if (Globals.RationallyAddIn.Model.Documents.Count > Index)
                 {
-                    RelatedDocument doc = Globals.RationallyAddIn.Model.Documents[DocumentIndex];
+                    RelatedDocument doc = Globals.RationallyAddIn.Model.Documents[Index];
                     if (Text != doc.Name)
                     {
                         Text = doc.Name;

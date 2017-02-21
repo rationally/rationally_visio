@@ -24,7 +24,7 @@ namespace Rationally.Visio.View.Stakeholders
             {
                 Children.Add(new StakeholderContainer(page, shape));
             }
-            Children = Children.OrderBy(c => c.StakeholderIndex).ToList();
+            Children = Children.OrderBy(c => c.Index).ToList();
             LayoutManager = new VerticalStretchLayout(this);
             InitStyle();
         }
@@ -38,23 +38,23 @@ namespace Rationally.Visio.View.Stakeholders
 
             if (StakeholderContainer.IsStakeholderContainer(s.Name))
             {
-                if (Children.All(c => c.StakeholderIndex != shapeComponent.StakeholderIndex)) //there is no stakeholder stub with this index
+                if (Children.All(c => c.Index != shapeComponent.Index)) //there is no stakeholder stub with this index
                 {
                     Children.Add(new StakeholderContainer(Page, s));
                 }
                 else
                 {
                     //remove stub, insert s as new containers
-                    StakeholderStubContainer stub = (StakeholderStubContainer)Children.First(c => c.StakeholderIndex == shapeComponent.StakeholderIndex);
+                    StakeholderStubContainer stub = (StakeholderStubContainer)Children.First(c => c.Index == shapeComponent.Index);
                     Children.Remove(stub);
                     StakeholderContainer con = new StakeholderContainer(Page, s);
-                    if (Children.Count < con.StakeholderIndex)
+                    if (Children.Count < con.Index)
                     {
                         Children.Add(con);
                     }
                     else
                     {
-                        Children.Insert(con.StakeholderIndex, con);
+                        Children.Insert(con.Index, con);
                     }
 
                 }
@@ -63,10 +63,10 @@ namespace Rationally.Visio.View.Stakeholders
             {
                 bool isStakeholderChild = StakeholderNameComponent.IsStakeholderName(s.Name) || StakeholderRoleComponent.IsStakeholderRole(s.Name);
 
-                if (isStakeholderChild && Children.All(c => c.StakeholderIndex != shapeComponent.StakeholderIndex)) //if parent not exists
+                if (isStakeholderChild && Children.All(c => c.Index != shapeComponent.Index)) //if parent not exists
                 {
-                    StakeholderStubContainer stub = new StakeholderStubContainer(Page, shapeComponent.StakeholderIndex);
-                    Children.Insert(stub.StakeholderIndex, stub);
+                    StakeholderStubContainer stub = new StakeholderStubContainer(Page, shapeComponent.Index);
+                    Children.Insert(stub.Index, stub);
                     Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
                 }
                 else
@@ -81,7 +81,7 @@ namespace Rationally.Visio.View.Stakeholders
         public void RemoveStakeholdersFromModel()
         {
             //Get a list of all stakeholderIndices
-            List<int> indexList = Children.Select(stakeholder => stakeholder.StakeholderIndex).ToList();
+            List<int> indexList = Children.Select(stakeholder => stakeholder.Index).ToList();
             indexList.Sort();
             indexList.Reverse(); //Reverse so indices don't change
             foreach (int index in indexList)

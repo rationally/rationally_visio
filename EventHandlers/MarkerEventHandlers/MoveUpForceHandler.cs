@@ -17,7 +17,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             ForcesContainer forcesContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
 
             RationallyComponent currentComponent = new RationallyComponent(changedShape.ContainingPage) {RShape = changedShape};
-            int currentForceIndex = currentComponent.ForceIndex;
+            int currentForceIndex = currentComponent.Index;
             int currentChildIndex = currentForceIndex + 1;
 
             //swap the forces in the model
@@ -25,16 +25,16 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             model.Forces[currentForceIndex] = model.Forces[currentForceIndex - 1];
             model.Forces[currentForceIndex - 1] = currentForce;
 
-            ForceContainer toMove = forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().First(c => c.ForceIndex == currentForceIndex);
-            ForceContainer toSwapWith = forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().First(c => c.ForceIndex == currentForceIndex - 1);
+            ForceContainer toMove = forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().First(c => c.Index == currentForceIndex);
+            ForceContainer toSwapWith = forcesContainer.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().First(c => c.Index == currentForceIndex - 1);
 
             //update the index of the component and his children
-            toMove.Children.ForEach(c => c.ForceIndex = currentForceIndex - 1);
-            toMove.ForceIndex = currentForceIndex - 1;
+            toMove.Children.ForEach(c => c.Index = currentForceIndex - 1);
+            toMove.Index = currentForceIndex - 1;
 
             //same, for the other component
-            toSwapWith.Children.ForEach(c => c.ForceIndex = currentForceIndex);
-            toSwapWith.ForceIndex = currentForceIndex;
+            toSwapWith.Children.ForEach(c => c.Index = currentForceIndex);
+            toSwapWith.Index = currentForceIndex;
 
             RationallyComponent temp = forcesContainer.Children[currentChildIndex];
             forcesContainer.Children[currentChildIndex] = forcesContainer.Children[currentChildIndex - 1];

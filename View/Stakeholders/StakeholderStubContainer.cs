@@ -7,14 +7,14 @@ namespace Rationally.Visio.View.Stakeholders
     internal class StakeholderStubContainer : RationallyComponent
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public override int StakeholderIndex
+        public override int Index
         {
             get; set;
         }
 
-        public StakeholderStubContainer(Page page, int stakeholderIndex) : base(page)
+        public StakeholderStubContainer(Page page, int index) : base(page)
         {
-            StakeholderIndex = stakeholderIndex;
+            Index = index;
         }
 
         public override bool ExistsInTree(Shape s) => false;

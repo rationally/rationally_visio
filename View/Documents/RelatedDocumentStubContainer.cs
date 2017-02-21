@@ -7,15 +7,15 @@ namespace Rationally.Visio.View.Documents
     internal sealed class RelatedDocumentStubContainer : RationallyComponent
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public override int DocumentIndex
+        public override int Index
         {
             get;
             set;
         }
 
-        public RelatedDocumentStubContainer(Page page, int documentIndex) : base(page)
+        public RelatedDocumentStubContainer(Page page, int index) : base(page)
         {
-            DocumentIndex = documentIndex;
+            Index = index;
         }
 
         public override bool ExistsInTree(Shape s) => false;

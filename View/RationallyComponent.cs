@@ -94,29 +94,11 @@ namespace Rationally.Visio.View
             get { return RShape.CellsU["User.alternativeIdentifier"].ResultStr["Value"]; }
             set { RShape.Cells["User.alternativeIdentifier.Value"].Formula = "\"" + value + "\""; }
         }
-        
-        public virtual int AlternativeIndex
-        {
-            get { return (int)RShape.CellsU[CellConstants.AlternativeIndex].ResultIU; }
-            protected set { RShape.CellsU["User.alternativeIndex.Value"].ResultIU = value; }
-        }
 
-        public virtual int ForceIndex
+        public virtual int Index
         {
-            get { return (int)RShape.CellsU["User.forceIndex"].ResultIU; }
-            set { RShape.CellsU["User.forceIndex.Value"].ResultIU = value; }
-        }
-
-        public virtual int DocumentIndex
-        {
-            get { return (int)RShape.CellsU["User.documentIndex"].ResultIU; }
-            set { RShape.CellsU["User.documentIndex.Value"].ResultIU = value; }
-        }
-
-        public virtual int StakeholderIndex
-        {
-            get { return (int)RShape.CellsU["User.StakeholderIndex"].ResultIU; }
-            set { RShape.CellsU["User.StakeholderIndex.Value"].ResultIU = value; }
+            get { return (int)RShape.CellsU[CellConstants.Index].ResultIU; }
+            set { RShape.CellsU[$"{CellConstants.Index}.Value"].ResultIU = value; }
         }
 
         public string FilePath

@@ -32,7 +32,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
             StakeholdersContainer stakeholdersContainer = (StakeholdersContainer)Globals.RationallyAddIn.View.Children.First(c => c is StakeholdersContainer);
             Log.Debug("container present:" + (stakeholdersContainer != null));
             //delete these elements from the view, which will automatically remove them from the model
-            scheduledForDeletion.ForEach(stakeholderIndex => stakeholdersContainer.Children.Cast<StakeholderContainer>().First(con => con.StakeholderIndex == stakeholderIndex).RShape.Delete());
+            scheduledForDeletion.ForEach(stakeholderIndex => stakeholdersContainer.Children.Cast<StakeholderContainer>().First(con => con.Index == stakeholderIndex).RShape.Delete());
 
             //repaint the view according to the new model
             RepaintHandler.Repaint(stakeholdersContainer);

@@ -124,13 +124,13 @@ namespace Rationally.Visio.View.Forces
             if (ForceTotalComponent.IsForceTotalComponent(s.Name))
             {
                 ForceTotalComponent com = new ForceTotalComponent(Page, s);
-                if ((2 + com.AlternativeIndex) > Children.Count)
+                if ((2 + com.Index) > Children.Count)
                 {
                     Children.Add(com);
                 }
                 else
                 {
-                    Children.Insert(2 + com.AlternativeIndex, com);
+                    Children.Insert(2 + com.Index, com);
                 }
             }
         }

@@ -26,7 +26,7 @@ namespace Rationally.Visio.View.Documents
             {
                 Children.Add(new RelatedDocumentContainer(page, shape));
             }
-            Children = Children.OrderBy(c => c.DocumentIndex).ToList();
+            Children = Children.OrderBy(c => c.Index).ToList();
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
             LayoutManager = new VerticalStretchLayout(this);
 
@@ -39,18 +39,18 @@ namespace Rationally.Visio.View.Documents
 
             if (RelatedDocumentContainer.IsRelatedDocumentContainer(s.Name))
             {
-                if (Children.All(c => c.DocumentIndex != shapeComponent.DocumentIndex)) //there is no container stub with this index
+                if (Children.All(c => c.Index != shapeComponent.Index)) //there is no container stub with this index
                 {
                     RelatedDocumentContainer con = new RelatedDocumentContainer(Page, s);
-                    Children.Insert(con.DocumentIndex, con);
+                    Children.Insert(con.Index, con);
                 }
                 else
                 {
                     //remove stub, insert s as the shape of the stub wrapper
-                    RelatedDocumentStubContainer stub = (RelatedDocumentStubContainer)Children.First(c => c.DocumentIndex == shapeComponent.DocumentIndex);
+                    RelatedDocumentStubContainer stub = (RelatedDocumentStubContainer)Children.First(c => c.Index == shapeComponent.Index);
                     Children.Remove(stub);
                     RelatedDocumentContainer con = new RelatedDocumentContainer(Page, s);
-                    Children.Insert(con.DocumentIndex, con);
+                    Children.Insert(con.Index, con);
                 }
 
                 
@@ -59,10 +59,10 @@ namespace Rationally.Visio.View.Documents
             {
                 bool isDocumentChild = RelatedDocumentTitleComponent.IsRelatedDocumentTitleContainer(s.Name) || RelatedFileComponent.IsRelatedFileComponent(s.Name) || RelatedUrlComponent.IsRelatedUrlComponent(s.Name) || RelatedURLURLComponent.IsRelatedUrlUrlComponent(s.Name);
 
-                if (isDocumentChild && Children.All(c => c.DocumentIndex != shapeComponent.DocumentIndex)) //if parent not exists
+                if (isDocumentChild && Children.All(c => c.Index != shapeComponent.Index)) //if parent not exists
                 {
-                    RelatedDocumentStubContainer stub = new RelatedDocumentStubContainer(Page, shapeComponent.DocumentIndex);
-                    Children.Insert(stub.DocumentIndex, stub);
+                    RelatedDocumentStubContainer stub = new RelatedDocumentStubContainer(Page, shapeComponent.Index);
+                    Children.Insert(stub.Index, stub);
                     Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
                 }
                 else
@@ -104,7 +104,7 @@ namespace Rationally.Visio.View.Documents
             if (Globals.RationallyAddIn.Model.Documents.Count > Children.Count)
             {
                 Globals.RationallyAddIn.Model.Documents
-                    .Where(doc => Children.Count == 0 || Globals.RationallyAddIn.Model.Documents.IndexOf(doc) > Children.Last().DocumentIndex).ToList()
+                    .Where(doc => Children.Count == 0 || Globals.RationallyAddIn.Model.Documents.IndexOf(doc) > Children.Last().Index).ToList()
                     .ForEach(doc => 
                         Children.Add(new RelatedDocumentContainer(Globals.RationallyAddIn.Application.ActivePage, Children.Count, doc))
                     );

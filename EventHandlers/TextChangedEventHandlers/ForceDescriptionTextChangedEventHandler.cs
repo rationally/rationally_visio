@@ -15,7 +15,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
             if (forceDescription != null)
             {
 
-                Globals.RationallyAddIn.Model.Forces[forceDescription.ForceIndex].Description = forceDescription.Text;
+                Globals.RationallyAddIn.Model.Forces[forceDescription.Index].Description = forceDescription.Text;
             }
         }
     }

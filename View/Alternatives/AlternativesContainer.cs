@@ -25,7 +25,7 @@ namespace Rationally.Visio.View.Alternatives
             {
                 Children.Add(new AlternativeContainer(page, shape));
             }
-            Children = Children.OrderBy(c => c.AlternativeIndex).ToList();
+            Children = Children.OrderBy(c => c.Index).ToList();
             LayoutManager = new VerticalStretchLayout(this);
             InitStyle();
         }
@@ -39,23 +39,23 @@ namespace Rationally.Visio.View.Alternatives
 
             if (AlternativeContainer.IsAlternativeContainer(s.Name))
             {
-                if (Children.All(c => c.AlternativeIndex != shapeComponent.AlternativeIndex)) //there is no forcecontainer stub with this index
+                if (Children.All(c => c.Index != shapeComponent.Index)) //there is no forcecontainer stub with this index
                 {
                     Children.Add(new AlternativeContainer(Page, s));
                 }
                 else
                 {
                     //remove stub, insert s as new containers
-                    AlternativeStubContainer stub = (AlternativeStubContainer) Children.First(c => c.AlternativeIndex == shapeComponent.AlternativeIndex);
+                    AlternativeStubContainer stub = (AlternativeStubContainer) Children.First(c => c.Index == shapeComponent.Index);
                     Children.Remove(stub);
                     AlternativeContainer con = new AlternativeContainer(Page, s);
-                    if (Children.Count < con.AlternativeIndex)
+                    if (Children.Count < con.Index)
                     {
                         Children.Add(con);
                     }
                     else
                     {
-                        Children.Insert(con.AlternativeIndex, con);
+                        Children.Insert(con.Index, con);
                     }
                     
                 }
@@ -64,10 +64,10 @@ namespace Rationally.Visio.View.Alternatives
             {
                 bool isAlternativeChild = AlternativeStateComponent.IsAlternativeState(s.Name) || AlternativeIdentifierComponent.IsAlternativeIdentifier(s.Name) || AlternativeTitleComponent.IsAlternativeTitle(s.Name) || AlternativeDescriptionComponent.IsAlternativeDescription(s.Name);
 
-                if (isAlternativeChild && Children.All(c => c.AlternativeIndex != shapeComponent.AlternativeIndex)) //if parent not exists
+                if (isAlternativeChild && Children.All(c => c.Index != shapeComponent.Index)) //if parent not exists
                 {
-                    AlternativeStubContainer stub = new AlternativeStubContainer(Page, shapeComponent.AlternativeIndex);
-                    Children.Insert(stub.AlternativeIndex, stub);
+                    AlternativeStubContainer stub = new AlternativeStubContainer(Page, shapeComponent.Index);
+                    Children.Insert(stub.Index, stub);
                     Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
                 }
                 else
@@ -82,7 +82,7 @@ namespace Rationally.Visio.View.Alternatives
         public void RemoveAlternativesFromModel()
         {
             //Get a list of all alternativeIndices
-            List<int> indexList = Children.Select(alternative => alternative.AlternativeIndex).ToList();
+            List<int> indexList = Children.Select(alternative => alternative.Index).ToList();
             indexList.Sort();
             indexList.Reverse(); //Reverse so indices don't change
             foreach (int index in indexList)

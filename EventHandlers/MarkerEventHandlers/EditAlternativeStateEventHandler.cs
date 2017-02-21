@@ -15,10 +15,10 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             RationallyModel model = Globals.RationallyAddIn.Model;
             RationallyComponent c = new RationallyComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = s };
 
-            int index = c.AlternativeIndex;
+            int index = c.Index;
             Alternative alternative = model.Alternatives[index];
             alternative.Status = newState;
-            AlternativeContainer container = (AlternativeContainer)((AlternativesContainer)Globals.RationallyAddIn.View.Children.Find(y => y.Name == "Alternatives")).Children.Find(x => (x.AlternativeIndex == index) && x is AlternativeContainer);
+            AlternativeContainer container = (AlternativeContainer)((AlternativesContainer)Globals.RationallyAddIn.View.Children.Find(y => y.Name == "Alternatives")).Children.Find(x => (x.Index == index) && x is AlternativeContainer);
             AlternativeStateComponent component = (AlternativeStateComponent)container.Children.Find(x => x is AlternativeStateComponent);
             component.SetAlternativeState(newState);
             component.UpdateBackgroundByState(newState);

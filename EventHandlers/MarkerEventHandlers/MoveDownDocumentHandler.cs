@@ -17,15 +17,15 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             RelatedDocumentsContainer docsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
 
             RationallyComponent currentComponent = new RationallyComponent(changedShape.ContainingPage) { RShape = changedShape };
-            int currentIndex = currentComponent.DocumentIndex;
+            int currentIndex = currentComponent.Index;
 
             //swap the forces in the model
             RelatedDocument currentDoc = model.Documents[currentIndex];
             model.Documents[currentIndex] = model.Documents[currentIndex + 1];
             model.Documents[currentIndex + 1] = currentDoc;
 
-            RelatedDocumentContainer toMove = docsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().First(c => c.DocumentIndex == currentIndex);
-            RelatedDocumentContainer toSwapWith = docsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().First(c => c.DocumentIndex == currentIndex + 1);
+            RelatedDocumentContainer toMove = docsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().First(c => c.Index == currentIndex);
+            RelatedDocumentContainer toSwapWith = docsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().First(c => c.Index == currentIndex + 1);
 
             //update the index of the component and his children
             toMove.SetDocumentIdentifier(currentIndex + 1);

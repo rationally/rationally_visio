@@ -20,12 +20,12 @@ namespace Rationally.Visio.View.Alternatives
             InitStyle();
         }
 
-        public AlternativeStateComponent(Page page, int alternativeIndex, string state ) : this(page)
+        public AlternativeStateComponent(Page page, int index, string state ) : this(page)
         {
             AddUserRow("rationallyType");
             RationallyType = "alternativeState";
-            AddUserRow("alternativeIndex");
-            AlternativeIndex = alternativeIndex;
+            AddUserRow("index");
+            Index = index;
 
             Name = "AlternativeState";
             
@@ -62,7 +62,7 @@ namespace Rationally.Visio.View.Alternatives
             MarginTop = 0.1;
         }
 
-        public void SetAlternativeIdentifier(int alternativeIndex) => AlternativeIndex = alternativeIndex;
+        public void SetAlternativeIdentifier(int alternativeIndex) => Index = alternativeIndex;
 
         public void SetAlternativeState(string newState)
         {
@@ -104,12 +104,12 @@ namespace Rationally.Visio.View.Alternatives
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
 
-            if (AlternativeIndex == 0)
+            if (Index == 0)
             {
                 DeleteAction("moveUp");
             }
 
-            if (AlternativeIndex == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -120,9 +120,9 @@ namespace Rationally.Visio.View.Alternatives
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //undo's should not edit the shape again, visio handles that for us
             {
                 UpdateReorderFunctions();
-                if (Globals.RationallyAddIn.Model.Alternatives.Count > AlternativeIndex)
+                if (Globals.RationallyAddIn.Model.Alternatives.Count > Index)
                 {
-                    Alternative alternative = Globals.RationallyAddIn.Model.Alternatives[AlternativeIndex];
+                    Alternative alternative = Globals.RationallyAddIn.Model.Alternatives[Index];
                     SetAlternativeState(alternative.Status);
                     UpdateBackgroundByState(alternative.Status);
                 }

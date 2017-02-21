@@ -58,16 +58,16 @@ namespace Rationally.Visio.View.Documents
             
             if ((name != null) && (path != null))
             {
-                if (DocumentIndex <= Globals.RationallyAddIn.Model.Documents.Count)
+                if (Index <= Globals.RationallyAddIn.Model.Documents.Count)
                 {
-                    Globals.RationallyAddIn.Model.Documents.Insert(DocumentIndex, new RelatedDocument(path, name, file));
+                    Globals.RationallyAddIn.Model.Documents.Insert(Index, new RelatedDocument(path, name, file));
                 }
                 else
                 {
                     Globals.RationallyAddIn.Model.Documents.Add(new RelatedDocument(path, name, file));
                 }
             }
-            MarginTop = DocumentIndex == 0 ? 0.3 : 0.0;
+            MarginTop = Index == 0 ? 0.3 : 0.0;
             MarginBottom = 0;
 
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
@@ -96,8 +96,8 @@ namespace Rationally.Visio.View.Documents
             AddUserRow("rationallyType");
             RationallyType = "relatedDocumentContainer";
             Name = "Related Document";
-            AddUserRow("documentIndex");
-            DocumentIndex = index;
+            AddUserRow("index");
+            Index = index;
 
             AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "\"Add file\"", false);
             AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "\"Add url\"", false);
@@ -115,7 +115,7 @@ namespace Rationally.Visio.View.Documents
         {
             
             LinePattern = 16; //borderless
-            MarginTop = DocumentIndex == 0 ? 0.3 : 0.0;
+            MarginTop = Index == 0 ? 0.3 : 0.0;
             MarginBottom = 0;
 
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
@@ -126,7 +126,7 @@ namespace Rationally.Visio.View.Documents
             if (RelatedDocumentTitleComponent.IsRelatedDocumentTitleContainer(s.Name))
             {
                 RelatedDocumentTitleComponent com = new RelatedDocumentTitleComponent(Page, s);
-                if (com.DocumentIndex == DocumentIndex)
+                if (com.Index == Index)
                 {
                     Children.Add(com);
                 }
@@ -134,7 +134,7 @@ namespace Rationally.Visio.View.Documents
             else if (RelatedFileComponent.IsRelatedFileComponent(s.Name))
             {
                 RelatedFileComponent com = new RelatedFileComponent(Page, s);
-                if (com.DocumentIndex == DocumentIndex)
+                if (com.Index == Index)
                 {
                     Children.Add(com);
                 }
@@ -142,7 +142,7 @@ namespace Rationally.Visio.View.Documents
             else if (RelatedUrlComponent.IsRelatedUrlComponent(s.Name))
             {
                 RelatedUrlComponent com = new RelatedUrlComponent(Page, s);
-                if (com.DocumentIndex == DocumentIndex)
+                if (com.Index == Index)
                 {
                     Children.Add(com);
                 }
@@ -150,7 +150,7 @@ namespace Rationally.Visio.View.Documents
             else if (RelatedURLURLComponent.IsRelatedUrlUrlComponent(s.Name))
             {
                 RelatedURLURLComponent com = new RelatedURLURLComponent(Page, s);
-                if (com.DocumentIndex == DocumentIndex)
+                if (com.Index == Index)
                 {
                     Children.Add(com);
                 }
@@ -161,8 +161,8 @@ namespace Rationally.Visio.View.Documents
 
         public void SetDocumentIdentifier(int documentIndex)
         {
-            Children.ForEach(c => c.DocumentIndex = documentIndex);
-            DocumentIndex = documentIndex;
+            Children.ForEach(c => c.Index = documentIndex);
+            Index = documentIndex;
             InitStyle();
         }
 
@@ -185,12 +185,12 @@ namespace Rationally.Visio.View.Documents
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
 
-            if (DocumentIndex == 0)
+            if (Index == 0)
             {
                 DeleteAction("moveUp");
             }
 
-            if (DocumentIndex == Globals.RationallyAddIn.Model.Documents.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.Documents.Count - 1)
             {
                 DeleteAction("moveDown");
             }

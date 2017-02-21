@@ -18,7 +18,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
                 {
                     forceConcern.Text = ForceConcernComponent.DefaultConcern;
                 }
-                Globals.RationallyAddIn.Model.Forces[forceConcern.ForceIndex].Concern = forceConcern.Text;
+                Globals.RationallyAddIn.Model.Forces[forceConcern.Index].Concern = forceConcern.Text;
             }
         }
     }

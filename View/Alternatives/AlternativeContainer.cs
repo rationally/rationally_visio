@@ -42,12 +42,12 @@ namespace Rationally.Visio.View.Alternatives
             }
             if ((title != null) && (state != null))
             {
-                if (AlternativeIndex <= Globals.RationallyAddIn.Model.Alternatives.Count)
+                if (Index <= Globals.RationallyAddIn.Model.Alternatives.Count)
                 {
                     Alternative newAlternative = new Alternative(title, state, Id);
-                    newAlternative.GenerateIdentifier(AlternativeIndex);
-                    Globals.RationallyAddIn.Model.Alternatives.Insert(AlternativeIndex, newAlternative);
-                    int index = AlternativeIndex;
+                    newAlternative.GenerateIdentifier(Index);
+                    Globals.RationallyAddIn.Model.Alternatives.Insert(Index, newAlternative);
+                    int index = Index;
                     foreach (Alternative alt in Globals.RationallyAddIn.Model.Alternatives.Skip(index + 1).ToList()) //Skip up till and including the new Alternative
                     {
                         alt.GenerateIdentifier(++index);
@@ -62,25 +62,25 @@ namespace Rationally.Visio.View.Alternatives
                 }
             }
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
-            MarginTop = AlternativeIndex == 0 ? 0.3 : 0.0;
+            MarginTop = Index == 0 ? 0.3 : 0.0;
 
         }
 
-        public AlternativeContainer(Page page, int alternativeIndex, Alternative alternative) : base(page)
+        public AlternativeContainer(Page page, int index, Alternative alternative) : base(page)
         {
             //1) state box
-            AlternativeStateComponent stateComponent = new AlternativeStateComponent(page, alternativeIndex, alternative.Status);
+            AlternativeStateComponent stateComponent = new AlternativeStateComponent(page, index, alternative.Status);
 
             //2) identifier ("A:")
-            string identifier = (char)(65 + alternativeIndex) + ":";
-            AlternativeIdentifierComponent identifierComponent = new AlternativeIdentifierComponent(page, alternativeIndex, identifier);
+            string identifier = (char)(65 + index) + ":";
+            AlternativeIdentifierComponent identifierComponent = new AlternativeIdentifierComponent(page, index, identifier);
             identifierComponent.ToggleBoldFont(true);
 
             //3) title
-            AlternativeTitleComponent titleComponent = new AlternativeTitleComponent(page, alternativeIndex, alternative.Title);
+            AlternativeTitleComponent titleComponent = new AlternativeTitleComponent(page, index, alternative.Title);
 
             //4) description area
-            AlternativeDescriptionComponent descComponent = new AlternativeDescriptionComponent(page, alternativeIndex);
+            AlternativeDescriptionComponent descComponent = new AlternativeDescriptionComponent(page, index);
             
             Children.Add(identifierComponent);
             Children.Add(titleComponent);
@@ -90,8 +90,8 @@ namespace Rationally.Visio.View.Alternatives
             Name = "Alternative";
             AddUserRow("rationallyType");
             RationallyType = "alternative";
-            AddUserRow("alternativeIndex");
-            AlternativeIndex = alternativeIndex;
+            AddUserRow("index");
+            Index = index;
             AddUserRow("uniqueId");
             Id = alternative.Id;
 
@@ -108,7 +108,7 @@ namespace Rationally.Visio.View.Alternatives
         private void InitStyle()
         {
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
-            MarginTop = AlternativeIndex == 0 ? 0.3 : 0.0;
+            MarginTop = Index == 0 ? 0.3 : 0.0;
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
@@ -118,7 +118,7 @@ namespace Rationally.Visio.View.Alternatives
 
         public void SetAlternativeIdentifier(int alternativeIndex)
         {
-            AlternativeIndex = alternativeIndex;
+            Index = alternativeIndex;
             Children.ForEach(child => ((IAlternativeComponent)child).SetAlternativeIdentifier(alternativeIndex));
             InitStyle();
         }
@@ -128,7 +128,7 @@ namespace Rationally.Visio.View.Alternatives
             if (AlternativeStateComponent.IsAlternativeState(s.Name))
             {
                 AlternativeStateComponent com = new AlternativeStateComponent(Page, s);
-                if (com.AlternativeIndex == AlternativeIndex)
+                if (com.Index == Index)
                 {
                     Children.Add(com);
                 }
@@ -136,7 +136,7 @@ namespace Rationally.Visio.View.Alternatives
             else if (AlternativeIdentifierComponent.IsAlternativeIdentifier(s.Name))
             {
                 AlternativeIdentifierComponent com = new AlternativeIdentifierComponent(Page, s);
-                if (com.AlternativeIndex == AlternativeIndex)
+                if (com.Index == Index)
                 {
                     Children.Add(com);
                 }
@@ -144,7 +144,7 @@ namespace Rationally.Visio.View.Alternatives
             else if (AlternativeTitleComponent.IsAlternativeTitle(s.Name))
             {
                 AlternativeTitleComponent com = new AlternativeTitleComponent(Page, s);
-                if (com.AlternativeIndex == AlternativeIndex)
+                if (com.Index == Index)
                 {
                     Children.Add(com);
                 }
@@ -152,7 +152,7 @@ namespace Rationally.Visio.View.Alternatives
             else if (AlternativeDescriptionComponent.IsAlternativeDescription(s.Name))
             {
                 AlternativeDescriptionComponent com = new AlternativeDescriptionComponent(Page, s);
-                if (com.AlternativeIndex == AlternativeIndex)
+                if (com.Index == Index)
                 {
                     Children.Add(com);
                 }
@@ -166,12 +166,12 @@ namespace Rationally.Visio.View.Alternatives
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
 
-            if (AlternativeIndex == 0)
+            if (Index == 0)
             {
                 DeleteAction("moveUp");
             }
 
-            if (AlternativeIndex == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
             {
                 DeleteAction("moveDown");
             }

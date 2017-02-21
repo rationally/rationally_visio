@@ -17,7 +17,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
                 //find shape in view tree
                 RelatedDocumentTitleComponent relatedDocumentTitle = (RelatedDocumentTitleComponent) Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
                 //locate connected model object
-                RelatedDocument document = Globals.RationallyAddIn.Model.Documents[relatedDocumentTitle.DocumentIndex];
+                RelatedDocument document = Globals.RationallyAddIn.Model.Documents[relatedDocumentTitle.Index];
                 //update the document name
                 document.Name = relatedDocumentTitle.Text;
             }

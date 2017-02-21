@@ -14,16 +14,16 @@ namespace Rationally.Visio.View.Forces
     {
         private static readonly Regex ForceContaineRegex = new Regex(@"ForceContainer(\.\d+)?$");
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public ForceContainer(Page page, int forceIndex, bool makeChildren) : base(page)
+        public ForceContainer(Page page, int index, bool makeChildren) : base(page)
         {
-            AddUserRow("forceIndex");
-            ForceIndex = forceIndex;
+            AddUserRow("index");
+            Index = index;
             if (makeChildren)
             {
-                ForceConcernComponent concern = new ForceConcernComponent(page, forceIndex);
+                ForceConcernComponent concern = new ForceConcernComponent(page, index);
                 Children.Add(concern);
 
-                ForceDescriptionComponent description = new ForceDescriptionComponent(page, forceIndex);
+                ForceDescriptionComponent description = new ForceDescriptionComponent(page, index);
                 Children.Add(description);
             }
             AddUserRow("rationallyType");
@@ -74,9 +74,9 @@ namespace Rationally.Visio.View.Forces
                 if ((concern != null) && (description != null))
                 {
                     Force correspondingForce = new Force(concern, description, forceValuesDictionary);
-                    if (ForceIndex <= Globals.RationallyAddIn.Model.Forces.Count)
+                    if (Index <= Globals.RationallyAddIn.Model.Forces.Count)
                     {
-                        Globals.RationallyAddIn.Model.Forces.Insert(ForceIndex, correspondingForce);
+                        Globals.RationallyAddIn.Model.Forces.Insert(Index, correspondingForce);
                     }
                     else
                     {
@@ -103,12 +103,12 @@ namespace Rationally.Visio.View.Forces
         {
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-            if (ForceIndex == 0)
+            if (Index == 0)
             {
                 DeleteAction("moveUp");
             }
 
-            if (ForceIndex == Globals.RationallyAddIn.Model.Forces.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.Forces.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -134,7 +134,7 @@ namespace Rationally.Visio.View.Forces
                 //if a deleted shape is present, there is no possiblity that we are adding an alternative. Furthermore, the deleted shape still represents an alternative, for each thus no second cell should be added!
                 if ((altValue == null) && Children.All(c => !c.Deleted))
                 {
-                    alreadyThere.Add(new ForceValueComponent(Page, alt.Id, alt.IdentifierString, ForceIndex));
+                    alreadyThere.Add(new ForceValueComponent(Page, alt.Id, alt.IdentifierString, Index));
                 }
             }
 
@@ -168,7 +168,7 @@ namespace Rationally.Visio.View.Forces
             if (ForceConcernComponent.IsForceConcern(s.Name))
             {
                 ForceConcernComponent com = new ForceConcernComponent(Page, s);
-                if (com.ForceIndex == ForceIndex)
+                if (com.Index == Index)
                 {
                     Children.Add(com);
                 }
@@ -176,7 +176,7 @@ namespace Rationally.Visio.View.Forces
             else if (ForceDescriptionComponent.IsForceDescription(s.Name))
             {
                 ForceDescriptionComponent com = new ForceDescriptionComponent(Page, s);
-                if (com.ForceIndex == ForceIndex)
+                if (com.Index == Index)
                 {
                     Children.Add(com);
                 }
@@ -184,7 +184,7 @@ namespace Rationally.Visio.View.Forces
             else if (ForceValueComponent.IsForceValue(s.Name))
             {
                 ForceValueComponent com = new ForceValueComponent(Page, s);
-                if (com.ForceIndex == ForceIndex)
+                if (com.Index == Index)
                 {
                     Children.Add(com);
                 }
@@ -193,8 +193,8 @@ namespace Rationally.Visio.View.Forces
 
         public void SetForceIdentifier(int forceIndex)
         {
-            Children.ForEach(c => c.ForceIndex = forceIndex);
-            ForceIndex = forceIndex;
+            Children.ForEach(c => c.Index = forceIndex);
+            Index = forceIndex;
             InitStyle();
         }
 

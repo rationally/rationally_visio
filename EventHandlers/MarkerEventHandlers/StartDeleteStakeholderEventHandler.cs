@@ -17,7 +17,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             RationallyModel model = Globals.RationallyAddIn.Model;
             RationallyComponent component = new RationallyComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = s };
 
-            int index = component.StakeholderIndex;
+            int index = component.Index;
             Stakeholder stakeholder = model.Stakeholders[index];
             DialogResult confirmResult = MessageBox.Show("Are you sure you want to remove " + stakeholder.Name + "?", "Confirm Deletion", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
@@ -33,7 +33,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                     //trace stakeholders container
                     StakeholdersContainer stakeholdersContainer = (StakeholdersContainer)Globals.RationallyAddIn.View.Children.First(c => c is StakeholdersContainer);
                     //trace the correct stakeholder container
-                    StakeholderContainer stakeholderContainer = (StakeholderContainer)stakeholdersContainer.Children.First(c => c is StakeholderContainer && (component.StakeholderIndex == c.StakeholderIndex));
+                    StakeholderContainer stakeholderContainer = (StakeholderContainer)stakeholdersContainer.Children.First(c => c is StakeholderContainer && (component.Index == c.Index));
 
                     shapeToPass = stakeholderContainer.RShape;
                 }

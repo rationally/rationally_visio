@@ -17,7 +17,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             RationallyModel model = Globals.RationallyAddIn.Model;
             RationallyComponent component = new RationallyComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = s };
 
-            int index = component.AlternativeIndex;
+            int index = component.Index;
             Alternative alternative = model.Alternatives[index];
             DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete " + alternative.Title + "?", "Confirm Deletion", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
@@ -33,7 +33,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                     //trace alternatives container
                     AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.RationallyAddIn.View.Children.First(c => c is AlternativesContainer);
                     //trace the correct alternative container
-                    AlternativeContainer alternativeContainer = (AlternativeContainer) alternativesContainer.Children.First(c => c is AlternativeContainer && (component.AlternativeIndex == c.AlternativeIndex));
+                    AlternativeContainer alternativeContainer = (AlternativeContainer) alternativesContainer.Children.First(c => c is AlternativeContainer && (component.Index == c.Index));
                     
                     shapeToPass = alternativeContainer.RShape;
                 }

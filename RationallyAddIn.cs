@@ -376,7 +376,7 @@ namespace Rationally.Visio
                     RelatedURLURLComponent relatedURLURLComponent = (RelatedURLURLComponent) relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent);
                     relatedURLURLComponent.Text = changedShape.Hyperlink.Address;
                 }
-                else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals("User.forceIndex"))
+                else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.Index))
                 {
                     Log.Debug("Forceindex cell changed of forcecontainer. shape:" + changedShape.Name);
                     RationallyComponent forcesComponent = View.Children.FirstOrDefault(x => x is ForcesContainer);
@@ -385,7 +385,7 @@ namespace Rationally.Visio
                         rebuildTree = true; //Wait with the rebuild till the undo is done
                     }
                 }
-                else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.AlternativeIndex))
+                else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.Index))
                 {
                     Log.Debug("Alternative index cell changed of alternativecontainer. shape:" + changedShape.Name);
                     RationallyComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
@@ -394,7 +394,7 @@ namespace Rationally.Visio
                         rebuildTree = true; //Wait with the rebuild till the undo is done
                     }
                 }
-                else if (Application.IsUndoingOrRedoing && RelatedDocumentContainer.IsRelatedDocumentContainer(changedShape.Name) && cell.LocalName.Equals("User.documentIndex"))
+                else if (Application.IsUndoingOrRedoing && RelatedDocumentContainer.IsRelatedDocumentContainer(changedShape.Name) && cell.LocalName.Equals("User.index"))
                 {
                     Log.Debug("Document index cell changed of documentcontainer. shape:" + changedShape.Name);
                     RationallyComponent docComponent = View.Children.FirstOrDefault(x => x is RelatedDocumentsContainer);
@@ -403,7 +403,7 @@ namespace Rationally.Visio
                         rebuildTree = true; //Wait with the rebuild till the undo is done
                     }
                 }
-                else if (Application.IsUndoingOrRedoing && StakeholderContainer.IsStakeholderContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.StakeholderIndex))
+                else if (Application.IsUndoingOrRedoing && StakeholderContainer.IsStakeholderContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.Index))
                 {
                     Log.Debug("Stakeholder index cell changed of stakeholdercontainer. shape:" + changedShape.Name);
                     RationallyComponent stakeholderComponent = View.Children.FirstOrDefault(x => x is StakeholdersContainer);

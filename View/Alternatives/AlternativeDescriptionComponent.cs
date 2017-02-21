@@ -18,7 +18,7 @@ namespace Rationally.Visio.View.Alternatives
             MarginTop = 0.05;
         }
 
-        public AlternativeDescriptionComponent(Page page, int alternativeIndex) : base(page)
+        public AlternativeDescriptionComponent(Page page, int index) : base(page)
         {
             Width = 5.15;
             Height = 2.5;
@@ -26,8 +26,8 @@ namespace Rationally.Visio.View.Alternatives
 
             AddUserRow("rationallyType");
             RationallyType = "alternativeDescription";
-            AddUserRow("alternativeIndex");
-            AlternativeIndex = alternativeIndex;
+            AddUserRow("index");
+            Index = index;
 
             Name = "AlternativeDescription";
 
@@ -35,7 +35,7 @@ namespace Rationally.Visio.View.Alternatives
             AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this alternative\"", false);
         }
 
-        public void SetAlternativeIdentifier(int alternativeIndex) => AlternativeIndex = alternativeIndex;
+        public void SetAlternativeIdentifier(int alternativeIndex) => Index = alternativeIndex;
 
         public static bool IsAlternativeDescription(string name) => DescriptionRegex.IsMatch(name);
 
@@ -56,12 +56,12 @@ namespace Rationally.Visio.View.Alternatives
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
 
-            if (AlternativeIndex == 0)
+            if (Index == 0)
             {
                 DeleteAction("moveUp");
             }
 
-            if (AlternativeIndex == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
             {
                 DeleteAction("moveDown");
             }

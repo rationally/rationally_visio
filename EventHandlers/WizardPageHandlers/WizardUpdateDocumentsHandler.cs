@@ -29,7 +29,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
             RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
             Log.Debug("container present:" + (relatedDocumentsContainer != null));
             //delete these elements from the view, which will automatically remove them from the model
-            scheduledForDeletion.ForEach(docIndex => relatedDocumentsContainer.Children.Cast<RelatedDocumentContainer>().First(rdc => rdc.DocumentIndex == docIndex).RShape.Delete());
+            scheduledForDeletion.ForEach(docIndex => relatedDocumentsContainer.Children.Cast<RelatedDocumentContainer>().First(rdc => rdc.Index == docIndex).RShape.Delete());
         }
     }
 }

@@ -15,11 +15,11 @@ namespace Rationally.Visio.View.Alternatives
                 InitStyle();
         }
 
-        public AlternativeIdentifierComponent(Page page, int alternativeIndex, string text) : base(page, text)
+        public AlternativeIdentifierComponent(Page page, int index, string text) : base(page, text)
         {
             RationallyType = "alternativeIdentifier";
-            AddUserRow("alternativeIndex");
-            AlternativeIndex = alternativeIndex;
+            AddUserRow("index");
+            Index = index;
 
             Name = "AlternativeIdent";
 
@@ -41,7 +41,7 @@ namespace Rationally.Visio.View.Alternatives
 
         public void SetAlternativeIdentifier(int alternativeIndex)
         {
-            AlternativeIndex = alternativeIndex;
+            Index = alternativeIndex;
             if (Text != (char) (65 + alternativeIndex) + ":")
             {
                 Text = (char) (65 + alternativeIndex) + ":";
@@ -54,12 +54,12 @@ namespace Rationally.Visio.View.Alternatives
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
 
-            if (AlternativeIndex == 0)
+            if (Index == 0)
             {
                 DeleteAction("moveUp");
             }
 
-            if (AlternativeIndex == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
             {
                 DeleteAction("moveDown");
             }

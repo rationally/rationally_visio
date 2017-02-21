@@ -22,8 +22,8 @@ namespace Rationally.Visio.View.Forces
             AddUserRow("alternativeUniqueId");
             ForceAlternativeId = -2;
 
-            AddUserRow("alternativeIndex");
-            AlternativeIndex = -2;
+            AddUserRow("index");
+            Index = -2;
 
             AddUserRow("alternativeIdentifier");
             AlternativeIdentifierString = "";
@@ -47,7 +47,7 @@ namespace Rationally.Visio.View.Forces
         {
             ForceAlternativeId = id;
             AlternativeIdentifierString = altId;
-            AlternativeIndex = altIndex;
+            Index = altIndex;
         }
 
         public ForceTotalComponent(Page page, Shape shape) : base(page)
@@ -63,7 +63,7 @@ namespace Rationally.Visio.View.Forces
             Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.Id == ForceAlternativeId);
             
             AlternativeIdentifierString = alternative.IdentifierString;
-            AlternativeIndex = Globals.RationallyAddIn.Model.Alternatives.IndexOf(alternative);
+            Index = Globals.RationallyAddIn.Model.Alternatives.IndexOf(alternative);
         }
 
         public override void Repaint()

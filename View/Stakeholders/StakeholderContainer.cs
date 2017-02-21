@@ -36,9 +36,9 @@ namespace Rationally.Visio.View.Stakeholders
             {
                 Stakeholder newStakeholder = new Stakeholder(name,role);
 
-                if (StakeholderIndex <= Globals.RationallyAddIn.Model.Stakeholders.Count)
+                if (Index <= Globals.RationallyAddIn.Model.Stakeholders.Count)
                 {
-                    Globals.RationallyAddIn.Model.Stakeholders.Insert(StakeholderIndex, newStakeholder);
+                    Globals.RationallyAddIn.Model.Stakeholders.Insert(Index, newStakeholder);
                 }
                 else
                 {
@@ -49,11 +49,11 @@ namespace Rationally.Visio.View.Stakeholders
             InitStyle();
         }
 
-        public StakeholderContainer(Page page, int stakeholderIndex, Stakeholder stakeholder) : base(page)
+        public StakeholderContainer(Page page, int index, Stakeholder stakeholder) : base(page)
         {
 
-            StakeholderNameComponent nameComponent = new StakeholderNameComponent(page, stakeholderIndex, stakeholder.Name);
-            StakeholderRoleComponent roleComponent = new StakeholderRoleComponent(page, stakeholderIndex, stakeholder.Role);
+            StakeholderNameComponent nameComponent = new StakeholderNameComponent(page, index, stakeholder.Name);
+            StakeholderRoleComponent roleComponent = new StakeholderRoleComponent(page, index, stakeholder.Role);
 
             Children.Add(nameComponent);
             Children.Add(roleComponent);
@@ -62,8 +62,8 @@ namespace Rationally.Visio.View.Stakeholders
             //NameU = "Stakeholder";
             AddUserRow("rationallyType");
             RationallyType = "stakeholder";
-            AddUserRow("stakeholderIndex");
-            StakeholderIndex = stakeholderIndex;
+            AddUserRow("index");
+            Index = index;
 
             //locks
             MsvSdContainerLocked = true;
@@ -86,7 +86,7 @@ namespace Rationally.Visio.View.Stakeholders
         private void InitStyle()
         {
             UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded;
-            MarginTop = StakeholderIndex == 0 ? 0.3 : 0.0;
+            MarginTop = Index == 0 ? 0.3 : 0.0;
             MarginLeft = 0.01;
             MarginRight = 0.01;
             MarginBottom = 0.1;
@@ -98,7 +98,7 @@ namespace Rationally.Visio.View.Stakeholders
             if (StakeholderNameComponent.IsStakeholderName(s.Name))
             {
                 StakeholderNameComponent com = new StakeholderNameComponent(Page, s);
-                if (com.StakeholderIndex == StakeholderIndex)
+                if (com.Index == Index)
                 {
                     Children.Add(com);
                 }
@@ -106,7 +106,7 @@ namespace Rationally.Visio.View.Stakeholders
             else if (StakeholderRoleComponent.IsStakeholderRole(s.Name))
             {
                 StakeholderRoleComponent com = new StakeholderRoleComponent(Page, s);
-                if (com.StakeholderIndex == StakeholderIndex)
+                if (com.Index == Index)
                 {
                     Children.Add(com);
                 }
@@ -115,8 +115,8 @@ namespace Rationally.Visio.View.Stakeholders
 
         public void SetStakeholderIndex(int index)
         {
-            StakeholderIndex = index;
-            Children.ForEach(c => c.StakeholderIndex = index);
+            Index = index;
+            Children.ForEach(c => c.Index = index);
             InitStyle();
         }
 
@@ -127,12 +127,12 @@ namespace Rationally.Visio.View.Stakeholders
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
 
-            if (StakeholderIndex == 0) //Top shape can't move up
+            if (Index == 0) //Top shape can't move up
             {
                 DeleteAction("moveUp");
             }
 
-            if (StakeholderIndex == Globals.RationallyAddIn.Model.Stakeholders.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.Stakeholders.Count - 1)
             {
                 DeleteAction("moveDown");
             }

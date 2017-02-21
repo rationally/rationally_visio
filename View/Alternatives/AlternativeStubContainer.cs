@@ -7,14 +7,14 @@ namespace Rationally.Visio.View.Alternatives
     internal sealed class AlternativeStubContainer : RationallyComponent
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public override int AlternativeIndex
+        public override int Index
         {
-            get; protected set;
+            get; set;
         }
 
-        public AlternativeStubContainer(Page page,int alternativeIndex) : base(page)
+        public AlternativeStubContainer(Page page,int index) : base(page)
         {
-            AlternativeIndex = alternativeIndex;
+            Index = index;
         }
 
         public override bool ExistsInTree(Shape s) => false;

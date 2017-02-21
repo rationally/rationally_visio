@@ -23,12 +23,12 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 RationallyComponent comp = new RationallyComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = changedShape };
-                int index = comp.DocumentIndex;
+                int index = comp.Index;
 
                 //container of all related documents:
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer) Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
                 //find the the RelatedDocumentContainer of the selected file
-                RelatedDocumentContainer documentContainer = (RelatedDocumentContainer) relatedDocumentsContainer.Children.First(f => f.DocumentIndex == index);
+                RelatedDocumentContainer documentContainer = (RelatedDocumentContainer) relatedDocumentsContainer.Children.First(f => f.Index == index);
 
                 RelatedDocument doc = model.Documents[index];
                 doc.Name = openFileDialog.FileName;

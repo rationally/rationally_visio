@@ -17,7 +17,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             RationallyModel model = Globals.RationallyAddIn.Model;
             RationallyComponent component = new RationallyComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = s };
 
-            int index = component.DocumentIndex;
+            int index = component.Index;
             RelatedDocument document = model.Documents[index];
             DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete " + document.Name + "?", "Confirm Deletion", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
@@ -33,7 +33,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                     //trace documents container
                     RelatedDocumentsContainer documentsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
                     //trace the correct document container
-                    RelatedDocumentContainer documentContainer = (RelatedDocumentContainer)documentsContainer.Children.First(c => c is RelatedDocumentContainer && (component.DocumentIndex == c.DocumentIndex));
+                    RelatedDocumentContainer documentContainer = (RelatedDocumentContainer)documentsContainer.Children.First(c => c is RelatedDocumentContainer && (component.Index == c.Index));
 
                     shapeToPass = documentContainer.RShape;
                 }

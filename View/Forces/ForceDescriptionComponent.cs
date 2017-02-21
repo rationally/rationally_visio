@@ -10,7 +10,7 @@ namespace Rationally.Visio.View.Forces
         private static readonly Regex ForceDescriptionRegex = new Regex(@"ForceDescription(\.\d+)?$");
         public const string DefaultDescription = "<<Force>>";
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public ForceDescriptionComponent(Page page, int forceIndex) : base(page)
+        public ForceDescriptionComponent(Page page, int index) : base(page)
         {
             
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
@@ -22,8 +22,8 @@ namespace Rationally.Visio.View.Forces
             RationallyType = "forceDescription";
             Name = "ForceDescription";
 
-            AddUserRow("forceIndex");
-            ForceIndex = forceIndex;
+            AddUserRow("index");
+            Index = index;
             
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
@@ -51,12 +51,12 @@ namespace Rationally.Visio.View.Forces
         {
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-            if (ForceIndex == 0)
+            if (Index == 0)
             {
                 DeleteAction("moveUp");
             }
 
-            if (ForceIndex == Globals.RationallyAddIn.Model.Forces.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.Forces.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -67,9 +67,9 @@ namespace Rationally.Visio.View.Forces
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 UpdateReorderFunctions();
-                if (Text != Globals.RationallyAddIn.Model.Forces[ForceIndex].Description)
+                if (Text != Globals.RationallyAddIn.Model.Forces[Index].Description)
                 {
-                    Text = Globals.RationallyAddIn.Model.Forces[ForceIndex].Description;
+                    Text = Globals.RationallyAddIn.Model.Forces[Index].Description;
                 }
             }
             base.Repaint();

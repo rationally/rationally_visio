@@ -33,7 +33,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 
                 RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
                 //update model
-                int docIndex = containerToDelete.DocumentIndex;
+                int docIndex = containerToDelete.Index;
                 /*if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     

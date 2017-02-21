@@ -42,7 +42,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 }
                 StakeholdersContainer stakeholdersContainer = (StakeholdersContainer)Globals.RationallyAddIn.View.Children.First(c => c is StakeholdersContainer);
                 //update model
-                model.Stakeholders.RemoveAt(delete.StakeholderIndex);
+                model.Stakeholders.RemoveAt(delete.Index);
                 Log.Debug("stakeholder removed from stakeholders container.");
                 //update view tree
                 stakeholdersContainer.Children.Remove(containerToDelete);

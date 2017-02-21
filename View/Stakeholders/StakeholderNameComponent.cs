@@ -17,11 +17,11 @@ namespace Rationally.Visio.View.Stakeholders
             InitStyle();
         }
 
-        public StakeholderNameComponent(Page page, int stakeholderIndex, string labelText) : base(page, labelText)
+        public StakeholderNameComponent(Page page, int index, string labelText) : base(page, labelText)
         {
             RationallyType = "stakeholderName";
-            AddUserRow("stakeholderIndex");
-            StakeholderIndex = stakeholderIndex;
+            AddUserRow("index");
+            Index = index;
 
             Name = "StakeholderName";
 
@@ -47,12 +47,12 @@ namespace Rationally.Visio.View.Stakeholders
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
 
-            if (StakeholderIndex == 0) //Top shape can't move up
+            if (Index == 0) //Top shape can't move up
             {
                 DeleteAction("moveUp");
             }
 
-            if (StakeholderIndex == Globals.RationallyAddIn.Model.Stakeholders.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.Stakeholders.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -64,9 +64,9 @@ namespace Rationally.Visio.View.Stakeholders
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 UpdateReorderFunctions();
-                if (Globals.RationallyAddIn.Model.Stakeholders.Count > StakeholderIndex)
+                if (Globals.RationallyAddIn.Model.Stakeholders.Count > Index)
                 {
-                    Stakeholder stakeholder = Globals.RationallyAddIn.Model.Stakeholders[StakeholderIndex];
+                    Stakeholder stakeholder = Globals.RationallyAddIn.Model.Stakeholders[Index];
                     Text = stakeholder.Name;
                 }
             }

@@ -12,7 +12,7 @@ namespace Rationally.Visio.View.Forces
         private static readonly Regex ForceValueRegex = new Regex(@"ForceValue(\.\d+)?$");
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public ForceValueComponent(Page page, int forceAlternativeId, string altId, int forceIndex) : base(page)
+        public ForceValueComponent(Page page, int forceAlternativeId, string altId, int index) : base(page)
         {
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
@@ -21,8 +21,8 @@ namespace Rationally.Visio.View.Forces
 
             AddUserRow("alternativeUniqueId");
 
-            AddUserRow("forceIndex");
-            ForceIndex = forceIndex;
+            AddUserRow("index");
+            Index = index;
 
             AddUserRow("rationallyType");
             RationallyType = "forceValue";
@@ -64,12 +64,12 @@ namespace Rationally.Visio.View.Forces
         {
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-            if (ForceIndex == 0)
+            if (Index == 0)
             {
                 DeleteAction("moveUp");
             }
 
-            if (ForceIndex == Globals.RationallyAddIn.Model.Forces.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.Forces.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -89,9 +89,9 @@ namespace Rationally.Visio.View.Forces
                 UpdateAlternativeLabels();
                 UpdateReorderFunctions();
 
-                if (Text != Globals.RationallyAddIn.Model.Forces[ForceIndex].ForceValueDictionary[ForceAlternativeId])
+                if (Text != Globals.RationallyAddIn.Model.Forces[Index].ForceValueDictionary[ForceAlternativeId])
                 {
-                    Text = Globals.RationallyAddIn.Model.Forces[ForceIndex].ForceValueDictionary[ForceAlternativeId];
+                    Text = Globals.RationallyAddIn.Model.Forces[Index].ForceValueDictionary[ForceAlternativeId];
                 }
 
                 string toParse = Text.StartsWith("+") ? Text.Substring(1) : Text;

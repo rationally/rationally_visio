@@ -19,8 +19,8 @@ namespace Rationally.Visio.View.Documents
         {
             RationallyType = "relatedUrlUrl";
             Name = "RelatedUrlUrl";
-            AddUserRow("documentIndex");
-            DocumentIndex = index;
+            AddUserRow("index");
+            Index = index;
 
             AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "\"Add file\"", false);
             AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "\"Add url\"", false);
@@ -43,12 +43,12 @@ namespace Rationally.Visio.View.Documents
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
 
-            if (DocumentIndex == 0)
+            if (Index == 0)
             {
                 DeleteAction("moveUp");
             }
 
-            if (DocumentIndex == Globals.RationallyAddIn.Model.Documents.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.Documents.Count - 1)
             {
                 DeleteAction("moveDown");
             }

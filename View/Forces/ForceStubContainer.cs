@@ -7,15 +7,15 @@ namespace Rationally.Visio.View.Forces
     internal sealed class ForceStubContainer : RationallyComponent
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public override int ForceIndex
+        public override int Index
         {
             get;
             set;
         }
 
-        public ForceStubContainer(Page page, int forceIndex) : base(page)
+        public ForceStubContainer(Page page, int index) : base(page)
         {
-            ForceIndex = forceIndex;
+            Index = index;
         }
 
         public override bool ExistsInTree(Shape s) => false;

@@ -11,7 +11,7 @@ namespace Rationally.Visio.View.Forces
         public const string DefaultConcern = "<<concern>>";
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public ForceConcernComponent(Page page, int forceIndex) : base(page)
+        public ForceConcernComponent(Page page, int index) : base(page)
         {
             
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
@@ -23,8 +23,8 @@ namespace Rationally.Visio.View.Forces
             RationallyType = "forceConcern";
             Name = "ForceConcern";
 
-            AddUserRow("forceIndex");
-            ForceIndex = forceIndex;
+            AddUserRow("index");
+            Index = index;
             
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
@@ -53,12 +53,12 @@ namespace Rationally.Visio.View.Forces
         {
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-            if (ForceIndex == 0)
+            if (Index == 0)
             {
                 DeleteAction("moveUp");
             }
 
-            if (ForceIndex == Globals.RationallyAddIn.Model.Forces.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.Forces.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -69,9 +69,9 @@ namespace Rationally.Visio.View.Forces
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio does this for us
             {
                 UpdateReorderFunctions();
-                if (Text != Globals.RationallyAddIn.Model.Forces[ForceIndex].Concern)
+                if (Text != Globals.RationallyAddIn.Model.Forces[Index].Concern)
                 {
-                    Text = Globals.RationallyAddIn.Model.Forces[ForceIndex].Concern;
+                    Text = Globals.RationallyAddIn.Model.Forces[Index].Concern;
                 }
             }
             base.Repaint();

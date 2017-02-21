@@ -16,11 +16,11 @@ namespace Rationally.Visio.View.Alternatives
             InitStyle();
         }
 
-        public AlternativeTitleComponent(Page page, int alternativeIndex, string text) : base(page, text)
+        public AlternativeTitleComponent(Page page, int index, string text) : base(page, text)
         {
             RationallyType = "alternativeTitle";
-            AddUserRow("alternativeIndex");
-            AlternativeIndex = alternativeIndex;
+            AddUserRow("index");
+            Index = index;
 
             Name = "AlternativeTitle";
 
@@ -43,7 +43,7 @@ namespace Rationally.Visio.View.Alternatives
             
         }
 
-        public void SetAlternativeIdentifier(int alternativeIndex) => AlternativeIndex = alternativeIndex;
+        public void SetAlternativeIdentifier(int alternativeIndex) => Index = alternativeIndex;
 
         public static bool IsAlternativeTitle(string name) => TitleRegex.IsMatch(name);
 
@@ -52,12 +52,12 @@ namespace Rationally.Visio.View.Alternatives
             AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
 
-            if (AlternativeIndex == 0) //Top shape can't move up
+            if (Index == 0) //Top shape can't move up
             {
                 DeleteAction("moveUp");
             }
 
-            if (AlternativeIndex == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
             {
                 DeleteAction("moveDown");
             }
@@ -69,9 +69,9 @@ namespace Rationally.Visio.View.Alternatives
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 UpdateReorderFunctions();
-                if (Globals.RationallyAddIn.Model.Alternatives.Count > AlternativeIndex)
+                if (Globals.RationallyAddIn.Model.Alternatives.Count > Index)
                 {
-                    Alternative alternative = Globals.RationallyAddIn.Model.Alternatives[AlternativeIndex];
+                    Alternative alternative = Globals.RationallyAddIn.Model.Alternatives[Index];
                     Text = alternative.Title;
                 }
             }

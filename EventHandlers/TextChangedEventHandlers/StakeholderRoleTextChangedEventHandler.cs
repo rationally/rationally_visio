@@ -14,9 +14,9 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
         {
             RationallyComponent stakeholderRoleComponent = new RationallyComponent(view.Page) { RShape = changedShape };
 
-            if (Globals.RationallyAddIn.Model.Stakeholders.Count <= stakeholderRoleComponent.StakeholderIndex) { return; }
+            if (Globals.RationallyAddIn.Model.Stakeholders.Count <= stakeholderRoleComponent.Index) { return; }
 
-            Stakeholder toUpdate = Globals.RationallyAddIn.Model.Stakeholders[stakeholderRoleComponent.StakeholderIndex];
+            Stakeholder toUpdate = Globals.RationallyAddIn.Model.Stakeholders[stakeholderRoleComponent.Index];
             toUpdate.Role = stakeholderRoleComponent.Text;
         }
     }

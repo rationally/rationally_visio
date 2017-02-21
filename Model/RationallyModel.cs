@@ -94,7 +94,7 @@ namespace Rationally.Visio.Model
         /// </summary>
         public void ResetAlternativeStateColors() => AlternativeStateColors = new Dictionary<string, Color> {{"No State", Color.DimGray}};
 
-        public IEnumerable<DictionaryEntry> AlternativeStateColorsFromFile
+        internal IEnumerable<DictionaryEntry> AlternativeStateColorsFromFile
         {
             get
             {

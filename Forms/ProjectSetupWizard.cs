@@ -4,9 +4,12 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
+using Newtonsoft.Json;
 using Rationally.Visio.Enums;
 using Rationally.Visio.Forms.WizardComponents;
 using Rationally.Visio.RationallyConstants;
+using RestSharp;
+
 
 namespace Rationally.Visio.Forms
 {
@@ -95,9 +98,19 @@ namespace Rationally.Visio.Forms
                 Close();
                 Log.Debug("Closed wizard");
                 pleaseWait.Hide();
+                //TestServerCreateDecision();
             }
         }
-        
+
+        public void TestServerCreateDecision()
+        {
+            RestClient client = new RestClient("http://localhost:4567/");
+            RestRequest request = new RestRequest("/decision/", Method.POST);
+            string jsonToSend = JsonConvert.SerializeObject(Globals.RationallyAddIn.Model);
+            request.AddParameter("application/json; charset=utf-8", jsonToSend, ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+        }
+
         private void UpdateLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             ProcessStartInfo sInfo = new ProcessStartInfo(Constants.RationallySite);

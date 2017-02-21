@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
 using Rationally.Visio.Enums;
+using Rationally.Visio.EventHandlers;
 using Rationally.Visio.Forms.WizardComponents;
+using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
+using Rationally.Visio.View.Alternatives;
+using Rationally.Visio.View.Information;
 
 namespace Rationally.Visio.Forms
 {
@@ -19,6 +24,7 @@ namespace Rationally.Visio.Forms
         private readonly PleaseWait pleaseWait = new PleaseWait();
         private readonly List<IWizardPanel> panelList;
         public IWizardPanel CurrentPanel;
+        public RationallyModel ModelCopy;
 
         public static ProjectSetupWizard Instance
         {
@@ -34,6 +40,7 @@ namespace Rationally.Visio.Forms
 
         public void ShowDialog(bool onDocumentCreation, WizardFieldTypes type)
         {
+            ModelCopy = Globals.RationallyAddIn.Model.DeepCopy();
             Log.Debug("Entered showDialog.");
             if (WindowState == FormWindowState.Minimized)
             {
@@ -89,7 +96,22 @@ namespace Rationally.Visio.Forms
                 int wizardScopeId = Globals.RationallyAddIn.Application.BeginUndoScope("Wizard actions");
 
                 CurrentPanel.UpdateModel();
-                
+                Globals.RationallyAddIn.Model = ModelCopy;
+                Log.Debug("Replaced model by copy");
+                if (DocumentCreation)
+                {
+                    //draw the header
+                    TitleLabel header = new TitleLabel(Globals.RationallyAddIn.Application.ActivePage, ModelCopy.DecisionName);
+                    Globals.RationallyAddIn.View.Children.Add(header);
+                    Log.Debug("Added title component to the sheet.");
+                    //draw the information container
+                    InformationContainer informationContainer = new InformationContainer(Globals.RationallyAddIn.Application.ActivePage, ModelCopy.Author, ModelCopy.DateString, ModelCopy.Version);
+                    Globals.RationallyAddIn.View.Children.Add(informationContainer);
+                    Log.Debug("Added information container to the sheet.");
+                    DocumentCreation = false;
+                }
+                Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is AlternativesContainer)?.Repaint(); //Temporary styling (margin fix) for adding multiple alternatives
+                RepaintHandler.Repaint();
                 //all changes have been made, close the scope and the wizard
                 Globals.RationallyAddIn.Application.EndUndoScope(wizardScopeId, true);
                 Close();

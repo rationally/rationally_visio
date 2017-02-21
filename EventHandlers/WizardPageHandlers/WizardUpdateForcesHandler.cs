@@ -15,26 +15,21 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public static void Execute(ProjectSetupWizard wizard)
         {
-            PleaseWait pleaseWait = new PleaseWait();
-            pleaseWait.Show();
-            pleaseWait.Refresh();
             Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
             //select filled in force rows
             List<DataGridViewRow> forceRows = wizard.TableLayoutMainContentForces.ForcesDataGrid.Rows.Cast<DataGridViewRow>().Where(row => !IsNullOrEmpty(row.Cells[0].Value?.ToString())).ToList();
             Log.Debug("Found " + forceRows.Count + " filled in force rows.");
-            Globals.RationallyAddIn.Model.Forces = forceRows.Select(ConstructForce).ToList();
+            ProjectSetupWizard.Instance.ModelCopy.Forces = forceRows.Select(ConstructForce).ToList();
             Log.Debug("Stored forces in model.");
-            RepaintHandler.Repaint(Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is ForcesContainer));
-            pleaseWait.Close();
         }
 
         private static Force ConstructForce(DataGridViewRow row)
         {
-            List<Alternative> alternatives = Globals.RationallyAddIn.Model.Alternatives;
+            List<Alternative> alternatives = ProjectSetupWizard.Instance.ModelCopy.Alternatives;
 
             Force force = new Force
             {
-                Concern = row.Cells[0].Value?.ToString() ?? "",
+                Concern = row.Cells[0].Value?.ToString() ?? ForceConcernComponent.DefaultConcern,
                 Description = row.Cells[1].Value?.ToString() ?? ""
             };
             Dictionary<int, string> forceValues = new Dictionary<int, string>();
@@ -42,7 +37,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
             List< DataGridViewCell> forceValueCells = row.Cells.Cast<DataGridViewCell>().ToList().Skip(2).ToList();//skip concern and description
             for (int i = 0; i < forceValueCells.Count; i++)
             {
-                forceValues.Add(alternatives[i].UniqueIdentifier,forceValueCells[i].Value?.ToString() ?? "");
+                forceValues.Add(alternatives[i].UniqueIdentifier,forceValueCells[i].Value?.ToString() ?? "0");
             }
             force.ForceValueDictionary = forceValues;
 

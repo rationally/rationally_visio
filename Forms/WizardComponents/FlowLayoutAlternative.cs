@@ -50,9 +50,9 @@ namespace Rationally.Visio.Forms.WizardComponents
         public void UpdateData()
         {
             //connect to a model resource, if one is present for this row
-            Alternative = Globals.RationallyAddIn.Model.Alternatives.Count >= alternativeIndex ? Globals.RationallyAddIn.Model.Alternatives[alternativeIndex - 1] : null;
+            Alternative = ProjectSetupWizard.Instance.ModelCopy.Alternatives.Count >= alternativeIndex ? ProjectSetupWizard.Instance.ModelCopy.Alternatives[alternativeIndex - 1] : null;
             TextBoxAlternativeTitle.Text = Alternative != null ? Alternative.Title : "";
-            alternativeStateDropdown.SelectedIndex = Alternative != null ? Globals.RationallyAddIn.Model.AlternativeStateColors.Keys.ToList().IndexOf(Alternative.Status) : 0;
+            alternativeStateDropdown.SelectedIndex = Alternative != null ? ProjectSetupWizard.Instance.ModelCopy.AlternativeStateColors.Keys.ToList().IndexOf(Alternative.Status) : 0;
         }
 
         public void UpdateModel()
@@ -60,13 +60,16 @@ namespace Rationally.Visio.Forms.WizardComponents
             Log.Debug("HasAlternative:" + (Alternative != null) + "|View has alternativescontainer:" + (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is AlternativesContainer) != null));
             if (Alternative != null)
             {
-                UpdateAlternativeHandler.Execute(alternativeIndex-1, TextBoxAlternativeTitle.Text, alternativeStateDropdown.SelectedItem.ToString());
+                Alternative.Status = alternativeStateDropdown.Text;
+                Alternative.Title = TextBoxAlternativeTitle.Text;
             }
             else
             {
                 if (!string.IsNullOrEmpty(TextBoxAlternativeTitle.Text))
                 {
-                    (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is AlternativesContainer) as AlternativesContainer)?.AddAlternative(TextBoxAlternativeTitle.Text, alternativeStateDropdown.SelectedItem.ToString());
+                    Alternative newAlternative = new Alternative(TextBoxAlternativeTitle.Text, alternativeStateDropdown.Text);
+                    ProjectSetupWizard.Instance.ModelCopy.Alternatives.Add(newAlternative);
+                    newAlternative.GenerateIdentifier(ProjectSetupWizard.Instance.ModelCopy.Alternatives.Count-1);
                 }
             }
         }
@@ -121,7 +124,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             // alternativeStateDropdown
             // 
             alternativeStateDropdown.FormattingEnabled = true;
-            alternativeStateDropdown.Items.AddRange(Globals.RationallyAddIn.Model.AlternativeStateColors.Keys.ToArray());
+            alternativeStateDropdown.Items.AddRange(ProjectSetupWizard.Instance.ModelCopy.AlternativeStateColors.Keys.ToArray());
             alternativeStateDropdown.SelectedIndex = 0;
             alternativeStateDropdown.Location = new Point(466, 6);
             alternativeStateDropdown.Margin = new Padding(3, 6, 3, 3);

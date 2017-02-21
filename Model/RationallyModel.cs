@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
+using System.Runtime.Serialization.Formatters.Binary;
 using log4net;
+using Newtonsoft.Json;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Documents;
@@ -17,6 +20,7 @@ namespace Rationally.Visio.Model
     /// <summary>
     /// Model for the Rationally application.
     /// </summary>
+
     public class RationallyModel 
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -49,7 +53,11 @@ namespace Rationally.Visio.Model
             AlternativeStateColorsFromFile.ToList().Select(rawState => (AlternativeState)rawState.Value).ToList().ForEach(stateColor => AlternativeStateColors.Add(stateColor.State,stateColor.Color));
             //AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"}; //Currently hardcoded, could be user setting in future product.
         }
-
+        public RationallyModel DeepCopy()
+        {
+            string json = JsonConvert.SerializeObject(this);
+            return JsonConvert.DeserializeObject<RationallyModel>(json);
+        }
         public void RegenerateAlternativeIdentifiers()
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Don't update the view during an undo, since the undo does that for us

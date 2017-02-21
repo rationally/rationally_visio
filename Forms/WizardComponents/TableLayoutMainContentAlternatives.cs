@@ -41,7 +41,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             Size = new Size(760, 482);
             TabIndex = 0;
 
-            UpdateRows();
+            //UpdateRows();
         }
 
         public void UpdateRows()
@@ -49,7 +49,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             Controls.Clear();
             RowStyles.Clear();
 
-            int numberOfRows = Math.Max(Constants.SupportedAmountOfAlternatives, Globals.RationallyAddIn.Model.Alternatives.Count);
+            int numberOfRows = Math.Max(Constants.SupportedAmountOfAlternatives, ProjectSetupWizard.Instance.ModelCopy.Alternatives.Count);
             RowCount = numberOfRows + 1;
 
             for (int i = 0; i < numberOfRows; i++)

@@ -221,10 +221,10 @@ namespace Rationally.Visio.Forms.WizardComponents
 
         public void InitData()
         {
-            TextAuthor.Text = Globals.RationallyAddIn.Model.Author;
-            TextDecisionTopic.Text = Globals.RationallyAddIn.Model.DecisionName;
-            DateTimePickerCreationDate.Text = Globals.RationallyAddIn.Model.DateString;
-            TextVersion.Text = Globals.RationallyAddIn.Model.Version;
+            TextAuthor.Text = ProjectSetupWizard.Instance.ModelCopy.Author;
+            TextDecisionTopic.Text = ProjectSetupWizard.Instance.ModelCopy.DecisionName;
+            DateTimePickerCreationDate.Text = ProjectSetupWizard.Instance.ModelCopy.DateString;
+            TextVersion.Text = ProjectSetupWizard.Instance.ModelCopy.Version;
             Log.Debug("Read all general information from the model and wrote it to the wizard.");
         }
 

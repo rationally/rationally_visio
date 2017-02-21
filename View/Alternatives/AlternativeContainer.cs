@@ -44,7 +44,7 @@ namespace Rationally.Visio.View.Alternatives
             {
                 if (AlternativeIndex <= Globals.RationallyAddIn.Model.Alternatives.Count)
                 {
-                    Alternative newAlternative = new Alternative(title, state, UniqueIdentifier);
+                    Alternative newAlternative = new Alternative(title, state, Id);
                     newAlternative.GenerateIdentifier(AlternativeIndex);
                     Globals.RationallyAddIn.Model.Alternatives.Insert(AlternativeIndex, newAlternative);
                     int index = AlternativeIndex;
@@ -55,7 +55,7 @@ namespace Rationally.Visio.View.Alternatives
                 }
                 else
                 {
-                    Alternative newAlternative = new Alternative(title, state, UniqueIdentifier);
+                    Alternative newAlternative = new Alternative(title, state, Id);
                     newAlternative.GenerateIdentifier(Globals.RationallyAddIn.Model.Alternatives.Count);
                     Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
 
@@ -68,7 +68,6 @@ namespace Rationally.Visio.View.Alternatives
 
         public AlternativeContainer(Page page, int alternativeIndex, Alternative alternative) : base(page)
         {
-
             //1) state box
             AlternativeStateComponent stateComponent = new AlternativeStateComponent(page, alternativeIndex, alternative.Status);
 
@@ -94,7 +93,7 @@ namespace Rationally.Visio.View.Alternatives
             AddUserRow("alternativeIndex");
             AlternativeIndex = alternativeIndex;
             AddUserRow("uniqueId");
-            UniqueIdentifier = alternative.UniqueIdentifier;
+            Id = alternative.UniqueIdentifier;
 
             //locks
             MsvSdContainerLocked = true;

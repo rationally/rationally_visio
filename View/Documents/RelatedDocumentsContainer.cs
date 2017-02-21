@@ -98,5 +98,18 @@ namespace Rationally.Visio.View.Documents
         }
 
         public static bool IsRelatedDocumentsContainer(string name) => RelatedRegex.IsMatch(name);
+
+        public override void Repaint()
+        {
+            if (Globals.RationallyAddIn.Model.Documents.Count > Children.Count)
+            {
+                Globals.RationallyAddIn.Model.Documents
+                    .Where(doc => Children.Count == 0 || Globals.RationallyAddIn.Model.Documents.IndexOf(doc) > Children.Last().DocumentIndex).ToList()
+                    .ForEach(doc => 
+                        Children.Add(new RelatedDocumentContainer(Globals.RationallyAddIn.Application.ActivePage, Children.Count, doc))
+                    );
+            }
+            base.Repaint();
+        }
     }
 }

@@ -67,7 +67,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             ForcesDataGrid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(97, 192, 167);
             ForcesDataGrid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             ForcesDataGrid.ColumnHeadersDefaultCellStyle.Font = WizardConstants.HighlightedFont;
-            InitColumns();
+            //InitColumns();
             Controls.Add(ForcesDataGrid);
         }
 
@@ -93,7 +93,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
 
             //examine the model to see how many alternatives are present on the view, and generate as many columns for the user to fill in force values
-            List<Alternative> alternatives = Globals.RationallyAddIn.Model.Alternatives;
+            List<Alternative> alternatives = ProjectSetupWizard.Instance.ModelCopy.Alternatives;
             foreach (DataGridViewTextBoxColumn alternativeColumn in alternatives.Select(alternative => new DataGridViewTextBoxColumn{ HeaderText = alternative.IdentifierString, Name = "ColumnAlternative" + alternative.UniqueIdentifier}))
             {
                 ForcesDataGrid.Columns.Add(alternativeColumn);
@@ -107,18 +107,18 @@ namespace Rationally.Visio.Forms.WizardComponents
             //clear current rows
             ForcesDataGrid.Rows.Clear();
             //create a row for each force in the view, matching the forces table from the view
-            foreach (Force force in Globals.RationallyAddIn.Model.Forces)
+            foreach (Force force in ProjectSetupWizard.Instance.ModelCopy.Forces)
             {
                 DataGridViewRow newRow = (DataGridViewRow)ForcesDataGrid.RowTemplate.Clone();
                 newRow.Cells.Add(new DataGridViewTextBoxCell {Value = force.Concern});
                 newRow.Cells.Add(new DataGridViewTextBoxCell { Value = force.Description });
-                foreach (Alternative alternative in Globals.RationallyAddIn.Model.Alternatives)
+                foreach (Alternative alternative in ProjectSetupWizard.Instance.ModelCopy.Alternatives)
                 {
                     newRow.Cells.Add(new DataGridViewTextBoxCell {Value = force.ForceValueDictionary[alternative.UniqueIdentifier]});
                 }
                 ForcesDataGrid.Rows.Add(newRow);
             }
-            Log.Debug($"Initialised forces table with {Globals.RationallyAddIn.Model.Alternatives.Count} alternatives.");
+            Log.Debug($"Initialised forces table with {ProjectSetupWizard.Instance.ModelCopy.Alternatives.Count} alternatives.");
         }
 
         public bool IsValid()

@@ -20,10 +20,10 @@ namespace Rationally.Visio.View.Forces
             basicDocument.Close();
 
             AddUserRow("alternativeUniqueId");
-            AlternativeUniqueIdentifier = -2;//for debugging, to distinguish from default highest of -1
+            ForceAlternativeUniqueIdentifier = -2;//for debugging, to distinguish from default highest of -1
 
             AddUserRow("alternativeIdentifier");
-            AlternativeIdentifier = "";
+            AlternativeIdentifierString = "";
 
             AddUserRow("rationallyType");
             RationallyType = "forceAlternativeHeaderComponent";
@@ -44,8 +44,8 @@ namespace Rationally.Visio.View.Forces
 
         public ForceAlternativeHeaderComponent(Page page, string altId, int id) : this(page)
         {
-            AlternativeUniqueIdentifier = id;
-            AlternativeIdentifier = altId;
+            ForceAlternativeUniqueIdentifier = id;
+            AlternativeIdentifierString = altId;
             Text = altId;
         }
 
@@ -59,9 +59,9 @@ namespace Rationally.Visio.View.Forces
         private void UpdateAlternativeLabels()
         {
             //locate alternative from model
-            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.UniqueIdentifier == AlternativeUniqueIdentifier);
+            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.UniqueIdentifier == ForceAlternativeUniqueIdentifier);
 
-            AlternativeIdentifier = alternative.IdentifierString;
+            AlternativeIdentifierString = alternative.IdentifierString;
         }
 
         public override void Repaint()
@@ -70,9 +70,9 @@ namespace Rationally.Visio.View.Forces
             {
                 UpdateAlternativeLabels();
             }
-            if (Text != AlternativeIdentifier) //Don't perform useless operations
+            if (Text != AlternativeIdentifierString) //Don't perform useless operations
             {
-                Text = AlternativeIdentifier;
+                Text = AlternativeIdentifierString;
             }
             base.Repaint();
         }

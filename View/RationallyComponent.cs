@@ -75,29 +75,30 @@ namespace Rationally.Visio.View
             get { return RShape.CellsU[CellConstants.RationallyType].ResultStr["Value"]; }
             set { RShape.Cells["User.rationallyType.Value"].Formula = "\"" + value + "\""; }
         }
-        
-        public virtual int AlternativeIndex
-        {
-            get { return (int)RShape.CellsU[CellConstants.AlternativeIndex].ResultIU; }
-            protected set { RShape.CellsU["User.alternativeIndex.Value"].ResultIU = value; }
-        }
 
-        public int UniqueIdentifier
+        public int Id
         {
-            get { return (int)RShape.CellsU["User.uniqueId"].ResultIU; }
+            get { return (int)RShape.CellsU["User.uniqueId"].ResultIU; } //Id is unique for its type (alternative, related document, stakeholder, etc)
             protected set { RShape.CellsU["User.uniqueId.Value"].ResultIU = value; }
         }
 
-        public int AlternativeUniqueIdentifier
+        public int ForceAlternativeUniqueIdentifier //Backreference to alternativeId, for the forces table
+
         {
             get { return (int)RShape.CellsU["User.alternativeUniqueId"].ResultIU; }
             protected set { RShape.CellsU["User.alternativeUniqueId.Value"].ResultIU = value; }
         }
 
-        public string AlternativeIdentifier
+        public string AlternativeIdentifierString
         {
             get { return RShape.CellsU["User.alternativeIdentifier"].ResultStr["Value"]; }
             set { RShape.Cells["User.alternativeIdentifier.Value"].Formula = "\"" + value + "\""; }
+        }
+        
+        public virtual int AlternativeIndex
+        {
+            get { return (int)RShape.CellsU[CellConstants.AlternativeIndex].ResultIU; }
+            protected set { RShape.CellsU["User.alternativeIndex.Value"].ResultIU = value; }
         }
 
         public virtual int ForceIndex

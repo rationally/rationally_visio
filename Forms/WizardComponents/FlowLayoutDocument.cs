@@ -18,7 +18,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         private readonly AntiAliasedButton chooseFileButton;
         private readonly AntiAliasedButton deleteDocumentButton;
 
-        public RelatedDocument Document => Globals.RationallyAddIn.Model.Documents.Count > DocumentIndex ? Globals.RationallyAddIn.Model.Documents[DocumentIndex] : null;
+        public RelatedDocument Document => ProjectSetupWizard.Instance.ModelCopy.Documents.Count > DocumentIndex ? ProjectSetupWizard.Instance.ModelCopy.Documents[DocumentIndex] : null;
 
         public FlowLayoutDocument(int documentIndex)
         {
@@ -148,18 +148,8 @@ namespace Rationally.Visio.Forms.WizardComponents
 
             //create a new document (optionally at the correct index)
             RelatedDocument newDocument = new RelatedDocument(FilePath.Text,FileName.Text,FilePath.ReadOnly);
-            DocumentIndex = Math.Min(DocumentIndex, Globals.RationallyAddIn.Model.Documents.Count);
-            Globals.RationallyAddIn.Model.Documents.Insert(DocumentIndex, newDocument);
-            (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is RelatedDocumentsContainer) as RelatedDocumentsContainer)?.InsertRelatedDocument(newDocument,DocumentIndex);
-            //move document to the right index
-            /*if (documentIndex > -1)
-            {
-                //RelatedDocument toSwap = Globals.RationallyAddIn.Model.Documents.Last();
-                RelatedDocument toSwap = Globals.RationallyAddIn.Model.Documents[documentIndex];
-                Globals.RationallyAddIn.Model.Documents[documentIndex] = Globals.RationallyAddIn.Model.Documents.Last();
-                Globals.RationallyAddIn.Model.Documents.Add(toSwap);
-
-            }*/
+            DocumentIndex = Math.Min(DocumentIndex, ProjectSetupWizard.Instance.ModelCopy.Documents.Count);
+            ProjectSetupWizard.Instance.ModelCopy.Documents.Insert(DocumentIndex, newDocument);
         }
 
         public void UpdateData()

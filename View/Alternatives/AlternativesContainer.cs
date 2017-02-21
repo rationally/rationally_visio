@@ -103,6 +103,18 @@ namespace Rationally.Visio.View.Alternatives
             RepaintHandler.Repaint();
             pleaseWait.Hide();
         }
-
+        
+        public override void Repaint()
+        {
+            if (Globals.RationallyAddIn.Model.Alternatives.Count > Children.Count)
+            {
+                Globals.RationallyAddIn.Model.Alternatives
+                    .Where(alt => Children.Count == 0 || Children.All(c => c.Id != alt.UniqueIdentifier)).ToList()
+                    .ForEach(alt => { alt.GenerateIdentifier(Children.Count);
+                        Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Children.Count, alt));
+                    });
+            }
+            base.Repaint();
+        }
     }
 }

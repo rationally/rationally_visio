@@ -11,7 +11,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
         public static void Execute(ProjectSetupWizard wizard)
         {
             Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
-            wizard.TableLayoutMainContentAlternatives.AlternativeRows.ForEach(a => a.UpdateModel());
+            wizard.TableLayoutMainContentAlternatives.Alternatives.ForEach(a => a.UpdateModel());
         }
     }
 }

@@ -93,7 +93,7 @@ namespace Rationally.Visio.View.Alternatives
             AddUserRow("alternativeIndex");
             AlternativeIndex = alternativeIndex;
             AddUserRow("uniqueId");
-            Id = alternative.UniqueIdentifier;
+            Id = alternative.Id;
 
             //locks
             MsvSdContainerLocked = true;

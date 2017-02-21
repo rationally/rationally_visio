@@ -8,7 +8,7 @@ namespace Rationally.Visio.Model
     public class Alternative
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static int highestUniqueIdentifier = -1;
+        private static int highestId = -1;
         //All properties must be public and have a getter and setter;
         public string Status { get; set; }
 
@@ -16,7 +16,7 @@ namespace Rationally.Visio.Model
 
         public string IdentifierString { get; set; }
 
-        public int UniqueIdentifier { get; set; } //Id that exists independent of the order of the elements. Allows for the identifying of alternatives
+        public int Id { get; set; } //Id that exists independent of the order of the elements. Allows for the identifying of alternatives
 
 
         [JsonConstructor]
@@ -29,16 +29,16 @@ namespace Rationally.Visio.Model
         {
             Title = title;
             Status = status;
-            UniqueIdentifier = ++highestUniqueIdentifier;
+            Id = ++highestId;
         }
-        public Alternative(string title, string status, int uniqueIdentifier)
+        public Alternative(string title, string status, int id)
         {
             Title = title;
             Status = status;
-            UniqueIdentifier = uniqueIdentifier;
-            if (uniqueIdentifier > highestUniqueIdentifier)
+            Id = id;
+            if (id > highestId)
             {
-                highestUniqueIdentifier = uniqueIdentifier;
+                highestId = id;
             }
         }
 

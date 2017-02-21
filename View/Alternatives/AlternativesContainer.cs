@@ -109,7 +109,7 @@ namespace Rationally.Visio.View.Alternatives
             if (Globals.RationallyAddIn.Model.Alternatives.Count > Children.Count)
             {
                 Globals.RationallyAddIn.Model.Alternatives
-                    .Where(alt => Children.Count == 0 || Children.All(c => c.Id != alt.UniqueIdentifier)).ToList()
+                    .Where(alt => Children.Count == 0 || Children.All(c => c.Id != alt.Id)).ToList()
                     .ForEach(alt => { alt.GenerateIdentifier(Children.Count);
                         Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Children.Count, alt));
                     });

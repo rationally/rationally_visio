@@ -37,7 +37,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
             List< DataGridViewCell> forceValueCells = row.Cells.Cast<DataGridViewCell>().ToList().Skip(2).ToList();//skip concern and description
             for (int i = 0; i < forceValueCells.Count; i++)
             {
-                forceValues.Add(alternatives[i].UniqueIdentifier,forceValueCells[i].Value?.ToString() ?? "0");
+                forceValues.Add(alternatives[i].Id,forceValueCells[i].Value?.ToString() ?? "0");
             }
             force.ForceValueDictionary = forceValues;
 

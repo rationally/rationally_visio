@@ -130,22 +130,22 @@ namespace Rationally.Visio.View.Forces
             {
 
                 //locate the header cell for the current alternative, if it exsists
-                ForceValueComponent altValue = (ForceValueComponent)Children.FirstOrDefault(c => c is ForceValueComponent && !c.Deleted && (((ForceValueComponent)c).ForceAlternativeUniqueIdentifier == alt.UniqueIdentifier));
+                ForceValueComponent altValue = (ForceValueComponent)Children.FirstOrDefault(c => c is ForceValueComponent && !c.Deleted && (((ForceValueComponent)c).ForceAlternativeUniqueIdentifier == alt.Id));
                 //if a deleted shape is present, there is no possiblity that we are adding an alternative. Furthermore, the deleted shape still represents an alternative, for each thus no second cell should be added!
                 if ((altValue == null) && Children.All(c => !c.Deleted))
                 {
-                    alreadyThere.Add(new ForceValueComponent(Page, alt.UniqueIdentifier, alt.IdentifierString, ForceIndex));
+                    alreadyThere.Add(new ForceValueComponent(Page, alt.Id, alt.IdentifierString, ForceIndex));
                 }
             }
 
             //at this point, all alternatives have a component in alreadyThere, but there might be components of removed alternatives in there as well
-            List<ForceValueComponent> toRemove = alreadyThere.Where(f => !f.Deleted && !alternatives.ToList().Any(alt => alt.UniqueIdentifier == f.ForceAlternativeUniqueIdentifier)).ToList();
-            List<ForceValueComponent> toRemoveFromTree = alreadyThere.Where(f => f.Deleted || !alternatives.ToList().Any(alt => alt.UniqueIdentifier == f.ForceAlternativeUniqueIdentifier)).ToList();
+            List<ForceValueComponent> toRemove = alreadyThere.Where(f => !f.Deleted && !alternatives.ToList().Any(alt => alt.Id == f.ForceAlternativeUniqueIdentifier)).ToList();
+            List<ForceValueComponent> toRemoveFromTree = alreadyThere.Where(f => f.Deleted || !alternatives.ToList().Any(alt => alt.Id == f.ForceAlternativeUniqueIdentifier)).ToList();
             alreadyThere.RemoveAll(a => toRemoveFromTree.Contains(a));
             //finally, order the alternative columns similar to the alternatives container
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.UniqueIdentifier == fc.ForceAlternativeUniqueIdentifier))).ToList();
+                alreadyThere = alreadyThere.OrderBy(fc => alternatives.IndexOf(alternatives.First(a => a.Id == fc.ForceAlternativeUniqueIdentifier))).ToList();
             }
             Children.RemoveAll(c => c is ForceValueComponent);
             Children.AddRange(alreadyThere);

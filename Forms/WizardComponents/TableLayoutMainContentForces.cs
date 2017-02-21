@@ -94,7 +94,7 @@ namespace Rationally.Visio.Forms.WizardComponents
 
             //examine the model to see how many alternatives are present on the view, and generate as many columns for the user to fill in force values
             List<Alternative> alternatives = ProjectSetupWizard.Instance.ModelCopy.Alternatives;
-            foreach (DataGridViewTextBoxColumn alternativeColumn in alternatives.Select(alternative => new DataGridViewTextBoxColumn{ HeaderText = alternative.IdentifierString, Name = "ColumnAlternative" + alternative.UniqueIdentifier}))
+            foreach (DataGridViewTextBoxColumn alternativeColumn in alternatives.Select(alternative => new DataGridViewTextBoxColumn{ HeaderText = alternative.IdentifierString, Name = "ColumnAlternative" + alternative.Id}))
             {
                 ForcesDataGrid.Columns.Add(alternativeColumn);
             }
@@ -114,7 +114,7 @@ namespace Rationally.Visio.Forms.WizardComponents
                 newRow.Cells.Add(new DataGridViewTextBoxCell { Value = force.Description });
                 foreach (Alternative alternative in ProjectSetupWizard.Instance.ModelCopy.Alternatives)
                 {
-                    newRow.Cells.Add(new DataGridViewTextBoxCell {Value = force.ForceValueDictionary[alternative.UniqueIdentifier]});
+                    newRow.Cells.Add(new DataGridViewTextBoxCell {Value = force.ForceValueDictionary[alternative.Id]});
                 }
                 ForcesDataGrid.Rows.Add(newRow);
             }

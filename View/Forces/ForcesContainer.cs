@@ -61,17 +61,17 @@ namespace Rationally.Visio.View.Forces
 
             //fix the order of the force containers, using ForceIndex
             Children = Children.OrderBy(c => (c is ForceHeaderRow ? -1 : (c is ForceTotalsRow ? Children.Count : c.Index))).ToList();
-            
+
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
             LayoutManager = new VerticalStretchLayout(this);
         }
-        
+
         public static bool IsForcesContainer(string name) => ForcesRegex.IsMatch(name);
 
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             //make s into an rcomponent for access to wrapper
-            RationallyComponent shapeComponent = new RationallyComponent(Page) {RShape = s};
+            RationallyComponent shapeComponent = new RationallyComponent(Page) { RShape = s };
 
             if (ForceContainer.IsForceContainer(s.Name))
             {
@@ -111,24 +111,35 @@ namespace Rationally.Visio.View.Forces
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                if ((Children.Count != 0) && ((Children.Count - 2) < Globals.RationallyAddIn.Model.Forces.Count))
+                List<ForceContainer> toDelete = new List<ForceContainer>();
+                int i = Children.Count - 2;
+                Children.Where(force => force is ForceContainer && Globals.RationallyAddIn.Model.Forces.All(modelForce => modelForce.Id != force.Id)).ToList().ForEach(force =>
                 {
-                    for (int i = Children.Count - 2; i < Globals.RationallyAddIn.Model.Forces.Count; i++)
+                    toDelete.Add((ForceContainer)force);
+                    i--;
+                });
+
+                Globals.RationallyAddIn.Model.Forces.Where(modelForce => Children.All(force => !(force is ForceContainer) || modelForce.Id != force.Id)).ToList().ForEach(modelForce =>
+                        Children.Add(new ForceContainer(Page, i++, modelForce.Id))
+                        );
+                toDelete.ForEach(force => force.RShape.Delete());
+                /*
+                for (int i = Children.Count - 2; i < Globals.RationallyAddIn.Model.Forces.Count; i++)
+                {
+                    Children.Add(new ForceContainer(Page, i, Globals.RationallyAddIn.Model.Forces[i].Id));
+                }*/
+                if (Children.Any(c => c is ForceTotalsRow))
+                {
+                    RationallyComponent toMove = Children.First(c => c is ForceTotalsRow);
+                    while (toMove != Children.Last())
                     {
-                        Children.Add(new ForceContainer(Page, i, true));
-                    }
-                    if (Children.Any(c => c is ForceTotalsRow))
-                    {
-                        RationallyComponent toMove = Children.First(c => c is ForceTotalsRow);
-                        while (toMove != Children.Last())
-                        {
-                            int toMoveIndex = Children.IndexOf(toMove);
-                            RationallyComponent toSwapWith = Children[toMoveIndex+1];
-                            Children[toMoveIndex + 1] = toMove;
-                            Children[toMoveIndex] = toSwapWith;
-                        }
+                        int toMoveIndex = Children.IndexOf(toMove);
+                        RationallyComponent toSwapWith = Children[toMoveIndex + 1];
+                        Children[toMoveIndex + 1] = toMove;
+                        Children[toMoveIndex] = toSwapWith;
                     }
                 }
+
             }
             base.Repaint();
         }

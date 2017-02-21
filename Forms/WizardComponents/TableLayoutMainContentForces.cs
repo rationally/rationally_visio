@@ -15,6 +15,9 @@ namespace Rationally.Visio.Forms.WizardComponents
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public DataGridView ForcesDataGrid;
+
+        public DataGridViewTextBoxColumn ColumnId { get; set; }
+
         public DataGridViewTextBoxColumn ColumnDescription { get; set; }
 
         public DataGridViewTextBoxColumn ColumnConcern { get; set; }
@@ -75,6 +78,9 @@ namespace Rationally.Visio.Forms.WizardComponents
         {
             ForcesDataGrid.Columns.Clear();
 
+            ColumnId = new DataGridViewTextBoxColumn();
+            ColumnId.Visible = false;
+
             //add the two base columns of a force: concern and description
             ColumnConcern = new DataGridViewTextBoxColumn();
             ColumnDescription = new DataGridViewTextBoxColumn();
@@ -89,7 +95,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             ColumnDescription.HeaderText = "Force";
             ColumnDescription.Name = "ColumnDescription"; 
 
-            ForcesDataGrid.Columns.AddRange(ColumnConcern, ColumnDescription);
+            ForcesDataGrid.Columns.AddRange(ColumnId, ColumnConcern, ColumnDescription);
 
 
             //examine the model to see how many alternatives are present on the view, and generate as many columns for the user to fill in force values
@@ -110,6 +116,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             foreach (Force force in ProjectSetupWizard.Instance.ModelCopy.Forces)
             {
                 DataGridViewRow newRow = (DataGridViewRow)ForcesDataGrid.RowTemplate.Clone();
+                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = force.Id});
                 newRow.Cells.Add(new DataGridViewTextBoxCell {Value = force.Concern});
                 newRow.Cells.Add(new DataGridViewTextBoxCell { Value = force.Description });
                 foreach (Alternative alternative in ProjectSetupWizard.Instance.ModelCopy.Alternatives)
@@ -132,7 +139,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         }
 
         private bool ValidateRow(DataGridViewRow row) => row.Cells.Cast<DataGridViewTextBoxCell>().All(cell => IsNullOrEmpty(cell.Value?.ToString()))
-                                                         || !IsNullOrEmpty(row.Cells[0].Value?.ToString());
+                                                         || !IsNullOrEmpty(row.Cells[1].Value?.ToString());
 
         public void UpdateModel()
         {

@@ -14,18 +14,17 @@ namespace Rationally.Visio.View.Forces
     {
         private static readonly Regex ForceContaineRegex = new Regex(@"ForceContainer(\.\d+)?$");
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public ForceContainer(Page page, int index, bool makeChildren) : base(page)
+        public ForceContainer(Page page, int index, int forceId) : base(page)
         {
             AddUserRow("index");
             Index = index;
-            if (makeChildren)
-            {
+            AddUserRow("uniqueId");
+            Id = forceId;
                 ForceConcernComponent concern = new ForceConcernComponent(page, index);
                 Children.Add(concern);
 
                 ForceDescriptionComponent description = new ForceDescriptionComponent(page, index);
                 Children.Add(description);
-            }
             AddUserRow("rationallyType");
             RationallyType = "forceContainer";
             Name = "ForceContainer";
@@ -73,7 +72,7 @@ namespace Rationally.Visio.View.Forces
 
                 if ((concern != null) && (description != null))
                 {
-                    Force correspondingForce = new Force(concern, description, forceValuesDictionary);
+                    Force correspondingForce = new Force(concern, description, forceValuesDictionary, Id);
                     if (Index <= Globals.RationallyAddIn.Model.Forces.Count)
                     {
                         Globals.RationallyAddIn.Model.Forces.Insert(Index, correspondingForce);

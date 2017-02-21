@@ -91,12 +91,16 @@
             <visio:PublishTemplate MenuPath="Rationally\Decision View" />
         </File>
     </Component>
-      <Component>
+       <Component>
         <File Name="log4net.dll">
         </File>
       </Component>
       <Component>
         <File Name="Newtonsoft.Json.dll">
+        </File>
+      </Component>
+      <Component>
+        <File Name="RestSharp.dll">
         </File>
       </Component>
       <Component>

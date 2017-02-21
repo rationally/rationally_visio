@@ -12,7 +12,7 @@ namespace Rationally.Visio.View.Forces
         private static readonly Regex ForceValueRegex = new Regex(@"ForceValue(\.\d+)?$");
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public ForceValueComponent(Page page, int forceAlternativeUniqueIdentifier, string altId, int forceIndex) : base(page)
+        public ForceValueComponent(Page page, int forceAlternativeId, string altId, int forceIndex) : base(page)
         {
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
@@ -33,12 +33,12 @@ namespace Rationally.Visio.View.Forces
 
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
             AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
-            ForceAlternativeUniqueIdentifier = forceAlternativeUniqueIdentifier;
+            ForceAlternativeId = forceAlternativeId;
             Globals.RationallyAddIn.Model.Forces.ForEach(force =>
             {
-                if (!force.ForceValueDictionary.ContainsKey(forceAlternativeUniqueIdentifier))
+                if (!force.ForceValueDictionary.ContainsKey(forceAlternativeId))
                 {
-                    force.ForceValueDictionary.Add(forceAlternativeUniqueIdentifier, "0");
+                    force.ForceValueDictionary.Add(forceAlternativeId, "0");
                 }
             });
 
@@ -78,7 +78,7 @@ namespace Rationally.Visio.View.Forces
         private void UpdateAlternativeLabels()
         {
             //locate alternative from model
-            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.Id == ForceAlternativeUniqueIdentifier);
+            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.Id == ForceAlternativeId);
             AlternativeIdentifierString = alternative.IdentifierString;
         }
 
@@ -89,9 +89,9 @@ namespace Rationally.Visio.View.Forces
                 UpdateAlternativeLabels();
                 UpdateReorderFunctions();
 
-                if (Text != Globals.RationallyAddIn.Model.Forces[ForceIndex].ForceValueDictionary[ForceAlternativeUniqueIdentifier])
+                if (Text != Globals.RationallyAddIn.Model.Forces[ForceIndex].ForceValueDictionary[ForceAlternativeId])
                 {
-                    Text = Globals.RationallyAddIn.Model.Forces[ForceIndex].ForceValueDictionary[ForceAlternativeUniqueIdentifier];
+                    Text = Globals.RationallyAddIn.Model.Forces[ForceIndex].ForceValueDictionary[ForceAlternativeId];
                 }
 
                 string toParse = Text.StartsWith("+") ? Text.Substring(1) : Text;

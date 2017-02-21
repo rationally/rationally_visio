@@ -20,7 +20,7 @@ namespace Rationally.Visio.View.Forces
             basicDocument.Close();
 
             AddUserRow("alternativeUniqueId");
-            ForceAlternativeUniqueIdentifier = -2;//for debugging, to distinguish from default highest of -1
+            ForceAlternativeId = -2;//for debugging, to distinguish from default highest of -1
 
             AddUserRow("alternativeIdentifier");
             AlternativeIdentifierString = "";
@@ -44,7 +44,7 @@ namespace Rationally.Visio.View.Forces
 
         public ForceAlternativeHeaderComponent(Page page, string altId, int id) : this(page)
         {
-            ForceAlternativeUniqueIdentifier = id;
+            ForceAlternativeId = id;
             AlternativeIdentifierString = altId;
             Text = altId;
         }
@@ -59,7 +59,7 @@ namespace Rationally.Visio.View.Forces
         private void UpdateAlternativeLabels()
         {
             //locate alternative from model
-            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.Id == ForceAlternativeUniqueIdentifier);
+            Alternative alternative = Globals.RationallyAddIn.Model.Alternatives.First(a => a.Id == ForceAlternativeId);
 
             AlternativeIdentifierString = alternative.IdentifierString;
         }

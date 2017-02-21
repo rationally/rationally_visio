@@ -82,7 +82,7 @@ namespace Rationally.Visio.View
             protected set { RShape.CellsU["User.uniqueId.Value"].ResultIU = value; }
         }
 
-        public int ForceAlternativeUniqueIdentifier //Backreference to alternativeId, for the forces table
+        public int ForceAlternativeId //Backreference to alternativeId, for the forces table
 
         {
             get { return (int)RShape.CellsU["User.alternativeUniqueId"].ResultIU; }

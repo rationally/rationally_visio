@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
 using Rationally.Visio.EventHandlers.WizardPageHandlers;
+using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
 
 namespace Rationally.Visio.Forms.WizardComponents
@@ -14,13 +16,15 @@ namespace Rationally.Visio.Forms.WizardComponents
     {
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public readonly List<FlowLayoutAlternative> AlternativeRows = new List<FlowLayoutAlternative>();
+        public readonly List<FlowLayoutAlternative> Alternatives;
+
+        public readonly AntiAliasedButton AddAlternativeButton;
 
         public TableLayoutMainContentAlternatives()
         {
-            
+            Alternatives = new List<FlowLayoutAlternative>();
 
-
+            AddAlternativeButton = new AntiAliasedButton();
             Init();
         }
 
@@ -40,8 +44,27 @@ namespace Rationally.Visio.Forms.WizardComponents
             
             Size = new Size(760, 482);
             TabIndex = 0;
+            //
+            // addAlternativeButton
+            //
+            AddAlternativeButton.Name = "AddAlternativeButton";
+            AddAlternativeButton.UseVisualStyleBackColor = true;
+            AddAlternativeButton.Click += AddAlternativeButton_Click;
+            AddAlternativeButton.Text = "Add Alternative";
+            AddAlternativeButton.Size = new Size(200, 34);
+            AddAlternativeButton.Margin = new Padding(0, 0, 360, 0);
+            AddAlternativeButton.Anchor = AnchorStyles.Left | AnchorStyles.Top;
 
-            //UpdateRows();
+            UpdateRows();
+        }
+
+        private void InitScrollBar()
+        {
+            //the following lines are a weird hack to enable vertical scrolling without enabling horizontal scrolling:
+            HorizontalScroll.Maximum = 0;
+            AutoScroll = false;
+            //VerticalScroll.Visible = false;
+            AutoScroll = true;
         }
 
         public void UpdateRows()
@@ -49,31 +72,43 @@ namespace Rationally.Visio.Forms.WizardComponents
             Controls.Clear();
             RowStyles.Clear();
 
-            int numberOfRows = Math.Max(Constants.SupportedAmountOfAlternatives, ProjectSetupWizard.Instance.ModelCopy.Alternatives.Count);
-            RowCount = numberOfRows + 1;
+            RowCount = Alternatives.Count;
+            InitScrollBar();
 
-            for (int i = 0; i < numberOfRows; i++)
+            //update alternative identifier strings
+
+            for (int i = 0; i < Alternatives.Count; i++)
             {
-                FlowLayoutAlternative alternativeRow = new FlowLayoutAlternative(i + 1);
-                AlternativeRows.Add(alternativeRow);
-                RowStyles.Add(new RowStyle(SizeType.Percent, 10F));//TODO what if rowCount > 9
-                Controls.Add(alternativeRow, 0, i);
+                Alternatives[i].Alternative.GenerateIdentifier(i);
+                Controls.Add(Alternatives[i], 0, i);//add control to view
+                
+                RowStyles.Add(new RowStyle(SizeType.Absolute, 95));//style the just added row
             }
+        }
 
-            RowStyles.Add(new RowStyle(SizeType.Percent, 100 - (numberOfRows * 10)));
+        private void AddAlternativeButton_Click(object sender, EventArgs e) => AddAlternative();
+
+        private void AddAlternative()
+        {
+            Alternatives.Add(new FlowLayoutAlternative());
+            UpdateRows();
         }
 
         public void InitData()
         {
-            UpdateRows();
-            AlternativeRows.ForEach(a => a.UpdateData());
+            RationallyModel model = ProjectSetupWizard.Instance.ModelCopy;
+            Alternatives.Clear();
+            //for each present alternative in the model, create a representing row in the wizard panel
+            model.Alternatives.ForEach(alt => Alternatives.Add(new FlowLayoutAlternative(alt)));
 
+            UpdateRows();
+            Alternatives.ForEach(d => d.UpdateData());
             Log.Debug("Initialized alternatives wizard page.");
         }
 
         public bool IsValid()
         {
-            bool validFields = ProjectSetupWizard.Instance.TableLayoutMainContentAlternatives.AlternativeRows.TrueForAll(row => (row.Alternative == null) || !string.IsNullOrWhiteSpace(row.TextBoxAlternativeTitle.Text));
+            bool validFields = ProjectSetupWizard.Instance.TableLayoutMainContentAlternatives.Alternatives.TrueForAll(row => (row.Alternative == null) || !string.IsNullOrWhiteSpace(row.TextBoxAlternativeTitle.Text));
             if (!validFields)
             {
                 MessageBox.Show("Enter a name for every existing alternative.", "Alternative name missing");

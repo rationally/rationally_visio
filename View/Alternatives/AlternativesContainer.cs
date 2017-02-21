@@ -106,6 +106,10 @@ namespace Rationally.Visio.View.Alternatives
         
         public override void Repaint()
         {
+            //remove alternatives that are no longer in the model, but still in the view
+            List<RationallyComponent> toDelete = Children.Where(alternative => !Globals.RationallyAddIn.Model.Alternatives.Select(alt => alt.Id).Contains(alternative.Id)).ToList();
+
+
             if (Globals.RationallyAddIn.Model.Alternatives.Count > Children.Count)
             {
                 Globals.RationallyAddIn.Model.Alternatives
@@ -114,6 +118,9 @@ namespace Rationally.Visio.View.Alternatives
                         Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Children.Count, alt));
                     });
             }
+
+
+            toDelete.ForEach(alt => alt.RShape.Delete());
             base.Repaint();
         }
     }

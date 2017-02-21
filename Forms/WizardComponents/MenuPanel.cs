@@ -114,6 +114,7 @@ namespace Rationally.Visio.Forms.WizardComponents
                 //define bottom buttons
                 ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Clear();
                 ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.CreateButton);
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentAlternatives.AddAlternativeButton);
 
                 ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Refresh();
 

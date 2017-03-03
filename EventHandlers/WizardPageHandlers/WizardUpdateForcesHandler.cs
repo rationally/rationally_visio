@@ -33,7 +33,7 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
             }
             else
             {
-                force = Globals.RationallyAddIn.Model.Forces.First(f => f.Id == int.Parse(row.Cells[0].Value.ToString()));
+                force = ProjectSetupWizard.Instance.ModelCopy.Forces.First(f => f.Id == int.Parse(row.Cells[0].Value.ToString()));
                 force.Concern = row.Cells[1].Value?.ToString() ?? ForceConcernComponent.DefaultConcern;
                 force.Description = row.Cells[2].Value?.ToString() ?? "";
             }

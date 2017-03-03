@@ -111,11 +111,11 @@ namespace Rationally.Visio.View.Forces
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                List<ForceContainer> toDelete = new List<ForceContainer>();
+                List<RationallyComponent> toDelete = new List<RationallyComponent>();
                 int i = Children.Count - 2;
-                Children.Where(force => force is ForceContainer && Globals.RationallyAddIn.Model.Forces.All(modelForce => modelForce.Id != force.Id)).ToList().ForEach(force =>
+                Children.Where(force => force is ForceContainer && !Globals.RationallyAddIn.Model.Forces.Select(frc => frc.Id).Contains(force.Id)).ToList().ForEach(force =>
                 {
-                    toDelete.Add((ForceContainer)force);
+                    toDelete.Add(force);
                     i--;
                 });
 
@@ -123,11 +123,7 @@ namespace Rationally.Visio.View.Forces
                         Children.Add(new ForceContainer(Page, i++, modelForce.Id))
                         );
                 toDelete.ForEach(force => force.RShape.Delete());
-                /*
-                for (int i = Children.Count - 2; i < Globals.RationallyAddIn.Model.Forces.Count; i++)
-                {
-                    Children.Add(new ForceContainer(Page, i, Globals.RationallyAddIn.Model.Forces[i].Id));
-                }*/
+
                 if (Children.Any(c => c is ForceTotalsRow))
                 {
                     RationallyComponent toMove = Children.First(c => c is ForceTotalsRow);

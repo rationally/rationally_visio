@@ -33,10 +33,9 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 
                 ForcesContainer forcesContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
                 //update model
-                int forceIndex = forcesContainer.Children.IndexOf(containerToDelete) - 1;
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
-                    model.Forces.RemoveAt(forceIndex);
+                    model.Forces.RemoveAll(force => force.Id == containerToDelete.Id);
                     Log.Debug("Deleting force from model list of forces.");
                 }
                 //update view tree

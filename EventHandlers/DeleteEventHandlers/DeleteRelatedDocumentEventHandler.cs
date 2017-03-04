@@ -39,7 +39,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                     
                 }*/
                 Log.Debug("Document being removed from model list...");
-                model.Documents.RemoveAt(docIndex);
+                model.Documents.RemoveAll(doc => doc.Id == containerToDelete.Id);
                 //update view tree
                 relatedDocumentsContainer.Children.Remove(containerToDelete);
 

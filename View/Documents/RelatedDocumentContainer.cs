@@ -58,13 +58,14 @@ namespace Rationally.Visio.View.Documents
             
             if ((name != null) && (path != null))
             {
+                RelatedDocument doc = new RelatedDocument(path, name, file, Id);
                 if (Index <= Globals.RationallyAddIn.Model.Documents.Count)
                 {
-                    Globals.RationallyAddIn.Model.Documents.Insert(Index, new RelatedDocument(path, name, file));
+                    Globals.RationallyAddIn.Model.Documents.Insert(Index, doc);
                 }
                 else
                 {
-                    Globals.RationallyAddIn.Model.Documents.Add(new RelatedDocument(path, name, file));
+                    Globals.RationallyAddIn.Model.Documents.Add(doc);
                 }
             }
             MarginTop = Index == 0 ? 0.3 : 0.0;
@@ -73,7 +74,7 @@ namespace Rationally.Visio.View.Documents
             UsedSizingPolicy |= SizingPolicy.ExpandYIfNeeded;
         }
 
-        public RelatedDocumentContainer(Page page, int index, RelatedDocument document) : base(page)
+        public RelatedDocumentContainer(Page page, int index, RelatedDocument document, int docId) : base(page)
         {
             //1) make a title component for the source and add it to the container
             RelatedDocumentTitleComponent relatedDocumentTitleComponent = new RelatedDocumentTitleComponent(page, index, document.Name);
@@ -98,6 +99,8 @@ namespace Rationally.Visio.View.Documents
             Name = "Related Document";
             AddUserRow("index");
             Index = index;
+            AddUserRow("uniqueId");
+            Id = docId;
 
             AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "\"Add file\"", false);
             AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "\"Add url\"", false);

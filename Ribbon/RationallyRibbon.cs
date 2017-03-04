@@ -44,7 +44,6 @@ namespace Rationally.Visio
             string jsonToSend = JsonConvert.SerializeObject(Globals.RationallyAddIn.Model);
             request.AddParameter("application/json; charset=utf-8", jsonToSend, ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
-            var x = 0;
         }
     }
 }

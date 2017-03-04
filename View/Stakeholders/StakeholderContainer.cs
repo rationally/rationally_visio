@@ -34,7 +34,7 @@ namespace Rationally.Visio.View.Stakeholders
 
             if ((name != null) && (role != null))
             {
-                Stakeholder newStakeholder = new Stakeholder(name,role);
+                Stakeholder newStakeholder = new Stakeholder(name,role, Id);
 
                 if (Index <= Globals.RationallyAddIn.Model.Stakeholders.Count)
                 {
@@ -49,7 +49,7 @@ namespace Rationally.Visio.View.Stakeholders
             InitStyle();
         }
 
-        public StakeholderContainer(Page page, int index, Stakeholder stakeholder) : base(page)
+        public StakeholderContainer(Page page, int index, Stakeholder stakeholder, int id) : base(page)
         {
 
             StakeholderNameComponent nameComponent = new StakeholderNameComponent(page, index, stakeholder.Name);
@@ -64,6 +64,9 @@ namespace Rationally.Visio.View.Stakeholders
             RationallyType = "stakeholder";
             AddUserRow("index");
             Index = index;
+            AddUserRow("uniqueid");
+            Id = id;
+
 
             //locks
             MsvSdContainerLocked = true;

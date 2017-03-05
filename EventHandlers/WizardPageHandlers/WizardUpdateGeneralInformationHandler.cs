@@ -19,7 +19,9 @@ namespace Rationally.Visio.EventHandlers.WizardPageHandlers
 
         private static void UpdateGeneralInformationInModel(string author, string decisionName, string date, string version)
         {
+            Log.Debug("About to start a tree rebuild.");
             Globals.RationallyAddIn.RebuildTree(Globals.RationallyAddIn.Application.ActiveDocument);
+            Log.Debug("Rebuild tree was completed.");
             RationallyModel model = ProjectSetupWizard.Instance.ModelCopy;
 
             // Read the contents of setupDialog's TextBox.

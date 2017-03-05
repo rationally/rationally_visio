@@ -57,7 +57,7 @@ namespace Rationally.Visio.View.Stakeholders
 
             Children.Add(nameComponent);
             Children.Add(roleComponent);
-
+            Log.Debug("Starting shapesheet initing of stakeholdercontainer.");
             Name = "Stakeholder";
             //NameU = "Stakeholder";
             AddUserRow("rationallyType");

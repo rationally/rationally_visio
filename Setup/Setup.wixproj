@@ -34,6 +34,7 @@
     <Content Include="Newtonsoft.Json.dll" />
     <Content Include="Rationally Shapes.vssx" />
     <Content Include="RationallyHidden.vssx" />
+    <Content Include="RestSharp.dll" />
   </ItemGroup>
   <ItemGroup>
     <WixExtension Include="WixNetFxExtension">

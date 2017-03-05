@@ -13,13 +13,19 @@ namespace Rationally.Visio
     public partial class RationallyRibbon
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private void RationallyRibbon_Load(object sender, RibbonUIEventArgs e) => wizardButton.Click += wizardButton_Click;
+        private void RationallyRibbon_Load(object sender, RibbonUIEventArgs e)
+        {
+            wizardButton.Click += wizardButton_Click;
+            alternativeStatesOptionsButton.Visible = false;
+            saveToServerButton.Visible = false;
+        }
 
         private static void wizardButton_Click(object sender, RibbonControlEventArgs e)
         {
             if (Globals.RationallyAddIn.Application.ActiveDocument.Template.Contains(Constants.TemplateName))
             {
                 ProjectSetupWizard.Instance.ShowDialog(false, WizardFieldTypes.Title);
+
             }
             else
             {

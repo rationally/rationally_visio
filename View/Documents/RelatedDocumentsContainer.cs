@@ -79,7 +79,7 @@ namespace Rationally.Visio.View.Documents
         public void AddRelatedDocument(RelatedDocument document)
         {
             //create a container that wraps the new document
-            Children.Add(new RelatedDocumentContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Documents.Count - 1, document));
+            Children.Add(new RelatedDocumentContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Documents.Count - 1, document, document.Id));
 
             RepaintHandler.Repaint(this);
         }
@@ -92,7 +92,7 @@ namespace Rationally.Visio.View.Documents
         public void InsertRelatedDocument(RelatedDocument document, int documentIndex)
         {
             //create a container that wraps the new document
-            Children.Insert(Math.Min(documentIndex, Globals.RationallyAddIn.Model.Documents.Count - 1),new RelatedDocumentContainer(Globals.RationallyAddIn.Application.ActivePage, documentIndex, document));
+            Children.Insert(Math.Min(documentIndex, Globals.RationallyAddIn.Model.Documents.Count - 1),new RelatedDocumentContainer(Globals.RationallyAddIn.Application.ActivePage, documentIndex, document, document.Id));
 
             RepaintHandler.Repaint(this);
         }
@@ -101,14 +101,16 @@ namespace Rationally.Visio.View.Documents
 
         public override void Repaint()
         {
+            List<RationallyComponent> toDelete = Children.Where(document => !Globals.RationallyAddIn.Model.Documents.Select(doc => doc.Id).Contains(document.Id)).ToList();
             if (Globals.RationallyAddIn.Model.Documents.Count > Children.Count)
             {
                 Globals.RationallyAddIn.Model.Documents
                     .Where(doc => Children.Count == 0 || Globals.RationallyAddIn.Model.Documents.IndexOf(doc) > Children.Last().Index).ToList()
                     .ForEach(doc => 
-                        Children.Add(new RelatedDocumentContainer(Globals.RationallyAddIn.Application.ActivePage, Children.Count, doc))
+                        Children.Add(new RelatedDocumentContainer(Globals.RationallyAddIn.Application.ActivePage, Children.Count, doc, doc.Id))
                     );
             }
+            toDelete.ForEach(doc => doc.RShape.Delete());
             base.Repaint();
         }
     }

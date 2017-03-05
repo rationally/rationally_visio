@@ -128,6 +128,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         private void RemoveFile(object sender, EventArgs e)
         {
             ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.Documents.Remove(this);
+            ProjectSetupWizard.Instance.ModelCopy.Documents.Remove(Document);
             ProjectSetupWizard.Instance.TableLayoutMainContentDocuments.UpdateRows();
         }
 

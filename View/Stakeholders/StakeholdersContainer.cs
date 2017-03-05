@@ -97,9 +97,24 @@ namespace Rationally.Visio.View.Stakeholders
             pleaseWait.Refresh();
             Stakeholder stakeholder = new Stakeholder(name,role);
             Globals.RationallyAddIn.Model.Stakeholders.Add(stakeholder);
-            Children.Add(new StakeholderContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Stakeholders.Count - 1, stakeholder));//assumes stakeholder is already in the model
+            Children.Add(new StakeholderContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Stakeholders.Count - 1, stakeholder, stakeholder.Id));//assumes stakeholder is already in the model
             RepaintHandler.Repaint(this);
             pleaseWait.Hide();
+        }
+
+        public override void Repaint()
+        {
+            List<RationallyComponent> toDelete = Children.Where(stake => !Globals.RationallyAddIn.Model.Stakeholders.Select(sth => sth.Id).Contains(stake.Id)).ToList();
+            if (Globals.RationallyAddIn.Model.Stakeholders.Count > Children.Count)
+            {
+                Globals.RationallyAddIn.Model.Stakeholders
+                    .Where(sth => Children.Count == 0 || Globals.RationallyAddIn.Model.Stakeholders.IndexOf(sth) > Children.Last().Index).ToList()
+                    .ForEach(sth =>
+                        Children.Add(new StakeholderContainer(Globals.RationallyAddIn.Application.ActivePage, Children.Count, sth, sth.Id))
+                    );
+            }
+            toDelete.ForEach(doc => doc.RShape.Delete());
+            base.Repaint();
         }
     }
 }

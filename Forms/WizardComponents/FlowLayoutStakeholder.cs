@@ -99,6 +99,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         private void RemoveStakeholder(object sender, EventArgs e)
         {
             ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders.Stakeholders.Remove(this);
+            ProjectSetupWizard.Instance.ModelCopy.Stakeholders.Remove(Stakeholder);
             ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders.UpdateRows();
         }
 
@@ -112,8 +113,9 @@ namespace Rationally.Visio.Forms.WizardComponents
             }
             else
             {
+                Stakeholder newStakeholder = new Stakeholder(StakeholderName.Text, StakeholderRole.Text);
                 StakeholderIndex = Math.Min(StakeholderIndex, ProjectSetupWizard.Instance.ModelCopy.Stakeholders.Count);
-                (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is StakeholdersContainer) as StakeholdersContainer)?.AddStakeholder(StakeholderName.Text, StakeholderRole.Text);
+                ProjectSetupWizard.Instance.ModelCopy.Stakeholders.Insert(StakeholderIndex, newStakeholder);
             }
         }
 

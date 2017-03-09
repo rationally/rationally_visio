@@ -17,7 +17,7 @@ namespace Rationally.Visio.View
             InitStyle();
         }
 
-        private void InitStyle()
+        protected void InitStyle()
         {
             SetMargin(0.01);
             MarginLeft = 0.02;

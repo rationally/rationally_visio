@@ -243,6 +243,7 @@ namespace Rationally.Visio.View
         //background
         public string BackgroundColor
         {
+            get { return RShape.CellsU["FillForegnd"].Formula;  }
             set { RShape.CellsU["FillForegnd"].Formula = value; }
         }
 

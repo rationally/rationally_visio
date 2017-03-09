@@ -138,6 +138,7 @@
     <Compile Include="Enums\WizardFieldTypes.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteStakeholderEventHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteStakeholdersEventHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\AddPlanningItemEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\AddStakeholderEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveDownStakeholderHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveUpStakeholderHandler.cs" />
@@ -220,6 +221,8 @@
     <Compile Include="Ribbon\RationallyRibbon.Designer.cs">
       <DependentUpon>RationallyRibbon.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\CheckBoxComponent.cs" />
+    <Compile Include="View\CheckBoxStateComponent.cs" />
     <Compile Include="View\Information\AuthorLabel.cs" />
     <Compile Include="View\Information\DateLabel.cs" />
     <Compile Include="View\Information\TitleLabel.cs" />
@@ -322,6 +325,10 @@
     <Compile Include="View\Information\InformationContainer.cs" />
     <Compile Include="View\InlineLayout.cs" />
     <Compile Include="View\PaddedTextLabel.cs" />
+    <Compile Include="View\Planning\PlanningContainer.cs" />
+    <Compile Include="View\Planning\PlanningItem.cs" />
+    <Compile Include="View\Planning\PlanningItemTextComponent.cs" />
+    <Compile Include="View\Planning\PlanningStubItem.cs" />
     <Compile Include="View\RationallyComponent.cs" />
     <Compile Include="View\RationallyContainer.cs" />
     <Compile Include="View\Documents\RelatedDocumentsContainer.cs" />

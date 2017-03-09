@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using log4net;
 using log4net.Config;
 using Microsoft.Office.Interop.Visio;
+using Microsoft.Office.Tools.Ribbon;
 using Newtonsoft.Json.Linq;
 using Rationally.Visio.EventHandlers;
 using Rationally.Visio.EventHandlers.DeleteEventHandlers;
@@ -75,6 +76,7 @@ namespace Rationally.Visio
             Application.BeforePageDelete += Application_BeforePageDeleteEvent;
             Application.WindowActivated += Application_WindowActivatedEvent;
 
+            Application.SelectionChanged += Application_SelectionChanged;
             RegisterDeleteEventHandlers();
             RegisterQueryDeleteEventHandlers();
             RegisterMarkerEventHandlers();
@@ -86,7 +88,18 @@ namespace Rationally.Visio
             showRationallyUpdatePopup = NewVersionAvailable = CheckRationallyVersion();
         }
 
+        private void Application_SelectionChanged(Window Window)
+        {
+            foreach (Shape s in Window.Selection)
+            {
+                RationallyComponent c = View.GetComponentByShape(s);
 
+                if (c!= null && c.RationallyType.Contains("checkBoxStateComponent"))
+                {
+                    ((CheckBoxStateComponent)c).Toggle();
+                }
+            }
+        }
 
         private static void RegisterDeleteEventHandlers()
         {
@@ -241,6 +254,9 @@ namespace Rationally.Visio
             MarkerEventHandlerRegistry.Register("stakeholderRole.moveDown", new MoveDownStakeholderHandler());
             MarkerEventHandlerRegistry.Register("stakeholder.moveDown", new MoveDownStakeholderHandler());
             MarkerEventHandlerRegistry.Register("stakeholderName.moveDown", new MoveDownStakeholderHandler());
+
+            MarkerEventHandlerRegistry.Register("planning.add", new AddPlanningItemEventHandler());
+            MarkerEventHandlerRegistry.Register("planningItemTextComponent.add", new AddPlanningItemEventHandler());
         }
 
         private static void RegisterTextChangedEventHandlers()

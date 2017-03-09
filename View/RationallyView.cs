@@ -7,6 +7,7 @@ using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Documents;
 using Rationally.Visio.View.Forces;
 using Rationally.Visio.View.Information;
+using Rationally.Visio.View.Planning;
 using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.View
@@ -123,6 +124,22 @@ namespace Rationally.Visio.View
                 {
                     StakeholdersContainer stakeholdersContainer = new StakeholdersContainer(Page, s);
                     Children.Add(stakeholdersContainer);
+                }
+            }
+            else if (PlanningContainer.IsPlanningContainer(s.Name))
+            {
+                if (Children.Exists(x => PlanningContainer.IsPlanningContainer(x.Name)))
+                {
+                    if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+                    {
+                        MessageBox.Show("Only one instance of the planning container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
+                    }
+                }
+                else
+                {
+                    PlanningContainer planningContainer = new PlanningContainer(Page, s);
+                    Children.Add(planningContainer);
                 }
             }
             else if (allowAddOfSubpart)

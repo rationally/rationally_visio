@@ -12,7 +12,7 @@ namespace Rationally.Visio.View
         public static double CHECKBOX_SIZE = 0.4;
         private static readonly Regex regex = new Regex(@"CheckBoxComponent(\.\d+)?$");
 
-        public CheckBoxComponent(Page page) : base(page)
+        public CheckBoxComponent(Page page, int index, bool isFinished) : base(page)
         {
             //create a rectangle wrapper shape
             Application application = Globals.RationallyAddIn.Application;
@@ -25,13 +25,13 @@ namespace Rationally.Visio.View
             containerDocument.Close();
 
             //create a slightly smaller rectangle shape, whose background indicates the state of the checkbox
-            Children.Add(new CheckBoxStateComponent(page));
+            Children.Add(new CheckBoxStateComponent(page, index, isFinished));
 
             AddUserRow("rationallyType");
             AddUserRow("Index");
             RationallyType = "checkBoxComponent";
             Name = "CheckBoxComponent";
-            Index = 0;//TODO implement via model
+            Index = index;
             Width = CHECKBOX_SIZE;
             Height = CHECKBOX_SIZE;
 

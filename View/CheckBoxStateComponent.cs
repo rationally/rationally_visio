@@ -14,7 +14,7 @@ namespace Rationally.Visio.View
         private string unCheckedColor = "RGB(255,255,255)";
         private static readonly Regex regex = new Regex(@"CheckBoxStateComponent(\.\d+)?$");
 
-        public CheckBoxStateComponent(Page page) : base(page)
+        public CheckBoxStateComponent(Page page, int index, bool isFinished) : base(page)
         {
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
@@ -29,10 +29,10 @@ namespace Rationally.Visio.View
             AddUserRow("Index");
             RationallyType = "checkBoxStateComponent";
             Name = "CheckBoxStateComponent";
-            Index = 0;//TODO implement via model
+            Index = index;//TODO implement via model
             LockTextEdit = true;
 
-            Check(false);
+            Check(isFinished);
             InitStyle();
         }
 
@@ -65,10 +65,7 @@ namespace Rationally.Visio.View
             set { Check(value); }
         }
 
-        public void Toggle()
-        {
-            Checked = !Checked;
-        }
+        public void Toggle() => Checked = !Checked;
 
         /// <summary>
         /// Validates whether the passed coordinate is within the four sides of the square that is this component.

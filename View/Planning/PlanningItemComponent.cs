@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
-using Rationally.Visio.View.Alternatives;
+using Rationally.Visio.Model;
+
 
 namespace Rationally.Visio.View.Planning
 {
-    class PlanningItem : HeaderlessContainer
+    class PlanningItemComponent : HeaderlessContainer
     {
         private static readonly Regex regex = new Regex(@"PlanningItem(\.\d+)?$");
 
-        public PlanningItem(Page page, Shape planningItem) : base(page,false)
+        public PlanningItemComponent(Page page, Shape planningItem) : base(page,false)
         {
             RShape = planningItem;
 
@@ -37,12 +38,12 @@ namespace Rationally.Visio.View.Planning
             InitStyle();
         }
 
-        public PlanningItem(Page page) : base(page)
+        public PlanningItemComponent(Page page, int index, PlanningItem item) : base(page)
         {
-            CheckBoxComponent checkBoxComponent = new CheckBoxComponent(page);
+            CheckBoxComponent checkBoxComponent = new CheckBoxComponent(page, index, item.Finished);
             Children.Add(checkBoxComponent);
 
-            PlanningItemTextComponent itemContent = new PlanningItemTextComponent(page,"<<Fill in something that needs to done>>");
+            PlanningItemTextComponent itemContent = new PlanningItemTextComponent(page,index,item.ItemText);
             Children.Add(itemContent);
 
             AddUserRow("rationallyType");
@@ -51,8 +52,8 @@ namespace Rationally.Visio.View.Planning
 
             Name = "PlanningItem";
             RationallyType = "planningItem";
-            Index = 0;//TODO implement
-            Id = -1;//TODO implement
+            Index = index;
+            Id = item.Id;
 
             Width = 4;
             Height = 0.4;
@@ -68,8 +69,12 @@ namespace Rationally.Visio.View.Planning
 
         private void InitStyle()
         {
-            MarginTop = 0.1;
-            MarginBottom = 0.1;
+            MarginTop = Index == 0 ? 0.3 : 0.0;
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+            {
+                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                ContainerPadding = 0;
+            }
             UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded;
         }
 
@@ -132,18 +137,18 @@ namespace Rationally.Visio.View.Planning
 
         private void UpdateReorderFunctions()
         {
-            /*AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
+            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
 
-            if (Index == 0)
+            if (Index == 0) //Top shape can't move up
             {
                 DeleteAction("moveUp");
             }
 
-            if (Index == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.PlanningItems.Count - 1)
             {
                 DeleteAction("moveDown");
-            }*/
+            }
         }
 
         public override void Repaint()

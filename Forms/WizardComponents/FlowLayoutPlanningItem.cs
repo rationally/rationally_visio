@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using Rationally.Visio.Model;
-using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {
@@ -11,120 +9,120 @@ namespace Rationally.Visio.Forms.WizardComponents
     {
         public int PlanningItemIndex { get; private set; }
 
-        private readonly AntiAliasedLabel stakeholderNameLabel;
-        internal readonly TextBox StakeholderName;
-        private readonly AntiAliasedButton deleteStakeholderButton;
+        private readonly AntiAliasedLabel planningItemTextLabel;
+        internal readonly TextBox PlanningItemText;
+        private readonly AntiAliasedButton deletePlanningItemButton;
 
-        public Stakeholder Stakeholder => ProjectSetupWizard.Instance.ModelCopy.Stakeholders.Count > StakeholderIndex ? ProjectSetupWizard.Instance.ModelCopy.Stakeholders[StakeholderIndex] : null;
+        public PlanningItem PlanningItem => ProjectSetupWizard.Instance.ModelCopy.PlanningItems.Count > PlanningItemIndex ? ProjectSetupWizard.Instance.ModelCopy.PlanningItems[PlanningItemIndex] : null;
 
-        private readonly AntiAliasedLabel stakeholderRoleLabel;
-        internal readonly TextBox StakeholderRole;
+        private readonly AntiAliasedLabel planningItemFinishedLabel;
+        internal readonly CheckBox PlanningItemFinished;
 
-        public FlowLayoutStakeholder(int stakeholderIndex)
+        public FlowLayoutPlanningItem(int planningItemIndex)
         {
-            StakeholderIndex = stakeholderIndex;
+            PlanningItemIndex = planningItemIndex;
 
             Dock = DockStyle.Top;
             //this.Anchor = AnchorStyles.Left;
             Location = new Point(3, 3);
-            Name = "flowLayoutPanelStakeholder" + StakeholderIndex;
+            Name = "flowLayoutPanelPlanningItem" + PlanningItemIndex;
             Size = new Size(714, 84);
             TabIndex = 0;
 
-            stakeholderNameLabel = new AntiAliasedLabel();
-            StakeholderName = new TextBox();
-            stakeholderRoleLabel = new AntiAliasedLabel();
-            StakeholderRole = new TextBox();
-            deleteStakeholderButton = new AntiAliasedButton();
+            planningItemTextLabel = new AntiAliasedLabel();
+            PlanningItemText = new TextBox();
+            planningItemFinishedLabel = new AntiAliasedLabel();
+            PlanningItemFinished = new CheckBox();
+            deletePlanningItemButton = new AntiAliasedButton();
             SuspendLayout();
             Init();
         }
 
         private void Init()
         {
-            Controls.Add(stakeholderNameLabel);
-            Controls.Add(StakeholderName);
-            Controls.Add(stakeholderRoleLabel);
-            Controls.Add(StakeholderRole);
-            Controls.Add(deleteStakeholderButton);
+            Controls.Add(planningItemTextLabel);
+            Controls.Add(PlanningItemText);
+            Controls.Add(planningItemFinishedLabel);
+            Controls.Add(PlanningItemFinished);
+            Controls.Add(deletePlanningItemButton);
             //
-            // fileNameLabel
+            // planningItemTextLabel
             //
-            stakeholderNameLabel.AutoSize = true;
-            stakeholderNameLabel.Location = new Point(8, 17);
-            stakeholderNameLabel.Margin = new Padding(3, 10, 3, 0);
-            stakeholderNameLabel.Name = "stakeholderNameLabel";
-            stakeholderNameLabel.Size = new Size(100, 19);
-            stakeholderNameLabel.TabIndex = 0;
-            stakeholderNameLabel.Text = "Name:";
+            planningItemTextLabel.AutoSize = true;
+            planningItemTextLabel.Location = new Point(8, 17);
+            planningItemTextLabel.Margin = new Padding(3, 10, 3, 0);
+            planningItemTextLabel.Name = "planningItemTextLabel";
+            planningItemTextLabel.Size = new Size(100, 19);
+            planningItemTextLabel.TabIndex = 0;
+            planningItemTextLabel.Text = "Name:";
             //
-            // fileName
+            // PlanningItemText
             //
-            StakeholderName.Location = new Point(110, 15);
-            StakeholderName.Margin = new Padding(3, 6, 400, 3);
-            StakeholderName.Name = "stakeholderName";
-            StakeholderName.Size = new Size(350, 27);
-            StakeholderName.TabIndex = 1;
+            PlanningItemText.Location = new Point(110, 15);
+            PlanningItemText.Margin = new Padding(3, 6, 400, 3);
+            PlanningItemText.Name = "PlanningItemText";
+            PlanningItemText.Size = new Size(350, 27);
+            PlanningItemText.TabIndex = 1;
             //
-            // filepathlabel
+            // planningItemFinishedLabel
             //
-            stakeholderRoleLabel.AutoSize = true;
-            stakeholderRoleLabel.Location = new Point(8, 52);
-            stakeholderRoleLabel.Margin = new Padding(3, 10, 3, 0);
-            stakeholderRoleLabel.Name = "stakeholderRoleLabel";
-            stakeholderRoleLabel.Size = new Size(100, 19);
-            stakeholderRoleLabel.TabIndex = 2;
-            stakeholderRoleLabel.Text = "Role:";
+            planningItemFinishedLabel.AutoSize = true;
+            planningItemFinishedLabel.Location = new Point(8, 52);
+            planningItemFinishedLabel.Margin = new Padding(3, 10, 3, 0);
+            planningItemFinishedLabel.Name = "planningItemFinishedLabel";
+            planningItemFinishedLabel.Size = new Size(100, 19);
+            planningItemFinishedLabel.TabIndex = 2;
+            planningItemFinishedLabel.Text = "Role:";
             //
-            // stakeholderRole
+            // PlanningItemFinished
             //
-            StakeholderRole.Location = new Point(110, 50);
-            StakeholderRole.Margin = new Padding(3, 6, 3, 3);
-            StakeholderRole.Name = "stakeholderRole";
-            StakeholderRole.Size = new Size(350, 27);
-            StakeholderRole.TabIndex = 3;
+            PlanningItemFinished.Location = new Point(110, 50);
+            PlanningItemFinished.Margin = new Padding(3, 6, 3, 3);
+            PlanningItemFinished.Name = "planningItemFinished";
+            PlanningItemFinished.Size = new Size(350, 27);
+            PlanningItemFinished.TabIndex = 3;
             //
-            // deleteStakeholderButton
+            // deletePlanningItemButton
             //
-            deleteStakeholderButton.Name = "DeleteStakeholderButton";
-            deleteStakeholderButton.UseVisualStyleBackColor = true;
-            deleteStakeholderButton.Click += RemoveStakeholder;
-            deleteStakeholderButton.TabIndex = 5;
-            deleteStakeholderButton.Location = new Point(580, 50);
-            deleteStakeholderButton.Size = new Size(150, 27);
-            deleteStakeholderButton.Margin = new Padding(3, 0, 3, 3);
-            deleteStakeholderButton.Text = "Remove";
+            deletePlanningItemButton.Name = "DeletePlanningItemButton";
+            deletePlanningItemButton.UseVisualStyleBackColor = true;
+            deletePlanningItemButton.Click += RemovePlanningItem;
+            deletePlanningItemButton.TabIndex = 5;
+            deletePlanningItemButton.Location = new Point(580, 50);
+            deletePlanningItemButton.Size = new Size(150, 27);
+            deletePlanningItemButton.Margin = new Padding(3, 0, 3, 3);
+            deletePlanningItemButton.Text = "Remove";
         }
 
-        private void RemoveStakeholder(object sender, EventArgs e)
+        private void RemovePlanningItem(object sender, EventArgs e)
         {
-            ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders.Stakeholders.Remove(this);
-            ProjectSetupWizard.Instance.ModelCopy.Stakeholders.Remove(Stakeholder);
-            ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders.UpdateRows();
+            ProjectSetupWizard.Instance.TableLayoutMainContentPlanningItems.PlanningItems.Remove(this);
+            ProjectSetupWizard.Instance.ModelCopy.PlanningItems.Remove(PlanningItem);
+            ProjectSetupWizard.Instance.TableLayoutMainContentPlanningItems.UpdateRows();
         }
 
         public void UpdateModel()
         {
-            //if this row represents an existing stakeholder in the model, update it.
-            if (Stakeholder != null)
+            //if this row represents an existing PlanningItem in the model, update it.
+            if (PlanningItem != null)
             {
-                Stakeholder.Name = StakeholderName.Text;
-                Stakeholder.Role = StakeholderRole.Text;
+                PlanningItem.ItemText = PlanningItemText.Text;
+                PlanningItem.Finished = PlanningItemFinished.Checked;
             }
             else
             {
-                Stakeholder newStakeholder = new Stakeholder(StakeholderName.Text, StakeholderRole.Text);
-                StakeholderIndex = Math.Min(StakeholderIndex, ProjectSetupWizard.Instance.ModelCopy.Stakeholders.Count);
-                ProjectSetupWizard.Instance.ModelCopy.Stakeholders.Insert(StakeholderIndex, newStakeholder);
+                PlanningItem newPlanningItem = new PlanningItem(PlanningItemText.Text, PlanningItemFinished.Checked);
+                PlanningItemIndex = Math.Min(PlanningItemIndex, ProjectSetupWizard.Instance.ModelCopy.PlanningItems.Count);
+                ProjectSetupWizard.Instance.ModelCopy.PlanningItems.Insert(PlanningItemIndex, newPlanningItem);
             }
         }
 
         public void UpdateData()
         {
-            if (Stakeholder != null)
+            if (PlanningItem != null)
             {
-                StakeholderName.Text = Stakeholder.Name;
-                StakeholderRole.Text = Stakeholder.Role;
+                PlanningItemText.Text = PlanningItem.ItemText;
+                PlanningItemFinished.Checked = PlanningItem.Finished;
             }
         }
     }

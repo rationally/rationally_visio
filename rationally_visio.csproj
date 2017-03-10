@@ -197,6 +197,9 @@
     <Compile Include="Forms\WizardComponents\TableLayoutMainContentForces.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\WizardComponents\TableLayoutMainContentPlanningItems.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\WizardComponents\TableLayoutMainContentStakeholders.cs">
       <SubType>Component</SubType>
     </Compile>

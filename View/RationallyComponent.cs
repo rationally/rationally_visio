@@ -218,6 +218,11 @@ namespace Rationally.Visio.View
             set { RShape.CellsU["Char.Color"].Formula = value; }
         }
 
+        public bool StrikeThrough
+        {
+            set { RShape.CellsU["Char.strikethru"].Formula = value.ToString().ToUpper(); }
+        }
+
         public int Order
         {
             get { return (int)RShape.CellsU["User.order"].ResultIU; }

@@ -93,7 +93,7 @@ namespace Rationally.Visio
 
         private void Application_MouseDown(int Button, int KeyButtonState, double x, double y, ref bool CancelDefault)
         {
-            /*if (Button != 1) //if other than the left mouse button was clicked
+            if (Button != 1) //if other than the left mouse button was clicked
             {
                 return;
             }
@@ -101,7 +101,7 @@ namespace Rationally.Visio
             PlanningContainer planningContainer = (View.Children.FirstOrDefault(c => c is PlanningContainer) as PlanningContainer);
             //locate all checkbox elements in the view
             List<CheckBoxStateComponent> candidates = planningContainer?.Children //map all planning items to their checkbox child, and that checkbox to its state component
-                .Select(planningItem => ((PlanningItem)planningItem).Children
+                .Select(planningItemComponent => ((PlanningItemComponent)planningItemComponent).Children
                     .First(c => c is CheckBoxComponent)).Cast<CheckBoxComponent>()
                 .Select(checkBox => (CheckBoxStateComponent)checkBox.Children.First()).ToList();
 
@@ -109,15 +109,20 @@ namespace Rationally.Visio
             {
                 return;
             }
-
+            CheckBoxStateComponent stateComponent;
             //for all the candidates, check if the clicked location was within its bounds. Stop as soon as a match if found.
             foreach (CheckBoxStateComponent candidate in candidates)
             {
                 if (candidate.WasClicked(x, y))
                 {
                     candidate.Toggle(); //actual changing of the clicked checkbox's state
+                    stateComponent = candidate;
+                    break;
                 }
-            }*/
+            }
+
+            //locate parent of stateComponent
+
             
 
         }

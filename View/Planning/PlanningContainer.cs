@@ -7,6 +7,7 @@ using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.EventHandlers;
 using Rationally.Visio.Forms;
 using Rationally.Visio.Model;
+using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.View.Planning
@@ -20,9 +21,9 @@ namespace Rationally.Visio.View.Planning
             RShape = planningContainer;
             Array ident = planningContainer.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
-            foreach (Shape shape in shapes.Where(shape => PlanningItem.IsPlanningItem(shape.Name)))
+            foreach (Shape shape in shapes.Where(shape => PlanningItemComponent.IsPlanningItem(shape.Name)))
             {
-                Children.Add(new PlanningItem(page, shape));
+                Children.Add(new PlanningItemComponent(page, shape));
             }
             Children = Children.OrderBy(c => c.Index).ToList();
             LayoutManager = new VerticalStretchLayout(this);
@@ -33,18 +34,18 @@ namespace Rationally.Visio.View.Planning
             //make s into an rcomponent for access to wrapper
             RationallyComponent shapeComponent = new RationallyComponent(Page) { RShape = s };
 
-            if (PlanningItem.IsPlanningItem(s.Name))
+            if (PlanningItemComponent.IsPlanningItem(s.Name))
             {
                 if (Children.All(c => c.Index != shapeComponent.Index)) //there is no forcecontainer stub with this index
                 {
-                    Children.Add(new PlanningItem(Page, s));
+                    Children.Add(new PlanningItemComponent(Page, s));
                 }
                 else
                 {
                     //remove stub, insert s as new containers
                     PlanningStubItem stub = (PlanningStubItem)Children.First(c => c.Index == shapeComponent.Index);
                     Children.Remove(stub);
-                    PlanningItem con = new PlanningItem(Page, s);
+                    PlanningItemComponent con = new PlanningItemComponent(Page, s);
                     if (Children.Count < con.Index)
                     {
                         Children.Add(con);
@@ -77,11 +78,10 @@ namespace Rationally.Visio.View.Planning
         {
             PleaseWait pleaseWait = new PleaseWait();
             pleaseWait.Show();
-            pleaseWait.Refresh();//TODO model stuff
-            //Alternative newAlternative = new Alternative(title, state);
-            //newAlternative.GenerateIdentifier(Globals.RationallyAddIn.Model.Alternatives.Count);
-            //Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
-            Children.Add(new PlanningItem(Globals.RationallyAddIn.Application.ActivePage));
+            pleaseWait.Refresh();
+            PlanningItem newItem = new PlanningItem(Constants.DefaultPlanningItemText, false);
+            Globals.RationallyAddIn.Model.PlanningItems.Add(newItem);
+            Children.Add(new PlanningItemComponent(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.PlanningItems.Count-1, newItem));
             RepaintHandler.Repaint();
             pleaseWait.Hide();
         }

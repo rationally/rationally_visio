@@ -23,6 +23,8 @@ namespace Rationally.Visio.RationallyConstants
         public const string DefaultStateName = "state";
         public static readonly Color DefaultStateColor = Color.BlueViolet;
         public static readonly string StateResourceFile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Rationally/alternativeStates.resx";
+
+        public const string DefaultPlanningItemText = "<<enter something that needs to be done here>>";
     }
 
 }

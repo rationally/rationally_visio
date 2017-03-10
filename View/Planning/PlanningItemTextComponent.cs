@@ -20,7 +20,7 @@ namespace Rationally.Visio.View.Planning
             RShape = shape;
         }
 
-        public PlanningItemTextComponent(Page page, string labelText) : base(page, labelText)
+        public PlanningItemTextComponent(Page page, int index, string labelText) : base(page, labelText)
         {
             RationallyType = "planningItemTextComponent";
 
@@ -30,17 +30,25 @@ namespace Rationally.Visio.View.Planning
             AddAction("deletePlanningItem", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this item\"", false);
 
             AddUserRow("Index");
-            Index = 0; //TODO implement via model
-            Width = 3.7;
+            Index = index; 
+            Width = 4.3;
             Height = 0.2;
             InitStyle();
+        }
+
+        public new void InitStyle()
+        {
+            MarginTop = 0.1;
+            MarginBottom = 0.1;
+            MarginLeft = 0.2;
+            UsedSizingPolicy = SizingPolicy.FixedSize;
         }
 
         public static bool IsPlanningItemTextComponent(string name) => regex.IsMatch(name);
 
         private void UpdateReorderFunctions()
         {
-            /*AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
+            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
             AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
 
             if (Index == 0) //Top shape can't move up
@@ -48,10 +56,10 @@ namespace Rationally.Visio.View.Planning
                 DeleteAction("moveUp");
             }
 
-            if (Index == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
+            if (Index == Globals.RationallyAddIn.Model.PlanningItems.Count - 1)
             {
                 DeleteAction("moveDown");
-            }*/
+            }
         }
 
         public override void Repaint()

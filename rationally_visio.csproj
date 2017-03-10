@@ -328,7 +328,7 @@
     <Compile Include="View\InlineLayout.cs" />
     <Compile Include="View\PaddedTextLabel.cs" />
     <Compile Include="View\Planning\PlanningContainer.cs" />
-    <Compile Include="View\Planning\PlanningItem.cs" />
+    <Compile Include="View\Planning\PlanningItemComponent.cs" />
     <Compile Include="View\Planning\PlanningItemTextComponent.cs" />
     <Compile Include="View\Planning\PlanningStubItem.cs" />
     <Compile Include="View\RationallyComponent.cs" />

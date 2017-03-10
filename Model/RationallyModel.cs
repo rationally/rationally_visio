@@ -38,6 +38,8 @@ namespace Rationally.Visio.Model
         public string Version { get; set; }
         public List<Force> Forces { get; set; }
 
+        public List<PlanningItem> PlanningItems { get; set; }
+
         public RationallyModel()
         {
             Author = "";
@@ -48,6 +50,7 @@ namespace Rationally.Visio.Model
             Documents = new List<RelatedDocument>();
             Forces = new List<Force>();
             Stakeholders = new List<Stakeholder>();
+            PlanningItems = new List<PlanningItem>();
 
             ResetAlternativeStateColors();
             AlternativeStateColorsFromFile.ToList().Select(rawState => (AlternativeState)rawState.Value).ToList().ForEach(stateColor => AlternativeStateColors.Add(stateColor.State,stateColor.Color));

@@ -223,6 +223,7 @@
     </Compile>
     <Compile Include="View\CheckBoxComponent.cs" />
     <Compile Include="View\CheckBoxStateComponent.cs" />
+    <Compile Include="View\CheckBoxStubComponent.cs" />
     <Compile Include="View\Information\AuthorLabel.cs" />
     <Compile Include="View\Information\DateLabel.cs" />
     <Compile Include="View\Information\TitleLabel.cs" />

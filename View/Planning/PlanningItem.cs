@@ -51,7 +51,7 @@ namespace Rationally.Visio.View.Planning
 
             Name = "PlanningItem";
             RationallyType = "planningItem";
-            Index = -1;//TODO implement
+            Index = 0;//TODO implement
             Id = -1;//TODO implement
 
             Width = 4;
@@ -77,12 +77,30 @@ namespace Rationally.Visio.View.Planning
 
         public override void AddToTree(Shape s, bool allowAddInChildren)
         {
+            //make s into an rcomponent for access to wrapper
+            RationallyComponent shapeComponent = new RationallyComponent(Page) { RShape = s };
+
             if (CheckBoxComponent.IsCheckBoxComponent(s.Name))
             {
-                CheckBoxComponent com = new CheckBoxComponent(Page, s);
-                if (com.Index == Index)//TODO implement index
+                if (Children.All(c => c.Index != shapeComponent.Index)) //there is no stub with this index
                 {
-                    Children.Add(com);
+                    Children.Add(new CheckBoxComponent(Page, s));
+                }
+                else
+                {
+                    //remove stub, insert s as new containers
+                    CheckBoxStubComponent stub = (CheckBoxStubComponent)Children.First(c => c.Index == shapeComponent.Index);
+                    Children.Remove(stub);
+                    CheckBoxComponent con = new CheckBoxComponent(Page, s);
+                    if (Children.Count < con.Index) //TODO implement index
+                    {
+                        Children.Add(con);
+                    }
+                    else
+                    {
+                        Children.Insert(con.Index, con);
+                    }
+
                 }
             }
             else if (PlanningItemTextComponent.IsPlanningItemTextComponent(s.Name))
@@ -95,8 +113,19 @@ namespace Rationally.Visio.View.Planning
             }
             else
             {
-                Children.ForEach(r => r.AddToTree(s, allowAddInChildren));
+
+                if (CheckBoxStateComponent.IsCheckBoxStateComponent(s.Name) && Children.All(c => c.Index != shapeComponent.Index)) //if parent not exists
+                {
+                    CheckBoxStubComponent stub = new CheckBoxStubComponent(Page, shapeComponent.Index);
+                    Children.Insert(stub.Index, stub);
+                    Children.ForEach(r => r.AddToTree(s, allowAddInChildren));
+                }
+                else
+                {
+                    Children.ForEach(r => r.AddToTree(s, allowAddInChildren));
+                }
             }
+            
         }
 
         public static bool IsPlanningItem(string name) => regex.IsMatch(name);

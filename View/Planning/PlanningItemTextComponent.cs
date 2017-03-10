@@ -30,7 +30,7 @@ namespace Rationally.Visio.View.Planning
             AddAction("deletePlanningItem", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this item\"", false);
 
             AddUserRow("Index");
-            Index = -1; //TODO implement via model
+            Index = 0; //TODO implement via model
             Width = 3.7;
             Height = 0.2;
             InitStyle();

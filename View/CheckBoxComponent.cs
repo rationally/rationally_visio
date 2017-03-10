@@ -31,7 +31,7 @@ namespace Rationally.Visio.View
             AddUserRow("Index");
             RationallyType = "checkBoxComponent";
             Name = "CheckBoxComponent";
-            Index = -1;//TODO implement via model
+            Index = 0;//TODO implement via model
             Width = CHECKBOX_SIZE;
             Height = CHECKBOX_SIZE;
 
@@ -41,6 +41,17 @@ namespace Rationally.Visio.View
         public CheckBoxComponent(Page page, Shape shape) : base(page)
         {
             RShape = shape;
+
+            foreach (int shapeIdentifier in shape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested))
+            {
+                Shape checkBoxComponent = page.Shapes.ItemFromID[shapeIdentifier];
+                if (CheckBoxStateComponent.IsCheckBoxStateComponent(checkBoxComponent.Name))
+                {
+                    CheckBoxStateComponent cbComponent = new CheckBoxStateComponent(page, checkBoxComponent);
+                    Children.Add(cbComponent);
+                }
+            }
+
             InitStyle();
         }
 

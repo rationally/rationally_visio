@@ -29,10 +29,16 @@ namespace Rationally.Visio.View
             AddUserRow("Index");
             RationallyType = "checkBoxStateComponent";
             Name = "CheckBoxStateComponent";
-            Index = -1;//TODO implement via model
+            Index = 0;//TODO implement via model
             LockTextEdit = true;
 
             Check(false);
+            InitStyle();
+        }
+
+        public CheckBoxStateComponent(Page page, Shape shape) : base(page)
+        {
+            RShape = shape;
             InitStyle();
         }
 

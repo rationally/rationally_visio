@@ -17,6 +17,7 @@ namespace Rationally.Visio.View
         protected ILayoutManager LayoutManager { private get; set; }
         public SizingPolicy UsedSizingPolicy { get; protected set; }
 
+
         protected RationallyContainer(Page page) : base(page)
         {
             Children = new List<RationallyComponent>();
@@ -55,6 +56,18 @@ namespace Rationally.Visio.View
             MsvSdContainerLocked = oldLock;
             
             Children.Where(x => !x.Deleted).ToList().ForEach(c => c.PlaceChildren());
+        }
+
+        public override void UpdateIndex(int index)
+        {
+            //set our own index to the new value
+            if (Index == index)
+            {
+                return;
+            }
+            Index = index;
+            //recursively set the one of our children
+            Children.ForEach(c => UpdateIndex(index));
         }
 
         public override void RemoveChildren()

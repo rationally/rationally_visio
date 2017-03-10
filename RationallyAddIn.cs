@@ -77,7 +77,6 @@ namespace Rationally.Visio
             Application.BeforePageDelete += Application_BeforePageDeleteEvent;
             Application.WindowActivated += Application_WindowActivatedEvent;
 
-            Application.SelectionChanged += Application_SelectionChanged;
             Application.MouseDown += Application_MouseDown;
 
             RegisterDeleteEventHandlers();
@@ -109,7 +108,7 @@ namespace Rationally.Visio
             {
                 return;
             }
-            CheckBoxStateComponent stateComponent;
+            CheckBoxStateComponent stateComponent = null;
             //for all the candidates, check if the clicked location was within its bounds. Stop as soon as a match if found.
             foreach (CheckBoxStateComponent candidate in candidates)
             {
@@ -120,25 +119,17 @@ namespace Rationally.Visio
                     break;
                 }
             }
+            if (stateComponent == null)
+            {
+                return;
+            }
 
             //locate parent of stateComponent
-
-            
+            PlanningItemComponent toStrikeThrough = planningContainer?.Children.Cast<PlanningItemComponent>().First(item => (item.Children.First(c => c is CheckBoxComponent) as CheckBoxComponent).Children.Contains(stateComponent));
+            toStrikeThrough.Children.First(c => c is PlanningItemTextComponent).StrikeThrough = !toStrikeThrough.Children.First(c => c is PlanningItemTextComponent).StrikeThrough;
 
         }
 
-        private void Application_SelectionChanged(Window Window)
-        {
-            /*foreach (Shape s in Window.Selection)
-            {
-                RationallyComponent c = View.GetComponentByShape(s);
-
-                if (c != null && c.RationallyType.Contains("checkBoxStateComponent"))
-                {
-                    ((CheckBoxStateComponent)c).Toggle();
-                }
-            }*/
-        }
 
         private static void RegisterDeleteEventHandlers()
         {
@@ -164,6 +155,9 @@ namespace Rationally.Visio
 
             DeleteEventHandlerRegistry.Register("stakeholder", new DeleteStakeholderEventHandler());
             DeleteEventHandlerRegistry.Register("stakeholders", new DeleteStakeholdersEventHandler());
+
+            DeleteEventHandlerRegistry.Register("planningItem", new DeletePlanningItemEventHandler());
+            DeleteEventHandlerRegistry.Register("planningItemTextComponent", new DeletePlanningItemEventHandler());
         }
 
         private static void RegisterQueryDeleteEventHandlers()
@@ -296,6 +290,10 @@ namespace Rationally.Visio
 
             MarkerEventHandlerRegistry.Register("planning.add", new AddPlanningItemEventHandler());
             MarkerEventHandlerRegistry.Register("planningItemTextComponent.add", new AddPlanningItemEventHandler());
+
+            MarkerEventHandlerRegistry.Register("planning.delete", new MarkerDeletePlanningItemEventHandler());
+            MarkerEventHandlerRegistry.Register("planningItem.delete", new MarkerDeletePlanningItemEventHandler());
+            MarkerEventHandlerRegistry.Register("planningItemTextComponent.delete", new MarkerDeletePlanningItemEventHandler());
         }
 
         private static void RegisterTextChangedEventHandlers()

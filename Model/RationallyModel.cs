@@ -13,6 +13,7 @@ using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Documents;
 using Rationally.Visio.View.Forces;
+using Rationally.Visio.View.Planning;
 using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.Model
@@ -77,7 +78,12 @@ namespace Rationally.Visio.Model
             }
         }
 
-        
+        public void RegeneratePlanningIdentifiers()
+        {
+            int i = 0;
+            PlanningContainer planningContainer = (PlanningContainer)Globals.RationallyAddIn.View.Children.First(c => c is PlanningContainer);
+            planningContainer.Children.Where(c => c is PlanningItemComponent).ToList().ForEach(c => ((PlanningItemComponent)c).UpdateIndex(i++));
+        }
 
         public void RegenerateDocumentIdentifiers()
         {

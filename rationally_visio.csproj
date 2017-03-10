@@ -136,10 +136,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\WizardFieldTypes.cs" />
+    <Compile Include="EventHandlers\DeleteEventHandlers\DeletePlanningItemEventHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteStakeholderEventHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteStakeholdersEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\AddPlanningItemEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\AddStakeholderEventHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MarkerDeletePlanningItemEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveDownStakeholderHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveUpStakeholderHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\StartDeleteStakeholderEventHandler.cs" />

@@ -186,6 +186,9 @@
     <Compile Include="Forms\WizardComponents\FlowLayoutDocument.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\WizardComponents\FlowLayoutPlanningItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\WizardComponents\FlowLayoutStakeholder.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -194,6 +197,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\WizardComponents\TableLayoutMainContentForces.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\WizardComponents\TableLayoutMainContentPlanningItems.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\WizardComponents\TableLayoutMainContentStakeholders.cs">

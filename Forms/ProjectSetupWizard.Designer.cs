@@ -157,6 +157,7 @@ namespace Rationally.Visio.Forms
         public TableLayoutMainContentForces TableLayoutMainContentForces = new TableLayoutMainContentForces();
         public TableLayoutMainContentDocuments TableLayoutMainContentDocuments = new TableLayoutMainContentDocuments();
         public TableLayoutMainContentStakeholders TableLayoutMainContentStakeholders = new TableLayoutMainContentStakeholders();
+        public TableLayoutMainContentPlanningItems TableLayoutMainContentPlanningItems = new TableLayoutMainContentPlanningItems();
         public FlowLayoutPanel FlowLayoutBottomButtons;
         
         

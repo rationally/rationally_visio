@@ -46,11 +46,12 @@ namespace Rationally.Visio.View.Planning
             Children.Add(itemContent);
 
             AddUserRow("rationallyType");
-            AddUserRow("order");
+            AddUserRow("Index");
             AddUserRow("uniqueId");
 
+            Name = "PlanningItem";
             RationallyType = "planningItem";
-            Order = -1;//TODO implement
+            Index = -1;//TODO implement
             Id = -1;//TODO implement
 
             Width = 4;
@@ -87,10 +88,14 @@ namespace Rationally.Visio.View.Planning
             else if (PlanningItemTextComponent.IsPlanningItemTextComponent(s.Name))
             {
                 PlanningItemTextComponent com = new PlanningItemTextComponent(Page, s);
-                if (com.Index == Index)//TODO implement index
+                if (com.Index == Index) //TODO implement index
                 {
                     Children.Add(com);
                 }
+            }
+            else
+            {
+                Children.ForEach(r => r.AddToTree(s, allowAddInChildren));
             }
         }
 

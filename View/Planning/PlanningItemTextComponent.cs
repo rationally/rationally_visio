@@ -28,6 +28,9 @@ namespace Rationally.Visio.View.Planning
 
             AddAction("addPlanningItem", "QUEUEMARKEREVENT(\"add\")", "\"Add item\"", false);
             AddAction("deletePlanningItem", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this item\"", false);
+
+            AddUserRow("Index");
+            Index = -1; //TODO implement via model
             Width = 3.7;
             Height = 0.2;
             InitStyle();

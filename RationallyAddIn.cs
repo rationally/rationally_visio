@@ -21,6 +21,7 @@ using Rationally.Visio.View;
 using Rationally.Visio.View.Alternatives;
 using Rationally.Visio.View.Documents;
 using Rationally.Visio.View.Forces;
+using Rationally.Visio.View.Planning;
 using Rationally.Visio.View.Stakeholders;
 using Application = Microsoft.Office.Interop.Visio.Application;
 
@@ -77,6 +78,8 @@ namespace Rationally.Visio
             Application.WindowActivated += Application_WindowActivatedEvent;
 
             Application.SelectionChanged += Application_SelectionChanged;
+            Application.MouseDown += Application_MouseDown;
+
             RegisterDeleteEventHandlers();
             RegisterQueryDeleteEventHandlers();
             RegisterMarkerEventHandlers();
@@ -88,17 +91,48 @@ namespace Rationally.Visio
             showRationallyUpdatePopup = NewVersionAvailable = CheckRationallyVersion();
         }
 
+        private void Application_MouseDown(int Button, int KeyButtonState, double x, double y, ref bool CancelDefault)
+        {
+            /*if (Button != 1) //if other than the left mouse button was clicked
+            {
+                return;
+            }
+            
+            PlanningContainer planningContainer = (View.Children.FirstOrDefault(c => c is PlanningContainer) as PlanningContainer);
+            //locate all checkbox elements in the view
+            List<CheckBoxStateComponent> candidates = planningContainer?.Children //map all planning items to their checkbox child, and that checkbox to its state component
+                .Select(planningItem => ((PlanningItem)planningItem).Children
+                    .First(c => c is CheckBoxComponent)).Cast<CheckBoxComponent>()
+                .Select(checkBox => (CheckBoxStateComponent)checkBox.Children.First()).ToList();
+
+            if (candidates == null)
+            {
+                return;
+            }
+
+            //for all the candidates, check if the clicked location was within its bounds. Stop as soon as a match if found.
+            foreach (CheckBoxStateComponent candidate in candidates)
+            {
+                if (candidate.WasClicked(x, y))
+                {
+                    candidate.Toggle(); //actual changing of the clicked checkbox's state
+                }
+            }*/
+            
+
+        }
+
         private void Application_SelectionChanged(Window Window)
         {
-            foreach (Shape s in Window.Selection)
+            /*foreach (Shape s in Window.Selection)
             {
                 RationallyComponent c = View.GetComponentByShape(s);
 
-                if (c!= null && c.RationallyType.Contains("checkBoxStateComponent"))
+                if (c != null && c.RationallyType.Contains("checkBoxStateComponent"))
                 {
                     ((CheckBoxStateComponent)c).Toggle();
                 }
-            }
+            }*/
         }
 
         private static void RegisterDeleteEventHandlers()
@@ -124,7 +158,7 @@ namespace Rationally.Visio
             DeleteEventHandlerRegistry.Register("informationVersionLabel", new DeleteInformationComponentEventHandler());
 
             DeleteEventHandlerRegistry.Register("stakeholder", new DeleteStakeholderEventHandler());
-            DeleteEventHandlerRegistry.Register("stakeholders", new DeleteStakeholdersEventHandler());  
+            DeleteEventHandlerRegistry.Register("stakeholders", new DeleteStakeholdersEventHandler());
         }
 
         private static void RegisterQueryDeleteEventHandlers()
@@ -197,7 +231,7 @@ namespace Rationally.Visio
             MarkerEventHandlerRegistry.Register("alternativeIdentifier.delete", new MarkerDeleteAlternativeEventHandler());
             MarkerEventHandlerRegistry.Register("alternativeTitle.delete", new MarkerDeleteAlternativeEventHandler());
             MarkerEventHandlerRegistry.Register("alternativeDescription.delete", new MarkerDeleteAlternativeEventHandler());
-            
+
             MarkerEventHandlerRegistry.Register("alternativeState.change", new EditAlternativeStateEventHandler());
             MarkerEventHandlerRegistry.Register("relatedFile.edit", new EditRelatedFileHandler());
 
@@ -272,7 +306,7 @@ namespace Rationally.Visio
             TextChangedEventHandlerRegistry.Register("decisionName", new DecisionNameTextChangedHandler());
             TextChangedEventHandlerRegistry.Register("relatedDocumentTitle", new RelatedDocumentTitleTextChangedEventHandler());
             TextChangedEventHandlerRegistry.Register("relatedUrlUrl", new RelatedUrlUrlTextChangedHandler());
-            TextChangedEventHandlerRegistry.Register("stakeholderName",new StakeholderNameTextChangedEventHandler());
+            TextChangedEventHandlerRegistry.Register("stakeholderName", new StakeholderNameTextChangedEventHandler());
             TextChangedEventHandlerRegistry.Register("stakeholderRole", new StakeholderRoleTextChangedEventHandler());
         }
 
@@ -375,7 +409,7 @@ namespace Rationally.Visio
         {
             Shape changedShape = cell.Shape;
             // ReSharper disable once MergeSequentialChecksWhenPossible
-            if ((changedShape == null) || !changedShape.Document.Template.Contains(Constants.TemplateName) || (changedShape.CellExistsU[CellConstants.RationallyType, (short) VisExistsFlags.visExistsAnywhere] != Constants.CellExists)) //No need to continue when the shape is not part of our model.
+            if ((changedShape == null) || !changedShape.Document.Template.Contains(Constants.TemplateName) || (changedShape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] != Constants.CellExists)) //No need to continue when the shape is not part of our model.
             {
                 return;
             }
@@ -385,11 +419,11 @@ namespace Rationally.Visio
                 {
                     Log.Debug("Cell changed of hyperlink shape:" + changedShape.Name);
                     //find the container that holds all Related Documents
-                    RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer) View.Children.First(c => c is RelatedDocumentsContainer);
+                    RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)View.Children.First(c => c is RelatedDocumentsContainer);
                     //find the related document holding the changed shape (one of his children has RShape equal to changedShape)
                     RelatedDocumentContainer relatedDocumentContainer = relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().First(dc => dc.Children.Where(c => c.RShape.Equals(changedShape)).ToList().Count > 0);
                     //update the text of the URL display component to the new url
-                    RelatedURLURLComponent relatedURLURLComponent = (RelatedURLURLComponent) relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent);
+                    RelatedURLURLComponent relatedURLURLComponent = (RelatedURLURLComponent)relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent);
                     relatedURLURLComponent.Text = changedShape.Hyperlink.Address;
                 }
                 else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.Index))

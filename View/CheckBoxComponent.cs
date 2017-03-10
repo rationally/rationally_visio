@@ -28,9 +28,10 @@ namespace Rationally.Visio.View
             Children.Add(new CheckBoxStateComponent(page));
 
             AddUserRow("rationallyType");
+            AddUserRow("Index");
             RationallyType = "checkBoxComponent";
             Name = "CheckBoxComponent";
-
+            Index = -1;//TODO implement via model
             Width = CHECKBOX_SIZE;
             Height = CHECKBOX_SIZE;
 
@@ -41,6 +42,17 @@ namespace Rationally.Visio.View
         {
             RShape = shape;
             InitStyle();
+        }
+
+        public override void AddToTree(Shape s, bool allowAddOfSubpart)
+        {
+            //make s into an rcomponent for access to wrapper
+            RationallyComponent shapeComponent = new RationallyComponent(Page) {RShape = s};
+
+            if (CheckBoxStateComponent.IsCheckBoxStateComponent(shapeComponent.Name))
+            {
+                Children.Add((CheckBoxStateComponent)shapeComponent);
+            }//TODO validate whether it's the right one
         }
 
         private void InitStyle()

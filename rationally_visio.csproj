@@ -203,6 +203,7 @@
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="Model\AlternativeState.cs" />
+    <Compile Include="Model\PlanningItem.cs" />
     <Compile Include="Model\Stakeholder.cs" />
     <Compile Include="RationallyConstants\CellConstants.cs" />
     <Compile Include="RationallyConstants\Constants.cs" />

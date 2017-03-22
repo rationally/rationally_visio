@@ -15,6 +15,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         private readonly MenuButton buttonShowForces;
         private readonly MenuButton buttonShowRelatedDocuments;
         private readonly MenuButton buttonShowStakeholders;
+        private readonly MenuButton buttonShowPlanning;
 
         public readonly List<MenuButton> Buttons;
 
@@ -39,6 +40,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             buttonShowForces = new MenuButton(this);
             buttonShowRelatedDocuments = new MenuButton(this);
             buttonShowStakeholders = new MenuButton(this);
+            buttonShowPlanning = new MenuButton(this);
             Init();
 
         }
@@ -87,6 +89,14 @@ namespace Rationally.Visio.Forms.WizardComponents
             buttonShowStakeholders.Text = "Stakeholders";
             buttonShowStakeholders.UseVisualStyleBackColor = false;
             buttonShowStakeholders.Click += buttonShowStakeholders_Click;
+            //
+            // button planning
+            //
+            buttonShowPlanning.FlatAppearance.BorderSize = 0;
+            buttonShowPlanning.Name = "buttonShowPlanning";
+            buttonShowPlanning.Text = "Planning";
+            buttonShowPlanning.UseVisualStyleBackColor = false;
+            buttonShowPlanning.Click += buttonShowPlanning_Click;
             //self
 
             Controls.Add(ButtonShowGeneral, 0, 0);
@@ -94,6 +104,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             Controls.Add(buttonShowForces, 0, 2);
             Controls.Add(buttonShowRelatedDocuments, 0, 3);
             Controls.Add(buttonShowStakeholders, 0, 4);
+            Controls.Add(buttonShowPlanning, 0, 5);
             HighLightedButton = ButtonShowGeneral;
         }
 
@@ -183,6 +194,25 @@ namespace Rationally.Visio.Forms.WizardComponents
                 ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Refresh();
 
                 ProjectSetupWizard.Instance.TableLayoutMainContentStakeholders.InitData();
+            }
+        }
+
+        private void buttonShowPlanning_Click(object sender, EventArgs e)
+        {
+            if ((sender as MenuButton)?.HandleEvent ?? false)
+            {
+                ProjectSetupWizard.Instance.CurrentPanel = ProjectSetupWizard.Instance.TableLayoutMainContentPlanningItems;
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Clear();
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentPlanningItems);
+                ProjectSetupWizard.Instance.tableLayoutRightColumn.Controls.Add(ProjectSetupWizard.Instance.FlowLayoutBottomButtons);
+                //define bottom buttons
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Clear();
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.CreateButton);
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Controls.Add(ProjectSetupWizard.Instance.TableLayoutMainContentPlanningItems.AddPlanningItemButton);
+
+                ProjectSetupWizard.Instance.FlowLayoutBottomButtons.Refresh();
+
+                ProjectSetupWizard.Instance.TableLayoutMainContentPlanningItems.InitData();
             }
         }
     }

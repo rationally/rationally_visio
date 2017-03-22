@@ -133,6 +133,14 @@ namespace Rationally.Visio.View.Planning
             
         }
 
+        public void SetPlanningItemIndex(int index)
+        {
+            Index = index;
+            Children.ForEach(c => c.Index = index);
+            InitStyle();
+        }
+
+
         public static bool IsPlanningItem(string name) => regex.IsMatch(name);
 
         private void UpdateReorderFunctions()
@@ -153,31 +161,10 @@ namespace Rationally.Visio.View.Planning
 
         public override void Repaint()
         {
-            /*if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio takes care of this
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio takes care of this
             {
                 UpdateReorderFunctions();
             }
-            if (Children.Count == 4)
-            {
-                if (!(Children[0] is AlternativeIdentifierComponent))
-                {
-                    RationallyComponent c = Children.Find(x => x is AlternativeIdentifierComponent);
-                    Children.Remove(c);
-                    Children.Insert(0, c);
-                }
-                if (!(Children[1] is AlternativeTitleComponent))
-                {
-                    RationallyComponent c = Children.Find(x => x is AlternativeTitleComponent);
-                    Children.Remove(c);
-                    Children.Insert(1, c);
-                }
-                if (!(Children[2] is AlternativeStateComponent))
-                {
-                    RationallyComponent c = Children.Find(x => x is AlternativeStateComponent);
-                    Children.Remove(c);
-                    Children.Insert(2, c);
-                }
-            }*/
             base.Repaint();
         }
     }

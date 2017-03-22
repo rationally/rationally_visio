@@ -81,7 +81,8 @@ namespace Rationally.Visio.Forms
                 TableLayoutMainContentAlternatives,
                 TableLayoutMainContentForces,
                 TableLayoutMainContentDocuments,
-                TableLayoutMainContentStakeholders
+                TableLayoutMainContentStakeholders,
+                TableLayoutMainContentPlanningItems
             };
             StartPosition = FormStartPosition.CenterScreen;
             Log.Debug("Setting AcceptButton as CreateButton with text:" + CreateButton.Text);

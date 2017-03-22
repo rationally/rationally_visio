@@ -25,7 +25,6 @@ using Rationally.Visio.View.Planning;
 using Rationally.Visio.View.Stakeholders;
 using Application = Microsoft.Office.Interop.Visio.Application;
 
-//[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 // ReSharper disable ClassNeverInstantiated.Global
 
 //Main class for the visio add in. Everything is managed from here.
@@ -76,8 +75,7 @@ namespace Rationally.Visio
 
             Application.BeforePageDelete += Application_BeforePageDeleteEvent;
             Application.WindowActivated += Application_WindowActivatedEvent;
-
-            Application.SelectionChanged += Application_SelectionChanged;
+            
             Application.MouseDown += Application_MouseDown;
 
             RegisterDeleteEventHandlers();
@@ -126,19 +124,7 @@ namespace Rationally.Visio
             
 
         }
-
-        private void Application_SelectionChanged(Window Window)
-        {
-            /*foreach (Shape s in Window.Selection)
-            {
-                RationallyComponent c = View.GetComponentByShape(s);
-
-                if (c != null && c.RationallyType.Contains("checkBoxStateComponent"))
-                {
-                    ((CheckBoxStateComponent)c).Toggle();
-                }
-            }*/
-        }
+        
 
         private static void RegisterDeleteEventHandlers()
         {
@@ -296,6 +282,12 @@ namespace Rationally.Visio
 
             MarkerEventHandlerRegistry.Register("planning.add", new AddPlanningItemEventHandler());
             MarkerEventHandlerRegistry.Register("planningItemTextComponent.add", new AddPlanningItemEventHandler());
+
+            MarkerEventHandlerRegistry.Register("planningItem.moveUp", new MoveUpPlanningItemHandler());
+            MarkerEventHandlerRegistry.Register("planningItemTextComponent.moveUp", new MoveUpPlanningItemHandler());
+            MarkerEventHandlerRegistry.Register("planningItemTextComponent.moveDown", new MoveDownPlanningItemHandler());
+            MarkerEventHandlerRegistry.Register("planningItem.moveDown", new MoveDownPlanningItemHandler());
+
         }
 
         private static void RegisterTextChangedEventHandlers()
@@ -313,6 +305,7 @@ namespace Rationally.Visio
             TextChangedEventHandlerRegistry.Register("relatedUrlUrl", new RelatedUrlUrlTextChangedHandler());
             TextChangedEventHandlerRegistry.Register("stakeholderName", new StakeholderNameTextChangedEventHandler());
             TextChangedEventHandlerRegistry.Register("stakeholderRole", new StakeholderRoleTextChangedEventHandler());
+            TextChangedEventHandlerRegistry.Register("planningItemTextComponent", new PlanningTextChangedEventHandler());
         }
 
         //Fired when any text is changed

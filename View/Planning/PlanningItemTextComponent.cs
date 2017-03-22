@@ -18,6 +18,7 @@ namespace Rationally.Visio.View.Planning
         public PlanningItemTextComponent(Page page, Shape shape) : base(page, shape)
         {
             RShape = shape;
+            InitStyle();
         }
 
         public PlanningItemTextComponent(Page page, int index, string labelText) : base(page, labelText)
@@ -68,10 +69,11 @@ namespace Rationally.Visio.View.Planning
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 UpdateReorderFunctions();
-                //if (Globals.RationallyAddIn.Model.Alternatives.Count > Index)
-                //{
-                    //TODO read content from model
-                //}
+                if (Globals.RationallyAddIn.Model.PlanningItems.Count > Index)
+                {
+                    PlanningItem item = Globals.RationallyAddIn.Model.PlanningItems[Index];
+                    Text = item.ItemText;
+                }
             }
             base.Repaint();
         }

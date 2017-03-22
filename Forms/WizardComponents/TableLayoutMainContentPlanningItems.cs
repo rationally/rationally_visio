@@ -97,7 +97,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         public bool IsValid()
         {
             //check if all rows have an entry
-            if (PlanningItems.Any(pi => IsNullOrEmpty(pi.PlanningItemText.Text)))
+            if (PlanningItems.Any(pi => IsNullOrWhiteSpace(pi.PlanningItemText.Text)))
             {
                 MessageBox.Show("For all planning items, enter a description.");
                 return false;
@@ -108,7 +108,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         public void UpdateModel()
         {
             //handle changes in the "Stakeholders" page
-            //WizardUpdatePlanningItemsHandler.Execute(ProjectSetupWizard.Instance);
+            WizardUpdatePlanningHandler.Execute(ProjectSetupWizard.Instance);
             Log.Debug("PlanningItems updated.");
         }
     }

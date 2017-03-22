@@ -140,7 +140,10 @@
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteStakeholdersEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\AddPlanningItemEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\AddStakeholderEventHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MarkerDeletePlanningItemEventHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MoveDownPlanningItemHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveDownStakeholderHandler.cs" />
+    <Compile Include="EventHandlers\MarkerEventHandlers\MoveUpPlanningItemHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveUpStakeholderHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\StartDeleteStakeholderEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDStakeholderComponentEventHandler.cs" />
@@ -151,11 +154,13 @@
     <Compile Include="EventHandlers\TextChangedEventHandlers\RelatedDocumentTitleTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\RelatedUrlUrlTextChangedHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\StakeholderNameTextChangedEventHandler.cs" />
+    <Compile Include="EventHandlers\TextChangedEventHandlers\PlanningItemTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\StakeholderRoleTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateAlternativesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateDocumentsHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateForcesHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateGeneralInformationHandler.cs" />
+    <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdatePlanningHandler.cs" />
     <Compile Include="EventHandlers\WizardPageHandlers\WizardUpdateStakeholdersHandler.cs" />
     <Compile Include="Forms\AlternativeStateConfiguration\FlowLayoutAlternativeState.cs">
       <SubType>Component</SubType>

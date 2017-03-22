@@ -54,7 +54,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             planningItemTextLabel.Name = "planningItemTextLabel";
             planningItemTextLabel.Size = new Size(100, 19);
             planningItemTextLabel.TabIndex = 0;
-            planningItemTextLabel.Text = "Name:";
+            planningItemTextLabel.Text = "Item:";
             //
             // PlanningItemText
             //
@@ -72,7 +72,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             planningItemFinishedLabel.Name = "planningItemFinishedLabel";
             planningItemFinishedLabel.Size = new Size(100, 19);
             planningItemFinishedLabel.TabIndex = 2;
-            planningItemFinishedLabel.Text = "Role:";
+            planningItemFinishedLabel.Text = "Finished:";
             //
             // PlanningItemFinished
             //

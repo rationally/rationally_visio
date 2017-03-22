@@ -89,21 +89,16 @@ namespace Rationally.Visio.View.Planning
         public override void Repaint()
         {
             //remove alternatives that are no longer in the model, but still in the view
-            /*List<RationallyComponent> toDelete = Children.Where(alternative => !Globals.RationallyAddIn.Model.Alternatives.Select(alt => alt.Id).Contains(alternative.Id)).ToList();
-
-
-            if (Globals.RationallyAddIn.Model.Alternatives.Count > Children.Count)
+            List<RationallyComponent> toDelete = Children.Where(planning => !Globals.RationallyAddIn.Model.PlanningItems.Select(pln => pln.Id).Contains(planning.Id)).ToList();
+            
+            if (Globals.RationallyAddIn.Model.PlanningItems.Count > Children.Count)
             {
-                Globals.RationallyAddIn.Model.Alternatives
-                    .Where(alt => Children.Count == 0 || Children.All(c => c.Id != alt.Id)).ToList()
-                    .ForEach(alt => {
-                        alt.GenerateIdentifier(Children.Count);
-                        Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Children.Count, alt));
-                    });
+                Globals.RationallyAddIn.Model.PlanningItems
+                    .Where(pln => Children.Count == 0 || Children.All(c => c.Id != pln.Id)).ToList()
+                    .ForEach(pln => Children.Add(new PlanningItemComponent(Globals.RationallyAddIn.Application.ActivePage, Children.Count, pln)));
             }
-
-
-            toDelete.ForEach(alt => alt.RShape.Delete());*/
+            
+            toDelete.ForEach(alt => alt.RShape.Delete());
             base.Repaint();
         }
 

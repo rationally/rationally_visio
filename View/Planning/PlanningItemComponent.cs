@@ -63,6 +63,7 @@ namespace Rationally.Visio.View.Planning
 
             //Events
             AddAction("addPlanningItem", "QUEUEMARKEREVENT(\"add\")", "\"Add item\"", false);
+            AddAction("deletePlanningItem", "QUEUEMARKEREVENT(\"delete\")", "\"Delete item\"", false);
 
             InitStyle();
         }

@@ -220,6 +220,7 @@ namespace Rationally.Visio.View
 
         public bool StrikeThrough
         {
+            get { return bool.Parse(RShape.CellsU["Char.strikethru"].FormulaU); }
             set { RShape.CellsU["Char.strikethru"].Formula = value.ToString().ToUpper(); }
         }
 
@@ -279,7 +280,12 @@ namespace Rationally.Visio.View
         {
 
         }
-        
+
+        public virtual void UpdateIndex(int index)
+        {
+            //set our own index to the new value
+            Index = index;
+        }
 
         public void MoveChildren(double deltaX, double deltaY)
         {

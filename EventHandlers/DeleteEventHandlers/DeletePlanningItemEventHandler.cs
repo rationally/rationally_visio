@@ -37,11 +37,6 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     Log.Debug("deleting children of the planning item to delete");
-                    containerToDelete.Children.Where(c => c is CheckBoxComponent).Cast<CheckBoxComponent>().FirstOrDefault()?.Children.ForEach(c => //for checkbox state component
-                    {
-                        c.Deleted = true;
-                        c.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
-                    });
                     containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
                     {
                         c.Deleted = true;

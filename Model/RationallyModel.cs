@@ -82,7 +82,7 @@ namespace Rationally.Visio.Model
         {
             int i = 0;
             PlanningContainer planningContainer = (PlanningContainer)Globals.RationallyAddIn.View.Children.First(c => c is PlanningContainer);
-            planningContainer.Children.Where(c => c is PlanningItemComponent).ToList().ForEach(c => ((PlanningItemComponent)c).UpdateIndex(i++));
+            planningContainer.Children.Where(c => c is PlanningItemComponent).ToList().ForEach(c => ((PlanningItemComponent)c).SetPlanningItemIndex(i++));
         }
 
         public void RegenerateDocumentIdentifiers()

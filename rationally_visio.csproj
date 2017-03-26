@@ -138,6 +138,7 @@
     <Compile Include="Enums\WizardFieldTypes.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeletePlanningItemEventHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteStakeholderEventHandler.cs" />
+    <Compile Include="EventHandlers\DeleteEventHandlers\DeletePlanningContainerEventHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteStakeholdersEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\AddPlanningItemEventHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\AddStakeholderEventHandler.cs" />
@@ -147,7 +148,9 @@
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveUpPlanningItemHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\MoveUpStakeholderHandler.cs" />
     <Compile Include="EventHandlers\MarkerEventHandlers\StartDeleteStakeholderEventHandler.cs" />
+    <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDPlanningItemComponentEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDStakeholderComponentEventHandler.cs" />
+    <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDPlanningItemContainerEventHandler.cs" />
     <Compile Include="EventHandlers\QueryDeleteEventHandlers\QDStakeholderContainerEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\AlternativeTitleTextChangedEventHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\ForceDescriptionTextChangedEventHandler.cs" />

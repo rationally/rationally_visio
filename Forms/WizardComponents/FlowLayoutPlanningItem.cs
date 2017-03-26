@@ -13,7 +13,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         internal readonly TextBox PlanningItemText;
         private readonly AntiAliasedButton deletePlanningItemButton;
 
-        public PlanningItem PlanningItem => ProjectSetupWizard.Instance.ModelCopy.PlanningItems.Count > PlanningItemIndex ? ProjectSetupWizard.Instance.ModelCopy.PlanningItems[PlanningItemIndex] : null;
+        public PlanningItem PlanningItem { get; private set; }  
 
         private readonly AntiAliasedLabel planningItemFinishedLabel;
         internal readonly CheckBox PlanningItemFinished;
@@ -21,7 +21,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         public FlowLayoutPlanningItem(int planningItemIndex)
         {
             PlanningItemIndex = planningItemIndex;
-
+            PlanningItem = ProjectSetupWizard.Instance.ModelCopy.PlanningItems.Count > PlanningItemIndex ? ProjectSetupWizard.Instance.ModelCopy.PlanningItems[PlanningItemIndex] : null;
             Dock = DockStyle.Top;
             //this.Anchor = AnchorStyles.Left;
             Location = new Point(3, 3);

@@ -15,7 +15,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         internal readonly TextBox StakeholderName;
         private readonly AntiAliasedButton deleteStakeholderButton;
 
-        public Stakeholder Stakeholder => ProjectSetupWizard.Instance.ModelCopy.Stakeholders.Count > StakeholderIndex ? ProjectSetupWizard.Instance.ModelCopy.Stakeholders[StakeholderIndex] : null;
+        public Stakeholder Stakeholder { get; private set; } 
 
         private readonly AntiAliasedLabel stakeholderRoleLabel;
         internal readonly TextBox StakeholderRole;
@@ -23,7 +23,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         public FlowLayoutStakeholder(int stakeholderIndex)
         {
             StakeholderIndex = stakeholderIndex;
-
+            Stakeholder = ProjectSetupWizard.Instance.ModelCopy.Stakeholders.Count > StakeholderIndex ? ProjectSetupWizard.Instance.ModelCopy.Stakeholders[StakeholderIndex] : null;
             Dock = DockStyle.Top;
             //this.Anchor = AnchorStyles.Left;
             Location = new Point(3, 3);

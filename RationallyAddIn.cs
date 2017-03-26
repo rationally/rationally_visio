@@ -156,7 +156,7 @@ namespace Rationally.Visio
             DeleteEventHandlerRegistry.Register("stakeholders", new DeleteStakeholdersEventHandler());
 
             DeleteEventHandlerRegistry.Register("planningItem", new DeletePlanningItemEventHandler());
-            DeleteEventHandlerRegistry.Register("planningItemTextComponent", new DeletePlanningItemEventHandler());
+            DeleteEventHandlerRegistry.Register("planning", new DeletePlanningContainerEventHandler());
         }
 
         private static void RegisterQueryDeleteEventHandlers()
@@ -182,6 +182,9 @@ namespace Rationally.Visio
             QueryDeleteEventHandlerRegistry.Register("stakeholderRole", new QDStakeholderComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("stakeholderName", new QDStakeholderComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("stakeholder", new QDStakeholderContainerEventHandler());
+
+            QueryDeleteEventHandlerRegistry.Register("planningItemTextComponent", new QDPlanningItemComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("planningItem", new QDPlanningContainerEventHandler());
         }
 
         private static void RegisterMarkerEventHandlers()

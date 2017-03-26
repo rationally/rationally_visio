@@ -11,7 +11,7 @@ using Rationally.Visio.View.Planning;
 
 namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
-    class DeletePlanningItemEventHandler : IDeleteEventHandler
+    internal class DeletePlanningItemEventHandler : IDeleteEventHandler
     {
         private const string DeleteUndoScope = "Delete planningitem";
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

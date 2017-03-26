@@ -19,7 +19,6 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(Shape s, string context)
         {
-            RationallyModel model = Globals.RationallyAddIn.Model;
             PlanningContainer planningContainer = (PlanningContainer)Globals.RationallyAddIn.View.Children.First(ch => ch is PlanningContainer);
             planningContainer.AddPlanningItem();
 

@@ -34,7 +34,6 @@ namespace Rationally.Visio.View
             Index = index;
             Width = CHECKBOX_SIZE;
             Height = CHECKBOX_SIZE;
-
             InitStyle();
         }
 
@@ -62,7 +61,7 @@ namespace Rationally.Visio.View
 
             if (CheckBoxStateComponent.IsCheckBoxStateComponent(shapeComponent.Name))
             {
-                Children.Add((CheckBoxStateComponent)shapeComponent);
+                Children.Add(new CheckBoxStateComponent(Page, s));
             }//TODO validate whether it's the right one
         }
 
@@ -76,6 +75,7 @@ namespace Rationally.Visio.View
             ((CheckBoxStateComponent) Children.First()).Checked = isChecked;
         }
 
+        public bool Checked => ((CheckBoxStateComponent)Children.First()).Checked;
         public static bool IsCheckBoxComponent(string name)
         {
             return regex.IsMatch(name);

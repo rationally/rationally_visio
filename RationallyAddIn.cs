@@ -495,6 +495,7 @@ namespace Rationally.Visio
                 Model.Documents.Clear();
                 Model.Forces.Clear();
                 Model.Stakeholders.Clear();
+                Model.PlanningItems.Clear();
 
                 foreach (Page page in d.Pages)
                 {

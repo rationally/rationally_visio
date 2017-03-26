@@ -16,7 +16,8 @@ namespace Rationally.Visio.View.Planning
         public PlanningItemComponent(Page page, Shape planningItem) : base(page,false)
         {
             RShape = planningItem;
-
+            string name = null;
+            bool? checkedBox = null;
             foreach (int shapeIdentifier in planningItem.ContainerProperties.GetMemberShapes((int) VisContainerFlags.visContainerFlagsExcludeNested))
             {
                 Shape planningItemComponent = page.Shapes.ItemFromID[shapeIdentifier];
@@ -24,12 +25,27 @@ namespace Rationally.Visio.View.Planning
                 {
                     CheckBoxComponent cbComponent = new CheckBoxComponent(page, planningItemComponent);
                     Children.Add(cbComponent);
+                    checkedBox = cbComponent.Checked;
                 }
 
                 if (PlanningItemTextComponent.IsPlanningItemTextComponent(planningItemComponent.Name))
                 {
                     PlanningItemTextComponent itemContent = new PlanningItemTextComponent(page, planningItemComponent);
                     Children.Add(itemContent);
+                    name = itemContent.Text;
+                }
+            }
+            if ((name != null) && (checkedBox != null))
+            {
+                PlanningItem item = new PlanningItem(name, checkedBox.Value, Id);
+
+                if (Index <= Globals.RationallyAddIn.Model.PlanningItems.Count)
+                {
+                    Globals.RationallyAddIn.Model.PlanningItems.Insert(Index, item);
+                }
+                else
+                {
+                    Globals.RationallyAddIn.Model.PlanningItems.Add(item);
                 }
             }
 

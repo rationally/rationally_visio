@@ -38,20 +38,27 @@ namespace Rationally.Visio.View
             
 
             contentTextWidth = GetWidthOfString(labelText);// PixelsPerInch;
-            Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
+            Log.Debug("About to create a textlabel");
+            Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden + (short)VisOpenSaveArgs.visOpenCopy);
+            Log.Debug("Basic shapes document was opened successfully.");
             Master rectMaster = basicDocument.Masters["Rectangle"];
+            Log.Debug("The rectangle master was extracted successfully from the document.");
             RShape = page.Drop(rectMaster, 0,0);
+            Log.Debug("The textlabel shape has been dropped on the sheet.");
             basicDocument.Close();
             RShape.LineStyle = "Text Only";
+            Log.Debug("LineStyle property has been set (shapesheet assignment!)");
             RShape.FillStyle = "Text Only";
             RShape.Characters.Text = text;
             RShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = size;
             RShape.CellsU["LinePattern"].ResultIU = 0;
             RShape.Name = "TextLabel";
-
+            Log.Debug("More shapesheet interactions were performed.");
             AddUserRow("order"); //allows sorting, even with same-type shapes
             AddUserRow("rationallyType");
+            Log.Debug("Textlabel user rows added.");
             BackgroundColor = "RGB(255,255,255)";
+            Log.Debug("Set background color");
             FontColor = "RGB(89,131,168)";
             ShadowPattern = 0;
         }

@@ -102,14 +102,18 @@ namespace Rationally.Visio.Forms
                 CurrentPanel.UpdateModel();
                 Globals.RationallyAddIn.Model = ModelCopy;
                 Log.Debug("Replaced model by copy");
+                Log.Debug("DocumentCreation: " + DocumentCreation);
+                Log.Debug("CurrentPanel:" + CurrentPanel.ToString());
                 if (DocumentCreation)
                 {
                     //draw the header
                     TitleLabel header = new TitleLabel(Globals.RationallyAddIn.Application.ActivePage, ModelCopy.DecisionName);
+                    Log.Debug("TitleLabel has been created successfully.");
                     Globals.RationallyAddIn.View.Children.Add(header);
                     Log.Debug("Added title component to the sheet.");
                     //draw the information container
                     InformationContainer informationContainer = new InformationContainer(Globals.RationallyAddIn.Application.ActivePage, ModelCopy.Author, ModelCopy.DateString, ModelCopy.Version);
+                    Log.Debug("InformationContainer was created succesfully.");
                     Globals.RationallyAddIn.View.Children.Add(informationContainer);
                     Log.Debug("Added information container to the sheet.");
                     DocumentCreation = false;

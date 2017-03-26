@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 using log4net;
 using log4net.Config;
@@ -735,6 +736,7 @@ namespace Rationally.Visio
 
         private static void DelegateCreateDocumentEvent(IVDocument d)
         {
+
             if (d.Template.Contains(Constants.TemplateName))
             {
                 try

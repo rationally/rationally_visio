@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -42,6 +43,15 @@ namespace Rationally.Visio.View.Alternatives
         public void UpdateBackgroundByState(string state)
         {
             Color color = Globals.RationallyAddIn.Model.AlternativeStateColors[state];
+            try
+            {
+                Log.Debug($"Test statement for string interpolation support: {this.Index}");
+                Log.Debug($"Setting alternative background state: RGB({color.R},{color.G},{color.B})");
+            }
+            catch (Exception e)
+            {
+                Log.Debug(e.StackTrace);
+            }
             RShape.CellsU["FillForegnd"].Formula = $"RGB({color.R},{color.G},{color.B})";
         }
 

@@ -96,8 +96,10 @@ namespace Rationally.Visio.View.Alternatives
             PleaseWait pleaseWait = new PleaseWait();
             pleaseWait.Show();
             pleaseWait.Refresh();
+            Log.Debug("About to create Alternative model object");
             Alternative newAlternative = new Alternative(title, state);
             newAlternative.GenerateIdentifier(Globals.RationallyAddIn.Model.Alternatives.Count);
+            Log.Debug("Identifier generated");
             Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
             Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Alternatives.Count - 1, newAlternative));
             RepaintHandler.Repaint();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using log4net;
@@ -184,6 +185,8 @@ namespace Rationally.Visio
             QueryDeleteEventHandlerRegistry.Register("stakeholderName", new QDStakeholderComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("stakeholder", new QDStakeholderContainerEventHandler());
 
+            QueryDeleteEventHandlerRegistry.Register("checkBoxComponent", new QDPlanningItemComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register("checkBoxStateComponent", new QDPlanningItemComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("planningItemTextComponent", new QDPlanningItemComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("planningItem", new QDPlanningContainerEventHandler());
         }
@@ -395,7 +398,7 @@ namespace Rationally.Visio
 
                     foreach (Shape s in selection)
                     {
-                        if (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+                        if (s.CellExistsU[CellConstants.RationallyType, (short) VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                         {
                             string identifier = context;
                             if (context.Contains("."))
@@ -407,6 +410,16 @@ namespace Rationally.Visio
                             MarkerEventHandlerRegistry.HandleEvent(s.CellsU[CellConstants.RationallyType].ResultStr["Value"] + "." + context, s, identifier);
                         }
                     }
+                }
+                catch (COMException e)
+                {
+                    Log.Error("COMExeption occured:" + e.Message);
+                    Log.Error("source: " + e.Source);
+                    Log.Error("error code:" + e.ErrorCode);
+                    Log.Error("inner exception:\n" + e.InnerException?.StackTrace);
+#if DEBUG
+                    throw;
+#endif
                 }
                 catch (Exception ex)
                 {

@@ -330,5 +330,14 @@ namespace Rationally.Visio.View
         public virtual RationallyComponent GetComponentByShape(Shape s) => RShape.Equals(s) ? this : null;
 
         public virtual void RemoveDeleteLock(bool recursive) => LockDelete = false;
+
+        /// <summary>
+        /// Marks all child components as deleted, deletes them and then does the same for this component.
+        /// </summary>
+        public virtual void DeleteRecursive()
+        {
+            Deleted = true;
+            RShape.Delete();
+        }
     }
 }

@@ -17,11 +17,13 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 
             foreach (PlanningItemComponent planningComponent in cont.Children.Where(c => c is PlanningItemComponent).Cast<PlanningItemComponent>().ToList())
             {
-                if ((planningComponent.Children.Where(c => c.RShape.Equals(changedShape)).ToList().Count > 0) && !planningComponent.Deleted) //check if this stakeholder contains the to be deleted component and is not already deleted
+                //check if this planning component contains the to be deleted component and is not already deleted
+                if (planningComponent.ExistsInTree(changedShape) && !planningComponent.Deleted)
                 {
                     planningComponent.Deleted = true;
                     planningComponent.RShape.Delete(); //delete the parent wrapper of s
                 }
+
             }
         }
     }

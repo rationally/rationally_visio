@@ -138,5 +138,15 @@ namespace Rationally.Visio.View
             }
             return false;
         }
+
+        /// <summary>
+        /// Marks all child components as deleted, deletes them and then does the same for this component.
+        /// </summary>
+        public override void DeleteRecursive()
+        {
+            Children.ForEach(c => c.DeleteRecursive());
+            Deleted = true;
+            RShape.Delete();
+        }
     }
 }

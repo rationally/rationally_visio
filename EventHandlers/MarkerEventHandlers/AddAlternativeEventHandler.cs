@@ -18,7 +18,10 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
         public void Execute(Shape s, string context)
         {
             RationallyModel model = Globals.RationallyAddIn.Model;
+            Log.Debug("Model found: " + (model != null));
             AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.RationallyAddIn.View.Children.First(ch => ch is AlternativesContainer);
+            Log.Debug("Alternatives container found in view tree: " + (alternativesContainer != null));
+            Log.Debug("Alternatives count: " + model.Alternatives.Count);
             if (model.Alternatives.Count >= Constants.SupportedAmountOfAlternatives) //The view does not handling more than 3 alternatives well, by default.
             {
                 AddAlternativeWithWarning alternativePopUp = new AddAlternativeWithWarning(model);
@@ -33,6 +36,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 AddAlternative alternativePopUp = new AddAlternative(model);
                 if (alternativePopUp.ShowDialog() == DialogResult.OK)
                 {
+                    Log.Debug("About to enter AddAlternative method");
                     alternativesContainer?.AddAlternative(alternativePopUp.alternativeName.Text, alternativePopUp.alternativeStatus.SelectedItem.ToString());
                 }
                 alternativePopUp.Dispose();

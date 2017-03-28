@@ -70,18 +70,19 @@ namespace Rationally.Visio.View.Alternatives
         {
             //1) state box
             AlternativeStateComponent stateComponent = new AlternativeStateComponent(page, index, alternative.Status);
-
+            Log.Debug("Created state component");
             //2) identifier ("A:")
             string identifier = (char)(65 + index) + ":";
             AlternativeIdentifierComponent identifierComponent = new AlternativeIdentifierComponent(page, index, identifier);
             identifierComponent.ToggleBoldFont(true);
-
+            Log.Debug("created identifier component");
             //3) title
             AlternativeTitleComponent titleComponent = new AlternativeTitleComponent(page, index, alternative.Title);
-
+            Log.Debug("created title component");
             //4) description area
             AlternativeDescriptionComponent descComponent = new AlternativeDescriptionComponent(page, index);
-            
+            Log.Debug("created description component");
+
             Children.Add(identifierComponent);
             Children.Add(titleComponent);
             Children.Add(stateComponent);
@@ -95,6 +96,7 @@ namespace Rationally.Visio.View.Alternatives
             AddUserRow("uniqueId");
             Id = alternative.Id;
 
+            Log.Debug("Done with shapesheet identifying properties");
             //locks
             MsvSdContainerLocked = true;
 

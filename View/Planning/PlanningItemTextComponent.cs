@@ -73,6 +73,7 @@ namespace Rationally.Visio.View.Planning
                 {
                     PlanningItem item = Globals.RationallyAddIn.Model.PlanningItems[Index];
                     Text = item.ItemText;
+                    StrikeThrough = item.Finished;
                 }
             }
             base.Repaint();

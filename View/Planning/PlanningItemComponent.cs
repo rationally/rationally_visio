@@ -92,7 +92,7 @@ namespace Rationally.Visio.View.Planning
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
-            UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded;
+            UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
         }
 
 

@@ -126,8 +126,10 @@ namespace Rationally.Visio
             }
 
             //locate parent of stateComponent
-            PlanningItemComponent toStrikeThrough = planningContainer?.Children.Cast<PlanningItemComponent>().First(item => (item.Children.First(c => c is CheckBoxComponent) as CheckBoxComponent).Children.Contains(stateComponent));
-            toStrikeThrough.Children.First(c => c is PlanningItemTextComponent).StrikeThrough = !toStrikeThrough.Children.First(c => c is PlanningItemTextComponent).StrikeThrough;
+            //PlanningItemComponent toStrikeThrough = planningContainer?.Children.Cast<PlanningItemComponent>().First(item => (item.Children.First(c => c is CheckBoxComponent) as CheckBoxComponent).Children.Contains(stateComponent));
+            //toStrikeThrough.Children.First(c => c is PlanningItemTextComponent).StrikeThrough = !toStrikeThrough.Children.First(c => c is PlanningItemTextComponent).StrikeThrough;
+
+            
 
         }
         

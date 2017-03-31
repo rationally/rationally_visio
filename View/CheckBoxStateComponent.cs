@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.View.Planning;
 
 namespace Rationally.Visio.View
 {
@@ -31,8 +32,9 @@ namespace Rationally.Visio.View
             Name = "CheckBoxStateComponent";
             Index = index;//TODO implement via model
             LockTextEdit = true;
+            //LockDelete = true;
 
-            Check(isFinished);
+            //Check(isFinished);
             InitStyle();
         }
 
@@ -49,14 +51,15 @@ namespace Rationally.Visio.View
 
         private void Check(bool isChecked)
         {
-            if (isChecked)
-            {
-                BackgroundColor = checkedColor;
-            }
-            else
-            {
-                BackgroundColor = unCheckedColor;
-            }
+            
+            //update model
+            Globals.RationallyAddIn.Model.PlanningItems[Index].Finished = isChecked;
+            PlanningContainer planningContainer = (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is PlanningContainer) as PlanningContainer);
+            planningContainer.Children[Index].Repaint();
+            /*PlanningContainer planningContainer = (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is PlanningContainer) as PlanningContainer);
+            //locate parent of stateComponent
+            PlanningItemComponent toStrikeThrough = planningContainer?.Children.Cast<PlanningItemComponent>().First(item => (item.Children.First(c => c is CheckBoxComponent) as CheckBoxComponent).Children.Contains(this));
+            toStrikeThrough.Children.First(c => c is PlanningItemTextComponent).StrikeThrough = isChecked;*/
         }
 
         public bool Checked
@@ -65,7 +68,7 @@ namespace Rationally.Visio.View
             set { Check(value); }
         }
 
-        public void Toggle() => Checked = !Checked;
+        public void Toggle() => Check(!Checked);
 
         /// <summary>
         /// Validates whether the passed coordinate is within the four sides of the square that is this component.
@@ -75,6 +78,22 @@ namespace Rationally.Visio.View
         /// <returns></returns>
         public bool WasClicked(double x, double y) => (x > (CenterX - (Width/2))) && (x < (CenterX + (Width/2))) &&
                                                       (y > (CenterY - (Height/2))) && (y < (CenterY + (Height/2)));
+
+        public override void Repaint()
+        {
+            if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio takes care of this
+            {
+                if (Globals.RationallyAddIn.Model.PlanningItems[Index].Finished)
+                {
+                    BackgroundColor = checkedColor;
+                }
+                else
+                {
+                    BackgroundColor = unCheckedColor;
+                }
+            }
+            base.Repaint();
+        }
 
         public static bool IsCheckBoxStateComponent(string name) => regex.IsMatch(name);
     }

@@ -19,9 +19,9 @@ namespace Rationally.Visio.View
             Document containerDocument = application.Documents.OpenEx(application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers, VisMeasurementSystem.visMSUS), (short)VisOpenSaveArgs.visOpenHidden);
             Master containerMaster = containerDocument.Masters["Plain"];
 
-            RShape = Page.DropContainer(containerMaster, null);
+            Shape = Page.DropContainer(containerMaster, null);
 
-            RShape.CellsU["User.msvSDHeadingStyle"].ResultIU = 0; //Remove visible header
+            Shape.CellsU["User.msvSDHeadingStyle"].ResultIU = 0; //Remove visible header
             containerDocument.Close();
 
             //create a slightly smaller rectangle shape, whose background indicates the state of the checkbox
@@ -39,7 +39,7 @@ namespace Rationally.Visio.View
 
         public CheckBoxComponent(Page page, Shape shape) : base(page)
         {
-            RShape = shape;
+            Shape = shape;
 
             foreach (int shapeIdentifier in shape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested))
             {
@@ -57,7 +57,7 @@ namespace Rationally.Visio.View
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             //make s into an rcomponent for access to wrapper
-            RationallyComponent shapeComponent = new RationallyComponent(Page) {RShape = s};
+            VisioShape shapeComponent = new VisioShape(Page) {Shape = s};
 
             if (CheckBoxStateComponent.IsCheckBoxStateComponent(shapeComponent.Name))
             {

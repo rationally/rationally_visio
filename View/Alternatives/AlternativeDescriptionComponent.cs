@@ -11,7 +11,7 @@ namespace Rationally.Visio.View.Alternatives
         private static readonly Regex DescriptionRegex = new Regex(@"AlternativeDescription(\.\d+)?$");
         public AlternativeDescriptionComponent(Page page, Shape alternativeComponent) : base(page, false)
         {
-            RShape = alternativeComponent;
+            Shape = alternativeComponent;
             MarginLeft = 0.1;
             MarginRight = 0.1;
             MarginBottom = 0.1;
@@ -43,7 +43,7 @@ namespace Rationally.Visio.View.Alternatives
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                Shape.ContainerProperties.ResizeAsNeeded = 0;
             }
             MarginLeft = 0.1;
             MarginRight = 0.1;

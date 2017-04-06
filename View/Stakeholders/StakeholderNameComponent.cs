@@ -13,7 +13,7 @@ namespace Rationally.Visio.View.Stakeholders
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public StakeholderNameComponent(Page page, Shape shape) : base(page, shape)
         {
-            RShape = shape;
+            Shape = shape;
             InitStyle();
         }
 

@@ -8,7 +8,7 @@ using Rationally.Visio.View.Planning;
 
 namespace Rationally.Visio.View
 {
-    class CheckBoxStateComponent : RationallyComponent
+    class CheckBoxStateComponent : VisioShape
     {
         private double margin = 0.05; //border for the wrapper component
         private string checkedColor = "THEMEVAL()";
@@ -20,7 +20,7 @@ namespace Rationally.Visio.View
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
 
-            RShape = page.Drop(rectMaster, 0, 0);
+            Shape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
 
             Width = CheckBoxComponent.CHECKBOX_SIZE - 2*margin;
@@ -40,7 +40,7 @@ namespace Rationally.Visio.View
 
         public CheckBoxStateComponent(Page page, Shape shape) : base(page)
         {
-            RShape = shape;
+            Shape = shape;
             InitStyle();
         }
 

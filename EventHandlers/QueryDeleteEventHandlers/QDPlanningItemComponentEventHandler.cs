@@ -21,7 +21,7 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
                 if (planningComponent.ExistsInTree(changedShape) && !planningComponent.Deleted)
                 {
                     planningComponent.Deleted = true;
-                    planningComponent.RShape.Delete(); //delete the parent wrapper of s
+                    planningComponent.Shape.Delete(); //delete the parent wrapper of s
                 }
 
             }

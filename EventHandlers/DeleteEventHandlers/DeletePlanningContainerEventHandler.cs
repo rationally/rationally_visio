@@ -14,7 +14,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 
         public void Execute(RationallyModel model, Shape changedShape)
         {
-            Globals.RationallyAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
+            Globals.RationallyAddIn.View.Children.RemoveAll(obj => obj.Shape.Equals(changedShape));
             Log.Debug("Handler of delete planning container entered.");
             if (!Globals.RationallyAddIn.View.Children.Any(x => x is PlanningContainer))
             {

@@ -11,7 +11,7 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(RationallyView view, Shape changedShape)
         {
-            RationallyComponent comp = view.Children.Find(x => x is RelatedDocumentsContainer);
+            VisioShape comp = view.Children.Find(x => x is RelatedDocumentsContainer);
             if (comp is RelatedDocumentsContainer)
             {
                 comp.MsvSdContainerLocked = false; //Child shapes can now be removed.

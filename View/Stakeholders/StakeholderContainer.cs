@@ -13,7 +13,7 @@ namespace Rationally.Visio.View.Stakeholders
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public StakeholderContainer(Page page, Shape stakeholder) : base(page, false)
         {
-            RShape = stakeholder;
+            Shape = stakeholder;
             string name = null;
             string role = null;
             foreach (int shapeIdentifier in stakeholder.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested))
@@ -81,7 +81,7 @@ namespace Rationally.Visio.View.Stakeholders
             InitStyle();
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                Shape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
         }

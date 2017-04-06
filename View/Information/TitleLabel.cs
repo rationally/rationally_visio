@@ -11,7 +11,7 @@ namespace Rationally.Visio.View.Information
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public TitleLabel(Page page, Shape shape) : base(page, shape)
         {
-            RShape = shape;
+            Shape = shape;
         }
 
         public TitleLabel(Page page, string labelText) : base(page, labelText)

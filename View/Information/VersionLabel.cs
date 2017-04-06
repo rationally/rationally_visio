@@ -11,7 +11,7 @@ namespace Rationally.Visio.View.Information
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public VersionLabel(Page page, Shape shape) : base(page, shape)
         {
-            RShape = shape;
+            Shape = shape;
             InitStyle();
         }
 

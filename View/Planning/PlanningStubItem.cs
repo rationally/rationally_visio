@@ -6,7 +6,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Planning
 {
-    internal sealed class PlanningStubItem : RationallyComponent
+    internal sealed class PlanningStubItem : VisioShape
     {
         public override int Index
         {

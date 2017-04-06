@@ -4,7 +4,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Stakeholders
 {
-    internal class StakeholderStubContainer : RationallyComponent
+    internal class StakeholderStubContainer : VisioShape
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public override int Index

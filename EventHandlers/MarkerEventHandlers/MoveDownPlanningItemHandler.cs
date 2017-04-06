@@ -17,7 +17,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             RationallyModel model = Globals.RationallyAddIn.Model;
             PlanningContainer planningContainer = (PlanningContainer)Globals.RationallyAddIn.View.Children.First(c => c is PlanningContainer);
 
-            RationallyComponent toChangeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
+            VisioShape toChangeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
             int currentIndex = toChangeComponent.Index;
 
             PlanningItemComponent toChange = (PlanningItemComponent)planningContainer.Children.First(c => c.Index == currentIndex);
@@ -35,7 +35,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             other.SetPlanningItemIndex(currentIndex);
 
             //swap the elements in the view tree
-            RationallyComponent temp = planningContainer.Children[currentIndex];
+            VisioShape temp = planningContainer.Children[currentIndex];
             planningContainer.Children[currentIndex] = planningContainer.Children[currentIndex + 1];
             planningContainer.Children[currentIndex + 1] = temp;
 

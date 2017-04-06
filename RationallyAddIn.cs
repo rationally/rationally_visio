@@ -21,6 +21,7 @@ using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Alternatives;
+using Rationally.Visio.View.ContextMenu;
 using Rationally.Visio.View.Documents;
 using Rationally.Visio.View.Forces;
 using Rationally.Visio.View.Planning;
@@ -239,7 +240,7 @@ namespace Rationally.Visio
             MarkerEventHandlerRegistry.Register("alternativeTitle.delete", new MarkerDeleteAlternativeEventHandler());
             MarkerEventHandlerRegistry.Register("alternativeDescription.delete", new MarkerDeleteAlternativeEventHandler());
 
-            MarkerEventHandlerRegistry.Register("alternativeState.change", new EditAlternativeStateEventHandler());
+           // MarkerEventHandlerRegistry.Register("alternativeState.change", new EditAlternativeStateEventHandler());
             MarkerEventHandlerRegistry.Register("relatedFile.edit", new EditRelatedFileHandler());
 
             MarkerEventHandlerRegistry.Register("alternative.moveUp", new MoveUpAlternativeHandler());
@@ -410,8 +411,11 @@ namespace Rationally.Visio
                             }
                             Log.Debug("Marker event being handled for: " + s.Name);
                             MarkerEventHandlerRegistry.HandleEvent(s.CellsU[CellConstants.RationallyType].ResultStr["Value"] + "." + context, s, identifier);
+                            ContextMenuEventHandler.Instance.OnContextMenuEvent(application, sequence, context);
                         }
                     }
+
+                    
                 }
                 catch (COMException e)
                 {
@@ -448,8 +452,8 @@ namespace Rationally.Visio
                     Log.Debug("Cell changed of hyperlink shape:" + changedShape.Name);
                     //find the container that holds all Related Documents
                     RelatedDocumentsContainer relatedDocumentsContainer = (RelatedDocumentsContainer)View.Children.First(c => c is RelatedDocumentsContainer);
-                    //find the related document holding the changed shape (one of his children has RShape equal to changedShape)
-                    RelatedDocumentContainer relatedDocumentContainer = relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().First(dc => dc.Children.Where(c => c.RShape.Equals(changedShape)).ToList().Count > 0);
+                    //find the related document holding the changed shape (one of his children has Shape equal to changedShape)
+                    RelatedDocumentContainer relatedDocumentContainer = relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().First(dc => dc.Children.Where(c => c.Shape.Equals(changedShape)).ToList().Count > 0);
                     //update the text of the URL display component to the new url
                     RelatedURLURLComponent relatedURLURLComponent = (RelatedURLURLComponent)relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent);
                     relatedURLURLComponent.Text = changedShape.Hyperlink.Address;
@@ -457,7 +461,7 @@ namespace Rationally.Visio
                 else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.Index))
                 {
                     Log.Debug("Forceindex cell changed of forcecontainer. shape:" + changedShape.Name);
-                    RationallyComponent forcesComponent = View.Children.FirstOrDefault(x => x is ForcesContainer);
+                    VisioShape forcesComponent = View.Children.FirstOrDefault(x => x is ForcesContainer);
                     if (forcesComponent != null)
                     {
                         rebuildTree = true; //Wait with the rebuild till the undo is done
@@ -466,7 +470,7 @@ namespace Rationally.Visio
                 else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.Index))
                 {
                     Log.Debug("Alternative index cell changed of alternativecontainer. shape:" + changedShape.Name);
-                    RationallyComponent alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
+                    VisioShape alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
                     if (alternativesComponent != null)
                     {
                         rebuildTree = true; //Wait with the rebuild till the undo is done
@@ -475,7 +479,7 @@ namespace Rationally.Visio
                 else if (Application.IsUndoingOrRedoing && RelatedDocumentContainer.IsRelatedDocumentContainer(changedShape.Name) && cell.LocalName.Equals("User.index"))
                 {
                     Log.Debug("Document index cell changed of documentcontainer. shape:" + changedShape.Name);
-                    RationallyComponent docComponent = View.Children.FirstOrDefault(x => x is RelatedDocumentsContainer);
+                    VisioShape docComponent = View.Children.FirstOrDefault(x => x is RelatedDocumentsContainer);
                     if (docComponent != null)
                     {
                         rebuildTree = true; //Wait with the rebuild till the undo is done
@@ -484,7 +488,7 @@ namespace Rationally.Visio
                 else if (Application.IsUndoingOrRedoing && StakeholderContainer.IsStakeholderContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.Index))
                 {
                     Log.Debug("Stakeholder index cell changed of stakeholdercontainer. shape:" + changedShape.Name);
-                    RationallyComponent stakeholderComponent = View.Children.FirstOrDefault(x => x is StakeholdersContainer);
+                    VisioShape stakeholderComponent = View.Children.FirstOrDefault(x => x is StakeholdersContainer);
                     if (stakeholderComponent != null)
                     {
                         rebuildTree = true; //Wait with the rebuild till the undo is done
@@ -691,7 +695,7 @@ namespace Rationally.Visio
                         string rationallyType = s.CellsU[CellConstants.RationallyType].ResultStr["Value"];
 
                         //mark the deleted shape as 'deleted' in the view tree
-                        RationallyComponent deleted = View.GetComponentByShape(s);
+                        VisioShape deleted = View.GetComponentByShape(s);
                         if (deleted != null)
                         {
                             deleted.Deleted = true;

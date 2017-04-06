@@ -98,9 +98,9 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
                 //repaint all currently present alternative state components
                 AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is AlternativesContainer);
                 //map all alternatives to their state component shape
-                IEnumerable<AlternativeStateComponent> toUpdate = alternativesContainer?.Children
-                    .Select(alt => ((AlternativeContainer) alt).Children.First(c => c is AlternativeStateComponent))
-                    .Cast<AlternativeStateComponent>();
+                IEnumerable<AlternativeStateShape> toUpdate = alternativesContainer?.Children
+                    .Select(alt => ((AlternativeContainer) alt).Children.First(c => c is AlternativeStateShape))
+                    .Cast<AlternativeStateShape>();
                 toUpdate?.ToList().ForEach(stateComp => stateComp.Repaint());
             }
             else

@@ -7,7 +7,7 @@ using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Forces
 {
-    internal sealed class ForceValueComponent : RationallyComponent
+    internal sealed class ForceValueComponent : VisioShape
     {
         private static readonly Regex ForceValueRegex = new Regex(@"ForceValue(\.\d+)?$");
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -16,7 +16,7 @@ namespace Rationally.Visio.View.Forces
         {
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
-            RShape = page.Drop(rectMaster, 0, 0);
+            Shape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
 
             AddUserRow("alternativeUniqueId");
@@ -55,7 +55,7 @@ namespace Rationally.Visio.View.Forces
 
         public ForceValueComponent(Page page, Shape shape) : base(page)
         {
-            RShape = shape;
+            Shape = shape;
         }
 
         public static bool IsForceValue(string name) => ForceValueRegex.IsMatch(name);

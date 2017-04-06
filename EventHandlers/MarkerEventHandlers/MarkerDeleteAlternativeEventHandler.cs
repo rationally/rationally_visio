@@ -15,7 +15,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
         public void Execute(Shape s, string context)
         {
             RationallyModel model = Globals.RationallyAddIn.Model;
-            RationallyComponent component = new RationallyComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = s };
+            VisioShape component = new VisioShape(Globals.RationallyAddIn.Application.ActivePage) { Shape = s };
 
             int index = component.Index;
             Alternative alternative = model.Alternatives[index];
@@ -35,7 +35,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                     //trace the correct alternative container
                     AlternativeContainer alternativeContainer = (AlternativeContainer) alternativesContainer.Children.First(c => c is AlternativeContainer && (component.Index == c.Index));
                     
-                    shapeToPass = alternativeContainer.RShape;
+                    shapeToPass = alternativeContainer.Shape;
                 }
                 //initiate a delete handler with the container's shape
                 shapeToPass.Delete();

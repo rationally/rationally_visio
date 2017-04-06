@@ -4,7 +4,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Forces
 {
-    internal sealed class ForceStubContainer : RationallyComponent
+    internal sealed class ForceStubContainer : VisioShape
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public override int Index

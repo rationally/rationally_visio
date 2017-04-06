@@ -41,7 +41,7 @@ namespace Rationally.Visio.View.Forces
 
         public ForceContainer(Page page, Shape forceContainer) : base(page, false)
         {
-            RShape = forceContainer;
+            Shape = forceContainer;
             Array ident = forceContainer.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             string concern = null;
@@ -92,7 +92,7 @@ namespace Rationally.Visio.View.Forces
             UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkYIfNeeded;
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                Shape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
             LayoutManager = new InlineLayout(this);
@@ -153,7 +153,7 @@ namespace Rationally.Visio.View.Forces
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 MsvSdContainerLocked = false;
-                toRemove.ForEach(c => c.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal));
+                toRemove.ForEach(c => c.Shape.DeleteEx((short)VisDeleteFlags.visDeleteNormal));
                 MsvSdContainerLocked = true;
             }
             base.Repaint();

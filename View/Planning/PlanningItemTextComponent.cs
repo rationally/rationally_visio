@@ -17,7 +17,7 @@ namespace Rationally.Visio.View.Planning
 
         public PlanningItemTextComponent(Page page, Shape shape) : base(page, shape)
         {
-            RShape = shape;
+            Shape = shape;
             InitStyle();
         }
 

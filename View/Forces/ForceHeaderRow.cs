@@ -30,7 +30,7 @@ namespace Rationally.Visio.View.Forces
 
         public ForceHeaderRow(Page page, Shape forceHeaderShape) : base(page, false)
         {
-            RShape = forceHeaderShape;
+            Shape = forceHeaderShape;
             Array ident = forceHeaderShape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             if (Children.Count == 0)
@@ -44,7 +44,7 @@ namespace Rationally.Visio.View.Forces
                     }
                     else if (shape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                     {
-                        RationallyComponent toAdd = new RationallyComponent(page) { RShape = shape };
+                        VisioShape toAdd = new VisioShape(page) { Shape = shape };
                         Children.Add(toAdd);
                     }
                 }
@@ -60,9 +60,9 @@ namespace Rationally.Visio.View.Forces
             Master rectMaster = basicDocument.Masters["Rectangle"];
 
 
-            RationallyComponent concernLabel = new RationallyComponent(page)
+            VisioShape concernLabel = new VisioShape(page)
             {
-                RShape = page.Drop(rectMaster, 0, 0),
+                Shape = page.Drop(rectMaster, 0, 0),
                 Text = "Concern",
                 Name = "ConcernLabel",
                 Width = 1,
@@ -76,9 +76,9 @@ namespace Rationally.Visio.View.Forces
             concernLabel.RationallyType = "concernLabel";
             Children.Add(concernLabel);
 
-            RationallyComponent descLabel = new RationallyComponent(page)
+            VisioShape descLabel = new VisioShape(page)
             {
-                RShape = page.Drop(rectMaster, 0, 0),
+                Shape = page.Drop(rectMaster, 0, 0),
                 Text = "Description",
                 Name = "DescriptionLabel",
                 Width = 2,
@@ -100,7 +100,7 @@ namespace Rationally.Visio.View.Forces
             MarginTop = 0.4;
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                Shape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
             UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
@@ -112,7 +112,7 @@ namespace Rationally.Visio.View.Forces
             if (ForceAlternativeHeaderComponent.IsForceAlternativeHeaderComponent(s.Name))
             {
                 ForceAlternativeHeaderComponent com = new ForceAlternativeHeaderComponent(Page, s);
-                int index = com.RShape.Text[0] - 63;//text is of the form "A:"; A = 65 and should be inserted at index 2, after the concern and desc column
+                int index = com.Shape.Text[0] - 63;//text is of the form "A:"; A = 65 and should be inserted at index 2, after the concern and desc column
                 if (Children.Count < index)
                 {
                     Children.Add(com);
@@ -159,7 +159,7 @@ namespace Rationally.Visio.View.Forces
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 MsvSdContainerLocked = false;
-                toRemove.ForEach(c => c.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal));
+                toRemove.ForEach(c => c.Shape.DeleteEx((short)VisDeleteFlags.visDeleteNormal));
                 MsvSdContainerLocked = true;
             }
             base.Repaint();

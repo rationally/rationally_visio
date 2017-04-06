@@ -22,7 +22,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                RationallyComponent comp = new RationallyComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = changedShape };
+                VisioShape comp = new VisioShape(Globals.RationallyAddIn.Application.ActivePage) { Shape = changedShape };
                 int index = comp.Index;
 
                 //container of all related documents:

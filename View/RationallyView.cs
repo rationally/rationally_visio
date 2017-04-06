@@ -148,6 +148,6 @@ namespace Rationally.Visio.View
             }
         }
 
-        public override RationallyComponent GetComponentByShape(Shape s) => Children.FirstOrDefault(c => c.GetComponentByShape(s) != null)?.GetComponentByShape(s);
+        public override VisioShape GetComponentByShape(Shape s) => Children.FirstOrDefault(c => c.GetComponentByShape(s) != null)?.GetComponentByShape(s);
     }
 }

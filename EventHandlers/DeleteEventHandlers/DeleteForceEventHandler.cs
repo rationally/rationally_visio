@@ -16,7 +16,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
         {
             Log.Debug("Entered DeleteForceEventHandler.");
             //trace force row in view tree
-            RationallyComponent forceComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
+            VisioShape forceComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
 
             if (forceComponent is ForceContainer)
             {
@@ -27,7 +27,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                     containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
                     {
                         c.Deleted = true;
-                        c.RShape.Delete();
+                        c.Shape.Delete();
                     }); //schedule the missing delete events (children not selected during the manual delete)
                 }
 

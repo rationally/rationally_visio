@@ -16,7 +16,7 @@ namespace Rationally.Visio.View.Forces
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public ForcesContainer(Page page, Shape forcesContainer) : base(page)
         {
-            RShape = forcesContainer;
+            Shape = forcesContainer;
             Array ident = forcesContainer.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
 
@@ -51,9 +51,9 @@ namespace Rationally.Visio.View.Forces
                 }
                 else if (Children.Any(c => c is ForceTotalsRow))
                 {
-                    RationallyComponent toMove = Children.First(c => c is ForceTotalsRow);
+                    VisioShape toMove = Children.First(c => c is ForceTotalsRow);
                     int toMoveIndex = Children.IndexOf(toMove);
-                    RationallyComponent toSwapWith = Children.Last();
+                    VisioShape toSwapWith = Children.Last();
                     Children[Children.Count - 1] = toMove;
                     Children[toMoveIndex] = toSwapWith;
                 }
@@ -71,7 +71,7 @@ namespace Rationally.Visio.View.Forces
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             //make s into an rcomponent for access to wrapper
-            RationallyComponent shapeComponent = new RationallyComponent(Page) { RShape = s };
+            VisioShape shapeComponent = new VisioShape(Page) { Shape = s };
 
             if (ForceContainer.IsForceContainer(s.Name))
             {
@@ -111,7 +111,7 @@ namespace Rationally.Visio.View.Forces
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                List<RationallyComponent> toDelete = new List<RationallyComponent>();
+                List<VisioShape> toDelete = new List<VisioShape>();
                 int i = Children.Count - 2;
                 Children.Where(force => force is ForceContainer && !Globals.RationallyAddIn.Model.Forces.Select(frc => frc.Id).Contains(force.Id)).ToList().ForEach(force =>
                 {
@@ -122,15 +122,15 @@ namespace Rationally.Visio.View.Forces
                 Globals.RationallyAddIn.Model.Forces.Where(modelForce => Children.All(force => !(force is ForceContainer) || modelForce.Id != force.Id)).ToList().ForEach(modelForce =>
                         Children.Add(new ForceContainer(Page, i++, modelForce.Id))
                         );
-                toDelete.ForEach(force => force.RShape.Delete());
+                toDelete.ForEach(force => force.Shape.Delete());
 
                 if (Children.Any(c => c is ForceTotalsRow))
                 {
-                    RationallyComponent toMove = Children.First(c => c is ForceTotalsRow);
+                    VisioShape toMove = Children.First(c => c is ForceTotalsRow);
                     while (toMove != Children.Last())
                     {
                         int toMoveIndex = Children.IndexOf(toMove);
-                        RationallyComponent toSwapWith = Children[toMoveIndex + 1];
+                        VisioShape toSwapWith = Children[toMoveIndex + 1];
                         Children[toMoveIndex + 1] = toMove;
                         Children[toMoveIndex] = toSwapWith;
                     }

@@ -18,12 +18,12 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             RationallyModel model = Globals.RationallyAddIn.Model;
             AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.RationallyAddIn.View.Children.First(c => c is AlternativesContainer);
 
-            RationallyComponent toChangeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
+            VisioShape toChangeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
             int currentIndex = toChangeComponent.Index;
             
-            AlternativeContainer toChange = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU[CellConstants.Index].ResultIU == currentIndex);
+            AlternativeContainer toChange = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.Shape.CellsU[CellConstants.Index].ResultIU == currentIndex);
             //locate the alternative that we are going to swap with
-            AlternativeContainer other = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.RShape.CellsU[CellConstants.Index].ResultIU == currentIndex + 1);
+            AlternativeContainer other = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.Shape.CellsU[CellConstants.Index].ResultIU == currentIndex + 1);
             
             //swap the items in the model
             model.Alternatives[currentIndex].GenerateIdentifier(currentIndex + 1);
@@ -52,7 +52,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             forcesContainer?.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(fc => fc.Children.Where(fcc => fcc is ForceValueComponent && (((ForceValueComponent) fcc).AlternativeIdentifierString == oldIndex)).Cast<ForceValueComponent>().ToList().ForEach(fvc => fvc.AlternativeIdentifierString = higherIndex));
             forcesContainer?.Children.Where(c => c is ForceContainer).Cast<ForceContainer>().ToList().ForEach(fc => fc.Children.Where(fcc => fcc is ForceValueComponent && (((ForceValueComponent) fcc).AlternativeIdentifierString == "temp")).Cast<ForceValueComponent>().ToList().ForEach(fvc => fvc.AlternativeIdentifierString = oldIndex));
             //swap the elements in the view tree
-            RationallyComponent temp = alternativesContainer.Children[currentIndex];
+            VisioShape temp = alternativesContainer.Children[currentIndex];
             alternativesContainer.Children[currentIndex] = alternativesContainer.Children[currentIndex + 1];
             alternativesContainer.Children[currentIndex + 1] = temp;
 

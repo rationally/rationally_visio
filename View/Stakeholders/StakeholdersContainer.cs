@@ -17,7 +17,7 @@ namespace Rationally.Visio.View.Stakeholders
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public StakeholdersContainer(Page page, Shape stakeholderContainer) : base(page)
         {
-            RShape = stakeholderContainer;
+            Shape = stakeholderContainer;
             Array ident = stakeholderContainer.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             foreach (Shape shape in shapes.Where(shape => StakeholderContainer.IsStakeholderContainer(shape.Name)))
@@ -34,7 +34,7 @@ namespace Rationally.Visio.View.Stakeholders
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             //make s into an rcomponent for access to wrapper
-            RationallyComponent shapeComponent = new RationallyComponent(Page) { RShape = s };
+            VisioShape shapeComponent = new VisioShape(Page) { Shape = s };
 
             if (StakeholderContainer.IsStakeholderContainer(s.Name))
             {
@@ -104,7 +104,7 @@ namespace Rationally.Visio.View.Stakeholders
 
         public override void Repaint()
         {
-            List<RationallyComponent> toDelete = Children.Where(stake => !Globals.RationallyAddIn.Model.Stakeholders.Select(sth => sth.Id).Contains(stake.Id)).ToList();
+            List<VisioShape> toDelete = Children.Where(stake => !Globals.RationallyAddIn.Model.Stakeholders.Select(sth => sth.Id).Contains(stake.Id)).ToList();
             if (Globals.RationallyAddIn.Model.Stakeholders.Count > Children.Count)
             {
                 Globals.RationallyAddIn.Model.Stakeholders
@@ -113,7 +113,7 @@ namespace Rationally.Visio.View.Stakeholders
                         Children.Add(new StakeholderContainer(Globals.RationallyAddIn.Application.ActivePage, Children.Count, sth, sth.Id))
                     );
             }
-            toDelete.ForEach(doc => doc.RShape.Delete());
+            toDelete.ForEach(doc => doc.Shape.Delete());
             base.Repaint();
         }
     }

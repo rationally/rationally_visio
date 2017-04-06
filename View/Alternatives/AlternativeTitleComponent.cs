@@ -12,9 +12,10 @@ namespace Rationally.Visio.View.Alternatives
         private static readonly Regex TitleRegex = new Regex(@"AlternativeTitle(\.\d+)?$");
         public AlternativeTitleComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {
-            RShape = alternativeComponent;
+            Shape = alternativeComponent;
             InitStyle();
         }
+
 
         public AlternativeTitleComponent(Page page, int index, string text) : base(page, text)
         {

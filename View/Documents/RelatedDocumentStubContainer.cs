@@ -4,7 +4,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Documents
 {
-    internal sealed class RelatedDocumentStubContainer : RationallyComponent
+    internal sealed class RelatedDocumentStubContainer : VisioShape
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public override int Index

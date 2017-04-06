@@ -12,7 +12,7 @@ namespace Rationally.Visio.View.Documents
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public RelatedDocumentTitleComponent(Page page, Shape shape) : base(page, shape)
         {
-            RShape = shape;
+            Shape = shape;
             InitStyle();
         }
 

@@ -21,7 +21,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                 foreach (RelatedDocumentContainer relatedDocumentContainer in relatedDocumentsContainer.Children.Where(c => c is RelatedDocumentContainer).Cast<RelatedDocumentContainer>().ToList())
                 {
                     Log.Debug("Removing the actual url url component from the view tree...");
-                    relatedDocumentContainer.Children.RemoveAll(c => c.RShape.Equals(changedShape)); //Remove the component from the tree
+                    relatedDocumentContainer.Children.RemoveAll(c => c.Shape.Equals(changedShape)); //Remove the component from the tree
                 }
             }
         }

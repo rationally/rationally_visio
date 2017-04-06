@@ -16,10 +16,10 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
 
             foreach (AlternativeContainer alternativeContainer in cont.Children.Where(c => c is AlternativeContainer).Cast<AlternativeContainer>().ToList())
             {
-                if ((alternativeContainer.Children.Where(c => c.RShape.Equals(changedShape)).ToList().Count > 0) && !alternativeContainer.Deleted) //check if this alternative contains the to be deleted component and is not already deleted
+                if ((alternativeContainer.Children.Where(c => c.Shape.Equals(changedShape)).ToList().Count > 0) && !alternativeContainer.Deleted) //check if this alternative contains the to be deleted component and is not already deleted
                 {
                     alternativeContainer.Deleted = true;
-                    alternativeContainer.RShape.Delete(); //delete the parent wrapper of s
+                    alternativeContainer.Shape.Delete(); //delete the parent wrapper of s
                 }
             }
         }

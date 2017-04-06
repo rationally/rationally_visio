@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using log4net;
@@ -13,7 +14,7 @@ namespace Rationally.Visio.View.Alternatives
         private static readonly Regex AlternativeRegex = new Regex(@"Alternative(\.\d+)?$");
         public AlternativeContainer(Page page, Shape alternative) : base(page, false)
         {
-            RShape = alternative;
+            Shape = alternative;
             string title = null, state = null;
             foreach (int shapeIdentifier in alternative.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested))
             {
@@ -24,9 +25,9 @@ namespace Rationally.Visio.View.Alternatives
                     Children.Add(comp);
                     title = comp.Text;
                 }
-                else if (AlternativeStateComponent.IsAlternativeState(alternativeComponent.Name))
+                else if (AlternativeStateShape.IsAlternativeState(alternativeComponent.Name))
                 {
-                    AlternativeStateComponent comp = new AlternativeStateComponent(page, alternativeComponent);
+                    AlternativeStateShape comp = AlternativeStateShape.CreateFromShape(page, alternativeComponent);
                     Children.Add(comp);
                     state = comp.Text;
                 }
@@ -69,8 +70,11 @@ namespace Rationally.Visio.View.Alternatives
         public AlternativeContainer(Page page, int index, Alternative alternative) : base(page)
         {
             //1) state box
-            AlternativeStateComponent stateComponent = new AlternativeStateComponent(page, index, alternative.Status);
+            AlternativeStates alternativeState;
+            Enum.TryParse(alternative.Status, out alternativeState);
+            AlternativeStateShape stateShape = AlternativeStateShape.CreateWithNewShape(page, index, alternativeState);
             Log.Debug("Created state component");
+        
             //2) identifier ("A:")
             string identifier = (char)(65 + index) + ":";
             AlternativeIdentifierComponent identifierComponent = new AlternativeIdentifierComponent(page, index, identifier);
@@ -85,7 +89,7 @@ namespace Rationally.Visio.View.Alternatives
 
             Children.Add(identifierComponent);
             Children.Add(titleComponent);
-            Children.Add(stateComponent);
+            Children.Add(stateShape);
             Children.Add(descComponent);
 
             Name = "Alternative";
@@ -113,7 +117,7 @@ namespace Rationally.Visio.View.Alternatives
             MarginTop = Index == 0 ? 0.3 : 0.0;
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                Shape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
         }
@@ -127,9 +131,9 @@ namespace Rationally.Visio.View.Alternatives
 
         public override void AddToTree(Shape s, bool allowAddInChildren)
         {
-            if (AlternativeStateComponent.IsAlternativeState(s.Name))
+            if (AlternativeStateShape.IsAlternativeState(s.Name))
             {
-                AlternativeStateComponent com = new AlternativeStateComponent(Page, s);
+                AlternativeStateShape com = AlternativeStateShape.CreateFromShape(Page, s);
                 if (com.Index == Index)
                 {
                     Children.Add(com);
@@ -189,19 +193,19 @@ namespace Rationally.Visio.View.Alternatives
             {
                 if (!(Children[0] is AlternativeIdentifierComponent))
                 {
-                    RationallyComponent c = Children.Find(x => x is AlternativeIdentifierComponent);
+                    VisioShape c = Children.Find(x => x is AlternativeIdentifierComponent);
                     Children.Remove(c);
                     Children.Insert(0, c);
                 }
                 if (!(Children[1] is AlternativeTitleComponent))
                 {
-                    RationallyComponent c = Children.Find(x => x is AlternativeTitleComponent);
+                    VisioShape c = Children.Find(x => x is AlternativeTitleComponent);
                     Children.Remove(c);
                     Children.Insert(1, c);
                 }
-                if (!(Children[2] is AlternativeStateComponent))
+                if (!(Children[2] is AlternativeStateShape))
                 {
-                    RationallyComponent c = Children.Find(x => x is AlternativeStateComponent);
+                    VisioShape c = Children.Find(x => x is AlternativeStateShape);
                     Children.Remove(c);
                     Children.Insert(2, c);
                 }

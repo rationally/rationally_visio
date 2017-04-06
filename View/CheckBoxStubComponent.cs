@@ -6,7 +6,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View
 {
-    class CheckBoxStubComponent : RationallyComponent
+    class CheckBoxStubComponent : VisioShape
     {
         public override int Index
         {

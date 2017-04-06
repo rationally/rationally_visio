@@ -18,7 +18,7 @@ namespace Rationally.Visio.View.Documents
 
         public RelatedDocumentContainer(Page page, Shape containerShape) : base(page, false)
         {
-            RShape = containerShape;
+            Shape = containerShape;
             Array ident = containerShape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = (new List<int>((int[]) ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
             string name = null, path = null;
@@ -175,7 +175,7 @@ namespace Rationally.Visio.View.Documents
             comp.ForEach(c =>
             {
                 Children.Remove(c);
-                c.RShape.Delete();
+                c.Shape.Delete();
             });
             //Make a shortcut to the file
             RelatedFileComponent relatedFileComponent = new RelatedFileComponent(Page, index, doc.Path);

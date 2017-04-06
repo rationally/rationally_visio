@@ -12,7 +12,7 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(RationallyView view, Shape changedShape)
         {
-            RationallyComponent comp = view.Children.Find(x => x is PlanningContainer);
+            VisioShape comp = view.Children.Find(x => x is PlanningContainer);
             if (comp is PlanningContainer)
             {
                 comp.MsvSdContainerLocked = false;

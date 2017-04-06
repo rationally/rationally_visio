@@ -6,13 +6,13 @@ using Rationally.Visio.RationallyConstants;
 
 namespace Rationally.Visio.View.Documents
 {
-    internal sealed class RelatedUrlComponent : RationallyComponent
+    internal sealed class RelatedUrlComponent : VisioShape
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex RelatedRegex = new Regex(@"RelatedUrl(\.\d+)?$");
         public RelatedUrlComponent(Page page, Shape urlShape) : base(page)
         {
-            RShape = urlShape;
+            Shape = urlShape;
             InitStyle();
         }
 
@@ -21,9 +21,9 @@ namespace Rationally.Visio.View.Documents
             string docPath = Constants.MyShapesFolder + "\\RationallyHidden.vssx";
             Document rationallyDocument = Globals.RationallyAddIn.Application.Documents.OpenEx(docPath, (short)VisOpenSaveArgs.visAddHidden);
             Master rectMaster = rationallyDocument.Masters["LinkIcon"]; 
-            RShape = page.Drop(rectMaster, 0, 0);
+            Shape = page.Drop(rectMaster, 0, 0);
 
-            Hyperlink link = RShape.AddHyperlink();
+            Hyperlink link = Shape.AddHyperlink();
             link.Address = url;
             EventDblClick = "HYPERLINK(Hyperlink.Row_1.Address)";
 

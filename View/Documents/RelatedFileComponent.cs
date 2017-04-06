@@ -5,19 +5,19 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Documents
 {
-    internal sealed class RelatedFileComponent : RationallyComponent
+    internal sealed class RelatedFileComponent : VisioShape
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex RelatedRegex = new Regex(@"RelatedFile(\.\d+)?$");
         public RelatedFileComponent(Page page, Shape fileShape) : base(page)
         {
-            RShape = fileShape;
+            Shape = fileShape;
             InitStyle();
         }
 
         public RelatedFileComponent(Page page, int index, string filePath) : base(page)
         {
-            RShape = page.InsertFromFile(filePath, (short)VisInsertObjArgs.visInsertLink | (short)VisInsertObjArgs.visInsertIcon);
+            Shape = page.InsertFromFile(filePath, (short)VisInsertObjArgs.visInsertLink | (short)VisInsertObjArgs.visInsertIcon);
             Name = "RelatedFile";
             AddUserRow("rationallyType");
             AddAction("editAction","QUEUEMARKEREVENT(\"edit\")","\"Choose other file\"", false);

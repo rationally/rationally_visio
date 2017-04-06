@@ -5,7 +5,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Forces
 {
-    internal sealed class ForceConcernComponent : RationallyComponent
+    internal sealed class ForceConcernComponent : VisioShape
     {
         private static readonly Regex ForceConcernRegex = new Regex(@"ForceConcern(\.\d+)?$");
         public const string DefaultConcern = "<<concern>>";
@@ -16,7 +16,7 @@ namespace Rationally.Visio.View.Forces
             
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
-            RShape = page.Drop(rectMaster, 0, 0);
+            Shape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
 
             AddUserRow("rationallyType");
@@ -34,7 +34,7 @@ namespace Rationally.Visio.View.Forces
 
         public ForceConcernComponent(Page page, Shape shape) : base(page)
         {
-            RShape = shape;
+            Shape = shape;
         }
 
         private void InitStyle()

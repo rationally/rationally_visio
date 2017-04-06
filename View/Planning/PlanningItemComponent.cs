@@ -15,7 +15,7 @@ namespace Rationally.Visio.View.Planning
 
         public PlanningItemComponent(Page page, Shape planningItem) : base(page,false)
         {
-            RShape = planningItem;
+            Shape = planningItem;
             string name = null;
             bool? checkedBox = null;
             foreach (int shapeIdentifier in planningItem.ContainerProperties.GetMemberShapes((int) VisContainerFlags.visContainerFlagsExcludeNested))
@@ -89,7 +89,7 @@ namespace Rationally.Visio.View.Planning
             MarginTop = Index == 0 ? 0.3 : 0.0;
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                Shape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
             UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
@@ -100,7 +100,7 @@ namespace Rationally.Visio.View.Planning
         public override void AddToTree(Shape s, bool allowAddInChildren)
         {
             //make s into an rcomponent for access to wrapper
-            RationallyComponent shapeComponent = new RationallyComponent(Page) { RShape = s };
+            VisioShape shapeComponent = new VisioShape(Page) { Shape = s };
 
             if (CheckBoxComponent.IsCheckBoxComponent(s.Name))
             {

@@ -10,17 +10,17 @@ namespace Rationally.Visio.View
      /// <summary>
      /// Represents a container object in Rationally. Name is a shorthand for Rationally Container.
      /// </summary>
-    public class RationallyContainer : RationallyComponent
+    public class RationallyContainer : VisioShape
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public List<RationallyComponent> Children { get; protected set; }
+        public List<VisioShape> Children { get; protected set; }
         protected ILayoutManager LayoutManager { private get; set; }
         public SizingPolicy UsedSizingPolicy { get; protected set; }
 
 
         protected RationallyContainer(Page page) : base(page)
         {
-            Children = new List<RationallyComponent>();
+            Children = new List<VisioShape>();
             LayoutManager = new InlineLayout(this);
         }
 
@@ -37,7 +37,7 @@ namespace Rationally.Visio.View
         {
             bool oldLock = MsvSdContainerLocked;
             MsvSdContainerLocked = false;
-            foreach (RationallyComponent c in Children.Where(x => !x.Deleted))
+            foreach (VisioShape c in Children.Where(x => !x.Deleted))
             {
                 bool lockContainer = false;
                 if (c is RationallyContainer)
@@ -46,7 +46,7 @@ namespace Rationally.Visio.View
                     c.MsvSdContainerLocked = false;
                 }
 
-                RShape.ContainerProperties.AddMember(c.RShape, VisMemberAddOptions.visMemberAddDoNotExpand);
+                Shape.ContainerProperties.AddMember(c.Shape, VisMemberAddOptions.visMemberAddDoNotExpand);
                 
                 if (c is RationallyContainer)
                 {
@@ -72,7 +72,7 @@ namespace Rationally.Visio.View
 
         public override void RemoveChildren()
         {
-            foreach (RationallyComponent c in Children)
+            foreach (VisioShape c in Children)
             {
                 MsvSdContainerLocked = false;
                 bool lockContainer = false;
@@ -82,7 +82,7 @@ namespace Rationally.Visio.View
                     c.MsvSdContainerLocked = false;
                 }
 
-                RShape.ContainerProperties.RemoveMember(c.RShape);
+                Shape.ContainerProperties.RemoveMember(c.Shape);
                 
                 if (c is RationallyContainer)
                 {
@@ -104,19 +104,19 @@ namespace Rationally.Visio.View
 
         protected double ContainerPadding
         {
-            set { RShape.CellsU["User.MsvSDContainerMargin"].ResultIU = value; }
+            set { Shape.CellsU["User.MsvSDContainerMargin"].ResultIU = value; }
         }
 
-        public override bool ExistsInTree(Shape s) => RShape.Equals(s) || Children.Exists(x => x.ExistsInTree(s));
+        public override bool ExistsInTree(Shape s) => Shape.Equals(s) || Children.Exists(x => x.ExistsInTree(s));
 
 
-        public override RationallyComponent GetComponentByShape(Shape s) => RShape.Equals(s) ? this : Children.FirstOrDefault(c => c.GetComponentByShape(s) != null)?.GetComponentByShape(s);
+        public override VisioShape GetComponentByShape(Shape s) => Shape.Equals(s) ? this : Children.FirstOrDefault(c => c.GetComponentByShape(s) != null)?.GetComponentByShape(s);
 
         public bool DeleteFromTree(Shape s)
         {
-            foreach (RationallyComponent c in Children)
+            foreach (VisioShape c in Children)
             {
-                if (c.RShape.Equals(s))
+                if (c.Shape.Equals(s))
                 {
                     Children.Remove(c);
                     if (c is AlternativesContainer)
@@ -146,7 +146,7 @@ namespace Rationally.Visio.View
         {
             Children.ForEach(c => c.DeleteRecursive());
             Deleted = true;
-            RShape.Delete();
+            Shape.Delete();
         }
     }
 }

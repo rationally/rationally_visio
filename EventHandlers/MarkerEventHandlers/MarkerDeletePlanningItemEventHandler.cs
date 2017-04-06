@@ -14,7 +14,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
         public void Execute(Shape s, string identifier)
         {
 
-            RationallyComponent component = new RationallyComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = s };
+            VisioShape component = new VisioShape(Globals.RationallyAddIn.Application.ActivePage) { Shape = s };
 
 
             DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Deletion", MessageBoxButtons.YesNo);
@@ -33,7 +33,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                     //trace the correct planningItemComponent
                     PlanningItemComponent planningItemComponent = (PlanningItemComponent)planningContainer.Children.First(c => c is PlanningItemComponent && (component.Index == c.Index));
 
-                    shapeToPass = planningItemComponent.RShape;
+                    shapeToPass = planningItemComponent.Shape;
                 }
                 //initiate a delete handler with the container's shape
                 shapeToPass.Delete();

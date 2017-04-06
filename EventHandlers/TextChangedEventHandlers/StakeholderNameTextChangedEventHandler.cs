@@ -12,7 +12,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 
         public void Execute(RationallyView view, Shape changedShape)
         {
-            RationallyComponent stakeholderNameComponent = new RationallyComponent(view.Page) { RShape = changedShape };
+            VisioShape stakeholderNameComponent = new VisioShape(view.Page) { Shape = changedShape };
 
             if (Globals.RationallyAddIn.Model.Stakeholders.Count <= stakeholderNameComponent.Index) { return; }
 

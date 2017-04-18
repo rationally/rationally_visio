@@ -24,7 +24,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             {
                 Shape shapeToPass;
 
-                if (AlternativeContainer.IsAlternativeContainer(s.Name))
+                if (AlternativeShape.IsAlternativeContainer(s.Name))
                 {
                     shapeToPass = s;
                 }
@@ -33,9 +33,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                     //trace alternatives container
                     AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.RationallyAddIn.View.Children.First(c => c is AlternativesContainer);
                     //trace the correct alternative container
-                    AlternativeContainer alternativeContainer = (AlternativeContainer) alternativesContainer.Children.First(c => c is AlternativeContainer && (component.Index == c.Index));
+                    AlternativeShape alternativeShape = (AlternativeShape) alternativesContainer.Children.First(c => c is AlternativeShape && (component.Index == c.Index));
                     
-                    shapeToPass = alternativeContainer.Shape;
+                    shapeToPass = alternativeShape.Shape;
                 }
                 //initiate a delete handler with the container's shape
                 shapeToPass.Delete();

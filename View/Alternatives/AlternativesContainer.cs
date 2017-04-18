@@ -21,9 +21,9 @@ namespace Rationally.Visio.View.Alternatives
             Shape = alternativesContainer;
             Array ident = alternativesContainer.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
-            foreach (Shape shape in shapes.Where(shape => AlternativeContainer.IsAlternativeContainer(shape.Name)))
+            foreach (Shape shape in shapes.Where(shape => AlternativeShape.IsAlternativeContainer(shape.Name)))
             {
-                Children.Add(new AlternativeContainer(page, shape));
+                Children.Add(new AlternativeShape(page, shape));
             }
             Children = Children.OrderBy(c => c.Index).ToList();
             LayoutManager = new VerticalStretchLayout(this);
@@ -37,18 +37,18 @@ namespace Rationally.Visio.View.Alternatives
             //make s into an rcomponent for access to wrapper
             VisioShape shapeComponent = new VisioShape(Page) {Shape = s};
 
-            if (AlternativeContainer.IsAlternativeContainer(s.Name))
+            if (AlternativeShape.IsAlternativeContainer(s.Name))
             {
                 if (Children.All(c => c.Index != shapeComponent.Index)) //there is no forcecontainer stub with this index
                 {
-                    Children.Add(new AlternativeContainer(Page, s));
+                    Children.Add(new AlternativeShape(Page, s));
                 }
                 else
                 {
                     //remove stub, insert s as new containers
                     AlternativeStubContainer stub = (AlternativeStubContainer) Children.First(c => c.Index == shapeComponent.Index);
                     Children.Remove(stub);
-                    AlternativeContainer con = new AlternativeContainer(Page, s);
+                    AlternativeShape con = new AlternativeShape(Page, s);
                     if (Children.Count < con.Index)
                     {
                         Children.Add(con);
@@ -101,7 +101,7 @@ namespace Rationally.Visio.View.Alternatives
             newAlternative.GenerateIdentifier(Globals.RationallyAddIn.Model.Alternatives.Count);
             Log.Debug("Identifier generated");
             Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
-            Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Alternatives.Count - 1, newAlternative));
+            Children.Add(new AlternativeShape(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Alternatives.Count - 1, newAlternative));
             RepaintHandler.Repaint();
             pleaseWait.Hide();
         }
@@ -117,7 +117,7 @@ namespace Rationally.Visio.View.Alternatives
                 Globals.RationallyAddIn.Model.Alternatives
                     .Where(alt => Children.Count == 0 || Children.All(c => c.Id != alt.Id)).ToList()
                     .ForEach(alt => { alt.GenerateIdentifier(Children.Count);
-                        Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Children.Count, alt));
+                        Children.Add(new AlternativeShape(Globals.RationallyAddIn.Application.ActivePage, Children.Count, alt));
                     });
             }
 

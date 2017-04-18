@@ -21,9 +21,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             VisioShape toChangeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
             int currentIndex = toChangeComponent.Index;
             
-            AlternativeContainer toChange = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.Shape.CellsU[CellConstants.Index].ResultIU == currentIndex);
+            AlternativeShape toChange = (AlternativeShape)alternativesContainer.Children.First(c => (int)c.Shape.CellsU[CellConstants.Index].ResultIU == currentIndex);
             //locate the alternative that we are going to swap with
-            AlternativeContainer other = (AlternativeContainer)alternativesContainer.Children.First(c => (int)c.Shape.CellsU[CellConstants.Index].ResultIU == currentIndex + 1);
+            AlternativeShape other = (AlternativeShape)alternativesContainer.Children.First(c => (int)c.Shape.CellsU[CellConstants.Index].ResultIU == currentIndex + 1);
             
             //swap the items in the model
             model.Alternatives[currentIndex].GenerateIdentifier(currentIndex + 1);

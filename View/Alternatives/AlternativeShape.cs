@@ -8,11 +8,11 @@ using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Alternatives
 {
-    internal sealed class AlternativeContainer : HeaderlessContainer, IAlternativeComponent
+    internal sealed class AlternativeShape : HeaderlessContainer, IAlternativeComponent
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex AlternativeRegex = new Regex(@"Alternative(\.\d+)?$");
-        public AlternativeContainer(Page page, Shape alternative) : base(page, false)
+        public AlternativeShape(Page page, Shape alternative) : base(page, false)
         {
             Shape = alternative;
             string title = null, state = null;
@@ -67,7 +67,64 @@ namespace Rationally.Visio.View.Alternatives
 
         }
 
-        public AlternativeContainer(Page page, int index, Alternative alternative) : base(page)
+        public static AlternativeShape CreateWithNewShape(Page page, int index, Alternative alternative)
+        {
+            AlternativeShape alternativeShape = new AlternativeShape(page, index, alternative);
+
+            string title = null, state = null;
+            foreach (int shapeIdentifier in alternativeShape.Shape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested))
+            {
+                Shape alternativeComponent = page.Shapes.ItemFromID[shapeIdentifier];
+                if (AlternativeTitleComponent.IsAlternativeTitle(alternativeComponent.Name))
+                {
+                    AlternativeTitleComponent comp = new AlternativeTitleComponent(page, alternativeComponent);
+                    alternativeShape.Children.Add(comp);
+                    title = comp.Text;
+                }
+                else if (AlternativeStateShape.IsAlternativeState(alternativeComponent.Name))
+                {
+                    AlternativeStateShape comp = AlternativeStateShape.CreateFromShape(page, alternativeComponent);
+                    alternativeShape.Children.Add(comp);
+                    state = comp.Text;
+                }
+                else if (AlternativeIdentifierComponent.IsAlternativeIdentifier(alternativeComponent.Name))
+                {
+                    alternativeShape.Children.Add(new AlternativeIdentifierComponent(page, alternativeComponent));
+                }
+                else if (AlternativeDescriptionComponent.IsAlternativeDescription(alternativeComponent.Name))
+                {
+                    AlternativeDescriptionComponent comp = new AlternativeDescriptionComponent(page, alternativeComponent);
+                    alternativeShape.Children.Add(comp);
+                }
+            }
+            if ((title != null) && (state != null))
+            {
+                if (alternativeShape.Index <= Globals.RationallyAddIn.Model.Alternatives.Count)
+                {
+                    Alternative newAlternative = new Alternative(title, state, alternativeShape.Id);
+                    newAlternative.GenerateIdentifier(alternativeShape.Index);
+                    Globals.RationallyAddIn.Model.Alternatives.Insert(alternativeShape.Index, newAlternative);
+                    int indexCounter = alternativeShape.Index;
+                    foreach (Alternative alt in Globals.RationallyAddIn.Model.Alternatives.Skip(indexCounter + 1).ToList()) //Skip up till and including the new Alternative
+                    {
+                        alt.GenerateIdentifier(++indexCounter);
+                    }
+                }
+                else
+                {
+                    Alternative newAlternative = new Alternative(title, state, alternativeShape.Id);
+                    newAlternative.GenerateIdentifier(Globals.RationallyAddIn.Model.Alternatives.Count);
+                    Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
+
+                }
+            }
+            alternativeShape.UsedSizingPolicy = SizingPolicy.ExpandYIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
+            alternativeShape.MarginTop = alternativeShape.Index == 0 ? 0.3 : 0.0;
+
+            return alternativeShape;
+        }
+
+        public AlternativeShape(Page page, int index, Alternative alternative) : base(page)
         {
             //1) state box
             AlternativeState alternativeState;

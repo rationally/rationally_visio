@@ -65,7 +65,7 @@ namespace Rationally.Visio.Model
             {
                 int i = 0;
                 AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.RationallyAddIn.View.Children.First(c => c is AlternativesContainer);
-                alternativesContainer.Children.Where(c => c is AlternativeContainer).ToList().ForEach(c => ((AlternativeContainer) c).SetAlternativeIdentifier(i++));
+                alternativesContainer.Children.Where(c => c is AlternativeShape).ToList().ForEach(c => ((AlternativeShape) c).SetAlternativeIdentifier(i++));
             }
             int j = 0;
             foreach (Alternative a in Alternatives)

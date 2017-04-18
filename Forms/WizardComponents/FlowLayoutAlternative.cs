@@ -2,10 +2,8 @@
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
-using System.Security.Policy;
 using System.Windows.Forms;
 using log4net;
-using Rationally.Visio.EventHandlers.ClickEventHandlers;
 using Rationally.Visio.Model;
 using Rationally.Visio.View.Alternatives;
 

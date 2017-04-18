@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
@@ -9,9 +6,9 @@ using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Planning
 {
-    class PlanningItemComponent : HeaderlessContainer
+    internal class PlanningItemComponent : HeaderlessContainer
     {
-        private static readonly Regex regex = new Regex(@"PlanningItem(\.\d+)?$");
+        private static readonly Regex Regex = new Regex(@"PlanningItem(\.\d+)?$");
 
         public PlanningItemComponent(Page page, Shape planningItem) : base(page,false)
         {
@@ -158,7 +155,7 @@ namespace Rationally.Visio.View.Planning
         }
 
 
-        public static bool IsPlanningItem(string name) => regex.IsMatch(name);
+        public static bool IsPlanningItem(string name) => Regex.IsMatch(name);
         
 
         public override void Repaint()

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Text;
 using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;

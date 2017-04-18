@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Office.Interop.Visio;
+﻿using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View
 {
-    class CheckBoxStubComponent : VisioShape
+    internal class CheckBoxStubComponent : VisioShape
     {
         public override int Index
         {

@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
-using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.Forms.AlternativeStateConfiguration
 {
-    class TableLayoutAlternativeStates : TableLayoutPanel
+    internal class TableLayoutAlternativeStates : TableLayoutPanel
     {
         public List<FlowLayoutAlternativeState> StateRows = new List<FlowLayoutAlternativeState>();
 
@@ -123,7 +121,7 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
                 {
                     resx.AddResource("Root", "");
                     int i = 0;
-                    foreach (String state in Enum.GetNames(typeof(AlternativeState)))
+                    foreach (string state in Enum.GetNames(typeof(AlternativeState)))
                     {
                         AlternativeState newAlternativeState;
                         Enum.TryParse(state, out newAlternativeState);

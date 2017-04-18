@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.EventHandlers;
 using Rationally.Visio.Forms;
 using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
-using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.View.Planning
 {
-    class PlanningContainer : RationallyContainer
+    internal class PlanningContainer : RationallyContainer
     {
         private static readonly Regex PlanningRegex = new Regex(@"Planning(\.\d+)?$");
 

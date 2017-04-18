@@ -4,12 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows.Forms;
 using log4net;
 using log4net.Config;
 using Microsoft.Office.Interop.Visio;
-using Microsoft.Office.Tools.Ribbon;
 using Newtonsoft.Json.Linq;
 using Rationally.Visio.EventHandlers;
 using Rationally.Visio.EventHandlers.DeleteEventHandlers;
@@ -92,14 +90,14 @@ namespace Rationally.Visio
             showRationallyUpdatePopup = NewVersionAvailable = CheckRationallyVersion();
         }
 
-        private void Application_MouseDown(int Button, int KeyButtonState, double x, double y, ref bool CancelDefault)
+        private void Application_MouseDown(int button, int keyButtonState, double x, double y, ref bool cancelDefault)
         {
-            if (Button != 1) //if other than the left mouse button was clicked
+            if (button != 1) //if other than the left mouse button was clicked
             {
                 return;
             }
             
-            PlanningContainer planningContainer = (View.Children.FirstOrDefault(c => c is PlanningContainer) as PlanningContainer);
+            PlanningContainer planningContainer = View.Children.FirstOrDefault(c => c is PlanningContainer) as PlanningContainer;
             //locate all checkbox elements in the view
             List<CheckBoxStateComponent> candidates = planningContainer?.Children //map all planning items to their checkbox child, and that checkbox to its state component
                 .Select(planningItemComponent => ((PlanningItemComponent)planningItemComponent).Children
@@ -121,11 +119,7 @@ namespace Rationally.Visio
                     break;
                 }
             }
-            if (stateComponent == null)
-            {
-                return;
-            }
-
+           
             //locate parent of stateComponent
             //PlanningItemComponent toStrikeThrough = planningContainer?.Children.Cast<PlanningItemComponent>().First(item => (item.Children.First(c => c is CheckBoxComponent) as CheckBoxComponent).Children.Contains(stateComponent));
             //toStrikeThrough.Children.First(c => c is PlanningItemTextComponent).StrikeThrough = !toStrikeThrough.Children.First(c => c is PlanningItemTextComponent).StrikeThrough;

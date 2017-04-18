@@ -62,19 +62,19 @@ namespace Rationally.Visio.View
 
         public void AddMenuItem(ContextMenuItem item)
         {
-            AddAction(item.EventId, string.Format(VisioFormulas.Formula_QUEUMARKEREVENT, item.ActionId), item.Name,item.IsFlyOut,item.IsEnabled);
+            AddAction(item.EventId, Format(VisioFormulas.Formula_QUEUMARKEREVENT, item.ActionId), item.Name,item.IsFlyOut,item.IsEnabled);
             ContextMenuEventHandler.Instance.RegisterMenuEvent(item.ActionId, item);
         }
 
         public void UpdateMenuItem(ContextMenuItem item)
         {
 
-            if (Shape.CellExists[string.Format(VisioFormulas.Action_Action, item.EventId), (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+            if (Shape.CellExists[Format(VisioFormulas.Action_Action, item.EventId), (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
             {
-                Shape.CellsU[string.Format(VisioFormulas.Action_Disabled, item.EventId)].Formula =
+                Shape.CellsU[Format(VisioFormulas.Action_Disabled, item.EventId)].Formula =
                 (!item.IsEnabled).ToString().ToUpper();
-                Shape.CellsU[string.Format(VisioFormulas.Action_MenuName, item.EventId)].Formula =
-              string.Format(VisioFormulas.Formula_EscapedValue, item.Name);
+                Shape.CellsU[Format(VisioFormulas.Action_MenuName, item.EventId)].Formula =
+              Format(VisioFormulas.Formula_EscapedValue, item.Name);
             }
         }
 
@@ -181,25 +181,23 @@ namespace Rationally.Visio.View
         }
 
         
-        internal void AddAction(string actionRowID, string action, string name, bool flyout, bool enabled=true)
+        internal void AddAction(string actionRowId, string action, string name, bool flyout, bool enabled=true)
         {
-
-
-            if (Shape.CellExists[string.Format(VisioFormulas.Action_Action, actionRowID), (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+            if (Shape.CellExists[Format(VisioFormulas.Action_Action, actionRowId), (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
             {
-                Shape.DeleteRow((short)VisSectionIndices.visSectionAction, Shape.CellsRowIndex[string.Format(VisioFormulas.Action_Action, actionRowID)]);
+                Shape.DeleteRow((short)VisSectionIndices.visSectionAction, Shape.CellsRowIndex[Format(VisioFormulas.Action_Action, actionRowId)]);
             }
 
-            Shape.AddNamedRow((short)VisSectionIndices.visSectionAction, actionRowID,
+            Shape.AddNamedRow((short)VisSectionIndices.visSectionAction, actionRowId,
                 (short)VisRowTags.visTagDefault);
-            Shape.CellsU[string.Format(VisioFormulas.Action_Action, actionRowID)].Formula = action;
-            Shape.CellsU[string.Format(VisioFormulas.Action_MenuName, actionRowID)].Formula =
-                string.Format(VisioFormulas.Formula_EscapedValue, name);
+            Shape.CellsU[Format(VisioFormulas.Action_Action, actionRowId)].Formula = action;
+            Shape.CellsU[Format(VisioFormulas.Action_MenuName, actionRowId)].Formula =
+                Format(VisioFormulas.Formula_EscapedValue, name);
 
-            Shape.CellsU[string.Format(VisioFormulas.Action_Disabled, actionRowID)].Formula =
+            Shape.CellsU[Format(VisioFormulas.Action_Disabled, actionRowId)].Formula =
                 (!enabled).ToString().ToUpper();
 
-            Shape.CellsU[string.Format(VisioFormulas.Action_IsFlyoutChild, actionRowID)].Formula =
+            Shape.CellsU[Format(VisioFormulas.Action_IsFlyoutChild, actionRowId)].Formula =
                 flyout.ToString().ToUpper();
         }
 
@@ -284,7 +282,7 @@ namespace Rationally.Visio.View
 
         public bool StrikeThrough
         {
-            get { return Boolean.Parse(Shape.CellsU["Char.strikethru"].FormulaU); }
+            get { return bool.Parse(Shape.CellsU["Char.strikethru"].FormulaU); }
             set { Shape.CellsU["Char.strikethru"].Formula = value.ToString().ToUpper(); }
         }
 
@@ -359,11 +357,7 @@ namespace Rationally.Visio.View
 
         }
 
-        public virtual void UpdateIndex(int index)
-        {
-            //set our own index to the new value
-            Index = index;
-        }
+        public virtual void UpdateIndex(int index) => Index = index;
 
         public void MoveChildren(double deltaX, double deltaY)
         {
@@ -444,7 +438,7 @@ namespace Rationally.Visio.View
             {
                 rationallyStencils = Globals.RationallyAddIn.Application.Documents.OpenEx(pathToStencil,
                     (short)(VisOpenSaveArgs.visOpenRO | VisOpenSaveArgs.visOpenHidden));
-                var master = rationallyStencils.Masters.ItemU[masterName];
+                Master master = rationallyStencils.Masters.ItemU[masterName];
                 shape = page.Drop(master, 0,0);
 
             }

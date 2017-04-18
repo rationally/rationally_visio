@@ -15,8 +15,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
             ForcesContainer forcesContainer = (ForcesContainer)view.Children.First(c => c is ForcesContainer);
 
             ForceValueComponent forceValue = (ForceValueComponent)view.GetComponentByShape(changedShape);
-            string forceVal;
-            forceVal = forceValue.Text == string.Empty ? "0" : forceValue.Text;
+            string forceVal = forceValue.Text == string.Empty ? "0" : forceValue.Text;
             Globals.RationallyAddIn.Model.Forces[forceValue.Index].ForceValueDictionary[forceValue.ForceAlternativeId] = forceVal;
             RepaintHandler.Repaint(forceValue); //repaint the force value, for coloring
             ForceTotalsRow forceTotalsRow = forcesContainer.Children.First(c => c is ForceTotalsRow) as ForceTotalsRow;

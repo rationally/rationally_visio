@@ -2,13 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
 using Rationally.Visio.EventHandlers.WizardPageHandlers;
 using Rationally.Visio.Model;
-using Rationally.Visio.RationallyConstants;
 
 namespace Rationally.Visio.Forms.WizardComponents
 {

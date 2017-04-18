@@ -7,7 +7,7 @@ using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
-    class MoveUpStakeholderHandler : IMarkerEventHandler
+    internal class MoveUpStakeholderHandler : IMarkerEventHandler
     {
         public void Execute(Shape changedShape, string identifier)
         {

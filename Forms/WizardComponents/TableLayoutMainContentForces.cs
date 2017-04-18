@@ -78,8 +78,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         {
             ForcesDataGrid.Columns.Clear();
 
-            ColumnId = new DataGridViewTextBoxColumn();
-            ColumnId.Visible = false;
+            ColumnId = new DataGridViewTextBoxColumn {Visible = false};
 
             //add the two base columns of a force: concern and description
             ColumnConcern = new DataGridViewTextBoxColumn();

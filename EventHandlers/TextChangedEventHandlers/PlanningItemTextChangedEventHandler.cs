@@ -6,7 +6,7 @@ using Rationally.Visio.View;
 
 namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
-    class PlanningTextChangedEventHandler : ITextChangedEventHandler
+    internal class PlanningTextChangedEventHandler : ITextChangedEventHandler
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 

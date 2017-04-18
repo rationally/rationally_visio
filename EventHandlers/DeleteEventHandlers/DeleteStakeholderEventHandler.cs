@@ -8,7 +8,7 @@ using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
-    class DeleteStakeholderEventHandler : IDeleteEventHandler
+    internal class DeleteStakeholderEventHandler : IDeleteEventHandler
     {
         private const string DeleteUndoScope = "Delete stakeholder";
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

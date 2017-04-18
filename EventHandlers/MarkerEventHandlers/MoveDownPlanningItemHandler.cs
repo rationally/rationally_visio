@@ -5,7 +5,6 @@ using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Planning;
-using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {

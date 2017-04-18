@@ -4,11 +4,10 @@ using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.View;
 using Rationally.Visio.View.Planning;
-using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
-    class MoveUpPlanningItemHandler : IMarkerEventHandler
+    internal class MoveUpPlanningItemHandler : IMarkerEventHandler
     {
         public void Execute(Shape changedShape, string identifier)
         {

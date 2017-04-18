@@ -7,7 +7,7 @@ using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
 {
-    class DeleteStakeholdersEventHandler : IDeleteEventHandler
+    internal class DeleteStakeholdersEventHandler : IDeleteEventHandler
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 

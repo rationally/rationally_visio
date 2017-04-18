@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using log4net;
 using Microsoft.Office.Interop.Visio;
-using Rationally.Visio.RationallyConstants;
 
 namespace Rationally.Visio.View.ContextMenu
 {

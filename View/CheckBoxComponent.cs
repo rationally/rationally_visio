@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View
 {
-    class CheckBoxComponent : RationallyContainer
+    internal class CheckBoxComponent : RationallyContainer
     {
-        public static double CHECKBOX_SIZE = 0.4;
-        private static readonly Regex regex = new Regex(@"CheckBoxComponent(\.\d+)?$");
+        public static readonly double CheckboxSize = 0.4;
+        private static readonly Regex Regex = new Regex(@"CheckBoxComponent(\.\d+)?$");
 
         public CheckBoxComponent(Page page, int index, bool isFinished) : base(page)
         {
@@ -32,8 +29,8 @@ namespace Rationally.Visio.View
             RationallyType = "checkBoxComponent";
             Name = "CheckBoxComponent";
             Index = index;
-            Width = CHECKBOX_SIZE;
-            Height = CHECKBOX_SIZE;
+            Width = CheckboxSize;
+            Height = CheckboxSize;
             InitStyle();
         }
 
@@ -70,15 +67,9 @@ namespace Rationally.Visio.View
 
         }
 
-        public void Check(bool isChecked)
-        {
-            ((CheckBoxStateComponent) Children.First()).Checked = isChecked;
-        }
+        public void Check(bool isChecked) => ((CheckBoxStateComponent) Children.First()).Checked = isChecked;
 
         public bool Checked => ((CheckBoxStateComponent)Children.First()).Checked;
-        public static bool IsCheckBoxComponent(string name)
-        {
-            return regex.IsMatch(name);
-        }
+        public static bool IsCheckBoxComponent(string name) => Regex.IsMatch(name);
     }
 }

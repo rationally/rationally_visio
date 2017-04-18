@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 using System.Text.RegularExpressions;
 using log4net;
 using Microsoft.Office.Interop.Visio;
@@ -10,10 +6,10 @@ using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Planning
 {
-    class PlanningItemTextComponent : PaddedTextLabel
+    internal class PlanningItemTextComponent : PaddedTextLabel
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static readonly Regex regex = new Regex(@"PlanningItemTextComponent(\.\d+)?$");
+        private static readonly Regex Regex = new Regex(@"PlanningItemTextComponent(\.\d+)?$");
 
         public PlanningItemTextComponent(Page page, Shape shape) : base(page, shape)
         {
@@ -45,7 +41,7 @@ namespace Rationally.Visio.View.Planning
             UsedSizingPolicy = SizingPolicy.FixedSize;
         }
 
-        public static bool IsPlanningItemTextComponent(string name) => regex.IsMatch(name);
+        public static bool IsPlanningItemTextComponent(string name) => Regex.IsMatch(name);
         
 
         public override void Repaint()

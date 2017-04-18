@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.View.Planning;
 
 namespace Rationally.Visio.View
 {
-    class CheckBoxStateComponent : VisioShape
+    internal class CheckBoxStateComponent : VisioShape
     {
         private double margin = 0.05; //border for the wrapper component
         private string checkedColor = "THEMEVAL()";
         private string unCheckedColor = "RGB(255,255,255)";
-        private static readonly Regex regex = new Regex(@"CheckBoxStateComponent(\.\d+)?$");
+        private static readonly Regex Regex = new Regex(@"CheckBoxStateComponent(\.\d+)?$");
 
         public CheckBoxStateComponent(Page page, int index, bool isFinished) : base(page)
         {
@@ -23,8 +20,8 @@ namespace Rationally.Visio.View
             Shape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
 
-            Width = CheckBoxComponent.CHECKBOX_SIZE - 2*margin;
-            Height = CheckBoxComponent.CHECKBOX_SIZE - 2 * margin;
+            Width = CheckBoxComponent.CheckboxSize - 2*margin;
+            Height = CheckBoxComponent.CheckboxSize - 2 * margin;
 
             AddUserRow("rationallyType");
             AddUserRow("Index");
@@ -44,17 +41,14 @@ namespace Rationally.Visio.View
             InitStyle();
         }
 
-        private void InitStyle()
-        {
-            SetMargin(margin);
-        }
+        private void InitStyle() => SetMargin(margin);
 
         private void Check(bool isChecked)
         {
             
             //update model
             Globals.RationallyAddIn.Model.PlanningItems[Index].Finished = isChecked;
-            PlanningContainer planningContainer = (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is PlanningContainer) as PlanningContainer);
+            PlanningContainer planningContainer = Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is PlanningContainer) as PlanningContainer;
             planningContainer.Children[Index].Repaint();
             /*PlanningContainer planningContainer = (Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is PlanningContainer) as PlanningContainer);
             //locate parent of stateComponent
@@ -83,18 +77,11 @@ namespace Rationally.Visio.View
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio takes care of this
             {
-                if (Globals.RationallyAddIn.Model.PlanningItems[Index].Finished)
-                {
-                    BackgroundColor = checkedColor;
-                }
-                else
-                {
-                    BackgroundColor = unCheckedColor;
-                }
+                BackgroundColor = Globals.RationallyAddIn.Model.PlanningItems[Index].Finished ? checkedColor : unCheckedColor;
             }
             base.Repaint();
         }
 
-        public static bool IsCheckBoxStateComponent(string name) => regex.IsMatch(name);
+        public static bool IsCheckBoxStateComponent(string name) => Regex.IsMatch(name);
     }
 }

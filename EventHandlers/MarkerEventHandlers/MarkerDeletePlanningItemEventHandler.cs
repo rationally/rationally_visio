@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.View;
@@ -9,7 +6,7 @@ using Rationally.Visio.View.Planning;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
-    class MarkerDeletePlanningItemEventHandler : IMarkerEventHandler
+    internal class MarkerDeletePlanningItemEventHandler : IMarkerEventHandler
     {
         public void Execute(Shape s, string identifier)
         {

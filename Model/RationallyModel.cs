@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
-using System.Runtime.Serialization.Formatters.Binary;
 using log4net;
 using Newtonsoft.Json;
 using Rationally.Visio.RationallyConstants;
@@ -119,7 +117,7 @@ namespace Rationally.Visio.Model
                 else
                 {
                     int i = 0;
-                    foreach (String state in Enum.GetNames(typeof(AlternativeState)))
+                    foreach (string state in Enum.GetNames(typeof(AlternativeState)))
                     {
                         AlternativeState newAlternativeState;
                         Enum.TryParse(state, out newAlternativeState);

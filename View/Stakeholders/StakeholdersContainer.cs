@@ -11,7 +11,7 @@ using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Stakeholders
 {
-    class StakeholdersContainer : RationallyContainer
+    internal class StakeholdersContainer : RationallyContainer
     {
         private static readonly Regex StakeholdersRegex = new Regex(@"Stakeholders(\.\d+)?$");
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

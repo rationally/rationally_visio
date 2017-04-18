@@ -119,11 +119,8 @@ namespace Rationally.Visio.View
                 if (c.Shape.Equals(s))
                 {
                     Children.Remove(c);
-                    if (c is AlternativesContainer)
-                    {
-                        AlternativesContainer container = c as AlternativesContainer;
-                        container.RemoveAlternativesFromModel();
-                    }
+                    AlternativesContainer container = c as AlternativesContainer;
+                    container?.RemoveAlternativesFromModel();
                     return true;
                 }
 

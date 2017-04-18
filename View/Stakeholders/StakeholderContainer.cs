@@ -60,11 +60,8 @@ namespace Rationally.Visio.View.Stakeholders
             Log.Debug("Starting shapesheet initing of stakeholdercontainer.");
             Name = "Stakeholder";
             //NameU = "Stakeholder";
-            AddUserRow("rationallyType");
             RationallyType = "stakeholder";
-            AddUserRow("index");
             Index = index;
-            AddUserRow("uniqueid");
             Id = id;
 
 

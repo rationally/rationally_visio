@@ -23,9 +23,7 @@ namespace Rationally.Visio.View
 
             //create a slightly smaller rectangle shape, whose background indicates the state of the checkbox
             Children.Add(new CheckBoxStateComponent(page, index, isFinished));
-
-            AddUserRow("rationallyType");
-            AddUserRow("Index");
+            
             RationallyType = "checkBoxComponent";
             Name = "CheckBoxComponent";
             Index = index;

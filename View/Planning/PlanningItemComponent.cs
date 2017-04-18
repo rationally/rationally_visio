@@ -59,10 +59,6 @@ namespace Rationally.Visio.View.Planning
             PlanningItemTextComponent itemContent = new PlanningItemTextComponent(page,index,item.ItemText);
             Children.Add(itemContent);
 
-            AddUserRow("rationallyType");
-            AddUserRow("Index");
-            AddUserRow("uniqueId");
-
             Name = "PlanningItem";
             RationallyType = "planningItem";
             Index = index;

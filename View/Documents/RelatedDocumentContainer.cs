@@ -94,12 +94,9 @@ namespace Rationally.Visio.View.Documents
                 RelatedURLURLComponent urlLabel = new RelatedURLURLComponent(page, index, document.Path);
                 Children.Add(urlLabel);
             }
-            AddUserRow("rationallyType");
             RationallyType = "relatedDocumentContainer";
             Name = "Related Document";
-            AddUserRow("index");
             Index = index;
-            AddUserRow("uniqueId");
             Id = docId;
 
             AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "Add file", false);

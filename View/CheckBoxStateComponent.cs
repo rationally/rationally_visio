@@ -22,9 +22,7 @@ namespace Rationally.Visio.View
 
             Width = CheckBoxComponent.CheckboxSize - 2*margin;
             Height = CheckBoxComponent.CheckboxSize - 2 * margin;
-
-            AddUserRow("rationallyType");
-            AddUserRow("Index");
+            
             RationallyType = "checkBoxStateComponent";
             Name = "CheckBoxStateComponent";
             Index = index;//TODO implement via model

@@ -24,8 +24,7 @@ namespace Rationally.Visio.View.Forces
 
             AddUserRow("alternativeIdentifier");
             AlternativeIdentifierString = "";
-
-            AddUserRow("rationallyType");
+            
             RationallyType = "forceAlternativeHeaderComponent";
             Name = "ForceAlternativeHeaderComponent";
             InitStyle();

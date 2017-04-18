@@ -18,7 +18,6 @@ namespace Rationally.Visio.View.Forces
 
         public ForceTotalsRow(Page page) : base(page)
         {
-            AddUserRow("rationallyType");
             RationallyType = "forceTotalsRow";
             Name = "ForceTotalsRow";
 
@@ -80,7 +79,6 @@ namespace Rationally.Visio.View.Forces
                 LockDelete = true
             };
             concernDummy.LinePattern = 1;
-            concernDummy.AddUserRow("rationallyType");
             concernDummy.RationallyType = "concernDummy";
             concernDummy.ToggleBoldFont(true);
             Children.Add(concernDummy);
@@ -98,7 +96,6 @@ namespace Rationally.Visio.View.Forces
                 LockDelete = true
             };
             descDummy.LinePattern = 1;
-            descDummy.AddUserRow("rationallyType");
             descDummy.RationallyType = "descDummy";
             Children.Add(descDummy);
 

@@ -79,9 +79,7 @@ namespace Rationally.Visio.View.Alternatives
 
             AlternativeStateShape stateShape = new AlternativeStateShape(page, shape);
             stateShape.GenerateMenu();
-            stateShape.AddUserRow("rationallyType");
             stateShape.RationallyType = "alternativeState";
-            stateShape.AddUserRow("index");
             stateShape.Index = alternativeIndex;
             stateShape.Name = "AlternativeState";
 

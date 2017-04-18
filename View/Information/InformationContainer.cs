@@ -23,7 +23,6 @@ namespace Rationally.Visio.View.Information
 
 
             Log.Debug("about to add rationally type row in shapesheet");
-            AddUserRow("rationallyType");
             Log.Debug("rationally type row added");
             RationallyType = "informationBox";
             Shape.Name = "Information";

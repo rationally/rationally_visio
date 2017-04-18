@@ -114,8 +114,22 @@ namespace Rationally.Visio.View
 
         public int Id
         {
-            get { return (int)Shape.CellsU["User.uniqueId"].ResultIU; } //Id is unique for its type (alternative, related document, stakeholder, etc)
-            protected set { Shape.CellsU["User.uniqueId.Value"].ResultIU = value; }
+            get
+            {
+                if (!CellExists(VisioFormulas.Formula_UniqueId))
+                {
+                    AddUserRow("uniqueId");
+                }
+                return (int)Shape.CellsU["User.uniqueId"].ResultIU;
+            } //Id is unique for its type (alternative, related document, stakeholder, etc)
+            protected set
+            {
+                if (!CellExists(VisioFormulas.Formula_UniqueId))
+                {
+                    AddUserRow("uniqueId");
+                }
+                Shape.CellsU[VisioFormulas.Formula_UniqueId].ResultIU = value;
+            }
         }
 
         public int ForceAlternativeId //Backreference to alternativeId, for the forces table

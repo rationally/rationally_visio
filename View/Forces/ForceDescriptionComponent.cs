@@ -17,12 +17,10 @@ namespace Rationally.Visio.View.Forces
             Master rectMaster = basicDocument.Masters["Rectangle"];
             Shape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
-
-            AddUserRow("rationallyType");
+            
             RationallyType = "forceDescription";
             Name = "ForceDescription";
-
-            AddUserRow("index");
+            
             Index = index;
 
             AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "Add force", false);

@@ -20,7 +20,6 @@ namespace Rationally.Visio.View.Documents
         {
             RationallyType = "relatedDocumentTitle";
             Name = "Related Document Title";
-            AddUserRow("index");
             Index = index;
 
             AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "Add file", false);

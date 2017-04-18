@@ -19,14 +19,12 @@ namespace Rationally.Visio.View.Documents
         {
             Shape = page.InsertFromFile(filePath, (short)VisInsertObjArgs.visInsertLink | (short)VisInsertObjArgs.visInsertIcon);
             Name = "RelatedFile";
-            AddUserRow("rationallyType");
             AddAction("editAction","QUEUEMARKEREVENT(\"edit\")","Choose other file", false);
 
             AddUserRow("filePath");
             FilePath = filePath; //store the path of the file this shape is a link to, so it can be read during a tree rebuild
 
             RationallyType = "relatedFile";
-            AddUserRow("index");
             Index = index;
 
             AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "Add file", false);

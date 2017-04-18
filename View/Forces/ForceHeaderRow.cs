@@ -17,7 +17,6 @@ namespace Rationally.Visio.View.Forces
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public ForceHeaderRow(Page page) : base(page)
         {
-            AddUserRow("rationallyType");
             RationallyType = "forceHeaderRow";
             Name = "ForceHeaderRow";
 
@@ -72,7 +71,6 @@ namespace Rationally.Visio.View.Forces
                 LineColor = "RGB(89,131,168)"
             };
             concernLabel.ToggleBoldFont(true);
-            concernLabel.AddUserRow("rationallyType");
             concernLabel.RationallyType = "concernLabel";
             Children.Add(concernLabel);
 
@@ -88,7 +86,6 @@ namespace Rationally.Visio.View.Forces
                 LineColor = "RGB(89,131,168)"
             };
             descLabel.ToggleBoldFont(true);
-            descLabel.AddUserRow("rationallyType");
             descLabel.RationallyType = "descLabel";
             Children.Add(descLabel);
 

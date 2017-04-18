@@ -19,7 +19,6 @@ namespace Rationally.Visio.View.Documents
         {
             RationallyType = "relatedUrlUrl";
             Name = "RelatedUrlUrl";
-            AddUserRow("index");
             Index = index;
 
             AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "Add file", false);

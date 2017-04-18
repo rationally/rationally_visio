@@ -22,7 +22,6 @@ namespace Rationally.Visio.View.Stakeholders
             Log.Debug("Starting shapesheet initing of stakeholdernamecontainer.");
             RationallyType = "stakeholderName";
             Log.Debug("Added rationally type");
-            AddUserRow("index");
             Index = index;
             Log.Debug("index set");
 

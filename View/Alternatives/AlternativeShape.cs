@@ -159,11 +159,8 @@ namespace Rationally.Visio.View.Alternatives
             Children.Add(descShape);
 
             Name = "Alternative";
-            //AddUserRow("rationallyType");
             RationallyType = "alternative";
-            AddUserRow("index");
             Index = index;
-            AddUserRow("uniqueId");
             Id = alternative.Id;
 
             Log.Debug("Done with shapesheet identifying properties");

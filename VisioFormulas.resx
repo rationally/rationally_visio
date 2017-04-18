@@ -156,4 +156,7 @@
   <data name="EventId_DeleteAlternative" xml:space="preserve">
     <value>DELETE_ALTERNATIVE_MENU</value>
   </data>
+  <data name="Formula_UniqueId" xml:space="preserve">
+    <value>User.uniqueId.Value</value>
+  </data>
 </root>

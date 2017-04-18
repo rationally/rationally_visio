@@ -160,6 +160,15 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User.uniqueId.Value.
+        /// </summary>
+        internal static string Formula_UniqueId {
+            get {
+                return ResourceManager.GetString("Formula_UniqueId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to \RationallyHidden.vssx.
         /// </summary>
         internal static string HiddenStencil {

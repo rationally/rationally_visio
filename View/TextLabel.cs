@@ -55,7 +55,6 @@ namespace Rationally.Visio.View
             Shape.Name = "TextLabel";
             Log.Debug("More shapesheet interactions were performed.");
             AddUserRow("order"); //allows sorting, even with same-type shapes
-            AddUserRow("rationallyType");
             Log.Debug("Textlabel user rows added.");
             BackgroundColor = "RGB(255,255,255)";
             Log.Debug("Set background color");

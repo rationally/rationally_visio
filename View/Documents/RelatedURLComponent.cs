@@ -30,9 +30,7 @@ namespace Rationally.Visio.View.Documents
             InitStyle();
 
             Name = "RelatedUrl";
-            AddUserRow("rationallyType");
             RationallyType = "relatedUrl";
-            AddUserRow("index");
             Index = index;
 
             AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "Add file", false);

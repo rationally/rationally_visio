@@ -19,7 +19,6 @@ namespace Rationally.Visio.View.Stakeholders
         public StakeholderRoleComponent(Page page, int index, string labelText) : base(page, labelText)
         {
             RationallyType = "stakeholderRole";
-            AddUserRow("index");
             Index = index;
 
             Name = "StakeholderRole";

@@ -20,11 +20,9 @@ namespace Rationally.Visio.View.Forces
             basicDocument.Close();
 
             AddUserRow("alternativeUniqueId");
-
-            AddUserRow("index");
+            
             Index = index;
-
-            AddUserRow("rationallyType");
+            
             RationallyType = "forceValue";
             Name = "ForceValue";
 

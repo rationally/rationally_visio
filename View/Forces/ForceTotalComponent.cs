@@ -21,14 +21,12 @@ namespace Rationally.Visio.View.Forces
 
             AddUserRow("alternativeUniqueId");
             ForceAlternativeId = -2;
-
-            AddUserRow("index");
+            
             Index = -2;
 
             AddUserRow("alternativeIdentifier");
             AlternativeIdentifierString = "";
-
-            AddUserRow("rationallyType");
+            
             RationallyType = "forceTotalComponent";
             Name = "ForceTotalComponent";
             InitStyle();

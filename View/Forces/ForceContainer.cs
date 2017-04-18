@@ -16,16 +16,13 @@ namespace Rationally.Visio.View.Forces
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public ForceContainer(Page page, int index, int forceId) : base(page)
         {
-            AddUserRow("index");
             Index = index;
-            AddUserRow("uniqueId");
             Id = forceId;
                 ForceConcernComponent concern = new ForceConcernComponent(page, index);
                 Children.Add(concern);
 
                 ForceDescriptionComponent description = new ForceDescriptionComponent(page, index);
                 Children.Add(description);
-            AddUserRow("rationallyType");
             RationallyType = "forceContainer";
             Name = "ForceContainer";
 

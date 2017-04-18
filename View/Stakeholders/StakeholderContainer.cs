@@ -72,8 +72,8 @@ namespace Rationally.Visio.View.Stakeholders
             MsvSdContainerLocked = true;
 
             //Events
-            AddAction("addStakeholder", "QUEUEMARKEREVENT(\"add\")", "\"Add stakeholder\"", false);
-            AddAction("deleteStakeholder", "QUEUEMARKEREVENT(\"delete\")", "\"Delete stakeholder\"", false);
+            AddAction("addStakeholder", "QUEUEMARKEREVENT(\"add\")", "Add stakeholde", false);
+            AddAction("deleteStakeholder", "QUEUEMARKEREVENT(\"delete\")", "Delete stakeholder", false);
 
             Width = 5.26;
 

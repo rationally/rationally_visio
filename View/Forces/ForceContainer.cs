@@ -29,8 +29,8 @@ namespace Rationally.Visio.View.Forces
             RationallyType = "forceContainer";
             Name = "ForceContainer";
 
-            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
-            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
+            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "Add force", false);
+            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "Delete this force", false);
 
             MsvSdContainerLocked = true;
             Height = 0.33;

@@ -86,8 +86,8 @@ namespace Rationally.Visio.View.Alternatives
             stateShape.Name = "AlternativeState";
 
             stateShape.State = state;
-            stateShape.AddActionNew("addAlternative", "QUEUEMARKEREVENT(\"add\")", "Add alternative", false);
-            stateShape.AddActionNew("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "Delete this alternative",
+            stateShape.AddAction("addAlternative", "QUEUEMARKEREVENT(\"add\")", "Add alternative", false);
+            stateShape.AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "Delete this alternative",
                 false);
             stateShape.InitStyle();
             return stateShape;

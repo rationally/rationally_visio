@@ -171,7 +171,7 @@ namespace Rationally.Visio.View.Alternatives
             MsvSdContainerLocked = true;
 
             //Events
-            AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete alternative\"", false);
+            AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "Delete alternative", false);
 
             LinePattern = 16;
             InitStyle();

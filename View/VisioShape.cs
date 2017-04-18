@@ -62,7 +62,7 @@ namespace Rationally.Visio.View
 
         public void AddMenuItem(ContextMenuItem item)
         {
-            AddActionNew(item.EventId, string.Format(VisioFormulas.Formula_QUEUMARKEREVENT, item.ActionId), item.Name,item.IsFlyOut,item.IsEnabled);
+            AddAction(item.EventId, string.Format(VisioFormulas.Formula_QUEUMARKEREVENT, item.ActionId), item.Name,item.IsFlyOut,item.IsEnabled);
             ContextMenuEventHandler.Instance.RegisterMenuEvent(item.ActionId, item);
         }
 
@@ -180,29 +180,8 @@ namespace Rationally.Visio.View
             set { Shape.CellsU["pinY"].Result[VisUnitCodes.visInches] = value; }
         }
 
-        [Obsolete("Use new addactionnew() which automatically escapes the name", false)]
-        internal void AddAction(string actionRowID, string action, string name, bool flyout, bool enabled = true)
-        {
-
-
-            if (Shape.CellExists[string.Format(VisioFormulas.Action_Action, actionRowID), (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
-            {
-                Shape.DeleteRow((short)VisSectionIndices.visSectionAction, Shape.CellsRowIndex[string.Format(VisioFormulas.Action_Action, actionRowID)]);
-            }
-
-            Shape.AddNamedRow((short)VisSectionIndices.visSectionAction, actionRowID,
-                (short)VisRowTags.visTagDefault);
-            Shape.CellsU[string.Format(VisioFormulas.Action_Action, actionRowID)].Formula = action;
-            Shape.CellsU[string.Format(VisioFormulas.Action_MenuName, actionRowID)].Formula =name;
-
-            Shape.CellsU[string.Format(VisioFormulas.Action_Disabled, actionRowID)].Formula =
-                (!enabled).ToString().ToUpper();
-
-            Shape.CellsU[string.Format(VisioFormulas.Action_IsFlyoutChild, actionRowID)].Formula =
-                flyout.ToString().ToUpper();
-        }
-
-        internal void AddActionNew(string actionRowID, string action, string name, bool flyout, bool enabled=true)
+        
+        internal void AddAction(string actionRowID, string action, string name, bool flyout, bool enabled=true)
         {
 
 
@@ -441,8 +420,8 @@ namespace Rationally.Visio.View
 
         public void UpdateReorderFunctions(int max)
         {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
+            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "Move up", false);
+            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "Move down", false);
 
             if (Index == 0)
             {

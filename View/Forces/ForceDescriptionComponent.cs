@@ -24,9 +24,9 @@ namespace Rationally.Visio.View.Forces
 
             AddUserRow("index");
             Index = index;
-            
-            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
-            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
+
+            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "Add force", false);
+            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "Delete this force", false);
             InitStyle();
         }
 

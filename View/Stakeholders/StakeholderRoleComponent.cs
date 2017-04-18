@@ -24,8 +24,8 @@ namespace Rationally.Visio.View.Stakeholders
 
             Name = "StakeholderRole";
             //NameU = "StakeholderRole";
-            AddAction("addStakeholder", "QUEUEMARKEREVENT(\"add\")", "\"Add stakeholder\"", false);
-            AddAction("deleteStakeholder", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this stakeholder\"", false);
+            AddAction("addStakeholder", "QUEUEMARKEREVENT(\"add\")", "Add stakeholder", false);
+            AddAction("deleteStakeholder", "QUEUEMARKEREVENT(\"delete\")", "Delete this stakeholder", false);
             Width = 1.9;
             Height = 0.2;
             InitStyle();

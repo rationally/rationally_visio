@@ -31,8 +31,8 @@ namespace Rationally.Visio.View.Forces
             AddUserRow("alternativeIdentifier");
             AlternativeIdentifierString = altId;
 
-            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
-            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
+            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "Add force", false);
+            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "Delete this force", false);
             ForceAlternativeId = forceAlternativeId;
             Globals.RationallyAddIn.Model.Forces.ForEach(force =>
             {

@@ -27,8 +27,8 @@ namespace Rationally.Visio.View.Planning
 
             Name = "PlanningItemTextComponent";
 
-            AddAction("addPlanningItem", "QUEUEMARKEREVENT(\"add\")", "\"Add item\"", false);
-            AddAction("deletePlanningItem", "QUEUEMARKEREVENT(\"delete\")", "\"Delete item\"", false);
+            AddAction("addPlanningItem", "QUEUEMARKEREVENT(\"add\")", "Add item", false);
+            AddAction("deletePlanningItem", "QUEUEMARKEREVENT(\"delete\")", "Delete item", false);
 
             AddUserRow("Index");
             Index = index; 

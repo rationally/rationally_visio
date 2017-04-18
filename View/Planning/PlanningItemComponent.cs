@@ -78,8 +78,8 @@ namespace Rationally.Visio.View.Planning
             MsvSdContainerLocked = true;
 
             //Events
-            AddAction("addPlanningItem", "QUEUEMARKEREVENT(\"add\")", "\"Add item\"", false);
-            AddAction("deletePlanningItem", "QUEUEMARKEREVENT(\"delete\")", "\"Delete item\"", false);
+            AddAction("addPlanningItem", "QUEUEMARKEREVENT(\"add\")", "Add item", false);
+            AddAction("deletePlanningItem", "QUEUEMARKEREVENT(\"delete\")", "Delete item", false);
 
             InitStyle();
         }

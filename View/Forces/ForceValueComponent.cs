@@ -59,21 +59,7 @@ namespace Rationally.Visio.View.Forces
         }
 
         public static bool IsForceValue(string name) => ForceValueRegex.IsMatch(name);
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-            if (Index == 0)
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.Forces.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        
 
         private void UpdateAlternativeLabels()
         {
@@ -87,7 +73,7 @@ namespace Rationally.Visio.View.Forces
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
             {
                 UpdateAlternativeLabels();
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.Forces.Count - 1);
 
                 if (Text != Globals.RationallyAddIn.Model.Forces[Index].ForceValueDictionary[ForceAlternativeId])
                 {

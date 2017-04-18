@@ -124,28 +124,13 @@ namespace Rationally.Visio.View.Stakeholders
         }
 
         public static bool IsStakeholderContainer(string name) => StakeholderRegex.IsMatch(name);
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-
-            if (Index == 0) //Top shape can't move up
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.Stakeholders.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        
 
         public override void Repaint()
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio takes care of this
             {
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.Stakeholders.Count - 1);
             }
             base.Repaint();
         }

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
+using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.Forms.AlternativeStateConfiguration
 {
@@ -28,8 +29,8 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
 
         public FlowLayoutAlternativeState(AlternativeState state, int index)
         {
-            OldState = state.State;
-            Color = state.Color;
+            OldState = state.GetName();
+            Color = state.GetColor();
             Index = index;
             Init();
         }

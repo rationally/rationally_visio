@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using log4net;
 using Rationally.Visio.Model;
+using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.Forms
 {
@@ -14,7 +15,7 @@ namespace Rationally.Visio.Forms
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
-            alternativeStatus.Items.AddRange(model.AlternativeStateColors.Keys.ToArray());
+            alternativeStatus.Items.AddRange(Enum.GetNames(typeof(AlternativeState)));
             alternativeStatus.SelectedIndex = 0;
         }
 

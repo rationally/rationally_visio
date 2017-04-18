@@ -18,12 +18,12 @@ namespace Rationally.Visio.View.Alternatives
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex StateRegex = new Regex(@"AlternativeState(\.\d+)?$");
 
-        private readonly IDictionary<AlternativeStates, ContextMenuItem> menu =
-            new Dictionary<AlternativeStates, ContextMenuItem>();
+        private readonly IDictionary<AlternativeState, ContextMenuItem> menu =
+            new Dictionary<AlternativeState, ContextMenuItem>();
 
         private ContextMenuItem changeStateMenu;
 
-        private AlternativeStates state = default(AlternativeStates);
+        private AlternativeState state = default(AlternativeState);
 
 
         private AlternativeStateShape(Page page, Shape alternativeStateShape) : base(page)
@@ -31,7 +31,7 @@ namespace Rationally.Visio.View.Alternatives
             Shape = alternativeStateShape;
         }
 
-        public AlternativeStates State
+        public AlternativeState State
         {
             get { return state; }
             set
@@ -53,7 +53,7 @@ namespace Rationally.Visio.View.Alternatives
         private void GenerateMenu()
         {
             changeStateMenu = ContextMenuItem.CreateAndRegister(this, StateMenuEventId, Messages.Menu_SetState);
-            Enum.GetValues(typeof(AlternativeStates)).Cast<AlternativeStates>().ToList().ForEach(state =>
+            Enum.GetValues(typeof(AlternativeState)).Cast<AlternativeState>().ToList().ForEach(state =>
             {
                 ContextMenuItem menuItem = ContextMenuItem.CreateAndRegister(this, state.GetName().ToUpper(),
                     state.GetName(), true);
@@ -72,7 +72,7 @@ namespace Rationally.Visio.View.Alternatives
 
 
         public static AlternativeStateShape CreateWithNewShape(Page page, int alternativeIndex,
-            AlternativeStates state)
+            AlternativeState state)
         {
             string pathToStencil = Constants.MyShapesFolder + VisioFormulas.HiddenStencil;
             Shape shape = CreateShapeFromStencilMaster(page, pathToStencil, VisioFormulas.AlternativeState_ShapeMaster);
@@ -106,36 +106,22 @@ namespace Rationally.Visio.View.Alternatives
         public static bool IsAlternativeState(string name) => StateRegex.IsMatch(name);
 
         //TODO should be moved to parent (AlternativeContainer)
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-
-            if (Index == 0)
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        
 
         public override void Repaint()
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 //undo's should not edit the shape again, visio handles that for us
             {
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.Alternatives.Count - 1);
                 if (Globals.RationallyAddIn.Model.Alternatives.Count > Index)
                 {
                     Alternative alternative = Globals.RationallyAddIn.Model.Alternatives[Index];
-                    AlternativeStates _newAlternativeState;
+                    AlternativeState newAlternativeState;
 
-                    if (Enum.TryParse(alternative.Status, out _newAlternativeState))
+                    if (Enum.TryParse(alternative.Status, out newAlternativeState))
                     {
-                        State = _newAlternativeState;
+                        State = newAlternativeState;
                     }
                 }
             }
@@ -143,49 +129,49 @@ namespace Rationally.Visio.View.Alternatives
         }
     }
 
-    internal enum AlternativeStates
+    internal enum AlternativeState
     {
         Proposed,
         Accepted,
         Rejected,
         Challenged,
-        Discarded
+        Discarded,
     }
 
     internal static class AlternativeStateExtensions
     {
-        public static Color GetColor(this AlternativeStates state)
+        public static Color GetColor(this AlternativeState state)
         {
             switch (state)
             {
-                case AlternativeStates.Accepted:
+                case AlternativeState.Accepted:
                     return Color.FromArgb(0, 175, 0);
-                case AlternativeStates.Rejected:
+                case AlternativeState.Rejected:
                     return Color.FromArgb(153, 12, 0);
-                case AlternativeStates.Challenged:
+                case AlternativeState.Challenged:
                     return Color.FromArgb(255, 173, 21);
-                case AlternativeStates.Discarded:
+                case AlternativeState.Discarded:
                     return Color.FromArgb(155, 155, 155);
                 default:
-                case AlternativeStates.Proposed:
+                case AlternativeState.Proposed:
                     return Color.FromArgb(96, 182, 215);
             }
         }
 
-        public static string GetName(this AlternativeStates state)
+        public static string GetName(this AlternativeState state)
         {
             switch (state)
             {
-                case AlternativeStates.Accepted:
+                case AlternativeState.Accepted:
                     return Messages.AlternativeState_Accepted;
-                case AlternativeStates.Rejected:
+                case AlternativeState.Rejected:
                     return Messages.AlternativeState_Rejected;
-                case AlternativeStates.Challenged:
+                case AlternativeState.Challenged:
                     return Messages.AlternativeState_Challenged;
-                case AlternativeStates.Discarded:
+                case AlternativeState.Discarded:
                     return Messages.AlternativeState_Discarded;
                 default:
-                case AlternativeStates.Proposed:
+                case AlternativeState.Proposed:
                     return Messages.AlternativeState_Proposed;
             }
         }

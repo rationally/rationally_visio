@@ -62,18 +62,18 @@ namespace Rationally.Visio.View
 
         public void AddMenuItem(ContextMenuItem item)
         {
-            AddActionNew(item.EventID, string.Format(VisioFormulas.Formula_QUEUMARKEREVENT, item.ActionID), item.Name,item.IsFlyOut,item.IsEnabled);
-            ContextMenuEventHandler.Instance.RegisterMenuEvent(item.ActionID, item);
+            AddActionNew(item.EventId, string.Format(VisioFormulas.Formula_QUEUMARKEREVENT, item.ActionId), item.Name,item.IsFlyOut,item.IsEnabled);
+            ContextMenuEventHandler.Instance.RegisterMenuEvent(item.ActionId, item);
         }
 
         public void UpdateMenuItem(ContextMenuItem item)
         {
 
-            if (Shape.CellExists[string.Format(VisioFormulas.Action_Action, item.EventID), (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+            if (Shape.CellExists[string.Format(VisioFormulas.Action_Action, item.EventId), (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
             {
-                Shape.CellsU[string.Format(VisioFormulas.Action_Disabled, item.EventID)].Formula =
+                Shape.CellsU[string.Format(VisioFormulas.Action_Disabled, item.EventId)].Formula =
                 (!item.IsEnabled).ToString().ToUpper();
-                Shape.CellsU[string.Format(VisioFormulas.Action_MenuName, item.EventID)].Formula =
+                Shape.CellsU[string.Format(VisioFormulas.Action_MenuName, item.EventId)].Formula =
               string.Format(VisioFormulas.Formula_EscapedValue, item.Name);
             }
         }
@@ -437,6 +437,22 @@ namespace Rationally.Visio.View
         {
             Deleted = true;
             Shape.Delete();
+        }
+
+        public void UpdateReorderFunctions(int max)
+        {
+            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
+            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
+
+            if (Index == 0)
+            {
+                DeleteAction("moveUp");
+            }
+
+            if (Index == max)
+            {
+                DeleteAction("moveDown");
+            }
         }
 
         public static Shape CreateShapeFromStencilMaster(Page page,  string pathToStencil,  string masterName)

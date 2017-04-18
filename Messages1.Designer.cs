@@ -88,6 +88,15 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No state.
+        /// </summary>
+        internal static string AlternativeState_No_state {
+            get {
+                return ResourceManager.GetString("AlternativeState_No_state", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Proposed.
         /// </summary>
         internal static string AlternativeState_Proposed {

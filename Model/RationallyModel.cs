@@ -29,9 +29,6 @@ namespace Rationally.Visio.Model
         public List<RelatedDocument> Documents { get; }
 
         public List<Stakeholder> Stakeholders { get; } 
-        public Dictionary<string, Color> AlternativeStateColors { get; set; }
-
-        public Dictionary<string, Color> DefaultStates { get; } = new Dictionary<string, Color> { {"Accepted", Color.FromArgb(0, 175, 0) }, { "Rejected", Color.FromArgb(153, 12, 0) }, {"Proposed", Color.FromArgb(96, 182, 215) }, {"Challenged", Color.FromArgb(255, 173, 21) },{ "Discarded", Color.FromArgb(155, 155, 155) } };
 
         public string Author { get; set; }
         public string DecisionName { get; set; }
@@ -52,10 +49,8 @@ namespace Rationally.Visio.Model
             Forces = new List<Force>();
             Stakeholders = new List<Stakeholder>();
             PlanningItems = new List<PlanningItem>();
-
-            ResetAlternativeStateColors();
-            AlternativeStateColorsFromFile.ToList().Select(rawState => (AlternativeState)rawState.Value).ToList().ForEach(stateColor => AlternativeStateColors.Add(stateColor.State,stateColor.Color));
-            //AlternativeStates = new List<string> {"Accepted", "Challenged", "Discarded", "Proposed", "Rejected"}; //Currently hardcoded, could be user setting in future product.
+            
+            //AlternativeStateColorsFromFile.ToList().Select(rawState => (AlternativeState)rawState.Value).ToList().ForEach(state => AlternativeStateColors.Add(state.GetName(), state.GetColor())); No longer supported
         }
         public RationallyModel DeepCopy()
         {
@@ -105,12 +100,7 @@ namespace Rationally.Visio.Model
             StakeholdersContainer stakeholdersContainer = (StakeholdersContainer)Globals.RationallyAddIn.View.Children.First(c => c is StakeholdersContainer);
             stakeholdersContainer.Children.Where(c => c is StakeholderContainer).ToList().ForEach(c => ((StakeholderContainer)c).SetStakeholderIndex(i++));
         }
-
-        /// <summary>
-        /// Reduces the current list of alternative states (and their color) to only the "No State" element.
-        /// </summary>
-        public void ResetAlternativeStateColors() => AlternativeStateColors = new Dictionary<string, Color> {{"No State", Color.DimGray}};
-
+        
         internal IEnumerable<DictionaryEntry> AlternativeStateColorsFromFile
         {
             get
@@ -129,13 +119,11 @@ namespace Rationally.Visio.Model
                 else
                 {
                     int i = 0;
-                    foreach (AlternativeState state in DefaultStates.Select(kvp => new AlternativeState
+                    foreach (String state in Enum.GetNames(typeof(AlternativeState)))
                     {
-                        Color = kvp.Value,
-                        State = kvp.Key
-                    }))
-                    {
-                        yield return new DictionaryEntry("alternativeState" + i, state);
+                        AlternativeState newAlternativeState;
+                        Enum.TryParse(state, out newAlternativeState);
+                        yield return new DictionaryEntry("alternativeState" + i, newAlternativeState);
                         i++;
                     }
                 }

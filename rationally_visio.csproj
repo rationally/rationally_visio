@@ -316,7 +316,7 @@
     <Compile Include="Forms\UrlSelector.Designer.cs">
       <DependentUpon>UrlSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Alternatives\AlternativeContainer.cs" />
+    <Compile Include="View\Alternatives\AlternativeShape.cs" />
     <Compile Include="View\Alternatives\AlternativeDescriptionComponent.cs" />
     <Compile Include="View\Alternatives\AlternativeIdentifierComponent.cs" />
     <Compile Include="View\Alternatives\AlternativesContainer.cs" />

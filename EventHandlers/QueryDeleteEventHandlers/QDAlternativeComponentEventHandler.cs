@@ -14,7 +14,7 @@ namespace Rationally.Visio.EventHandlers.QueryDeleteEventHandlers
         {
             AlternativesContainer cont = (AlternativesContainer)view.Children.First(x => x is AlternativesContainer);
 
-            foreach (AlternativeContainer alternativeContainer in cont.Children.Where(c => c is AlternativeContainer).Cast<AlternativeContainer>().ToList())
+            foreach (AlternativeShape alternativeContainer in cont.Children.Where(c => c is AlternativeShape).Cast<AlternativeShape>().ToList())
             {
                 if ((alternativeContainer.Children.Where(c => c.Shape.Equals(changedShape)).ToList().Count > 0) && !alternativeContainer.Deleted) //check if this alternative contains the to be deleted component and is not already deleted
                 {

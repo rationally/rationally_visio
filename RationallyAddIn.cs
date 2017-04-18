@@ -467,7 +467,7 @@ namespace Rationally.Visio
                         rebuildTree = true; //Wait with the rebuild till the undo is done
                     }
                 }
-                else if (Application.IsUndoingOrRedoing && AlternativeContainer.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.Index))
+                else if (Application.IsUndoingOrRedoing && AlternativeShape.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.Index))
                 {
                     Log.Debug("Alternative index cell changed of alternativecontainer. shape:" + changedShape.Name);
                     VisioShape alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);

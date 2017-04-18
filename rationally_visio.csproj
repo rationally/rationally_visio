@@ -217,7 +217,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Model\AlternativeState.cs" />
     <Compile Include="Model\PlanningItem.cs" />
     <Compile Include="Model\Stakeholder.cs" />
     <Compile Include="RationallyConstants\CellConstants.cs" />
@@ -425,6 +424,7 @@
     <EmbeddedResource Include="Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\RationallyRibbon.resx">
       <DependentUpon>RationallyRibbon.cs</DependentUpon>
@@ -454,6 +454,7 @@
     <EmbeddedResource Include="VisioFormulas.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>VisioFormulas.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

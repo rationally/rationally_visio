@@ -152,7 +152,7 @@ namespace Rationally.Visio.View.Alternatives
         Accepted,
         Rejected,
         Challenged,
-        Discarded
+        Discarded,
     }
 
     internal static class AlternativeStateExtensions

@@ -80,8 +80,7 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
                     }
                 }
                 //write current states to model
-                Globals.RationallyAddIn.Model.ResetAlternativeStateColors();
-                StateRows.ForEach(stateRow => Globals.RationallyAddIn.Model.AlternativeStateColors.Add(stateRow.NewState, stateRow.Color));
+                //StateRows.ForEach(stateRow => Globals.RationallyAddIn.Model.AlternativeStateColors.Add(stateRow.NewState, stateRow.Color)); //NoLongerSupported
 
 
                 //locate renamed alternative states
@@ -94,9 +93,9 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
 
 
                 //update non-existent alternative states to the default state
-                Globals.RationallyAddIn.Model.Alternatives
+                /*Globals.RationallyAddIn.Model.Alternatives
                     .Where(alternative => !Globals.RationallyAddIn.Model.AlternativeStateColors.ContainsKey(alternative.Status)).ToList()
-                    .ForEach(alternative => alternative.Status = Globals.RationallyAddIn.Model.AlternativeStateColors.Keys.First());
+                    .ForEach(alternative => alternative.Status = Globals.RationallyAddIn.Model.AlternativeStateColors.Keys.First());*/
 
 
                 //repaint all currently present alternative state components

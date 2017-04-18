@@ -134,4 +134,7 @@
   <data name="Menu_SetState" xml:space="preserve">
     <value>Set State</value>
   </data>
+  <data name="AlternativeState_No_state" xml:space="preserve">
+    <value>No state</value>
+  </data>
 </root>

@@ -28,7 +28,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         public Alternative Alternative { get; private set; }
         public FlowLayoutAlternative()
         {
-            Alternative = new Alternative("", ProjectSetupWizard.Instance.ModelCopy.AlternativeStateColors.Keys.First());
+            Alternative = new Alternative("", default(AlternativeState).GetName());
             ProjectSetupWizard.Instance.ModelCopy.Alternatives.Add(Alternative);
             Alternative.GenerateIdentifier(ProjectSetupWizard.Instance.ModelCopy.Alternatives.Count - 1);
             SuspendLayout();
@@ -50,7 +50,7 @@ namespace Rationally.Visio.Forms.WizardComponents
         public void UpdateData()
         {
             TextBoxAlternativeTitle.Text = Alternative.Title;
-            alternativeStateDropdown.SelectedIndex = ProjectSetupWizard.Instance.ModelCopy.AlternativeStateColors.Keys.ToList().IndexOf(Alternative.Status);
+            alternativeStateDropdown.SelectedIndex = Enum.GetNames(typeof(AlternativeState)).ToList().IndexOf(Alternative.Status);
         }
 
         public void UpdateModel()
@@ -137,7 +137,7 @@ namespace Rationally.Visio.Forms.WizardComponents
             //
             alternativeStateDropdown.FormattingEnabled = true;
             alternativeStateDropdown.Items.Clear();
-            alternativeStateDropdown.Items.AddRange(ProjectSetupWizard.Instance.ModelCopy.AlternativeStateColors.Keys.ToArray());
+            alternativeStateDropdown.Items.AddRange(Enum.GetNames(typeof(AlternativeState)));
             alternativeStateDropdown.SelectedIndex = 0;
             alternativeStateDropdown.Location = new Point(127, 50);
             alternativeStateDropdown.Margin = new Padding(3, 6, 3, 3);

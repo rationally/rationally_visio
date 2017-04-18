@@ -29,7 +29,6 @@ namespace Rationally.Visio.Model
         public List<RelatedDocument> Documents { get; }
 
         public List<Stakeholder> Stakeholders { get; } 
-        public Dictionary<string, Color> AlternativeStateColors { get; set; }
 
         public string Author { get; set; }
         public string DecisionName { get; set; }
@@ -50,9 +49,8 @@ namespace Rationally.Visio.Model
             Forces = new List<Force>();
             Stakeholders = new List<Stakeholder>();
             PlanningItems = new List<PlanningItem>();
-
-            ResetAlternativeStateColors();
-            AlternativeStateColorsFromFile.ToList().Select(rawState => (AlternativeState)rawState.Value).ToList().ForEach(state => AlternativeStateColors.Add(state.GetName(), state.GetColor()));
+            
+            //AlternativeStateColorsFromFile.ToList().Select(rawState => (AlternativeState)rawState.Value).ToList().ForEach(state => AlternativeStateColors.Add(state.GetName(), state.GetColor())); No longer supported
         }
         public RationallyModel DeepCopy()
         {
@@ -102,12 +100,7 @@ namespace Rationally.Visio.Model
             StakeholdersContainer stakeholdersContainer = (StakeholdersContainer)Globals.RationallyAddIn.View.Children.First(c => c is StakeholdersContainer);
             stakeholdersContainer.Children.Where(c => c is StakeholderContainer).ToList().ForEach(c => ((StakeholderContainer)c).SetStakeholderIndex(i++));
         }
-
-        /// <summary>
-        /// Reduces the current list of alternative states (and their color) to only the "No State" element.
-        /// </summary>
-        public void ResetAlternativeStateColors() => AlternativeStateColors = new Dictionary<string, Color> {{"No State", Color.DimGray}};
-
+        
         internal IEnumerable<DictionaryEntry> AlternativeStateColorsFromFile
         {
             get

@@ -48,27 +48,13 @@ namespace Rationally.Visio.View.Forces
         }
 
         public static bool IsForceConcern(string name) => ForceConcernRegex.IsMatch(name);
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-            if (Index == 0)
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.Forces.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        
 
         public override void Repaint()
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio does this for us
             {
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.Forces.Count - 1);
                 if (Text != Globals.RationallyAddIn.Model.Forces[Index].Concern)
                 {
                     Text = Globals.RationallyAddIn.Model.Forces[Index].Concern;

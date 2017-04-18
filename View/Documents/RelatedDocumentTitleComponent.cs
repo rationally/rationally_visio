@@ -39,22 +39,7 @@ namespace Rationally.Visio.View.Documents
         }
 
         internal static bool IsRelatedDocumentTitleContainer(string name) => RelatedRegex.IsMatch(name);
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-
-            if (Index == 0)
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.Documents.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        
 
         public override void Repaint()
         {
@@ -69,7 +54,7 @@ namespace Rationally.Visio.View.Documents
                         Text = doc.Name;
                     }
                 }
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.Documents.Count - 1);
             }
             base.Repaint();
         }

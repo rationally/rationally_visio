@@ -109,28 +109,14 @@ namespace Rationally.Visio.View.Alternatives
         public static bool IsAlternativeState(string name) => StateRegex.IsMatch(name);
 
         //TODO should be moved to parent (AlternativeContainer)
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-
-            if (Index == 0)
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.Alternatives.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        
 
         public override void Repaint()
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 //undo's should not edit the shape again, visio handles that for us
             {
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.Alternatives.Count - 1);
                 if (Globals.RationallyAddIn.Model.Alternatives.Count > Index)
                 {
                     Alternative alternative = Globals.RationallyAddIn.Model.Alternatives[Index];

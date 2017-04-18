@@ -411,6 +411,22 @@ namespace Rationally.Visio.View
             Shape.Delete();
         }
 
+        public void UpdateReorderFunctions(int max)
+        {
+            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
+            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
+
+            if (Index == 0)
+            {
+                DeleteAction("moveUp");
+            }
+
+            if (Index == max)
+            {
+                DeleteAction("moveDown");
+            }
+        }
+
         public static Shape CreateShapeFromStencilMaster(Page page,  string pathToStencil,  string masterName)
         {
 

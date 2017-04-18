@@ -46,29 +46,14 @@ namespace Rationally.Visio.View.Planning
         }
 
         public static bool IsPlanningItemTextComponent(string name) => regex.IsMatch(name);
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-
-            if (Index == 0) //Top shape can't move up
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.PlanningItems.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        
 
         public override void Repaint()
         {
 
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.PlanningItems.Count - 1);
                 if (Globals.RationallyAddIn.Model.PlanningItems.Count > Index)
                 {
                     PlanningItem item = Globals.RationallyAddIn.Model.PlanningItems[Index];

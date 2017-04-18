@@ -62,7 +62,7 @@ namespace Rationally.Visio.View.Alternatives
             }
             else
             {
-                bool isAlternativeChild = AlternativeStateShape.IsAlternativeState(s.Name) || AlternativeIdentifierComponent.IsAlternativeIdentifier(s.Name) || AlternativeTitleComponent.IsAlternativeTitle(s.Name) || AlternativeDescriptionComponent.IsAlternativeDescription(s.Name);
+                bool isAlternativeChild = AlternativeStateShape.IsAlternativeState(s.Name) || AlternativeIdentifierShape.IsAlternativeIdentifier(s.Name) || AlternativeTitleComponent.IsAlternativeTitle(s.Name) || AlternativeDescriptionShape.IsAlternativeDescription(s.Name);
 
                 if (isAlternativeChild && Children.All(c => c.Index != shapeComponent.Index)) //if parent not exists
                 {

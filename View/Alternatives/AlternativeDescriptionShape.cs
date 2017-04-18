@@ -2,14 +2,15 @@
 using System.Text.RegularExpressions;
 using log4net;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.View.ContextMenu;
 
 namespace Rationally.Visio.View.Alternatives
 {
-    internal sealed class AlternativeDescriptionComponent : HeaderlessContainer, IAlternativeComponent
+    internal sealed class AlternativeDescriptionShape : HeaderlessContainer
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex DescriptionRegex = new Regex(@"AlternativeDescription(\.\d+)?$");
-        public AlternativeDescriptionComponent(Page page, Shape alternativeComponent) : base(page, false)
+        public AlternativeDescriptionShape(Page page, Shape alternativeComponent) : base(page, false)
         {
             Shape = alternativeComponent;
             MarginLeft = 0.1;
@@ -18,24 +19,21 @@ namespace Rationally.Visio.View.Alternatives
             MarginTop = 0.05;
         }
 
-        public AlternativeDescriptionComponent(Page page, int index) : base(page)
+        public AlternativeDescriptionShape(Page page, int index) : base(page)
         {
             Width = 5.15;
             Height = 2.5;
             InitStyle();
-
-            AddUserRow("rationallyType");
             RationallyType = "alternativeDescription";
-            AddUserRow("index");
             Index = index;
 
             Name = "AlternativeDescription";
 
-            AddAction("addAlternative", "QUEUEMARKEREVENT(\"add\")", "\"Add alternative\"", false);
-            AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this alternative\"", false);
+            ContextMenuItem addAlternativeMenuItem = ContextMenuItem.CreateAndRegister(this, VisioFormulas.EventId_AddAlternative, Messages.Menu_AddAlternative);
+            //addAlternativeMenuItem.Action = ?? //TODO implement
+            ContextMenuItem removeAlternativeMenuItem = ContextMenuItem.CreateAndRegister(this, VisioFormulas.EventId_DeleteAlternative, Messages.Menu_DeleteAlternative);
+            //removeAlternativeMenuItem.Action = ?? //TODO implement
         }
-
-        public void SetAlternativeIdentifier(int alternativeIndex) => Index = alternativeIndex;
 
         public static bool IsAlternativeDescription(string name) => DescriptionRegex.IsMatch(name);
 

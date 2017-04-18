@@ -3,13 +3,21 @@ using System.Text.RegularExpressions;
 using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
+using Rationally.Visio.View.ContextMenu;
 
 namespace Rationally.Visio.View.Alternatives
 {
-    internal sealed class AlternativeTitleComponent : TextLabel, IAlternativeComponent
+    internal sealed class AlternativeTitleComponent : TextLabel
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex TitleRegex = new Regex(@"AlternativeTitle(\.\d+)?$");
+
+        public string Title
+        {
+            get { return Text; }
+            set { Text = value; }
+        }
+
         public AlternativeTitleComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
         {
             Shape = alternativeComponent;
@@ -20,13 +28,14 @@ namespace Rationally.Visio.View.Alternatives
         public AlternativeTitleComponent(Page page, int index, string text) : base(page, text)
         {
             RationallyType = "alternativeTitle";
-            AddUserRow("index");
             Index = index;
 
             Name = "AlternativeTitle";
 
-            AddAction("addAlternative", "QUEUEMARKEREVENT(\"add\")", "\"Add alternative\"", false);
-            AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this alternative\"", false);
+            ContextMenuItem addAlternativeMenuItem = ContextMenuItem.CreateAndRegister(this, VisioFormulas.EventId_AddAlternative, Messages.Menu_AddAlternative);
+            //addAlternativeMenuItem.Action = ?? //TODO implement
+            ContextMenuItem removeAlternativeMenuItem = ContextMenuItem.CreateAndRegister(this, VisioFormulas.EventId_DeleteAlternative, Messages.Menu_DeleteAlternative);
+            //removeAlternativeMenuItem.Action = ?? //TODO implement
             Width = 3.7;
             Height = 0.2;
             InitStyle();
@@ -43,8 +52,6 @@ namespace Rationally.Visio.View.Alternatives
             UsedSizingPolicy = SizingPolicy.FixedSize;
             
         }
-
-        public void SetAlternativeIdentifier(int alternativeIndex) => Index = alternativeIndex;
 
         public static bool IsAlternativeTitle(string name) => TitleRegex.IsMatch(name);
 

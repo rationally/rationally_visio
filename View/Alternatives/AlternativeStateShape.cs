@@ -12,7 +12,7 @@ using Color = System.Drawing.Color;
 
 namespace Rationally.Visio.View.Alternatives
 {
-    internal sealed class AlternativeStateShape : VisioShape, IAlternativeComponent
+    internal sealed class AlternativeStateShape : VisioShape
     {
         private const string StateMenuEventId = "STATE_MENU";
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -49,9 +49,6 @@ namespace Rationally.Visio.View.Alternatives
                 }
             }
         }
-
-
-        public void SetAlternativeIdentifier(int alternativeIndex) => Index = alternativeIndex;
 
         private void GenerateMenu()
         {

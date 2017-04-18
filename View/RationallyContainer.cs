@@ -148,5 +148,15 @@ namespace Rationally.Visio.View
             Deleted = true;
             Shape.Delete();
         }
+
+         public override int Index
+         {
+             get { return base.Index; }
+             set
+             {
+                 base.Index = value;
+                 Children.ForEach(c => c.Index = value);
+             }
+         }
     }
 }

@@ -144,4 +144,16 @@
   <data name="Formula_QUEUMARKEREVENT" xml:space="preserve">
     <value>QUEUEMARKEREVENT("{0}")</value>
   </data>
+  <data name="Formula_RationallyType" xml:space="preserve">
+    <value>User.rationallyType.Value</value>
+  </data>
+  <data name="Formula_Index" xml:space="preserve">
+    <value>User.Index.Value</value>
+  </data>
+  <data name="EventId_AddAlternative" xml:space="preserve">
+    <value>ADD_ALTERNATIVE_MENU</value>
+  </data>
+  <data name="EventId_DeleteAlternative" xml:space="preserve">
+    <value>DELETE_ALTERNATIVE_MENU</value>
+  </data>
 </root>

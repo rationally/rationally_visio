@@ -317,13 +317,12 @@
       <DependentUpon>UrlSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Alternatives\AlternativeShape.cs" />
-    <Compile Include="View\Alternatives\AlternativeDescriptionComponent.cs" />
-    <Compile Include="View\Alternatives\AlternativeIdentifierComponent.cs" />
+    <Compile Include="View\Alternatives\AlternativeDescriptionShape.cs" />
+    <Compile Include="View\Alternatives\AlternativeIdentifierShape.cs" />
     <Compile Include="View\Alternatives\AlternativesContainer.cs" />
     <Compile Include="View\Alternatives\AlternativeStateShape.cs" />
     <Compile Include="View\Alternatives\AlternativeStubContainer.cs" />
     <Compile Include="View\Alternatives\AlternativeTitleComponent.cs" />
-    <Compile Include="View\Alternatives\IAlternativeComponent.cs" />
     <Compile Include="View\Documents\RelatedDocumentContainer.cs" />
     <Compile Include="View\Documents\RelatedDocumentStubContainer.cs" />
     <Compile Include="View\Documents\RelatedDocumentTitleComponent.cs" />
@@ -425,6 +424,7 @@
     <EmbeddedResource Include="Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\RationallyRibbon.resx">
       <DependentUpon>RationallyRibbon.cs</DependentUpon>
@@ -454,6 +454,7 @@
     <EmbeddedResource Include="VisioFormulas.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>VisioFormulas.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -37,10 +37,10 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             model.Alternatives[currentIndex + 1] = one;
 
             //update the index of the component and his children
-            toChange.SetAlternativeIdentifier(currentIndex + 1);
+            toChange.Index = currentIndex + 1;
             
             //same, for the other component
-            other.SetAlternativeIdentifier(currentIndex);
+            other.Index = currentIndex;
 
             //update the related force column value identifiers
             ForcesContainer forcesContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is ForcesContainer);

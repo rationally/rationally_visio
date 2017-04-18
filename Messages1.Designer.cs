@@ -106,6 +106,24 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add alternative.
+        /// </summary>
+        internal static string Menu_AddAlternative {
+            get {
+                return ResourceManager.GetString("Menu_AddAlternative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this alternative.
+        /// </summary>
+        internal static string Menu_DeleteAlternative {
+            get {
+                return ResourceManager.GetString("Menu_DeleteAlternative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set State.
         /// </summary>
         internal static string Menu_SetState {

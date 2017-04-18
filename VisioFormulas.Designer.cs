@@ -106,6 +106,24 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ADD_ALTERNATIVE_MENU.
+        /// </summary>
+        internal static string EventId_AddAlternative {
+            get {
+                return ResourceManager.GetString("EventId_AddAlternative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE_ALTERNATIVE_MENU.
+        /// </summary>
+        internal static string EventId_DeleteAlternative {
+            get {
+                return ResourceManager.GetString("EventId_DeleteAlternative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &quot;{0}&quot;.
         /// </summary>
         internal static string Formula_EscapedValue {
@@ -115,11 +133,29 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User.Index.Value.
+        /// </summary>
+        internal static string Formula_Index {
+            get {
+                return ResourceManager.GetString("Formula_Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to QUEUEMARKEREVENT(&quot;{0}&quot;).
         /// </summary>
         internal static string Formula_QUEUMARKEREVENT {
             get {
                 return ResourceManager.GetString("Formula_QUEUMARKEREVENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.rationallyType.Value.
+        /// </summary>
+        internal static string Formula_RationallyType {
+            get {
+                return ResourceManager.GetString("Formula_RationallyType", resourceCulture);
             }
         }
         

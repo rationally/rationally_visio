@@ -8,10 +8,19 @@ using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Alternatives
 {
-    internal sealed class AlternativeShape : HeaderlessContainer, IAlternativeComponent
+    internal sealed class AlternativeShape : HeaderlessContainer
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex AlternativeRegex = new Regex(@"Alternative(\.\d+)?$");
+
+        public override int Index
+        {
+            get { return base.Index; }
+            set {
+                base.Index = value;
+                MarginTop = Index == 0 ? 0.3 : 0;
+            }
+        }
         public AlternativeShape(Page page, Shape alternative) : base(page, false)
         {
             Shape = alternative;
@@ -31,13 +40,13 @@ namespace Rationally.Visio.View.Alternatives
                     Children.Add(comp);
                     state = comp.Text;
                 }
-                else if (AlternativeIdentifierComponent.IsAlternativeIdentifier(alternativeComponent.Name))
+                else if (AlternativeIdentifierShape.IsAlternativeIdentifier(alternativeComponent.Name))
                 {
-                    Children.Add(new AlternativeIdentifierComponent(page, alternativeComponent));
+                    Children.Add(new AlternativeIdentifierShape(page, alternativeComponent));
                 }
-                else if (AlternativeDescriptionComponent.IsAlternativeDescription(alternativeComponent.Name))
+                else if (AlternativeDescriptionShape.IsAlternativeDescription(alternativeComponent.Name))
                 {
-                    AlternativeDescriptionComponent comp = new AlternativeDescriptionComponent(page, alternativeComponent);
+                    AlternativeDescriptionShape comp = new AlternativeDescriptionShape(page, alternativeComponent);
                     Children.Add(comp);
                 }
             }
@@ -67,7 +76,7 @@ namespace Rationally.Visio.View.Alternatives
 
         }
 
-        public static AlternativeShape CreateWithNewShape(Page page, int index, Alternative alternative)
+        /*public static AlternativeShape CreateWithNewShape(Page page, int index, Alternative alternative)
         {
             AlternativeShape alternativeShape = new AlternativeShape(page, index, alternative);
 
@@ -87,9 +96,9 @@ namespace Rationally.Visio.View.Alternatives
                     alternativeShape.Children.Add(comp);
                     state = comp.Text;
                 }
-                else if (AlternativeIdentifierComponent.IsAlternativeIdentifier(alternativeComponent.Name))
+                else if (AlternativeIdentifierShape.IsAlternativeIdentifier(alternativeComponent.Name))
                 {
-                    alternativeShape.Children.Add(new AlternativeIdentifierComponent(page, alternativeComponent));
+                    alternativeShape.Children.Add(new AlternativeIdentifierShape(page, alternativeComponent));
                 }
                 else if (AlternativeDescriptionComponent.IsAlternativeDescription(alternativeComponent.Name))
                 {
@@ -122,7 +131,7 @@ namespace Rationally.Visio.View.Alternatives
             alternativeShape.MarginTop = alternativeShape.Index == 0 ? 0.3 : 0.0;
 
             return alternativeShape;
-        }
+        }*/
 
         public AlternativeShape(Page page, int index, Alternative alternative) : base(page)
         {
@@ -134,23 +143,23 @@ namespace Rationally.Visio.View.Alternatives
         
             //2) identifier ("A:")
             string identifier = (char)(65 + index) + ":";
-            AlternativeIdentifierComponent identifierComponent = new AlternativeIdentifierComponent(page, index, identifier);
-            identifierComponent.ToggleBoldFont(true);
+            AlternativeIdentifierShape identifierShape = new AlternativeIdentifierShape(page, index, identifier);
+            identifierShape.ToggleBoldFont(true);
             Log.Debug("created identifier component");
             //3) title
             AlternativeTitleComponent titleComponent = new AlternativeTitleComponent(page, index, alternative.Title);
             Log.Debug("created title component");
             //4) description area
-            AlternativeDescriptionComponent descComponent = new AlternativeDescriptionComponent(page, index);
+            AlternativeDescriptionShape descShape = new AlternativeDescriptionShape(page, index);
             Log.Debug("created description component");
 
-            Children.Add(identifierComponent);
+            Children.Add(identifierShape);
             Children.Add(titleComponent);
             Children.Add(stateShape);
-            Children.Add(descComponent);
+            Children.Add(descShape);
 
             Name = "Alternative";
-            AddUserRow("rationallyType");
+            //AddUserRow("rationallyType");
             RationallyType = "alternative";
             AddUserRow("index");
             Index = index;
@@ -179,12 +188,6 @@ namespace Rationally.Visio.View.Alternatives
             }
         }
 
-        public void SetAlternativeIdentifier(int alternativeIndex)
-        {
-            Index = alternativeIndex;
-            Children.ForEach(child => ((IAlternativeComponent)child).SetAlternativeIdentifier(alternativeIndex));
-            InitStyle();
-        }
 
         public override void AddToTree(Shape s, bool allowAddInChildren)
         {
@@ -196,9 +199,9 @@ namespace Rationally.Visio.View.Alternatives
                     Children.Add(com);
                 }
             }
-            else if (AlternativeIdentifierComponent.IsAlternativeIdentifier(s.Name))
+            else if (AlternativeIdentifierShape.IsAlternativeIdentifier(s.Name))
             {
-                AlternativeIdentifierComponent com = new AlternativeIdentifierComponent(Page, s);
+                AlternativeIdentifierShape com = new AlternativeIdentifierShape(Page, s);
                 if (com.Index == Index)
                 {
                     Children.Add(com);
@@ -212,9 +215,9 @@ namespace Rationally.Visio.View.Alternatives
                     Children.Add(com);
                 }
             }
-            else if (AlternativeDescriptionComponent.IsAlternativeDescription(s.Name))
+            else if (AlternativeDescriptionShape.IsAlternativeDescription(s.Name))
             {
-                AlternativeDescriptionComponent com = new AlternativeDescriptionComponent(Page, s);
+                AlternativeDescriptionShape com = new AlternativeDescriptionShape(Page, s);
                 if (com.Index == Index)
                 {
                     Children.Add(com);
@@ -248,9 +251,9 @@ namespace Rationally.Visio.View.Alternatives
             }
             if (Children.Count == 4)
             {
-                if (!(Children[0] is AlternativeIdentifierComponent))
+                if (!(Children[0] is AlternativeIdentifierShape))
                 {
-                    VisioShape c = Children.Find(x => x is AlternativeIdentifierComponent);
+                    VisioShape c = Children.Find(x => x is AlternativeIdentifierShape);
                     Children.Remove(c);
                     Children.Insert(0, c);
                 }

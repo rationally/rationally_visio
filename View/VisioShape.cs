@@ -94,8 +94,22 @@ namespace Rationally.Visio.View
 
         public string RationallyType
         {
-            get { return Shape.CellsU[CellConstants.RationallyType].ResultStr["Value"]; }
-            set { Shape.Cells["User.rationallyType.Value"].Formula = "\"" + value + "\""; }
+            get
+            {
+                if (!CellExists(VisioFormulas.Formula_RationallyType))
+                {
+                    AddUserRow("rationallyType");
+                }
+                return Shape.CellsU[CellConstants.RationallyType].ResultStr["Value"];
+            }
+            set
+            {
+                if (!CellExists(VisioFormulas.Formula_RationallyType))
+                {
+                    AddUserRow("rationallyType");
+                }
+                Shape.Cells[VisioFormulas.Formula_RationallyType].Formula = "\"" + value + "\"";
+            }
         }
 
         public int Id
@@ -119,8 +133,22 @@ namespace Rationally.Visio.View
 
         public virtual int Index
         {
-            get { return (int)Shape.CellsU[CellConstants.Index].ResultIU; }
-            set { Shape.CellsU[$"{CellConstants.Index}.Value"].ResultIU = value; }
+            get
+            {
+                if (!CellExists(VisioFormulas.Formula_Index))
+                {
+                    AddUserRow("Index");
+                }
+                return (int)Shape.CellsU[CellConstants.Index].ResultIU;
+            }
+            set
+            {
+                if (!CellExists(VisioFormulas.Formula_Index))
+                {
+                    AddUserRow("Index");
+                }
+                Shape.CellsU[$"{CellConstants.Index}.Value"].ResultIU = value;
+            }
         }
 
         public string FilePath
@@ -436,5 +464,12 @@ namespace Rationally.Visio.View
             }
             return shape;
         }
+
+        /// <summary>
+        /// Finds out whether a cell is the shapeSheet of Shape.
+        /// </summary>
+        /// <param name="cellName">cellname, INCLUDING section (example: "User.rationallyType")</param>
+        /// <returns></returns>
+        public bool CellExists(string cellName) => Shape.CellExists[cellName, (short) VisExistsFlags.visExistsAnywhere] == Constants.CellExists;
     }
 }

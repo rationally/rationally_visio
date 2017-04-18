@@ -2,29 +2,45 @@
 using System.Text.RegularExpressions;
 using log4net;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.View.ContextMenu;
 
 namespace Rationally.Visio.View.Alternatives
 {
-    internal sealed class AlternativeIdentifierComponent : TextLabel, IAlternativeComponent
+    internal sealed class AlternativeIdentifierShape : TextLabel
     {
+
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex IdentRegex = new Regex(@"AlternativeIdent(\.\d+)?$");
-        public AlternativeIdentifierComponent(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
+
+        /// <summary>
+        /// Used to retrieve and modify the value of this component.
+        /// </summary>
+        public override int Index
         {
-            
-                InitStyle();
+            get { return base.Index; }
+            set
+            {
+                base.Index = value;
+                Text = (char)(65 + value) + ":"; //map c-indexed value to capital alphabetical character (0 => "A:")
+            }
         }
 
-        public AlternativeIdentifierComponent(Page page, int index, string text) : base(page, text)
+        public AlternativeIdentifierShape(Page page, Shape alternativeComponent) : base(page, alternativeComponent)
+        {
+            InitStyle();
+        }
+
+        public AlternativeIdentifierShape(Page page, int index, string text) : base(page, text)
         {
             RationallyType = "alternativeIdentifier";
-            AddUserRow("index");
             Index = index;
 
             Name = "AlternativeIdent";
 
-            AddAction("addAlternative", "QUEUEMARKEREVENT(\"add\")", "\"Add alternative\"", false);
-            AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this alternative\"", false);
+            ContextMenuItem addAlternativeMenuItem = ContextMenuItem.CreateAndRegister(this, VisioFormulas.EventId_AddAlternative, Messages.Menu_AddAlternative);
+            //addAlternativeMenuItem.Action = ?? //TODO implement
+            ContextMenuItem removeAlternativeMenuItem = ContextMenuItem.CreateAndRegister(this, VisioFormulas.EventId_DeleteAlternative, Messages.Menu_DeleteAlternative);
+            //removeAlternativeMenuItem.Action = ?? //TODO implement
             Height = 0.2;
             Width = 0.3;
             InitStyle();
@@ -39,14 +55,6 @@ namespace Rationally.Visio.View.Alternatives
             UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded;
         }
 
-        public void SetAlternativeIdentifier(int alternativeIndex)
-        {
-            Index = alternativeIndex;
-            if (Text != (char) (65 + alternativeIndex) + ":")
-            {
-                Text = (char) (65 + alternativeIndex) + ":";
-            }
-        }
         public static bool IsAlternativeIdentifier(string name) => IdentRegex.IsMatch(name);
 
         private void UpdateReorderFunctions()

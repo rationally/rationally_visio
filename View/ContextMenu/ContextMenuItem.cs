@@ -7,56 +7,56 @@ namespace Rationally.Visio.View.ContextMenu
 
     public class ContextMenuItem
     {
-        private bool _isEnabled;
+        private bool isEnabled;
 
-        private string _name;
+        private string name;
 
-        private ContextMenuItem(VisioShape shape, string eventID, string name, bool isFlyOut = false)
+        private ContextMenuItem(VisioShape shape, string eventId, string name, bool isFlyOut = false)
         {
             Shape = shape;
-            EventID = eventID;
+            EventId = eventId;
             IsFlyOut = isFlyOut;
-            ActionID = Shape.Shape.UniqueID[(short) VisUniqueIDArgs.visGetOrMakeGUID] + EventID;
+            ActionId = Shape.Shape.UniqueID[(short) VisUniqueIDArgs.visGetOrMakeGUID] + EventId;
            
         }
 
-        public static ContextMenuItem CreateAndRegister(VisioShape shape, string eventID, string name,
+        public static ContextMenuItem CreateAndRegister(VisioShape shape, string eventId, string name,
             bool isFlyOut = false)
         {
-            var menuItem = new ContextMenuItem(shape,eventID,name,isFlyOut);
+            ContextMenuItem menuItem = new ContextMenuItem(shape,eventId,name,isFlyOut);
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 //Assign to local varibale and not field to avoid updatemenuitem being called
-                menuItem._name = name;
-                menuItem._isEnabled = true;
+                menuItem.name = name;
+                menuItem.isEnabled = true;
                 menuItem.Shape.AddMenuItem(menuItem);
             }
             else
             {
                 if (
                     menuItem.Shape.Shape.CellExists[
-                        string.Format(VisioFormulas.Action_Action, menuItem.EventID), (short)VisExistsFlags.visExistsAnywhere] ==
+                        string.Format(VisioFormulas.Action_Action, menuItem.EventId), (short)VisExistsFlags.visExistsAnywhere] ==
                     Constants.CellExists)
                 {
-                    menuItem._name =
-                        menuItem.Shape.Shape.CellsU[string.Format(VisioFormulas.Action_MenuName, menuItem.EventID)].ResultStr["Value"];
-                    menuItem._isEnabled =
-                        !(menuItem.Shape.Shape.CellsU[string.Format(VisioFormulas.Action_Disabled, menuItem.EventID)].ResultIU > 0);
+                    menuItem.name =
+                        menuItem.Shape.Shape.CellsU[string.Format(VisioFormulas.Action_MenuName, menuItem.EventId)].ResultStr["Value"];
+                    menuItem.isEnabled =
+                        !(menuItem.Shape.Shape.CellsU[string.Format(VisioFormulas.Action_Disabled, menuItem.EventId)].ResultIU > 0);
                 }
             }
             return menuItem;
         }
 
-        public string EventID { get; }
+        public string EventId { get; }
         public bool IsFlyOut { get; }
-        public string ActionID { get; }
+        public string ActionId { get; }
 
         public string Name
         {
-            get { return _name; }
+            get { return name; }
             set
             {
-                _name = value;
+                name = value;
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     Shape.UpdateMenuItem(this);
@@ -66,10 +66,10 @@ namespace Rationally.Visio.View.ContextMenu
 
         public bool IsEnabled
         {
-            get { return _isEnabled; }
+            get { return isEnabled; }
             set
             {
-                _isEnabled = value;
+                isEnabled = value;
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     Shape.UpdateMenuItem(this);

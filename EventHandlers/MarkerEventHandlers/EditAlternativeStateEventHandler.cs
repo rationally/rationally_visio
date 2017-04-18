@@ -28,7 +28,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             AlternativeStateShape component =
                 (AlternativeStateShape) container.Children.Find(x => x is AlternativeStateShape);
 
-            AlternativeStates _newAlternativeState;
+            AlternativeState _newAlternativeState;
 
             Enum.TryParse(newState, out _newAlternativeState);
 

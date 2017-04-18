@@ -70,7 +70,7 @@ namespace Rationally.Visio.View.Alternatives
         public AlternativeContainer(Page page, int index, Alternative alternative) : base(page)
         {
             //1) state box
-            AlternativeStates alternativeState;
+            AlternativeState alternativeState;
             Enum.TryParse(alternative.Status, out alternativeState);
             AlternativeStateShape stateShape = AlternativeStateShape.CreateWithNewShape(page, index, alternativeState);
             Log.Debug("Created state component");

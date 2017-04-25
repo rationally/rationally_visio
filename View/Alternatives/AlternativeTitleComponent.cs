@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using log4net;
 using Microsoft.Office.Interop.Visio;
+using Rationally.Visio.EventHandlers.MarkerEventHandlers;
 using Rationally.Visio.Model;
 using Rationally.Visio.View.ContextMenu;
 
@@ -33,9 +34,9 @@ namespace Rationally.Visio.View.Alternatives
             Name = "AlternativeTitle";
 
             ContextMenuItem addAlternativeMenuItem = ContextMenuItem.CreateAndRegister(this, VisioFormulas.EventId_AddAlternative, Messages.Menu_AddAlternative);
-            //addAlternativeMenuItem.Action = ?? //TODO implement
+            addAlternativeMenuItem.Action = () => (new AddAlternativeEventHandler()).Execute(Shape, "add");
             ContextMenuItem removeAlternativeMenuItem = ContextMenuItem.CreateAndRegister(this, VisioFormulas.EventId_DeleteAlternative, Messages.Menu_DeleteAlternative);
-            //removeAlternativeMenuItem.Action = ?? //TODO implement
+            removeAlternativeMenuItem.Action = () => (new MarkerDeleteAlternativeEventHandler()).Execute(Shape,"delete");
             Width = 3.7;
             Height = 0.2;
             InitStyle();

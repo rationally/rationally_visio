@@ -62,7 +62,12 @@ namespace Rationally.Visio.View
 
         public void AddMenuItem(ContextMenuItem item)
         {
-            AddAction(item.EventId, Format(VisioFormulas.Formula_QUEUMARKEREVENT, item.ActionId), item.Name,item.IsFlyOut,item.IsEnabled);
+            if (Shape.CellExists[string.Format(VisioFormulas.Action_Action,item.EventId), (short)VisExistsFlags.visExistsAnywhere] != Constants.CellExists)//if not exists
+            {
+                //after a redo, we don't need to execute this. It would generate a new undo action on top of the readd-alternative action.
+                AddAction(item.EventId, Format(VisioFormulas.Formula_QUEUMARKEREVENT, item.ActionId), item.Name, item.IsFlyOut, item.IsEnabled);
+            }
+            
             ContextMenuEventHandler.Instance.RegisterMenuEvent(item.ActionId, item);
         }
 

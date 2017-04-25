@@ -57,6 +57,8 @@ namespace Rationally.Visio.Forms.WizardComponents
             //should refer to model copy!
             Alternative.Status = alternativeStateDropdown.Text;
             Alternative.Title = TextBoxAlternativeTitle.Text;
+            //for each force that does not have a force value for this alternative, add a force value
+            ProjectSetupWizard.Instance.ModelCopy.Forces.Where(f => !f.ForceValueDictionary.Keys.Contains(Alternative.Id)).ToList().ForEach(f => f.ForceValueDictionary[Alternative.Id] = "");
         }
 
         private void RemoveAlternative(object sender, EventArgs e)

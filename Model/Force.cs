@@ -31,6 +31,7 @@ namespace Rationally.Visio.Model
             Concern = concern;
             Description = description;
             ForceValueDictionary = forceValues;
+            Id = id;
             if (id > highestId)
             {
                 highestId = id;

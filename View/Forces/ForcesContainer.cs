@@ -112,13 +112,14 @@ namespace Rationally.Visio.View.Forces
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 List<VisioShape> toDelete = new List<VisioShape>();
-                int i = Children.Count - 2;
+                int i = Children.Count - 2; //2 = header row + total row, that we both want to ignore
+                //for each force container, that is not in the model (checked by id), increase the to-delete-counter.
                 Children.Where(force => force is ForceContainer && !Globals.RationallyAddIn.Model.Forces.Select(frc => frc.Id).Contains(force.Id)).ToList().ForEach(force =>
                 {
                     toDelete.Add(force);
                     i--;
                 });
-
+                //for each model force that is not yet in the view, add it.
                 Globals.RationallyAddIn.Model.Forces.Where(modelForce => Children.All(force => !(force is ForceContainer) || modelForce.Id != force.Id)).ToList().ForEach(modelForce =>
                         Children.Add(new ForceContainer(Page, i++, modelForce.Id))
                         );

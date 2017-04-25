@@ -32,44 +32,45 @@ namespace Rationally.Visio.View.Planning
             //make s into an rcomponent for access to wrapper
             VisioShape shapeComponent = new VisioShape(Page) { Shape = s };
 
-            if (PlanningItemComponent.IsPlanningItem(s.Name))
-            {
-                if (Children.All(c => c.Index != shapeComponent.Index)) //there is no forcecontainer stub with this index
+                if (PlanningItemComponent.IsPlanningItem(s.Name))
                 {
-                    Children.Add(new PlanningItemComponent(Page, s));
-                }
-                else
-                {
-                    //remove stub, insert s as new containers
-                    PlanningStubItem stub = (PlanningStubItem)Children.First(c => c.Index == shapeComponent.Index);
-                    Children.Remove(stub);
-                    PlanningItemComponent con = new PlanningItemComponent(Page, s);
-                    if (Children.Count < con.Index)
+                    if (Children.All(c => c.Index != shapeComponent.Index)) //there is no forcecontainer stub with this index
                     {
-                        Children.Add(con);
+                        Children.Add(new PlanningItemComponent(Page, s));
                     }
                     else
                     {
-                        Children.Insert(con.Index, con);
+                        //remove stub, insert s as new containers
+                        PlanningStubItem stub = (PlanningStubItem) Children.First(c => c.Index == shapeComponent.Index);
+                        Children.Remove(stub);
+                        PlanningItemComponent con = new PlanningItemComponent(Page, s);
+                        if (Children.Count < con.Index)
+                        {
+                            Children.Add(con);
+                        }
+                        else
+                        {
+                            Children.Insert(con.Index, con);
+                        }
+
                     }
-
-                }
-            }
-            else
-            {
-                bool isPlanningChild = CheckBoxComponent.IsCheckBoxComponent(s.Name) || PlanningItemTextComponent.IsPlanningItemTextComponent(s.Name);
-
-                if (isPlanningChild && Children.All(c => c.Index != shapeComponent.Index)) //if parent not exists
-                {
-                    PlanningStubItem stub = new PlanningStubItem(Page, shapeComponent.Index);
-                    Children.Insert(stub.Index, stub);
-                    Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
                 }
                 else
                 {
-                    Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
+                    bool isPlanningChild = CheckBoxComponent.IsCheckBoxComponent(s.Name) || PlanningItemTextComponent.IsPlanningItemTextComponent(s.Name);
+
+                    if (isPlanningChild && Children.All(c => c.Index != shapeComponent.Index)) //if parent not exists
+                    {
+                        PlanningStubItem stub = new PlanningStubItem(Page, shapeComponent.Index);
+                        Children.Insert(stub.Index, stub);
+                        Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
+                    }
+                    else
+                    {
+                        Children.ForEach(r => r.AddToTree(s, allowAddOfSubpart));
+                    }
                 }
-            }
+            
         }
 
         public void AddPlanningItem()

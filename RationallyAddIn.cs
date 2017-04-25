@@ -114,8 +114,9 @@ namespace Rationally.Visio
             {
                 if (candidate.WasClicked(x, y))
                 {
+                    int scopeId = Application.BeginUndoScope("Click checkbox");
                     candidate.Toggle(); //actual changing of the clicked checkbox's state
-                    stateComponent = candidate;
+                    Application.EndUndoScope(scopeId, true);
                     break;
                 }
             }
@@ -451,6 +452,14 @@ namespace Rationally.Visio
                     //update the text of the URL display component to the new url
                     RelatedURLURLComponent relatedURLURLComponent = (RelatedURLURLComponent)relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent);
                     relatedURLURLComponent.Text = changedShape.Hyperlink.Address;
+                }
+                else if (Application.IsUndoingOrRedoing && CheckBoxStateComponent.IsCheckBoxStateComponent(changedShape.Name) && cell.LocalName.Equals("FillForegnd"))
+                {
+                    CheckBoxStateComponent checkBoxState = View.GetComponentByShape(changedShape) as CheckBoxStateComponent;
+                    if (checkBoxState != null)
+                    {
+                        Model.PlanningItems[checkBoxState.Index].Finished = checkBoxState.Checked;
+                    }
                 }
                 else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.Index))
                 {

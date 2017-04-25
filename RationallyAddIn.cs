@@ -582,8 +582,19 @@ namespace Rationally.Visio
                             {
                                 int scopeId = Application.BeginUndoScope("Add stakeholder");
                                 s.Delete();
-                                StakeholdersContainer stakeholdersContainer = Globals.RationallyAddIn.View.Children.FirstOrDefault(ch => ch is StakeholdersContainer) as StakeholdersContainer;
+                                StakeholdersContainer stakeholdersContainer = View.Children.FirstOrDefault(ch => ch is StakeholdersContainer) as StakeholdersContainer;
                                 stakeholdersContainer?.AddStakeholder("<<name>>", "<<role>>");
+
+                                Application.EndUndoScope(scopeId, true);
+                            }
+                            break;
+                        case "planningItemStub":
+                            if (!Application.IsUndoingOrRedoing)
+                            {
+                                int scopeId = Application.BeginUndoScope("Add Planning item");
+                                s.Delete();
+                                PlanningContainer planningContainer = View.Children.FirstOrDefault(ch => ch is PlanningContainer) as PlanningContainer;
+                                planningContainer?.AddPlanningItem();
 
                                 Application.EndUndoScope(scopeId, true);
                             }

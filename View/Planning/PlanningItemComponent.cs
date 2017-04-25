@@ -92,7 +92,7 @@ namespace Rationally.Visio.View.Planning
                 RShape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
-            UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ShrinkXIfNeeded;
+            UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkYIfNeeded;
         }
 
 
@@ -154,6 +154,7 @@ namespace Rationally.Visio.View.Planning
         {
             Index = index;
             Children.ForEach(c => c.Index = index);
+            (Children.FirstOrDefault(child => child is CheckBoxComponent) as CheckBoxComponent)?.Children.ForEach(c => c.Index = index);
             InitStyle();
         }
 

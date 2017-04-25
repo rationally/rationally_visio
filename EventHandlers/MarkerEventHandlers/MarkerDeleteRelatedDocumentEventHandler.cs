@@ -15,7 +15,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
         public void Execute(Shape s, string identifier)
         {
             RationallyModel model = Globals.RationallyAddIn.Model;
-            RationallyComponent component = new RationallyComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = s };
+            VisioShape component = new VisioShape(Globals.RationallyAddIn.Application.ActivePage) { Shape = s };
 
             int index = component.Index;
             RelatedDocument document = model.Documents[index];
@@ -35,7 +35,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                     //trace the correct document container
                     RelatedDocumentContainer documentContainer = (RelatedDocumentContainer)documentsContainer.Children.First(c => c is RelatedDocumentContainer && (component.Index == c.Index));
 
-                    shapeToPass = documentContainer.RShape;
+                    shapeToPass = documentContainer.Shape;
                 }
                 //initiate a delete handler with the container's shape
                 shapeToPass.Delete();

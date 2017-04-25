@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Text;
 using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
@@ -28,7 +25,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
             }
 
             //trace planning item container in view tree
-            RationallyComponent planningComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
+            VisioShape planningComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
 
             PlanningItemComponent delete = planningComponent as PlanningItemComponent;
             if (delete != null)
@@ -40,7 +37,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
                     containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
                     {
                         c.Deleted = true;
-                        c.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
+                        c.Shape.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
                     }); //schedule the missing delete events (children not selected during the manual delete)
                 }
                 PlanningContainer planningContainer = (PlanningContainer)Globals.RationallyAddIn.View.Children.First(c => c is PlanningContainer);

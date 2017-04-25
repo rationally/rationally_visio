@@ -15,7 +15,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
         {
             Log.Debug("Deleting information component.");
             InformationContainer cont = Globals.RationallyAddIn.View.Children.FirstOrDefault(obj => obj.RationallyType == "information") as InformationContainer;
-            cont?.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
+            cont?.Children.RemoveAll(obj => obj.Shape.Equals(changedShape));
         }
     }
 }

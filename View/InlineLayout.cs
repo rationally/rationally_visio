@@ -22,14 +22,14 @@ namespace Rationally.Visio.View
             if (toManage.Children.Count == 0) { return; }
 
             //start the drawing at the left top of the container
-            Draw(toManage.CenterX - (toManage.Width / 2.0), toManage.CenterY + (toManage.Height / 2.0), 0, 0, double.MaxValue, new Queue<RationallyComponent>(toManage.Children));
+            Draw(toManage.CenterX - (toManage.Width / 2.0), toManage.CenterY + (toManage.Height / 2.0), 0, 0, double.MaxValue, new Queue<VisioShape>(toManage.Children));
         }
 
-        private void Draw(double x, double y, double currentLineHeight, double contentXEnd, double contentYEnd, Queue<RationallyComponent> components)
+        private void Draw(double x, double y, double currentLineHeight, double contentXEnd, double contentYEnd, Queue<VisioShape> components)
         {
             while (components.Count > 0)
             {
-                RationallyComponent toDraw = components.Dequeue();
+                VisioShape toDraw = components.Dequeue();
                 double toDrawWidth = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight; //expected increase in x
                 double toDrawHeight = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom; //expected height in y
 
@@ -50,7 +50,7 @@ namespace Rationally.Visio.View
 
                 if (toDraw is RationallyContainer)
                 {
-                    foreach (RationallyComponent c in ((RationallyContainer) toDraw).Children)
+                    foreach (VisioShape c in ((RationallyContainer) toDraw).Children)
                     {
                         c.CenterX += deltaX;
                         c.CenterY += deltaY;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 using System.Text.RegularExpressions;
 using log4net;
 using Microsoft.Office.Interop.Visio;
@@ -10,14 +6,14 @@ using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Planning
 {
-    class PlanningItemTextComponent : PaddedTextLabel
+    internal class PlanningItemTextComponent : PaddedTextLabel
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static readonly Regex regex = new Regex(@"PlanningItemTextComponent(\.\d+)?$");
+        private static readonly Regex Regex = new Regex(@"PlanningItemTextComponent(\.\d+)?$");
 
         public PlanningItemTextComponent(Page page, Shape shape) : base(page, shape)
         {
-            RShape = shape;
+            Shape = shape;
             InitStyle();
         }
 
@@ -27,10 +23,9 @@ namespace Rationally.Visio.View.Planning
 
             Name = "PlanningItemTextComponent";
 
-            AddAction("addPlanningItem", "QUEUEMARKEREVENT(\"add\")", "\"Add item\"", false);
-            AddAction("deletePlanningItem", "QUEUEMARKEREVENT(\"delete\")", "\"Delete item\"", false);
-
-            AddUserRow("Index");
+            AddAction("addPlanningItem", "QUEUEMARKEREVENT(\"add\")", "Add item", false);
+            AddAction("deletePlanningItem", "QUEUEMARKEREVENT(\"delete\")", "Delete item", false);
+            
             Index = index; 
             Width = 4.3;
             Height = 0.2;
@@ -45,30 +40,15 @@ namespace Rationally.Visio.View.Planning
             UsedSizingPolicy = SizingPolicy.FixedSize;
         }
 
-        public static bool IsPlanningItemTextComponent(string name) => regex.IsMatch(name);
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-
-            if (Index == 0) //Top shape can't move up
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.PlanningItems.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        public static bool IsPlanningItemTextComponent(string name) => Regex.IsMatch(name);
+        
 
         public override void Repaint()
         {
 
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.PlanningItems.Count - 1);
                 if (Globals.RationallyAddIn.Model.PlanningItems.Count > Index)
                 {
                     PlanningItem item = Globals.RationallyAddIn.Model.PlanningItems[Index];

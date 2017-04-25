@@ -12,20 +12,19 @@ namespace Rationally.Visio.View.Stakeholders
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public StakeholderRoleComponent(Page page, Shape shape) : base(page, shape)
         {
-            RShape = shape;
+            Shape = shape;
             InitStyle();
         }
 
         public StakeholderRoleComponent(Page page, int index, string labelText) : base(page, labelText)
         {
             RationallyType = "stakeholderRole";
-            AddUserRow("index");
             Index = index;
 
             Name = "StakeholderRole";
             //NameU = "StakeholderRole";
-            AddAction("addStakeholder", "QUEUEMARKEREVENT(\"add\")", "\"Add stakeholder\"", false);
-            AddAction("deleteStakeholder", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this stakeholder\"", false);
+            AddAction("addStakeholder", "QUEUEMARKEREVENT(\"add\")", "Add stakeholder", false);
+            AddAction("deleteStakeholder", "QUEUEMARKEREVENT(\"delete\")", "Delete this stakeholder", false);
             Width = 1.9;
             Height = 0.2;
             InitStyle();
@@ -40,29 +39,14 @@ namespace Rationally.Visio.View.Stakeholders
             MarginTop = 0.01;
             UsedSizingPolicy = SizingPolicy.FixedSize;
         }
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-
-            if (Index == 0) //Top shape can't move up
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.Stakeholders.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        
 
         public override void Repaint()
         {
 
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.Stakeholders.Count - 1);
                 if (Globals.RationallyAddIn.Model.Stakeholders.Count > Index)
                 {
                     Stakeholder stakeholder = Globals.RationallyAddIn.Model.Stakeholders[Index];

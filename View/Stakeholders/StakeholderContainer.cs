@@ -13,7 +13,7 @@ namespace Rationally.Visio.View.Stakeholders
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public StakeholderContainer(Page page, Shape stakeholder) : base(page, false)
         {
-            RShape = stakeholder;
+            Shape = stakeholder;
             string name = null;
             string role = null;
             foreach (int shapeIdentifier in stakeholder.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested))
@@ -60,11 +60,8 @@ namespace Rationally.Visio.View.Stakeholders
             Log.Debug("Starting shapesheet initing of stakeholdercontainer.");
             Name = "Stakeholder";
             //NameU = "Stakeholder";
-            AddUserRow("rationallyType");
             RationallyType = "stakeholder";
-            AddUserRow("index");
             Index = index;
-            AddUserRow("uniqueid");
             Id = id;
 
 
@@ -72,8 +69,8 @@ namespace Rationally.Visio.View.Stakeholders
             MsvSdContainerLocked = true;
 
             //Events
-            AddAction("addStakeholder", "QUEUEMARKEREVENT(\"add\")", "\"Add stakeholder\"", false);
-            AddAction("deleteStakeholder", "QUEUEMARKEREVENT(\"delete\")", "\"Delete stakeholder\"", false);
+            AddAction("addStakeholder", "QUEUEMARKEREVENT(\"add\")", "Add stakeholde", false);
+            AddAction("deleteStakeholder", "QUEUEMARKEREVENT(\"delete\")", "Delete stakeholder", false);
 
             Width = 5.26;
 
@@ -81,7 +78,7 @@ namespace Rationally.Visio.View.Stakeholders
             InitStyle();
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                Shape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
         }
@@ -124,28 +121,13 @@ namespace Rationally.Visio.View.Stakeholders
         }
 
         public static bool IsStakeholderContainer(string name) => StakeholderRegex.IsMatch(name);
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-
-            if (Index == 0) //Top shape can't move up
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.Stakeholders.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        
 
         public override void Repaint()
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio takes care of this
             {
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.Stakeholders.Count - 1);
             }
             base.Repaint();
         }

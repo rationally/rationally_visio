@@ -23,10 +23,9 @@ namespace Rationally.Visio.View.Information
 
 
             Log.Debug("about to add rationally type row in shapesheet");
-            AddUserRow("rationallyType");
             Log.Debug("rationally type row added");
             RationallyType = "informationBox";
-            RShape.Name = "Information";
+            Shape.Name = "Information";
 
             InitContent(page, author, date, version);
             InitStyle();
@@ -34,7 +33,7 @@ namespace Rationally.Visio.View.Information
 
         public InformationContainer(Page page, Shape s) : base(page, false)
         {
-            RShape = s;
+            Shape = s;
             RationallyModel model = Globals.RationallyAddIn.Model;
             if ((s.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested).Length == 0) && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
@@ -42,7 +41,7 @@ namespace Rationally.Visio.View.Information
             }
             else
             {
-                Array ident = RShape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
+                Array ident = Shape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
                 List<Shape> shapes = (new List<int>((int[])ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
                 foreach (Shape shape in shapes)
                 {
@@ -82,7 +81,7 @@ namespace Rationally.Visio.View.Information
             CenterY = 22.45;
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                Shape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
             MsvSdContainerLocked = true;

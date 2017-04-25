@@ -16,7 +16,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             RationallyModel model = Globals.RationallyAddIn.Model;
             RelatedDocumentsContainer docsContainer = (RelatedDocumentsContainer)Globals.RationallyAddIn.View.Children.First(c => c is RelatedDocumentsContainer);
 
-            RationallyComponent currentComponent = new RationallyComponent(changedShape.ContainingPage) {RShape = changedShape};
+            VisioShape currentComponent = new VisioShape(changedShape.ContainingPage) {Shape = changedShape};
             int currentIndex = currentComponent.Index;
 
             //swap the forces in the model
@@ -33,7 +33,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             //same, for the other component
             toSwapWith.SetDocumentIdentifier(currentIndex);
 
-            RationallyComponent temp = docsContainer.Children[currentIndex];
+            VisioShape temp = docsContainer.Children[currentIndex];
             docsContainer.Children[currentIndex] = docsContainer.Children[currentIndex - 1];
             docsContainer.Children[currentIndex - 1] = temp;
 

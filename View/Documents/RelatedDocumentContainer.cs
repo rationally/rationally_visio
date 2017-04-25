@@ -18,7 +18,7 @@ namespace Rationally.Visio.View.Documents
 
         public RelatedDocumentContainer(Page page, Shape containerShape) : base(page, false)
         {
-            RShape = containerShape;
+            Shape = containerShape;
             Array ident = containerShape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = (new List<int>((int[]) ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
             string name = null, path = null;
@@ -94,17 +94,14 @@ namespace Rationally.Visio.View.Documents
                 RelatedURLURLComponent urlLabel = new RelatedURLURLComponent(page, index, document.Path);
                 Children.Add(urlLabel);
             }
-            AddUserRow("rationallyType");
             RationallyType = "relatedDocumentContainer";
             Name = "Related Document";
-            AddUserRow("index");
             Index = index;
-            AddUserRow("uniqueId");
             Id = docId;
 
-            AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "\"Add file\"", false);
-            AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "\"Add url\"", false);
-            AddAction("deleteRelatedDocument", "QUEUEMARKEREVENT(\"delete\")", "\"Delete document\"", false);
+            AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "Add file", false);
+            AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "Add url", false);
+            AddAction("deleteRelatedDocument", "QUEUEMARKEREVENT(\"delete\")", "Delete document", false);
 
             MsvSdContainerLocked = true;
             
@@ -175,35 +172,20 @@ namespace Rationally.Visio.View.Documents
             comp.ForEach(c =>
             {
                 Children.Remove(c);
-                c.RShape.Delete();
+                c.Shape.Delete();
             });
             //Make a shortcut to the file
             RelatedFileComponent relatedFileComponent = new RelatedFileComponent(Page, index, doc.Path);
             Children.Add(relatedFileComponent);
             Children.Where(c => c is RelatedDocumentTitleComponent).ToList().ForEach(x => x.Text = doc.Path);
         }
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-
-            if (Index == 0)
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.Documents.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        
 
         public override void Repaint()
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
             {
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.Documents.Count - 1);
             }
             base.Repaint();
         }

@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.EventHandlers;
 using Rationally.Visio.Forms;
 using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
-using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.View.Planning
 {
-    class PlanningContainer : RationallyContainer
+    internal class PlanningContainer : RationallyContainer
     {
         private static readonly Regex PlanningRegex = new Regex(@"Planning(\.\d+)?$");
 
         public PlanningContainer(Page page, Shape planningContainer) : base(page)
         {
-            RShape = planningContainer;
+            Shape = planningContainer;
             Array ident = planningContainer.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             foreach (Shape shape in shapes.Where(shape => PlanningItemComponent.IsPlanningItem(shape.Name)))
@@ -32,7 +30,7 @@ namespace Rationally.Visio.View.Planning
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             //make s into an rcomponent for access to wrapper
-            RationallyComponent shapeComponent = new RationallyComponent(Page) { RShape = s };
+            VisioShape shapeComponent = new VisioShape(Page) { Shape = s };
 
             if (PlanningItemComponent.IsPlanningItem(s.Name))
             {
@@ -89,7 +87,7 @@ namespace Rationally.Visio.View.Planning
         public override void Repaint()
         {
             //remove alternatives that are no longer in the model, but still in the view
-            List<RationallyComponent> toDelete = Children.Where(planning => !Globals.RationallyAddIn.Model.PlanningItems.Select(pln => pln.Id).Contains(planning.Id)).ToList();
+            List<VisioShape> toDelete = Children.Where(planning => !Globals.RationallyAddIn.Model.PlanningItems.Select(pln => pln.Id).Contains(planning.Id)).ToList();
             
             if (Globals.RationallyAddIn.Model.PlanningItems.Count > Children.Count)
             {
@@ -98,7 +96,7 @@ namespace Rationally.Visio.View.Planning
                     .ForEach(pln => Children.Add(new PlanningItemComponent(Globals.RationallyAddIn.Application.ActivePage, Children.Count, pln)));
             }
             
-            toDelete.ForEach(alt => alt.RShape.Delete());
+            toDelete.ForEach(alt => alt.Shape.Delete());
             base.Repaint();
         }
 

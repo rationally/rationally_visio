@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
+using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.Forms.AlternativeStateConfiguration
 {
-    class FlowLayoutAlternativeState : FlowLayoutPanel
+    internal class FlowLayoutAlternativeState : FlowLayoutPanel
     {
         private Label labelStateTitle;
         public TextBox StateTextBox;
@@ -28,8 +28,8 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
 
         public FlowLayoutAlternativeState(AlternativeState state, int index)
         {
-            OldState = state.State;
-            Color = state.Color;
+            OldState = state.GetName();
+            Color = state.GetColor();
             Index = index;
             Init();
         }

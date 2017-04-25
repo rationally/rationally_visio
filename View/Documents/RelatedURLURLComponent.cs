@@ -19,12 +19,11 @@ namespace Rationally.Visio.View.Documents
         {
             RationallyType = "relatedUrlUrl";
             Name = "RelatedUrlUrl";
-            AddUserRow("index");
             Index = index;
 
-            AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "\"Add file\"", false);
-            AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "\"Add url\"", false);
-            AddAction("deleteRelatedDocument", "QUEUEMARKEREVENT(\"delete\")", "\"Delete document\"", false);
+            AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "Add file", false);
+            AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "Add url", false);
+            AddAction("deleteRelatedDocument", "QUEUEMARKEREVENT(\"delete\")", "Delete document", false);
 
             Width = 4.2;
             InitStyle();
@@ -37,28 +36,13 @@ namespace Rationally.Visio.View.Documents
         }
 
         public static bool IsRelatedUrlUrlComponent(string name) => UrlUrlRegex.IsMatch(name);
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-
-            if (Index == 0)
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.Documents.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        
 
         public override void Repaint()
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio does this for us
             {
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.Documents.Count - 1);
             }
             base.Repaint();
         }

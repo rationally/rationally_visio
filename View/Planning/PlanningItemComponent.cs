@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.Model;
@@ -9,13 +6,13 @@ using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Planning
 {
-    class PlanningItemComponent : HeaderlessContainer
+    internal class PlanningItemComponent : HeaderlessContainer
     {
-        private static readonly Regex regex = new Regex(@"PlanningItem(\.\d+)?$");
+        private static readonly Regex Regex = new Regex(@"PlanningItem(\.\d+)?$");
 
         public PlanningItemComponent(Page page, Shape planningItem) : base(page,false)
         {
-            RShape = planningItem;
+            Shape = planningItem;
             string name = null;
             bool? checkedBox = null;
             foreach (int shapeIdentifier in planningItem.ContainerProperties.GetMemberShapes((int) VisContainerFlags.visContainerFlagsExcludeNested))
@@ -62,10 +59,6 @@ namespace Rationally.Visio.View.Planning
             PlanningItemTextComponent itemContent = new PlanningItemTextComponent(page,index,item.ItemText);
             Children.Add(itemContent);
 
-            AddUserRow("rationallyType");
-            AddUserRow("Index");
-            AddUserRow("uniqueId");
-
             Name = "PlanningItem";
             RationallyType = "planningItem";
             Index = index;
@@ -78,8 +71,8 @@ namespace Rationally.Visio.View.Planning
             MsvSdContainerLocked = true;
 
             //Events
-            AddAction("addPlanningItem", "QUEUEMARKEREVENT(\"add\")", "\"Add item\"", false);
-            AddAction("deletePlanningItem", "QUEUEMARKEREVENT(\"delete\")", "\"Delete item\"", false);
+            AddAction("addPlanningItem", "QUEUEMARKEREVENT(\"add\")", "Add item", false);
+            AddAction("deletePlanningItem", "QUEUEMARKEREVENT(\"delete\")", "Delete item", false);
 
             InitStyle();
         }
@@ -89,7 +82,7 @@ namespace Rationally.Visio.View.Planning
             MarginTop = Index == 0 ? 0.3 : 0.0;
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                Shape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
             UsedSizingPolicy = SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkYIfNeeded;
@@ -100,7 +93,7 @@ namespace Rationally.Visio.View.Planning
         public override void AddToTree(Shape s, bool allowAddInChildren)
         {
             //make s into an rcomponent for access to wrapper
-            RationallyComponent shapeComponent = new RationallyComponent(Page) { RShape = s };
+            VisioShape shapeComponent = new VisioShape(Page) { Shape = s };
 
             if (CheckBoxComponent.IsCheckBoxComponent(s.Name))
             {
@@ -159,29 +152,14 @@ namespace Rationally.Visio.View.Planning
         }
 
 
-        public static bool IsPlanningItem(string name) => regex.IsMatch(name);
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-
-            if (Index == 0) //Top shape can't move up
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.PlanningItems.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        public static bool IsPlanningItem(string name) => Regex.IsMatch(name);
+        
 
         public override void Repaint()
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio takes care of this
             {
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.PlanningItems.Count - 1);
             }
             base.Repaint();
         }

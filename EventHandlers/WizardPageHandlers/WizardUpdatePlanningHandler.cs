@@ -1,15 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using log4net;
 using Rationally.Visio.Forms;
 using Rationally.Visio.Forms.WizardComponents;
-using Rationally.Visio.Model;
-using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.EventHandlers.WizardPageHandlers
 {
-    class WizardUpdatePlanningHandler
+    internal class WizardUpdatePlanningHandler
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public static void Execute(ProjectSetupWizard wizard)

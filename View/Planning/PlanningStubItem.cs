@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Office.Interop.Visio;
+﻿using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Planning
 {
-    internal sealed class PlanningStubItem : RationallyComponent
+    internal sealed class PlanningStubItem : VisioShape
     {
         public override int Index
         {

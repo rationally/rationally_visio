@@ -11,7 +11,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(RationallyView view, Shape changedShape)
         {
-            RationallyComponent alternativeTitleComponent = new RationallyComponent(view.Page) {RShape = changedShape};
+            VisioShape alternativeTitleComponent = new VisioShape(view.Page) {Shape = changedShape};
 
             if (Globals.RationallyAddIn.Model.Alternatives.Count <= alternativeTitleComponent.Index) { return;}
 

@@ -15,7 +15,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
         public void Execute(Shape s, string identifier)
         {
             RationallyModel model = Globals.RationallyAddIn.Model;
-            RationallyComponent component = new RationallyComponent(Globals.RationallyAddIn.Application.ActivePage) { RShape = s };
+            VisioShape component = new VisioShape(Globals.RationallyAddIn.Application.ActivePage) { Shape = s };
 
             int index = component.Index;
             Stakeholder stakeholder = model.Stakeholders[index];
@@ -35,7 +35,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                     //trace the correct stakeholder container
                     StakeholderContainer stakeholderContainer = (StakeholderContainer)stakeholdersContainer.Children.First(c => c is StakeholderContainer && (component.Index == c.Index));
 
-                    shapeToPass = stakeholderContainer.RShape;
+                    shapeToPass = stakeholderContainer.Shape;
                 }
                 //initiate a delete handler with the container's shape
                 shapeToPass.Delete();

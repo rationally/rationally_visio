@@ -7,7 +7,7 @@ using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Forces
 {
-    internal class ForceAlternativeHeaderComponent : RationallyComponent
+    internal class ForceAlternativeHeaderComponent : VisioShape
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex ForceAlternativeHeaderComponentRegex = new Regex(@"ForceAlternativeHeaderComponent(\.\d+)?$");
@@ -16,7 +16,7 @@ namespace Rationally.Visio.View.Forces
         {
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
-            RShape = page.Drop(rectMaster, 0, 0);
+            Shape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
 
             AddUserRow("alternativeUniqueId");
@@ -24,8 +24,7 @@ namespace Rationally.Visio.View.Forces
 
             AddUserRow("alternativeIdentifier");
             AlternativeIdentifierString = "";
-
-            AddUserRow("rationallyType");
+            
             RationallyType = "forceAlternativeHeaderComponent";
             Name = "ForceAlternativeHeaderComponent";
             InitStyle();
@@ -51,7 +50,7 @@ namespace Rationally.Visio.View.Forces
 
         public ForceAlternativeHeaderComponent(Page page, Shape shape) : base(page)
         {
-            RShape = shape;
+            Shape = shape;
         }
 
         public static bool IsForceAlternativeHeaderComponent(string name) => ForceAlternativeHeaderComponentRegex.IsMatch(name);

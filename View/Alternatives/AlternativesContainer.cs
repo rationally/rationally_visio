@@ -18,12 +18,12 @@ namespace Rationally.Visio.View.Alternatives
         
         public AlternativesContainer(Page page, Shape alternativesContainer) : base(page)
         {
-            RShape = alternativesContainer;
+            Shape = alternativesContainer;
             Array ident = alternativesContainer.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
-            foreach (Shape shape in shapes.Where(shape => AlternativeContainer.IsAlternativeContainer(shape.Name)))
+            foreach (Shape shape in shapes.Where(shape => AlternativeShape.IsAlternativeContainer(shape.Name)))
             {
-                Children.Add(new AlternativeContainer(page, shape));
+                Children.Add(new AlternativeShape(page, shape));
             }
             Children = Children.OrderBy(c => c.Index).ToList();
             LayoutManager = new VerticalStretchLayout(this);
@@ -35,20 +35,20 @@ namespace Rationally.Visio.View.Alternatives
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             //make s into an rcomponent for access to wrapper
-            RationallyComponent shapeComponent = new RationallyComponent(Page) {RShape = s};
+            VisioShape shapeComponent = new VisioShape(Page) {Shape = s};
 
-            if (AlternativeContainer.IsAlternativeContainer(s.Name))
+            if (AlternativeShape.IsAlternativeContainer(s.Name))
             {
                 if (Children.All(c => c.Index != shapeComponent.Index)) //there is no forcecontainer stub with this index
                 {
-                    Children.Add(new AlternativeContainer(Page, s));
+                    Children.Add(new AlternativeShape(Page, s));
                 }
                 else
                 {
                     //remove stub, insert s as new containers
                     AlternativeStubContainer stub = (AlternativeStubContainer) Children.First(c => c.Index == shapeComponent.Index);
                     Children.Remove(stub);
-                    AlternativeContainer con = new AlternativeContainer(Page, s);
+                    AlternativeShape con = new AlternativeShape(Page, s);
                     if (Children.Count < con.Index)
                     {
                         Children.Add(con);
@@ -62,7 +62,7 @@ namespace Rationally.Visio.View.Alternatives
             }
             else
             {
-                bool isAlternativeChild = AlternativeStateComponent.IsAlternativeState(s.Name) || AlternativeIdentifierComponent.IsAlternativeIdentifier(s.Name) || AlternativeTitleComponent.IsAlternativeTitle(s.Name) || AlternativeDescriptionComponent.IsAlternativeDescription(s.Name);
+                bool isAlternativeChild = AlternativeStateShape.IsAlternativeState(s.Name) || AlternativeIdentifierShape.IsAlternativeIdentifier(s.Name) || AlternativeTitleComponent.IsAlternativeTitle(s.Name) || AlternativeDescriptionShape.IsAlternativeDescription(s.Name);
 
                 if (isAlternativeChild && Children.All(c => c.Index != shapeComponent.Index)) //if parent not exists
                 {
@@ -101,7 +101,7 @@ namespace Rationally.Visio.View.Alternatives
             newAlternative.GenerateIdentifier(Globals.RationallyAddIn.Model.Alternatives.Count);
             Log.Debug("Identifier generated");
             Globals.RationallyAddIn.Model.Alternatives.Add(newAlternative);
-            Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Alternatives.Count - 1, newAlternative));
+            Children.Add(new AlternativeShape(Globals.RationallyAddIn.Application.ActivePage, Globals.RationallyAddIn.Model.Alternatives.Count - 1, newAlternative));
             RepaintHandler.Repaint();
             pleaseWait.Hide();
         }
@@ -109,7 +109,7 @@ namespace Rationally.Visio.View.Alternatives
         public override void Repaint()
         {
             //remove alternatives that are no longer in the model, but still in the view
-            List<RationallyComponent> toDelete = Children.Where(alternative => !Globals.RationallyAddIn.Model.Alternatives.Select(alt => alt.Id).Contains(alternative.Id)).ToList();
+            List<VisioShape> toDelete = Children.Where(alternative => !Globals.RationallyAddIn.Model.Alternatives.Select(alt => alt.Id).Contains(alternative.Id)).ToList();
 
 
             if (Globals.RationallyAddIn.Model.Alternatives.Count > Children.Count)
@@ -117,12 +117,12 @@ namespace Rationally.Visio.View.Alternatives
                 Globals.RationallyAddIn.Model.Alternatives
                     .Where(alt => Children.Count == 0 || Children.All(c => c.Id != alt.Id)).ToList()
                     .ForEach(alt => { alt.GenerateIdentifier(Children.Count);
-                        Children.Add(new AlternativeContainer(Globals.RationallyAddIn.Application.ActivePage, Children.Count, alt));
+                        Children.Add(new AlternativeShape(Globals.RationallyAddIn.Application.ActivePage, Children.Count, alt));
                     });
             }
 
 
-            toDelete.ForEach(alt => alt.RShape.Delete());
+            toDelete.ForEach(alt => alt.Shape.Delete());
             base.Repaint();
         }
     }

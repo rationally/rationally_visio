@@ -5,33 +5,31 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Documents
 {
-    internal sealed class RelatedFileComponent : RationallyComponent
+    internal sealed class RelatedFileComponent : VisioShape
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly Regex RelatedRegex = new Regex(@"RelatedFile(\.\d+)?$");
         public RelatedFileComponent(Page page, Shape fileShape) : base(page)
         {
-            RShape = fileShape;
+            Shape = fileShape;
             InitStyle();
         }
 
         public RelatedFileComponent(Page page, int index, string filePath) : base(page)
         {
-            RShape = page.InsertFromFile(filePath, (short)VisInsertObjArgs.visInsertLink | (short)VisInsertObjArgs.visInsertIcon);
+            Shape = page.InsertFromFile(filePath, (short)VisInsertObjArgs.visInsertLink | (short)VisInsertObjArgs.visInsertIcon);
             Name = "RelatedFile";
-            AddUserRow("rationallyType");
-            AddAction("editAction","QUEUEMARKEREVENT(\"edit\")","\"Choose other file\"", false);
+            AddAction("editAction","QUEUEMARKEREVENT(\"edit\")","Choose other file", false);
 
             AddUserRow("filePath");
             FilePath = filePath; //store the path of the file this shape is a link to, so it can be read during a tree rebuild
 
             RationallyType = "relatedFile";
-            AddUserRow("index");
             Index = index;
 
-            AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "\"Add file\"", false);
-            AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "\"Add url\"", false);
-            AddAction("deleteRelatedDocument", "QUEUEMARKEREVENT(\"delete\")", "\"Delete document\"", false);
+            AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "Add file", false);
+            AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "Add url", false);
+            AddAction("deleteRelatedDocument", "QUEUEMARKEREVENT(\"delete\")", "Delete document", false);
             
             InitStyle();
         }
@@ -46,28 +44,13 @@ namespace Rationally.Visio.View.Documents
         }
 
         internal static bool IsRelatedFileComponent(string name) => RelatedRegex.IsMatch(name);
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-
-            if (Index == 0)
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.Documents.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        
 
         public override void Repaint()
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
             {
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.Documents.Count - 1);
             }
             base.Repaint();
         }

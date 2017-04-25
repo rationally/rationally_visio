@@ -16,21 +16,18 @@ namespace Rationally.Visio.View.Forces
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public ForceContainer(Page page, int index, int forceId) : base(page)
         {
-            AddUserRow("index");
             Index = index;
-            AddUserRow("uniqueId");
             Id = forceId;
                 ForceConcernComponent concern = new ForceConcernComponent(page, index);
                 Children.Add(concern);
 
                 ForceDescriptionComponent description = new ForceDescriptionComponent(page, index);
                 Children.Add(description);
-            AddUserRow("rationallyType");
             RationallyType = "forceContainer";
             Name = "ForceContainer";
 
-            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
-            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
+            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "Add force", false);
+            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "Delete this force", false);
 
             MsvSdContainerLocked = true;
             Height = 0.33;
@@ -41,7 +38,7 @@ namespace Rationally.Visio.View.Forces
 
         public ForceContainer(Page page, Shape forceContainer) : base(page, false)
         {
-            RShape = forceContainer;
+            Shape = forceContainer;
             Array ident = forceContainer.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = new List<int>((int[])ident).Select(i => page.Shapes.ItemFromID[i]).ToList();
             string concern = null;
@@ -92,25 +89,10 @@ namespace Rationally.Visio.View.Forces
             UsedSizingPolicy |= SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkYIfNeeded;
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                Shape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
             LayoutManager = new InlineLayout(this);
-        }
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-            if (Index == 0)
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.Forces.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
         }
 
         [SuppressMessage("ReSharper", "SimplifyLinqExpression")]
@@ -118,7 +100,7 @@ namespace Rationally.Visio.View.Forces
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio does this for us
             {
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.Forces.Count - 1);
             }
             //foreach alternative in model { add a force value component, if it is not aleady there }
             List<Alternative> alternatives = Globals.RationallyAddIn.Model.Alternatives;
@@ -153,7 +135,7 @@ namespace Rationally.Visio.View.Forces
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
                 MsvSdContainerLocked = false;
-                toRemove.ForEach(c => c.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal));
+                toRemove.ForEach(c => c.Shape.DeleteEx((short)VisDeleteFlags.visDeleteNormal));
                 MsvSdContainerLocked = true;
             }
             base.Repaint();

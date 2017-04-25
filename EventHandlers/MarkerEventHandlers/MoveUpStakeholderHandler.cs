@@ -7,18 +7,18 @@ using Rationally.Visio.View.Stakeholders;
 
 namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
 {
-    class MoveUpStakeholderHandler : IMarkerEventHandler
+    internal class MoveUpStakeholderHandler : IMarkerEventHandler
     {
         public void Execute(Shape changedShape, string identifier)
         {
             RationallyModel model = Globals.RationallyAddIn.Model;
             //locate the stakeholder(component) to move
-            RationallyComponent toChangeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
+            VisioShape toChangeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
             int currentIndex = toChangeComponent.Index;
             //locate the stakeholder to swap with
             StakeholdersContainer stakeholdersContainer = (StakeholdersContainer)Globals.RationallyAddIn.View.Children.First(c => c is StakeholdersContainer);
-            StakeholderContainer toChange = (StakeholderContainer)stakeholdersContainer.Children.First(c => (int)c.RShape.CellsU[CellConstants.Index].ResultIU == currentIndex);
-            StakeholderContainer other = (StakeholderContainer)stakeholdersContainer.Children.First(c => (int)c.RShape.CellsU[CellConstants.Index].ResultIU == currentIndex - 1);
+            StakeholderContainer toChange = (StakeholderContainer)stakeholdersContainer.Children.First(c => (int)c.Shape.CellsU[CellConstants.Index].ResultIU == currentIndex);
+            StakeholderContainer other = (StakeholderContainer)stakeholdersContainer.Children.First(c => (int)c.Shape.CellsU[CellConstants.Index].ResultIU == currentIndex - 1);
 
             //swap
             Stakeholder one = model.Stakeholders[currentIndex];
@@ -30,7 +30,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             //same, for the other component
             other.SetStakeholderIndex(currentIndex);
             //swap the elements
-            RationallyComponent temp = stakeholdersContainer.Children[currentIndex];
+            VisioShape temp = stakeholdersContainer.Children[currentIndex];
             stakeholdersContainer.Children[currentIndex] = stakeholdersContainer.Children[currentIndex - 1];
             stakeholdersContainer.Children[currentIndex - 1] = temp;
 

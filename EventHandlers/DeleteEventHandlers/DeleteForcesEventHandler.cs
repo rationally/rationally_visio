@@ -14,7 +14,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
         public void Execute(RationallyModel model, Shape forcesContainer)
         {
             Log.Debug("Entered DeleteForcesEventHandler.");    
-            Globals.RationallyAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(forcesContainer));
+            Globals.RationallyAddIn.View.Children.RemoveAll(obj => obj.Shape.Equals(forcesContainer));
             if (!Globals.RationallyAddIn.View.Children.Any(x => x is ForcesContainer))
             {
                 model.Forces.Clear();

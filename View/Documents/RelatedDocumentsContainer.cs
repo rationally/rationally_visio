@@ -19,7 +19,7 @@ namespace Rationally.Visio.View.Documents
         
         public RelatedDocumentsContainer(Page page, Shape relatedDocumentsContainer) : base(page)
         {
-            RShape = relatedDocumentsContainer;
+            Shape = relatedDocumentsContainer;
             Array ident = relatedDocumentsContainer.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested);
             List<Shape> shapes = (new List<int>((int[])ident)).Select(i => page.Shapes.ItemFromID[i]).ToList();
             foreach (Shape shape in shapes.Where(shape => RelatedDocumentContainer.IsRelatedDocumentContainer(shape.Name)))
@@ -35,7 +35,7 @@ namespace Rationally.Visio.View.Documents
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             //make s into an rcomponent for access to wrapper
-            RationallyComponent shapeComponent = new RationallyComponent(Page) {RShape = s};
+            VisioShape shapeComponent = new VisioShape(Page) {Shape = s};
 
             if (RelatedDocumentContainer.IsRelatedDocumentContainer(s.Name))
             {
@@ -101,7 +101,7 @@ namespace Rationally.Visio.View.Documents
 
         public override void Repaint()
         {
-            List<RationallyComponent> toDelete = Children.Where(document => !Globals.RationallyAddIn.Model.Documents.Select(doc => doc.Id).Contains(document.Id)).ToList();
+            List<VisioShape> toDelete = Children.Where(document => !Globals.RationallyAddIn.Model.Documents.Select(doc => doc.Id).Contains(document.Id)).ToList();
             if (Globals.RationallyAddIn.Model.Documents.Count > Children.Count)
             {
                 Globals.RationallyAddIn.Model.Documents
@@ -110,7 +110,7 @@ namespace Rationally.Visio.View.Documents
                         Children.Add(new RelatedDocumentContainer(Globals.RationallyAddIn.Application.ActivePage, Children.Count, doc, doc.Id))
                     );
             }
-            toDelete.ForEach(doc => doc.RShape.Delete());
+            toDelete.ForEach(doc => doc.Shape.Delete());
             base.Repaint();
         }
     }

@@ -12,7 +12,7 @@ using Font = System.Drawing.Font;
 
 namespace Rationally.Visio.View
 {
-    public class TextLabel : RationallyComponent
+    public class TextLabel : VisioShape
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private short size = 12;
@@ -25,7 +25,7 @@ namespace Rationally.Visio.View
 
         protected TextLabel(Page page, Shape shape) : base(page)
         {
-            RShape = shape;
+            Shape = shape;
 
             size = Convert.ToInt16(shape.Cells["Char.Size"].Formula.Split(' ')[0]);
         }
@@ -43,19 +43,18 @@ namespace Rationally.Visio.View
             Log.Debug("Basic shapes document was opened successfully.");
             Master rectMaster = basicDocument.Masters["Rectangle"];
             Log.Debug("The rectangle master was extracted successfully from the document.");
-            RShape = page.Drop(rectMaster, 0,0);
+            Shape = page.Drop(rectMaster, 0,0);
             Log.Debug("The textlabel shape has been dropped on the sheet.");
             basicDocument.Close();
-            RShape.LineStyle = "Text Only";
+            Shape.LineStyle = "Text Only";
             Log.Debug("LineStyle property has been set (shapesheet assignment!)");
-            RShape.FillStyle = "Text Only";
-            RShape.Characters.Text = text;
-            RShape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = size;
-            RShape.CellsU["LinePattern"].ResultIU = 0;
-            RShape.Name = "TextLabel";
+            Shape.FillStyle = "Text Only";
+            Shape.Characters.Text = text;
+            Shape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = size;
+            Shape.CellsU["LinePattern"].ResultIU = 0;
+            Shape.Name = "TextLabel";
             Log.Debug("More shapesheet interactions were performed.");
             AddUserRow("order"); //allows sorting, even with same-type shapes
-            AddUserRow("rationallyType");
             Log.Debug("Textlabel user rows added.");
             BackgroundColor = "RGB(255,255,255)";
             Log.Debug("Set background color");
@@ -86,7 +85,7 @@ namespace Rationally.Visio.View
 
         public override void Repaint()
         {
-            string text = RShape.Text.Replace("\n","");
+            string text = Shape.Text.Replace("\n","");
             characterHeight = (1.0 / 72.0) * (double)size;
             
             contentTextWidth = GetWidthOfString(text) + (8*Constants.WidthOfOnePoint);// / PixelsPerInch;
@@ -111,11 +110,11 @@ namespace Rationally.Visio.View
                     }
                     //add the last piece of the string
                     newContent += text.Substring((text.Length/lineLength)*lineLength);//integer devision
-                    if ((RShape.Characters.Text != newContent) && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
+                    if ((Shape.Characters.Text != newContent) && !Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                     {
                         bool oldLock = LockTextEdit;
                         LockTextEdit = false;
-                        RShape.Characters.Text = newContent;
+                        Shape.Characters.Text = newContent;
                         LockTextEdit = oldLock;
                     }
                 }

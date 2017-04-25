@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
-using Rationally.Visio.Model;
 using Rationally.Visio.RationallyConstants;
 using Rationally.Visio.View.Alternatives;
 
 namespace Rationally.Visio.Forms.AlternativeStateConfiguration
 {
-    class TableLayoutAlternativeStates : TableLayoutPanel
+    internal class TableLayoutAlternativeStates : TableLayoutPanel
     {
         public List<FlowLayoutAlternativeState> StateRows = new List<FlowLayoutAlternativeState>();
 
@@ -72,12 +72,13 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
                     resx.AddResource("Root", "");
                     for (int i = 0; i < StateRows.Count; i++)
                     {
-                        resx.AddResource("alternativeState" + i, new AlternativeState {Color = StateRows[i].Color, State = StateRows[i].NewState});
+                        AlternativeState newAlternativeState;
+                        Enum.TryParse(StateRows[i].NewState, out newAlternativeState);
+                        resx.AddResource("alternativeState" + i, newAlternativeState);
                     }
                 }
                 //write current states to model
-                Globals.RationallyAddIn.Model.ResetAlternativeStateColors();
-                StateRows.ForEach(stateRow => Globals.RationallyAddIn.Model.AlternativeStateColors.Add(stateRow.NewState, stateRow.Color));
+                //StateRows.ForEach(stateRow => Globals.RationallyAddIn.Model.AlternativeStateColors.Add(stateRow.NewState, stateRow.Color)); //NoLongerSupported
 
 
                 //locate renamed alternative states
@@ -90,17 +91,17 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
 
 
                 //update non-existent alternative states to the default state
-                Globals.RationallyAddIn.Model.Alternatives
+                /*Globals.RationallyAddIn.Model.Alternatives
                     .Where(alternative => !Globals.RationallyAddIn.Model.AlternativeStateColors.ContainsKey(alternative.Status)).ToList()
-                    .ForEach(alternative => alternative.Status = Globals.RationallyAddIn.Model.AlternativeStateColors.Keys.First());
+                    .ForEach(alternative => alternative.Status = Globals.RationallyAddIn.Model.AlternativeStateColors.Keys.First());*/
 
 
                 //repaint all currently present alternative state components
                 AlternativesContainer alternativesContainer = (AlternativesContainer) Globals.RationallyAddIn.View.Children.FirstOrDefault(c => c is AlternativesContainer);
                 //map all alternatives to their state component shape
-                IEnumerable<AlternativeStateComponent> toUpdate = alternativesContainer?.Children
-                    .Select(alt => ((AlternativeContainer) alt).Children.First(c => c is AlternativeStateComponent))
-                    .Cast<AlternativeStateComponent>();
+                IEnumerable<AlternativeStateShape> toUpdate = alternativesContainer?.Children
+                    .Select(alt => ((AlternativeShape) alt).Children.First(c => c is AlternativeStateShape))
+                    .Cast<AlternativeStateShape>();
                 toUpdate?.ToList().ForEach(stateComp => stateComp.Repaint());
             }
             else
@@ -120,9 +121,11 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
                 {
                     resx.AddResource("Root", "");
                     int i = 0;
-                    foreach (KeyValuePair<string, Color> kvp in Globals.RationallyAddIn.Model.DefaultStates)
+                    foreach (string state in Enum.GetNames(typeof(AlternativeState)))
                     {
-                        resx.AddResource("alternativeState" + i, new AlternativeState { Color = kvp.Value, State = kvp.Key });
+                        AlternativeState newAlternativeState;
+                        Enum.TryParse(state, out newAlternativeState);
+                        resx.AddResource("alternativeState" + i, newAlternativeState);
                         i++;
                     }
                 }
@@ -130,7 +133,7 @@ namespace Rationally.Visio.Forms.AlternativeStateConfiguration
             }
 
             StateRows = new List<FlowLayoutAlternativeState>();
-            Globals.RationallyAddIn.Model.AlternativeStateColorsFromFile.Select(indexedAlternative => (AlternativeState)indexedAlternative.Value).ToList().ForEach(stateColor => StateRows.Add(new FlowLayoutAlternativeState(stateColor, StateRows.Count)));
+            Globals.RationallyAddIn.Model.AlternativeStateColorsFromFile.Select(rawState => (AlternativeState)rawState.Value).ToList().ToList().ForEach(stateColor => StateRows.Add(new FlowLayoutAlternativeState(stateColor, StateRows.Count)));
 
         }
 

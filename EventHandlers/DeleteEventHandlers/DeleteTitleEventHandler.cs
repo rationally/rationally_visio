@@ -12,7 +12,7 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
         public void Execute(RationallyModel model, Shape changedShape)
         {
             Log.Debug("Deleting title label.");
-            Globals.RationallyAddIn.View.Children.RemoveAll(obj => obj.RShape.Equals(changedShape));
+            Globals.RationallyAddIn.View.Children.RemoveAll(obj => obj.Shape.Equals(changedShape));
         }
     }
 }

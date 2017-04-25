@@ -14,9 +14,9 @@ namespace Rationally.Visio.View
             Document containerDocument = application.Documents.OpenEx(application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers, VisMeasurementSystem.visMSUS), (short)VisOpenSaveArgs.visOpenHidden);
             Master containerMaster = containerDocument.Masters["Plain"];
 
-            RShape = Page.DropContainer(containerMaster, null);
+            Shape = Page.DropContainer(containerMaster, null);
 
-            RShape.CellsU["User.msvSDHeadingStyle"].ResultIU = 0; //Remove visible header
+            Shape.CellsU["User.msvSDHeadingStyle"].ResultIU = 0; //Remove visible header
             containerDocument.Close();
         }
 

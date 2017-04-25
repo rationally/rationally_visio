@@ -23,11 +23,11 @@ namespace Rationally.Visio.View
         /// <param name="x">top left x-coordinate to start drawing the component.</param>
         /// <param name="y">top left y-coordinate to start drawing the component.</param>
         /// <param name="components">Queue of components to draw.</param>
-        private void Draw(double x, double y, Queue<RationallyComponent> components)
+        private void Draw(double x, double y, Queue<VisioShape> components)
         {
             while (components.Count > 0)
             {
-                RationallyComponent toDraw = components.Dequeue();
+                VisioShape toDraw = components.Dequeue();
                 double totalWidthToDraw = toDraw.MarginLeft + toDraw.Width + toDraw.MarginRight;
                 double totalHeightToDraw = toDraw.MarginTop + toDraw.Height + toDraw.MarginBottom;
 
@@ -45,9 +45,9 @@ namespace Rationally.Visio.View
 
                 if (toDraw is RationallyContainer)
                 {
-                    foreach (RationallyComponent c in ((RationallyContainer) toDraw).Children)
+                    foreach (VisioShape c in ((RationallyContainer) toDraw).Children)
                     {
-                        if (c.RShape.ContainerProperties != null)
+                        if (c.Shape.ContainerProperties != null)
                         {
                             //moving children will disband the composite pattern between the shapes => remember children and later rebuild the pattern
                             c.StoreChildren();
@@ -56,7 +56,7 @@ namespace Rationally.Visio.View
                         c.CenterX += deltaX;
                         c.CenterY += deltaY;
 
-                        if (c.RShape.ContainerProperties != null)
+                        if (c.Shape.ContainerProperties != null)
                         {
                             c.RestoreChildren();
                         }
@@ -81,7 +81,7 @@ namespace Rationally.Visio.View
             if (toManage.Children.Count == 0) { return; }
             
             //draw (left top of content area) (children)
-            Draw(toManage.CenterX - (toManage.Width/2.0),toManage.CenterY + (toManage.Height/2.0),new Queue<RationallyComponent>(toManage.Children));
+            Draw(toManage.CenterX - (toManage.Width/2.0),toManage.CenterY + (toManage.Height/2.0),new Queue<VisioShape>(toManage.Children));
             toManage.Children.ForEach(c => c.Repaint());
         }
 
@@ -126,7 +126,7 @@ namespace Rationally.Visio.View
         /// </summary>
         /// <param name="component"></param>
         /// <param name="containerWidth"></param>
-        private static void StretchComponentIfNeeded(RationallyComponent component, double containerWidth)
+        private static void StretchComponentIfNeeded(VisioShape component, double containerWidth)
         {
             double marginIncludedWidth = component.MarginLeft + component.Width + component.MarginRight;
             if (marginIncludedWidth < containerWidth)

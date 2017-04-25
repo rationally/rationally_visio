@@ -116,4 +116,28 @@
   <data name="Wizard_Label_UpdateView" xml:space="preserve">
     <value>rationally - Update Decision View</value>
   </data>
+  <data name="AlternativeState_Accepted" xml:space="preserve">
+    <value>Accepted</value>
+  </data>
+  <data name="AlternativeState_Rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="AlternativeState_Challenged" xml:space="preserve">
+    <value>Challenged</value>
+  </data>
+  <data name="AlternativeState_Discarded" xml:space="preserve">
+    <value>Discarded</value>
+  </data>
+  <data name="AlternativeState_Proposed" xml:space="preserve">
+    <value>Proposed</value>
+  </data>
+  <data name="Menu_SetState" xml:space="preserve">
+    <value>Set State</value>
+  </data>
+  <data name="Menu_AddAlternative" xml:space="preserve">
+    <value>Add alternative</value>
+  </data>
+  <data name="Menu_DeleteAlternative" xml:space="preserve">
+    <value>Delete this alternative</value>
+  </data>
 </root>

@@ -16,7 +16,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             RationallyModel model = Globals.RationallyAddIn.Model;
             ForcesContainer forcesContainer = (ForcesContainer)Globals.RationallyAddIn.View.Children.First(c => c is ForcesContainer);
 
-            RationallyComponent currentComponent = new RationallyComponent(changedShape.ContainingPage) {RShape = changedShape};
+            VisioShape currentComponent = new VisioShape(changedShape.ContainingPage) {Shape = changedShape};
             int currentForceIndex = currentComponent.Index;
             int currentChildIndex = currentForceIndex + 1;
 
@@ -36,7 +36,7 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             toSwapWith.Children.ForEach(c => c.Index = currentForceIndex);
             toSwapWith.Index = currentForceIndex;
 
-            RationallyComponent temp = forcesContainer.Children[currentChildIndex];
+            VisioShape temp = forcesContainer.Children[currentChildIndex];
             forcesContainer.Children[currentChildIndex] = forcesContainer.Children[currentChildIndex + 1];
             forcesContainer.Children[currentChildIndex + 1] = temp;
 

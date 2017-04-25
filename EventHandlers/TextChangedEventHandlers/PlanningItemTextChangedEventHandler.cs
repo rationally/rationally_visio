@@ -6,13 +6,13 @@ using Rationally.Visio.View;
 
 namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
-    class PlanningTextChangedEventHandler : ITextChangedEventHandler
+    internal class PlanningTextChangedEventHandler : ITextChangedEventHandler
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public void Execute(RationallyView view, Shape changedShape)
         {
-            RationallyComponent planningItemTextComponent = new RationallyComponent(view.Page) { RShape = changedShape };
+            VisioShape planningItemTextComponent = new VisioShape(view.Page) { Shape = changedShape };
 
             if (Globals.RationallyAddIn.Model.PlanningItems.Count <= planningItemTextComponent.Index) { return; }
 

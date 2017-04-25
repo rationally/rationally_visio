@@ -212,12 +212,11 @@
     <Compile Include="Forms\WizardComponents\TableLayoutMainContentStakeholders.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Messages.Designer.cs">
+    <Compile Include="Messages1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Model\AlternativeState.cs" />
     <Compile Include="Model\PlanningItem.cs" />
     <Compile Include="Model\Stakeholder.cs" />
     <Compile Include="RationallyConstants\CellConstants.cs" />
@@ -231,6 +230,7 @@
     <Compile Include="EventHandlers\TextChangedEventHandlers\InformationDateTextChangedHandler.cs" />
     <Compile Include="EventHandlers\TextChangedEventHandlers\InformationVersionTextChangedHandler.cs" />
     <Compile Include="RationallyConstants\WizardConstants.cs" />
+    <Compile Include="RationallyException.cs" />
     <Compile Include="Ribbon\RationallyRibbon.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -240,6 +240,8 @@
     <Compile Include="View\CheckBoxComponent.cs" />
     <Compile Include="View\CheckBoxStateComponent.cs" />
     <Compile Include="View\CheckBoxStubComponent.cs" />
+    <Compile Include="View\ContextMenu\ContextMenuEventHandler.cs" />
+    <Compile Include="View\ContextMenu\ContextMenuItem.cs" />
     <Compile Include="View\Information\AuthorLabel.cs" />
     <Compile Include="View\Information\DateLabel.cs" />
     <Compile Include="View\Information\TitleLabel.cs" />
@@ -313,14 +315,13 @@
     <Compile Include="Forms\UrlSelector.Designer.cs">
       <DependentUpon>UrlSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Alternatives\AlternativeContainer.cs" />
-    <Compile Include="View\Alternatives\AlternativeDescriptionComponent.cs" />
-    <Compile Include="View\Alternatives\AlternativeIdentifierComponent.cs" />
+    <Compile Include="View\Alternatives\AlternativeShape.cs" />
+    <Compile Include="View\Alternatives\AlternativeDescriptionShape.cs" />
+    <Compile Include="View\Alternatives\AlternativeIdentifierShape.cs" />
     <Compile Include="View\Alternatives\AlternativesContainer.cs" />
-    <Compile Include="View\Alternatives\AlternativeStateComponent.cs" />
+    <Compile Include="View\Alternatives\AlternativeStateShape.cs" />
     <Compile Include="View\Alternatives\AlternativeStubContainer.cs" />
     <Compile Include="View\Alternatives\AlternativeTitleComponent.cs" />
-    <Compile Include="View\Alternatives\IAlternativeComponent.cs" />
     <Compile Include="View\Documents\RelatedDocumentContainer.cs" />
     <Compile Include="View\Documents\RelatedDocumentStubContainer.cs" />
     <Compile Include="View\Documents\RelatedDocumentTitleComponent.cs" />
@@ -346,7 +347,7 @@
     <Compile Include="View\Planning\PlanningItemComponent.cs" />
     <Compile Include="View\Planning\PlanningItemTextComponent.cs" />
     <Compile Include="View\Planning\PlanningStubItem.cs" />
-    <Compile Include="View\RationallyComponent.cs" />
+    <Compile Include="View\VisioShape.cs" />
     <Compile Include="View\RationallyContainer.cs" />
     <Compile Include="View\Documents\RelatedDocumentsContainer.cs" />
     <Compile Include="View\RationallyView.cs" />
@@ -371,6 +372,11 @@
     </Compile>
     <Compile Include="Forms\WizardComponents\TableLayoutMainContentGeneral.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="VisioFormulas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VisioFormulas.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -416,6 +422,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\RationallyRibbon.resx">
       <DependentUpon>RationallyRibbon.cs</DependentUpon>
@@ -441,6 +449,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UrlSelector.resx">
       <DependentUpon>UrlSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisioFormulas.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>VisioFormulas.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

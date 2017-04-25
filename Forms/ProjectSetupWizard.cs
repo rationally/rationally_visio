@@ -103,7 +103,7 @@ namespace Rationally.Visio.Forms
                 Globals.RationallyAddIn.Model = ModelCopy;
                 Log.Debug("Replaced model by copy");
                 Log.Debug("DocumentCreation: " + DocumentCreation);
-                Log.Debug("CurrentPanel:" + CurrentPanel.ToString());
+                Log.Debug("CurrentPanel:" + CurrentPanel);
                 if (DocumentCreation)
                 {
                     //draw the header

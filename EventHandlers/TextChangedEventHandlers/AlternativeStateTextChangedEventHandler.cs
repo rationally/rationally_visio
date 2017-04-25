@@ -11,7 +11,7 @@ namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public void Execute(RationallyView view, Shape changedShape)
         {
-            AlternativeStateComponent alternativeState = (AlternativeStateComponent)view.GetComponentByShape(changedShape);
+            AlternativeStateShape alternativeState = (AlternativeStateShape)view.GetComponentByShape(changedShape);
             if (alternativeState == null) { return;}
 
             int index = alternativeState.Index;

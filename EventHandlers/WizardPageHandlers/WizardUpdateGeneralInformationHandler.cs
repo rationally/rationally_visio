@@ -1,10 +1,7 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using log4net;
 using Rationally.Visio.Forms;
 using Rationally.Visio.Model;
-using Rationally.Visio.View;
-using Rationally.Visio.View.Information;
 
 namespace Rationally.Visio.EventHandlers.WizardPageHandlers
 {

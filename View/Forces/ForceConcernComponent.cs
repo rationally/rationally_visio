@@ -5,7 +5,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View.Forces
 {
-    internal sealed class ForceConcernComponent : RationallyComponent
+    internal sealed class ForceConcernComponent : VisioShape
     {
         private static readonly Regex ForceConcernRegex = new Regex(@"ForceConcern(\.\d+)?$");
         public const string DefaultConcern = "<<concern>>";
@@ -16,25 +16,23 @@ namespace Rationally.Visio.View.Forces
             
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
-            RShape = page.Drop(rectMaster, 0, 0);
+            Shape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
-
-            AddUserRow("rationallyType");
+            
             RationallyType = "forceConcern";
             Name = "ForceConcern";
-
-            AddUserRow("index");
-            Index = index;
             
-            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
-            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
+            Index = index;
+
+            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "Add force", false);
+            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "Delete this force", false);
             
             InitStyle();
         }
 
         public ForceConcernComponent(Page page, Shape shape) : base(page)
         {
-            RShape = shape;
+            Shape = shape;
         }
 
         private void InitStyle()
@@ -48,27 +46,13 @@ namespace Rationally.Visio.View.Forces
         }
 
         public static bool IsForceConcern(string name) => ForceConcernRegex.IsMatch(name);
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-            if (Index == 0)
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.Forces.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        
 
         public override void Repaint()
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing) //Visio does this for us
             {
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.Forces.Count - 1);
                 if (Text != Globals.RationallyAddIn.Model.Forces[Index].Concern)
                 {
                     Text = Globals.RationallyAddIn.Model.Forces[Index].Concern;

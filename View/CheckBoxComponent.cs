@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Visio;
 
 namespace Rationally.Visio.View
 {
-    class CheckBoxComponent : RationallyContainer
+    internal class CheckBoxComponent : RationallyContainer
     {
-        public static double CHECKBOX_SIZE = 0.4;
-        private static readonly Regex regex = new Regex(@"CheckBoxComponent(\.\d+)?$");
+        public static readonly double CheckboxSize = 0.4;
+        private static readonly Regex Regex = new Regex(@"CheckBoxComponent(\.\d+)?$");
 
         public CheckBoxComponent(Page page, int index, bool isFinished) : base(page)
         {
@@ -19,27 +16,25 @@ namespace Rationally.Visio.View
             Document containerDocument = application.Documents.OpenEx(application.GetBuiltInStencilFile(VisBuiltInStencilTypes.visBuiltInStencilContainers, VisMeasurementSystem.visMSUS), (short)VisOpenSaveArgs.visOpenHidden);
             Master containerMaster = containerDocument.Masters["Plain"];
 
-            RShape = Page.DropContainer(containerMaster, null);
+            Shape = Page.DropContainer(containerMaster, null);
 
-            RShape.CellsU["User.msvSDHeadingStyle"].ResultIU = 0; //Remove visible header
+            Shape.CellsU["User.msvSDHeadingStyle"].ResultIU = 0; //Remove visible header
             containerDocument.Close();
 
             //create a slightly smaller rectangle shape, whose background indicates the state of the checkbox
             Children.Add(new CheckBoxStateComponent(page, index, isFinished));
-
-            AddUserRow("rationallyType");
-            AddUserRow("Index");
+            
             RationallyType = "checkBoxComponent";
             Name = "CheckBoxComponent";
             Index = index;
-            Width = CHECKBOX_SIZE;
-            Height = CHECKBOX_SIZE;
+            Width = CheckboxSize;
+            Height = CheckboxSize;
             InitStyle();
         }
 
         public CheckBoxComponent(Page page, Shape shape) : base(page)
         {
-            RShape = shape;
+            Shape = shape;
 
             foreach (int shapeIdentifier in shape.ContainerProperties.GetMemberShapes((int)VisContainerFlags.visContainerFlagsExcludeNested))
             {
@@ -57,7 +52,7 @@ namespace Rationally.Visio.View
         public override void AddToTree(Shape s, bool allowAddOfSubpart)
         {
             //make s into an rcomponent for access to wrapper
-            RationallyComponent shapeComponent = new RationallyComponent(Page) {RShape = s};
+            VisioShape shapeComponent = new VisioShape(Page) {Shape = s};
 
             if (CheckBoxStateComponent.IsCheckBoxStateComponent(shapeComponent.Name))
             {
@@ -70,15 +65,9 @@ namespace Rationally.Visio.View
 
         }
 
-        public void Check(bool isChecked)
-        {
-            ((CheckBoxStateComponent) Children.First()).Checked = isChecked;
-        }
+        public void Check(bool isChecked) => ((CheckBoxStateComponent) Children.First()).Checked = isChecked;
 
         public bool Checked => ((CheckBoxStateComponent)Children.First()).Checked;
-        public static bool IsCheckBoxComponent(string name)
-        {
-            return regex.IsMatch(name);
-        }
+        public static bool IsCheckBoxComponent(string name) => Regex.IsMatch(name);
     }
 }

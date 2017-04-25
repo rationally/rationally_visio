@@ -8,7 +8,7 @@ using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Forces
 {
-    internal sealed class ForceTotalComponent : RationallyComponent
+    internal sealed class ForceTotalComponent : VisioShape
     {
         private static readonly Regex ForceTotalComponentRegex = new Regex(@"ForceTotalComponent(\.\d+)?$");
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -16,19 +16,17 @@ namespace Rationally.Visio.View.Forces
         {
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
-            RShape = page.Drop(rectMaster, 0, 0);
+            Shape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
 
             AddUserRow("alternativeUniqueId");
             ForceAlternativeId = -2;
-
-            AddUserRow("index");
+            
             Index = -2;
 
             AddUserRow("alternativeIdentifier");
             AlternativeIdentifierString = "";
-
-            AddUserRow("rationallyType");
+            
             RationallyType = "forceTotalComponent";
             Name = "ForceTotalComponent";
             InitStyle();
@@ -52,7 +50,7 @@ namespace Rationally.Visio.View.Forces
 
         public ForceTotalComponent(Page page, Shape shape) : base(page)
         {
-            RShape = shape;
+            Shape = shape;
         }
 
         public static bool IsForceTotalComponent(string name) => ForceTotalComponentRegex.IsMatch(name);

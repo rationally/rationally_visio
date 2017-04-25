@@ -26,20 +26,20 @@ namespace Rationally.Visio.EventHandlers.DeleteEventHandlers
             }
 
             //trace alternative container in view tree
-            RationallyComponent alternativeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
+            VisioShape alternativeComponent = Globals.RationallyAddIn.View.GetComponentByShape(changedShape);
 
-            AlternativeContainer delete = alternativeComponent as AlternativeContainer;
+            AlternativeShape delete = alternativeComponent as AlternativeShape;
             if (delete != null)
             {
                 model.Forces.ForEach(force => force.ForceValueDictionary.Remove(delete.Id));
-                AlternativeContainer containerToDelete = delete;
+                AlternativeShape containerToDelete = delete;
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     Log.Debug("deleting children of the alternative to delete");
                     containerToDelete.Children.Where(c => !c.Deleted).ToList().ForEach(c =>
                     {
                         c.Deleted = true;
-                        c.RShape.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
+                        c.Shape.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
                     }); //schedule the missing delete events (children not selected during the manual delete)
                 }
                 AlternativesContainer alternativesContainer = (AlternativesContainer)Globals.RationallyAddIn.View.Children.First(c => c is AlternativesContainer);

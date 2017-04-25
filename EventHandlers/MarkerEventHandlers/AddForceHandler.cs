@@ -29,9 +29,9 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
                 }
                 else if (forcesContainer.Children.Any(c => c is ForceTotalsRow))
                 {
-                    RationallyComponent toMove = forcesContainer.Children.First(c => c is ForceTotalsRow);
+                    VisioShape toMove = forcesContainer.Children.First(c => c is ForceTotalsRow);
                     int toMoveIndex = forcesContainer.Children.IndexOf(toMove);
-                    RationallyComponent toSwapWith = forcesContainer.Children.Last();
+                    VisioShape toSwapWith = forcesContainer.Children.Last();
                     forcesContainer.Children[forcesContainer.Children.Count - 1] = toMove;
                     forcesContainer.Children[toMoveIndex] = toSwapWith;
                 }

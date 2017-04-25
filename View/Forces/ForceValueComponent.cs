@@ -7,7 +7,7 @@ using Rationally.Visio.Model;
 
 namespace Rationally.Visio.View.Forces
 {
-    internal sealed class ForceValueComponent : RationallyComponent
+    internal sealed class ForceValueComponent : VisioShape
     {
         private static readonly Regex ForceValueRegex = new Regex(@"ForceValue(\.\d+)?$");
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -16,23 +16,21 @@ namespace Rationally.Visio.View.Forces
         {
             Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
-            RShape = page.Drop(rectMaster, 0, 0);
+            Shape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();
 
             AddUserRow("alternativeUniqueId");
-
-            AddUserRow("index");
+            
             Index = index;
-
-            AddUserRow("rationallyType");
+            
             RationallyType = "forceValue";
             Name = "ForceValue";
 
             AddUserRow("alternativeIdentifier");
             AlternativeIdentifierString = altId;
 
-            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "\"Add force\"", false);
-            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "\"Delete this force\"", false);
+            AddAction("addForce", "QUEUEMARKEREVENT(\"add\")", "Add force", false);
+            AddAction("deleteForce", "QUEUEMARKEREVENT(\"delete\")", "Delete this force", false);
             ForceAlternativeId = forceAlternativeId;
             Globals.RationallyAddIn.Model.Forces.ForEach(force =>
             {
@@ -55,25 +53,11 @@ namespace Rationally.Visio.View.Forces
 
         public ForceValueComponent(Page page, Shape shape) : base(page)
         {
-            RShape = shape;
+            Shape = shape;
         }
 
         public static bool IsForceValue(string name) => ForceValueRegex.IsMatch(name);
-
-        private void UpdateReorderFunctions()
-        {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "\"Move up\"", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "\"Move down\"", false);
-            if (Index == 0)
-            {
-                DeleteAction("moveUp");
-            }
-
-            if (Index == Globals.RationallyAddIn.Model.Forces.Count - 1)
-            {
-                DeleteAction("moveDown");
-            }
-        }
+        
 
         private void UpdateAlternativeLabels()
         {
@@ -87,7 +71,7 @@ namespace Rationally.Visio.View.Forces
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)//Visio does this for us
             {
                 UpdateAlternativeLabels();
-                UpdateReorderFunctions();
+                UpdateReorderFunctions(Globals.RationallyAddIn.Model.Forces.Count - 1);
 
                 if (Text != Globals.RationallyAddIn.Model.Forces[Index].ForceValueDictionary[ForceAlternativeId])
                 {

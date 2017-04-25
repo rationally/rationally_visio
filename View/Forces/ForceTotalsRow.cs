@@ -18,7 +18,6 @@ namespace Rationally.Visio.View.Forces
 
         public ForceTotalsRow(Page page) : base(page)
         {
-            AddUserRow("rationallyType");
             RationallyType = "forceTotalsRow";
             Name = "ForceTotalsRow";
 
@@ -30,7 +29,7 @@ namespace Rationally.Visio.View.Forces
 
         public ForceTotalsRow(Page page, Shape forceTotalsShape) : base(page, false)
         {
-            RShape = forceTotalsShape;
+            Shape = forceTotalsShape;
             
             UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
             LayoutManager = new InlineLayout(this);
@@ -49,9 +48,9 @@ namespace Rationally.Visio.View.Forces
                     }
                     else if (shape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                     {
-                        RationallyComponent toAdd = new RationallyComponent(page)
+                        VisioShape toAdd = new VisioShape(page)
                         {
-                            RShape = shape
+                            Shape = shape
                         };
                         Children.Add(toAdd);
                     }
@@ -66,9 +65,9 @@ namespace Rationally.Visio.View.Forces
             Master rectMaster = basicDocument.Masters["Rectangle"];
 
             //dummy element for concern
-            RationallyComponent concernDummy = new RationallyComponent(page)
+            VisioShape concernDummy = new VisioShape(page)
             {
-                RShape = page.Drop(rectMaster, 0, 0),
+                Shape = page.Drop(rectMaster, 0, 0),
                 LinePattern = 0,
                 Width = 1,
                 Height = 0.33,
@@ -80,14 +79,13 @@ namespace Rationally.Visio.View.Forces
                 LockDelete = true
             };
             concernDummy.LinePattern = 1;
-            concernDummy.AddUserRow("rationallyType");
             concernDummy.RationallyType = "concernDummy";
             concernDummy.ToggleBoldFont(true);
             Children.Add(concernDummy);
 
-            RationallyComponent descDummy = new RationallyComponent(page)
+            VisioShape descDummy = new VisioShape(page)
             {
-                RShape = page.Drop(rectMaster, 0, 0),
+                Shape = page.Drop(rectMaster, 0, 0),
                 LinePattern = 0,
                 Width = 2,
                 Height = 0.33,
@@ -98,7 +96,6 @@ namespace Rationally.Visio.View.Forces
                 LockDelete = true
             };
             descDummy.LinePattern = 1;
-            descDummy.AddUserRow("rationallyType");
             descDummy.RationallyType = "descDummy";
             Children.Add(descDummy);
 
@@ -110,7 +107,7 @@ namespace Rationally.Visio.View.Forces
             MarginBottom = 0.4;
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                RShape.ContainerProperties.ResizeAsNeeded = 0;
+                Shape.ContainerProperties.ResizeAsNeeded = 0;
                 ContainerPadding = 0;
             }
             UsedSizingPolicy |= SizingPolicy.ShrinkYIfNeeded | SizingPolicy.ExpandXIfNeeded;
@@ -174,7 +171,7 @@ namespace Rationally.Visio.View.Forces
                 if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                 {
                     MsvSdContainerLocked = false;
-                    toRemove.ForEach(c => c.RShape.DeleteEx((short) VisDeleteFlags.visDeleteNormal));
+                    toRemove.ForEach(c => c.Shape.DeleteEx((short) VisDeleteFlags.visDeleteNormal));
                     MsvSdContainerLocked = true;
                 }
 

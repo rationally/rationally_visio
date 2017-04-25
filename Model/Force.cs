@@ -2,7 +2,6 @@
 using System.Reflection;
 using log4net;
 using Newtonsoft.Json;
-using Rationally.Visio.View.Forces;
 
 namespace Rationally.Visio.Model
 {

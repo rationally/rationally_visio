@@ -6,13 +6,13 @@ using Rationally.Visio.View;
 
 namespace Rationally.Visio.EventHandlers.TextChangedEventHandlers
 {
-    class StakeholderRoleTextChangedEventHandler : ITextChangedEventHandler
+    internal class StakeholderRoleTextChangedEventHandler : ITextChangedEventHandler
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public void Execute(RationallyView view, Shape changedShape)
         {
-            RationallyComponent stakeholderRoleComponent = new RationallyComponent(view.Page) { RShape = changedShape };
+            VisioShape stakeholderRoleComponent = new VisioShape(view.Page) { Shape = changedShape };
 
             if (Globals.RationallyAddIn.Model.Stakeholders.Count <= stakeholderRoleComponent.Index) { return; }
 

@@ -106,6 +106,15 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Basic Shapes.vss.
+        /// </summary>
+        internal static string BasicStencil {
+            get {
+                return ResourceManager.GetString("BasicStencil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ADD_ALTERNATIVE_MENU.
         /// </summary>
         internal static string EventId_AddAlternative {
@@ -174,6 +183,15 @@ namespace Rationally.Visio {
         internal static string HiddenStencil {
             get {
                 return ResourceManager.GetString("HiddenStencil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rectangle.
+        /// </summary>
+        internal static string Rectangle_ShapeMaster {
+            get {
+                return ResourceManager.GetString("Rectangle_ShapeMaster", resourceCulture);
             }
         }
         

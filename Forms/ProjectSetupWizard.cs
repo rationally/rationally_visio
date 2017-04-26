@@ -101,12 +101,12 @@ namespace Rationally.Visio.Forms
 
                 CurrentPanel.UpdateModel();
                 Globals.RationallyAddIn.Model = ModelCopy;
-                Log.Debug("Replaced model by copy");
-                Log.Debug("DocumentCreation: " + DocumentCreation);
-                Log.Debug("CurrentPanel:" + CurrentPanel);
+                Log.Debug("Replaced rationally model by wizard model copy");
+                Log.Debug($"Check if wizard creates a new document: {DocumentCreation}");
+               
                 if (DocumentCreation)
                 {
-                    //draw the header
+                    Log.Debug($"Create Decision View Header with title {ModelCopy.DecisionName} by {ModelCopy.Author}");
                     TitleLabel header = new TitleLabel(Globals.RationallyAddIn.Application.ActivePage, ModelCopy.DecisionName);
                     Log.Debug("TitleLabel has been created successfully.");
                     Globals.RationallyAddIn.View.Children.Add(header);

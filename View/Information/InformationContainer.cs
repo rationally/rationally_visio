@@ -19,14 +19,10 @@ namespace Rationally.Visio.View.Information
 
         public InformationContainer(Page page, string author, string date, string version) : base(page)
         {
-
-
-
-            Log.Debug("about to add rationally type row in shapesheet");
-            Log.Debug("rationally type row added");
+            Log.Debug($"Create InformationContainer @({author},{date},{version})");
             RationallyType = "informationBox";
             Shape.Name = "Information";
-
+                
             InitContent(page, author, date, version);
             InitStyle();
         }
@@ -90,6 +86,7 @@ namespace Rationally.Visio.View.Information
 
         private void InitContent(Page page, string author, string date, string version)
         {
+            Log.Debug("Started itialization of information container");
             PaddedTextLabel authorLabel = new PaddedTextLabel(page, "Author: ")
             {
                 BackgroundColor = "RGB(255,255,255)",
@@ -113,7 +110,7 @@ namespace Rationally.Visio.View.Information
                 EventDblClick = "QUEUEMARKEREVENT(\"openWizard\")"
             };
             //authorLabelContent.
-
+            Log.Debug("Created Author Label");
 
             PaddedTextLabel dateLabel = new PaddedTextLabel(page, "Date: ")
             {
@@ -139,6 +136,8 @@ namespace Rationally.Visio.View.Information
             };
             dateLabelContent.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
 
+            Log.Debug("Created Date Label");
+
             PaddedTextLabel versionLabel = new PaddedTextLabel(page, "Version: ")
             {
                 Height = 0.38,
@@ -163,12 +162,16 @@ namespace Rationally.Visio.View.Information
             };
             versionLabelContent.SetUsedSizingPolicy(SizingPolicy.ExpandXIfNeeded | SizingPolicy.ShrinkXIfNeeded);
 
+            Log.Debug("Created Version Label");
+
             Children.Add(authorLabel);
             Children.Add(authorLabelContent);
             Children.Add(dateLabel);
             Children.Add(dateLabelContent);
             Children.Add(versionLabel);
             Children.Add(versionLabelContent);
+
+            Log.Debug("Finished initialization of information container");
         }
 
         public override void AddToTree(Shape s, bool allowAddInChildren)

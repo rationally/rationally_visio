@@ -9,7 +9,7 @@ namespace Rationally.Visio.View.Documents
     internal sealed class RelatedUrlComponent : VisioShape
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static readonly Regex RelatedRegex = new Regex(@"RelatedUrl(\.\d+)?$");
+        private static readonly Regex RelatedRegex = new Regex($@"{ShapeNames.RelatedUrl}(\.\d+)?$");
         public RelatedUrlComponent(Page page, Shape urlShape) : base(page)
         {
             Shape = urlShape;
@@ -25,17 +25,17 @@ namespace Rationally.Visio.View.Documents
 
             Hyperlink link = Shape.AddHyperlink();
             link.Address = url;
-            EventDblClick = "HYPERLINK(Hyperlink.Row_1.Address)";
+            EventDblClick = VisioFormulas.Formula_OpenHyperlink;
 
             InitStyle();
 
-            Name = "RelatedUrl";
-            RationallyType = "relatedUrl";
+            Name = ShapeNames.RelatedUrl;
+            RationallyType = ShapeNames.TypeRelatedUrl;
             Index = index;
 
-            AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "Add file", false);
-            AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "Add url", false);
-            AddAction("deleteRelatedDocument", "QUEUEMARKEREVENT(\"delete\")", "Delete document", false);
+            AddAction("addRelatedFile", string.Format(VisioFormulas.Formula_QUEUMARKEREVENT, "addRelatedFile"), Messages.Menu_AddFile, false);
+            AddAction("addRelatedUrl", string.Format(VisioFormulas.Formula_QUEUMARKEREVENT, "addRelatedUrl"), Messages.Menu_AddUrl, false);
+            AddAction("deleteRelatedDocument", string.Format(VisioFormulas.Formula_QUEUMARKEREVENT, "delete"), Messages.Menu_DeleteDocument, false);
 
             rationallyDocument.Close();
         }

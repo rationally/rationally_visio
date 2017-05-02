@@ -213,4 +213,16 @@
   <data name="CannotDeleteForceHeaderFooter" xml:space="preserve">
     <value>Deleting the header or totals row is not allowed.</value>
   </data>
+  <data name="Menu_AddFile" xml:space="preserve">
+    <value>Add file</value>
+  </data>
+  <data name="Menu_AddUrl" xml:space="preserve">
+    <value>Add url</value>
+  </data>
+  <data name="Menu_DeleteDocument" xml:space="preserve">
+    <value>Delete document</value>
+  </data>
+  <data name="Menu_ChooseOtherFile" xml:space="preserve">
+    <value>Choose other file</value>
+  </data>
 </root>

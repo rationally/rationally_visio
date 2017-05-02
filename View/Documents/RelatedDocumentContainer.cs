@@ -14,7 +14,7 @@ namespace Rationally.Visio.View.Documents
     internal sealed class RelatedDocumentContainer : HeaderlessContainer
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static readonly Regex RelatedRegex = new Regex(@"Related Document(\.\d+)?$");
+        private static readonly Regex RelatedRegex = new Regex($@"{ShapeNames.RelatedDocument}(\.\d+)?$");
 
         public RelatedDocumentContainer(Page page, Shape containerShape) : base(page, false)
         {
@@ -94,14 +94,14 @@ namespace Rationally.Visio.View.Documents
                 RelatedURLURLComponent urlLabel = new RelatedURLURLComponent(page, index, document.Path);
                 Children.Add(urlLabel);
             }
-            RationallyType = "relatedDocumentContainer";
-            Name = "Related Document";
+            RationallyType = ShapeNames.TypeRelatedDocumentContainer;
+            Name = ShapeNames.RelatedDocument;
             Index = index;
             Id = docId;
 
-            AddAction("addRelatedFile", "QUEUEMARKEREVENT(\"addRelatedFile\")", "Add file", false);
-            AddAction("addRelatedUrl", "QUEUEMARKEREVENT(\"addRelatedUrl\")", "Add url", false);
-            AddAction("deleteRelatedDocument", "QUEUEMARKEREVENT(\"delete\")", "Delete document", false);
+            AddAction("addRelatedFile", string.Format(VisioFormulas.Formula_QUEUMARKEREVENT, "addRelatedFile"), Messages.Menu_AddFile, false);
+            AddAction("addRelatedUrl", string.Format(VisioFormulas.Formula_QUEUMARKEREVENT,"addRelatedUrl"), Messages.Menu_AddUrl, false);
+            AddAction("deleteRelatedDocument", string.Format(VisioFormulas.Formula_QUEUMARKEREVENT,"delete"), Messages.Menu_DeleteDocument, false);
 
             MsvSdContainerLocked = true;
             

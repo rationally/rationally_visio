@@ -133,11 +133,47 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add file.
+        /// </summary>
+        internal static string Menu_AddFile {
+            get {
+                return ResourceManager.GetString("Menu_AddFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add url.
+        /// </summary>
+        internal static string Menu_AddUrl {
+            get {
+                return ResourceManager.GetString("Menu_AddUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose other file.
+        /// </summary>
+        internal static string Menu_ChooseOtherFile {
+            get {
+                return ResourceManager.GetString("Menu_ChooseOtherFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete this alternative.
         /// </summary>
         internal static string Menu_DeleteAlternative {
             get {
                 return ResourceManager.GetString("Menu_DeleteAlternative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete document.
+        /// </summary>
+        internal static string Menu_DeleteDocument {
+            get {
+                return ResourceManager.GetString("Menu_DeleteDocument", resourceCulture);
             }
         }
         

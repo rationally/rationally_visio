@@ -421,6 +421,15 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HYPERLINK(Hyperlink.Row_1.Address).
+        /// </summary>
+        internal static string Formula_OpenHyperlink {
+            get {
+                return ResourceManager.GetString("Formula_OpenHyperlink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User.order.Value.
         /// </summary>
         internal static string Formula_Order {

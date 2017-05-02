@@ -136,9 +136,9 @@ namespace Rationally.Visio
             DeleteEventHandlerRegistry.Register(ShapeNames.TypeAlternative, new DeleteAlternativeEventHandler());
             DeleteEventHandlerRegistry.Register(ShapeNames.TypeAlternatives, new DeleteAlternativesEventHandler());
 
-            DeleteEventHandlerRegistry.Register("relatedUrlUrl", new DeletedRelatedUrlUrlEventHandler());
-            DeleteEventHandlerRegistry.Register("relatedDocumentContainer", new DeleteRelatedDocumentEventHandler());
-            DeleteEventHandlerRegistry.Register("relatedDocuments", new DeleteRelatedDocumentsEventHandler());
+            DeleteEventHandlerRegistry.Register(ShapeNames.TypeRelatedUrlUrl, new DeletedRelatedUrlUrlEventHandler());
+            DeleteEventHandlerRegistry.Register(ShapeNames.TypeRelatedDocumentContainer, new DeleteRelatedDocumentEventHandler());
+            DeleteEventHandlerRegistry.Register(ShapeNames.TypeRelatedDocuments, new DeleteRelatedDocumentsEventHandler());
 
             DeleteEventHandlerRegistry.Register("forces", new DeleteForcesEventHandler());
             DeleteEventHandlerRegistry.Register("forceContainer", new DeleteForceEventHandler());
@@ -174,11 +174,11 @@ namespace Rationally.Visio
             QueryDeleteEventHandlerRegistry.Register(ShapeNames.TypeAlternativeDescription, new QDAlternativeComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register(ShapeNames.TypeAlternative, new QDAlternativeContainerEventHander());
 
-            QueryDeleteEventHandlerRegistry.Register("relatedUrlUrl", new QDRelatedDocumentComponentEventHandler());
-            QueryDeleteEventHandlerRegistry.Register("relatedUrl", new QDRelatedDocumentComponentEventHandler());
-            QueryDeleteEventHandlerRegistry.Register("relatedFile", new QDRelatedDocumentComponentEventHandler());
-            QueryDeleteEventHandlerRegistry.Register("relatedDocumentTitle", new QDRelatedDocumentComponentEventHandler());
-            QueryDeleteEventHandlerRegistry.Register("relatedDocumentContainer", new QDRelatedDocumentContainerEventHandler());
+            QueryDeleteEventHandlerRegistry.Register(ShapeNames.TypeRelatedUrlUrl, new QDRelatedDocumentComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register(ShapeNames.TypeRelatedUrl, new QDRelatedDocumentComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register(ShapeNames.TypeRelatedFile, new QDRelatedDocumentComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register(ShapeNames.TypeRelatedDocumentTitle, new QDRelatedDocumentComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register(ShapeNames.TypeRelatedDocumentContainer, new QDRelatedDocumentContainerEventHandler());
 
             QueryDeleteEventHandlerRegistry.Register("stakeholderRole", new QDStakeholderComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("stakeholderName", new QDStakeholderComponentEventHandler());
@@ -194,35 +194,37 @@ namespace Rationally.Visio
         {
             MarkerEventHandlerRegistry.Register("alternatives.add", new AddAlternativeEventHandler());
 
-            MarkerEventHandlerRegistry.Register("relatedDocuments.addRelatedFile", new AddRelatedDocumentHandler());
-            MarkerEventHandlerRegistry.Register("relatedUrlUrl.addRelatedFile", new AddRelatedDocumentHandler());
-            MarkerEventHandlerRegistry.Register("relatedUrl.addRelatedFile", new AddRelatedDocumentHandler());
-            MarkerEventHandlerRegistry.Register("relatedFile.addRelatedFile", new AddRelatedDocumentHandler());
-            MarkerEventHandlerRegistry.Register("relatedDocumentTitle.addRelatedFile", new AddRelatedDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedDocuments}.addRelatedFile", new AddRelatedDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedDocumentContainer}.addRelatedFile", new AddRelatedDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedUrlUrl}.addRelatedFile", new AddRelatedDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedUrl}.addRelatedFile", new AddRelatedDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedFile}.addRelatedFile", new AddRelatedDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedDocumentTitle}.addRelatedFile", new AddRelatedDocumentHandler());
 
-            MarkerEventHandlerRegistry.Register("relatedDocuments.addRelatedUrl", new AddRelatedUrlHandler());
-            MarkerEventHandlerRegistry.Register("relatedUrlUrl.addRelatedUrl", new AddRelatedUrlHandler());
-            MarkerEventHandlerRegistry.Register("relatedUrl.addRelatedUrl", new AddRelatedUrlHandler());
-            MarkerEventHandlerRegistry.Register("relatedFile.addRelatedUrl", new AddRelatedUrlHandler());
-            MarkerEventHandlerRegistry.Register("relatedDocumentTitle.addRelatedUrl", new AddRelatedUrlHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedDocuments}.addRelatedUrl", new AddRelatedUrlHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedDocumentContainer}.addRelatedUrl", new AddRelatedUrlHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedUrlUrl}.addRelatedUrl", new AddRelatedUrlHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedUrl}.addRelatedUrl", new AddRelatedUrlHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedFile}.addRelatedUrl", new AddRelatedUrlHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedDocumentTitle}.addRelatedUrl", new AddRelatedUrlHandler());
 
-            MarkerEventHandlerRegistry.Register("relatedDocumentContainer.moveUp", new MoveUpDocumentHandler());
-            MarkerEventHandlerRegistry.Register("relatedUrlUrl.moveUp", new MoveUpDocumentHandler());
-            MarkerEventHandlerRegistry.Register("relatedUrl.moveUp", new MoveUpDocumentHandler());
-            MarkerEventHandlerRegistry.Register("relatedFile.moveUp", new MoveUpDocumentHandler());
-            MarkerEventHandlerRegistry.Register("relatedDocumentTitle.moveUp", new MoveUpDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedDocumentContainer}.moveUp", new MoveUpDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedUrlUrl}.moveUp", new MoveUpDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedUrl}.moveUp", new MoveUpDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedFile}.moveUp", new MoveUpDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedDocumentTitle}.moveUp", new MoveUpDocumentHandler());
 
-            MarkerEventHandlerRegistry.Register("relatedDocumentContainer.moveDown", new MoveDownDocumentHandler());
-            MarkerEventHandlerRegistry.Register("relatedUrlUrl.moveDown", new MoveDownDocumentHandler());
-            MarkerEventHandlerRegistry.Register("relatedUrl.moveDown", new MoveDownDocumentHandler());
-            MarkerEventHandlerRegistry.Register("relatedFile.moveDown", new MoveDownDocumentHandler());
-            MarkerEventHandlerRegistry.Register("relatedDocumentTitle.moveDown", new MoveDownDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedDocumentContainer}.moveDown", new MoveDownDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedUrlUrl}.moveDown", new MoveDownDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedUrl}.moveDown", new MoveDownDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedFile}.moveDown", new MoveDownDocumentHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedDocumentTitle}.moveDown", new MoveDownDocumentHandler());
 
-            MarkerEventHandlerRegistry.Register("relatedDocumentContainer.delete", new MarkerDeleteRelatedDocumentEventHandler());
-            MarkerEventHandlerRegistry.Register("relatedUrlUrl.delete", new MarkerDeleteRelatedDocumentEventHandler());
-            MarkerEventHandlerRegistry.Register("relatedUrl.delete", new MarkerDeleteRelatedDocumentEventHandler());
-            MarkerEventHandlerRegistry.Register("relatedFile.delete", new MarkerDeleteRelatedDocumentEventHandler());
-            MarkerEventHandlerRegistry.Register("relatedDocumentTitle.delete", new MarkerDeleteRelatedDocumentEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedDocumentContainer}.delete", new MarkerDeleteRelatedDocumentEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedUrlUrl}.delete", new MarkerDeleteRelatedDocumentEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedUrl}.delete", new MarkerDeleteRelatedDocumentEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedFile}.delete", new MarkerDeleteRelatedDocumentEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeRelatedDocumentTitle}.delete", new MarkerDeleteRelatedDocumentEventHandler());
 
             MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternative}.add", new AddAlternativeEventHandler());
             MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeState}.add", new AddAlternativeEventHandler());

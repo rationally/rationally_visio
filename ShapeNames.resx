@@ -134,4 +134,40 @@
   <data name="TypeAlternatives" xml:space="preserve">
     <value>alternatives</value>
   </data>
+  <data name="TypeRelatedDocumentContainer" xml:space="preserve">
+    <value>relatedDocumentContainer</value>
+  </data>
+  <data name="RelatedDocument" xml:space="preserve">
+    <value>Related Document</value>
+  </data>
+  <data name="RelatedDocuments" xml:space="preserve">
+    <value>Related Documents</value>
+  </data>
+  <data name="TypeRelatedDocumentTitle" xml:space="preserve">
+    <value>relatedDocumentTitle</value>
+  </data>
+  <data name="RelatedDocumentTitle" xml:space="preserve">
+    <value>Related Document Title</value>
+  </data>
+  <data name="RelatedFile" xml:space="preserve">
+    <value>RelatedFile</value>
+  </data>
+  <data name="TypeRelatedFile" xml:space="preserve">
+    <value>relatedFile</value>
+  </data>
+  <data name="RelatedUrl" xml:space="preserve">
+    <value>RelatedUrl</value>
+  </data>
+  <data name="TypeRelatedUrl" xml:space="preserve">
+    <value>relatedUrl</value>
+  </data>
+  <data name="TypeRelatedUrlUrl" xml:space="preserve">
+    <value>relatedUrlUrl</value>
+  </data>
+  <data name="RelatedUrlUrl" xml:space="preserve">
+    <value>RelatedUrlUrl</value>
+  </data>
+  <data name="TypeRelatedDocuments" xml:space="preserve">
+    <value>relatedDocuments</value>
+  </data>
 </root>

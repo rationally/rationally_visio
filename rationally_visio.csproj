@@ -236,6 +236,11 @@
     <Compile Include="Ribbon\RationallyRibbon.Designer.cs">
       <DependentUpon>RationallyRibbon.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShapeNames.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShapeNames.resx</DependentUpon>
+    </Compile>
     <Compile Include="View\CheckBoxComponent.cs" />
     <Compile Include="View\CheckBoxStateComponent.cs" />
     <Compile Include="View\CheckBoxStubComponent.cs" />
@@ -448,6 +453,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UrlSelector.resx">
       <DependentUpon>UrlSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShapeNames.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShapeNames.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="VisioFormulas.resx">
       <Generator>ResXFileCodeGenerator</Generator>

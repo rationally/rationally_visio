@@ -106,6 +106,15 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add alternative.
         /// </summary>
         internal static string Menu_AddAlternative {
@@ -129,6 +138,69 @@ namespace Rationally.Visio {
         internal static string Menu_SetState {
             get {
                 return ResourceManager.GetString("Menu_SetState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only one instance of the alternatives container is allowed..
+        /// </summary>
+        internal static string OneAlternativesContainerAllowed {
+            get {
+                return ResourceManager.GetString("OneAlternativesContainerAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only one instance of the forces container is allowed..
+        /// </summary>
+        internal static string OneForcesContainerAllowed {
+            get {
+                return ResourceManager.GetString("OneForcesContainerAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only one instance of the information container is allowed..
+        /// </summary>
+        internal static string OneInformationContainerAllowed {
+            get {
+                return ResourceManager.GetString("OneInformationContainerAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only one instance of the planning container is allowed..
+        /// </summary>
+        internal static string OnePlanningContainerAllowed {
+            get {
+                return ResourceManager.GetString("OnePlanningContainerAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only one instance of the related documents container is allowed..
+        /// </summary>
+        internal static string OneRelatedDocumentsContainerAllowed {
+            get {
+                return ResourceManager.GetString("OneRelatedDocumentsContainerAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only one instance of the stakeholders container is allowed..
+        /// </summary>
+        internal static string OneStakeholdersContainerAllowed {
+            get {
+                return ResourceManager.GetString("OneStakeholdersContainerAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only one instance of the title box is allowed..
+        /// </summary>
+        internal static string OneTitleAllowed {
+            get {
+                return ResourceManager.GetString("OneTitleAllowed", resourceCulture);
             }
         }
         

@@ -11,7 +11,7 @@ namespace Rationally.Visio.View.Alternatives
     internal sealed class AlternativeShape : HeaderlessContainer
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static readonly Regex AlternativeRegex = new Regex(@"Alternative(\.\d+)?$");
+        private static readonly Regex AlternativeRegex = new Regex($@"{ShapeNames.Alternative}(\.\d+)?$");
 
         public override int Index
         {
@@ -158,8 +158,8 @@ namespace Rationally.Visio.View.Alternatives
             Children.Add(stateShape);
             Children.Add(descShape);
 
-            Name = "Alternative";
-            RationallyType = "alternative";
+            Name = ShapeNames.Alternative;
+            RationallyType = ShapeNames.TypeAlternative;
             Index = index;
             Id = alternative.Id;
 
@@ -168,7 +168,7 @@ namespace Rationally.Visio.View.Alternatives
             MsvSdContainerLocked = true;
 
             //Events
-            AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "Delete alternative", false);
+            AddAction("deleteAlternative", string.Format(VisioFormulas.Formula_QUEUMARKEREVENT,"delete"), Messages.Menu_DeleteAlternative, false);
 
             LinePattern = 16;
             InitStyle();

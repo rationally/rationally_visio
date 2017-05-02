@@ -16,7 +16,7 @@ namespace Rationally.Visio.View.Alternatives
     {
         private const string StateMenuEventId = "STATE_MENU";
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static readonly Regex StateRegex = new Regex(@"AlternativeState(\.\d+)?$");
+        private static readonly Regex StateRegex = new Regex($@"{ShapeNames.AlternativeState}(\.\d+)?$");
 
         private readonly IDictionary<AlternativeState, ContextMenuItem> menu =
             new Dictionary<AlternativeState, ContextMenuItem>();
@@ -79,13 +79,13 @@ namespace Rationally.Visio.View.Alternatives
 
             AlternativeStateShape stateShape = new AlternativeStateShape(page, shape);
             stateShape.GenerateMenu();
-            stateShape.RationallyType = "alternativeState";
+            stateShape.RationallyType = ShapeNames.TypeAlternativeState;
             stateShape.Index = alternativeIndex;
-            stateShape.Name = "AlternativeState";
+            stateShape.Name = ShapeNames.AlternativeState;
 
             stateShape.State = state;
-            stateShape.AddAction("addAlternative", "QUEUEMARKEREVENT(\"add\")", "Add alternative", false);
-            stateShape.AddAction("deleteAlternative", "QUEUEMARKEREVENT(\"delete\")", "Delete this alternative",
+            stateShape.AddAction("addAlternative", string.Format(VisioFormulas.Formula_QUEUMARKEREVENT,"add"), Messages.Menu_AddAlternative, false);
+            stateShape.AddAction("deleteAlternative", string.Format(VisioFormulas.Formula_QUEUMARKEREVENT, "delete"), Messages.Menu_DeleteAlternative,
                 false);
             stateShape.InitStyle();
             return stateShape;

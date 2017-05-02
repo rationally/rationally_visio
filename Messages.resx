@@ -159,6 +159,30 @@
   <data name="Menu_DeleteAlternative" xml:space="preserve">
     <value>Delete this alternative</value>
   </data>
+  <data name="OneAlternativesContainerAllowed" xml:space="preserve">
+    <value>Only one instance of the alternatives container is allowed.</value>
+  </data>
+  <data name="OneRelatedDocumentsContainerAllowed" xml:space="preserve">
+    <value>Only one instance of the related documents container is allowed.</value>
+  </data>
+  <data name="OneForcesContainerAllowed" xml:space="preserve">
+    <value>Only one instance of the forces container is allowed.</value>
+  </data>
+  <data name="OneInformationContainerAllowed" xml:space="preserve">
+    <value>Only one instance of the information container is allowed.</value>
+  </data>
+  <data name="OneTitleAllowed" xml:space="preserve">
+    <value>Only one instance of the title box is allowed.</value>
+  </data>
+  <data name="OneStakeholdersContainerAllowed" xml:space="preserve">
+    <value>Only one instance of the stakeholders container is allowed.</value>
+  </data>
+  <data name="OnePlanningContainerAllowed" xml:space="preserve">
+    <value>Only one instance of the planning container is allowed.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="MoveUp" xml:space="preserve">
     <value>Move up</value>
   </data>

@@ -98,70 +98,40 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-  <data name="Warning_WizardOnlyOnRationallyTemplates_Description" xml:space="preserve">
-    <value>You can only open this wizard while working on a rationally document.</value>
+  <data name="AlternativeDescription" xml:space="preserve">
+    <value>AlternativeDescription</value>
   </data>
-  <data name="Warning_WizardOnlyOnRationallyTemplates_Label" xml:space="preserve">
-    <value>Action Not Available</value>
+  <data name="TypeAlternativeDescription" xml:space="preserve">
+    <value>alternativeDescription</value>
   </data>
-  <data name="Wizard_CreateButton_CreateView" xml:space="preserve">
-    <value>Create View</value>
+  <data name="TypeAlternativeIdentifier" xml:space="preserve">
+    <value>alternativeIdentifier</value>
   </data>
-  <data name="Wizard_CreateButton_UpdateView" xml:space="preserve">
-    <value>Update View</value>
+  <data name="AlternativeIdentifier" xml:space="preserve">
+    <value>AlternativeIdent</value>
   </data>
-  <data name="Wizard_Label_CreateView" xml:space="preserve">
-    <value>rationally - Configure Decision View</value>
+  <data name="Alternatives" xml:space="preserve">
+    <value>Alternatives</value>
   </data>
-  <data name="Wizard_Label_UpdateView" xml:space="preserve">
-    <value>rationally - Update Decision View</value>
+  <data name="Alternative" xml:space="preserve">
+    <value>Alternative</value>
   </data>
-  <data name="AlternativeState_Accepted" xml:space="preserve">
-    <value>Accepted</value>
+  <data name="TypeAlternative" xml:space="preserve">
+    <value>alternative</value>
   </data>
-  <data name="AlternativeState_Rejected" xml:space="preserve">
-    <value>Rejected</value>
+  <data name="AlternativeState" xml:space="preserve">
+    <value>AlternativeState</value>
   </data>
-  <data name="AlternativeState_Challenged" xml:space="preserve">
-    <value>Challenged</value>
+  <data name="TypeAlternativeState" xml:space="preserve">
+    <value>alternativeState</value>
   </data>
-  <data name="AlternativeState_Discarded" xml:space="preserve">
-    <value>Discarded</value>
+  <data name="AlternativeTitle" xml:space="preserve">
+    <value>AlternativeTitle</value>
   </data>
-  <data name="AlternativeState_Proposed" xml:space="preserve">
-    <value>Proposed</value>
+  <data name="TypeAlternativeTitle" xml:space="preserve">
+    <value>alternativeTitle</value>
   </data>
-  <data name="Menu_SetState" xml:space="preserve">
-    <value>Set State</value>
-  </data>
-  <data name="Menu_AddAlternative" xml:space="preserve">
-    <value>Add alternative</value>
-  </data>
-  <data name="Menu_DeleteAlternative" xml:space="preserve">
-    <value>Delete this alternative</value>
-  </data>
-  <data name="OneAlternativesContainerAllowed" xml:space="preserve">
-    <value>Only one instance of the alternatives container is allowed.</value>
-  </data>
-  <data name="OneRelatedDocumentsContainerAllowed" xml:space="preserve">
-    <value>Only one instance of the related documents container is allowed.</value>
-  </data>
-  <data name="OneForcesContainerAllowed" xml:space="preserve">
-    <value>Only one instance of the forces container is allowed.</value>
-  </data>
-  <data name="OneInformationContainerAllowed" xml:space="preserve">
-    <value>Only one instance of the information container is allowed.</value>
-  </data>
-  <data name="OneTitleAllowed" xml:space="preserve">
-    <value>Only one instance of the title box is allowed.</value>
-  </data>
-  <data name="OneStakeholdersContainerAllowed" xml:space="preserve">
-    <value>Only one instance of the stakeholders container is allowed.</value>
-  </data>
-  <data name="OnePlanningContainerAllowed" xml:space="preserve">
-    <value>Only one instance of the planning container is allowed.</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Error</value>
+  <data name="TypeAlternatives" xml:space="preserve">
+    <value>alternatives</value>
   </data>
 </root>

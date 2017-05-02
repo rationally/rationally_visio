@@ -10,7 +10,7 @@ namespace Rationally.Visio.View.Alternatives
     internal sealed class AlternativeDescriptionShape : HeaderlessContainer
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static readonly Regex DescriptionRegex = new Regex(@"AlternativeDescription(\.\d+)?$");
+        private static readonly Regex DescriptionRegex = new Regex($@"{ShapeNames.AlternativeDescription}(\.\d+)?$");
         public AlternativeDescriptionShape(Page page, Shape alternativeComponent) : base(page, false)
         {
             Shape = alternativeComponent;
@@ -25,10 +25,10 @@ namespace Rationally.Visio.View.Alternatives
             Width = 5.15;
             Height = 2.5;
             InitStyle();
-            RationallyType = "alternativeDescription";
+            RationallyType = ShapeNames.TypeAlternativeDescription;
             Index = index;
 
-            Name = "AlternativeDescription";
+            Name = ShapeNames.AlternativeDescription;
 
             ContextMenuItem addAlternativeMenuItem = ContextMenuItem.CreateAndRegister(this, VisioFormulas.EventId_AddAlternative, Messages.Menu_AddAlternative);
             addAlternativeMenuItem.Action = () => (new AddAlternativeEventHandler()).Execute(Shape, "add");
@@ -42,7 +42,7 @@ namespace Rationally.Visio.View.Alternatives
         {
             if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
             {
-                Shape.ContainerProperties.ResizeAsNeeded = 0;
+                Shape.ContainerProperties.ResizeAsNeeded = VisContainerAutoResize.visContainerAutoResizeNone;
             }
             MarginLeft = 0.1;
             MarginRight = 0.1;

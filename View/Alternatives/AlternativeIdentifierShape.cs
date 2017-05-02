@@ -11,7 +11,7 @@ namespace Rationally.Visio.View.Alternatives
     {
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static readonly Regex IdentRegex = new Regex(@"AlternativeIdent(\.\d+)?$");
+        private static readonly Regex IdentRegex = new Regex($@"{ShapeNames.AlternativeIdentifier}(\.\d+)?$");
 
         /// <summary>
         /// Used to retrieve and modify the value of this component.
@@ -33,10 +33,10 @@ namespace Rationally.Visio.View.Alternatives
 
         public AlternativeIdentifierShape(Page page, int index, string text) : base(page, text)
         {
-            RationallyType = "alternativeIdentifier";
+            RationallyType = ShapeNames.TypeAlternativeIdentifier;
             Index = index;
 
-            Name = "AlternativeIdent";
+            Name = ShapeNames.AlternativeIdentifier;
 
             ContextMenuItem addAlternativeMenuItem = ContextMenuItem.CreateAndRegister(this, VisioFormulas.EventId_AddAlternative, Messages.Menu_AddAlternative);
             addAlternativeMenuItem.Action = () => (new AddAlternativeEventHandler()).Execute(Shape, "add");

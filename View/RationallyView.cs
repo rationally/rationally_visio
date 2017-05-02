@@ -37,7 +37,7 @@ namespace Rationally.Visio.View
                 {
                     if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                     {
-                        MessageBox.Show("Only one instance of the alternatives container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Messages.OneAlternativesContainerAllowed, Messages.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
                     }
                 }
@@ -52,7 +52,7 @@ namespace Rationally.Visio.View
                 {
                     if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                     {
-                        MessageBox.Show("Only one instance of the related documents container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Messages.OneRelatedDocumentsContainerAllowed, Messages.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
                     }
                 }
@@ -68,7 +68,7 @@ namespace Rationally.Visio.View
                 {
                     if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                     {
-                        MessageBox.Show("Only one instance of the forces container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Messages.OneForcesContainerAllowed, Messages.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
                     }
                 }
@@ -84,7 +84,7 @@ namespace Rationally.Visio.View
                 {
                     if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                     {
-                        MessageBox.Show("Only one instance of the information container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Messages.OneInformationContainerAllowed, Messages.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
                     }
                 }
@@ -100,7 +100,7 @@ namespace Rationally.Visio.View
                 {
                     if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                     {
-                        MessageBox.Show("Only one instance of the title box is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Messages.OneTitleAllowed, Messages.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
                     }
                 }
@@ -116,7 +116,7 @@ namespace Rationally.Visio.View
                 {
                     if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                     {
-                        MessageBox.Show("Only one instance of the stakeholders container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Messages.OneStakeholdersContainerAllowed, Messages.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         s.DeleteEx((short) VisDeleteFlags.visDeleteNormal);
                     }
                 }
@@ -132,7 +132,7 @@ namespace Rationally.Visio.View
                 {
                     if (!Globals.RationallyAddIn.Application.IsUndoingOrRedoing)
                     {
-                        MessageBox.Show("Only one instance of the planning container is allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Messages.OnePlanningContainerAllowed, Messages.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         s.DeleteEx((short)VisDeleteFlags.visDeleteNormal);
                     }
                 }

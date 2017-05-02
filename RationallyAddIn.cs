@@ -133,8 +133,8 @@ namespace Rationally.Visio
 
         private static void RegisterDeleteEventHandlers()
         {
-            DeleteEventHandlerRegistry.Register("alternative", new DeleteAlternativeEventHandler());
-            DeleteEventHandlerRegistry.Register("alternatives", new DeleteAlternativesEventHandler());
+            DeleteEventHandlerRegistry.Register(ShapeNames.TypeAlternative, new DeleteAlternativeEventHandler());
+            DeleteEventHandlerRegistry.Register(ShapeNames.TypeAlternatives, new DeleteAlternativesEventHandler());
 
             DeleteEventHandlerRegistry.Register("relatedUrlUrl", new DeletedRelatedUrlUrlEventHandler());
             DeleteEventHandlerRegistry.Register("relatedDocumentContainer", new DeleteRelatedDocumentEventHandler());
@@ -168,11 +168,11 @@ namespace Rationally.Visio
             QueryDeleteEventHandlerRegistry.Register("forceContainer", new QDForceContainerEventHandler());
             QueryDeleteEventHandlerRegistry.Register("forces", new QDForcesContainerEventHandler());
 
-            QueryDeleteEventHandlerRegistry.Register("alternativeState", new QDAlternativeComponentEventHandler());
-            QueryDeleteEventHandlerRegistry.Register("alternativeIdentifier", new QDAlternativeComponentEventHandler());
-            QueryDeleteEventHandlerRegistry.Register("alternativeTitle", new QDAlternativeComponentEventHandler());
-            QueryDeleteEventHandlerRegistry.Register("alternativeDescription", new QDAlternativeComponentEventHandler());
-            QueryDeleteEventHandlerRegistry.Register("alternative", new QDAlternativeContainerEventHander());
+            QueryDeleteEventHandlerRegistry.Register(ShapeNames.TypeAlternativeState, new QDAlternativeComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register(ShapeNames.TypeAlternativeIdentifier, new QDAlternativeComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register(ShapeNames.TypeAlternativeTitle, new QDAlternativeComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register(ShapeNames.TypeAlternativeDescription, new QDAlternativeComponentEventHandler());
+            QueryDeleteEventHandlerRegistry.Register(ShapeNames.TypeAlternative, new QDAlternativeContainerEventHander());
 
             QueryDeleteEventHandlerRegistry.Register("relatedUrlUrl", new QDRelatedDocumentComponentEventHandler());
             QueryDeleteEventHandlerRegistry.Register("relatedUrl", new QDRelatedDocumentComponentEventHandler());
@@ -224,32 +224,32 @@ namespace Rationally.Visio
             MarkerEventHandlerRegistry.Register("relatedFile.delete", new MarkerDeleteRelatedDocumentEventHandler());
             MarkerEventHandlerRegistry.Register("relatedDocumentTitle.delete", new MarkerDeleteRelatedDocumentEventHandler());
 
-            MarkerEventHandlerRegistry.Register("alternative.add", new AddAlternativeEventHandler());
-            MarkerEventHandlerRegistry.Register("alternativeState.add", new AddAlternativeEventHandler());
-            MarkerEventHandlerRegistry.Register("alternativeIdentifier.add", new AddAlternativeEventHandler());
-            MarkerEventHandlerRegistry.Register("alternativeTitle.add", new AddAlternativeEventHandler());
-            MarkerEventHandlerRegistry.Register("alternativeDescription.add", new AddAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternative}.add", new AddAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeState}.add", new AddAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeIdentifier}.add", new AddAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeTitle}.add", new AddAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeDescription}.add", new AddAlternativeEventHandler());
 
-            MarkerEventHandlerRegistry.Register("alternative.delete", new MarkerDeleteAlternativeEventHandler());
-            MarkerEventHandlerRegistry.Register("alternativeState.delete", new MarkerDeleteAlternativeEventHandler());
-            MarkerEventHandlerRegistry.Register("alternativeIdentifier.delete", new MarkerDeleteAlternativeEventHandler());
-            MarkerEventHandlerRegistry.Register("alternativeTitle.delete", new MarkerDeleteAlternativeEventHandler());
-            MarkerEventHandlerRegistry.Register("alternativeDescription.delete", new MarkerDeleteAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternative}.delete", new MarkerDeleteAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeState}.delete", new MarkerDeleteAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeIdentifier}.delete", new MarkerDeleteAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeTitle}.delete", new MarkerDeleteAlternativeEventHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeDescription}.delete", new MarkerDeleteAlternativeEventHandler());
 
            // MarkerEventHandlerRegistry.Register("alternativeState.change", new EditAlternativeStateEventHandler());
             MarkerEventHandlerRegistry.Register("relatedFile.edit", new EditRelatedFileHandler());
 
-            MarkerEventHandlerRegistry.Register("alternative.moveUp", new MoveUpAlternativeHandler());
-            MarkerEventHandlerRegistry.Register("alternativeState.moveUp", new MoveUpAlternativeHandler());
-            MarkerEventHandlerRegistry.Register("alternativeIdentifier.moveUp", new MoveUpAlternativeHandler());
-            MarkerEventHandlerRegistry.Register("alternativeTitle.moveUp", new MoveUpAlternativeHandler());
-            MarkerEventHandlerRegistry.Register("alternativeDescription.moveUp", new MoveUpAlternativeHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternative}.moveUp", new MoveUpAlternativeHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeState}.moveUp", new MoveUpAlternativeHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeIdentifier}.moveUp", new MoveUpAlternativeHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeTitle}.moveUp", new MoveUpAlternativeHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeDescription}.moveUp", new MoveUpAlternativeHandler());
 
-            MarkerEventHandlerRegistry.Register("alternative.moveDown", new MoveDownAlternativeHandler());
-            MarkerEventHandlerRegistry.Register("alternativeState.moveDown", new MoveDownAlternativeHandler());
-            MarkerEventHandlerRegistry.Register("alternativeIdentifier.moveDown", new MoveDownAlternativeHandler());
-            MarkerEventHandlerRegistry.Register("alternativeTitle.moveDown", new MoveDownAlternativeHandler());
-            MarkerEventHandlerRegistry.Register("alternativeDescription.moveDown", new MoveDownAlternativeHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternative}.moveDown", new MoveDownAlternativeHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeState}.moveDown", new MoveDownAlternativeHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeIdentifier}.moveDown", new MoveDownAlternativeHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeTitle}.moveDown", new MoveDownAlternativeHandler());
+            MarkerEventHandlerRegistry.Register($"{ShapeNames.TypeAlternativeDescription}.moveDown", new MoveDownAlternativeHandler());
 
             MarkerEventHandlerRegistry.Register("forces.add", new AddForceHandler());
             MarkerEventHandlerRegistry.Register("forceContainer.add", new AddForceHandler());
@@ -312,8 +312,8 @@ namespace Rationally.Visio
             TextChangedEventHandlerRegistry.Register("forceValue", new ForceValueTextChangedEventHandler());
             TextChangedEventHandlerRegistry.Register("forceConcern", new ForceConcernTextChangedEventHandler());
             TextChangedEventHandlerRegistry.Register("forceDescription", new ForceDescriptionTextChangedEventHandler());
-            TextChangedEventHandlerRegistry.Register("alternativeState", new AlternativeStateTextChangedEventHandler());
-            TextChangedEventHandlerRegistry.Register("alternativeTitle", new AlternativeTitleTextChangedEventHandler());
+            TextChangedEventHandlerRegistry.Register(ShapeNames.TypeAlternativeState, new AlternativeStateTextChangedEventHandler());
+            TextChangedEventHandlerRegistry.Register(ShapeNames.TypeAlternativeTitle, new AlternativeTitleTextChangedEventHandler());
             TextChangedEventHandlerRegistry.Register("informationAuthor", new InformationAuthorTextChangedHandler());
             TextChangedEventHandlerRegistry.Register("informationDate", new InformationDateTextChangedHandler());
             TextChangedEventHandlerRegistry.Register("informationVersion", new InformationVersionTextChangedHandler());

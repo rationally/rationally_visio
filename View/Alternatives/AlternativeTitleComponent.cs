@@ -11,7 +11,7 @@ namespace Rationally.Visio.View.Alternatives
     internal sealed class AlternativeTitleComponent : TextLabel
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static readonly Regex TitleRegex = new Regex(@"AlternativeTitle(\.\d+)?$");
+        private static readonly Regex TitleRegex = new Regex($@"{ShapeNames.AlternativeTitle}(\.\d+)?$");
 
         public string Title
         {
@@ -28,10 +28,10 @@ namespace Rationally.Visio.View.Alternatives
 
         public AlternativeTitleComponent(Page page, int index, string text) : base(page, text)
         {
-            RationallyType = "alternativeTitle";
+            RationallyType = ShapeNames.TypeAlternativeTitle;
             Index = index;
 
-            Name = "AlternativeTitle";
+            Name = ShapeNames.AlternativeTitle;
 
             ContextMenuItem addAlternativeMenuItem = ContextMenuItem.CreateAndRegister(this, VisioFormulas.EventId_AddAlternative, Messages.Menu_AddAlternative);
             addAlternativeMenuItem.Action = () => (new AddAlternativeEventHandler()).Execute(Shape, "add");

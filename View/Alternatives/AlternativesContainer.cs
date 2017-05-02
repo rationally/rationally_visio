@@ -14,7 +14,7 @@ namespace Rationally.Visio.View.Alternatives
     public class AlternativesContainer : RationallyContainer
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static readonly Regex AlternativesRegex = new Regex(@"Alternatives(\.\d+)?$");
+        private static readonly Regex AlternativesRegex = new Regex($@"{ShapeNames.Alternatives}(\.\d+)?$");
         
         public AlternativesContainer(Page page, Shape alternativesContainer) : base(page)
         {

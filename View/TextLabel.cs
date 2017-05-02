@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using log4net;
 using Microsoft.Office.Interop.Visio;
 using Rationally.Visio.RationallyConstants;
+using static System.String;
 using Font = System.Drawing.Font;
 
 // ReSharper disable RedundantCast
@@ -32,34 +33,27 @@ namespace Rationally.Visio.View
 
         protected TextLabel(Page page, string labelText) : base(page)
         {
-            string text = labelText;
             characterHeight = (1.0/72.0)*(double) size;
 
-            
+            Log.Debug($"Create TextLabel \"{labelText}\"");
 
             contentTextWidth = GetWidthOfString(labelText);// PixelsPerInch;
-            Log.Debug("About to create a textlabel");
-            Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden + (short)VisOpenSaveArgs.visOpenCopy);
-            Log.Debug("Basic shapes document was opened successfully.");
-            Master rectMaster = basicDocument.Masters["Rectangle"];
-            Log.Debug("The rectangle master was extracted successfully from the document.");
-            Shape = page.Drop(rectMaster, 0,0);
-            Log.Debug("The textlabel shape has been dropped on the sheet.");
-            basicDocument.Close();
+            Shape = CreateShapeFromStencilMaster(page, VisioFormulas.BasicStencil, VisioFormulas.Rectangle_ShapeMaster);
             Shape.LineStyle = "Text Only";
-            Log.Debug("LineStyle property has been set (shapesheet assignment!)");
             Shape.FillStyle = "Text Only";
-            Shape.Characters.Text = text;
+            Shape.Characters.Text = labelText;
             Shape.Characters.CharProps[(short)VisCellIndices.visCharacterSize] = size;
             Shape.CellsU["LinePattern"].ResultIU = 0;
             Shape.Name = "TextLabel";
-            Log.Debug("More shapesheet interactions were performed.");
+
             AddUserRow("order"); //allows sorting, even with same-type shapes
-            Log.Debug("Textlabel user rows added.");
-            BackgroundColor = "RGB(255,255,255)";
-            Log.Debug("Set background color");
-            FontColor = "RGB(89,131,168)";
+                   
+            SetBackgroundColor(System.Drawing.Color.White);
+            //TODO: Use themeval()!!!
+            FontColor = Format(VisioFormulas.RGB_Color_Formula, 89, 131, 168);
             ShadowPattern = 0;
+            
+
         }
 
         public void SetUsedSizingPolicy(SizingPolicy p) => UsedSizingPolicy = p;

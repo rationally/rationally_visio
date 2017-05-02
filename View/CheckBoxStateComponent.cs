@@ -14,7 +14,7 @@ namespace Rationally.Visio.View
 
         public CheckBoxStateComponent(Page page, int index, bool isFinished) : base(page)
         {
-            Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
+            Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx(VisioFormulas.BasicStencil, (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
 
             Shape = page.Drop(rectMaster, 0, 0);

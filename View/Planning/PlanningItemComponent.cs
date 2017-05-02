@@ -94,53 +94,55 @@ namespace Rationally.Visio.View.Planning
         {
             //make s into an rcomponent for access to wrapper
             VisioShape shapeComponent = new VisioShape(Page) { Shape = s };
-
-            if (CheckBoxComponent.IsCheckBoxComponent(s.Name))
+            if (shapeComponent.Index == Index)
             {
-                if (Children.All(c => c.Index != shapeComponent.Index)) //there is no stub with this index
+                if (CheckBoxComponent.IsCheckBoxComponent(s.Name))
                 {
-                    Children.Add(new CheckBoxComponent(Page, s));
-                }
-                else
-                {
-                    //remove stub, insert s as new containers
-                    CheckBoxStubComponent stub = (CheckBoxStubComponent)Children.First(c => c.Index == shapeComponent.Index);
-                    Children.Remove(stub);
-                    CheckBoxComponent con = new CheckBoxComponent(Page, s);
-                    if (Children.Count < con.Index) //TODO implement index
+                    if (Children.All(c => c.Index != shapeComponent.Index)) //there is no stub with this index
                     {
-                        Children.Add(con);
+                        Children.Add(new CheckBoxComponent(Page, s));
                     }
                     else
                     {
-                        Children.Insert(con.Index, con);
+                        //remove stub, insert s as new containers
+                        CheckBoxStubComponent stub = (CheckBoxStubComponent) Children.First(c => c.Index == shapeComponent.Index);
+                        Children.Remove(stub);
+                        CheckBoxComponent con = new CheckBoxComponent(Page, s);
+                        if (Children.Count < con.Index) //TODO implement index
+                        {
+                            Children.Add(con);
+                        }
+                        else
+                        {
+                            Children.Insert(con.Index, con);
+                        }
+
                     }
-
                 }
-            }
-            else if (PlanningItemTextComponent.IsPlanningItemTextComponent(s.Name))
-            {
-                PlanningItemTextComponent com = new PlanningItemTextComponent(Page, s);
-                if (com.Index == Index) //TODO implement index
+                else if (PlanningItemTextComponent.IsPlanningItemTextComponent(s.Name))
                 {
-                    Children.Add(com);
-                }
-            }
-            else
-            {
-
-                if (CheckBoxStateComponent.IsCheckBoxStateComponent(s.Name) && Children.All(c => c.Index != shapeComponent.Index)) //if parent not exists
-                {
-                    CheckBoxStubComponent stub = new CheckBoxStubComponent(Page, shapeComponent.Index);
-                    Children.Insert(stub.Index, stub);
-                    Children.ForEach(r => r.AddToTree(s, allowAddInChildren));
+                    PlanningItemTextComponent com = new PlanningItemTextComponent(Page, s);
+                    if (com.Index == Index) //TODO implement index
+                    {
+                        Children.Add(com);
+                    }
                 }
                 else
                 {
-                    Children.ForEach(r => r.AddToTree(s, allowAddInChildren));
+
+                    if (CheckBoxStateComponent.IsCheckBoxStateComponent(s.Name) && Children.All(c => c.Index != shapeComponent.Index)) //if parent not exists
+                    {
+                        CheckBoxStubComponent stub = new CheckBoxStubComponent(Page, shapeComponent.Index);
+                        Children.Insert(stub.Index, stub);
+                        Children.ForEach(r => r.AddToTree(s, allowAddInChildren));
+                    }
+                    else
+                    {
+                        Children.ForEach(r => r.AddToTree(s, allowAddInChildren));
+                    }
                 }
             }
-            
+
         }
 
         public void SetPlanningItemIndex(int index)

@@ -159,4 +159,10 @@
   <data name="Formula_UniqueId" xml:space="preserve">
     <value>User.uniqueId.Value</value>
   </data>
+  <data name="BasicStencil" xml:space="preserve">
+    <value>Basic Shapes.vss</value>
+  </data>
+  <data name="Rectangle_ShapeMaster" xml:space="preserve">
+    <value>Rectangle</value>
+  </data>
 </root>

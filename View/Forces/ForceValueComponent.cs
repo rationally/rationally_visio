@@ -14,7 +14,7 @@ namespace Rationally.Visio.View.Forces
 
         public ForceValueComponent(Page page, int forceAlternativeId, string altId, int index) : base(page)
         {
-            Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx("Basic Shapes.vss", (short)VisOpenSaveArgs.visOpenHidden);
+            Document basicDocument = Globals.RationallyAddIn.Application.Documents.OpenEx(VisioFormulas.BasicStencil, (short)VisOpenSaveArgs.visOpenHidden);
             Master rectMaster = basicDocument.Masters["Rectangle"];
             Shape = page.Drop(rectMaster, 0, 0);
             basicDocument.Close();

@@ -58,7 +58,7 @@ namespace Rationally.Visio
         {
             //init for logger
             XmlConfigurator.Configure();
-            Log.Info("Rationally started!");
+            Log.Info("======== NEW SESSION ========");
             Model = new RationallyModel();
             View = new RationallyView(Application.ActivePage);
             rebuildTree = false;
@@ -84,7 +84,8 @@ namespace Rationally.Visio
             RegisterMarkerEventHandlers();
             RegisterTextChangedEventHandlers();
 
-            Log.Info("Eventhandlers registered succesfully");
+            Log.Info($"MyShapesFolder is {Constants.MyShapesFolder}");
+            Log.Info("Eventhandlers registered");
 
 
             showRationallyUpdatePopup = NewVersionAvailable = CheckRationallyVersion();
@@ -114,8 +115,9 @@ namespace Rationally.Visio
             {
                 if (candidate.WasClicked(x, y))
                 {
+                    int scopeId = Application.BeginUndoScope("Click checkbox");
                     candidate.Toggle(); //actual changing of the clicked checkbox's state
-                    stateComponent = candidate;
+                    Application.EndUndoScope(scopeId, true);
                     break;
                 }
             }
@@ -452,6 +454,14 @@ namespace Rationally.Visio
                     RelatedURLURLComponent relatedURLURLComponent = (RelatedURLURLComponent)relatedDocumentContainer.Children.First(c => c is RelatedURLURLComponent);
                     relatedURLURLComponent.Text = changedShape.Hyperlink.Address;
                 }
+                else if (Application.IsUndoingOrRedoing && CheckBoxStateComponent.IsCheckBoxStateComponent(changedShape.Name) && cell.LocalName.Equals("FillForegnd"))
+                {
+                    CheckBoxStateComponent checkBoxState = View.GetComponentByShape(changedShape) as CheckBoxStateComponent;
+                    if (checkBoxState != null)
+                    {
+                        Model.PlanningItems[checkBoxState.Index].Finished = checkBoxState.Checked;
+                    }
+                }
                 else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.Index))
                 {
                     Log.Debug("Forceindex cell changed of forcecontainer. shape:" + changedShape.Name);
@@ -766,7 +776,7 @@ namespace Rationally.Visio
             {
                 try
                 {
-                    Log.Debug("Rationally template detected => firing document created handler.");
+                    Log.Debug("rationally template detected");
                     DocumentCreatedEventHandler.Execute(d);
                 }
                 catch (Exception ex)
@@ -781,7 +791,7 @@ namespace Rationally.Visio
 
         private void Application_DocumentOpenendEvent(IVDocument d)
         {
-            Log.Debug("DocumentOpenedEvent detected.");
+            Log.Debug($"DocumentOpenEvent for Document  {d.Name} detected.");
             if (Application.ActiveDocument.Template.Contains(Constants.TemplateName) && showRationallyUpdatePopup)
             {
                 Log.Debug("Rationally template and update required detected.");

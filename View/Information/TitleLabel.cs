@@ -16,9 +16,8 @@ namespace Rationally.Visio.View.Information
 
         public TitleLabel(Page page, string labelText) : base(page, labelText)
         {
-            Log.Debug("title component constructor; setting r type.");
+            Log.Debug("Creating Title Label");
             RationallyType = "decisionName";
-            Log.Debug("rationally type is set!");
             Name = "Topic";
             EventDblClick = "QUEUEMARKEREVENT(\"openWizard\")";
             InitStyle();

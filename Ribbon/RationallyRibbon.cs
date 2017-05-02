@@ -22,7 +22,7 @@ namespace Rationally.Visio
 
         private static void wizardButton_Click(object sender, RibbonControlEventArgs e)
         {
-            if (Globals.RationallyAddIn.Application.ActiveDocument.Template.Contains(Constants.TemplateName))
+            if (Globals.RationallyAddIn.Application.ActiveDocument.Template.Contains(Information.TemplateName))
             {
                 ProjectSetupWizard.Instance.ShowDialog(false, WizardFieldTypes.Title);
 

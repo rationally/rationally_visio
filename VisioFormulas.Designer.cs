@@ -205,6 +205,15 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hyperlink.Row_1.Address.
+        /// </summary>
+        internal static string Cell_HyperlinkAddress {
+            get {
+                return ResourceManager.GetString("Cell_HyperlinkAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User.Index.
         /// </summary>
         internal static string Cell_Index {

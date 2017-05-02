@@ -212,6 +212,11 @@
     <Compile Include="Forms\WizardComponents\TableLayoutMainContentStakeholders.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Information.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Information.resx</DependentUpon>
+    </Compile>
     <Compile Include="Messages1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -423,6 +428,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PleaseWait.resx">
       <DependentUpon>PleaseWait.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Information.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Information.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>

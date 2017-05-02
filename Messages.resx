@@ -189,4 +189,28 @@
   <data name="MoveDown" xml:space="preserve">
     <value>Move down</value>
   </data>
+  <data name="Scope_CheckboxClick" xml:space="preserve">
+    <value>Click checkbox</value>
+  </data>
+  <data name="Scope_AddAlternative" xml:space="preserve">
+    <value>Add alternative</value>
+  </data>
+  <data name="Scope_AddForce" xml:space="preserve">
+    <value>Add force</value>
+  </data>
+  <data name="Scope_AddFile" xml:space="preserve">
+    <value>Add related file</value>
+  </data>
+  <data name="Scope_AddUrl" xml:space="preserve">
+    <value>Add related url</value>
+  </data>
+  <data name="Scope_AddStakeholder" xml:space="preserve">
+    <value>Add stakeholder</value>
+  </data>
+  <data name="Scope_AddPlanningItem" xml:space="preserve">
+    <value>Add Planning item</value>
+  </data>
+  <data name="CannotDeleteForceHeaderFooter" xml:space="preserve">
+    <value>Deleting the header or totals row is not allowed.</value>
+  </data>
 </root>

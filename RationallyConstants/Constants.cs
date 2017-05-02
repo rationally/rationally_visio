@@ -5,8 +5,7 @@ namespace Rationally.Visio.RationallyConstants
 {
     internal static class Constants
     {
-
-        public const string TemplateName = "Decision View";
+        
         public const string RationallySite = "https://rationally.github.io/";
         public const int CellExists = -1;
         public const double Epsilon = 0.001;

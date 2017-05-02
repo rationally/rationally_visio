@@ -106,6 +106,15 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deleting the header or totals row is not allowed..
+        /// </summary>
+        internal static string CannotDeleteForceHeaderFooter {
+            get {
+                return ResourceManager.GetString("CannotDeleteForceHeaderFooter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
@@ -138,6 +147,24 @@ namespace Rationally.Visio {
         internal static string Menu_SetState {
             get {
                 return ResourceManager.GetString("Menu_SetState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move down.
+        /// </summary>
+        internal static string MoveDown {
+            get {
+                return ResourceManager.GetString("MoveDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move up.
+        /// </summary>
+        internal static string MoveUp {
+            get {
+                return ResourceManager.GetString("MoveUp", resourceCulture);
             }
         }
         
@@ -205,20 +232,65 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Move down.
+        ///   Looks up a localized string similar to Add alternative.
         /// </summary>
-        internal static string MoveDown {
+        internal static string Scope_AddAlternative {
             get {
-                return ResourceManager.GetString("MoveDown", resourceCulture);
+                return ResourceManager.GetString("Scope_AddAlternative", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Move up.
+        ///   Looks up a localized string similar to Add related file.
         /// </summary>
-        internal static string MoveUp {
+        internal static string Scope_AddFile {
             get {
-                return ResourceManager.GetString("MoveUp", resourceCulture);
+                return ResourceManager.GetString("Scope_AddFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add force.
+        /// </summary>
+        internal static string Scope_AddForce {
+            get {
+                return ResourceManager.GetString("Scope_AddForce", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Planning item.
+        /// </summary>
+        internal static string Scope_AddPlanningItem {
+            get {
+                return ResourceManager.GetString("Scope_AddPlanningItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add stakeholder.
+        /// </summary>
+        internal static string Scope_AddStakeholder {
+            get {
+                return ResourceManager.GetString("Scope_AddStakeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add related url.
+        /// </summary>
+        internal static string Scope_AddUrl {
+            get {
+                return ResourceManager.GetString("Scope_AddUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click checkbox.
+        /// </summary>
+        internal static string Scope_CheckboxClick {
+            get {
+                return ResourceManager.GetString("Scope_CheckboxClick", resourceCulture);
             }
         }
         

@@ -16,7 +16,7 @@ namespace Rationally.Visio.EventHandlers
         public static void Execute(IVDocument document)
         {
             Log.Debug($"Document {document.Name} based on {document.Template} created. ");
-            if (document.Template.Contains(Constants.TemplateName))
+            if (document.Template.Contains(Information.TemplateName))
             {
                 Log.Debug($"Initialize with an empty model and show setup wizard.");
                 Globals.RationallyAddIn.Model = new RationallyModel();

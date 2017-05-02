@@ -41,7 +41,7 @@ namespace Rationally.Visio.View.Forces
                     {
                         Children.Add(new ForceAlternativeHeaderComponent(page, shape));
                     }
-                    else if (shape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+                    else if (shape.CellExistsU[VisioFormulas.Cell_RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                     {
                         VisioShape toAdd = new VisioShape(page) { Shape = shape };
                         Children.Add(toAdd);

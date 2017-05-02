@@ -17,8 +17,8 @@ namespace Rationally.Visio.EventHandlers.MarkerEventHandlers
             int currentIndex = toChangeComponent.Index;
             //locate the stakeholder to swap with
             StakeholdersContainer stakeholdersContainer = (StakeholdersContainer)Globals.RationallyAddIn.View.Children.First(c => c is StakeholdersContainer);
-            StakeholderContainer toChange = (StakeholderContainer)stakeholdersContainer.Children.First(c => (int)c.Shape.CellsU[CellConstants.Index].ResultIU == currentIndex);
-            StakeholderContainer other = (StakeholderContainer)stakeholdersContainer.Children.First(c => (int)c.Shape.CellsU[CellConstants.Index].ResultIU == currentIndex - 1);
+            StakeholderContainer toChange = (StakeholderContainer)stakeholdersContainer.Children.First(c => (int)c.Shape.CellsU[VisioFormulas.Cell_Index].ResultIU == currentIndex);
+            StakeholderContainer other = (StakeholderContainer)stakeholdersContainer.Children.First(c => (int)c.Shape.CellsU[VisioFormulas.Cell_Index].ResultIU == currentIndex - 1);
 
             //swap
             Stakeholder one = model.Stakeholders[currentIndex];

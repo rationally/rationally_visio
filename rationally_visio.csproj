@@ -219,7 +219,6 @@
     </Compile>
     <Compile Include="Model\PlanningItem.cs" />
     <Compile Include="Model\Stakeholder.cs" />
-    <Compile Include="RationallyConstants\CellConstants.cs" />
     <Compile Include="RationallyConstants\Constants.cs" />
     <Compile Include="EventHandlers\ClickEventHandlers\UpdateAlternativeHandler.cs" />
     <Compile Include="EventHandlers\DeleteEventHandlers\DeleteInformationComponentEventHandler.cs" />

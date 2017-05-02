@@ -176,7 +176,7 @@ namespace Rationally.Visio.View.Information
 
         public override void AddToTree(Shape s, bool allowAddInChildren)
         {
-            string rationallyType = s.CellsU[CellConstants.RationallyType].ResultStr["Value"];
+            string rationallyType = s.CellsU[VisioFormulas.Cell_RationallyType].ResultStr["Value"];
             if (AuthorLabel.IsAuthorLabel(s.Name))
             {
                 Children.Add(new AuthorLabel(Page, s));

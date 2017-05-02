@@ -62,7 +62,7 @@ namespace Rationally.Visio.View
 
         public void AddMenuItem(ContextMenuItem item)
         {
-            if (Shape.CellExists[string.Format(VisioFormulas.Action_Action,item.EventId), (short)VisExistsFlags.visExistsAnywhere] != Constants.CellExists)//if not exists
+            if (Shape.CellExists[Format(VisioFormulas.Action_Action,item.EventId), (short)VisExistsFlags.visExistsAnywhere] != Constants.CellExists)//if not exists
             {
                 //after a redo, we don't need to execute this. It would generate a new undo action on top of the readd-alternative action.
                 AddAction(item.EventId, Format(VisioFormulas.Formula_QUEUMARKEREVENT, item.ActionId), item.Name, item.IsFlyOut, item.IsEnabled);
@@ -103,15 +103,15 @@ namespace Rationally.Visio.View
             {
                 if (!CellExists(VisioFormulas.Formula_RationallyType))
                 {
-                    AddUserRow("rationallyType");
+                    AddUserRow(VisioFormulas.RationallyType);
                 }
-                return Shape.CellsU[CellConstants.RationallyType].ResultStr["Value"];
+                return Shape.CellsU[VisioFormulas.Cell_RationallyType].ResultStr[VisioFormulas.Value];
             }
             set
             {
                 if (!CellExists(VisioFormulas.Formula_RationallyType))
                 {
-                    AddUserRow("rationallyType");
+                    AddUserRow(VisioFormulas.RationallyType);
                 }
                 Shape.Cells[VisioFormulas.Formula_RationallyType].FormulaU = "\"" + value + "\"";
             }
@@ -123,15 +123,15 @@ namespace Rationally.Visio.View
             {
                 if (!CellExists(VisioFormulas.Formula_UniqueId))
                 {
-                    AddUserRow("uniqueId");
+                    AddUserRow(VisioFormulas.UniqueId);
                 }
-                return (int)Shape.CellsU["User.uniqueId"].ResultIU;
+                return (int)Shape.CellsU[VisioFormulas.Cell_UniqueId].ResultIU;
             } //Id is unique for its type (alternative, related document, stakeholder, etc)
             protected set
             {
                 if (!CellExists(VisioFormulas.Formula_UniqueId))
                 {
-                    AddUserRow("uniqueId");
+                    AddUserRow(VisioFormulas.UniqueId);
                 }
                 Shape.CellsU[VisioFormulas.Formula_UniqueId].ResultIU = value;
             }
@@ -140,14 +140,14 @@ namespace Rationally.Visio.View
         public int ForceAlternativeId //Backreference to alternativeId, for the forces table
 
         {
-            get { return (int)Shape.CellsU["User.alternativeUniqueId"].ResultIU; }
-            protected set { Shape.CellsU["User.alternativeUniqueId.Value"].ResultIU = value; }
+            get { return (int)Shape.CellsU[VisioFormulas.Cell_AlternativeUniqueId].ResultIU; }
+            protected set { Shape.CellsU[VisioFormulas.Formula_AlternativeUniqueId].ResultIU = value; }
         }
 
         public string AlternativeIdentifierString
         {
-            get { return Shape.CellsU["User.alternativeIdentifier"].ResultStr["Value"]; }
-            set { Shape.Cells["User.alternativeIdentifier.Value"].FormulaU = "\"" + value + "\""; }
+            get { return Shape.CellsU[VisioFormulas.Cell_AlternativeIdentifier].ResultStr[VisioFormulas.Value]; }
+            set { Shape.Cells[VisioFormulas.Formula_AlternativeIdentifier].FormulaU = "\"" + value + "\""; }
         }
 
         public virtual int Index
@@ -156,47 +156,47 @@ namespace Rationally.Visio.View
             {
                 if (!CellExists(VisioFormulas.Formula_Index))
                 {
-                    AddUserRow("Index");
+                    AddUserRow(VisioFormulas.Index);
                 }
-                return (int)Shape.CellsU[CellConstants.Index].ResultIU;
+                return (int)Shape.CellsU[VisioFormulas.Cell_Index].ResultIU;
             }
             set
             {
                 if (!CellExists(VisioFormulas.Formula_Index))
                 {
-                    AddUserRow("Index");
+                    AddUserRow(VisioFormulas.Index);
                 }
-                Shape.CellsU[$"{CellConstants.Index}.Value"].ResultIU = value;
+                Shape.CellsU[VisioFormulas.Formula_Index].ResultIU = value;
             }
         }
 
         public string FilePath
         {
-            get { return Shape.CellsU["User.filePath"].ResultStr["Value"]; }
-            set { Shape.Cells["User.filePath.Value"].FormulaU = "\"" + value + "\""; }
+            get { return Shape.CellsU[VisioFormulas.Cell_FilePath].ResultStr[VisioFormulas.Value]; }
+            set { Shape.Cells[VisioFormulas.Formula_FilePath].FormulaU = "\"" + value + "\""; }
         }
 
         public double Width
         {
-            get { return Shape.CellsU["Width"].ResultIU; }
-            set { Shape.CellsU["Width"].ResultIU = value; }
+            get { return Shape.CellsU[VisioFormulas.Cell_Width].ResultIU; }
+            set { Shape.CellsU[VisioFormulas.Cell_Width].ResultIU = value; }
         }
 
         public double Height
         {
-            get { return Shape.CellsU["Height"].ResultIU; }
-            set { Shape.CellsU["Height"].ResultIU = value; }
+            get { return Shape.CellsU[VisioFormulas.Cell_Height].ResultIU; }
+            set { Shape.CellsU[VisioFormulas.Cell_Height].ResultIU = value; }
         }
         public double CenterX
         {
-            get { return Shape.CellsU["pinX"].Result[VisUnitCodes.visInches]; }
-            set { Shape.CellsU["pinX"].Result[VisUnitCodes.visInches] = value; }
+            get { return Shape.CellsU[VisioFormulas.Cell_PositionX].Result[VisUnitCodes.visInches]; }
+            set { Shape.CellsU[VisioFormulas.Cell_PositionX].Result[VisUnitCodes.visInches] = value; }
         }
 
         public double CenterY
         {
-            get { return Shape.CellsU["pinY"].Result[VisUnitCodes.visInches]; }
-            set { Shape.CellsU["pinY"].Result[VisUnitCodes.visInches] = value; }
+            get { return Shape.CellsU[VisioFormulas.Cell_PositionY].Result[VisUnitCodes.visInches]; }
+            set { Shape.CellsU[VisioFormulas.Cell_PositionY].Result[VisUnitCodes.visInches] = value; }
         }
 
         
@@ -222,9 +222,9 @@ namespace Rationally.Visio.View
 
         protected void DeleteAction(string fieldName)
         {
-            if (Shape.CellExistsU["Actions." + fieldName + ".Action", (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+            if (Shape.CellExistsU[Format(VisioFormulas.Action_Action, fieldName), (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
             {
-                Shape.DeleteRow((short)VisSectionIndices.visSectionAction, Shape.CellsRowIndex["Actions." + fieldName + ".Action"]);
+                Shape.DeleteRow((short)VisSectionIndices.visSectionAction, Shape.CellsRowIndex[Format(VisioFormulas.Action_Action, fieldName)]);
             }
         }
 
@@ -247,36 +247,36 @@ namespace Rationally.Visio.View
 
         protected int ShadowPattern
         {
-            set { Shape.CellsU["ShdwPattern"].ResultIU = value; }
+            set { Shape.CellsU[VisioFormulas.Cell_ShadowPattern].ResultIU = value; }
         }
 
         public bool LockDelete
         {
-            set { Shape.CellsU["LockDelete"].ResultIU = (value ? 1 : 0); }
+            set { Shape.CellsU[VisioFormulas.Cell_LockDelete].ResultIU = (value ? 1 : 0); }
         }
 
         public bool LockTextEdit
         {
-            protected get { return Shape.CellsU["LockTextEdit"].ResultIU > 0; }
-            set { Shape.CellsU["LockTextEdit"].ResultIU = (value ? 1 : 0); }
+            protected get { return Shape.CellsU[VisioFormulas.Cell_LockTextEdit].ResultIU > 0; }
+            set { Shape.CellsU[VisioFormulas.Cell_LockTextEdit].ResultIU = (value ? 1 : 0); }
         }
 
         public bool LockWidth
         {
-            protected get { return Shape.CellsU["LockWidth"].ResultIU > 0; }
-            set { Shape.CellsU["LockWidth"].ResultIU = (value ? 1 : 0); }
+            protected get { return Shape.CellsU[VisioFormulas.Cell_LockWidth].ResultIU > 0; }
+            set { Shape.CellsU[VisioFormulas.Cell_LockWidth].ResultIU = (value ? 1 : 0); }
         }
 
         public bool LockHeight
         {
-            protected get { return Shape.CellsU["LockHeight"].ResultIU > 0; }
-            set { Shape.CellsU["LockHeight"].ResultIU = (value ? 1 : 0); }
+            protected get { return Shape.CellsU[VisioFormulas.Cell_LockHeight].ResultIU > 0; }
+            set { Shape.CellsU[VisioFormulas.Cell_LockHeight].ResultIU = (value ? 1 : 0); }
         }
 
         public bool MsvSdContainerLocked
         {
-            get { return Shape.CellsU["User.msvSDContainerLocked"].ResultStr["Value"] == "TRUE"; }
-            set { Shape.CellsU["User.msvSDContainerLocked"].FormulaU = (value ? "TRUE" : "FALSE"); }
+            get { return Shape.CellsU[VisioFormulas.Cell_ContainerLocked].ResultStr[VisioFormulas.Value] == "TRUE"; }
+            set { Shape.CellsU[VisioFormulas.Cell_ContainerLocked].FormulaU = (value ? "TRUE" : "FALSE"); }
         }
         
 
@@ -285,30 +285,30 @@ namespace Rationally.Visio.View
         /// </summary>
         public double HAlign
         {
-            set { Shape.CellsU["Para.HorzAlign"].FormulaForceU = "" + value; }
+            set { Shape.CellsU[VisioFormulas.Cell_HAlighn].FormulaForceU = "" + value; }
         }
 
 
         protected int FontSize
         {
-            set { Shape.Cells["Char.Size"].FormulaU = value + " pt"; }
+            set { Shape.Cells[VisioFormulas.Cell_FontSize].FormulaU = value + " pt"; }
         }
 
         public string FontColor
         {
-            set { Shape.CellsU["Char.Color"].FormulaU = value; }
+            set { Shape.CellsU[VisioFormulas.Cell_FontColour].FormulaU = value; }
         }
 
         public bool StrikeThrough
         {
-            get { return bool.Parse(Shape.CellsU["Char.strikethru"].FormulaU); }
-            set { Shape.CellsU["Char.strikethru"].FormulaU = value.ToString().ToUpper(); }
+            get { return bool.Parse(Shape.CellsU[VisioFormulas.Cell_StrikeThrough].FormulaU); }
+            set { Shape.CellsU[VisioFormulas.Cell_StrikeThrough].FormulaU = value.ToString().ToUpper(); }
         }
 
         public int Order
         {
-            get { return (int)Shape.CellsU["User.order"].ResultIU; }
-            set { Shape.CellsU["User.order.Value"].ResultIU = value; }
+            get { return (int)Shape.CellsU[VisioFormulas.Cell_Order].ResultIU; }
+            set { Shape.CellsU[VisioFormulas.Formula_Order].ResultIU = value; }
         }
 
         //line format
@@ -318,28 +318,28 @@ namespace Rationally.Visio.View
         /// </summary>
         public double LinePattern
         {
-            set { Shape.CellsU["LinePattern"].ResultIU = value; }
+            set { Shape.CellsU[VisioFormulas.Cell_LinePattern].ResultIU = value; }
         }
 
         //events
         public string EventDblClick
         {
-            set { Shape.CellsU["EventDblClick"].FormulaU = value; }
+            set { Shape.CellsU[VisioFormulas.Cell_EventDoubleClick].FormulaU = value; }
         }
 
         //background
         [Obsolete("Use SetBackgroundColor", false)]
         public string BackgroundColor
         {
-            get { return Shape.CellsU["FillForegnd"].FormulaU;  }
-            set { Shape.CellsU["FillForegnd"].FormulaU = value; }
+            get { return Shape.CellsU[VisioFormulas.Cell_BackGroundColour].FormulaU;  }
+            set { Shape.CellsU[VisioFormulas.Cell_BackGroundColour].FormulaU = value; }
         }
 
         public void SetBackgroundColor(Color color)
         {
             try
             {
-                Shape.CellsU["FillForegnd"].FormulaU = Format(VisioFormulas.RGB_Color_Formula,color.R,color.G,color.B);
+                Shape.CellsU[VisioFormulas.Cell_BackGroundColour].FormulaU = Format(VisioFormulas.RGB_Color_Formula,color.R,color.G,color.B);
             }
             catch (COMException ex)
             {   
@@ -350,7 +350,7 @@ namespace Rationally.Visio.View
 
         public string LineColor
         {
-            set { Shape.CellsU["LineColor"].FormulaU = value; }
+            set { Shape.CellsU[VisioFormulas.Cell_LineColour].FormulaU = value; }
         }
 
         /// <summary>
@@ -433,17 +433,17 @@ namespace Rationally.Visio.View
 
         public void UpdateReorderFunctions(int max)
         {
-            AddAction("moveUp", "QUEUEMARKEREVENT(\"moveUp\")", "Move up", false);
-            AddAction("moveDown", "QUEUEMARKEREVENT(\"moveDown\")", "Move down", false);
+            AddAction(VisioFormulas.MoveUp, Format(VisioFormulas.Formula_QUEUMARKEREVENT, VisioFormulas.MoveUp), Messages.MoveUp, false);
+            AddAction(VisioFormulas.MoveDown, Format(VisioFormulas.Formula_QUEUMARKEREVENT, VisioFormulas.MoveUp), Messages.MoveDown, false);
 
             if (Index == 0)
             {
-                DeleteAction("moveUp");
+                DeleteAction(VisioFormulas.MoveUp);
             }
 
             if (Index == max)
             {
-                DeleteAction("moveDown");
+                DeleteAction(VisioFormulas.MoveDown);
             }
         }
 

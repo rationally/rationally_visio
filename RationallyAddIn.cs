@@ -328,12 +328,12 @@ namespace Rationally.Visio
         //Fired when any text is changed
         private void Application_TextChangedEvent(Shape shape)
         {
-            if (shape.Document.Template.Contains(Constants.TemplateName) && (shape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists))
+            if (shape.Document.Template.Contains(Constants.TemplateName) && (shape.CellExistsU[VisioFormulas.Cell_RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists))
             {
                 try
                 {
                     Log.Debug("TextChanged: shapeName: " + shape.Name);
-                    string rationallyType = shape.CellsU[CellConstants.RationallyType].ResultStr["Value"];
+                    string rationallyType = shape.CellsU[VisioFormulas.Cell_RationallyType].ResultStr["Value"];
                     TextChangedEventHandlerRegistry.HandleEvent(rationallyType, View, shape);
                 }
                 catch (Exception ex)
@@ -397,7 +397,7 @@ namespace Rationally.Visio
 
                     foreach (Shape s in selection)
                     {
-                        if (s.CellExistsU[CellConstants.RationallyType, (short) VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+                        if (s.CellExistsU[VisioFormulas.Cell_RationallyType, (short) VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                         {
                             string identifier = context;
                             if (context.Contains("."))
@@ -406,7 +406,7 @@ namespace Rationally.Visio
                                 context = context.Split('.')[0];
                             }
                             Log.Debug("Marker event being handled for: " + s.Name);
-                            MarkerEventHandlerRegistry.HandleEvent(s.CellsU[CellConstants.RationallyType].ResultStr["Value"] + "." + context, s, identifier);
+                            MarkerEventHandlerRegistry.HandleEvent(s.CellsU[VisioFormulas.Cell_RationallyType].ResultStr["Value"] + "." + context, s, identifier);
                             ContextMenuEventHandler.Instance.OnContextMenuEvent(application, sequence, context);
                         }
                     }
@@ -437,7 +437,7 @@ namespace Rationally.Visio
         {
             Shape changedShape = cell.Shape;
             // ReSharper disable once MergeSequentialChecksWhenPossible
-            if ((changedShape == null) || !changedShape.Document.Template.Contains(Constants.TemplateName) || (changedShape.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] != Constants.CellExists)) //No need to continue when the shape is not part of our model.
+            if ((changedShape == null) || !changedShape.Document.Template.Contains(Constants.TemplateName) || (changedShape.CellExistsU[VisioFormulas.Cell_RationallyType, (short)VisExistsFlags.visExistsAnywhere] != Constants.CellExists)) //No need to continue when the shape is not part of our model.
             {
                 return;
             }
@@ -462,7 +462,7 @@ namespace Rationally.Visio
                         Model.PlanningItems[checkBoxState.Index].Finished = checkBoxState.Checked;
                     }
                 }
-                else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.Index))
+                else if (Application.IsUndoingOrRedoing && ForceContainer.IsForceContainer(changedShape.Name) && cell.LocalName.Equals(VisioFormulas.Cell_Index))
                 {
                     Log.Debug("Forceindex cell changed of forcecontainer. shape:" + changedShape.Name);
                     VisioShape forcesComponent = View.Children.FirstOrDefault(x => x is ForcesContainer);
@@ -471,7 +471,7 @@ namespace Rationally.Visio
                         rebuildTree = true; //Wait with the rebuild till the undo is done
                     }
                 }
-                else if (Application.IsUndoingOrRedoing && AlternativeShape.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.Index))
+                else if (Application.IsUndoingOrRedoing && AlternativeShape.IsAlternativeContainer(changedShape.Name) && cell.LocalName.Equals(VisioFormulas.Cell_Index))
                 {
                     Log.Debug("Alternative index cell changed of alternativecontainer. shape:" + changedShape.Name);
                     VisioShape alternativesComponent = View.Children.FirstOrDefault(x => x is AlternativesContainer);
@@ -489,7 +489,7 @@ namespace Rationally.Visio
                         rebuildTree = true; //Wait with the rebuild till the undo is done
                     }
                 }
-                else if (Application.IsUndoingOrRedoing && StakeholderContainer.IsStakeholderContainer(changedShape.Name) && cell.LocalName.Equals(CellConstants.Index))
+                else if (Application.IsUndoingOrRedoing && StakeholderContainer.IsStakeholderContainer(changedShape.Name) && cell.LocalName.Equals(VisioFormulas.Cell_Index))
                 {
                     Log.Debug("Stakeholder index cell changed of stakeholdercontainer. shape:" + changedShape.Name);
                     VisioShape stakeholderComponent = View.Children.FirstOrDefault(x => x is StakeholdersContainer);
@@ -541,11 +541,11 @@ namespace Rationally.Visio
         private void Application_ShapeAddedEvent(Shape s)
         {
             Log.Debug("Shape added with name: " + s.Name);
-            if (s.Document.Template.Contains(Constants.TemplateName) && (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists) && !View.ExistsInTree(s))
+            if (s.Document.Template.Contains(Constants.TemplateName) && (s.CellExistsU[VisioFormulas.Cell_RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists) && !View.ExistsInTree(s))
             {
                 try
                 {
-                    switch (s.CellsU[CellConstants.RationallyType].ResultStr["Value"])
+                    switch (s.CellsU[VisioFormulas.Cell_RationallyType].ResultStr["Value"])
                     {
                         case "alternativeAddStub":
                             if (!Application.IsUndoingOrRedoing)
@@ -632,10 +632,10 @@ namespace Rationally.Visio
             try
             {
                 Log.Debug("before shape deleted event for " + e.Count + " shapes.");
-                if (toBeDeleted.Any(s => ((s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
-                                          && (s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "forceHeaderRow")) || (s.CellsU[CellConstants.RationallyType].ResultStr["Value"] == "forceTotalsRow")))
+                if (toBeDeleted.Any(s => ((s.CellExistsU[VisioFormulas.Cell_RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+                                          && (s.CellsU[VisioFormulas.Cell_RationallyType].ResultStr["Value"] == "forceHeaderRow")) || (s.CellsU[VisioFormulas.Cell_RationallyType].ResultStr["Value"] == "forceTotalsRow")))
                 {
-                    if (toBeDeleted.All(s => s.CellsU[CellConstants.RationallyType].ResultStr["Value"] != "forces"))
+                    if (toBeDeleted.All(s => s.CellsU[VisioFormulas.Cell_RationallyType].ResultStr["Value"] != "forces"))
                     {
                         MessageBox.Show("Deleting the header or totals row is not allowed.", "Delete forbidden", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return true;
@@ -654,9 +654,9 @@ namespace Rationally.Visio
                 foreach (Shape s in e)
                 {
                     Log.Debug("deleted shape name: " + s.Name);
-                    if (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+                    if (s.CellExistsU[VisioFormulas.Cell_RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                     {
-                        string rationallyType = s.CellsU[CellConstants.RationallyType].ResultStr["Value"];
+                        string rationallyType = s.CellsU[VisioFormulas.Cell_RationallyType].ResultStr["Value"];
 
                         QueryDeleteEventHandlerRegistry.HandleEvent(rationallyType, View, s);
                     }
@@ -701,13 +701,13 @@ namespace Rationally.Visio
                 try
                 {
                     Log.Debug("shape deleted event for: " + s.Name);
-                    if (s.CellExistsU[CellConstants.Stub, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+                    if (s.CellExistsU[VisioFormulas.Cell_Stub, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                     {
                         return;
                     }
-                    if (s.CellExistsU[CellConstants.RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
+                    if (s.CellExistsU[VisioFormulas.Cell_RationallyType, (short)VisExistsFlags.visExistsAnywhere] == Constants.CellExists)
                     {
-                        string rationallyType = s.CellsU[CellConstants.RationallyType].ResultStr["Value"];
+                        string rationallyType = s.CellsU[VisioFormulas.Cell_RationallyType].ResultStr["Value"];
 
                         //mark the deleted shape as 'deleted' in the view tree
                         VisioShape deleted = View.GetComponentByShape(s);

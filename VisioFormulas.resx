@@ -165,4 +165,112 @@
   <data name="Rectangle_ShapeMaster" xml:space="preserve">
     <value>Rectangle</value>
   </data>
+  <data name="Value" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="Formula_AlternativeUniqueId" xml:space="preserve">
+    <value>User.alternativeUniqueId.Value</value>
+  </data>
+  <data name="Cell_AlternativeUniqueId" xml:space="preserve">
+    <value>User.alternativeUniqueId</value>
+  </data>
+  <data name="Formula_AlternativeIdentifier" xml:space="preserve">
+    <value>User.alternativeIdentifier.Value</value>
+  </data>
+  <data name="Cell_AlternativeIdentifier" xml:space="preserve">
+    <value>User.alternativeIdentifier</value>
+  </data>
+  <data name="Cell_UniqueId" xml:space="preserve">
+    <value>User.uniqueId</value>
+  </data>
+  <data name="UniqueId" xml:space="preserve">
+    <value>uniqueId</value>
+  </data>
+  <data name="RationallyType" xml:space="preserve">
+    <value>rationallyType</value>
+  </data>
+  <data name="Cell_RationallyType" xml:space="preserve">
+    <value>User.rationallyType</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>Index</value>
+  </data>
+  <data name="Formula_FilePath" xml:space="preserve">
+    <value>User.filePath.Value</value>
+  </data>
+  <data name="Cell_FilePath" xml:space="preserve">
+    <value>User.filePath</value>
+  </data>
+  <data name="Cell_Width" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="Cell_Height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="Cell_PositionX" xml:space="preserve">
+    <value>pinX</value>
+  </data>
+  <data name="Cell_PositionY" xml:space="preserve">
+    <value>pinY</value>
+  </data>
+  <data name="Cell_ShadowPattern" xml:space="preserve">
+    <value>ShdwPattern</value>
+  </data>
+  <data name="Cell_LockDelete" xml:space="preserve">
+    <value>LockDelete</value>
+  </data>
+  <data name="Cell_LockTextEdit" xml:space="preserve">
+    <value>LockTextEdit</value>
+  </data>
+  <data name="Cell_LockWidth" xml:space="preserve">
+    <value>LockWidth</value>
+  </data>
+  <data name="Cell_LockHeight" xml:space="preserve">
+    <value>LockHeight</value>
+  </data>
+  <data name="Cell_ContainerLocked" xml:space="preserve">
+    <value>User.msvSDContainerLocked</value>
+  </data>
+  <data name="Cell_HAlighn" xml:space="preserve">
+    <value>Para.HorzAlign</value>
+  </data>
+  <data name="Cell_FontSize" xml:space="preserve">
+    <value>Char.Size</value>
+  </data>
+  <data name="Cell_FontColour" xml:space="preserve">
+    <value>Char.Color</value>
+  </data>
+  <data name="Cell_StrikeThrough" xml:space="preserve">
+    <value>Char.strikethru</value>
+  </data>
+  <data name="Cell_Order" xml:space="preserve">
+    <value>User.order</value>
+  </data>
+  <data name="Formula_Order" xml:space="preserve">
+    <value>User.order.Value</value>
+  </data>
+  <data name="Cell_LinePattern" xml:space="preserve">
+    <value>LinePattern</value>
+  </data>
+  <data name="Cell_EventDoubleClick" xml:space="preserve">
+    <value>EventDblClick</value>
+  </data>
+  <data name="Cell_BackGroundColour" xml:space="preserve">
+    <value>FillForegnd</value>
+  </data>
+  <data name="Cell_LineColour" xml:space="preserve">
+    <value>LineColor</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>moveUp</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>moveDown</value>
+  </data>
+  <data name="Cell_Stub" xml:space="preserve">
+    <value>User.isStub</value>
+  </data>
+  <data name="Cell_Index" xml:space="preserve">
+    <value>User.Index</value>
+  </data>
 </root>

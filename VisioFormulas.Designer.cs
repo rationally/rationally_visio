@@ -115,6 +115,240 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User.alternativeIdentifier.
+        /// </summary>
+        internal static string Cell_AlternativeIdentifier {
+            get {
+                return ResourceManager.GetString("Cell_AlternativeIdentifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.alternativeUniqueId.
+        /// </summary>
+        internal static string Cell_AlternativeUniqueId {
+            get {
+                return ResourceManager.GetString("Cell_AlternativeUniqueId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FillForegnd.
+        /// </summary>
+        internal static string Cell_BackGroundColour {
+            get {
+                return ResourceManager.GetString("Cell_BackGroundColour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.msvSDContainerLocked.
+        /// </summary>
+        internal static string Cell_ContainerLocked {
+            get {
+                return ResourceManager.GetString("Cell_ContainerLocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventDblClick.
+        /// </summary>
+        internal static string Cell_EventDoubleClick {
+            get {
+                return ResourceManager.GetString("Cell_EventDoubleClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.filePath.
+        /// </summary>
+        internal static string Cell_FilePath {
+            get {
+                return ResourceManager.GetString("Cell_FilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Char.Color.
+        /// </summary>
+        internal static string Cell_FontColour {
+            get {
+                return ResourceManager.GetString("Cell_FontColour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Char.Size.
+        /// </summary>
+        internal static string Cell_FontSize {
+            get {
+                return ResourceManager.GetString("Cell_FontSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Para.HorzAlign.
+        /// </summary>
+        internal static string Cell_HAlighn {
+            get {
+                return ResourceManager.GetString("Cell_HAlighn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        internal static string Cell_Height {
+            get {
+                return ResourceManager.GetString("Cell_Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.Index.
+        /// </summary>
+        internal static string Cell_Index {
+            get {
+                return ResourceManager.GetString("Cell_Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LineColor.
+        /// </summary>
+        internal static string Cell_LineColour {
+            get {
+                return ResourceManager.GetString("Cell_LineColour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LinePattern.
+        /// </summary>
+        internal static string Cell_LinePattern {
+            get {
+                return ResourceManager.GetString("Cell_LinePattern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LockDelete.
+        /// </summary>
+        internal static string Cell_LockDelete {
+            get {
+                return ResourceManager.GetString("Cell_LockDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LockHeight.
+        /// </summary>
+        internal static string Cell_LockHeight {
+            get {
+                return ResourceManager.GetString("Cell_LockHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LockTextEdit.
+        /// </summary>
+        internal static string Cell_LockTextEdit {
+            get {
+                return ResourceManager.GetString("Cell_LockTextEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LockWidth.
+        /// </summary>
+        internal static string Cell_LockWidth {
+            get {
+                return ResourceManager.GetString("Cell_LockWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.order.
+        /// </summary>
+        internal static string Cell_Order {
+            get {
+                return ResourceManager.GetString("Cell_Order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pinX.
+        /// </summary>
+        internal static string Cell_PositionX {
+            get {
+                return ResourceManager.GetString("Cell_PositionX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pinY.
+        /// </summary>
+        internal static string Cell_PositionY {
+            get {
+                return ResourceManager.GetString("Cell_PositionY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.rationallyType.
+        /// </summary>
+        internal static string Cell_RationallyType {
+            get {
+                return ResourceManager.GetString("Cell_RationallyType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ShdwPattern.
+        /// </summary>
+        internal static string Cell_ShadowPattern {
+            get {
+                return ResourceManager.GetString("Cell_ShadowPattern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Char.strikethru.
+        /// </summary>
+        internal static string Cell_StrikeThrough {
+            get {
+                return ResourceManager.GetString("Cell_StrikeThrough", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.isStub.
+        /// </summary>
+        internal static string Cell_Stub {
+            get {
+                return ResourceManager.GetString("Cell_Stub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.uniqueId.
+        /// </summary>
+        internal static string Cell_UniqueId {
+            get {
+                return ResourceManager.GetString("Cell_UniqueId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width.
+        /// </summary>
+        internal static string Cell_Width {
+            get {
+                return ResourceManager.GetString("Cell_Width", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ADD_ALTERNATIVE_MENU.
         /// </summary>
         internal static string EventId_AddAlternative {
@@ -133,6 +367,24 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User.alternativeIdentifier.Value.
+        /// </summary>
+        internal static string Formula_AlternativeIdentifier {
+            get {
+                return ResourceManager.GetString("Formula_AlternativeIdentifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.alternativeUniqueId.Value.
+        /// </summary>
+        internal static string Formula_AlternativeUniqueId {
+            get {
+                return ResourceManager.GetString("Formula_AlternativeUniqueId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &quot;{0}&quot;.
         /// </summary>
         internal static string Formula_EscapedValue {
@@ -142,11 +394,29 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User.filePath.Value.
+        /// </summary>
+        internal static string Formula_FilePath {
+            get {
+                return ResourceManager.GetString("Formula_FilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User.Index.Value.
         /// </summary>
         internal static string Formula_Index {
             get {
                 return ResourceManager.GetString("Formula_Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.order.Value.
+        /// </summary>
+        internal static string Formula_Order {
+            get {
+                return ResourceManager.GetString("Formula_Order", resourceCulture);
             }
         }
         
@@ -187,6 +457,42 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Index.
+        /// </summary>
+        internal static string Index {
+            get {
+                return ResourceManager.GetString("Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to moveDown.
+        /// </summary>
+        internal static string MoveDown {
+            get {
+                return ResourceManager.GetString("MoveDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to moveUp.
+        /// </summary>
+        internal static string MoveUp {
+            get {
+                return ResourceManager.GetString("MoveUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rationallyType.
+        /// </summary>
+        internal static string RationallyType {
+            get {
+                return ResourceManager.GetString("RationallyType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rectangle.
         /// </summary>
         internal static string Rectangle_ShapeMaster {
@@ -201,6 +507,24 @@ namespace Rationally.Visio {
         internal static string RGB_Color_Formula {
             get {
                 return ResourceManager.GetString("RGB_Color_Formula", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to uniqueId.
+        /// </summary>
+        internal static string UniqueId {
+            get {
+                return ResourceManager.GetString("UniqueId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        internal static string Value {
+            get {
+                return ResourceManager.GetString("Value", resourceCulture);
             }
         }
     }

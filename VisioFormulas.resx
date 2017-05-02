@@ -273,4 +273,7 @@
   <data name="Cell_Index" xml:space="preserve">
     <value>User.Index</value>
   </data>
+  <data name="Formula_OpenHyperlink" xml:space="preserve">
+    <value>HYPERLINK(Hyperlink.Row_1.Address)</value>
+  </data>
 </root>

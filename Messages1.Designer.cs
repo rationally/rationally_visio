@@ -124,6 +124,33 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add file.
+        /// </summary>
+        internal static string Menu_AddFile {
+            get {
+                return ResourceManager.GetString("Menu_AddFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add url.
+        /// </summary>
+        internal static string Menu_AddUrl {
+            get {
+                return ResourceManager.GetString("Menu_AddUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose other file.
+        /// </summary>
+        internal static string Menu_ChooseOtherFile {
+            get {
+                return ResourceManager.GetString("Menu_ChooseOtherFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete this alternative.
         /// </summary>
         internal static string Menu_DeleteAlternative {
@@ -133,11 +160,38 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete document.
+        /// </summary>
+        internal static string Menu_DeleteDocument {
+            get {
+                return ResourceManager.GetString("Menu_DeleteDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set State.
         /// </summary>
         internal static string Menu_SetState {
             get {
                 return ResourceManager.GetString("Menu_SetState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move down.
+        /// </summary>
+        internal static string MoveDown {
+            get {
+                return ResourceManager.GetString("MoveDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move up.
+        /// </summary>
+        internal static string MoveUp {
+            get {
+                return ResourceManager.GetString("MoveUp", resourceCulture);
             }
         }
         
@@ -201,24 +255,6 @@ namespace Rationally.Visio {
         internal static string OneTitleAllowed {
             get {
                 return ResourceManager.GetString("OneTitleAllowed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Move down.
-        /// </summary>
-        internal static string MoveDown {
-            get {
-                return ResourceManager.GetString("MoveDown", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Move up.
-        /// </summary>
-        internal static string MoveUp {
-            get {
-                return ResourceManager.GetString("MoveUp", resourceCulture);
             }
         }
         

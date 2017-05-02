@@ -15,7 +15,7 @@ namespace Rationally.Visio.View.Documents
     internal class RelatedDocumentsContainer : RationallyContainer
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static readonly Regex RelatedRegex = new Regex(@"Related Documents(\.\d+)?$");
+        private static readonly Regex RelatedRegex = new Regex($@"{ShapeNames.RelatedDocuments}(\.\d+)?$");
         
         public RelatedDocumentsContainer(Page page, Shape relatedDocumentsContainer) : base(page)
         {

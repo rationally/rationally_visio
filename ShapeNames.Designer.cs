@@ -115,6 +115,60 @@ namespace Rationally.Visio {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Related Document.
+        /// </summary>
+        internal static string RelatedDocument {
+            get {
+                return ResourceManager.GetString("RelatedDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Related Documents.
+        /// </summary>
+        internal static string RelatedDocuments {
+            get {
+                return ResourceManager.GetString("RelatedDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Related Document Title.
+        /// </summary>
+        internal static string RelatedDocumentTitle {
+            get {
+                return ResourceManager.GetString("RelatedDocumentTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RelatedFile.
+        /// </summary>
+        internal static string RelatedFile {
+            get {
+                return ResourceManager.GetString("RelatedFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RelatedUrl.
+        /// </summary>
+        internal static string RelatedUrl {
+            get {
+                return ResourceManager.GetString("RelatedUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RelatedUrlUrl.
+        /// </summary>
+        internal static string RelatedUrlUrl {
+            get {
+                return ResourceManager.GetString("RelatedUrlUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to alternative.
         /// </summary>
         internal static string TypeAlternative {
@@ -165,6 +219,60 @@ namespace Rationally.Visio {
         internal static string TypeAlternativeTitle {
             get {
                 return ResourceManager.GetString("TypeAlternativeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to relatedDocumentContainer.
+        /// </summary>
+        internal static string TypeRelatedDocumentContainer {
+            get {
+                return ResourceManager.GetString("TypeRelatedDocumentContainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to relatedDocuments.
+        /// </summary>
+        internal static string TypeRelatedDocuments {
+            get {
+                return ResourceManager.GetString("TypeRelatedDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to relatedDocumentTitle.
+        /// </summary>
+        internal static string TypeRelatedDocumentTitle {
+            get {
+                return ResourceManager.GetString("TypeRelatedDocumentTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to relatedFile.
+        /// </summary>
+        internal static string TypeRelatedFile {
+            get {
+                return ResourceManager.GetString("TypeRelatedFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to relatedUrl.
+        /// </summary>
+        internal static string TypeRelatedUrl {
+            get {
+                return ResourceManager.GetString("TypeRelatedUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to relatedUrlUrl.
+        /// </summary>
+        internal static string TypeRelatedUrlUrl {
+            get {
+                return ResourceManager.GetString("TypeRelatedUrlUrl", resourceCulture);
             }
         }
     }
